@@ -20,8 +20,8 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   name: "Dilshan",
   siteName: "dilshan.dev",
-  tagline: "Full-stack developer and AI/ML engineer.",
-  sidebarBio: "I'm Dilshan, full-stack developer and AI/ML engineer. This is my digital garden.",
+  tagline: "AI/ML Engineer, Full-Stack Developer & DevOps Practitioner.",
+  sidebarBio: "I'm Dilshan — cultivating an open digital garden where neural architectures, resilient DevOps infrastructure, and thoughtful code grow in public.",
   social: {
     github: "https://github.com/dilshandevxx",
     linkedin: "https://linkedin.com/in/heydilshan/",

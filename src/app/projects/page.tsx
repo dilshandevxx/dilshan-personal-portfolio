@@ -33,7 +33,9 @@ export default function ProjectsPage() {
       {/* Editorial Header */}
       <header className="page-header-editorial">
         <div className="page-header-topline">
-          <h1 className="page-title-editorial">Our Work</h1>
+          <h1 className="page-title-editorial">
+            Selected <span className="title-accent">Projects</span>
+          </h1>
           <div className="page-count-badge">
             <FolderGit2 size={13} />
             <span>{projectsList.length} Systems & Repositories</span>

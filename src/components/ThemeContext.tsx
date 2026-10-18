@@ -23,9 +23,9 @@ function hexToRgb(hex: string): string {
 export const ACCENT_COLORS: ColorAccent[] = [
   {
     id: "amber",
-    name: "Warm Gold",
-    lightValue: "#b45309",
-    darkValue: "#f0b429",
+    name: "Warm Sand",
+    lightValue: "#a16207",
+    darkValue: "#dfc19b",
   },
   {
     id: "green",

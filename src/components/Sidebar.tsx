@@ -8,7 +8,7 @@ import { ColorPicker } from "./ColorPicker";
 import { ThemeToggle } from "./ThemeToggle";
 import { GithubIcon, LinkedinIcon, XIcon } from "./SocialIcons";
 import {
-  FileText,
+  PenLine,
   Compass,
   Code2,
   User,
@@ -17,6 +17,7 @@ import {
   Rss,
   Menu,
   X as CloseIcon,
+  Save,
 } from "lucide-react";
 
 export function Sidebar() {
@@ -26,7 +27,7 @@ export function Sidebar() {
   const navLinks = [
     {
       label: "Blog",
-      icon: FileText,
+      icon: PenLine,
       path: "/blog",
       isActive:
         pathname === "/blog" ||
@@ -59,20 +60,7 @@ export function Sidebar() {
       <header className="mobile-header">
         <Link href="/" className="mobile-brand-link">
           <span className="sidebar-brand-mark">
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-              <line x1="8" y1="21" x2="16" y2="21" />
-              <line x1="12" y1="17" x2="12" y2="21" />
-            </svg>
+            <Save size={16} strokeWidth={2} />
           </span>
           <span className="mobile-brand-name">dilshan.dev</span>
         </Link>
@@ -90,7 +78,7 @@ export function Sidebar() {
         </div>
       </header>
 
-      {/* Main Minimalist Matte Sidebar */}
+      {/* Main Minimalist Matte Sidebar inspired by tania.dev (no emojis) */}
       <aside className={`app-sidebar ${mobileOpen ? "open" : ""}`}>
         <div className="sidebar-top">
           {/* Header Row: Brand + Minimal Controls */}
@@ -101,20 +89,7 @@ export function Sidebar() {
               onClick={() => setMobileOpen(false)}
             >
               <span className="sidebar-brand-mark">
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                  <line x1="8" y1="21" x2="16" y2="21" />
-                  <line x1="12" y1="17" x2="12" y2="21" />
-                </svg>
+                <Save size={16} strokeWidth={2} />
               </span>
               <span className="sidebar-brand-name">dilshan.dev</span>
             </Link>
@@ -125,16 +100,22 @@ export function Sidebar() {
             </div>
           </div>
 
-          {/* Understated Personal Bio */}
+          {/* Top Hairline Divider */}
+          <div className="sidebar-divider" />
+
+          {/* Artistic Personal Bio */}
           <p className="sidebar-bio">
             I&apos;m{" "}
             <Link href="/about" className="sidebar-bio-highlight">
               Dilshan
-            </Link>
-            , software engineer and open-source creator. This is my digital garden.
+            </Link>{" "}
+            — cultivating an{" "}
+            <span className="bio-accent-garden">open digital garden</span> where{" "}
+            <span className="bio-accent-term">neural architectures</span>,{" "}
+            <span className="bio-accent-term">resilient DevOps infrastructure</span>, and thoughtful code grow in public.
           </p>
 
-          {/* Clean Thin Divider */}
+          {/* Second Hairline Divider */}
           <div className="sidebar-divider" />
 
           {/* Clean Navigation Links */}
@@ -150,7 +131,7 @@ export function Sidebar() {
                   className={`sidebar-nav-item ${item.isActive ? "active" : ""}`}
                 >
                   <IconComponent
-                    size={16}
+                    size={17}
                     strokeWidth={1.8}
                     className="sidebar-nav-icon"
                   />
@@ -159,7 +140,7 @@ export function Sidebar() {
               );
             })}
 
-            {/* Subtle return to cover */}
+            {/* Subtle return to cover overview */}
             <div className="sidebar-subdivider" />
             <Link
               href="/"
@@ -175,7 +156,16 @@ export function Sidebar() {
 
         {/* Quiet Minimalist Footer */}
         <div className="sidebar-footer">
+          {/* Social Row */}
           <div className="sidebar-social-links">
+            <a
+              href={`mailto:${siteConfig.social.email}`}
+              title="Email"
+              aria-label="Email"
+              className="sidebar-social-link"
+            >
+              <Mail size={16} strokeWidth={1.8} />
+            </a>
             <a
               href={siteConfig.social.github}
               target="_blank"
@@ -184,17 +174,7 @@ export function Sidebar() {
               aria-label="GitHub"
               className="sidebar-social-link"
             >
-              <GithubIcon size={14} />
-            </a>
-            <a
-              href={siteConfig.social.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="LinkedIn"
-              aria-label="LinkedIn"
-              className="sidebar-social-link"
-            >
-              <LinkedinIcon size={14} />
+              <GithubIcon size={16} />
             </a>
             <a
               href={siteConfig.social.x}
@@ -204,15 +184,17 @@ export function Sidebar() {
               aria-label="X (Twitter)"
               className="sidebar-social-link"
             >
-              <XIcon size={12} />
+              <XIcon size={14} />
             </a>
             <a
-              href={`mailto:${siteConfig.social.email}`}
-              title="Email"
-              aria-label="Email"
+              href={siteConfig.social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="LinkedIn"
+              aria-label="LinkedIn"
               className="sidebar-social-link"
             >
-              <Mail size={14} strokeWidth={1.8} />
+              <LinkedinIcon size={16} />
             </a>
             <Link
               href="/rss.xml"
@@ -220,10 +202,29 @@ export function Sidebar() {
               aria-label="RSS Feed"
               className="sidebar-social-link"
             >
-              <Rss size={13} strokeWidth={1.8} />
+              <Rss size={15} strokeWidth={1.8} />
             </Link>
           </div>
-          <div className="sidebar-copyright">dilshan.dev &bull; 2026</div>
+
+          {/* Text Navigation Links: Resume | Topics | Source */}
+          <div className="sidebar-text-links">
+            <Link href="/about" className="sidebar-footer-link">
+              Resume
+            </Link>
+            <span className="sidebar-footer-separator">|</span>
+            <Link href="/shelves" className="sidebar-footer-link">
+              Topics
+            </Link>
+            <span className="sidebar-footer-separator">|</span>
+            <a
+              href={siteConfig.social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sidebar-footer-link"
+            >
+              Source
+            </a>
+          </div>
         </div>
       </aside>
 

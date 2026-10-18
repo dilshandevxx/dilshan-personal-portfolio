@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Inter, JetBrains_Mono, Kanit } from "next/font/google";
+import { Plus_Jakarta_Sans, Outfit, Inter, JetBrains_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeContext";
 import { AppShell } from "@/components/AppShell";
@@ -11,11 +11,18 @@ const outfit = Outfit({
   display: "swap",
 });
 
-const kanit = Kanit({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["700", "800", "900"],
-  style: ["normal", "italic"],
+  weight: ["600", "700", "800"],
   variable: "--font-display",
+  display: "swap",
+});
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400", "500"],
+  variable: "--font-artistic",
   display: "swap",
 });
 
@@ -69,7 +76,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${outfit.variable} ${kanit.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${outfit.variable} ${plusJakartaSans.variable} ${inter.variable} ${jetbrainsMono.variable} ${newsreader.variable}`}
     >
       <body>
         <ThemeProvider>

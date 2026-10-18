@@ -7,7 +7,7 @@ import { siteConfig } from "@/data/siteConfig";
 import { ColorPicker } from "@/components/ColorPicker";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { GithubIcon, LinkedinIcon, XIcon } from "@/components/SocialIcons";
-import { ArrowRight, Mail, BookOpen, Compass, FolderGit2, User } from "lucide-react";
+import { ArrowRight, Mail, BookOpen, Compass, FolderGit2, User, Cpu, Code2, Cloud } from "lucide-react";
 
 export default function SpotlightCoverPage() {
   const router = useRouter();
@@ -71,25 +71,62 @@ export default function SpotlightCoverPage() {
 
         {/* Eyebrow Domain */}
         <div className="monolith-eyebrow">
-          Systems &amp; Machine Learning Engineer
+          AI/ML Engineer &bull; Full-Stack Developer &bull; DevOps Practitioner
         </div>
 
         {/* Hero Title */}
-        <h1 className="monolith-title">Dilshan</h1>
+        <h1 className="monolith-title">
+          Dilshan<span className="title-accent">.</span>
+        </h1>
 
         {/* Compelling Manifesto */}
         <p className="monolith-manifesto">
-          Engineering intelligence at the intersection of scale, systems, and craft.
+          Architecting <span className="title-accent">intelligent AI models</span>, scalable web platforms, and automated cloud infrastructure.
         </p>
         <p className="monolith-subline">
-          A personal digital space for distributed architectures, deep learning notes, and open projects.
+          A personal digital space for machine learning pipelines, full-stack systems, and engineering notes.
         </p>
 
-        {/* Pillar Chips */}
-        <div className="monolith-chips-row">
-          <span className="monolith-chip">01 / Distributed Systems</span>
-          <span className="monolith-chip">02 / LLM Pipelines &amp; RAG</span>
-          <span className="monolith-chip">03 / Cloud Reliability</span>
+        {/* Core Disciplines & Skills Triad */}
+        <div className="monolith-skills-triad">
+          <div className="monolith-skill-card">
+            <div className="monolith-skill-header">
+              <Cpu size={14} className="monolith-skill-icon" />
+              <span className="monolith-skill-role">AI / ML Engineer</span>
+            </div>
+            <div className="monolith-skill-tags">
+              <span>PyTorch</span>
+              <span>LLMs &amp; RAG</span>
+              <span>vLLM</span>
+              <span>Hugging Face</span>
+            </div>
+          </div>
+
+          <div className="monolith-skill-card">
+            <div className="monolith-skill-header">
+              <Code2 size={14} className="monolith-skill-icon" />
+              <span className="monolith-skill-role">Full-Stack Developer</span>
+            </div>
+            <div className="monolith-skill-tags">
+              <span>React 19</span>
+              <span>Next.js</span>
+              <span>TypeScript</span>
+              <span>FastAPI</span>
+            </div>
+          </div>
+
+          <div className="monolith-skill-card">
+            <div className="monolith-skill-header">
+              <Cloud size={14} className="monolith-skill-icon" />
+              <span className="monolith-skill-role">DevOps &amp; Cloud</span>
+            </div>
+            <div className="monolith-skill-tags">
+              <span>Docker</span>
+              <span>Kubernetes</span>
+              <span>CI/CD</span>
+              <span>Linux</span>
+            </div>
+          </div>
         </div>
 
         {/* Action Button & Keyboard Hint */}
