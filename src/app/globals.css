@@ -2470,413 +2470,133 @@ a.text-link:hover {
 }
 
 /* ==========================================================================
-   Clean Typographic Cover Page (Inspired by Piñt / High-Fashion Editorial)
+   Minimalist Portfolio Landing Page (Rick Öberg Reference)
    ========================================================================== */
 
-.clean-cover-root {
+.minimal-landing-root {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
-  max-height: 100vh;
-  width: 100vw;
-  max-width: 100vw;
-  overflow: hidden;
-  position: relative;
+  min-height: 100vh;
+  width: 100%;
   background-color: var(--color-background);
   color: var(--color-text);
   box-sizing: border-box;
-  font-family: var(--font-body), -apple-system, sans-serif;
-  padding: 2.25rem 4rem 1.75rem;
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  position: relative;
 }
 
-[data-theme="dark"] .clean-cover-root {
-  background-color: #08090c;
-}
-
-/* Header Bar */
-.clean-cover-header {
+.minimal-nav-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  position: relative;
-  z-index: 20;
+  padding: 3rem 4.5rem;
+  box-sizing: border-box;
+  z-index: 50;
 }
 
-.clean-brand-logo {
-  font-family: var(--font-display), -apple-system, sans-serif;
-  font-size: 1.6rem;
-  font-weight: 850;
-  letter-spacing: -0.04em;
+.minimal-brand-title {
+  font-family: var(--font-heading), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.18rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
   color: var(--color-text-emphasized);
   text-decoration: none;
-  display: inline-flex;
-  align-items: baseline;
-  transition: opacity var(--transition);
+  transition: opacity 0.15s ease;
 }
 
-.clean-brand-logo:hover {
-  opacity: 0.85;
+.minimal-brand-title:hover {
+  opacity: 0.7;
 }
 
-.clean-brand-dot {
-  color: var(--color-primary);
-  transition: color var(--transition);
-}
-
-.clean-header-controls {
+.minimal-nav-right {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 2.25rem;
 }
 
-/* MENU Pill Button - Exact Match to Reference */
-.clean-menu-btn {
-  display: inline-flex;
+.minimal-nav-links {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-  padding: 0.45rem 1.65rem;
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.32);
-  background-color: transparent;
-  color: var(--color-text-emphasized);
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  gap: 2.25rem;
+}
+
+.minimal-nav-link {
+  font-family: var(--font-heading), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  cursor: pointer;
-  transition: all var(--transition);
+  text-decoration: none;
+  color: var(--color-text-muted);
+  transition: color 0.15s ease;
 }
 
-[data-theme="light"] .clean-menu-btn {
-  border-color: rgba(0, 0, 0, 0.28);
+.minimal-nav-link:hover {
+  color: var(--color-text-emphasized);
 }
 
-.clean-menu-btn:hover {
-  background-color: var(--color-text-emphasized);
-  color: var(--color-background);
-  border-color: var(--color-text-emphasized);
-  transform: translateY(-1px);
+.minimal-nav-link.active-item {
+  color: var(--color-text-emphasized);
+  font-weight: 800;
 }
 
-.clean-close-btn {
-  background-color: transparent;
+.minimal-utility-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--color-border);
 }
 
-.clean-close-btn:hover {
-  background-color: var(--color-text-emphasized);
-  color: var(--color-background);
-}
-
-/* Main Hero Stage - Scaled with Viewport Height to Never Clip */
-.clean-hero-stage {
+/* Center Statement Viewport */
+.minimal-hero-viewport {
   flex: 1;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 1400px;
-  position: relative;
-  z-index: 10;
-  padding: 0.75rem 0;
-  user-select: none;
-}
-
-.clean-hero-words {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0;
-}
-
-.clean-hero-word {
-  font-family: var(--font-display), -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 850;
-  /* Viewport height aware clamp so 3 lines always fit perfectly in viewport */
-  font-size: clamp(3.4rem, min(11vw, 17vh), 9.5rem);
-  line-height: 0.94;
-  letter-spacing: -0.05em;
-  text-decoration: none;
-  cursor: pointer;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
-  display: inline-block;
-  margin: 0;
-  padding: 0;
-}
-
-.clean-hero-word:hover {
-  transform: translateX(14px);
-}
-
-.clean-hero-word.word-primary {
-  color: var(--color-primary);
-  transition: color var(--transition), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.clean-hero-word.word-emphasized {
-  color: var(--color-text-emphasized);
-  transition: color var(--transition), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Bottom Footer Rail */
-.clean-cover-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  position: relative;
-  z-index: 20;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-[data-theme="light"] .clean-cover-footer {
-  border-top-color: rgba(0, 0, 0, 0.08);
-}
-
-.clean-footer-role {
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  color: var(--color-text-muted);
-  letter-spacing: 0.03em;
-}
-
-.clean-discipline-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.25rem 0.8rem;
-  border-radius: 9999px;
-  background-color: var(--color-background-card);
-  border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.clean-discipline-toggle:hover {
-  color: var(--color-text-emphasized);
-  border-color: var(--color-border-emphasized);
-}
-
-.clean-discipline-toggle .toggle-indicator {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--color-primary);
-}
-
-.clean-footer-enter {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  color: var(--color-text-muted);
-  text-decoration: none;
-  transition: color var(--transition);
-}
-
-.clean-footer-enter:hover {
-  color: var(--color-text-emphasized);
-}
-
-.clean-kbd {
-  padding: 0.12rem 0.4rem;
-  background-color: var(--color-background-tag);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  color: var(--color-text-emphasized);
-  font-size: 0.68rem;
-}
-
-/* ==========================================================================
-   Full-Screen Editorial Navigation Menu Overlay (Opaque & Clean)
-   ========================================================================== */
-
-.clean-menu-overlay {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 100;
-  background-color: #08090c;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 2.25rem 4rem 1.75rem;
+  padding: 2rem 3rem 6rem;
   box-sizing: border-box;
-  animation: cleanMenuFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-[data-theme="light"] .clean-menu-overlay {
-  background-color: #faf9f5;
-}
-
-@keyframes cleanMenuFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.clean-overlay-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   width: 100%;
 }
 
-.clean-overlay-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-  margin: auto 0;
-  padding: 1rem 0;
-}
-
-.clean-nav-link {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 1.5rem;
-  font-family: var(--font-display), sans-serif;
-  font-size: clamp(2.2rem, min(5.5vw, 8.5vh), 4.4rem);
-  font-weight: 850;
-  letter-spacing: -0.04em;
-  color: var(--color-text-emphasized);
-  text-decoration: none;
-  line-height: 1.05;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  width: fit-content;
-}
-
-.clean-nav-link:hover {
-  color: var(--color-primary);
-  transform: translateX(18px);
-}
-
-.clean-nav-num {
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--color-text-muted);
-  letter-spacing: 0.08em;
-  transition: color var(--transition);
-}
-
-.clean-nav-link:hover .clean-nav-num {
-  color: var(--color-primary);
-}
-
-.clean-nav-arrow {
-  opacity: 0;
-  transform: translate(-6px, 6px);
-  transition: all 0.22s ease;
-  color: var(--color-primary);
-}
-
-.clean-nav-link:hover .clean-nav-arrow {
-  opacity: 1;
-  transform: translate(0, 0);
-}
-
-.clean-overlay-footer {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--color-border);
+.minimal-hero-content {
+  max-width: 680px;
   width: 100%;
+  margin: 0 auto;
 }
 
-.clean-overlay-bio {
-  max-width: 520px;
-}
-
-.clean-bio-primary {
-  font-weight: 600;
-  font-size: 0.94rem;
+.minimal-statement {
+  font-family: var(--font-heading), var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(2rem, 4.4vw, 3.15rem);
+  font-weight: 800;
+  line-height: 1.34;
+  letter-spacing: -0.035em;
   color: var(--color-text-emphasized);
-  margin-bottom: 0.25rem;
-}
-
-.clean-bio-secondary {
-  font-size: 0.86rem;
-  color: var(--color-text-muted);
-  line-height: 1.5;
   margin: 0;
+  user-select: text;
 }
 
-.clean-overlay-socials {
-  display: flex;
-  align-items: center;
-  gap: 1.35rem;
-}
-
-.clean-social-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  color: var(--color-text-muted);
-  text-decoration: none;
-  transition: color var(--transition);
-}
-
-.clean-social-link:hover {
-  color: var(--color-primary);
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 860px) {
-  .clean-cover-root {
-    padding: 1.75rem 1.5rem 1.25rem;
-  }
-  .clean-brand-logo {
-    font-size: 1.35rem;
-  }
-  .clean-hero-word {
-    font-size: clamp(2.8rem, 13vw, 4.4rem);
-  }
-  .clean-cover-footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.65rem;
-    padding-top: 0.85rem;
-  }
-  .clean-footer-center {
-    order: 3;
-    width: 100%;
-  }
-  .clean-discipline-toggle {
-    width: 100%;
-    justify-content: center;
-  }
-  .clean-menu-overlay {
-    padding: 1.75rem 1.5rem;
-  }
-  .clean-nav-link {
-    font-size: 2.2rem;
-    gap: 1rem;
-  }
-  .clean-overlay-footer {
-    flex-direction: column;
-    align-items: flex-start;
+/* Responsive */
+@media (max-width: 768px) {
+  .minimal-nav-header {
+    padding: 2rem 1.75rem;
+    flex-wrap: wrap;
     gap: 1.25rem;
   }
-  .clean-overlay-socials {
-    flex-wrap: wrap;
-    gap: 1rem;
+  .minimal-nav-right {
+    gap: 1.25rem;
+  }
+  .minimal-nav-links {
+    gap: 1.25rem;
+  }
+  .minimal-hero-viewport {
+    padding: 2rem 1.75rem 4rem;
+  }
+  .minimal-statement {
+    font-size: clamp(1.75rem, 6.5vw, 2.35rem);
+    line-height: 1.32;
   }
 }
 
