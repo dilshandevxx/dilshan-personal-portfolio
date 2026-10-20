@@ -8,33 +8,41 @@ import { ColorPicker } from "@/components/ColorPicker";
 export default function MinimalLandingPage() {
   return (
     <div className="minimal-landing-root">
-      {/* Top Header matching Rick Öberg reference */}
+      {/* Refined Minimalist Navbar matching Rick Öberg reference */}
       <header className="minimal-nav-header">
-        <Link href="/" className="minimal-brand-title" title="Dilshan">
-          Dilshan
-        </Link>
+        <div className="minimal-nav-container">
+          <Link href="/" className="minimal-brand-title" title="Dilshan — Home">
+            <span className="brand-name">Dilshan</span>
+            <span className="brand-dot" aria-hidden="true">.</span>
+          </Link>
 
-        <div className="minimal-nav-right">
-          <nav className="minimal-nav-links" aria-label="Main Navigation">
-            <Link href="/projects" className="minimal-nav-link active-item">
-              PROJECTS
-            </Link>
-            <Link href="/about" className="minimal-nav-link">
-              BIO
-            </Link>
-            <a
-              href={`mailto:${siteConfig.social.email}?subject=Project%20or%20Role%20Inquiry`}
-              className="minimal-nav-link"
-            >
-              HIRE ME
-            </a>
-          </nav>
+          <div className="minimal-nav-right">
+            <nav className="minimal-nav-links" aria-label="Main Navigation">
+              <Link href="/projects" className="minimal-nav-link active-item">
+                PROJECTS
+              </Link>
+              <Link href="/blog" className="minimal-nav-link">
+                WRITING
+              </Link>
+              <Link href="/about" className="minimal-nav-link">
+                BIO
+              </Link>
+              <a
+                href={`mailto:${siteConfig.social.email}?subject=Project%20or%20Role%20Inquiry`}
+                className="minimal-nav-link hire-item"
+              >
+                HIRE ME
+              </a>
+            </nav>
 
-          {/* Discreet Controls for Theme, Palette & Chill Audio */}
-          <div className="minimal-utility-controls">
-            <AmbientPlayer variant="header" />
-            <ColorPicker />
-            <ThemeToggle />
+            <span className="minimal-nav-divider" aria-hidden="true" />
+
+            {/* Sleek Floating Capsule for Theme, Palette & Audio */}
+            <div className="minimal-toolbar-capsule" title="Appearance & Ambient Audio">
+              <AmbientPlayer variant="header" />
+              <ColorPicker />
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </header>
