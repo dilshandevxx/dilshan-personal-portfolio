@@ -2,8 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { siteConfig } from "@/data/siteConfig";
 import { timelineEras } from "@/data/timeline";
-import { GithubIcon, LinkedinIcon, XIcon, FacebookIcon } from "@/components/SocialIcons";
-import { Mail, Cpu, Code2, Cloud } from "lucide-react";
 import { TechMatrix } from "@/components/TechMatrix";
 
 export const metadata = {
@@ -11,27 +9,47 @@ export const metadata = {
   description: siteConfig.sidebarBio,
 };
 
+function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
+  return (
+    <h2 id={id} className="about-section-heading">
+      <a href={`#${id}`} className="heading-anchor" aria-label={`Permalink to ${id}`}>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M6.5 9.5a3.5 3.5 0 0 0 5 0l2-2a3.5 3.5 0 0 0-5-5l-1 1" />
+          <path d="M9.5 6.5a3.5 3.5 0 0 0-5 0l-2 2a3.5 3.5 0 0 0 5 5l1-1" />
+        </svg>
+      </a>
+      <span>{children}</span>
+    </h2>
+  );
+}
+
 export default function AboutPage() {
   return (
-    <div className="page-extended-container">
-      {/* Editorial Header */}
-      <header className="page-header-editorial">
-        <div className="page-header-topline">
-          <h1 className="page-title-editorial">
-            About <span className="title-accent">Dilshan</span>
-          </h1>
-          <div className="status-indicator-pill">
-            <span className="status-pulse-dot" />
-            <span>Available for Roles &amp; Consulting</span>
-          </div>
-        </div>
-        <p className="page-subtitle-editorial">
-          Software Engineer specializing in applied AI/ML systems, high-concurrency full-stack platforms, and automated DevOps infrastructure.
+    <div className="about-content-narrow">
+      {/* Clean Page Header */}
+      <header className="page-header">
+        <h1 className="page-title">About Me</h1>
+        <p className="page-subtitle">
+          Software engineer and open-source creator specializing in applied AI/ML systems, high-concurrency platforms, and resilient cloud infrastructure.
         </p>
+        <div className="status-indicator-inline">
+          <span className="status-pulse-dot" />
+          <span>Available for Roles &amp; Consulting</span>
+        </div>
       </header>
 
-      {/* Focused About Content Column */}
-      <div className="about-content-narrow">
+      {/* Main Content Stream */}
+      <div className="about-sections-stream">
         {/* Side-by-side Story & Photo */}
         <div className="about-intro-grid">
           <div className="about-prose-block">
@@ -82,63 +100,9 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Core Engineering Pillars */}
-        <div className="about-pillars-grid">
-          <div className="about-pillar-card">
-            <div className="about-pillar-header">
-              <Cpu size={16} className="about-pillar-icon" />
-              <h3 className="about-pillar-title">Applied AI &amp; Machine Learning</h3>
-            </div>
-            <p className="about-pillar-desc">
-              Architecting production RAG retrieval systems, fine-tuning open-weights models (PyTorch/Hugging Face), optimizing vLLM serving engines, and building semantic vector pipelines.
-            </p>
-            <div className="about-pillar-tags">
-              <span className="about-pillar-tag">PyTorch</span>
-              <span className="about-pillar-tag">LLMs &amp; RAG</span>
-              <span className="about-pillar-tag">vLLM</span>
-              <span className="about-pillar-tag">Hugging Face</span>
-              <span className="about-pillar-tag">Vector DBs</span>
-            </div>
-          </div>
-
-          <div className="about-pillar-card">
-            <div className="about-pillar-header">
-              <Code2 size={16} className="about-pillar-icon" />
-              <h3 className="about-pillar-title">Full-Stack Product Engineering</h3>
-            </div>
-            <p className="about-pillar-desc">
-              Building accessible, responsive user interfaces with React 19, Next.js App Router, and strict TypeScript alongside high-concurrency Node.js and FastAPI services.
-            </p>
-            <div className="about-pillar-tags">
-              <span className="about-pillar-tag">React 19</span>
-              <span className="about-pillar-tag">Next.js</span>
-              <span className="about-pillar-tag">TypeScript</span>
-              <span className="about-pillar-tag">FastAPI</span>
-              <span className="about-pillar-tag">Node.js</span>
-            </div>
-          </div>
-
-          <div className="about-pillar-card">
-            <div className="about-pillar-header">
-              <Cloud size={16} className="about-pillar-icon" />
-              <h3 className="about-pillar-title">Cloud &amp; DevOps Reliability</h3>
-            </div>
-            <p className="about-pillar-desc">
-              Provisioning reproducible infrastructure via Docker, Kubernetes GitOps (ArgoCD/Helm), automated CI/CD pipelines, Prometheus telemetry, and Linux systems hardening.
-            </p>
-            <div className="about-pillar-tags">
-              <span className="about-pillar-tag">Docker</span>
-              <span className="about-pillar-tag">Kubernetes</span>
-              <span className="about-pillar-tag">CI/CD</span>
-              <span className="about-pillar-tag">Linux</span>
-              <span className="about-pillar-tag">Prometheus</span>
-            </div>
-          </div>
-        </div>
-
         {/* Career & Timeline */}
         <section className="about-section-block">
-          <h2 className="about-section-heading">Engineering Timeline</h2>
+          <SectionHeading id="timeline">Engineering Timeline</SectionHeading>
           <div className="about-timeline-list">
             {timelineEras.map((era) => (
               <div key={era.period} className="about-timeline-row">
@@ -161,64 +125,101 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Tech Matrix */}
+        {/* Technical Competencies */}
         <section className="about-section-block">
-          <h2 className="about-section-heading">Technical Matrix &amp; Competencies</h2>
+          <SectionHeading id="competencies">Technical Competencies</SectionHeading>
           <TechMatrix />
         </section>
 
-        {/* Connect Box */}
-        <section className="about-connect-card">
-          <h3 className="about-connect-title">Let&apos;s Build Together</h3>
-          <p className="about-connect-desc">
-            I am actively exploring high-impact software engineering roles, technical advisory engagements, and distributed open-source collaboration. Feel free to connect across any channel:
-          </p>
+        {/* Songs Section */}
+        <section className="about-section-block">
+          <SectionHeading id="songs">Songs</SectionHeading>
+          <ul className="about-link-list">
+            <li>
+              <a href="https://soundcloud.com/ivoryandivory/rain" target="_blank" rel="noopener noreferrer">
+                Rain
+              </a>
+            </li>
+            <li>
+              <a href="https://soundcloud.com/ivoryandivory/let-it-be" target="_blank" rel="noopener noreferrer">
+                Let It Be
+              </a>
+            </li>
+            <li>
+              <a href="https://soundcloud.com/ivoryandivory/id-like-to-walk-around-in-your-mind" target="_blank" rel="noopener noreferrer">
+                I&apos;d Like to Walk Around In Your Mind
+              </a>
+            </li>
+            <li>
+              <a href="https://soundcloud.com/ivoryandivory/el-pasadiscos" target="_blank" rel="noopener noreferrer">
+                El Pasadiscos
+              </a>
+            </li>
+            <li>
+              <a href="https://soundcloud.com/john-termaat/such-great-heights" target="_blank" rel="noopener noreferrer">
+                Such Great Heights
+              </a>{" "}
+              <span className="about-link-note">(Duet)</span>
+            </li>
+            <li>
+              <a href="https://soundcloud.com/john-termaat/night-nurse" target="_blank" rel="noopener noreferrer">
+                Night Nurse
+              </a>{" "}
+              <span className="about-link-note">(Duet)</span>
+            </li>
+          </ul>
+        </section>
 
-          <div className="about-social-btns">
-            <a
-              href={siteConfig.social.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn"
-            >
-              <GithubIcon size={15} />
-              <span>GitHub</span>
-            </a>
-            <a
-              href={siteConfig.social.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn"
-            >
-              <LinkedinIcon size={15} />
-              <span>LinkedIn</span>
-            </a>
-            <a
-              href={siteConfig.social.x}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn"
-            >
-              <XIcon size={13} />
-              <span>X (Twitter)</span>
-            </a>
-            <a
-              href={siteConfig.social.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn"
-            >
-              <FacebookIcon size={15} />
-              <span>Facebook</span>
-            </a>
-            <a
-              href={`mailto:${siteConfig.social.email}`}
-              className="btn btn-primary"
-            >
-              <Mail size={15} />
-              <span>{siteConfig.social.email}</span>
-            </a>
-          </div>
+        {/* Miscellaneous Section */}
+        <section className="about-section-block">
+          <SectionHeading id="miscellaneous">Miscellaneous</SectionHeading>
+          <ul className="about-link-list">
+            <li>
+              <Link href="/resume">Resume</Link>
+            </li>
+            <li>
+              <Link href="/shelves">Digital Garden &amp; Shelves</Link>
+            </li>
+            <li>
+              <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer">
+                Open Source Repositories
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        {/* Connect Section */}
+        <section className="about-section-block">
+          <SectionHeading id="connect">Connect</SectionHeading>
+          <p className="about-connect-text">
+            I am actively exploring high-impact software engineering roles, technical advisory engagements, and open-source collaboration. Feel free to reach out across any channel:
+          </p>
+          <ul className="about-link-list">
+            <li>
+              <strong>Email:</strong>{" "}
+              <a href={`mailto:${siteConfig.social.email}`}>
+                {siteConfig.social.email}
+              </a>
+            </li>
+            <li>
+              <strong>GitHub:</strong>{" "}
+              <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer">
+                github.com/dilshandevxx
+              </a>
+            </li>
+            <li>
+              <strong>LinkedIn:</strong>{" "}
+              <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer">
+                linkedin.com/in/heydilshan
+              </a>
+            </li>
+            <li>
+              <strong>X (Twitter):</strong>{" "}
+              <a href={siteConfig.social.x} target="_blank" rel="noopener noreferrer">
+                @dilshanverse
+              </a>
+            </li>
+          </ul>
         </section>
       </div>
     </div>

@@ -1,87 +1,77 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Project } from "@/data/projects";
-import { ExternalLink, FileText, Activity, ArrowUpRight } from "lucide-react";
-import { GithubIcon } from "./SocialIcons";
+import { Star } from "lucide-react";
 
 export function ProjectCard({ project }: { project: Project }) {
+  const router = useRouter();
+
+  const handleCardClick = (e: React.MouseEvent<HTMLElement>) => {
+    // If the click is on an anchor or button inside the card, allow default behavior
+    const target = e.target as HTMLElement;
+    if (target.closest("a") || target.closest("button")) {
+      return;
+    }
+    router.push(`/projects/${project.slug}`);
+  };
+
   return (
-    <article className="project-editorial-card">
-      <div className="project-card-top-content">
-        {/* Meta Header */}
-        <div className="project-card-meta-row">
-          <div className="project-card-meta-left">
-            <span className="project-card-badge">{project.category}</span>
-            <span className="project-card-year">{project.date}</span>
-          </div>
-          {project.featured && (
-            <span className="project-card-featured-badge">Featured</span>
-          )}
-        </div>
-
-        {/* Title */}
-        <h3 className="project-card-title">
-          <a
-            href={project.demoUrl || project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="project-card-title-link"
-          >
-            <span>{project.title}</span>
-            <ArrowUpRight size={15} className="project-card-arrow" />
-          </a>
-        </h3>
-
-        {/* Tagline */}
-        <p className="project-card-tagline">{project.tagline}</p>
-
-        {/* Metrics Banner */}
-        {project.metrics && (
-          <div className="project-card-metrics">
-            <Activity size={12} className="project-metrics-icon" />
-            <span>{project.metrics}</span>
-          </div>
-        )}
-
-        {/* Tech Stack Tags */}
-        <div className="project-card-tags">
-          {project.tags.map((tag) => (
-            <span key={tag} className="project-card-tag">
-              {tag}
-            </span>
-          ))}
+    <div
+      className="card"
+      onClick={handleCardClick}
+      role="link"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          router.push(`/projects/${project.slug}`);
+        }
+      }}
+      aria-label={`View architecture details for ${project.title}`}
+    >
+      {/* Top Row: Year on Left, Stars on Right */}
+      <div className="stars">
+        <div className="star">
+          <span>{project.stars.toLocaleString()}</span>
+          <Star size={13} strokeWidth={1.8} className="star-icon" />
         </div>
       </div>
 
-      {/* Action Links */}
-      <div className="project-card-actions">
+      <time>{project.date}</time>
+
+      {/* Project Title (colored in accent color, links to detail page) */}
+      <Link className="card-header" href={`/projects/${project.slug}`}>
+        {project.title}
+      </Link>
+
+      {/* Concise Tagline */}
+      <p>{project.tagline}</p>
+
+      {/* Action Links at Bottom */}
+      <div className="card-links">
+        <Link href={`/projects/${project.slug}`}>Article</Link>
         {project.demoUrl && (
           <a
             href={project.demoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="project-action-link"
+            onClick={(e) => e.stopPropagation()}
           >
-            <ExternalLink size={13} />
-            <span>Live Demo</span>
+            Demo
           </a>
         )}
         <a
           href={project.githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="project-action-link"
+          onClick={(e) => e.stopPropagation()}
         >
-          <GithubIcon size={13} />
-          <span>Source</span>
+          Source
         </a>
-        {project.writeupUrl && (
-          <Link href={project.writeupUrl} className="project-action-link">
-            <FileText size={13} />
-            <span>Writeup</span>
-          </Link>
-        )}
       </div>
-    </article>
+    </div>
   );
 }

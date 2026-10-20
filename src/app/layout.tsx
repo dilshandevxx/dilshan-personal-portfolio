@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Outfit, Inter, JetBrains_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeContext";
+import { AudioProvider } from "@/components/AudioContext";
 import { AppShell } from "@/components/AppShell";
 import { siteConfig } from "@/data/siteConfig";
 
@@ -20,8 +21,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 const newsreader = Newsreader({
   subsets: ["latin"],
-  style: ["normal", "italic"],
-  weight: ["400", "500"],
+  style: "normal",
   variable: "--font-artistic",
   display: "swap",
 });
@@ -78,9 +78,35 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${outfit.variable} ${plusJakartaSans.variable} ${inter.variable} ${jetbrainsMono.variable} ${newsreader.variable}`}
     >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap"
+          rel="stylesheet"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var t = localStorage.getItem('portfolio_theme');
+                if (t && ['light', 'dark', 'midnight', 'forest', 'nord'].indexOf(t) !== -1) {
+                  document.documentElement.setAttribute('data-theme', t);
+                } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                  document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                  document.documentElement.setAttribute('data-theme', 'light');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
       <body>
         <ThemeProvider>
-          <AppShell>{children}</AppShell>
+          <AudioProvider>
+            <AppShell>{children}</AppShell>
+          </AudioProvider>
         </ThemeProvider>
       </body>
     </html>

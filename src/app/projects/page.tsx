@@ -1,53 +1,45 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { projectsList, Project } from "@/data/projects";
+import Link from "next/link";
+import { projectsList } from "@/data/projects";
 import { ProjectCard } from "@/components/ProjectCard";
-import { FolderGit2, Search, X as ClearIcon, SearchX } from "lucide-react";
+import { siteConfig } from "@/data/siteConfig";
+import { GithubIcon, XIcon } from "@/components/SocialIcons";
+import {
+  Code2,
+  Mail,
+  Rss,
+  Binary,
+  Server,
+  Cpu,
+  Layers,
+} from "lucide-react";
 
-const CATEGORIES = ["All", "AI/ML", "Full-Stack", "DevOps"] as const;
+const CATEGORIES = ["All", "AI/ML", "Full-Stack", "DevOps", "Systems"] as const;
 
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const filteredProjects = useMemo(() => {
-    return projectsList.filter((project) => {
-      const q = searchQuery.toLowerCase().trim();
-      const matchesCategory =
-        selectedCategory === "All" || project.category === selectedCategory;
-
-      const matchesSearch =
-        q === "" ||
-        project.title.toLowerCase().includes(q) ||
-        project.tagline.toLowerCase().includes(q) ||
-        project.description.toLowerCase().includes(q) ||
-        project.tags.some((t) => t.toLowerCase().includes(q));
-
-      return matchesCategory && matchesSearch;
-    });
-  }, [selectedCategory, searchQuery]);
+    if (selectedCategory === "All") return projectsList;
+    return projectsList.filter((project) => project.category === selectedCategory);
+  }, [selectedCategory]);
 
   return (
     <div className="projects-container">
-      {/* Editorial Header */}
-      <header className="page-header-editorial">
-        <div className="page-header-topline">
-          <h1 className="page-title-editorial">
-            Selected <span className="title-accent">Projects</span>
-          </h1>
-          <div className="page-count-badge">
-            <FolderGit2 size={13} />
-            <span>{projectsList.length} Systems & Repositories</span>
-          </div>
-        </div>
-        <p className="page-subtitle-editorial">
-          Open-source platforms, deep learning inference engines, and distributed cloud infrastructure built for production reliability.
+      {/* Clean Page Header */}
+      <header className="page-header">
+        <h1 className="page-title">Projects</h1>
+        <p className="page-subtitle">
+          Open-source projects, system architectures, and production engineering tools
+          I&apos;ve built over the years, including distributed engines, cloud
+          infrastructure, and AI models.
         </p>
       </header>
 
-      {/* Segmented Category Pill Bar */}
-      <div className="segmented-pill-bar">
+      {/* Segmented Category Filter Pill Bar */}
+      <div className="projects-filter-bar" role="tablist" aria-label="Project categories">
         {CATEGORIES.map((cat) => {
           const isActive = selectedCategory === cat;
           const count =
@@ -59,6 +51,8 @@ export default function ProjectsPage() {
             <button
               key={cat}
               type="button"
+              role="tab"
+              aria-selected={isActive}
               onClick={() => setSelectedCategory(cat)}
               className={`segmented-pill-btn ${isActive ? "active" : ""}`}
             >
@@ -68,65 +62,83 @@ export default function ProjectsPage() {
         })}
       </div>
 
-      {/* Unified Search Bar */}
-      <div className="search-bar-unified">
-        <Search size={15} style={{ color: "var(--color-text-muted)" }} />
-        <input
-          type="text"
-          className="search-unified-input"
-          placeholder="Filter projects by technology, keyword, or architecture (e.g. PyTorch, Docker, Kafka)..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          aria-label="Filter projects"
-        />
-        {searchQuery && (
-          <button
-            type="button"
-            className="icon-btn"
-            style={{ width: 24, height: 24, border: "none" }}
-            onClick={() => setSearchQuery("")}
-            title="Clear project search"
-          >
-            <ClearIcon size={14} />
-          </button>
-        )}
+      {/* 3-Column Projects Grid matching Reference */}
+      <div className="cards">
+        {filteredProjects.map((project) => (
+          <ProjectCard key={project.slug} project={project} />
+        ))}
       </div>
 
-      {/* Projects Grid */}
-      {filteredProjects.length === 0 ? (
-        <div
-          style={{
-            textAlign: "center",
-            padding: "4rem 2rem",
-            backgroundColor: "var(--color-background-card)",
-            border: "1px dashed var(--color-border)",
-            borderRadius: "var(--border-radius)",
-          }}
-        >
-          <SearchX size={32} style={{ color: "var(--color-text-muted)", margin: "0 auto 0.75rem" }} />
-          <h3 style={{ fontSize: "1.15rem", marginBottom: "0.25rem" }}>No matching projects</h3>
-          <p style={{ color: "var(--color-text-muted)", fontSize: "0.9rem" }}>
-            No systems found matching &quot;{searchQuery}&quot; under &quot;{selectedCategory}&quot;.
-          </p>
-          <button
-            type="button"
-            className="btn"
-            style={{ marginTop: "1rem" }}
-            onClick={() => {
-              setSelectedCategory("All");
-              setSearchQuery("");
-            }}
+      {/* Footer Strip matching Reference Screenshot */}
+      <footer className="guides-footer-strip" style={{ maxWidth: "100%", marginTop: "4rem" }}>
+        <nav className="guides-footer-links" aria-label="Quick contact links">
+          <a
+            href={`mailto:${siteConfig.social.email}`}
+            className="guides-footer-link"
+            title="Email Dilshan"
           >
-            Reset filter
-          </button>
+            <Mail size={14} strokeWidth={1.8} />
+            <span>Email contact</span>
+          </a>
+          <Link
+            href="/rss.xml"
+            className="guides-footer-link"
+            title="Subscribe to RSS Feed"
+          >
+            <Rss size={14} strokeWidth={1.8} />
+            <span>RSS feed</span>
+          </Link>
+          <a
+            href={siteConfig.social.x}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="guides-footer-link"
+            title="Follow on X"
+          >
+            <XIcon size={12} />
+            <span>X (Twitter)</span>
+          </a>
+          <a
+            href={siteConfig.social.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="guides-footer-link"
+            title="GitHub Profile"
+          >
+            <GithubIcon size={13} />
+            <span>GitHub</span>
+          </a>
+        </nav>
+
+        <div className="guides-footer-badges" aria-label="Core Engineering Stack">
+          <span className="guides-badge-pill" title="Framework: Next.js">
+            <Code2 size={13} strokeWidth={2} />
+            <span>Next.js</span>
+          </span>
+          <span className="guides-badge-pill" title="Language: TypeScript">
+            <Binary size={13} strokeWidth={2} />
+            <span>TypeScript</span>
+          </span>
+          <span className="guides-badge-pill" title="Containerization: Docker">
+            <Server size={13} strokeWidth={2} />
+            <span>Docker</span>
+          </span>
+          <span className="guides-badge-pill" title="Machine Learning: PyTorch">
+            <Cpu size={13} strokeWidth={2} />
+            <span>PyTorch</span>
+          </span>
+          <span className="guides-badge-pill" title="Orchestration: Kubernetes">
+            <Layers size={13} strokeWidth={2} />
+            <span>Kubernetes</span>
+          </span>
         </div>
-      ) : (
-        <div className="projects-editorial-grid">
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
+
+        <div className="guides-footer-credit">
+          <span>Crafted by {siteConfig.name}</span>
+          <span className="credit-dot">&bull;</span>
+          <span>Open Digital Garden</span>
         </div>
-      )}
+      </footer>
     </div>
   );
 }

@@ -11,28 +11,22 @@ const CATEGORY_ICONS: Record<string, React.ElementType> = {
 
 export function TechMatrix() {
   return (
-    <div className="tech-matrix">
-      {skillCategories.map((group, idx) => {
+    <div className="tech-matrix-grid">
+      {skillCategories.map((group) => {
         const IconComponent = CATEGORY_ICONS[group.category] || Code2;
-        const indexStr = String(idx + 1).padStart(2, "0");
 
         return (
-          <div key={group.category} className="tech-category-card">
-            <div className="tech-category-header">
-              <div className="tech-category-header-left">
-                <IconComponent size={15} className="tech-category-icon" />
-                <span className="tech-category-index">{indexStr} //</span>
-                <h3 className="tech-category-title">{group.category}</h3>
-              </div>
-              <span className="tech-category-count">{group.skills.length} skills</span>
+          <div key={group.category} className="tech-group">
+            <div className="tech-group-header">
+              <IconComponent size={16} className="tech-group-icon" />
+              <h3 className="tech-group-title">{group.category}</h3>
             </div>
-            <p className="tech-category-desc">{group.description}</p>
-            <div className="tech-pill-list">
+            <p className="tech-group-desc">{group.description}</p>
+            <div className="tech-tag-list">
               {group.skills.map((skill) => (
                 <span
                   key={skill.name}
-                  className={`tech-pill ${skill.highlight ? "highlight" : ""}`}
-                  title={`Proficiency: ${skill.level}`}
+                  className={`tech-tag ${skill.highlight ? "highlight" : ""}`}
                 >
                   {skill.name}
                 </span>
@@ -44,3 +38,4 @@ export function TechMatrix() {
     </div>
   );
 }
+

@@ -31,7 +31,7 @@ export const siteConfig: SiteConfig = {
   },
   navigation: [
     { label: "Blog", icon: "book", path: "/blog" },
-    { label: "Shelves", icon: "compass", path: "/shelves" },
+    { label: "Guides", icon: "compass", path: "/guides" },
     { label: "Projects", icon: "folder", path: "/projects" },
     { label: "About me", icon: "user", path: "/about" },
   ],

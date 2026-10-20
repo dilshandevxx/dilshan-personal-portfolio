@@ -6,19 +6,9 @@ import { usePathname } from "next/navigation";
 import { siteConfig } from "@/data/siteConfig";
 import { ColorPicker } from "./ColorPicker";
 import { ThemeToggle } from "./ThemeToggle";
-import { GithubIcon, LinkedinIcon, XIcon } from "./SocialIcons";
-import {
-  PenLine,
-  Compass,
-  Code2,
-  User,
-  ArrowLeft,
-  Mail,
-  Rss,
-  Menu,
-  X as CloseIcon,
-  Save,
-} from "lucide-react";
+import { AmbientPlayer } from "./AmbientPlayer";
+import { GithubIcon, BlueskyIcon } from "./SocialIcons";
+import { Mail, Rss, Menu, X as CloseIcon } from "lucide-react";
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -27,7 +17,7 @@ export function Sidebar() {
   const navLinks = [
     {
       label: "Blog",
-      icon: PenLine,
+      image: "/nav-blog.png",
       path: "/blog",
       isActive:
         pathname === "/blog" ||
@@ -36,19 +26,20 @@ export function Sidebar() {
     },
     {
       label: "Shelves",
-      icon: Compass,
+      image: "/nav-search.png",
       path: "/shelves",
-      isActive: pathname.startsWith("/shelves"),
+      isActive:
+        pathname.startsWith("/shelves") || pathname.startsWith("/guides"),
     },
     {
       label: "Projects",
-      icon: Code2,
+      image: "/nav-projects.png",
       path: "/projects",
       isActive: pathname.startsWith("/projects"),
     },
     {
       label: "About me",
-      icon: User,
+      image: "/nav-floppy.png",
       path: "/about",
       isActive: pathname.startsWith("/about"),
     },
@@ -56,42 +47,55 @@ export function Sidebar() {
 
   return (
     <>
-      {/* Mobile Top Header */}
+      {/* Mobile Top Navigation Header */}
       <header className="mobile-header">
         <Link href="/" className="mobile-brand-link">
-          <span className="sidebar-brand-mark">
-            <Save size={16} strokeWidth={2} />
-          </span>
-          <span className="mobile-brand-name">dilshan.dev</span>
+          <img
+            src="/nav-floppy.png"
+            className="navbar-logo"
+            alt="dilshan.dev"
+            title="💾"
+            width={20}
+            height={20}
+          />
+          <span className="site-name">dilshan.dev</span>
         </Link>
         <div className="mobile-header-actions">
+          <AmbientPlayer variant="header" />
           <ColorPicker />
           <ThemeToggle />
           <button
             type="button"
-            className="icon-btn"
+            className="navbar-button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
+            aria-label="Toggle navigation menu"
           >
             {mobileOpen ? <CloseIcon size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </header>
 
-      {/* Main Minimalist Matte Sidebar inspired by tania.dev (no emojis) */}
+      {/* Main Sticky Sidebar (Exact structure & behavior of taniarascia.com) */}
       <aside className={`app-sidebar ${mobileOpen ? "open" : ""}`}>
-        <div className="sidebar-top">
-          {/* Header Row: Brand + Minimal Controls */}
-          <div className="sidebar-header-row">
+        {/* Section 1: Title and Global Controls */}
+        <section className="sidebar-section">
+          <div className="sidebar-title-link">
             <Link
               href="/"
               className="sidebar-brand-link"
               onClick={() => setMobileOpen(false)}
             >
-              <span className="sidebar-brand-mark">
-                <Save size={16} strokeWidth={2} />
+              <span>
+                <img
+                  src="/nav-floppy.png"
+                  className="navbar-logo"
+                  alt="dilshan.dev"
+                  title="💾"
+                  width={20}
+                  height={20}
+                />
               </span>
-              <span className="sidebar-brand-name">dilshan.dev</span>
+              <span className="site-name">dilshan.dev</span>
             </Link>
 
             <div className="sidebar-header-controls">
@@ -99,132 +103,123 @@ export function Sidebar() {
               <ThemeToggle />
             </div>
           </div>
+        </section>
 
-          {/* Top Hairline Divider */}
-          <div className="sidebar-divider" />
-
-          {/* Artistic Personal Bio */}
-          <p className="sidebar-bio">
-            I&apos;m{" "}
-            <Link href="/about" className="sidebar-bio-highlight">
-              Dilshan
-            </Link>{" "}
-            — cultivating an{" "}
-            <span className="bio-accent-garden">open digital garden</span> where{" "}
-            <span className="bio-accent-term">neural architectures</span>,{" "}
-            <span className="bio-accent-term">resilient DevOps infrastructure</span>, and thoughtful code grow in public.
-          </p>
-
-          {/* Second Hairline Divider */}
-          <div className="sidebar-divider" />
-
-          {/* Clean Navigation Links */}
-          <nav className="sidebar-nav">
-            {navLinks.map((item) => {
-              const IconComponent = item.icon;
-
-              return (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  onClick={() => setMobileOpen(false)}
-                  className={`sidebar-nav-item ${item.isActive ? "active" : ""}`}
-                >
-                  <IconComponent
-                    size={17}
-                    strokeWidth={1.8}
-                    className="sidebar-nav-icon"
-                  />
-                  <span className="sidebar-nav-label">{item.label}</span>
-                </Link>
-              );
-            })}
-
-            {/* Subtle return to cover overview */}
-            <div className="sidebar-subdivider" />
-            <Link
-              href="/"
-              onClick={() => setMobileOpen(false)}
-              className="sidebar-nav-item sidebar-nav-return"
-              title="Return to cover overview"
-            >
-              <ArrowLeft size={13} strokeWidth={1.8} className="sidebar-nav-icon" />
-              <span className="sidebar-nav-label">Cover page</span>
-            </Link>
-          </nav>
-        </div>
-
-        {/* Quiet Minimalist Footer */}
-        <div className="sidebar-footer">
-          {/* Social Row */}
-          <div className="sidebar-social-links">
-            <a
-              href={`mailto:${siteConfig.social.email}`}
-              title="Email"
-              aria-label="Email"
-              className="sidebar-social-link"
-            >
-              <Mail size={16} strokeWidth={1.8} />
-            </a>
-            <a
-              href={siteConfig.social.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="GitHub"
-              aria-label="GitHub"
-              className="sidebar-social-link"
-            >
-              <GithubIcon size={16} />
-            </a>
-            <a
-              href={siteConfig.social.x}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="X (Twitter)"
-              aria-label="X (Twitter)"
-              className="sidebar-social-link"
-            >
-              <XIcon size={14} />
-            </a>
-            <a
-              href={siteConfig.social.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="LinkedIn"
-              aria-label="LinkedIn"
-              className="sidebar-social-link"
-            >
-              <LinkedinIcon size={16} />
-            </a>
-            <Link
-              href="/rss.xml"
-              title="RSS Feed"
-              aria-label="RSS Feed"
-              className="sidebar-social-link"
-            >
-              <Rss size={15} strokeWidth={1.8} />
-            </Link>
+        {/* Section 2: Personal Digital Garden Bio */}
+        <section className="sidebar-section">
+          <div className="sidebar-content">
+            <p>
+              I&apos;m{" "}
+              <Link
+                href="/about"
+                className="sidebar-bio-highlight"
+                onClick={() => setMobileOpen(false)}
+              >
+                Dilshan
+              </Link>
+              , <span className="sidebar-bio-term">Software Engineer</span> and{" "}
+              <span className="sidebar-bio-term">Open-Source Creator</span>. This is my{" "}
+              <span className="sidebar-bio-garden">Digital Garden</span>. 🌱
+            </p>
           </div>
+        </section>
 
-          {/* Text Navigation Links: Resume | Topics | Source */}
-          <div className="sidebar-text-links">
-            <Link href="/about" className="sidebar-footer-link">
+        {/* Section 3: Primary Navigation Links */}
+        <section className="sidebar-section">
+          <nav className="sidebar-nav-links">
+            {navLinks.map((item) => (
+              <Link
+                key={item.path}
+                href={item.path}
+                onClick={() => setMobileOpen(false)}
+                className={item.isActive ? "active" : ""}
+              >
+                <img
+                  src={item.image}
+                  alt=""
+                  width={24}
+                  height={24}
+                  style={{ objectFit: "contain", flexShrink: 0 }}
+                />
+                <span>{item.label}</span>
+              </Link>
+            ))}
+          </nav>
+        </section>
+
+        {/* Section 4: Sidebar Bottom (Pinned to bottom with margin-top: auto) */}
+        <div className="sidebar-bottom">
+          <section className="sidebar-section">
+            <nav className="sidebar-links">
+              <a
+                href={`mailto:${siteConfig.social.email}`}
+                title="Email"
+                aria-label="Email"
+              >
+                <Mail size={18} strokeWidth={1.8} />
+              </a>
+              <a
+                href={siteConfig.social.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="GitHub"
+                aria-label="GitHub"
+              >
+                <GithubIcon size={18} />
+              </a>
+              <a
+                href={siteConfig.social.x}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Bluesky"
+                aria-label="Bluesky"
+              >
+                <BlueskyIcon size={18} />
+              </a>
+              <Link
+                href="/rss.xml"
+                title="RSS Feed"
+                aria-label="RSS Feed"
+                onClick={() => setMobileOpen(false)}
+              >
+                <Rss size={18} strokeWidth={1.8} />
+              </Link>
+              <a
+                href="https://github.com/dilshandevxx/dilshan-personal-portfolio"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Theme Source"
+                aria-label="Theme Source"
+              >
+                <img
+                  src="/moon.png"
+                  alt="Theme"
+                  width={18}
+                  height={18}
+                  style={{ objectFit: "contain", display: "block" }}
+                />
+              </a>
+            </nav>
+          </section>
+
+          {/* Sub-links with dividers */}
+          <nav className="sidebar-sub-links">
+            <Link href="/about" onClick={() => setMobileOpen(false)}>
               Resume
             </Link>
-            <span className="sidebar-footer-separator">|</span>
-            <Link href="/shelves" className="sidebar-footer-link">
+            <div className="divider" />
+            <Link href="/shelves" onClick={() => setMobileOpen(false)}>
               Topics
             </Link>
-            <span className="sidebar-footer-separator">|</span>
+            <div className="divider" />
             <a
-              href={siteConfig.social.github}
+              href="https://github.com/dilshandevxx/dilshan-personal-portfolio"
               target="_blank"
               rel="noopener noreferrer"
-              className="sidebar-footer-link"
             >
               Source
             </a>
-          </div>
+          </nav>
         </div>
       </aside>
 
@@ -233,6 +228,7 @@ export function Sidebar() {
         <div
           className="mobile-backdrop"
           onClick={() => setMobileOpen(false)}
+          aria-hidden="true"
         />
       )}
     </>

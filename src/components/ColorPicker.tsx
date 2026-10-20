@@ -18,45 +18,56 @@ export function ColorPicker() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const currentVal = theme === "dark" ? accent.darkValue : accent.lightValue;
+  const isDarkCanvas = theme !== "light";
+  const currentVal = isDarkCanvas ? accent.darkValue : accent.lightValue;
 
   return (
-    <div className="color-dropdown-wrapper" ref={dropdownRef}>
+    <div className="dropdown tooltip-container" ref={dropdownRef}>
       <button
         type="button"
-        className="icon-btn"
+        className={`navbar-button ${isOpen ? "active" : ""}`}
         onClick={() => setIsOpen(!isOpen)}
-        title="Change accent color"
-        aria-label="Change accent color"
+        aria-label="Theme color"
       >
-        <span
-          className="color-dot-indicator"
-          style={{ backgroundColor: currentVal }}
+        <div
+          className="circle"
+          style={{
+            backgroundColor: currentVal,
+          }}
         />
       </button>
 
       {isOpen && (
-        <div className="color-dropdown-menu">
-          {ACCENT_COLORS.map((c) => {
-            const dotColor = theme === "dark" ? c.darkValue : c.lightValue;
-            const isActive = c.id === accent.id;
-            return (
-              <button
-                key={c.id}
-                type="button"
-                className={`color-choice-btn ${isActive ? "active" : ""}`}
-                style={{ backgroundColor: dotColor }}
-                title={c.name}
-                aria-label={`Select ${c.name}`}
-                onClick={() => {
-                  setAccent(c);
-                  setIsOpen(false);
-                }}
-              />
-            );
-          })}
+        <div className="dropdown-results">
+          <div className="circles">
+            {ACCENT_COLORS.map((c) => {
+              const dotColor = isDarkCanvas ? c.darkValue : c.lightValue;
+              const isActive = c.id === accent.id;
+              return (
+                <div
+                  key={c.id}
+                  className="dropdown-option"
+                  onClick={() => {
+                    setAccent(c);
+                    setIsOpen(false);
+                  }}
+                  title={c.name}
+                >
+                  <div
+                    className="circle"
+                    style={{
+                      backgroundColor: dotColor,
+                      outline: isActive ? "2px solid var(--color-primary)" : "none",
+                      outlineOffset: "2px",
+                    }}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
+      {!isOpen && <div className="tooltip">Color</div>}
     </div>
   );
 }

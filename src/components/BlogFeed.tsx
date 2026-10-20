@@ -4,7 +4,7 @@ import React, { useState, useMemo, useEffect, useRef, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { postsData, PostItem } from "@/data/notes";
-import { Search, X as ClearIcon, SearchX, BookOpen, Clock } from "lucide-react";
+import { Search, X as ClearIcon, SearchX, Clock } from "lucide-react";
 
 interface CategoryFilter {
   id: string;
@@ -81,25 +81,17 @@ function BlogFeedInner() {
   }, [filteredPosts]);
 
   return (
-    <div className="page-extended-container">
-      {/* Editorial Header */}
-      <header className="page-header-editorial">
-        <div className="page-header-topline">
-          <h1 className="page-title-editorial">
-            Latest <span className="title-accent">Articles</span>
-          </h1>
-          <div className="page-count-badge">
-            <BookOpen size={13} />
-            <span>{postsData.length} Articles</span>
-          </div>
-        </div>
-        <p className="page-subtitle-editorial">
-          Guides, engineering architectures, and technical notes on distributed systems, deep learning, and cloud infrastructure.
+    <div className="page-content-narrow">
+      {/* Clean Page Header */}
+      <header className="page-header">
+        <h1 className="page-title">Blog</h1>
+        <p className="page-subtitle">
+          Guides, tutorials, and technical notes on distributed systems, deep learning, and cloud infrastructure.
         </p>
       </header>
 
       {/* Focused Content Column */}
-      <div className="page-content-narrow">
+      <div className="blog-stream-wrapper">
         {/* Sleek Segmented Filter Bar */}
         <div className="segmented-pill-bar">
           {CATEGORIES.map((cat) => {
@@ -230,7 +222,7 @@ export function BlogFeed() {
   return (
     <Suspense
       fallback={
-        <div className="page-extended-container" style={{ padding: "3rem 0" }}>
+        <div className="page-content-narrow" style={{ padding: "3rem 0" }}>
           <p style={{ color: "var(--color-text-muted)" }}>Loading articles...</p>
         </div>
       }
