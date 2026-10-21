@@ -1,6 +1,8 @@
 import React from 'react';
 import { PortfolioSidebar } from '@/components/PortfolioSidebar';
-import { PortfolioMobileHeader } from '@/components/PortfolioMobileHeader';
+import { AmbientPlayer } from '@/components/AmbientPlayer';
+import { AudioProvider } from '@/components/AudioContext';
+import { ThemeProvider as ProductionThemeProvider } from '@/components/ThemeContext';
 
 export default function PortfolioLayout({
   children,
@@ -8,19 +10,25 @@ export default function PortfolioLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] flex flex-col lg:flex-row">
-      {/* Mobile Top Header (compact + drawer, hidden on desktop) */}
-      <PortfolioMobileHeader />
+    <ProductionThemeProvider>
+      <AudioProvider>
+        <div className="portfolio-app-shell">
+          {/* Authentic Production Left Panel (Sticky Desktop Sidebar & Mobile Drawer) */}
+          <PortfolioSidebar />
 
-      {/* Persistent Left Sidebar on Desktop (hidden on mobile/tablet) */}
-      <PortfolioSidebar className="hidden lg:flex" />
+          {/* Main Content Area */}
+          <div className="portfolio-main-column">
+            {/* Desktop Top Ambient Audio Pill */}
+            <div className="portfolio-top-bar hidden lg:flex">
+              <AmbientPlayer variant="floating" />
+            </div>
 
-      {/* Main Content Area: scrolls naturally on desktop and mobile */}
-      <div className="flex-1 min-w-0 flex flex-col justify-between">
-        <main className="flex-1 w-full max-w-5xl mx-auto px-5 sm:px-8 lg:px-12 py-8 lg:py-12">
-          {children}
-        </main>
-      </div>
-    </div>
+            <main className="portfolio-content-area">
+              {children}
+            </main>
+          </div>
+        </div>
+      </AudioProvider>
+    </ProductionThemeProvider>
   );
 }

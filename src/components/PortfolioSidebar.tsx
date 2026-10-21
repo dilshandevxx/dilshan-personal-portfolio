@@ -1,183 +1,252 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { ThemePicker } from '@/components/ThemePicker';
-import { GithubIcon, MailIcon, RssIcon, BlueskyIcon, CoffeeIcon } from '@/components/Icons';
+import React, { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ColorPicker } from "./ColorPicker";
+import { ThemeToggle } from "./ThemeToggle";
+import { AmbientPlayer } from "./AmbientPlayer";
+import { GithubIcon, BlueskyIcon } from "./Icons";
+import { Mail, Rss, Menu, X as CloseIcon } from "lucide-react";
 
-export const NAVIGATION_ITEMS = [
+export interface NavigationItem {
+  id: string;
+  label: string;
+  href: string;
+  emoji: string;
+}
+
+export const NAVIGATION_ITEMS: NavigationItem[] = [
   { id: 'blog', label: 'Blog', href: '/portfolio/blog', emoji: '📝' },
   { id: 'shelves', label: 'Shelves', href: '/portfolio/shelves', emoji: '🔍' },
   { id: 'projects', label: 'Projects', href: '/portfolio/projects', emoji: '🗂️' },
   { id: 'about', label: 'About me', href: '/portfolio/about', emoji: '💾' },
 ];
 
-interface PortfolioSidebarProps {
-  activeSection?: string;
-  className?: string;
-}
-
-export function PortfolioSidebar({ activeSection = 'about', className = '' }: PortfolioSidebarProps) {
+export function PortfolioSidebar() {
   const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  const isCurrentActive = (item: typeof NAVIGATION_ITEMS[0]) => {
-    if (pathname === item.href) return true;
-    if ((pathname === '/portfolio' || pathname === '/portfolio/') && item.id === 'about') return true;
-    if (pathname.startsWith(item.href) && item.href !== '/portfolio') return true;
-    if (pathname === '/portfolio/life' && item.id === 'shelves') return true;
-    if (pathname === '/portfolio' && activeSection === item.id) return true;
-    return false;
-  };
+  const navLinks = [
+    {
+      label: "Blog",
+      image: "/nav-blog.png",
+      path: "/portfolio/blog",
+      isActive:
+        pathname === "/portfolio/blog" ||
+        pathname.startsWith("/portfolio/blog/"),
+    },
+    {
+      label: "Shelves",
+      image: "/nav-search.png",
+      path: "/portfolio/shelves",
+      isActive:
+        pathname.startsWith("/portfolio/shelves") ||
+        pathname.startsWith("/portfolio/life"),
+    },
+    {
+      label: "Projects",
+      image: "/nav-projects.png",
+      path: "/portfolio/projects",
+      isActive: pathname.startsWith("/portfolio/projects"),
+    },
+    {
+      label: "About me",
+      image: "/nav-floppy.png",
+      path: "/portfolio/about",
+      isActive:
+        pathname === "/portfolio/about" ||
+        pathname === "/portfolio" ||
+        pathname === "/portfolio/",
+    },
+  ];
 
   return (
-    <aside
-      className={`w-64 lg:w-72 shrink-0 h-screen sticky top-0 flex flex-col justify-between p-6 border-r border-[var(--border-subtle)] bg-[var(--bg-primary)] overflow-y-auto selection:bg-[var(--accent-subtle)] selection:text-[var(--accent-color)] ${className}`}
-      aria-label="Main Portfolio Navigation"
-    >
-      {/* Top Header & Identity */}
-      <div className="space-y-6">
-        {/* Brand row: 💾 dilshan.dev + 🟢 online indicator + ☀️ theme picker */}
-        <div className="flex items-center justify-between">
-          <Link
-            href="/"
-            className="flex items-center gap-2 group focus-visible:outline-none"
-            title="Return to Book Landing Page"
+    <>
+      {/* Mobile Top Navigation Header (< 1020px) */}
+      <header className="mobile-header">
+        <Link href="/" className="mobile-brand-link">
+          <img
+            src="/nav-floppy.png"
+            className="navbar-logo"
+            alt="dilshan.dev"
+            title="💾"
+            width={20}
+            height={20}
+          />
+          <span className="site-name">dilshan.dev</span>
+        </Link>
+        <div className="mobile-header-actions">
+          <AmbientPlayer variant="header" />
+          <ColorPicker />
+          <ThemeToggle />
+          <button
+            type="button"
+            className="navbar-button"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle navigation menu"
           >
-            <span className="text-xl" role="img" aria-label="Floppy disk">💾</span>
-            <span className="font-sans font-bold text-base sm:text-lg text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-colors">
-              dilshan.dev
-            </span>
-          </Link>
-
-          <div className="flex items-center gap-2.5">
-            {/* Green status pulse dot */}
-            <span
-              className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(74,222,128,0.6)]"
-              title="Online • Available for systems & frontend engineering"
-              aria-label="Online indicator"
-            />
-            {/* Theme & Accent Selector */}
-            <ThemePicker compact align="left" />
-          </div>
+            {mobileOpen ? <CloseIcon size={18} /> : <Menu size={18} />}
+          </button>
         </div>
+      </header>
 
-        {/* Short Personal Bio in Tania Rascia Style */}
-        <div className="text-xs sm:text-[13px] font-sans text-[var(--text-secondary)] leading-relaxed">
-          <p>
-            I&apos;m{' '}
+      {/* Main Sticky Sidebar (Desktop & Mobile Drawer) */}
+      <aside className={`app-sidebar ${mobileOpen ? "open" : ""}`}>
+        {/* Section 1: Title and Controls */}
+        <section className="sidebar-section">
+          <div className="sidebar-title-link">
             <Link
-              href="/portfolio/about"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4 decoration-[var(--accent-color)]"
+              href="/"
+              className="sidebar-brand-link"
+              onClick={() => setMobileOpen(false)}
             >
-              Dilshan
+              <span>
+                <img
+                  src="/nav-floppy.png"
+                  className="navbar-logo"
+                  alt="dilshan.dev"
+                  title="💾"
+                  width={20}
+                  height={20}
+                />
+              </span>
+              <span className="site-name">dilshan.dev</span>
             </Link>
-            , software engineer and open-source creator. This is my digital garden. 🌱
-          </p>
-        </div>
 
-        {/* Navigation Section */}
-        <nav className="space-y-1.5 pt-2" aria-label="Digital Garden Sections">
-          {NAVIGATION_ITEMS.map((item) => {
-            const active = isCurrentActive(item);
+            <div className="sidebar-header-controls">
+              <ColorPicker />
+              <ThemeToggle />
+            </div>
+          </div>
+        </section>
 
-            return (
+        {/* Section 2: Personal Digital Garden Bio */}
+        <section className="sidebar-section">
+          <div className="sidebar-content">
+            <p>
+              I&apos;m{" "}
               <Link
-                key={item.id}
-                href={item.href}
-                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-sans transition-all ${
-                  active
-                    ? 'bg-[var(--surface-hover)] text-[var(--text-primary)] font-semibold border border-[var(--border-strong)]'
-                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-card)]'
-                }`}
-                aria-current={active ? 'page' : undefined}
+                href="/portfolio/about"
+                className="sidebar-bio-highlight"
+                onClick={() => setMobileOpen(false)}
               >
-                <span className="text-base" role="img" aria-hidden="true">{item.emoji}</span>
+                Dilshan
+              </Link>
+              , <span className="sidebar-bio-term">Software Engineer</span> and{" "}
+              <span className="sidebar-bio-term">Open-Source Creator</span>. This is my{" "}
+              <span className="sidebar-bio-garden">Digital Garden</span>. 🌱
+            </p>
+          </div>
+        </section>
+
+        {/* Section 3: Navigation Links */}
+        <section className="sidebar-section">
+          <nav className="sidebar-nav-links">
+            {navLinks.map((item) => (
+              <Link
+                key={item.path}
+                href={item.path}
+                onClick={() => setMobileOpen(false)}
+                className={item.isActive ? "active" : ""}
+              >
+                <img
+                  src={item.image}
+                  alt=""
+                  width={24}
+                  height={24}
+                  style={{ objectFit: "contain", flexShrink: 0 }}
+                />
                 <span>{item.label}</span>
               </Link>
-            );
-          })}
-        </nav>
-      </div>
+            ))}
+          </nav>
+        </section>
 
-      {/* Bottom Block: Social Icons & Secondary Links */}
-      <div className="pt-6 border-t border-[var(--border-subtle)] space-y-4">
-        {/* Social Icons Strip: Mail, GitHub, Bluesky, RSS, Coffee */}
-        <div className="flex items-center gap-3">
-          <a
-            href="mailto:hello@dilshan.dev"
-            className="p-1 rounded text-[var(--text-muted)] hover:text-[var(--accent-color)] transition-colors"
-            title="Email me"
-            aria-label="Email"
-          >
-            <MailIcon className="w-4 h-4" />
-          </a>
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-1 rounded text-[var(--text-muted)] hover:text-[var(--accent-color)] transition-colors"
-            title="GitHub"
-            aria-label="GitHub"
-          >
-            <GithubIcon className="w-4 h-4" />
-          </a>
-          <a
-            href="https://bsky.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-1 rounded text-[var(--text-muted)] hover:text-[var(--accent-color)] transition-colors"
-            title="Bluesky"
-            aria-label="Bluesky"
-          >
-            <BlueskyIcon className="w-4 h-4" />
-          </a>
-          <a
-            href="/feed.xml"
-            className="p-1 rounded text-[var(--text-muted)] hover:text-[var(--accent-color)] transition-colors"
-            title="RSS Feed"
-            aria-label="RSS Feed"
-          >
-            <RssIcon className="w-4 h-4" />
-          </a>
-          <a
-            href="https://buymeacoffee.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-1 rounded text-[var(--text-muted)] hover:text-[var(--accent-color)] transition-colors"
-            title="Buy me a coffee"
-            aria-label="Buy me a coffee"
-          >
-            <CoffeeIcon className="w-4 h-4" />
-          </a>
-        </div>
+        {/* Section 4: Sidebar Bottom (Pinned to bottom) */}
+        <div className="sidebar-bottom">
+          <section className="sidebar-section">
+            <nav className="sidebar-links">
+              <a
+                href="mailto:dilshan.devxx@gmail.com"
+                title="Email"
+                aria-label="Email"
+              >
+                <Mail size={18} strokeWidth={1.8} />
+              </a>
+              <a
+                href="https://github.com/dilshandevxx"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="GitHub"
+                aria-label="GitHub"
+              >
+                <GithubIcon className="w-[18px] h-[18px]" />
+              </a>
+              <a
+                href="https://x.com/dilshanverse"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Bluesky"
+                aria-label="Bluesky"
+              >
+                <BlueskyIcon className="w-[18px] h-[18px]" />
+              </a>
+              <Link
+                href="/feed.xml"
+                title="RSS Feed"
+                aria-label="RSS Feed"
+                onClick={() => setMobileOpen(false)}
+              >
+                <Rss size={18} strokeWidth={1.8} />
+              </Link>
+              <a
+                href="https://github.com/dilshandevxx/dilshan-personal-portfolio"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Theme Source"
+                aria-label="Theme Source"
+              >
+                <img
+                  src="/moon.png"
+                  alt="Theme"
+                  width={18}
+                  height={18}
+                  style={{ objectFit: "contain", display: "block" }}
+                />
+              </a>
+            </nav>
+          </section>
 
-        {/* Secondary Links: Resume | Topics | Source */}
-        <div className="flex items-center gap-2 text-xs font-sans text-[var(--text-muted)]">
-          <Link
-            href="/portfolio/resume"
-            className="hover:text-[var(--text-primary)] transition-colors"
-          >
-            Resume
-          </Link>
-          <span>|</span>
-          <Link
-            href="/portfolio/skills"
-            className="hover:text-[var(--text-primary)] transition-colors"
-          >
-            Topics
-          </Link>
-          <span>|</span>
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-[var(--text-primary)] transition-colors"
-          >
-            Source
-          </a>
+          {/* Sub-links with subtle dividers */}
+          <nav className="sidebar-sub-links">
+            <Link href="/portfolio/resume" onClick={() => setMobileOpen(false)}>
+              Resume
+            </Link>
+            <div className="divider" />
+            <Link href="/portfolio/skills" onClick={() => setMobileOpen(false)}>
+              Topics
+            </Link>
+            <div className="divider" />
+            <a
+              href="https://github.com/dilshandevxx/dilshan-personal-portfolio"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Source
+            </a>
+          </nav>
         </div>
-      </div>
-    </aside>
+      </aside>
+
+      {/* Mobile Backdrop */}
+      {mobileOpen && (
+        <div
+          className="mobile-backdrop"
+          onClick={() => setMobileOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+    </>
   );
 }
