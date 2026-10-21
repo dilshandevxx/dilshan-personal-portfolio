@@ -3408,6 +3408,9 @@ a.text-link:hover {
   top: calc(100% + 10px);
   right: 0;
   width: 350px;
+  max-height: calc(100vh - 5.5rem);
+  overflow-y: auto;
+  scrollbar-width: thin;
   background: var(--color-background-sidebar);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-lg);
@@ -3787,7 +3790,7 @@ a.text-link:hover {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  max-height: 190px;
+  max-height: 140px;
   overflow-y: auto;
   scrollbar-width: thin;
 }
