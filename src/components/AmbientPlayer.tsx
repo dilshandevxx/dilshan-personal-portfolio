@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 
 interface AmbientPlayerProps {
-  variant?: "header" | "floating";
+  variant?: "header" | "floating" | "icon";
 }
 
 function formatTime(seconds: number): string {
@@ -70,99 +70,125 @@ export function AmbientPlayer({ variant = "floating" }: AmbientPlayerProps) {
   return (
     <div
       ref={containerRef}
-      className={`chill-player-root ${
-        variant === "header" ? "variant-header" : "variant-floating"
+      className={`chill-player-root dropdown ${
+        variant === "header"
+          ? "variant-header"
+          : variant === "icon"
+          ? "variant-icon"
+          : "variant-floating"
       }`}
     >
-      {/* 1. Sleek Compact Trigger Capsule */}
-      <div className={`chill-pill-deck ${isPlaying ? "is-playing" : ""} ${isOpen ? "is-open" : ""}`}>
-        {/* Main interactive toggle button */}
-        <button
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          className="chill-pill-main-btn"
-          aria-label="Toggle Chill Music Player Deck"
-          title={`Now playing: ${currentTrack.name} (${currentTrack.mood}) — Click for chill controls`}
-        >
-          {/* Animated Vinyl Disc Icon */}
-          <span className={`chill-vinyl-icon ${isPlaying ? "spinning" : ""}`}>
-            <Disc3 size={15} />
-          </span>
-
-          {/* Track Name & Mood */}
-          <span className="chill-pill-track-info">
-            <span className="chill-pill-track-name">{currentTrack.name}</span>
-            <span className="chill-pill-mood-dot" />
-            <span className="chill-pill-mood-text">{currentTrack.mood}</span>
-          </span>
-
-          {/* 4-Bar Animated Equalizer */}
-          <span
-            className={`chill-equalizer ${isPlaying ? "active" : ""}`}
-            aria-hidden="true"
+      {/* 1. Trigger: Single Compact Icon Button (if variant="icon") or Pill Deck */}
+      {variant === "icon" ? (
+        <div className="tooltip-container">
+          <button
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            className={`navbar-button chill-icon-trigger ${isPlaying ? "is-playing" : ""} ${isOpen ? "active" : ""}`}
+            aria-label="Lo-Fi Hip Hop Music Player"
+            title={
+              isPlaying
+                ? `Now playing: ${currentTrack.name} (${currentTrack.mood}) — Click to adjust`
+                : "Lo-Fi Hip Hop Radio — Click to play"
+            }
           >
-            <span className="bar bar-1" />
-            <span className="bar bar-2" />
-            <span className="bar bar-3" />
-            <span className="bar bar-4" />
-          </span>
-        </button>
+            <span className={`chill-icon-vinyl ${isPlaying ? "spinning" : ""}`}>
+              <Disc3 size={18} />
+            </span>
+            {isPlaying && <span className="chill-icon-dot" />}
+          </button>
+          {!isOpen && <div className="tooltip">Lo-Fi Radio</div>}
+        </div>
+      ) : (
+        <div className={`chill-pill-deck ${isPlaying ? "is-playing" : ""} ${isOpen ? "is-open" : ""}`}>
+          {/* Main interactive toggle button */}
+          <button
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            className="chill-pill-main-btn"
+            aria-label="Toggle Lo-Fi Hip Hop Music Player Deck"
+            title={`Now playing: ${currentTrack.name} (${currentTrack.mood}) — Click for lo-fi controls`}
+          >
+            {/* Animated Vinyl Disc Icon */}
+            <span className={`chill-vinyl-icon ${isPlaying ? "spinning" : ""}`}>
+              <Disc3 size={15} />
+            </span>
 
-        {/* Quick Previous Track */}
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            prevTrack();
-          }}
-          className="chill-quick-btn"
-          aria-label="Previous chill track"
-          title="Previous Track (P)"
-        >
-          <SkipBack size={12} />
-        </button>
+            {/* Track Name & Mood */}
+            <span className="chill-pill-track-info">
+              <span className="chill-pill-track-name">{currentTrack.name}</span>
+              <span className="chill-pill-mood-dot" />
+              <span className="chill-pill-mood-text">{currentTrack.mood}</span>
+            </span>
 
-        {/* Quick Play / Pause Button */}
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            togglePlay();
-          }}
-          className={`chill-quick-btn play-btn ${isPlaying ? "playing" : ""}`}
-          aria-label={isPlaying ? "Pause music" : "Play chill music"}
-          title={isPlaying ? "Pause (M)" : "Play chill music (M)"}
-        >
-          {isPlaying ? (
-            <Pause size={12} />
-          ) : (
-            <Play size={12} className="play-icon-offset" />
-          )}
-        </button>
+            {/* 4-Bar Animated Equalizer */}
+            <span
+              className={`chill-equalizer ${isPlaying ? "active" : ""}`}
+              aria-hidden="true"
+            >
+              <span className="bar bar-1" />
+              <span className="bar bar-2" />
+              <span className="bar bar-3" />
+              <span className="bar bar-4" />
+            </span>
+          </button>
 
-        {/* Quick Next Track */}
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            nextTrack();
-          }}
-          className="chill-quick-btn"
-          aria-label="Next chill track"
-          title="Next Track (N)"
-        >
-          <SkipForward size={12} />
-        </button>
-      </div>
+          {/* Quick Previous Track */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              prevTrack();
+            }}
+            className="chill-quick-btn"
+            aria-label="Previous chill track"
+            title="Previous Track (P)"
+          >
+            <SkipBack size={12} />
+          </button>
+
+          {/* Quick Play / Pause Button */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              togglePlay();
+            }}
+            className={`chill-quick-btn play-btn ${isPlaying ? "playing" : ""}`}
+            aria-label={isPlaying ? "Pause music" : "Play chill music"}
+            title={isPlaying ? "Pause (M)" : "Play chill music (M)"}
+          >
+            {isPlaying ? (
+              <Pause size={12} />
+            ) : (
+              <Play size={12} className="play-icon-offset" />
+            )}
+          </button>
+
+          {/* Quick Next Track */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              nextTrack();
+            }}
+            className="chill-quick-btn"
+            aria-label="Next chill track"
+            title="Next Track (N)"
+          >
+            <SkipForward size={12} />
+          </button>
+        </div>
+      )}
 
       {/* 2. Deluxe Popover Player Deck */}
       {isOpen && (
-        <div className="chill-deck-popover" role="dialog" aria-label="Chill Music Player">
+        <div className="chill-deck-popover" role="dialog" aria-label="Lo-Fi Hip Hop Music Player">
           {/* Header */}
           <div className="chill-deck-header">
             <div className="chill-deck-badge">
               <span className={`chill-live-dot ${isPlaying ? "pulsing" : ""}`} />
-              <span className="chill-deck-title">CHILL • LO-FI RADIO</span>
+              <span className="chill-deck-title">LO-FI HIP HOP RADIO</span>
             </div>
             <div className="chill-deck-header-actions">
               <button
@@ -219,7 +245,7 @@ export function AmbientPlayer({ variant = "floating" }: AmbientPlayerProps) {
               </div>
               <p className="chill-track-subtitle">{currentTrack.subtitle}</p>
               <span className="chill-artist-name">
-                Chillhop Music • High Fidelity
+                Lo-Fi Hip Hop • Chill Beats
               </span>
             </div>
           </div>
@@ -309,11 +335,13 @@ export function AmbientPlayer({ variant = "floating" }: AmbientPlayerProps) {
             </button>
           </div>
 
-          {/* Curated Chill Tracks Playlist */}
+          {/* Curated Lo-Fi Tracks Playlist */}
           <div className="chill-playlist-section">
             <div className="chill-playlist-title-row">
-              <span className="chill-playlist-label">Select Chill Track</span>
-              <span className="chill-playlist-count">6 Tracks Available</span>
+              <span className="chill-playlist-label">Select Lo-Fi Beat</span>
+              <span className="chill-playlist-count">
+                {SOUND_TRACKS.length} Lo-Fi Beats
+              </span>
             </div>
 
             <div className="chill-playlist-items" role="radiogroup" aria-label="Chill playlist">

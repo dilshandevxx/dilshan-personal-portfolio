@@ -5,6 +5,7 @@ import Link from "next/link";
 import { siteConfig } from "@/data/siteConfig";
 import { AmbientPlayer } from "@/components/AmbientPlayer";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { ColorPicker } from "@/components/ColorPicker";
 
 export default function MinimalCoverPage() {
   const navLinks = [
@@ -67,10 +68,15 @@ export default function MinimalCoverPage() {
         </div>
       </main>
 
-      {/* 3. Discreet Floating Ambient Dock (Chill Music & Theme Toggle) */}
-      <aside className="rick-floating-dock" aria-label="Ambient controls">
-        <AmbientPlayer variant="floating" />
-        <ThemeToggle />
+      {/* 3. Discreet Floating Ambient Dock (Music, Theme Color, & Theme Mode) */}
+      <aside className="rick-floating-dock" aria-label="Ambient and theme controls">
+        <div className="rick-dock-capsule">
+          <AmbientPlayer variant="icon" />
+          <span className="rick-dock-divider" aria-hidden="true" />
+          <ColorPicker />
+          <span className="rick-dock-divider" aria-hidden="true" />
+          <ThemeToggle />
+        </div>
       </aside>
     </div>
   );
