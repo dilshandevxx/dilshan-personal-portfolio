@@ -16,4 +16,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
   - Do not add simulated CLI terminals or faux-console widgets.
   - Prioritize clean typography, whitespace, and authentic content-first developer aesthetics.
 
-
+## Page Isolation & Separation Rules
+- **Strict Separation of Cover Page and Portfolio**: The **Cover Page** (`/` -> `src/app/page.tsx`) and the **Portfolio Pages** (`/projects`, `/blog`, `/shelves`, `/about`, `/notes/*`) are strictly independent, separate parts of the site.
+- **When modifying the Cover Page**: NEVER touch, alter, or remove the portfolio pages, their 2-column layout, `<Sidebar />`, floating ambient controls, or portfolio styles. All cover page work must be confined strictly to `src/app/page.tsx` and cover-specific styles.
+- **When modifying Portfolio Pages**: NEVER alter the cover page layout or its editorial components.
+- **AppShell Architecture**: `src/components/AppShell.tsx` preserves this boundary by rendering `<main className="landing-page-wrapper">{children}</main>` on `/` and `<div className="app-shell"><Sidebar /><main className="app-main">...` on all portfolio routes.
