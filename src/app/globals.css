@@ -1,0 +1,644 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap");
+@import "tailwindcss";
+
+/* ==========================================================================
+   EDITORIAL DESIGN SYSTEM & THEME TOKENS
+   Inspired by fine book typography and minimalist engineering portfolios.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   BASE VARIABLES (Fallback / Default: Dark Moss)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Default to Dark Moss */
+  --bg-primary: #151816;
+  --bg-secondary: #1c211e;
+  --bg-tertiary: #242b26;
+  --bg-subtle: #191e1a;
+  
+  --border-subtle: #29322c;
+  --border-strong: #3b463e;
+  --border-focus: #55665a;
+  
+  --text-primary: #f2eee8;
+  --text-secondary: #a7b4ab;
+  --text-muted: #738377;
+  
+  --surface-card: #191d1a;
+  --surface-hover: #222823;
+  --badge-bg: #212823;
+  
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --shadow-elevation: 0 10px 30px -5px rgba(0, 0, 0, 0.45);
+  --shadow-book: 0 16px 40px -10px rgba(0, 0, 0, 0.6), -2px 0 8px rgba(0,0,0,0.4);
+
+  /* Default Accent: Sage (Dark Variant) */
+  --accent-color: #8bb397;
+  --accent-hover: #a3c7ad;
+  --accent-subtle: rgba(139, 179, 151, 0.14);
+  --accent-border: rgba(139, 179, 151, 0.38);
+  --accent-contrast: #111a14;
+  --accent-highlight: #bde0c6;
+}
+
+/* --------------------------------------------------------------------------
+   THEME 1: DARK MOSS (Tania Rascia Digital Garden Style)
+   Matte charcoal surfaces, warm off-white text, vibrant flora accents.
+   -------------------------------------------------------------------------- */
+html[data-theme="dark-moss"],
+[data-theme="dark-moss"] {
+  --bg-primary: #17191b;
+  --bg-secondary: #1d2024;
+  --bg-tertiary: #262a30;
+  --bg-subtle: #191c1f;
+  
+  --border-subtle: #272b31;
+  --border-strong: #363c44;
+  --border-focus: #4ade80;
+  
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  
+  --surface-card: #1f2327;
+  --surface-hover: #262b31;
+  --badge-bg: #262a2f;
+  
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-elevation: 0 8px 24px -4px rgba(0, 0, 0, 0.5);
+  --shadow-book: 0 16px 40px -10px rgba(0, 0, 0, 0.6), -2px 0 8px rgba(0,0,0,0.4);
+}
+
+/* --------------------------------------------------------------------------
+   THEME 2: PAPER
+   Warm ivory background, dark charcoal text, warm paper contrast.
+   -------------------------------------------------------------------------- */
+html[data-theme="paper"],
+[data-theme="paper"] {
+  --bg-primary: #fbf8f3;
+  --bg-secondary: #f4efe5;
+  --bg-tertiary: #eae2d3;
+  --bg-subtle: #f8f4ec;
+  
+  --border-subtle: #e3d9c8;
+  --border-strong: #c8bbaa;
+  --border-focus: #9e8e78;
+  
+  --text-primary: #24211e;
+  --text-secondary: #5d564f;
+  --text-muted: #8b8377;
+  
+  --surface-card: #ffffff;
+  --surface-hover: #f3ece0;
+  --badge-bg: #ebe3d5;
+  
+  --shadow-subtle: 0 1px 3px rgba(40, 32, 20, 0.05);
+  --shadow-elevation: 0 10px 28px -5px rgba(40, 32, 20, 0.08);
+  --shadow-book: 0 14px 36px -8px rgba(40, 32, 20, 0.16), -2px 0 6px rgba(40,32,20,0.06);
+}
+
+/* --------------------------------------------------------------------------
+   THEME 3: SAGE
+   Muted green-grey surfaces, forest-green text, light neutral contrast.
+   -------------------------------------------------------------------------- */
+html[data-theme="sage"],
+[data-theme="sage"] {
+  --bg-primary: #edf2ee;
+  --bg-secondary: #e2e9e3;
+  --bg-tertiary: #d4ded6;
+  --bg-subtle: #e8eee9;
+  
+  --border-subtle: #c5d3c7;
+  --border-strong: #a4b7a7;
+  --border-focus: #7a9480;
+  
+  --text-primary: #19271e;
+  --text-secondary: #3f5446;
+  --text-muted: #677e6f;
+  
+  --surface-card: #f6f9f6;
+  --surface-hover: #dbe4dc;
+  --badge-bg: #d7e2d9;
+  
+  --shadow-subtle: 0 1px 3px rgba(25, 39, 30, 0.05);
+  --shadow-elevation: 0 10px 28px -5px rgba(25, 39, 30, 0.08);
+  --shadow-book: 0 14px 36px -8px rgba(25, 39, 30, 0.16), -2px 0 6px rgba(25,39,30,0.06);
+}
+
+/* --------------------------------------------------------------------------
+   THEME 4: SANDSTONE
+   Warm beige surfaces, dark brown text, muted clay contrast.
+   -------------------------------------------------------------------------- */
+html[data-theme="sandstone"],
+[data-theme="sandstone"] {
+  --bg-primary: #f5efe6;
+  --bg-secondary: #ece1d1;
+  --bg-tertiary: #decbbe;
+  --bg-subtle: #f0e6d8;
+  
+  --border-subtle: #d5c4ae;
+  --border-strong: #b8a085;
+  --border-focus: #8f775c;
+  
+  --text-primary: #2d231b;
+  --text-secondary: #635142;
+  --text-muted: #8d7866;
+  
+  --surface-card: #fdfaf6;
+  --surface-hover: #e5d8c6;
+  --badge-bg: #e2d3bf;
+  
+  --shadow-subtle: 0 1px 3px rgba(45, 35, 27, 0.05);
+  --shadow-elevation: 0 10px 28px -5px rgba(45, 35, 27, 0.08);
+  --shadow-book: 0 14px 36px -8px rgba(45, 35, 27, 0.16), -2px 0 6px rgba(45,35,27,0.06);
+}
+
+/* --------------------------------------------------------------------------
+   ACCENT 1: SAGE GREEN (Default)
+   -------------------------------------------------------------------------- */
+html[data-theme="dark-moss"][data-accent="sage"],
+[data-theme="dark-moss"][data-accent="sage"] {
+  --accent-color: #4ade80;
+  --accent-hover: #86efac;
+  --accent-subtle: rgba(74, 222, 128, 0.12);
+  --accent-border: rgba(74, 222, 128, 0.35);
+  --accent-contrast: #09140d;
+  --accent-highlight: #bbf7d0;
+}
+
+html[data-theme="paper"][data-accent="sage"],
+html[data-theme="sage"][data-accent="sage"],
+html[data-theme="sandstone"][data-accent="sage"],
+[data-theme="paper"][data-accent="sage"],
+[data-theme="sage"][data-accent="sage"],
+[data-theme="sandstone"][data-accent="sage"] {
+  --accent-color: #3b6048;
+  --accent-hover: #2d4c38;
+  --accent-subtle: rgba(59, 96, 72, 0.12);
+  --accent-border: rgba(59, 96, 72, 0.32);
+  --accent-contrast: #ffffff;
+  --accent-highlight: #233e2d;
+}
+
+/* --------------------------------------------------------------------------
+   ACCENT 2: MUTED BLUE
+   -------------------------------------------------------------------------- */
+html[data-theme="dark-moss"][data-accent="blue"],
+[data-theme="dark-moss"][data-accent="blue"] {
+  --accent-color: #7fa6cb;
+  --accent-hover: #98bbdd;
+  --accent-subtle: rgba(127, 166, 203, 0.15);
+  --accent-border: rgba(127, 166, 203, 0.38);
+  --accent-contrast: #0d1a24;
+  --accent-highlight: #b2d2f0;
+}
+
+html[data-theme="paper"][data-accent="blue"],
+html[data-theme="sage"][data-accent="blue"],
+html[data-theme="sandstone"][data-accent="blue"],
+[data-theme="paper"][data-accent="blue"],
+[data-theme="sage"][data-accent="blue"],
+[data-theme="sandstone"][data-accent="blue"] {
+  --accent-color: #2b5980;
+  --accent-hover: #1e4261;
+  --accent-subtle: rgba(43, 89, 128, 0.12);
+  --accent-border: rgba(43, 89, 128, 0.32);
+  --accent-contrast: #ffffff;
+  --accent-highlight: #183752;
+}
+
+/* --------------------------------------------------------------------------
+   ACCENT 3: TERRACOTTA
+   -------------------------------------------------------------------------- */
+html[data-theme="dark-moss"][data-accent="terracotta"],
+[data-theme="dark-moss"][data-accent="terracotta"] {
+  --accent-color: #dc8167;
+  --accent-hover: #e89982;
+  --accent-subtle: rgba(220, 129, 103, 0.15);
+  --accent-border: rgba(220, 129, 103, 0.38);
+  --accent-contrast: #200d07;
+  --accent-highlight: #f4b8a7;
+}
+
+html[data-theme="paper"][data-accent="terracotta"],
+html[data-theme="sage"][data-accent="terracotta"],
+html[data-theme="sandstone"][data-accent="terracotta"],
+[data-theme="paper"][data-accent="terracotta"],
+[data-theme="sage"][data-accent="terracotta"],
+[data-theme="sandstone"][data-accent="terracotta"] {
+  --accent-color: #9d4c33;
+  --accent-hover: #7f3b26;
+  --accent-subtle: rgba(157, 76, 51, 0.12);
+  --accent-border: rgba(157, 76, 51, 0.32);
+  --accent-contrast: #ffffff;
+  --accent-highlight: #672d1c;
+}
+
+/* --------------------------------------------------------------------------
+   ACCENT 4: LAVENDER
+   -------------------------------------------------------------------------- */
+html[data-theme="dark-moss"][data-accent="lavender"],
+[data-theme="dark-moss"][data-accent="lavender"] {
+  --accent-color: #b297c8;
+  --accent-hover: #c6aedd;
+  --accent-subtle: rgba(178, 151, 200, 0.15);
+  --accent-border: rgba(178, 151, 200, 0.38);
+  --accent-contrast: #18111e;
+  --accent-highlight: #dec6f5;
+}
+
+html[data-theme="paper"][data-accent="lavender"],
+html[data-theme="sage"][data-accent="lavender"],
+html[data-theme="sandstone"][data-accent="lavender"],
+[data-theme="paper"][data-accent="lavender"],
+[data-theme="sage"][data-accent="lavender"],
+[data-theme="sandstone"][data-accent="lavender"] {
+  --accent-color: #6a4f7e;
+  --accent-hover: #533d63;
+  --accent-subtle: rgba(106, 79, 126, 0.12);
+  --accent-border: rgba(106, 79, 126, 0.32);
+  --accent-contrast: #ffffff;
+  --accent-highlight: #463354;
+}
+
+/* --------------------------------------------------------------------------
+   ACCENT 5: BURGUNDY
+   -------------------------------------------------------------------------- */
+html[data-theme="dark-moss"][data-accent="burgundy"],
+[data-theme="dark-moss"][data-accent="burgundy"] {
+  --accent-color: #cd6f84;
+  --accent-hover: #dc869a;
+  --accent-subtle: rgba(205, 111, 132, 0.15);
+  --accent-border: rgba(205, 111, 132, 0.38);
+  --accent-contrast: #1e0b11;
+  --accent-highlight: #f0a6b7;
+}
+
+html[data-theme="paper"][data-accent="burgundy"],
+html[data-theme="sage"][data-accent="burgundy"],
+html[data-theme="sandstone"][data-accent="burgundy"],
+[data-theme="paper"][data-accent="burgundy"],
+[data-theme="sage"][data-accent="burgundy"],
+[data-theme="sandstone"][data-accent="burgundy"] {
+  --accent-color: #843245;
+  --accent-hover: #672535;
+  --accent-subtle: rgba(132, 50, 69, 0.12);
+  --accent-border: rgba(132, 50, 69, 0.32);
+  --accent-contrast: #ffffff;
+  --accent-highlight: #541d2a;
+}
+
+/* --------------------------------------------------------------------------
+   ACCENT 6: GRAPHITE
+   -------------------------------------------------------------------------- */
+html[data-theme="dark-moss"][data-accent="graphite"],
+[data-theme="dark-moss"][data-accent="graphite"] {
+  --accent-color: #a6adb7;
+  --accent-hover: #bcc2cb;
+  --accent-subtle: rgba(166, 173, 183, 0.15);
+  --accent-border: rgba(166, 173, 183, 0.38);
+  --accent-contrast: #121518;
+  --accent-highlight: #dbe0e7;
+}
+
+html[data-theme="paper"][data-accent="graphite"],
+html[data-theme="sage"][data-accent="graphite"],
+html[data-theme="sandstone"][data-accent="graphite"],
+[data-theme="paper"][data-accent="graphite"],
+[data-theme="sage"][data-accent="graphite"],
+[data-theme="sandstone"][data-accent="graphite"] {
+  --accent-color: #444a52;
+  --accent-hover: #32373e;
+  --accent-subtle: rgba(68, 74, 82, 0.12);
+  --accent-border: rgba(68, 74, 82, 0.32);
+  --accent-contrast: #ffffff;
+  --accent-highlight: #22262b;
+}
+
+/* --------------------------------------------------------------------------
+   GLOBAL STYLES & RESET
+   -------------------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Editorial Typography */
+.font-serif {
+  font-family: var(--font-serif), "Newsreader", Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+.font-sans {
+  font-family: var(--font-sans), "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+}
+
+/* Custom Selection Highlight */
+::selection {
+  background-color: var(--accent-subtle);
+  color: var(--accent-color);
+}
+
+/* Accessible Focus States */
+:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.editorial-link {
+  color: var(--text-primary);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.15s ease;
+}
+
+.editorial-link:hover {
+  color: var(--accent-color);
+}
+
+/* Book Cover Spine & Paper Aesthetics */
+.book-spine-line {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--border-strong) 15%,
+    var(--border-strong) 85%,
+    transparent 100%
+  );
+}
+
+.book-shadow {
+  box-shadow: var(--shadow-book);
+}
+
+.card-shadow {
+  box-shadow: var(--shadow-elevation);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+/* Print Styles for Resume */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+}
+
+/* Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   Rick Öberg Minimal Cover Page (Matching heydilshan.me)
+   ========================================================================== */
+
+.rick-cover-root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.rick-header {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  padding: 3.5rem 4.5rem 2rem;
+  box-sizing: border-box;
+}
+
+.rick-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.rick-brand-name {
+  font-family: var(--font-heading), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: opacity 0.2s ease;
+}
+
+.rick-brand-name:hover {
+  opacity: 0.75;
+}
+
+.rick-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.85rem;
+}
+
+.rick-nav-link {
+  font-family: var(--font-heading), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-secondary);
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+.rick-nav-link:hover {
+  color: var(--text-primary);
+}
+
+.rick-nav-link.is-primary {
+  color: var(--text-primary);
+  font-weight: 800;
+}
+
+.rick-hero-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 4.5rem 5rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.rick-hero-content {
+  max-width: 1060px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.rick-statement {
+  font-family: var(--font-heading), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(2.2rem, 3.8vw, 3.15rem);
+  font-weight: 800;
+  line-height: 1.28;
+  letter-spacing: -0.035em;
+  margin: 0;
+  text-align: left;
+  user-select: text;
+  color: var(--text-primary);
+}
+
+.rick-line {
+  display: inline;
+}
+
+@media (min-width: 861px) {
+  .rick-line {
+    display: block;
+    white-space: nowrap;
+  }
+}
+
+.rick-floating-dock {
+  position: fixed;
+  bottom: 2rem;
+  right: 2.5rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  opacity: 0.9;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.rick-floating-dock:hover {
+  opacity: 1;
+}
+
+.rick-dock-capsule {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-strong);
+  border-radius: 9999px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+@media (max-width: 860px) {
+  .rick-header {
+    padding: 2rem 1.75rem 1.5rem;
+  }
+  .rick-nav-links {
+    gap: 1.5rem;
+  }
+  .rick-nav-link {
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+  }
+  .rick-hero-main {
+    padding: 2rem 1.75rem 3.5rem;
+  }
+  .rick-statement {
+    font-size: clamp(1.85rem, 6.5vw, 2.45rem);
+  }
+  .rick-floating-dock {
+    bottom: 1.25rem;
+    right: 1.25rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .rick-header {
+    padding: 1.5rem 1.25rem 1rem;
+  }
+  .rick-nav-links {
+    gap: 1.1rem;
+  }
+  .rick-nav-link {
+    font-size: 0.7rem;
+  }
+  .rick-nav-link:nth-child(2) {
+    display: none;
+  }
+  .rick-hero-main {
+    padding: 1.5rem 1.25rem 3rem;
+  }
+  .rick-statement {
+    font-size: clamp(1.6rem, 7.5vw, 2.1rem);
+    line-height: 1.34;
+  }
+}
+
