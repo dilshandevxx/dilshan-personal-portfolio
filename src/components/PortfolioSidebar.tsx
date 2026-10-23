@@ -3,24 +3,22 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ColorPicker } from "./ColorPicker";
-import { ThemeToggle } from "./ThemeToggle";
-import { AmbientPlayer } from "./AmbientPlayer";
-import { GithubIcon, BlueskyIcon } from "./Icons";
-import { Mail, Rss, Menu, X as CloseIcon } from "lucide-react";
+import { Menu, X as CloseIcon } from "lucide-react";
 
 export interface NavigationItem {
   id: string;
   label: string;
   href: string;
-  emoji: string;
+  emoji?: string;
 }
 
 export const NAVIGATION_ITEMS: NavigationItem[] = [
-  { id: 'blog', label: 'Blog', href: '/portfolio/blog', emoji: '📝' },
-  { id: 'shelves', label: 'Shelves', href: '/portfolio/shelves', emoji: '🔍' },
-  { id: 'projects', label: 'Projects', href: '/portfolio/projects', emoji: '🗂️' },
-  { id: 'about', label: 'About me', href: '/portfolio/about', emoji: '💾' },
+  { id: "projects", label: "PROJECTS", href: "/portfolio/projects" },
+  { id: "blog", label: "WRITING", href: "/portfolio/blog" },
+  { id: "shelves", label: "SHELVES", href: "/portfolio/shelves" },
+  { id: "about", label: "ABOUT", href: "/portfolio/about" },
+  { id: "resume", label: "RESUME", href: "/portfolio/resume" },
+  { id: "contact", label: "CONTACT", href: "/portfolio/contact" },
 ];
 
 export function PortfolioSidebar() {
@@ -29,220 +27,162 @@ export function PortfolioSidebar() {
 
   const navLinks = [
     {
-      label: "Blog",
-      image: "/nav-blog.png",
-      path: "/portfolio/blog",
-      isActive:
-        pathname === "/portfolio/blog" ||
-        pathname.startsWith("/portfolio/blog/"),
+      id: "projects",
+      label: "PROJECTS",
+      path: "/portfolio/projects",
+      isActive: pathname.startsWith("/portfolio/projects"),
     },
     {
-      label: "Shelves",
-      image: "/nav-search.png",
+      id: "writing",
+      label: "WRITING",
+      path: "/portfolio/blog",
+      isActive: pathname.startsWith("/portfolio/blog"),
+    },
+    {
+      id: "shelves",
+      label: "SHELVES",
       path: "/portfolio/shelves",
       isActive:
         pathname.startsWith("/portfolio/shelves") ||
         pathname.startsWith("/portfolio/life"),
     },
     {
-      label: "Projects",
-      image: "/nav-projects.png",
-      path: "/portfolio/projects",
-      isActive: pathname.startsWith("/portfolio/projects"),
-    },
-    {
-      label: "About me",
-      image: "/nav-floppy.png",
+      id: "about",
+      label: "ABOUT",
       path: "/portfolio/about",
       isActive:
         pathname === "/portfolio/about" ||
         pathname === "/portfolio" ||
         pathname === "/portfolio/",
     },
+    {
+      id: "resume",
+      label: "RESUME",
+      path: "/portfolio/resume",
+      isActive: pathname.startsWith("/portfolio/resume"),
+    },
+    {
+      id: "contact",
+      label: "CONTACT",
+      path: "/portfolio/contact",
+      isActive: pathname.startsWith("/portfolio/contact"),
+    },
   ];
 
   return (
     <>
       {/* Mobile Top Navigation Header (< 1020px) */}
-      <header className="mobile-header">
-        <Link href="/" className="mobile-brand-link">
-          <img
-            src="/nav-floppy.png"
-            className="navbar-logo"
-            alt="dilshan.dev"
-            title="💾"
-            width={20}
-            height={20}
-          />
-          <span className="site-name">dilshan.dev</span>
+      <header className="stefano-mobile-header">
+        <Link href="/" className="stefano-brand text-sm tracking-[0.22em]">
+          DILSHAN K.
         </Link>
-        <div className="mobile-header-actions">
-          <AmbientPlayer variant="header" />
-          <ColorPicker />
-          <ThemeToggle />
-          <button
-            type="button"
-            className="navbar-button"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle navigation menu"
-          >
-            {mobileOpen ? <CloseIcon size={18} /> : <Menu size={18} />}
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="p-2 text-neutral-400 hover:text-white transition-colors"
+          aria-label="Toggle navigation menu"
+        >
+          {mobileOpen ? <CloseIcon size={20} /> : <Menu size={20} />}
+        </button>
       </header>
 
-      {/* Main Sticky Sidebar (Desktop & Mobile Drawer) */}
-      <aside className={`app-sidebar ${mobileOpen ? "open" : ""}`}>
-        {/* Section 1: Title and Controls */}
-        <section className="sidebar-section">
-          <div className="sidebar-title-link">
+      {/* Main Stefano P. Testa Cinematic Left Panel */}
+      <aside className={`stefano-sidebar ${mobileOpen ? "open" : ""}`}>
+        {/* Top Wordmark (matching STEFANO P. TESTA) */}
+        <div className="stefano-top">
+          <Link
+            href="/"
+            className="stefano-brand"
+            onClick={() => setMobileOpen(false)}
+            title="Return to Cover Page"
+          >
+            DILSHAN K.
+          </Link>
+        </div>
+
+        {/* Center Minimal Spaced Navigation */}
+        <nav className="stefano-nav" aria-label="Main Navigation">
+          {navLinks.map((item) => (
             <Link
-              href="/"
-              className="sidebar-brand-link"
+              key={item.id}
+              href={item.path}
               onClick={() => setMobileOpen(false)}
+              className={`stefano-nav-link ${item.isActive ? "active" : ""}`}
+              aria-current={item.isActive ? "page" : undefined}
             >
-              <span>
-                <img
-                  src="/nav-floppy.png"
-                  className="navbar-logo"
-                  alt="dilshan.dev"
-                  title="💾"
-                  width={20}
-                  height={20}
-                />
-              </span>
-              <span className="site-name">dilshan.dev</span>
+              <span>{item.label}</span>
             </Link>
+          ))}
+        </nav>
 
-            <div className="sidebar-header-controls">
-              <ColorPicker />
-              <ThemeToggle />
-            </div>
-          </div>
-        </section>
-
-        {/* Section 2: Personal Digital Garden Bio */}
-        <section className="sidebar-section">
-          <div className="sidebar-content">
-            <p>
-              I&apos;m{" "}
-              <Link
-                href="/portfolio/about"
-                className="sidebar-bio-highlight"
-                onClick={() => setMobileOpen(false)}
-              >
-                Dilshan
-              </Link>
-              , <span className="sidebar-bio-term">Software Engineer</span> and{" "}
-              <span className="sidebar-bio-term">Open-Source Creator</span>. This is my{" "}
-              <span className="sidebar-bio-garden">Digital Garden</span>. 🌱
-            </p>
-          </div>
-        </section>
-
-        {/* Section 3: Navigation Links */}
-        <section className="sidebar-section">
-          <nav className="sidebar-nav-links">
-            {navLinks.map((item) => (
-              <Link
-                key={item.path}
-                href={item.path}
-                onClick={() => setMobileOpen(false)}
-                className={item.isActive ? "active" : ""}
-              >
-                <img
-                  src={item.image}
-                  alt=""
-                  width={24}
-                  height={24}
-                  style={{ objectFit: "contain", flexShrink: 0 }}
-                />
-                <span>{item.label}</span>
-              </Link>
-            ))}
-          </nav>
-        </section>
-
-        {/* Section 4: Sidebar Bottom (Pinned to bottom) */}
-        <div className="sidebar-bottom">
-          <section className="sidebar-section">
-            <nav className="sidebar-links">
-              <a
-                href="mailto:dilshan.devxx@gmail.com"
-                title="Email"
-                aria-label="Email"
-              >
-                <Mail size={18} strokeWidth={1.8} />
-              </a>
-              <a
-                href="https://github.com/dilshandevxx"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="GitHub"
-                aria-label="GitHub"
-              >
-                <GithubIcon className="w-[18px] h-[18px]" />
-              </a>
-              <a
-                href="https://x.com/dilshanverse"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Bluesky"
-                aria-label="Bluesky"
-              >
-                <BlueskyIcon className="w-[18px] h-[18px]" />
-              </a>
-              <Link
-                href="/feed.xml"
-                title="RSS Feed"
-                aria-label="RSS Feed"
-                onClick={() => setMobileOpen(false)}
-              >
-                <Rss size={18} strokeWidth={1.8} />
-              </Link>
-              <a
-                href="https://github.com/dilshandevxx/dilshan-personal-portfolio"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Theme Source"
-                aria-label="Theme Source"
-              >
-                <img
-                  src="/moon.png"
-                  alt="Theme"
-                  width={18}
-                  height={18}
-                  style={{ objectFit: "contain", display: "block" }}
-                />
-              </a>
-            </nav>
-          </section>
-
-          {/* Sub-links with subtle dividers */}
-          <nav className="sidebar-sub-links">
-            <Link href="/portfolio/resume" onClick={() => setMobileOpen(false)}>
-              Resume
-            </Link>
-            <div className="divider" />
-            <Link href="/portfolio/skills" onClick={() => setMobileOpen(false)}>
-              Topics
-            </Link>
-            <div className="divider" />
+        {/* Bottom Circular Social Badges (matching Mail, Socials, IMDb in reference) */}
+        <div className="stefano-bottom">
+          <div className="stefano-socials">
+            {/* Email Icon */}
             <a
-              href="https://github.com/dilshandevxx/dilshan-personal-portfolio"
+              href="mailto:dilshan.devxx@gmail.com"
+              className="stefano-social-circle"
+              title="Email"
+              aria-label="Email"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+            </a>
+
+            {/* GitHub Icon */}
+            <a
+              href="https://github.com/dilshandevxx"
               target="_blank"
               rel="noopener noreferrer"
+              className="stefano-social-circle"
+              title="GitHub"
+              aria-label="GitHub"
             >
-              Source
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+                <path d="M9 18c-4.51 2-5-2-7-2"/>
+              </svg>
             </a>
-          </nav>
+
+            {/* LinkedIn Icon */}
+            <a
+              href="https://linkedin.com/in/heydilshan"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="stefano-social-circle"
+              title="LinkedIn"
+              aria-label="LinkedIn"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect width="4" height="12" x="2" y="9"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+            </a>
+
+            {/* X / Twitter Icon */}
+            <a
+              href="https://x.com/dilshanverse"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="stefano-social-circle"
+              title="X (Twitter)"
+              aria-label="X (Twitter)"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+          </div>
         </div>
       </aside>
 
-      {/* Mobile Backdrop */}
+      {/* Mobile Backdrop Overlay */}
       {mobileOpen && (
         <div
-          className="mobile-backdrop"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-65 lg:hidden"
           onClick={() => setMobileOpen(false)}
           aria-hidden="true"
         />
