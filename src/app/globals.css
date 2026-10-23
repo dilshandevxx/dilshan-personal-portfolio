@@ -2093,6 +2093,188 @@ button.navbar-button:hover .circle {
   }
 }
 
+/* ==========================================================================
+   COVER PAGE EDITORIAL SHOWCASE SECTION (Stories Worth Remembering)
+   ========================================================================== */
+
+.cover-showcase-section {
+  width: 100%;
+  padding: 8rem 2rem 10rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-top: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.07));
+}
+
+.cover-showcase-container {
+  max-width: 980px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cover-showcase-eyebrow {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-muted, #858992);
+  margin-bottom: 2.5rem;
+  display: inline-block;
+}
+
+.cover-showcase-text {
+  font-family: var(--font-serif), "Newsreader", Georgia, serif;
+  font-size: clamp(1.85rem, 3.4vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.38;
+  letter-spacing: -0.015em;
+  color: var(--text-primary, #f0ede6);
+  margin: 0 0 3.5rem;
+  text-wrap: balance;
+  max-width: 920px;
+}
+
+.cover-showcase-sparkle {
+  display: inline-block;
+  margin: 0 0.45rem;
+  color: var(--color-primary, #fcb900);
+  font-size: 0.9em;
+  vertical-align: baseline;
+  filter: drop-shadow(0 0 10px rgba(var(--color-primary-rgb, 252, 185, 0), 0.45));
+}
+
+.cover-showcase-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cover-square-btn {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.12));
+  border-radius: 4px;
+  color: var(--text-muted, #9ba0a6);
+  text-decoration: none;
+  transition: all 0.22s ease;
+}
+
+.cover-square-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-primary, #fcb900);
+  color: var(--text-primary, #ffffff);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.cover-bracket-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 2.4rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: none;
+  color: var(--text-primary, #f0ede6);
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.cover-bracket-btn:hover {
+  color: var(--color-primary, #fcb900);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Corner bracket accents */
+.cover-bracket-corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: var(--border-strong, rgba(255, 255, 255, 0.45));
+  border-style: solid;
+  pointer-events: none;
+  transition: border-color 0.25s ease, width 0.2s ease, height 0.2s ease;
+}
+
+.cover-bracket-btn:hover .cover-bracket-corner {
+  border-color: var(--color-primary, #fcb900);
+  width: 10px;
+  height: 10px;
+}
+
+.cover-bracket-tl {
+  top: 0;
+  left: 0;
+  border-width: 1.5px 0 0 1.5px;
+}
+
+.cover-bracket-tr {
+  top: 0;
+  right: 0;
+  border-width: 1.5px 1.5px 0 0;
+}
+
+.cover-bracket-bl {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 1.5px 1.5px;
+}
+
+.cover-bracket-br {
+  bottom: 0;
+  right: 0;
+  border-width: 0 1.5px 1.5px 0;
+}
+
+/* Light theme overrides */
+[data-theme="paper"] .cover-showcase-section,
+[data-theme="sage"] .cover-showcase-section,
+[data-theme="sandstone"] .cover-showcase-section {
+  border-top-color: var(--border-subtle, rgba(0, 0, 0, 0.08));
+}
+
+[data-theme="paper"] .cover-square-btn,
+[data-theme="sage"] .cover-square-btn,
+[data-theme="sandstone"] .cover-square-btn {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: var(--border-subtle, rgba(0, 0, 0, 0.15));
+  color: var(--text-secondary, #555555);
+}
+
+[data-theme="paper"] .cover-square-btn:hover,
+[data-theme="sage"] .cover-square-btn:hover,
+[data-theme="sandstone"] .cover-square-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: var(--color-primary);
+  color: var(--text-primary, #000000);
+}
+
+[data-theme="paper"] .cover-bracket-corner,
+[data-theme="sage"] .cover-bracket-corner,
+[data-theme="sandstone"] .cover-bracket-corner {
+  border-color: var(--border-strong, rgba(0, 0, 0, 0.35));
+}
+
+
 
 
 
