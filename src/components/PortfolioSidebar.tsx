@@ -76,7 +76,7 @@ export function PortfolioSidebar() {
       {/* Mobile Top Navigation Header (< 1020px) */}
       <header className="stefano-mobile-header">
         <Link href="/" className="stefano-brand text-sm tracking-[0.22em]">
-          DILSHAN K.
+          DILSHAN
         </Link>
         <div className="flex items-center gap-1.5">
           <div className="stefano-controls">
@@ -105,7 +105,7 @@ export function PortfolioSidebar() {
               onClick={() => setMobileOpen(false)}
               title="Return to Cover Page"
             >
-              DILSHAN K.
+              DILSHAN
             </Link>
 
             {/* Seamless Theme & Accent Color Controls */}

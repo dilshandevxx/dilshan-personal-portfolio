@@ -8,8 +8,8 @@ import { SiteConfig } from '@/types/content';
  * Replace placeholder entries with your own verified history.
  */
 export const siteConfig: SiteConfig = {
-  name: "Dilshan K.",
-  initials: "DK",
+  name: "Dilshan",
+  initials: "D",
   wordmark: "DILSHAN . DEV",
   edition: "First Folio — Vol. 2026",
   title: "Software Engineer & Systems Architect",
