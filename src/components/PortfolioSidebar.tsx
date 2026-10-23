@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ColorPicker } from "./ColorPicker";
+import { ThemeToggle } from "./ThemeToggle";
 import { Menu, X as CloseIcon } from "lucide-react";
 
 export interface NavigationItem {
@@ -76,28 +78,42 @@ export function PortfolioSidebar() {
         <Link href="/" className="stefano-brand text-sm tracking-[0.22em]">
           DILSHAN K.
         </Link>
-        <button
-          type="button"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="p-2 text-neutral-400 hover:text-white transition-colors"
-          aria-label="Toggle navigation menu"
-        >
-          {mobileOpen ? <CloseIcon size={20} /> : <Menu size={20} />}
-        </button>
+        <div className="flex items-center gap-1.5">
+          <div className="stefano-controls">
+            <ColorPicker />
+            <ThemeToggle />
+          </div>
+          <button
+            type="button"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="p-1.5 text-neutral-400 hover:text-white transition-colors"
+            aria-label="Toggle navigation menu"
+          >
+            {mobileOpen ? <CloseIcon size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
       </header>
 
       {/* Main Stefano P. Testa Cinematic Left Panel */}
       <aside className={`stefano-sidebar ${mobileOpen ? "open" : ""}`}>
-        {/* Top Wordmark (matching STEFANO P. TESTA) */}
+        {/* Top Wordmark & Theme / Color Switchers */}
         <div className="stefano-top">
-          <Link
-            href="/"
-            className="stefano-brand"
-            onClick={() => setMobileOpen(false)}
-            title="Return to Cover Page"
-          >
-            DILSHAN K.
-          </Link>
+          <div className="stefano-brand-row">
+            <Link
+              href="/"
+              className="stefano-brand"
+              onClick={() => setMobileOpen(false)}
+              title="Return to Cover Page"
+            >
+              DILSHAN K.
+            </Link>
+
+            {/* Seamless Theme & Accent Color Controls */}
+            <div className="stefano-controls">
+              <ColorPicker />
+              <ThemeToggle />
+            </div>
+          </div>
         </div>
 
         {/* Center Minimal Spaced Navigation */}

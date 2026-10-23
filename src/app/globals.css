@@ -1838,56 +1838,113 @@ button.navbar-button:hover .circle {
    ========================================================================== */
 
 .stefano-sidebar {
-  width: 290px;
-  min-width: 290px;
+  width: var(--sidebar-width, 290px);
+  min-width: var(--sidebar-width, 290px);
   height: 100vh;
   position: sticky;
   top: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #0b0b0d;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 4rem 2.5rem 3.5rem 3rem;
+  background-color: var(--color-background-sidebar, #0b0b0d);
+  border-right: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  padding: 3.5rem 2.25rem 3rem 2.75rem;
   box-sizing: border-box;
   z-index: 50;
-  color: #e5e5e5;
+  color: var(--color-text, #e5e5e5);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   user-select: none;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.stefano-top {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.stefano-brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
 .stefano-brand {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-  font-size: 1.15rem;
-  font-weight: 400;
+  font-size: 1.2rem;
+  font-weight: 500;
   letter-spacing: 0.22em;
-  color: #dedede;
+  color: var(--color-primary, #e59500);
   text-decoration: none;
   text-transform: uppercase;
-  transition: opacity 0.2s ease, color 0.2s ease, letter-spacing 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-block;
-  line-height: 1.3;
+  line-height: 1.25;
+  text-shadow: 0 0 20px rgba(var(--color-primary-rgb, 229, 149, 0), 0.25);
 }
 
 .stefano-brand:hover {
-  color: #ffffff;
-  opacity: 0.9;
+  opacity: 0.88;
+  transform: translateX(2px);
+  text-shadow: 0 0 28px rgba(var(--color-primary-rgb, 229, 149, 0), 0.45);
+}
+
+.stefano-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stefano-controls .navbar-button {
+  width: 32px;
+  height: 32px;
+  padding: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-text-muted, #8b8e96);
+  transition: all 0.2s ease;
+}
+
+.stefano-controls .navbar-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-emphasized, #ffffff);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.stefano-controls .circle {
+  width: 14px;
+  height: 14px;
+  box-shadow: 0 0 8px rgba(var(--color-primary-rgb, 229, 149, 0), 0.5);
+}
+
+.stefano-controls .dropdown-results {
+  top: 40px;
+  border-radius: 10px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: var(--color-background-sidebar, #0e1013);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.12));
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
 }
 
 .stefano-nav {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 1.85rem;
   margin: auto 0;
+  padding: 2.5rem 0;
 }
 
 .stefano-nav-link {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-  font-size: 0.92rem;
+  font-size: 0.94rem;
   font-weight: 400;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #727278;
+  color: var(--color-text-muted, #727278);
   text-decoration: none;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
@@ -1897,13 +1954,43 @@ button.navbar-button:hover .circle {
 }
 
 .stefano-nav-link:hover {
-  color: #ffffff;
-  transform: translateX(4px);
+  color: var(--color-text-emphasized, #ffffff);
+  transform: translateX(6px);
 }
 
 .stefano-nav-link.active {
-  color: #ffffff;
+  color: var(--color-text-emphasized, #ffffff);
   font-weight: 500;
+}
+
+.stefano-nav-link.active::after {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--color-primary, #e59500);
+  box-shadow: 0 0 10px var(--color-primary, #e59500);
+  margin-left: 0.85rem;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+    box-shadow: 0 0 14px var(--color-primary, #e59500);
+  }
+}
+
+.stefano-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .stefano-socials {
@@ -1913,25 +2000,25 @@ button.navbar-button:hover .circle {
 }
 
 .stefano-social-circle {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #b5b5ba;
+  color: var(--color-text-muted, #a0a3ab);
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .stefano-social-circle:hover {
-  background: #ffffff;
-  color: #0b0b0d;
-  transform: translateY(-2px);
+  background: var(--color-text-emphasized, #ffffff);
+  color: var(--color-background-sidebar, #0b0b0d);
+  transform: translateY(-3px);
   border-color: #ffffff;
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
 /* Mobile Header for Stefano Panel */
@@ -1947,9 +2034,9 @@ button.navbar-button:hover .circle {
     left: 0;
     right: 0;
     height: 60px;
-    background: #0b0b0d;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 0 1.5rem;
+    background: var(--color-background-sidebar, #0b0b0d);
+    border-bottom: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+    padding: 0 1.25rem;
     align-items: center;
     justify-content: space-between;
     z-index: 60;
@@ -1961,7 +2048,7 @@ button.navbar-button:hover .circle {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 280px;
+    width: 290px;
     transform: translateX(-100%);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 10px 0 35px rgba(0, 0, 0, 0.7);
@@ -1972,5 +2059,6 @@ button.navbar-button:hover .circle {
     transform: translateX(0);
   }
 }
+
 
 
