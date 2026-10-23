@@ -2274,6 +2274,167 @@ button.navbar-button:hover .circle {
   border-color: var(--border-strong, rgba(0, 0, 0, 0.35));
 }
 
+/* ==========================================================================
+   2-COLUMN PHOTO MOSAIC + EDITORIAL ABOUT SECTION (Matching Reference)
+   ========================================================================== */
+
+.cover-split-section {
+  width: 100%;
+  padding: 7rem 2rem 8rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.07));
+  position: relative;
+}
+
+.cover-split-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 5.5rem;
+  align-items: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .cover-split-container {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+}
+
+.cover-mosaic-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+.cover-mosaic-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: var(--surface-card, rgba(255, 255, 255, 0.04));
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+}
+
+.cover-mosaic-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.65s ease;
+  filter: contrast(1.02) brightness(0.96);
+}
+
+.cover-mosaic-item:hover img {
+  transform: scale(1.04);
+  filter: contrast(1.05) brightness(1.02);
+}
+
+/* Specific aspect ratio cadence matching the reference */
+.cover-mosaic-1 {
+  aspect-ratio: 4 / 3;
+}
+
+.cover-mosaic-2 {
+  aspect-ratio: 3 / 4;
+}
+
+.cover-mosaic-3 {
+  aspect-ratio: 3 / 4;
+}
+
+.cover-mosaic-4 {
+  aspect-ratio: 4 / 3;
+}
+
+.cover-split-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 520px;
+}
+
+.cover-split-lead {
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(1.15rem, 1.45vw, 1.4rem);
+  line-height: 1.65;
+  color: var(--text-primary, #ded5c7);
+  margin: 0 0 2rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.cover-split-body {
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+  line-height: 1.65;
+  color: var(--text-secondary, #b3a99b);
+  margin: 0 0 3.25rem;
+  font-weight: 400;
+}
+
+.cover-split-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-primary, #f2eee8);
+  text-decoration: none;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--border-strong, rgba(255, 255, 255, 0.4));
+  width: fit-content;
+  transition: all 0.25s ease;
+}
+
+.cover-split-link:hover {
+  color: var(--color-primary, #fcb900);
+  border-bottom-color: var(--color-primary, #fcb900);
+  letter-spacing: 0.26em;
+}
+
+/* Light theme overrides */
+[data-theme="paper"] .cover-split-section,
+[data-theme="sage"] .cover-split-section,
+[data-theme="sandstone"] .cover-split-section {
+  border-top-color: var(--border-subtle, rgba(0, 0, 0, 0.08));
+}
+
+[data-theme="paper"] .cover-split-lead,
+[data-theme="sage"] .cover-split-lead,
+[data-theme="sandstone"] .cover-split-lead {
+  color: #24211e;
+}
+
+[data-theme="paper"] .cover-split-body,
+[data-theme="sage"] .cover-split-body,
+[data-theme="sandstone"] .cover-split-body {
+  color: #555048;
+}
+
+[data-theme="paper"] .cover-split-link,
+[data-theme="sage"] .cover-split-link,
+[data-theme="sandstone"] .cover-split-link {
+  color: #1a1a1a;
+  border-bottom-color: rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="paper"] .cover-split-link:hover,
+[data-theme="sage"] .cover-split-link:hover,
+[data-theme="sandstone"] .cover-split-link:hover {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+
 
 
 

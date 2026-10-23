@@ -66,7 +66,61 @@ export default function MinimalCoverPage() {
         </div>
       </main>
 
-      {/* 3. Editorial Showcase Section (Stories Worth Remembering) */}
+      {/* 3. Two-Column Mosaic & Editorial Values Section (Matching Reference) */}
+      <section className="cover-split-section" aria-label="About & Studio">
+        <div className="cover-split-container">
+          {/* Left Column: 2x2 Image Mosaic Grid */}
+          <div className="cover-mosaic-grid">
+            <div className="cover-mosaic-item cover-mosaic-1">
+              <img
+                src="/showcase/grid-1.jpg"
+                alt="Dilshan engineering at desk with coffee"
+                loading="lazy"
+              />
+            </div>
+            <div className="cover-mosaic-item cover-mosaic-2">
+              <img
+                src="/showcase/grid-2.jpg"
+                alt="Minimalist dual display workspace setup"
+                loading="lazy"
+              />
+            </div>
+            <div className="cover-mosaic-item cover-mosaic-3">
+              <img
+                src="/showcase/grid-3.jpg"
+                alt="Collaborative systems architecture discussion"
+                loading="lazy"
+              />
+            </div>
+            <div className="cover-mosaic-item cover-mosaic-4">
+              <img
+                src="/showcase/grid-4.jpg"
+                alt="Clean studio workspace with laptop and camera"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          {/* Right Column: Editorial Values & Narrative */}
+          <div className="cover-split-content">
+            <p className="cover-split-lead">
+              I value simplicity of architecture, doing over debating, and building durable software that respects human attention rather than exploiting it.
+            </p>
+            <p className="cover-split-body">
+              Bringing together distributed systems engineering, pixel-perfect frontend craft, and data-driven infrastructure to create thoughtful digital products that perform effortlessly at scale.
+            </p>
+            <Link href="/portfolio/about" className="cover-split-link" title="Explore more about Dilshan">
+              <span>MORE ABOUT ME</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Editorial Showcase Section (Stories Worth Remembering) */}
       <section className="cover-showcase-section" aria-label="Craft & Philosophy">
         <div className="cover-showcase-container">
           {/* Eyebrow Label */}
