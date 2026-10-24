@@ -1,6 +1,7 @@
 import Header from "@/components/cover/Header";
 import HeroMinimal from "@/components/cover/sections/HeroMinimal";
 import SelectedWork from "@/components/cover/sections/SelectedWork";
+import FAQ from "@/components/cover/sections/FAQ";
 import Contact from "@/components/cover/sections/Contact";
 import Footer from "@/components/cover/Footer";
 import { Metadata } from "next";
@@ -23,6 +24,7 @@ export default function Home() {
       <main>
         <HeroMinimal />
         <SelectedWork />
+        <FAQ />
         <Contact />
       </main>
       <Footer />
