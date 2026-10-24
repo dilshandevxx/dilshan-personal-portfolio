@@ -1,7 +1,7 @@
 import Header from "@/components/cover/Header";
 import HeroMinimal from "@/components/cover/sections/HeroMinimal";
 import SelectedWork from "@/components/cover/sections/SelectedWork";
-import PreFooter from "@/components/cover/sections/PreFooter";
+import Contact from "@/components/cover/sections/Contact";
 import Footer from "@/components/cover/Footer";
 import { Metadata } from "next";
 
@@ -23,7 +23,7 @@ export default function Home() {
       <main>
         <HeroMinimal />
         <SelectedWork />
-        <PreFooter />
+        <Contact />
       </main>
       <Footer />
     </div>

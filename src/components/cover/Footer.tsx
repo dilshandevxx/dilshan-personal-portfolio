@@ -15,6 +15,7 @@ export default function Footer() {
         <Link href="/projects" className={styles.link}>Projects</Link>
         <Link href="/blog" className={styles.link}>Blog</Link>
         <Link href="/about" className={styles.link}>About</Link>
+        <Link href="/#contact" className={styles.link}>Contact</Link>
       </div>
 
       <div className={styles.socialIcons}>
