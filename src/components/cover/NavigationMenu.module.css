@@ -1,0 +1,78 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--background);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 6rem 0; /* Add padding to prevent colliding with the top menu/logo */
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(2rem, 5vw, 4rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+}
+
+.linksContainer {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 3vh, 2rem); /* Dynamic gap based on height */
+  text-align: center;
+  padding: 2rem 0;
+}
+
+/* 
+ Dim out all links when the container is hovered, 
+ then brighten the specific hovered link.
+*/
+.linksContainer:hover .navLink {
+  opacity: 0.3;
+}
+.linksContainer .navLink:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.linkItem {
+  overflow: visible;
+}
+
+.navLink {
+  display: inline-block;
+  text-decoration: none;
+  transition: all 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  padding: 0.5rem 1rem; /* Prevent edge clipping during scale animations */
+}
+
+.linkLabel {
+  display: block; /* Ensure the text block expands fully */
+  font-family: var(--font-display);
+  font-size: clamp(3rem, min(8vw, 18vh), 8rem); /* Scale dynamically down if screen height is small */
+  font-weight: 500;
+  color: var(--foreground);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.1; /* Fix vertical clipping on large fonts */
+}
+
+/* MOBILE */
+@media (max-width: 1024px) {
+  .linkLabel {
+    font-size: clamp(3rem, 12vw, 5rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .linkLabel {
+    font-size: 3.5rem;
+  }
+}

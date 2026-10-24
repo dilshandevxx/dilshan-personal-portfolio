@@ -1,84 +1,86 @@
-"use client";
+import Header from "@/components/cover/Header";
+import HeroMinimal from "@/components/cover/sections/HeroMinimal";
+import SelectedWork from "@/components/cover/sections/SelectedWork";
+import CTA from "@/components/cover/sections/CTA";
+import Blog from "@/components/cover/sections/Blog";
+import PreFooter from "@/components/cover/sections/PreFooter";
+import Footer from "@/components/cover/Footer";
+import { Metadata } from "next";
+import { getLatestArticles, DevToArticle } from "@/lib/api";
 
-import React from "react";
-import Link from "next/link";
-import { siteConfig } from "@/data/siteConfig";
-import { AmbientPlayer } from "@/components/AmbientPlayer";
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { ColorPicker } from "@/components/ColorPicker";
+export const metadata: Metadata = {
+  title: "Dilshan | Visual Designer & Software Engineer",
+  description:
+    "Structuring the future through architectural digital experiences, brand identity systems, and intelligent suites.",
+  openGraph: {
+    title: "Dilshan | Digital Studio & Systems",
+    description: "Structuring the future through architectural digital experiences.",
+    type: "website",
+  },
+};
 
-export default function MinimalCoverPage() {
-  const navLinks = [
-    { label: "PROJECTS", path: "/projects", isPrimary: true },
-    { label: "BLOG", path: "/blog", isPrimary: false },
-    { label: "BIO", path: "/about", isPrimary: false },
-    {
-      label: "HIRE ME",
-      path: `mailto:${siteConfig.social.email}`,
-      isExternal: true,
-      isPrimary: false,
-    },
-  ];
+export default async function Home() {
+  let posts: DevToArticle[] = [];
+  try {
+    posts = await getLatestArticles(6);
+  } catch (error) {
+    console.error("Could not fetch remote articles:", error);
+    posts = [];
+  }
+
+  // Fallback posts if remote feed is offline
+  if (!posts || posts.length === 0) {
+    posts = [
+      {
+        id: 1,
+        title: "Deterministic Systems in Distributed Computing",
+        description: "An architectural exploration of state machines, consensus, and idempotency.",
+        cover_image: "/images/blog_arch.png",
+        published_at: "2026-03-12T00:00:00Z",
+        tag_list: ["SYSTEMS", "ARCHITECTURE"],
+        slug: "deterministic-systems",
+        path: "/blog",
+        url: "/blog",
+        comments_count: 0,
+        public_reactions_count: 42,
+        user: {
+          name: "Dilshan",
+          username: "dilshan",
+          profile_image: "/avatar.jpg",
+        },
+      },
+      {
+        id: 2,
+        title: "Designing for Reduced Cognitive Load in Web Interfaces",
+        description: "Why density of thought beats visual clutter in modern design systems.",
+        cover_image: "/images/blog_office.png",
+        published_at: "2026-02-28T00:00:00Z",
+        tag_list: ["DESIGN", "UIUX"],
+        slug: "cognitive-load",
+        path: "/blog",
+        url: "/blog",
+        comments_count: 0,
+        public_reactions_count: 38,
+        user: {
+          name: "Dilshan",
+          username: "dilshan",
+          profile_image: "/avatar.jpg",
+        },
+      },
+    ];
+  }
 
   return (
-    <div className="rick-cover-root">
-      {/* 1. Minimal Header Matching Rick Öberg */}
-      <header className="rick-header">
-        <div className="rick-header-container">
-          {/* Brand Name on Left */}
-          <Link href="/" className="rick-brand-name" title="Dilshan">
-            Dilshan
-          </Link>
-
-          {/* Clean Right-Aligned Uppercase Nav Links */}
-          <nav className="rick-nav-links" aria-label="Main Navigation">
-            {navLinks.map((link) =>
-              link.isExternal ? (
-                <a
-                  key={link.label}
-                  href={link.path}
-                  className={`rick-nav-link ${link.isPrimary ? "is-primary" : ""}`}
-                  title={link.label}
-                >
-                  {link.label}
-                </a>
-              ) : (
-                <Link
-                  key={link.label}
-                  href={link.path}
-                  className={`rick-nav-link ${link.isPrimary ? "is-primary" : ""}`}
-                  title={link.label}
-                >
-                  {link.label}
-                </Link>
-              )
-            )}
-          </nav>
-        </div>
-      </header>
-
-      {/* 2. Pure Centered Statement (Exact 3-Line Cadence, No Bottom Clutter) */}
-      <main className="rick-hero-main">
-        <div className="rick-hero-content">
-          <h1 className="rick-statement">
-            <span className="rick-line">I&apos;m Dilshan, a software engineer. I love to</span>{" "}
-            <span className="rick-line">create intelligent systems and scalable</span>{" "}
-            <span className="rick-line">experiences for the web.</span>
-          </h1>
-        </div>
+    <div className="xudo-cover-wrapper">
+      <Header />
+      <main>
+        <HeroMinimal />
+        <SelectedWork />
+        <CTA />
+        <Blog posts={posts} />
+        <PreFooter />
       </main>
-
-      {/* 3. Discreet Floating Ambient Dock (Music, Theme Color, & Theme Mode) */}
-      <aside className="rick-floating-dock" aria-label="Ambient and theme controls">
-        <div className="rick-dock-capsule">
-          <AmbientPlayer variant="icon" />
-          <span className="rick-dock-divider" aria-hidden="true" />
-          <ColorPicker />
-          <span className="rick-dock-divider" aria-hidden="true" />
-          <ThemeToggle />
-        </div>
-      </aside>
+      <Footer />
     </div>
   );
 }
-

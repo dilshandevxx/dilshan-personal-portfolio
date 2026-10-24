@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
   --font-family-monospace2: 'Google Sans Code', 'Google Sans Code Variable', Menlo, Consolas, Monaco, monospace;
@@ -609,37 +609,58 @@ button.navbar-button:hover .circle {
 
 
 /* Sidebar Bio Content */
+.sidebar-content {
+  position: relative;
+}
+
 .sidebar-content p {
   margin: 0;
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 14.5px;
-  line-height: 1.6;
-  letter-spacing: -0.01em;
-  color: var(--color-text);
+  line-height: 1.7;
+  letter-spacing: -0.012em;
+  color: var(--color-text-muted);
 }
 
 .sidebar-bio-highlight {
-  border-radius: 4px;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-  font-weight: 700;
-  color: var(--color-text-link);
+  color: var(--color-text-emphasized);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--color-primary);
+  padding-bottom: 1px;
   transition: all var(--transition);
+  display: inline;
 }
 
 .sidebar-bio-highlight:hover {
-  color: var(--color-text-emphasized);
-  background: var(--color-background-navbar-link-active);
+  color: var(--color-primary);
+  border-bottom-color: var(--color-text-emphasized);
 }
 
 .sidebar-bio-term {
   color: var(--color-text-emphasized);
-  font-weight: 600;
+  font-weight: 550;
+  letter-spacing: -0.01em;
 }
 
 .sidebar-bio-garden {
-  color: var(--color-harmonic-garden, var(--color-primary));
+  color: var(--color-primary);
   font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: color var(--transition);
+}
+
+.sidebar-bio-sprout {
+  display: inline-block;
+  margin-left: 2px;
+  transform-origin: bottom center;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 0.95em;
+  vertical-align: -1px;
+}
+
+.sidebar-content:hover .sidebar-bio-sprout {
+  transform: rotate(14deg) scale(1.15);
 }
 
 /* Sidebar Navigation Links */
@@ -671,16 +692,36 @@ button.navbar-button:hover .circle {
   flex-shrink: 0;
 }
 
+.sidebar-nav-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.2s ease;
+}
+
 .sidebar-nav-links a:hover {
   text-decoration: none;
   color: var(--color-text-emphasized);
   background: var(--color-background-navbar-link-hover);
 }
 
+.sidebar-nav-links a:hover .sidebar-nav-icon-wrap {
+  transform: scale(1.12) translateY(-1px);
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.28));
+}
+
 .sidebar-nav-links a.active {
   font-weight: 600;
   background: var(--color-background-navbar-link-active);
   color: var(--color-text-emphasized);
+}
+
+.sidebar-nav-links a.active .sidebar-nav-icon-wrap {
+  transform: scale(1.06);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 /* Sidebar Bottom (pinned to bottom) */
@@ -3983,5 +4024,50 @@ a.text-link:hover {
   border-radius: 3px;
   padding: 1px 4px;
   font-size: 0.62rem;
+}
+
+/* ==========================================================================
+   COVER PAGE SCOPED STYLES (MATCHING REFERENCE STUDIO MAIN PAGE)
+   ========================================================================== */
+.xudo-cover-wrapper {
+  --background: #050505;
+  --foreground: #f0f0f0;
+  --muted: #888888;
+  --accent: #ff4500;
+  --border: #222222;
+
+  --font-display: var(--font-syne), 'Syne', sans-serif;
+  --font-body: var(--font-inter), 'Inter', sans-serif;
+  --font-mono: 'Google Sans Code', monospace;
+
+  --container-padding: clamp(1rem, 5vw, 4rem);
+
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.xudo-cover-wrapper h1,
+.xudo-cover-wrapper h2,
+.xudo-cover-wrapper h3,
+.xudo-cover-wrapper h4,
+.xudo-cover-wrapper h5,
+.xudo-cover-wrapper h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.xudo-cover-wrapper a {
+  color: inherit;
+  text-decoration: none;
 }
 

@@ -1,0 +1,134 @@
+.blogSection {
+  padding: clamp(5rem, 15vw, 10rem) var(--container-padding);
+  border-bottom: 1px solid var(--border);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4rem;
+  gap: 1.5rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 500;
+  text-transform: none;
+  margin: 0;
+}
+
+.linkButton {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--foreground);
+  background: #111111;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.linkButton:hover {
+  background: #222222;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.blogCardWrapper {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.blogCard {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  background: #151515;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.blogCard:hover {
+  transform: translateY(-5px);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.blogCard:hover .image {
+  transform: scale(1.05);
+}
+
+.contentWrapper {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.category {
+  align-self: flex-start;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  margin-bottom: 2rem;
+  color: #ffffff;
+}
+
+.blogTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.4;
+  margin: 0 0 2rem 0;
+  color: #ffffff;
+}
+
+.date {
+  margin-top: auto;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* MOBILE OVERRIDES */
+@media (max-width: 768px) {
+  .contentWrapper { padding: 1.5rem; }
+  .blogTitle { font-size: 1.25rem; margin-bottom: 1rem; }
+  .category { margin-bottom: 1rem; }
+}

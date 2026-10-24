@@ -8,7 +8,18 @@ import { ColorPicker } from "./ColorPicker";
 import { ThemeToggle } from "./ThemeToggle";
 import { AmbientPlayer } from "./AmbientPlayer";
 import { GithubIcon, BlueskyIcon } from "./SocialIcons";
-import { Mail, Rss, Menu, X as CloseIcon } from "lucide-react";
+import {
+  BlogNavIcon,
+  ShelvesNavIcon,
+  ProjectsNavIcon,
+  AboutNavIcon,
+} from "./ColorfulNavIcons";
+import {
+  Mail,
+  Rss,
+  Menu,
+  X as CloseIcon,
+} from "lucide-react";
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -17,7 +28,7 @@ export function Sidebar() {
   const navLinks = [
     {
       label: "Blog",
-      image: "/nav-blog.png",
+      icon: BlogNavIcon,
       path: "/blog",
       isActive:
         pathname === "/blog" ||
@@ -26,20 +37,20 @@ export function Sidebar() {
     },
     {
       label: "Shelves",
-      image: "/nav-search.png",
+      icon: ShelvesNavIcon,
       path: "/shelves",
       isActive:
         pathname.startsWith("/shelves") || pathname.startsWith("/guides"),
     },
     {
       label: "Projects",
-      image: "/nav-projects.png",
+      icon: ProjectsNavIcon,
       path: "/projects",
       isActive: pathname.startsWith("/projects"),
     },
     {
       label: "About me",
-      image: "/nav-floppy.png",
+      icon: AboutNavIcon,
       path: "/about",
       isActive: pathname.startsWith("/about"),
     },
@@ -119,7 +130,8 @@ export function Sidebar() {
               </Link>
               , <span className="sidebar-bio-term">Software Engineer</span> and{" "}
               <span className="sidebar-bio-term">Open-Source Creator</span>. This is my{" "}
-              <span className="sidebar-bio-garden">Digital Garden</span>. 🌱
+              <span className="sidebar-bio-garden">Digital Garden</span>.{" "}
+              <span className="sidebar-bio-sprout" aria-hidden="true">🌱</span>
             </p>
           </div>
         </section>
@@ -127,23 +139,22 @@ export function Sidebar() {
         {/* Section 3: Primary Navigation Links */}
         <section className="sidebar-section">
           <nav className="sidebar-nav-links">
-            {navLinks.map((item) => (
-              <Link
-                key={item.path}
-                href={item.path}
-                onClick={() => setMobileOpen(false)}
-                className={item.isActive ? "active" : ""}
-              >
-                <img
-                  src={item.image}
-                  alt=""
-                  width={24}
-                  height={24}
-                  style={{ objectFit: "contain", flexShrink: 0 }}
-                />
-                <span>{item.label}</span>
-              </Link>
-            ))}
+            {navLinks.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.path}
+                  href={item.path}
+                  onClick={() => setMobileOpen(false)}
+                  className={item.isActive ? "active" : ""}
+                >
+                  <span className="sidebar-nav-icon-wrap" aria-hidden="true">
+                    <Icon size={22} />
+                  </span>
+                  <span>{item.label}</span>
+                </Link>
+              );
+            })}
           </nav>
         </section>
 
