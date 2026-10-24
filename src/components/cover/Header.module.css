@@ -1,49 +1,104 @@
+/* ==========================================================================
+   COVER HEADER (MATCHING USER REFERENCE SCREENSHOT)
+   Left: ✳ DILSHAN | Right: HOME PROJECTS ABOUT BLOG • CONTACT
+   ========================================================================== */
+
 .header {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 2rem var(--container-padding);
+  padding: 1.75rem var(--container-padding, clamp(1.5rem, 4vw, 3.5rem));
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  mix-blend-mode: difference;
-  pointer-events: none;
+  box-sizing: border-box;
 }
 
 .logo {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: 1rem;
   font-weight: 700;
-  color: var(--foreground);
-  pointer-events: auto;
+  letter-spacing: 0.16em;
+  color: #ffffff;
   text-decoration: none;
-  text-transform: lowercase;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease;
 }
 
-.menuButton {
-  background: none;
-  border: none;
-  color: var(--foreground);
-  cursor: pointer;
+.logo:hover {
+  opacity: 0.85;
+}
+
+.starIcon {
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+/* Desktop Navigation */
+.desktopNav {
   display: flex;
   align-items: center;
+  gap: 2.2rem;
+}
+
+.navLink {
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #92929f;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.navLink:hover {
+  color: #ffffff;
+}
+
+.contactLink {
+  color: #f4f4f7;
+}
+
+.contactLink:hover {
+  color: #e2c97c;
+}
+
+.navDot {
+  font-size: 1.1rem;
+  color: #ffffff;
+  line-height: 0.8;
+}
+
+/* Mobile Hamburger Menu */
+.menuButton {
+  display: none;
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  align-items: center;
   justify-content: center;
-  z-index: 100;
-  pointer-events: auto; /* MUST BE AUTO TO OVERRIDE HEADER */
-  transition: transform 0.3s ease;
+  transition: transform 0.25s ease;
 }
 
 .menuButton:hover {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
-@media (max-width: 768px) {
-  .header {
-    padding: 1.5rem var(--container-padding);
+@media (max-width: 820px) {
+  .desktopNav {
+    display: none;
   }
   .menuButton {
-    transform: scale(0.9);
+    display: flex;
   }
 }

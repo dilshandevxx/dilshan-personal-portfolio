@@ -1,5 +1,5 @@
 import Header from "@/components/cover/Header";
-import HeroMinimal from "@/components/cover/sections/HeroMinimal";
+import HeroLumen from "@/components/cover/sections/HeroLumen";
 import SelectedWork from "@/components/cover/sections/SelectedWork";
 import FAQ from "@/components/cover/sections/FAQ";
 import Contact from "@/components/cover/sections/Contact";
@@ -22,7 +22,7 @@ export default function Home() {
     <div className="xudo-cover-wrapper">
       <Header />
       <main>
-        <HeroMinimal />
+        <HeroLumen />
         <SelectedWork />
         <FAQ />
         <Contact />
