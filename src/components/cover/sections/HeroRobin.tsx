@@ -14,7 +14,7 @@ export default function HeroRobin() {
     <>
       <section className={styles.heroSection}>
         <div className={styles.container}>
-          {/* 1. Top Navigation Bar: Refined Square Portfolio Button (Left) | Role Tag (Center) | Menu Toggle (Right) */}
+          {/* 1. Top Navigation Bar: Sticky / Responsive */}
           <motion.div 
             className={styles.topBar}
             initial={{ opacity: 0, y: -12 }}
@@ -22,25 +22,33 @@ export default function HeroRobin() {
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className={styles.topLeftArea}>
-              <Link href="/projects" className={styles.portfolioBtn}>
-                <span className={styles.btnStatusDot} aria-hidden="true" />
-                <span className={styles.btnText}>PORTFOLIO</span>
-                <span className={styles.arrowBadge} aria-hidden="true">
-                  <svg 
-                    width="11" 
-                    height="11" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2.5" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                    className={styles.btnArrow}
-                  >
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
-                  </svg>
-                </span>
+              {/* Desktop: Refined Minimal Square-Corner Portfolio Button */}
+              <div className={styles.desktopPortfolioWrapper}>
+                <Link href="/projects" className={styles.portfolioBtn}>
+                  <span className={styles.btnStatusDot} aria-hidden="true" />
+                  <span className={styles.btnText}>PORTFOLIO</span>
+                  <span className={styles.arrowBadge} aria-hidden="true">
+                    <svg 
+                      width="11" 
+                      height="11" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      strokeWidth="2.5" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                      className={styles.btnArrow}
+                    >
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                  </span>
+                </Link>
+              </div>
+
+              {/* Mobile: Clean Brand Name Logo ("Robin James" style) */}
+              <Link href="/" className={styles.mobileBrandName}>
+                Dilshan Seneviratne
               </Link>
             </div>
 
@@ -57,15 +65,13 @@ export default function HeroRobin() {
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle Navigation Menu"
               >
-                <svg width="18" height="12" viewBox="0 0 18 12" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-                  <line x1="1" y1="2" x2="17" y2="2" />
-                  <line x1="1" y1="10" x2="17" y2="10" />
-                </svg>
+                <span className={styles.menuLine} />
+                <span className={styles.menuLine} />
               </button>
             </div>
           </motion.div>
 
-          {/* 2. Bold Hero Title */}
+          {/* 2. Bold Editorial Headline matching Robin James mobile composition */}
           <motion.div 
             className={styles.titleWrapper}
             initial={{ opacity: 0, y: 24 }}
@@ -73,8 +79,9 @@ export default function HeroRobin() {
             transition={{ duration: 0.65, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
             <h1 className={styles.headline}>
-              <span className={styles.headlineMain}>Hello, I&apos;m Dilshan Seneviratne</span>
-              <span className={styles.headlineSub}>an engineer by heart</span>
+              <span className={styles.headlineLine1}>Hello,</span>
+              <span className={styles.headlineLine2}>I&apos;m Dilshan Seneviratne,</span>
+              <span className={styles.headlineLine3}>an engineer by heart</span>
             </h1>
           </motion.div>
 
@@ -85,7 +92,7 @@ export default function HeroRobin() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Left Photo: Tall Vertical Cyclist on Hill Road */}
+            {/* Photo 1: Tall Vertical Cyclist on Mountain Road */}
             <div className={styles.leftPhotoWrapper}>
               <Image 
                 src="/images/hero_cyclist.jpg"
@@ -97,28 +104,28 @@ export default function HeroRobin() {
               />
             </div>
 
-            {/* Right Group: Staggered Kayak on Lake + Skateboarder on Stone Plaza */}
+            {/* Photos 2 & 3: Staggered Kayak on Lake + Skateboarder on Stone Plaza */}
             <div className={styles.rightPhotosWrapper}>
-              {/* Middle Photo: Kayaking into open lake */}
+              {/* Photo 2: Kayaking on lake */}
               <div className={styles.middlePhotoWrapper}>
                 <Image 
                   src="/images/hero_kayak.jpg"
                   alt="Kayaking on calm lake towards evening horizon"
                   fill
                   priority
-                  sizes="(max-width: 768px) 100vw, 48vw"
+                  sizes="(max-width: 768px) 50vw, 48vw"
                   className={styles.photo}
                 />
               </div>
 
-              {/* Lower-Right Photo: Skateboarder carving across stone plaza pavement */}
+              {/* Photo 3: Skateboarder on stone plaza */}
               <div className={styles.rightPhotoWrapper}>
                 <Image 
                   src="/images/hero_skater.jpg"
                   alt="Skateboarding across textured stone pavement plaza"
                   fill
                   priority
-                  sizes="(max-width: 768px) 100vw, 48vw"
+                  sizes="(max-width: 768px) 50vw, 48vw"
                   className={styles.photo}
                 />
               </div>

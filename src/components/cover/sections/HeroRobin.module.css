@@ -1,6 +1,6 @@
 /* ==========================================================================
    ROBIN JAMES LIFESTYLE HERO SECTION (EDITORIAL MATTE DARK THEME)
-   Asymmetric 3-Photo Collage with Prominent Typography & Square Portfolio Button
+   Exact match to Robin James mobile & desktop editorial composition
    ========================================================================== */
 
 .heroSection {
@@ -8,7 +8,7 @@
   width: 100%;
   background-color: var(--background, #0f1013);
   color: var(--foreground, #f7f4ee);
-  padding: clamp(2rem, 3.5vw, 3rem) var(--container-padding, clamp(1.5rem, 5vw, 4.5rem)) clamp(4.5rem, 8vw, 7rem);
+  padding: 0 var(--container-padding, clamp(1.5rem, 5vw, 4.5rem)) clamp(4.5rem, 8vw, 7rem);
   box-sizing: border-box;
   overflow: hidden;
   border-bottom: 1px solid var(--border, rgba(255, 255, 255, 0.08));
@@ -30,13 +30,33 @@
   align-items: center;
   width: 100%;
   gap: 1.5rem;
-  margin-bottom: clamp(2.5rem, 5vw, 4.2rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(1rem, 2vw, 1.5rem);
+  margin-bottom: clamp(1.5rem, 3.5vw, 3rem);
 }
 
 .topLeftArea {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+}
+
+.desktopPortfolioWrapper {
+  display: block;
+}
+
+.mobileBrandName {
+  display: none;
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: -0.015em;
+  transition: opacity 0.2s ease;
+}
+
+.mobileBrandName:hover {
+  opacity: 0.8;
 }
 
 .topCenterArea {
@@ -52,7 +72,7 @@
   justify-content: flex-end;
 }
 
-/* Minimalist Luxury Editorial Portfolio Button */
+/* Desktop: Minimalist Luxury Editorial Portfolio Button */
 .portfolioBtn {
   display: inline-flex;
   align-items: center;
@@ -153,25 +173,34 @@
   pointer-events: none;
 }
 
+/* Clean 2-Line Minimal Hamburger Toggle (matches Robin James header "=") */
 .menuButton {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
+  border: none;
+  width: 32px;
+  height: 20px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
   cursor: pointer;
-  transition: all 0.25s ease;
+  padding: 2px 0;
   color: #ffffff;
   position: relative;
-  z-index: 10;
+  z-index: 20;
 }
 
-.menuButton:hover {
-  background-color: rgba(255, 255, 255, 0.16);
-  transform: scale(1.05);
+.menuLine {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background-color: #ffffff;
+  border-radius: 1px;
+  transition: transform 0.25s ease, width 0.25s ease;
+}
+
+.menuButton:hover .menuLine:first-child {
+  width: 20px;
 }
 
 /* --------------------------------------------------------------------------
@@ -179,7 +208,6 @@
    -------------------------------------------------------------------------- */
 .titleWrapper {
   width: 100%;
-  margin-top: clamp(1rem, 2vw, 2rem);
   margin-bottom: clamp(2.5rem, 5vw, 4.25rem);
 }
 
@@ -190,16 +218,10 @@
   margin: 0;
 }
 
-.headlineMain {
-  font-family: var(--font-display, 'Syne', sans-serif);
-  font-size: clamp(2.4rem, 5.5vw, 5rem);
-  font-weight: 800;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
-  color: #f7f4ee;
-}
-
-.headlineSub {
+.headlineLine1,
+.headlineLine2,
+.headlineLine3 {
+  display: block;
   font-family: var(--font-display, 'Syne', sans-serif);
   font-size: clamp(2.4rem, 5.5vw, 5rem);
   font-weight: 800;
@@ -278,7 +300,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   RESPONSIVE LAYOUT
+   RESPONSIVE LAYOUT (MATCHING ROBIN JAMES SCREENSHOTS)
    -------------------------------------------------------------------------- */
 @media (max-width: 1080px) {
   .topBar {
@@ -287,7 +309,7 @@
   }
 
   .topCenterArea {
-    display: none; /* Safely remove center badge on narrower viewports to prevent collision */
+    display: none;
   }
 }
 
@@ -308,44 +330,104 @@
 }
 
 @media (max-width: 768px) {
+  /* Sticky Frosted Header (Robin James mobile header) */
   .topBar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: calc(100% + 2 * var(--container-padding, 1.5rem));
+    margin-left: calc(-1 * var(--container-padding, 1.5rem));
+    margin-right: calc(-1 * var(--container-padding, 1.5rem));
+    padding: 1.25rem var(--container-padding, 1.5rem);
     margin-bottom: 2rem;
+    background: rgba(15, 16, 19, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  .portfolioBtn {
-    height: 42px;
-    padding: 0 1.15rem 0 0.95rem;
-    font-size: 0.76rem;
-    letter-spacing: 0.14em;
-    gap: 0.65rem;
+  .desktopPortfolioWrapper {
+    display: none; /* Hidden on mobile to match the Robin James screenshot */
   }
 
-  .arrowBadge {
-    width: 20px;
-    height: 20px;
+  .mobileBrandName {
+    display: inline-block; /* Shows "Dilshan Seneviratne" in top-left */
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  .topCenterArea {
+    display: none;
   }
 
   .titleWrapper {
+    margin-top: 0.5rem;
     margin-bottom: 2.5rem;
   }
 
+  /* Exact 3-line mobile typography:
+     Hello,
+     I'm Dilshan Seneviratne,
+     an engineer by heart */
+  .headlineLine1,
+  .headlineLine2,
+  .headlineLine3 {
+    font-size: clamp(2.35rem, 9.4vw, 3.25rem);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+  }
+
+  /* Asymmetric mobile collage (Images 1, 2, 3) */
   .galleryContainer {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
   }
 
+  /* Photo 1: Large centered vertical cyclist */
   .leftPhotoWrapper {
+    width: 100%;
     aspect-ratio: 4 / 5;
+    border-radius: 6px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
   }
 
+  /* Photos 2 & 3: Staggered overlap below cyclist */
   .rightPhotosWrapper {
-    gap: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+    width: 100%;
+    margin-top: -14%; /* Asymmetrical overlap on the cyclist road/bottom */
+    position: relative;
+    z-index: 2;
   }
 
-  .middlePhotoWrapper,
+  /* Photo 2 (Kayak, Left) */
+  .middlePhotoWrapper {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 6px;
+    position: relative;
+    align-self: flex-start;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+  }
+
+  /* Photo 3 (Skater, Right) shifted downward */
   .rightPhotoWrapper {
     width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 6px;
+    position: relative;
     align-self: flex-start;
-    margin-top: 0;
+    margin-top: 32%; /* Staggered shift downward matching Image 3 */
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.65);
   }
 }
