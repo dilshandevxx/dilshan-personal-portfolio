@@ -4073,3 +4073,103 @@ a.text-link:hover {
   text-decoration: none;
 }
 
+/* ==========================================================================
+   PORTFOLIO EDITORIAL PAGE HEADERS & LAYOUT
+   ========================================================================== */
+.portfolio-shell-wrapper {
+  min-height: 100vh;
+  background-color: var(--color-background, #0d0f12);
+  color: var(--color-text, #f0f0f2);
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-shell-wrapper .mobile-header {
+  display: none !important;
+}
+
+.portfolio-shell-wrapper .app-shell {
+  padding-top: 0 !important;
+}
+
+/* Clean Page Header Structure for /projects, /blog, /shelves, /about */
+.page-header {
+  padding: clamp(2rem, 4vw, 3.25rem) 0 clamp(1.25rem, 2.5vw, 2rem);
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.page-title {
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  color: var(--color-text-emphasized, #ffffff);
+  margin: 0;
+  text-transform: none;
+}
+
+.page-subtitle {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-muted, #9c9ea7);
+  max-width: 680px;
+  margin: 0;
+}
+
+/* Container widths and padding */
+.projects-container,
+.page-content-narrow,
+.guides-page-container,
+.about-content-narrow {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 1020px) {
+  .projects-container,
+  .page-content-narrow,
+  .guides-page-container,
+  .about-content-narrow {
+    padding: 0 2.5rem 5rem;
+  }
+}
+
+.status-indicator-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-family: var(--font-mono, monospace);
+  color: #8bb397;
+  padding: 0.35rem 0.75rem;
+  background: rgba(139, 179, 151, 0.1);
+  border: 1px solid rgba(139, 179, 151, 0.25);
+  border-radius: 4px;
+  width: fit-content;
+  margin-top: 0.25rem;
+}
+
+.status-pulse-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #8bb397;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #8bb397;
+  animation: statusPulse 2s infinite ease-in-out;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+

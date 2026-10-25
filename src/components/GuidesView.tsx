@@ -89,10 +89,9 @@ export function GuidesView() {
     <div className="guides-page-container">
       {/* Clean Authentic Page Header */}
       <header className="page-header">
-        <h1 className="page-title">Guides &amp; References</h1>
+        <h1 className="page-title">Shelves</h1>
         <p className="page-subtitle">
-          A curated collection of architectural deep dives, from-scratch system
-          implementations, and infrastructure playbooks.
+          Curated roadmaps, architectural deep dives, and system implementation playbooks.
         </p>
       </header>
 

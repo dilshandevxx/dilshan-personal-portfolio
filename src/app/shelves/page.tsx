@@ -3,7 +3,7 @@ import { siteConfig } from "@/data/siteConfig";
 import { GuidesView } from "@/components/GuidesView";
 
 export const metadata = {
-  title: `Guides & References — ${siteConfig.siteName}`,
+  title: `Shelves — ${siteConfig.siteName}`,
   description:
     "Curated roadmaps, architectural deep dives, and system implementation playbooks.",
 };
