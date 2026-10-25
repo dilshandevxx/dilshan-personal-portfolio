@@ -21,20 +21,21 @@ export default function HeroLucas() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Link href="/" className={styles.logoLink} aria-label="Home">
+            <Link href="/projects" className={styles.portfolioBtn}>
+              <span>PORTFOLIO</span>
               <svg 
-                width="34" 
-                height="20" 
-                viewBox="0 0 34 20" 
+                width="14" 
+                height="14" 
+                viewBox="0 0 24 24" 
                 fill="none" 
                 stroke="currentColor" 
-                strokeWidth="2.2" 
+                strokeWidth="2.5" 
                 strokeLinecap="round" 
                 strokeLinejoin="round"
-                className={styles.waveIcon}
+                className={styles.btnArrow}
               >
-                <path d="M2 13C6 8 10 8 14 13C18 18 22 18 26 13C28 10.5 30 10.5 32 12" />
-                <path d="M2 7C6 2 10 2 14 7C18 12 22 12 26 7C28 4.5 30 4.5 32 6" />
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
               </svg>
             </Link>
 
