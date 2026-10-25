@@ -84,13 +84,13 @@
 
 .title {
   font-family: var(--font-display, 'Syne', sans-serif);
-  font-size: clamp(3.2rem, 7.8vw, 6.8rem);
+  font-size: clamp(2rem, 4.2vw, 3.8rem);
   font-weight: 700;
-  line-height: 0.94;
-  letter-spacing: -0.025em;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   color: #ffffff;
   text-transform: uppercase;
-  margin: 0 0 2rem 0;
+  margin: 0 0 1.35rem 0;
   display: flex;
   flex-direction: column;
 }
@@ -108,18 +108,18 @@
 
 .bio {
   font-family: var(--font-body), 'Inter', -apple-system, sans-serif;
-  font-size: clamp(0.9rem, 1.05vw, 1.02rem);
-  line-height: 1.65;
+  font-size: clamp(0.88rem, 1vw, 0.95rem);
+  line-height: 1.6;
   color: #8c8c98;
-  max-width: 380px;
+  max-width: 360px;
   margin: 0;
 }
 
 /* Rotating "SEE MY WORK" Circular Badge */
 .rotatingBadge {
   position: relative;
-  width: 96px;
-  height: 96px;
+  width: 84px;
+  height: 84px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -129,8 +129,8 @@
 }
 
 .centerCircle {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: #ffffff;
   color: #09090b;
@@ -310,7 +310,8 @@
     padding-bottom: 2rem;
   }
   .title {
-    font-size: 2.75rem;
+    font-size: clamp(1.75rem, 5.5vw, 2.15rem);
+    line-height: 1.1;
   }
   .cardStack {
     height: 320px;
