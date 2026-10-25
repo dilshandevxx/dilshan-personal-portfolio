@@ -1,17 +1,14 @@
-import HeroLucas from "@/components/cover/sections/HeroLucas";
-import SelectedWork from "@/components/cover/sections/SelectedWork";
-import FAQ from "@/components/cover/sections/FAQ";
-import Contact from "@/components/cover/sections/Contact";
+import HeroRobin from "@/components/cover/sections/HeroRobin";
 import Footer from "@/components/cover/Footer";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Dilshan | Visual Designer & Software Engineer",
+  title: "Dilshan Seneviratne | Software Engineer & Systems Architect",
   description:
-    "Structuring the future through architectural digital experiences, brand identity systems, and intelligent suites.",
+    "Software engineer crafting resilient distributed systems, high-performance web experiences, and thoughtful digital tools.",
   openGraph: {
-    title: "Dilshan | Digital Studio & Systems",
-    description: "Structuring the future through architectural digital experiences.",
+    title: "Dilshan Seneviratne | Portfolio",
+    description: "Software engineer crafting resilient distributed systems and thoughtful digital experiences.",
     type: "website",
   },
 };
@@ -20,10 +17,7 @@ export default function Home() {
   return (
     <div className="xudo-cover-wrapper">
       <main>
-        <HeroLucas />
-        <SelectedWork />
-        <FAQ />
-        <Contact />
+        <HeroRobin />
       </main>
       <Footer />
     </div>

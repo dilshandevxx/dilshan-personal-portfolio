@@ -1,0 +1,273 @@
+/* ==========================================================================
+   ROBIN JAMES LIFESTYLE HERO SECTION (EDITORIAL MATTE DARK THEME)
+   Asymmetric 3-Photo Collage with Prominent Typography & Square Portfolio Button
+   ========================================================================== */
+
+.heroSection {
+  position: relative;
+  width: 100%;
+  background-color: var(--background, #0f1013);
+  color: var(--foreground, #f7f4ee);
+  padding: clamp(2rem, 3.5vw, 3rem) var(--container-padding, clamp(1.5rem, 5vw, 4.5rem)) clamp(4.5rem, 8vw, 7rem);
+  box-sizing: border-box;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border, rgba(255, 255, 255, 0.08));
+}
+
+.container {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   TOP NAVIGATION BAR
+   -------------------------------------------------------------------------- */
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin-bottom: clamp(2.5rem, 5vw, 4.2rem);
+}
+
+/* Big Minimal Square-Corner Portfolio Button (Top-Left) */
+.portfolioBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background-color: #ffffff;
+  color: #121316;
+  padding: 0.95rem 2.35rem;
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 0px !important; /* Strict minimal square corners */
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  line-height: 1;
+  position: relative;
+  z-index: 10;
+}
+
+.portfolioBtn:hover {
+  background-color: var(--accent, #e2c97c);
+  border-color: var(--accent, #e2c97c);
+  color: #121316;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(226, 201, 124, 0.35);
+}
+
+.btnArrow {
+  transition: transform 0.25s ease;
+}
+
+.portfolioBtn:hover .btnArrow {
+  transform: translate(2px, -2px);
+}
+
+/* Center Role Tag (e.g. Design Lead @Airbnb -> Software Engineer & Systems Architect) */
+.roleBadge {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.85rem, 1.05vw, 0.96rem);
+  font-weight: 600;
+  color: #e5e2da;
+  letter-spacing: -0.01em;
+  text-align: center;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.menuButton {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  color: #ffffff;
+  position: relative;
+  z-index: 10;
+}
+
+.menuButton:hover {
+  background-color: rgba(255, 255, 255, 0.16);
+  transform: scale(1.05);
+}
+
+/* --------------------------------------------------------------------------
+   BOLD EDITORIAL HEADLINE
+   -------------------------------------------------------------------------- */
+.titleWrapper {
+  width: 100%;
+  margin-top: clamp(1rem, 2vw, 2rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4.25rem);
+}
+
+.headline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin: 0;
+}
+
+.headlineMain {
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: clamp(2.4rem, 5.5vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: #f7f4ee;
+}
+
+.headlineSub {
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: clamp(2.4rem, 5.5vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: #f7f4ee;
+}
+
+/* --------------------------------------------------------------------------
+   ASYMMETRIC THREE-PHOTO COLLAGE
+   -------------------------------------------------------------------------- */
+.galleryContainer {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: clamp(2rem, 4vw, 4.5rem);
+  align-items: center;
+  width: 100%;
+}
+
+/* Left Photo: Tall Vertical Cyclist */
+.leftPhotoWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.55);
+  background-color: #1a1b20;
+}
+
+/* Right Photos Group: Kayak on Top-Left, Skater Staggered Bottom-Right */
+.rightPhotosWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+.middlePhotoWrapper {
+  position: relative;
+  width: 82%;
+  aspect-ratio: 4 / 3;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  align-self: flex-start;
+  z-index: 1;
+  background-color: #1a1b20;
+}
+
+.rightPhotoWrapper {
+  position: relative;
+  width: 82%;
+  aspect-ratio: 4 / 3;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+  align-self: flex-end;
+  margin-top: -14%; /* Asymmetric overlapping stagger */
+  z-index: 2;
+  background-color: #1a1b20;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.leftPhotoWrapper:hover .photo,
+.middlePhotoWrapper:hover .photo,
+.rightPhotoWrapper:hover .photo {
+  transform: scale(1.035);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE LAYOUT
+   -------------------------------------------------------------------------- */
+@media (max-width: 960px) {
+  .roleBadge {
+    display: none; /* Keep top bar clean on tablet/mobile */
+  }
+
+  .galleryContainer {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .middlePhotoWrapper,
+  .rightPhotoWrapper {
+    width: 95%;
+  }
+
+  .rightPhotoWrapper {
+    margin-top: -8%;
+  }
+}
+
+@media (max-width: 768px) {
+  .topBar {
+    margin-bottom: 2rem;
+  }
+
+  .portfolioBtn {
+    padding: 0.8rem 1.6rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+  }
+
+  .titleWrapper {
+    margin-bottom: 2.5rem;
+  }
+
+  .galleryContainer {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .leftPhotoWrapper {
+    aspect-ratio: 4 / 5;
+  }
+
+  .rightPhotosWrapper {
+    gap: 1.5rem;
+  }
+
+  .middlePhotoWrapper,
+  .rightPhotoWrapper {
+    width: 100%;
+    align-self: flex-start;
+    margin-top: 0;
+  }
+}
