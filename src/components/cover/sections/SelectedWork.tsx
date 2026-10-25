@@ -33,9 +33,6 @@ export default function SelectedWork() {
                   className={styles.image}
                 />
                 <div className={styles.overlay}>
-                  <div className={styles.viewBadge}>
-                    View<br />Project
-                  </div>
                   <h3 className={styles.projectName}>{project.title}</h3>
                   <span className={styles.projectCategory}>{project.category}</span>
                 </div>
