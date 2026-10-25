@@ -14,46 +14,55 @@ export default function HeroRobin() {
     <>
       <section className={styles.heroSection}>
         <div className={styles.container}>
-          {/* 1. Top Navigation Bar: Minimal Big Square Portfolio Button (Left) | Role Tag (Center) | Menu Toggle (Right) */}
+          {/* 1. Top Navigation Bar: Refined Square Portfolio Button (Left) | Role Tag (Center) | Menu Toggle (Right) */}
           <motion.div 
             className={styles.topBar}
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Link href="/projects" className={styles.portfolioBtn}>
-              <span>PORTFOLIO</span>
-              <svg 
-                width="14" 
-                height="14" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2.5" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-                className={styles.btnArrow}
-              >
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
-              </svg>
-            </Link>
-
-            <div className={styles.roleBadge}>
-              <span>Software Engineer &amp; Systems Architect</span>
+            <div className={styles.topLeftArea}>
+              <Link href="/projects" className={styles.portfolioBtn}>
+                <span className={styles.btnStatusDot} aria-hidden="true" />
+                <span className={styles.btnText}>PORTFOLIO</span>
+                <span className={styles.arrowBadge} aria-hidden="true">
+                  <svg 
+                    width="11" 
+                    height="11" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2.5" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round"
+                    className={styles.btnArrow}
+                  >
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </span>
+              </Link>
             </div>
 
-            <button 
-              type="button"
-              className={styles.menuButton} 
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle Navigation Menu"
-            >
-              <svg width="18" height="12" viewBox="0 0 18 12" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-                <line x1="1" y1="2" x2="17" y2="2" />
-                <line x1="1" y1="10" x2="17" y2="10" />
-              </svg>
-            </button>
+            <div className={styles.topCenterArea}>
+              <div className={styles.roleBadge}>
+                <span>Software Engineer &amp; Systems Architect</span>
+              </div>
+            </div>
+
+            <div className={styles.topRightArea}>
+              <button 
+                type="button"
+                className={styles.menuButton} 
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle Navigation Menu"
+              >
+                <svg width="18" height="12" viewBox="0 0 18 12" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+                  <line x1="1" y1="2" x2="17" y2="2" />
+                  <line x1="1" y1="10" x2="17" y2="10" />
+                </svg>
+              </button>
+            </div>
           </motion.div>
 
           {/* 2. Bold Hero Title */}
