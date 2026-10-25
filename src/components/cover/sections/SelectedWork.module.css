@@ -1,49 +1,49 @@
+/* ==========================================================================
+   SELECTED WORK SECTION (AESTHETIC MATTE DARK THEME)
+   Consistent with "FEEL FREE TO CONTACT ME" typography & font scale
+   ========================================================================== */
+
 .workSection {
-  padding: clamp(5rem, 15vw, 10rem) var(--container-padding);
+  padding: clamp(4.5rem, 8vw, 7rem) var(--container-padding, clamp(1.5rem, 5vw, 4rem));
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center the internal containers on ultra-wide */
-  background: var(--background);
+  align-items: center;
+  background-color: var(--background, #18181c);
+  border-top: 1px solid var(--border, rgba(255, 255, 255, 0.08));
 }
 
 .header {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Left-aligned */
-  margin-bottom: clamp(6rem, 12vw, 10rem);
+  align-items: flex-start;
+  margin-bottom: clamp(3rem, 5vw, 4.5rem);
   width: 100%;
-  max-width: 1400px;
-}
-
-.icon {
-  color: #ff3333;
-  width: 24px;
-  height: 24px;
-  margin-bottom: 2rem;
-  fill: #ff3333;
+  max-width: 1360px;
 }
 
 .title {
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 6rem);
-  text-transform: uppercase;
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
   font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #ffffff;
   margin: 0;
-  letter-spacing: -0.01em;
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 6rem;
+  gap: 3.5rem;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1360px;
 }
 
 @media (min-width: 768px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 4rem;
+    gap: 3rem;
   }
 }
 
@@ -53,15 +53,13 @@
   display: block;
 }
 
-/* Stagger layout: push every even column down massively */
 @media (min-width: 768px) {
   .projectLink:nth-child(even) {
-    margin-top: clamp(8rem, 20vw, 16rem);
+    margin-top: clamp(4rem, 8vw, 7rem);
   }
   
-  /* Counteract the margin on the last even row if needed, but usually fine for masonry visually */
   .grid {
-    padding-bottom: clamp(4rem, 10vw, 8rem);
+    padding-bottom: clamp(2rem, 5vw, 4rem);
   }
 }
 
@@ -77,140 +75,107 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #ffffff; /* Gives solid background if images are transparent pngs */
-  border-radius: 4px;
+  background: #212228;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.projectCard:hover .imageWrapper {
+  border-color: rgba(226, 201, 124, 0.4);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
 .image {
   object-fit: cover;
-  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .projectCard:hover .image {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
-/* Overlay that contains gradient and badge */
 .overlay {
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: center;
-  padding: 3rem;
-  /* Light bottom shadow so the white text is always perfectly readable against any image */
-  background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 40%);
+  align-items: flex-start;
+  padding: 2.25rem;
+  background: linear-gradient(to top, rgba(15, 15, 18, 0.85) 0%, rgba(15, 15, 18, 0.3) 35%, transparent 65%);
 }
 
 .projectName {
-  font-family: var(--font-body);
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #ffffff;
-  margin: 0;
-  z-index: 2;
-  text-align: center;
-}
-
-/* View Badge Dynamic Placement */
-.viewBadge {
-  position: absolute;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: #000; /* Monochrome badge */
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-family: var(--font-inter);
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: 1.35rem;
   font-weight: 700;
-  line-height: 1.2;
+  color: #ffffff;
+  margin: 0 0 0.4rem 0;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 3;
 }
 
-/* Add organic randomness to the badge placement based on odd/even */
-.projectLink:nth-child(odd) .viewBadge {
-  bottom: 25%;
-  right: 15%;
+.projectCategory {
+  font-family: var(--font-body), 'Inter', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #e2c97c; /* Warm champagne gold */
+  font-weight: 600;
 }
 
-.projectLink:nth-child(even) .viewBadge {
-  bottom: 30%;
-  left: 15%;
-}
-
-/* Create an alternate third position to keep it truly organic */
-.projectLink:nth-child(3n) .viewBadge {
-  bottom: 20%;
-  right: 25%;
-}
-
-.projectCard:hover .viewBadge {
-  transform: scale(1.1);
-}
-
-/* MOBILE OVERRIDES */
 @media (max-width: 768px) {
-  .overlay { padding: 1.5rem; }
-  .grid { gap: 3rem; }
-  .projectName { font-size: 1.1rem; }
-  .viewBadge {
-    width: 60px; height: 60px; font-size: 0.6rem;
-    bottom: 1rem !important; right: 1rem !important; left: auto !important;
+  .overlay { 
+    padding: 1.5rem; 
+  }
+  .grid { 
+    gap: 2.5rem; 
+  }
+  .projectName { 
+    font-size: 1.15rem; 
   }
 }
 
 .viewAllContainer {
-  margin-top: clamp(4rem, 8vw, 8rem);
+  margin-top: clamp(3rem, 6vw, 5rem);
   display: flex;
-  justify-content: flex-start; /* Left-aligned */
+  justify-content: flex-start;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1360px;
 }
 
 .viewAllBtn {
   display: inline-flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1.5rem 3rem;
-  border: 1px solid var(--foreground);
-  border-radius: 0;
-  background-color: transparent;
-  color: var(--foreground);
-  font-family: var(--font-body);
-  font-size: 1rem;
-  letter-spacing: 0.1em;
-  font-weight: 500;
+  gap: 0.85rem;
+  padding: 1rem 2.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.04);
+  color: #f2f1f6;
+  font-family: var(--font-body), 'Inter', sans-serif;
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
   text-decoration: none;
   text-transform: uppercase;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .viewAllBtn:hover {
-  background-color: var(--foreground);
-  color: var(--background);
-  transform: translateY(-5px); /* Elegant lift instead of scale */
+  background-color: #212228;
+  border-color: #e2c97c;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .btnIcon {
-  transition: transform 0.4s ease;
+  transition: transform 0.3s ease;
 }
 
 .viewAllBtn:hover .btnIcon {
-  transform: translateX(5px) rotate(-45deg); /* Classy arrow animation */
-}
-
-@media (max-width: 768px) {
-  .viewAllBtn {
-    padding: 1.2rem 2.5rem;
-    font-size: 0.9rem;
-  }
+  transform: translateX(4px);
 }

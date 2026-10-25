@@ -1,6 +1,6 @@
 /* ==========================================================================
-   FAQ SECTION (FREQUENTLY ASKED QUESTIONS)
-   Centered display header, clean accordion with thin divider lines
+   FAQ SECTION (AESTHETIC MATTE DARK THEME)
+   Consistent with "FEEL FREE TO CONTACT ME" typography & font scale
    ========================================================================== */
 
 .faqSection {
@@ -10,8 +10,8 @@
   padding-bottom: clamp(5rem, 8vw, 7.5rem);
   padding-left: var(--container-padding, clamp(1.5rem, 5vw, 4rem));
   padding-right: var(--container-padding, clamp(1.5rem, 5vw, 4rem));
-  background-color: #0c0c10;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: var(--background, #18181c);
+  border-top: 1px solid var(--border, rgba(255, 255, 255, 0.08));
 }
 
 .container {
@@ -33,10 +33,10 @@
 
 .title {
   font-family: var(--font-display, 'Syne', sans-serif);
-  font-size: clamp(2rem, 4vw, 3.4rem);
-  font-weight: 500;
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  font-weight: 700;
   line-height: 1.15;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   color: #ffffff;
   text-transform: uppercase;
   margin: 0;
@@ -46,7 +46,7 @@
   font-family: var(--font-body), 'Inter', -apple-system, sans-serif;
   font-size: clamp(0.92rem, 1.05vw, 1rem);
   line-height: 1.6;
-  color: #8c8c98;
+  color: var(--muted, #9497a1);
   max-width: 520px;
   margin-top: 1.15rem;
   font-weight: 400;
@@ -60,12 +60,12 @@
 }
 
 .accordionItem {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid var(--border, rgba(255, 255, 255, 0.08));
   transition: border-color 0.25s ease;
 }
 
 .accordionItem:last-child {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid var(--border, rgba(255, 255, 255, 0.08));
 }
 
 .accordionTrigger {
@@ -83,7 +83,7 @@
 }
 
 .accordionTrigger:hover .questionText {
-  color: #ffffff;
+  color: var(--accent, #e2c97c);
 }
 
 .questionText {
@@ -92,7 +92,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #dcdcde;
+  color: #e4e4e9;
   transition: color 0.2s ease;
 }
 
@@ -103,7 +103,7 @@
   width: 24px;
   height: 24px;
   flex-shrink: 0;
-  color: #8e8e99;
+  color: var(--muted, #9497a1);
   font-size: 1.35rem;
   font-weight: 300;
   line-height: 1;
@@ -112,7 +112,7 @@
 
 .iconOpen {
   transform: rotate(45deg);
-  color: #ffffff;
+  color: var(--accent, #e2c97c);
 }
 
 /* Accordion Answer Content */
@@ -125,7 +125,7 @@
   font-family: var(--font-body), 'Inter', -apple-system, sans-serif;
   font-size: clamp(0.92rem, 1vw, 0.98rem);
   line-height: 1.68;
-  color: #92929e;
+  color: var(--muted, #9497a1);
 }
 
 /* Bottom Contact Callout */
@@ -147,13 +147,13 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #f0f0f4;
+  color: #f2f1f6;
   text-decoration: none;
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .contactLink:hover {
-  color: #e2c97c;
+  color: var(--accent, #e2c97c);
   transform: translateY(-1px);
 }
 
@@ -161,13 +161,13 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: var(--accent, #e2c97c);
   display: inline-block;
 }
 
 .subtext {
   font-family: var(--font-body), 'Inter', sans-serif;
   font-size: 0.85rem;
-  color: #72727e;
+  color: var(--muted, #9497a1);
   margin: 0;
 }

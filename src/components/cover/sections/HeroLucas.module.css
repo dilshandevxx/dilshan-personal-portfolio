@@ -1,18 +1,17 @@
 /* ==========================================================================
-   LUCAS EDITORIAL MAGAZINE HERO SECTION
-   Warm stone paper background (#dedcd7), split big names, panoramic banner,
-   large editorial serif italic statement.
+   LUCAS EDITORIAL HERO SECTION (AESTHETIC MATTE DARK THEME)
+   Consistent with "FEEL FREE TO CONTACT ME" typography & font scale
    ========================================================================== */
 
 .heroSection {
   position: relative;
   width: 100%;
-  background-color: #dedcd7;
-  color: #151517;
-  padding: 1.75rem var(--container-padding, clamp(1.5rem, 5vw, 4rem)) clamp(4rem, 7vw, 6.5rem);
+  background-color: var(--background, #18181c);
+  color: var(--foreground, #f2f1f6);
+  padding: 2rem var(--container-padding, clamp(1.5rem, 5vw, 4rem)) clamp(4.5rem, 8vw, 7rem);
   box-sizing: border-box;
   overflow: hidden;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid var(--border, rgba(255, 255, 255, 0.08));
 }
 
 .container {
@@ -30,31 +29,31 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: clamp(2rem, 4.5vw, 3.8rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4.2rem);
 }
 
 .logoLink {
   display: inline-flex;
   align-items: center;
-  color: #151517;
+  color: #ffffff;
   text-decoration: none;
   transition: opacity 0.2s ease;
 }
 
 .logoLink:hover {
-  opacity: 0.7;
+  opacity: 0.75;
 }
 
 .waveIcon {
-  stroke: #151517;
+  stroke: #ffffff;
 }
 
 .menuButton {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.07);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,12 +62,12 @@
 }
 
 .menuButton:hover {
-  background-color: rgba(0, 0, 0, 0.12);
+  background-color: rgba(255, 255, 255, 0.16);
   transform: scale(1.05);
 }
 
 /* --------------------------------------------------------------------------
-   SPLIT TYPOGRAPHY HEADER (LEFT: NAME + BAR | RIGHT: BIO + SECOND NAME)
+   SPLIT TYPOGRAPHY HEADER (SAME FONT & SCALE AS "FEEL FREE TO CONTACT ME")
    -------------------------------------------------------------------------- */
 .typographyHeader {
   display: grid;
@@ -87,21 +86,21 @@
 
 .firstName {
   font-family: var(--font-display, 'Syne', sans-serif);
-  font-size: clamp(3rem, 7.5vw, 6.5rem);
-  font-weight: 800;
-  line-height: 0.94;
-  letter-spacing: -0.03em;
-  color: #151517;
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.03em;
+  color: #ffffff;
   text-transform: uppercase;
   margin: 0;
 }
 
 .thickBar {
-  width: 58px;
-  height: 6px;
-  background-color: #151517;
+  width: 50px;
+  height: 5px;
+  background-color: #e2c97c; /* Warm champagne gold */
   border-radius: 1px;
-  margin-top: 1.15rem;
+  margin-top: 1rem;
 }
 
 .rightColumn {
@@ -113,21 +112,21 @@
 
 .descriptorText {
   font-family: var(--font-body), 'Inter', sans-serif;
-  font-size: clamp(0.85rem, 1.05vw, 0.95rem);
-  line-height: 1.5;
-  color: #52525a;
-  max-width: 380px;
-  margin: 0 0 1.15rem 0;
-  font-weight: 500;
+  font-size: clamp(0.88rem, 1.05vw, 0.98rem);
+  line-height: 1.6;
+  color: #9497a1;
+  max-width: 420px;
+  margin: 0 0 1rem 0;
+  font-weight: 400;
 }
 
 .secondName {
   font-family: var(--font-display, 'Syne', sans-serif);
-  font-size: clamp(3rem, 7.5vw, 6.5rem);
-  font-weight: 800;
-  line-height: 0.94;
-  letter-spacing: -0.03em;
-  color: #151517;
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.03em;
+  color: #ffffff;
   text-transform: uppercase;
   margin: 0;
 }
@@ -139,11 +138,12 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  max-height: 620px;
+  max-height: 600px;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.16);
-  background-color: #1b1b20;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #212228;
 }
 
 .bannerImage {
@@ -165,9 +165,9 @@
   font-family: 'Playfair Display', Georgia, serif;
   font-style: italic;
   font-weight: 700;
-  font-size: clamp(1.4rem, 2.7vw, 2.45rem);
-  line-height: 1.32;
-  color: #151517;
+  font-size: clamp(1.2rem, 2.3vw, 1.85rem);
+  line-height: 1.4;
+  color: #ecebf2;
   letter-spacing: -0.015em;
   margin: 0;
   max-width: 1200px;
@@ -197,7 +197,7 @@
     border-radius: 10px;
   }
   .statementText {
-    font-size: 1.25rem;
-    line-height: 1.4;
+    font-size: 1.15rem;
+    line-height: 1.45;
   }
 }

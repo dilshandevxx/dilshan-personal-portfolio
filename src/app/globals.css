@@ -4030,17 +4030,19 @@ a.text-link:hover {
    COVER PAGE SCOPED STYLES (MATCHING REFERENCE STUDIO MAIN PAGE)
    ========================================================================== */
 .xudo-cover-wrapper {
-  --background: #050505;
-  --foreground: #f0f0f0;
-  --muted: #888888;
-  --accent: #ff4500;
-  --border: #222222;
+  --background: #18181c; /* Aesthetic matte dark slate-charcoal */
+  --surface: #212228;
+  --surface-hover: #272830;
+  --foreground: #f2f1f6;
+  --muted: #9497a1;
+  --accent: #e2c97c; /* Warm champagne gold */
+  --border: rgba(255, 255, 255, 0.08);
 
   --font-display: var(--font-syne), 'Syne', sans-serif;
   --font-body: var(--font-inter), 'Inter', sans-serif;
   --font-mono: 'Google Sans Code', monospace;
 
-  --container-padding: clamp(1rem, 5vw, 4rem);
+  --container-padding: clamp(1.5rem, 5vw, 4rem);
 
   background-color: var(--background);
   color: var(--foreground);
