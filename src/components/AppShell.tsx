@@ -20,7 +20,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <main className="app-main">
           {/* Sticky top-right ambient audio player */}
           <div className="app-top-bar">
-            <AmbientPlayer variant="floating" />
+            <AmbientPlayer variant="icon" />
           </div>
           {children}
         </main>

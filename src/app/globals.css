@@ -4173,3 +4173,160 @@ a.text-link:hover {
   50% { opacity: 0.4; transform: scale(0.85); }
 }
 
+/* ==========================================================================
+   Editorial Page Headers (Projects, Shelves, About, Blog)
+   ========================================================================== */
+.page-header {
+  position: relative;
+  margin-top: 0.75rem;
+  margin-bottom: 2.75rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.page-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-family-monospace2, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+}
+
+.page-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 2px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+}
+
+.page-title {
+  font-family: var(--font-display, "Syne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: clamp(2.35rem, 5vw, 3.4rem);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  color: var(--color-text-emphasized);
+  margin: 0 0 1rem 0;
+}
+
+.page-subtitle {
+  font-family: var(--font-family-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 1.0625rem;
+  line-height: 1.68;
+  color: var(--color-text-muted);
+  max-width: 720px;
+  margin: 0;
+}
+
+.page-header-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1.35rem;
+  font-family: var(--font-family-monospace2, monospace);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+}
+
+.page-meta-dot {
+  opacity: 0.4;
+}
+
+.page-meta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.22rem 0.65rem;
+  border-radius: 4px;
+  background: var(--color-background-card);
+  border: 1px solid var(--color-border);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   Single Minimalist Music Icon Trigger & Top Bar
+   ========================================================================== */
+.app-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1.25rem 2.5rem 0.5rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .app-top-bar {
+    display: none;
+  }
+}
+
+.chill-icon-trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--color-background-sidebar);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.chill-icon-trigger:hover,
+.chill-icon-trigger.active {
+  color: var(--color-text-emphasized);
+  border-color: var(--color-border-emphasized);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.chill-icon-trigger.is-playing {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 14px rgba(var(--color-primary-rgb), 0.25);
+}
+
+.chill-icon-vinyl {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.chill-icon-vinyl.spinning {
+  animation: vinylSpin 3s linear infinite;
+}
+
+.chill-icon-dot {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.9);
+  border: 1.5px solid var(--color-background-sidebar);
+  animation: statusPulse 2s infinite ease-in-out;
+}
+

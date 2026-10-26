@@ -78,108 +78,30 @@ export function AmbientPlayer({ variant = "floating" }: AmbientPlayerProps) {
           : "variant-floating"
       }`}
     >
-      {/* 1. Trigger: Single Compact Icon Button (if variant="icon") or Pill Deck */}
-      {variant === "icon" ? (
-        <div className="tooltip-container">
-          <button
-            type="button"
-            onClick={() => setIsOpen(!isOpen)}
-            className={`navbar-button chill-icon-trigger ${isPlaying ? "is-playing" : ""} ${isOpen ? "active" : ""}`}
-            aria-label="Lo-Fi Hip Hop Music Player"
-            title={
-              isPlaying
-                ? `Now playing: ${currentTrack.name} (${currentTrack.mood}) — Click to adjust`
-                : "Lo-Fi Hip Hop Radio — Click to play"
-            }
-          >
-            <span className={`chill-icon-vinyl ${isPlaying ? "spinning" : ""}`}>
-              <Disc3 size={18} />
-            </span>
-            {isPlaying && <span className="chill-icon-dot" />}
-          </button>
-          {!isOpen && <div className="tooltip">Lo-Fi Radio</div>}
-        </div>
-      ) : (
-        <div className={`chill-pill-deck ${isPlaying ? "is-playing" : ""} ${isOpen ? "is-open" : ""}`}>
-          {/* Main interactive toggle button */}
-          <button
-            type="button"
-            onClick={() => setIsOpen(!isOpen)}
-            className="chill-pill-main-btn"
-            aria-label="Toggle Lo-Fi Hip Hop Music Player Deck"
-            title={`Now playing: ${currentTrack.name} (${currentTrack.mood}) — Click for lo-fi controls`}
-          >
-            {/* Animated Vinyl Disc Icon */}
-            <span className={`chill-vinyl-icon ${isPlaying ? "spinning" : ""}`}>
-              <Disc3 size={15} />
-            </span>
-
-            {/* Track Name & Mood */}
-            <span className="chill-pill-track-info">
-              <span className="chill-pill-track-name">{currentTrack.name}</span>
-              <span className="chill-pill-mood-dot" />
-              <span className="chill-pill-mood-text">{currentTrack.mood}</span>
-            </span>
-
-            {/* 4-Bar Animated Equalizer */}
-            <span
-              className={`chill-equalizer ${isPlaying ? "active" : ""}`}
-              aria-hidden="true"
-            >
-              <span className="bar bar-1" />
-              <span className="bar bar-2" />
-              <span className="bar bar-3" />
-              <span className="bar bar-4" />
-            </span>
-          </button>
-
-          {/* Quick Previous Track */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              prevTrack();
-            }}
-            className="chill-quick-btn"
-            aria-label="Previous chill track"
-            title="Previous Track (P)"
-          >
-            <SkipBack size={12} />
-          </button>
-
-          {/* Quick Play / Pause Button */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              togglePlay();
-            }}
-            className={`chill-quick-btn play-btn ${isPlaying ? "playing" : ""}`}
-            aria-label={isPlaying ? "Pause music" : "Play chill music"}
-            title={isPlaying ? "Pause (M)" : "Play chill music (M)"}
-          >
-            {isPlaying ? (
-              <Pause size={12} />
-            ) : (
-              <Play size={12} className="play-icon-offset" />
-            )}
-          </button>
-
-          {/* Quick Next Track */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              nextTrack();
-            }}
-            className="chill-quick-btn"
-            aria-label="Next chill track"
-            title="Next Track (N)"
-          >
-            <SkipForward size={12} />
-          </button>
-        </div>
-      )}
+      {/* 1. Single Beautiful Compact Icon Button */}
+      <div className="tooltip-container">
+        <button
+          type="button"
+          onClick={() => setIsOpen(!isOpen)}
+          className={`chill-icon-trigger ${isPlaying ? "is-playing" : ""} ${isOpen ? "active" : ""}`}
+          aria-label="Lo-Fi Ambient Music Player"
+          title={
+            isPlaying
+              ? `Playing: ${currentTrack.name} (${currentTrack.mood}) — Click for controls`
+              : "Lo-Fi Music Player — Click to listen"
+          }
+        >
+          <span className={`chill-icon-vinyl ${isPlaying ? "spinning" : ""}`}>
+            <Disc3 size={17} />
+          </span>
+          {isPlaying && <span className="chill-icon-dot" />}
+        </button>
+        {!isOpen && (
+          <div className="tooltip">
+            {isPlaying ? `Playing: ${currentTrack.name}` : "Lo-Fi Radio"}
+          </div>
+        )}
+      </div>
 
       {/* 2. Deluxe Popover Player Deck */}
       {isOpen && (
