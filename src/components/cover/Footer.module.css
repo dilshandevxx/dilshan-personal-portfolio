@@ -1,24 +1,20 @@
-/* ==========================================================================
-   COVER FOOTER (AESTHETIC MATTE DARK THEME)
-   ========================================================================== */
-
 .footer {
-  background-color: var(--background, #18181c);
-  padding: 5rem var(--container-padding, clamp(1.5rem, 5vw, 4rem)) 3.5rem;
+  background-color: #090a0c;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 5rem 2rem 3.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  border-top: 1px solid var(--border, rgba(255, 255, 255, 0.08));
 }
 
 .logo {
   color: #ffffff;
-  font-family: var(--font-display, 'Syne', sans-serif);
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-size: 1.85rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
   margin-bottom: 2rem;
   text-transform: uppercase;
 }
@@ -28,29 +24,28 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.5rem;
-  margin-bottom: 3rem;
-  max-width: 600px;
+  margin-bottom: 2.75rem;
+  max-width: 650px;
 }
 
 @media (min-width: 768px) {
   .navLinks {
-    gap: 2rem;
+    gap: 2.25rem;
   }
 }
 
 .link {
-  color: var(--muted, #9497a1);
-  font-family: var(--font-body), 'Inter', sans-serif;
-  font-size: 0.88rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  color: #9ca3af;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-decoration: none;
   transition: color 0.25s ease;
 }
 
 .link:hover {
-  color: var(--accent, #e2c97c);
+  color: #ffffff;
 }
 
 .socialIcons {
@@ -60,21 +55,18 @@
 }
 
 .socialIcon {
-  color: var(--muted, #9497a1);
-  transition: color 0.25s ease, transform 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  color: #6b7280;
+  transition: color 0.25s ease;
 }
 
 .socialIcon:hover {
   color: #ffffff;
-  transform: translateY(-2px);
 }
 
 .copyright {
-  color: #6a6a78;
-  font-family: var(--font-body), 'Inter', sans-serif;
-  font-size: 0.82rem;
+  color: #6b7280;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.8125rem;
   font-weight: 400;
+  letter-spacing: 0.04em;
 }

@@ -3,7 +3,6 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import { Sidebar } from "./Sidebar";
-import { PortfolioNavbar } from "./PortfolioNavbar";
 import { AmbientPlayer } from "./AmbientPlayer";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -16,7 +15,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="portfolio-shell-wrapper">
-      <PortfolioNavbar />
       <div className="app-shell">
         <Sidebar />
         <main className="app-main">
