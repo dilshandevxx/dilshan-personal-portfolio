@@ -87,21 +87,12 @@ function getGuideIcon(iconName: string) {
 export function GuidesView() {
   return (
     <div className="guides-page-container">
-      {/* Clean Authentic Page Header with Beautiful Editorial Pacing */}
       <header className="page-header">
-        <span className="page-eyebrow">RESOURCES &amp; PLAYBOOKS</span>
         <h1 className="page-title">Shelves</h1>
         <p className="page-subtitle">
           A living digital library of architectural blueprints, engineering playbooks,
           distributed systems roadmaps, and software craft notes.
         </p>
-        <div className="page-header-meta">
-          <span className="page-meta-badge">Curated Knowledge Base</span>
-          <span className="page-meta-dot">&bull;</span>
-          <span>System Architectures</span>
-          <span className="page-meta-dot">&bull;</span>
-          <span>Continuous Updates</span>
-        </div>
       </header>
 
       {/* Main Stream of Sections */}

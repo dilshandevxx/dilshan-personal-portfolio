@@ -82,20 +82,11 @@ function BlogFeedInner() {
 
   return (
     <div className="page-content-narrow">
-      {/* Clean Page Header with Beautiful Editorial Pacing */}
       <header className="page-header">
-        <span className="page-eyebrow">ESSAYS &amp; TECHNICAL NOTES</span>
-        <h1 className="page-title">Writing</h1>
+        <h1 className="page-title">Blog</h1>
         <p className="page-subtitle">
-          Guides, tutorials, and technical deep dives on distributed systems, applied deep learning, Kubernetes orchestration, and full-stack craft.
+          Guides, tutorials, and technical deep dives on distributed systems, applied deep learning, Kubernetes, and full-stack craft.
         </p>
-        <div className="page-header-meta">
-          <span className="page-meta-badge">{postsData.length} Articles Published</span>
-          <span className="page-meta-dot">&bull;</span>
-          <span>Technical Writing</span>
-          <span className="page-meta-dot">&bull;</span>
-          <span>Open Knowledge</span>
-        </div>
       </header>
 
       {/* Focused Content Column */}

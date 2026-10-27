@@ -28,20 +28,11 @@ export default function ProjectsPage() {
 
   return (
     <div className="projects-container">
-      {/* Clean Page Header with Beautiful Editorial Pacing */}
       <header className="page-header">
-        <span className="page-eyebrow">PORTFOLIO &amp; ARCHITECTURES</span>
         <h1 className="page-title">Projects</h1>
         <p className="page-subtitle">
           Open-source distributed systems, applied AI models, and production engineering tools built with a focus on determinism, concurrency, and scale.
         </p>
-        <div className="page-header-meta">
-          <span className="page-meta-badge">{projectsList.length} Engineering Builds</span>
-          <span className="page-meta-dot">&bull;</span>
-          <span>Open Source Systems</span>
-          <span className="page-meta-dot">&bull;</span>
-          <span>Applied AI &amp; Cloud Infrastructure</span>
-        </div>
       </header>
 
       {/* Segmented Category Filter Pill Bar */}

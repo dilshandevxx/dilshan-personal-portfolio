@@ -70,38 +70,45 @@ export function AmbientPlayer({ variant = "floating" }: AmbientPlayerProps) {
   return (
     <div
       ref={containerRef}
-      className={`chill-player-root dropdown ${
-        variant === "header"
-          ? "variant-header"
-          : variant === "icon"
-          ? "variant-icon"
-          : "variant-floating"
-      }`}
+      className="dropdown tooltip-container chill-player-root"
     >
-      {/* 1. Single Beautiful Compact Icon Button */}
-      <div className="tooltip-container">
-        <button
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          className={`chill-icon-trigger ${isPlaying ? "is-playing" : ""} ${isOpen ? "active" : ""}`}
-          aria-label="Lo-Fi Ambient Music Player"
-          title={
-            isPlaying
-              ? `Playing: ${currentTrack.name} (${currentTrack.mood}) — Click for controls`
-              : "Lo-Fi Music Player — Click to listen"
-          }
-        >
-          <span className={`chill-icon-vinyl ${isPlaying ? "spinning" : ""}`}>
-            <Disc3 size={17} />
-          </span>
-          {isPlaying && <span className="chill-icon-dot" />}
-        </button>
-        {!isOpen && (
-          <div className="tooltip">
-            {isPlaying ? `Playing: ${currentTrack.name}` : "Lo-Fi Radio"}
-          </div>
-        )}
-      </div>
+      {/* 1. Single Clean Beautiful Icon Button */}
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className={`navbar-button ${isOpen ? "active" : ""} ${isPlaying ? "is-playing" : ""}`}
+        aria-label="Lo-Fi Ambient Music Player"
+      >
+        <span style={{ position: "relative", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
+          <Headphones
+            size={18}
+            strokeWidth={1.8}
+            style={{
+              color: isPlaying ? "var(--color-primary)" : "currentColor",
+              transition: "color 0.2s ease, transform 0.2s ease",
+            }}
+          />
+          {isPlaying && (
+            <span
+              style={{
+                position: "absolute",
+                top: -2,
+                right: -3,
+                width: 6,
+                height: 6,
+                borderRadius: "50%",
+                backgroundColor: "#22c55e",
+                boxShadow: "0 0 6px #22c55e",
+              }}
+            />
+          )}
+        </span>
+      </button>
+      {!isOpen && (
+        <div className="tooltip">
+          {isPlaying ? `Playing: ${currentTrack.name}` : "Music"}
+        </div>
+      )}
 
       {/* 2. Deluxe Popover Player Deck */}
       {isOpen && (

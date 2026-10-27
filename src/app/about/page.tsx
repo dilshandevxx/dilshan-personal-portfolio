@@ -36,23 +36,11 @@ function SectionHeading({ id, children }: { id: string; children: React.ReactNod
 export default function AboutPage() {
   return (
     <div className="about-content-narrow">
-      {/* Clean Page Header with Beautiful Editorial Pacing */}
       <header className="page-header">
-        <span className="page-eyebrow">BIOGRAPHY &amp; PROFILE</span>
         <h1 className="page-title">About Me</h1>
         <p className="page-subtitle">
           Software engineer and open-source builder specializing in distributed systems, applied AI architectures, high-concurrency backends, and resilient infrastructure.
         </p>
-        <div className="page-header-meta">
-          <div className="status-indicator-inline">
-            <span className="status-pulse-dot" />
-            <span>Available for Roles &amp; Engineering Consulting</span>
-          </div>
-          <span className="page-meta-dot">&bull;</span>
-          <span>Open-Source Creator</span>
-          <span className="page-meta-dot">&bull;</span>
-          <span>Full-Stack &amp; DevOps</span>
-        </div>
       </header>
 
       {/* Main Content Stream */}

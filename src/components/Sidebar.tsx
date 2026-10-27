@@ -110,6 +110,7 @@ export function Sidebar() {
             </Link>
 
             <div className="sidebar-header-controls">
+              <AmbientPlayer />
               <ColorPicker />
               <ThemeToggle />
             </div>
