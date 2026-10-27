@@ -3,7 +3,6 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import { Sidebar } from "./Sidebar";
-import { TopBar } from "./TopBar";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -18,7 +17,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="app-shell">
         <Sidebar />
         <main className="app-main">
-          <TopBar />
           {children}
         </main>
       </div>

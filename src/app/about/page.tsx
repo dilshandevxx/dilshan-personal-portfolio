@@ -3,6 +3,7 @@ import Link from "next/link";
 import { siteConfig } from "@/data/siteConfig";
 import { timelineEras } from "@/data/timeline";
 import { TechMatrix } from "@/components/TechMatrix";
+import { AmbientPlayer } from "@/components/AmbientPlayer";
 
 export const metadata = {
   title: `About — ${siteConfig.siteName}`,
@@ -37,7 +38,12 @@ export default function AboutPage() {
   return (
     <div className="about-content-narrow">
       <header className="page-header">
-        <h1 className="page-title">About Me</h1>
+        <div className="page-header-top">
+          <h1 className="page-title">About Me</h1>
+          <div className="page-header-actions">
+            <AmbientPlayer />
+          </div>
+        </div>
         <p className="page-subtitle">
           Software engineer and open-source builder specializing in distributed systems, applied AI architectures, high-concurrency backends, and resilient infrastructure.
         </p>

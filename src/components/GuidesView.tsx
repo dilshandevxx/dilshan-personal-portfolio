@@ -32,6 +32,7 @@ import {
   Rss,
 } from "lucide-react";
 import { GithubIcon, XIcon } from "./SocialIcons";
+import { AmbientPlayer } from "./AmbientPlayer";
 
 function getGuideIcon(iconName: string) {
   switch (iconName) {
@@ -88,7 +89,12 @@ export function GuidesView() {
   return (
     <div className="guides-page-container">
       <header className="page-header">
-        <h1 className="page-title">Shelves</h1>
+        <div className="page-header-top">
+          <h1 className="page-title">Shelves</h1>
+          <div className="page-header-actions">
+            <AmbientPlayer />
+          </div>
+        </div>
         <p className="page-subtitle">
           A living digital library of architectural blueprints, engineering playbooks,
           distributed systems roadmaps, and software craft notes.

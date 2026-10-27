@@ -6,6 +6,7 @@ import { projectsList } from "@/data/projects";
 import { ProjectCard } from "@/components/ProjectCard";
 import { siteConfig } from "@/data/siteConfig";
 import { GithubIcon, XIcon } from "@/components/SocialIcons";
+import { AmbientPlayer } from "@/components/AmbientPlayer";
 import {
   Code2,
   Mail,
@@ -29,7 +30,12 @@ export default function ProjectsPage() {
   return (
     <div className="projects-container">
       <header className="page-header">
-        <h1 className="page-title">Projects</h1>
+        <div className="page-header-top">
+          <h1 className="page-title">Projects</h1>
+          <div className="page-header-actions">
+            <AmbientPlayer />
+          </div>
+        </div>
         <p className="page-subtitle">
           Open-source distributed systems, applied AI models, and production engineering tools built with a focus on determinism, concurrency, and scale.
         </p>

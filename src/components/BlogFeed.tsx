@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { postsData, PostItem } from "@/data/notes";
 import { Search, X as ClearIcon, SearchX, Clock } from "lucide-react";
+import { AmbientPlayer } from "./AmbientPlayer";
 
 interface CategoryFilter {
   id: string;
@@ -83,7 +84,12 @@ function BlogFeedInner() {
   return (
     <div className="page-content-narrow">
       <header className="page-header">
-        <h1 className="page-title">Blog</h1>
+        <div className="page-header-top">
+          <h1 className="page-title">Blog</h1>
+          <div className="page-header-actions">
+            <AmbientPlayer />
+          </div>
+        </div>
         <p className="page-subtitle">
           Guides, tutorials, and technical deep dives on distributed systems, applied deep learning, Kubernetes, and full-stack craft.
         </p>
