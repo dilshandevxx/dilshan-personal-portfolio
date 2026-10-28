@@ -109,6 +109,15 @@ export function AmbientPlayer({ variant = "floating" }: AmbientPlayerProps) {
         </div>
       )}
 
+      {/* Ambient Backdrop Overlay for Visual Focus & Quick Dismiss */}
+      {isOpen && (
+        <div
+          className="chill-deck-backdrop"
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Clean, Compact, Beautiful Lo-Fi Popover Player Card */}
       {isOpen && (
         <div className="chill-deck-popover" role="dialog" aria-label="Lo-Fi Music Player">
