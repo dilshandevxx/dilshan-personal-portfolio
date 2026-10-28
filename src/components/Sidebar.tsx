@@ -9,12 +9,10 @@ import { ThemeToggle } from "./ThemeToggle";
 import { AmbientPlayer } from "./AmbientPlayer";
 import { GithubIcon, BlueskyIcon } from "./SocialIcons";
 import {
-  BlogNavIcon,
-  ShelvesNavIcon,
-  ProjectsNavIcon,
-  AboutNavIcon,
-} from "./ColorfulNavIcons";
-import {
+  FileText,
+  Bookmark,
+  Code2,
+  User,
   Mail,
   Rss,
   Menu,
@@ -28,7 +26,7 @@ export function Sidebar() {
   const navLinks = [
     {
       label: "Blog",
-      icon: BlogNavIcon,
+      icon: FileText,
       path: "/blog",
       isActive:
         pathname === "/blog" ||
@@ -37,20 +35,20 @@ export function Sidebar() {
     },
     {
       label: "Shelves",
-      icon: ShelvesNavIcon,
+      icon: Bookmark,
       path: "/shelves",
       isActive:
         pathname.startsWith("/shelves") || pathname.startsWith("/guides"),
     },
     {
       label: "Projects",
-      icon: ProjectsNavIcon,
+      icon: Code2,
       path: "/projects",
       isActive: pathname.startsWith("/projects"),
     },
     {
       label: "About me",
-      icon: AboutNavIcon,
+      icon: User,
       path: "/about",
       isActive: pathname.startsWith("/about"),
     },
@@ -65,7 +63,6 @@ export function Sidebar() {
             src="/nav-floppy.png"
             className="navbar-logo"
             alt="dilshan.dev"
-            title="💾"
             width={20}
             height={20}
           />
@@ -86,7 +83,7 @@ export function Sidebar() {
         </div>
       </header>
 
-      {/* Main Sticky Sidebar (Exact structure & behavior of taniarascia.com) */}
+      {/* Main Sticky Sidebar */}
       <aside className={`app-sidebar ${mobileOpen ? "open" : ""}`}>
         {/* Section 1: Title and Global Controls */}
         <section className="sidebar-section">
@@ -101,7 +98,6 @@ export function Sidebar() {
                   src="/nav-floppy.png"
                   className="navbar-logo"
                   alt="dilshan.dev"
-                  title="💾"
                   width={20}
                   height={20}
                 />
@@ -130,13 +126,12 @@ export function Sidebar() {
               </Link>
               , <span className="sidebar-bio-term">Software Engineer</span> and{" "}
               <span className="sidebar-bio-term">Open-Source Creator</span>. This is my{" "}
-              <span className="sidebar-bio-garden">Digital Garden</span>.{" "}
-              <span className="sidebar-bio-sprout" aria-hidden="true">🌱</span>
+              <span className="sidebar-bio-garden">Digital Garden</span>.
             </p>
           </div>
         </section>
 
-        {/* Section 3: Primary Navigation Links */}
+        {/* Section 3: Primary Navigation Links (Clean Framer Aesthetic) */}
         <section className="sidebar-section">
           <nav className="sidebar-nav-links">
             {navLinks.map((item) => {
@@ -146,12 +141,12 @@ export function Sidebar() {
                   key={item.path}
                   href={item.path}
                   onClick={() => setMobileOpen(false)}
-                  className={item.isActive ? "active" : ""}
+                  className={`sidebar-nav-item ${item.isActive ? "active" : ""}`}
                 >
                   <span className="sidebar-nav-icon-wrap" aria-hidden="true">
-                    <Icon size={22} />
+                    <Icon size={17} strokeWidth={1.75} />
                   </span>
-                  <span>{item.label}</span>
+                  <span className="sidebar-nav-label">{item.label}</span>
                 </Link>
               );
             })}
