@@ -75,7 +75,7 @@
   --navbar-height: 60px;
   --footer-height: 60px;
   --content-width: 760px;
-  --sidebar-width: 260px;
+  --sidebar-width: 270px;
   --post-sidebar-width: 260px;
   --layout-padding-vertical: 2rem;
   --layout-padding-horizontal: 2rem;
@@ -349,6 +349,7 @@ code, pre, kbd {
   min-width: var(--sidebar-width);
   width: var(--sidebar-width);
   box-sizing: border-box;
+  padding: 2.25rem 1.35rem 1.75rem;
 }
 
 @media screen and (min-width: 1020px) {
@@ -370,6 +371,7 @@ code, pre, kbd {
     z-index: 70;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.45);
     background-color: var(--color-background-sidebar);
+    padding: 1.75rem 1.35rem;
   }
 
   .mobile-backdrop {
@@ -383,21 +385,23 @@ code, pre, kbd {
 
 /* Sidebar Section Breakdown */
 .sidebar-section {
-  margin: 0 1rem 1.25rem;
-  padding-bottom: 1rem;
+  margin: 0 0 1.35rem 0;
+  padding-bottom: 1.35rem;
   border-bottom: 1px solid var(--color-border);
 }
 
 .sidebar-section:last-of-type {
   border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .sidebar-title-link {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 1rem;
-  gap: 0.75rem;
+  margin-top: 0;
+  gap: 0.5rem;
 }
 
 .sidebar-brand-link {
@@ -446,6 +450,24 @@ code, pre, kbd {
 .sidebar-header-controls {
   display: flex;
   align-items: center;
+  gap: 0.2rem;
+}
+
+.sidebar-header-controls button.navbar-button {
+  height: 32px;
+  width: 32px;
+  padding: 0;
+  border-radius: 7px;
+  color: var(--color-text-muted);
+}
+
+.sidebar-header-controls button.navbar-button:hover {
+  color: var(--color-text-emphasized);
+}
+
+.sidebar-header-controls .circle {
+  height: 14px;
+  width: 14px;
 }
 
 /* Authentic Button & Circle from Tania */
@@ -613,14 +635,14 @@ button.navbar-button:hover .circle {
 /* Sidebar Bio Content */
 .sidebar-content {
   position: relative;
-  padding: 0.15rem 0;
+  padding: 0;
 }
 
 .sidebar-content p {
   margin: 0;
   font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 0.88rem;
-  line-height: 1.62;
+  font-size: 0.865rem;
+  line-height: 1.68;
   letter-spacing: -0.012em;
   color: var(--color-text-muted);
 }
@@ -654,7 +676,7 @@ button.navbar-button:hover .circle {
 .sidebar-nav-links {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.35rem;
 }
 
 .sidebar-nav-links a,
@@ -663,25 +685,25 @@ button.navbar-button:hover .circle {
   display: flex;
   gap: 0.75rem;
   align-items: center;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 500;
   letter-spacing: -0.01em;
   border-radius: 8px;
-  padding: 0.5rem 0.75rem;
-  margin-left: -0.5rem;
-  margin-right: -0.5rem;
+  padding: 0.55rem 0.8rem;
+  margin: 0;
   text-decoration: none;
   background: transparent;
   border: 1px solid transparent;
   transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
 }
 
 .sidebar-nav-icon-wrap {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
   color: var(--color-text-muted);
   transition: color 0.15s ease, transform 0.15s ease;
@@ -692,7 +714,7 @@ button.navbar-button:hover .circle {
   text-decoration: none;
   color: var(--color-text-emphasized);
   background: var(--color-background-navbar-link-hover, rgba(255, 255, 255, 0.04));
-  border-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.04);
 }
 
 .sidebar-nav-links a:hover .sidebar-nav-icon-wrap,
@@ -706,7 +728,7 @@ button.navbar-button:hover .circle {
   background: var(--color-background-navbar-link-active, rgba(255, 255, 255, 0.08));
   color: var(--color-text-emphasized);
   border-color: var(--color-border);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 .sidebar-nav-links a.active .sidebar-nav-icon-wrap,
@@ -721,12 +743,16 @@ button.navbar-button:hover .circle {
 /* Sidebar Bottom (pinned to bottom) */
 .sidebar-bottom {
   margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding-top: 1.5rem;
 }
 
 .sidebar-bottom .sidebar-section {
   border-bottom: none;
   padding-bottom: 0;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0;
 }
 
 .sidebar-links {
@@ -734,13 +760,14 @@ button.navbar-button:hover .circle {
   flex-direction: row;
   align-items: center;
   gap: 0.35rem;
-  margin-left: -6px;
+  margin: 0;
 }
 
 .sidebar-links a {
   margin: 0;
-  padding: 6px;
-  border-radius: var(--border-radius);
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
   color: var(--color-text-muted);
   display: inline-flex;
   align-items: center;
@@ -758,14 +785,14 @@ button.navbar-button:hover .circle {
 .sidebar-sub-links {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin: 0 1rem 1.25rem;
-  font-size: 14px;
+  gap: 0.65rem;
+  margin: 0;
+  font-size: 0.815rem;
   color: var(--color-text-muted);
 }
 
 .sidebar-sub-links a {
-  font-size: 14px;
+  font-size: 0.815rem;
   color: var(--color-text-muted);
   text-decoration: none;
   transition: color var(--transition);
@@ -779,8 +806,9 @@ button.navbar-button:hover .circle {
 
 .sidebar-sub-links .divider {
   width: 1px;
-  height: 12px;
+  height: 10px;
   background: var(--color-border);
+  opacity: 0.6;
 }
 
 /* ==========================================================================

@@ -1,0 +1,433 @@
+/* ==========================================================================
+   ROBIN JAMES LIFESTYLE HERO SECTION (EDITORIAL MATTE DARK THEME)
+   Exact match to Robin James mobile & desktop editorial composition
+   ========================================================================== */
+
+.heroSection {
+  position: relative;
+  width: 100%;
+  background-color: var(--background, #0f1013);
+  color: var(--foreground, #f7f4ee);
+  padding: 0 var(--container-padding, clamp(1.5rem, 5vw, 4.5rem)) clamp(4.5rem, 8vw, 7rem);
+  box-sizing: border-box;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border, rgba(255, 255, 255, 0.08));
+}
+
+.container {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   TOP NAVIGATION BAR
+   -------------------------------------------------------------------------- */
+.topBar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  width: 100%;
+  gap: 1.5rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(1rem, 2vw, 1.5rem);
+  margin-bottom: clamp(1.5rem, 3.5vw, 3rem);
+}
+
+.topLeftArea {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.desktopPortfolioWrapper {
+  display: block;
+}
+
+.mobileBrandName {
+  display: none;
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: -0.015em;
+  transition: opacity 0.2s ease;
+}
+
+.mobileBrandName:hover {
+  opacity: 0.8;
+}
+
+.topCenterArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.topRightArea {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Desktop: Minimalist Luxury Editorial Portfolio Button */
+.portfolioBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  height: 48px;
+  padding: 0 1.45rem 0 1.25rem;
+  background-color: #f7f4ee; /* Warm bespoke ivory */
+  color: #111215;
+  font-family: 'Syne', var(--font-display, sans-serif);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 0px !important; /* Strict minimal square corners */
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* Status Craft Indicator (Champagne Gold square dot) */
+.btnStatusDot {
+  width: 6px;
+  height: 6px;
+  background-color: #d4a034; /* Rich champagne gold */
+  border-radius: 0px; /* Square minimal dot matching the geometry */
+  display: inline-block;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(212, 160, 52, 0.6);
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.btnText {
+  display: inline-block;
+  line-height: 1;
+  color: #111215;
+  transition: color 0.25s ease;
+}
+
+/* Crisp Square Arrow Badge */
+.arrowBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background-color: rgba(17, 18, 21, 0.08);
+  border: 1px solid rgba(17, 18, 21, 0.14);
+  border-radius: 0px; /* Square notch */
+  flex-shrink: 0;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btnArrow {
+  display: block;
+  stroke: #111215;
+  transition: transform 0.25s ease, stroke 0.25s ease;
+}
+
+/* Hover Interaction: Elevates to warm champagne gold highlight */
+.portfolioBtn:hover {
+  background-color: var(--accent, #e2c97c);
+  border-color: var(--accent, #e2c97c);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(226, 201, 124, 0.35);
+}
+
+.portfolioBtn:hover .arrowBadge {
+  background-color: #111215;
+  border-color: #111215;
+}
+
+.portfolioBtn:hover .btnArrow {
+  stroke: #ffffff;
+  transform: translate(1.5px, -1.5px);
+}
+
+.portfolioBtn:hover .btnStatusDot {
+  transform: scale(1.3);
+  background-color: #111215;
+  box-shadow: none;
+}
+
+/* Center Role Tag (e.g. Design Lead @Airbnb -> Software Engineer & Systems Architect) */
+.roleBadge {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.85rem, 1.05vw, 0.96rem);
+  font-weight: 600;
+  color: #e5e2da;
+  letter-spacing: -0.01em;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Clean 2-Line Minimal Hamburger Toggle (matches Robin James header "=") */
+.menuButton {
+  background: transparent;
+  border: none;
+  width: 32px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  cursor: pointer;
+  padding: 2px 0;
+  color: #ffffff;
+  position: relative;
+  z-index: 20;
+}
+
+.menuLine {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background-color: #ffffff;
+  border-radius: 1px;
+  transition: transform 0.25s ease, width 0.25s ease;
+}
+
+.menuButton:hover .menuLine:first-child {
+  width: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   BOLD EDITORIAL HEADLINE
+   -------------------------------------------------------------------------- */
+.titleWrapper {
+  width: 100%;
+  margin-bottom: clamp(2.5rem, 5vw, 4.25rem);
+}
+
+.headline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin: 0;
+}
+
+.headlineLine1,
+.headlineLine2,
+.headlineLine3 {
+  display: block;
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: clamp(2.4rem, 5.5vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: #f7f4ee;
+}
+
+/* --------------------------------------------------------------------------
+   ASYMMETRIC THREE-PHOTO COLLAGE
+   -------------------------------------------------------------------------- */
+.galleryContainer {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: clamp(2rem, 4vw, 4.5rem);
+  align-items: center;
+  width: 100%;
+}
+
+/* Left Photo: Tall Vertical Cyclist */
+.leftPhotoWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.55);
+  background-color: #1a1b20;
+}
+
+/* Right Photos Group: Kayak on Top-Left, Skater Staggered Bottom-Right */
+.rightPhotosWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+.middlePhotoWrapper {
+  position: relative;
+  width: 82%;
+  aspect-ratio: 4 / 3;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  align-self: flex-start;
+  z-index: 1;
+  background-color: #1a1b20;
+}
+
+.rightPhotoWrapper {
+  position: relative;
+  width: 82%;
+  aspect-ratio: 4 / 3;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+  align-self: flex-end;
+  margin-top: -14%; /* Asymmetric overlapping stagger */
+  z-index: 2;
+  background-color: #1a1b20;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.leftPhotoWrapper:hover .photo,
+.middlePhotoWrapper:hover .photo,
+.rightPhotoWrapper:hover .photo {
+  transform: scale(1.035);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE LAYOUT (MATCHING ROBIN JAMES SCREENSHOTS)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1080px) {
+  .topBar {
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+  }
+
+  .topCenterArea {
+    display: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .galleryContainer {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .middlePhotoWrapper,
+  .rightPhotoWrapper {
+    width: 95%;
+  }
+
+  .rightPhotoWrapper {
+    margin-top: -8%;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Sticky Frosted Header (Robin James mobile header) */
+  .topBar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: calc(100% + 2 * var(--container-padding, 1.5rem));
+    margin-left: calc(-1 * var(--container-padding, 1.5rem));
+    margin-right: calc(-1 * var(--container-padding, 1.5rem));
+    padding: 1.25rem var(--container-padding, 1.5rem);
+    margin-bottom: 2rem;
+    background: rgba(15, 16, 19, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .desktopPortfolioWrapper {
+    display: none; /* Hidden on mobile to match the Robin James screenshot */
+  }
+
+  .mobileBrandName {
+    display: inline-block; /* Shows "Dilshan Seneviratne" in top-left */
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  .topCenterArea {
+    display: none;
+  }
+
+  .titleWrapper {
+    margin-top: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  /* Exact 3-line mobile typography:
+     Hello,
+     I'm Dilshan Seneviratne,
+     an engineer by heart */
+  .headlineLine1,
+  .headlineLine2,
+  .headlineLine3 {
+    font-size: clamp(2.35rem, 9.4vw, 3.25rem);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+  }
+
+  /* Asymmetric mobile collage (Images 1, 2, 3) */
+  .galleryContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+  }
+
+  /* Photo 1: Large centered vertical cyclist */
+  .leftPhotoWrapper {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 6px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Photos 2 & 3: Staggered overlap below cyclist */
+  .rightPhotosWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+    width: 100%;
+    margin-top: -14%; /* Asymmetrical overlap on the cyclist road/bottom */
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Photo 2 (Kayak, Left) */
+  .middlePhotoWrapper {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 6px;
+    position: relative;
+    align-self: flex-start;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+  }
+
+  /* Photo 3 (Skater, Right) shifted downward */
+  .rightPhotoWrapper {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 6px;
+    position: relative;
+    align-self: flex-start;
+    margin-top: 32%; /* Staggered shift downward matching Image 3 */
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.65);
+  }
+}
