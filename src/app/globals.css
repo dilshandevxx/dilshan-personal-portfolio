@@ -566,6 +566,8 @@ button.navbar-button:hover .circle {
   opacity: 0;
   transition: opacity var(--transition);
   pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
   display: block;
   position: absolute;
   bottom: -40px;
@@ -787,14 +789,14 @@ button.navbar-button:hover .circle {
 .app-main {
   flex-grow: 1;
   min-width: 0;
-  padding: 0.85rem 2rem 4rem;
+  padding: 1.75rem 2rem 4.5rem;
   width: 100%;
   box-sizing: border-box;
 }
 
 @media screen and (min-width: 1020px) {
   .app-main {
-    padding: 0.85rem 3.5rem 4rem;
+    padding: 2.25rem 3.5rem 5rem;
   }
 }
 
@@ -834,8 +836,8 @@ button.navbar-button:hover .circle {
 .page-header {
   width: 100%;
   margin-top: 0;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.15rem;
+  margin-bottom: 2.25rem;
+  padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -843,18 +845,18 @@ button.navbar-button:hover .circle {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.5rem;
   width: 100%;
 }
 
 .page-title-editorial,
 .page-title {
   font-family: var(--font-heading), var(--font-display), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: clamp(1.85rem, 2.8vw, 2.25rem);
+  font-size: clamp(2rem, 3.2vw, 2.45rem);
   font-weight: 700;
   font-style: normal;
   text-transform: none;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   color: var(--color-text-emphasized);
   line-height: 1.15;
   margin: 0;
@@ -872,9 +874,9 @@ button.navbar-button:hover .circle {
   font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 0.98rem;
   color: var(--color-text-muted);
-  line-height: 1.55;
-  max-width: 68ch;
-  margin-top: 0.5rem;
+  line-height: 1.62;
+  max-width: 65ch;
+  margin-top: 0.85rem;
   margin-bottom: 0;
 }
 
@@ -3264,6 +3266,24 @@ a.text-link:hover {
   position: relative;
   display: inline-flex;
   align-items: center;
+}
+
+.chill-player-root .tooltip {
+  top: calc(100% + 8px);
+  bottom: auto;
+  left: auto;
+  right: 0;
+  transform: none;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.chill-player-root .tooltip::after {
+  left: auto;
+  right: 12px;
+  top: -4.5px;
+  margin-left: 0;
 }
 
 /* 1. Sleek Compact Trigger Capsule */

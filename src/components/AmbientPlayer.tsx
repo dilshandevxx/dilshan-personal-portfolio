@@ -104,7 +104,11 @@ export function AmbientPlayer({ variant = "floating" }: AmbientPlayerProps) {
         </span>
       </button>
       {!isOpen && (
-        <div className="tooltip">
+        <div
+          className="tooltip"
+          aria-hidden="true"
+          style={{ userSelect: "none", WebkitUserSelect: "none", pointerEvents: "none" }}
+        >
           {isPlaying ? `Playing: ${currentTrack.name}` : "Lo-Fi Player"}
         </div>
       )}
