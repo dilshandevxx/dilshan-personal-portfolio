@@ -1,7 +1,7 @@
-/* Clean Minimal Technical Disciplines Section */
+/* Accordion Skills Section (Matching Reference Design) */
 .skillsSection {
   background-color: #090a0c;
-  padding: 6.5rem var(--container-padding, 2rem);
+  padding: 6.5rem 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
 }
@@ -19,122 +19,155 @@
 
 /* Header */
 .header {
-  margin-bottom: 4rem;
+  margin-bottom: 3.5rem;
 }
 
 .headline {
   color: #ffffff;
   font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
-  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-size: clamp(2.2rem, 5vw, 3.75rem);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.025em;
   margin: 0;
 }
 
-/* Rows Container */
-.rowsContainer {
+/* Accordion List */
+.accordionList {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Individual Row */
-.skillRow {
-  display: grid;
-  grid-template-columns: 320px 240px 1fr;
+.accordionItem {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Row Trigger Button */
+.rowTrigger {
+  width: 100%;
+  display: flex;
   align-items: center;
-  gap: 3rem;
-  padding: 2.5rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  transition: background-color 0.3s ease;
+  justify-content: space-between;
+  padding: 2.25rem 0.5rem;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s ease;
 }
 
-@media (max-width: 990px) {
-  .skillRow {
+.rowTrigger:hover .itemTitle {
+  color: #d8dfa6;
+}
+
+.itemTitle {
+  font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
+  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #ffffff;
+  transition: color 0.25s ease;
+}
+
+.plusIcon {
+  font-family: var(--font-mono, monospace);
+  font-size: 1.75rem;
+  line-height: 1;
+  color: #cbd5e1;
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease;
+  user-select: none;
+}
+
+.plusIconOpen {
+  transform: rotate(45deg);
+  color: #ffffff;
+}
+
+/* Expanded Content Wrapper */
+.expandedContentWrapper {
+  overflow: hidden;
+}
+
+.expandedContent {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 3.5rem;
+  padding: 0.5rem 0.5rem 3rem;
+  align-items: center;
+}
+
+@media (max-width: 860px) {
+  .expandedContent {
     grid-template-columns: 1fr;
-    gap: 1.75rem;
-    padding: 2.25rem 0;
+    gap: 2rem;
+    padding-bottom: 2.5rem;
   }
 }
 
-/* Col 1: Title */
-.titleCol {
-  display: flex;
-  flex-direction: column;
-}
-
-.skillTitle {
-  color: #ffffff;
-  font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
-  font-size: 1.15rem;
-  font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: 0.02em;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.titleLine {
-  display: block;
-}
-
-/* Col 2: Image */
+/* Image Column with STRICT SQUARE CORNERS */
 .imageCol {
-  display: flex;
-  align-items: center;
+  width: 100%;
 }
 
-.imageWrapper {
+.imageFrame {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
   border-radius: 0; /* STRICTLY SQUARE */
   overflow: hidden;
-  background-color: #16181d;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background-color: #14171c;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.rowImage {
+.detailImage {
   object-fit: cover;
-  transition: transform 0.5s ease;
+  border-radius: 0; /* SQUARE */
 }
 
-.skillRow:hover .rowImage {
-  transform: scale(1.04);
-}
-
-/* Col 3: Narrative & Tags */
-.descCol {
+/* Text Column */
+.textCol {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
-.description {
+.detailSubtitle {
+  color: #ffffff;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.detailDescription {
   color: #9da4ae;
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   line-height: 1.65;
   margin: 0;
-  max-width: 560px;
+  max-width: 640px;
 }
 
+/* Tag List with STRICT SQUARE CORNERS */
 .tagList {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
+  margin-top: 0.5rem;
 }
 
 .tagItem {
-  color: #7b828d;
+  color: #8b929d;
   font-family: var(--font-mono, monospace);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.06em;
-  padding: 0.25rem 0.6rem;
+  padding: 0.3rem 0.65rem;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 4px;
+  border-radius: 0; /* STRICTLY SQUARE */
 }

@@ -1,118 +1,140 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import styles from "./SkillsGrid.module.css";
 
 interface SkillItem {
   id: string;
-  title: string;
+  name: string;
   image: string;
+  subtitle: string;
   description: string;
   tags: string[];
 }
 
 const SKILL_ITEMS: SkillItem[] = [
   {
-    id: "ai-strategy",
-    title: "AI ARCHITECTURE &\nDISTRIBUTED SYSTEMS",
-    image: "/images/skill_ai_strategy.jpg",
-    description:
-      "Design and deploy production-grade neural inference pipelines, quantized model serving, and enterprise RAG retrieval architectures with deterministic latency.",
-    tags: ["PYTORCH", "CUDA", "RAG PIPELINES", "VLLM", "RAY"],
-  },
-  {
-    id: "cloud-devops",
-    title: "CLOUD INFRASTRUCTURE &\nKUBERNETES",
-    image: "/images/skill_workflow_automation.jpg",
-    description:
-      "Automated GitOps deployments, progressive canary rollouts, multi-region container orchestration, and high-volume Kafka streaming pipelines.",
-    tags: ["KUBERNETES", "GITOPS", "DOCKER", "TERRAFORM", "KAFKA"],
-  },
-  {
-    id: "web-systems",
-    title: "HIGH-PERFORMANCE\nWEB APPLICATIONS",
+    id: "web-dev",
+    name: "Web Development",
+    subtitle: "High-Performance Modern Web Applications",
     image: "/images/skill_custom_tools.jpg",
     description:
-      "Crafting ultra-responsive React 19 and Next.js applications, hardware-accelerated WebGL telemetry dashboards, and clean editorial interfaces.",
-    tags: ["NEXT.JS", "TYPESCRIPT", "REACT 19", "WEBGL", "NODE.JS"],
+      "Crafting ultra-responsive React 19 and Next.js applications, hardware-accelerated WebGL telemetry dashboards, and clean editorial interfaces built for high throughput and zero layout thrashing.",
+    tags: ["NEXT.JS", "TYPESCRIPT", "REACT 19", "WEBGL", "TAILWIND CSS", "NODE.JS"],
   },
   {
-    id: "engineering-rigor",
-    title: "SYSTEM RELIABILITY &\nOBSERVABILITY",
-    image: "/images/skill_team_training.jpg",
+    id: "mobile-dev",
+    name: "Mobile App Development",
+    subtitle: "Cross-Platform & Native Mobile Engineering",
+    image: "/images/hero_phone_flare.jpg",
     description:
-      "End-to-end telemetry instrumentation with Prometheus and Grafana, automated fault injection, zero-downtime database migrations, and CI/CD automation.",
-    tags: ["PROMETHEUS", "GRAFANA", "DISTRIBUTED TRACING", "CI/CD"],
+      "Developing fluid, tactile iOS and Android mobile experiences using Flutter and React Native with native bridge performance, offline-first SQLite sync, and smooth 60fps animations.",
+    tags: ["FLUTTER", "DART", "REACT NATIVE", "OFFLINE SYNC", "IOS & ANDROID"],
+  },
+  {
+    id: "ai-ml",
+    name: "AI & Machine Learning",
+    subtitle: "Neural Inference & Distributed AI Architecture",
+    image: "/images/skill_ai_strategy.jpg",
+    description:
+      "Designing and deploying production-grade neural inference pipelines, quantized model serving with vLLM, and enterprise RAG retrieval architectures with deterministic sub-50ms latency.",
+    tags: ["PYTORCH", "CUDA", "vLLM", "RAG RETRIEVAL", "ONNX", "LANGCHAIN"],
+  },
+  {
+    id: "custom-software",
+    name: "Custom Software Development",
+    subtitle: "Distributed Systems & Cloud Orchestration",
+    image: "/images/skill_workflow_automation.jpg",
+    description:
+      "Building resilient distributed backends, microservice meshes, event-driven streaming pipelines with Apache Kafka, and automated GitOps Kubernetes infrastructure.",
+    tags: ["GOLANG", "RUST", "KUBERNETES", "KAFKA", "GITOPS", "POSTGRESQL"],
   },
 ];
 
 export default function SkillsGrid() {
+  // First item open by default for immediate visual interest
+  const [openId, setOpenId] = useState<string | null>("web-dev");
+
+  const toggleItem = (id: string) => {
+    setOpenId((prev) => (prev === id ? null : id));
+  };
+
   return (
     <section className={styles.skillsSection} id="skills">
       <div className={styles.container}>
-        {/* Section Header: Clean title without clutter */}
+        {/* Clean Header */}
         <div className={styles.header}>
-          <motion.h2
-            className={styles.headline}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6 }}
-          >
-            Technical Disciplines &amp; Core Competencies
-          </motion.h2>
+          <h2 className={styles.headline}>Skills &amp; Capabilities</h2>
         </div>
 
-        {/* Clean Editorial Rows */}
-        <div className={styles.rowsContainer}>
-          {SKILL_ITEMS.map((item, idx) => (
-            <motion.div
-              key={item.id}
-              className={styles.skillRow}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: idx * 0.08 }}
-            >
-              {/* Col 1: Title */}
-              <div className={styles.titleCol}>
-                <h3 className={styles.skillTitle}>
-                  {item.title.split("\n").map((line, i) => (
-                    <span key={i} className={styles.titleLine}>
-                      {line}
-                    </span>
-                  ))}
-                </h3>
-              </div>
+        {/* Accordion List matching the user reference */}
+        <div className={styles.accordionList}>
+          {SKILL_ITEMS.map((item) => {
+            const isOpen = openId === item.id;
+            return (
+              <div key={item.id} className={styles.accordionItem}>
+                {/* Accordion Row Trigger */}
+                <button
+                  type="button"
+                  onClick={() => toggleItem(item.id)}
+                  className={styles.rowTrigger}
+                  aria-expanded={isOpen}
+                >
+                  <span className={styles.itemTitle}>{item.name}</span>
+                  <span
+                    className={`${styles.plusIcon} ${isOpen ? styles.plusIconOpen : ""}`}
+                    aria-hidden="true"
+                  >
+                    +
+                  </span>
+                </button>
 
-              {/* Col 2: Image Thumbnail */}
-              <div className={styles.imageCol}>
-                <div className={styles.imageWrapper}>
-                  <Image
-                    src={item.image}
-                    alt={item.title.replace("\n", " ")}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 320px"
-                    className={styles.rowImage}
-                  />
-                </div>
-              </div>
+                {/* Expanded Details matching current design with SQUARE corners */}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="content"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      className={styles.expandedContentWrapper}
+                    >
+                      <div className={styles.expandedContent}>
+                        {/* Square Image Thumbnail */}
+                        <div className={styles.imageCol}>
+                          <div className={styles.imageFrame}>
+                            <Image
+                              src={item.image}
+                              alt={item.name}
+                              fill
+                              sizes="(max-width: 768px) 100vw, 360px"
+                              className={styles.detailImage}
+                            />
+                          </div>
+                        </div>
 
-              {/* Col 3: Narrative & Tags */}
-              <div className={styles.descCol}>
-                <p className={styles.description}>{item.description}</p>
-                <div className={styles.tagList}>
-                  {item.tags.map((tag) => (
-                    <span key={tag} className={styles.tagItem}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                        {/* Narrative & Tags */}
+                        <div className={styles.textCol}>
+                          <h3 className={styles.detailSubtitle}>{item.subtitle}</h3>
+                          <p className={styles.detailDescription}>{item.description}</p>
+                          <div className={styles.tagList}>
+                            {item.tags.map((tag) => (
+                              <span key={tag} className={styles.tagItem}>
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-            </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
