@@ -1,4 +1,4 @@
-/* Projects Section (2-Column Editorial Grid matching Reference) */
+/* Projects Section (2-Column Grid with SQUARE Corners) */
 .projectsSection {
   background-color: #090a0c;
   padding: 7rem 2rem 8rem;
@@ -17,12 +17,12 @@
   margin: 0 auto;
 }
 
-/* Editorial Header */
+/* Header */
 .header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 4.5rem;
+  margin-bottom: 4rem;
   gap: 3rem;
 }
 
@@ -30,8 +30,8 @@
   .header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
+    gap: 1.25rem;
+    margin-bottom: 2.75rem;
   }
 }
 
@@ -40,34 +40,18 @@
   flex-direction: column;
 }
 
-.counterTag {
-  color: #7b828d;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-}
-
 .title {
   color: #ffffff;
   font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
-  font-size: clamp(3.2rem, 7vw, 5.5rem);
+  font-size: clamp(3rem, 6.5vw, 5rem);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.03em;
-  margin: 0 0 0.5rem 0;
-}
-
-.yearTag {
-  color: #7b828d;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  margin: 0;
 }
 
 .headerRight {
-  max-width: 360px;
+  max-width: 380px;
 }
 
 .headerDescription {
@@ -97,6 +81,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
+  border-radius: 0; /* Strictly SQUARE corners */
 }
 
 /* Card Top Metadata Bar */
@@ -104,28 +89,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 0.25rem;
-}
-
-.metaLeft {
-  display: flex;
-  align-items: baseline;
-  gap: 0.6rem;
+  padding: 0 0.15rem;
 }
 
 .projectName {
   color: #ffffff;
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 700;
   letter-spacing: -0.01em;
-}
-
-.projectYear {
-  color: #6a717c;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.75rem;
-  font-weight: 500;
 }
 
 .dotsIcon {
@@ -136,27 +108,28 @@
   user-select: none;
 }
 
-/* Rounded Image Canvas */
+/* Square Image Canvas (border-radius: 0) */
 .imageCanvas {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 3;
-  border-radius: 16px;
+  border-radius: 0; /* STRICTLY SQUARE CORNERS */
   overflow: hidden;
   background-color: #121418;
   display: block;
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
 }
 
 .imageCanvas:hover {
   transform: scale(0.99);
-  border-color: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
 .image {
   object-fit: cover;
+  border-radius: 0; /* SQUARE */
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

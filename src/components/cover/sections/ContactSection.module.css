@@ -1,4 +1,4 @@
-/* Contact Section (FEEL FREE TO CONTACT ME - matching reference) */
+/* Contact Section (FEEL FREE TO CONTACT ME - strictly square corners) */
 .contactSection {
   background-color: #090a0c;
   padding: 8rem 2rem 9rem;
@@ -94,8 +94,8 @@
   width: 100%;
   box-sizing: border-box;
   background-color: #1a1d22;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0; /* STRICTLY SQUARE */
   padding: 1.1rem 1.25rem;
   color: #ffffff;
   font-family: var(--font-body, -apple-system, sans-serif);
@@ -109,7 +109,7 @@
 }
 
 .input:focus {
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.35);
   background-color: #1e2228;
 }
 
@@ -122,8 +122,8 @@
   width: 100%;
   box-sizing: border-box;
   background-color: #1a1d22;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0; /* STRICTLY SQUARE */
   padding: 1.1rem 1.25rem;
   color: #ffffff;
   font-family: var(--font-body, -apple-system, sans-serif);
@@ -139,28 +139,30 @@
 }
 
 .textarea:focus {
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.35);
   background-color: #1e2228;
 }
 
-/* Solid White Send Button */
+/* Solid White Send Button with SQUARE corners */
 .sendButton {
   width: 100%;
   background-color: #ffffff;
   color: #000000;
-  border: none;
-  border-radius: 8px;
-  padding: 1.1rem;
+  border: 1px solid #ffffff;
+  border-radius: 0; /* STRICTLY SQUARE */
+  padding: 1.15rem;
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: background-color 0.25s ease, transform 0.2s ease, opacity 0.25s ease;
+  transition: all 0.25s ease;
 }
 
 .sendButton:hover:not(:disabled) {
-  background-color: #e5e5e5;
-  transform: translateY(-1px);
+  background-color: transparent;
+  color: #ffffff;
 }
 
 .sendButton:disabled {
@@ -172,7 +174,7 @@
 .successMessage {
   background-color: #1a1d22;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
+  border-radius: 0; /* STRICTLY SQUARE */
   padding: 3rem 2rem;
   text-align: center;
   display: flex;
@@ -200,7 +202,7 @@
   background: transparent;
   color: #e2d5b5;
   border: 1px solid #e2d5b5;
-  border-radius: 6px;
+  border-radius: 0; /* STRICTLY SQUARE */
   padding: 0.6rem 1.4rem;
   font-family: var(--font-body, -apple-system, sans-serif);
   font-size: 0.8125rem;

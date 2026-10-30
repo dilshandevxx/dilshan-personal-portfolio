@@ -1,4 +1,4 @@
-/* Modern Projects Page Styles (Matching Reference) */
+/* Modern Projects Page Styles (Square Corners & Clean Header) */
 .pageSection {
   width: 100%;
   min-height: 80vh;
@@ -22,30 +22,9 @@
   gap: 0.75rem;
 }
 
-.metaRow {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  margin-bottom: 0.5rem;
-}
-
-.indexTag {
-  color: #7b828d;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.8125rem;
-  font-weight: 500;
-}
-
-.yearTag {
-  color: #7b828d;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.8125rem;
-  font-weight: 600;
-}
-
 .headline {
   font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
-  font-size: clamp(3rem, 6.5vw, 5.5rem);
+  font-size: clamp(3rem, 6.5vw, 5rem);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.03em;
@@ -78,7 +57,7 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: #9da4ae;
   padding: 0.6rem 1.25rem;
-  border-radius: 0;
+  border-radius: 0; /* SQUARE */
   font-family: var(--font-body, -apple-system, sans-serif);
   font-size: 0.75rem;
   font-weight: 700;
@@ -126,20 +105,15 @@
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
+  border-radius: 0; /* STRICTLY SQUARE */
 }
 
-/* Card Top Bar matching reference */
+/* Card Top Bar */
 .cardTopBar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 0.25rem;
-}
-
-.cardTopLeft {
-  display: flex;
-  align-items: baseline;
-  gap: 0.6rem;
+  padding: 0 0.15rem;
 }
 
 .cardTitle {
@@ -148,13 +122,6 @@
   font-size: 0.9375rem;
   font-weight: 700;
   letter-spacing: -0.01em;
-}
-
-.cardYear {
-  color: #6a717c;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.75rem;
-  font-weight: 500;
 }
 
 .dotsIcon {
@@ -169,7 +136,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 3;
-  border-radius: 16px;
+  border-radius: 0; /* STRICTLY SQUARE CORNERS */
   overflow: hidden;
   background-color: #121418;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -177,6 +144,7 @@
 
 .projectImage {
   object-fit: cover;
+  border-radius: 0; /* SQUARE */
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -225,7 +193,7 @@
   font-size: 0.72rem;
   font-family: var(--font-mono, monospace);
   padding: 0.25rem 0.55rem;
-  border-radius: 4px;
+  border-radius: 0; /* SQUARE */
   background: rgba(255, 255, 255, 0.04);
   color: #cbd5e1;
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -245,7 +213,7 @@
   background-color: transparent;
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0;
+  border-radius: 0; /* SQUARE */
   padding: 0.75rem 1.75rem;
   font-family: var(--font-body, -apple-system, sans-serif);
   font-size: 0.75rem;

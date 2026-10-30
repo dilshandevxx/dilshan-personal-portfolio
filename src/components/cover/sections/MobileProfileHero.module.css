@@ -1,0 +1,412 @@
+/* Mobile Profile Hero Component (Matching Design Reference) */
+.mobileProfileRoot {
+  width: 100%;
+  background-color: #121316;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-bottom: 2.5rem;
+}
+
+/* 1. Blurred Banner Background */
+.bannerContainer {
+  position: relative;
+  width: 100%;
+  height: 130px;
+  overflow: hidden;
+}
+
+.bannerImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  filter: blur(20px);
+  transform: scale(1.15);
+  opacity: 0.65;
+}
+
+.bannerImage {
+  object-fit: cover;
+}
+
+.bannerOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(18, 19, 22, 0.2) 0%, rgba(18, 19, 22, 0.95) 100%);
+}
+
+/* 2. Overlapping Circular Avatar */
+.avatarWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: -46px;
+  z-index: 5;
+}
+
+.avatarInner {
+  position: relative;
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #121316;
+  background-color: #1a1d22;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.avatarImage {
+  object-fit: cover;
+}
+
+/* 3. Profile Header / Narrative */
+.profileHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0.85rem 1.5rem 1.25rem;
+}
+
+.nameRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.35rem;
+}
+
+.displayName {
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.verifiedBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+}
+
+.verifiedSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.metadataLine {
+  color: #8b929d;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  margin: 0 0 0.85rem 0;
+  letter-spacing: 0.01em;
+}
+
+.bioText {
+  color: #9da4ae;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  max-width: 380px;
+  margin: 0 0 0.85rem 0;
+}
+
+/* Contact / Info links */
+.infoRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.8125rem;
+  color: #8b929d;
+}
+
+.infoLink {
+  color: #cbd5e1;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: color 0.2s ease;
+}
+
+.infoLink:hover {
+  color: #ffffff;
+}
+
+.infoIcon {
+  color: #8b929d;
+}
+
+.infoDot {
+  color: #555b66;
+}
+
+/* 7. Action Row (Share | Email Pill | Bell) */
+.actionRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0 1.25rem 1.75rem;
+  max-width: 440px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.squareActionBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  background-color: #1e2126;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.squareActionBtn:hover {
+  background-color: #262a31;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.squareActionBtnActive {
+  background-color: #ffffff;
+  color: #121316;
+}
+
+.emailPillBtn {
+  flex: 1;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  background-color: #ffffff;
+  color: #121316;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 0 1.25rem;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.emailPillBtn:hover {
+  background-color: #f1f3f6;
+  transform: translateY(-1px);
+}
+
+.emailText {
+  letter-spacing: -0.01em;
+}
+
+.copyIconWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #555b66;
+}
+
+.checkIcon {
+  color: #10b981;
+}
+
+/* 8. Story Highlights (Instagram Story style) */
+.storiesContainer {
+  width: 100%;
+  padding-bottom: 1.5rem;
+}
+
+.storiesScroll {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  padding: 0 1.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  justify-content: center;
+}
+
+@media (max-width: 440px) {
+  .storiesScroll {
+    justify-content: flex-start;
+  }
+}
+
+.storiesScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.storyItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.storyCircle {
+  position: relative;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  background-color: #1a1d22;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.storyItem:hover .storyCircle {
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.storyImage {
+  object-fit: cover;
+}
+
+.storyTitle {
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.72rem;
+  color: #8b929d;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* 9. Social Pill Tags Row */
+.socialPillsContainer {
+  width: 100%;
+}
+
+.socialPillsScroll {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 1.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  justify-content: center;
+}
+
+@media (max-width: 440px) {
+  .socialPillsScroll {
+    justify-content: flex-start;
+  }
+}
+
+.socialPillsScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.socialPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background-color: #1c1f24;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 9999px;
+  padding: 0.45rem 0.85rem;
+  color: #e2e8f0;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.socialPill:hover {
+  background-color: #252930;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.socialPillIcon {
+  color: #ffffff;
+}
+
+.socialPillIconFigma {
+  color: #f24e1e;
+}
+
+.socialPillIconLinkedin {
+  color: #0a66c2;
+}
+
+/* Lightbox Modal for Story Preview */
+.storyModalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.storyModalContent {
+  background-color: #16181d;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 360px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modalTitle {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.modalCloseBtn {
+  background: transparent;
+  border: none;
+  color: #8b929d;
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modalImageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.modalImage {
+  object-fit: cover;
+}

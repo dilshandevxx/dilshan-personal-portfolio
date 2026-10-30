@@ -15,7 +15,6 @@ const ALL_PROJECTS = [
     category: "AI SYSTEMS",
     image: "/images/project_boltshift.jpg",
     client: "FinTech Scaleup",
-    year: "2025",
     role: "Lead Systems Architect",
     description: "High-throughput cloud inference engine and real-time payment gateway processing 10,000+ operations/sec with deterministic sub-50ms latency.",
     challenge: "Scaling transaction concurrency while enforcing strict cryptographic ledger auditing.",
@@ -31,7 +30,6 @@ const ALL_PROJECTS = [
     category: "AI SYSTEMS",
     image: "/images/project_euphoria.jpg",
     client: "HealthTech AI",
-    year: "2025",
     role: "Computer Vision Engineer",
     description: "Multimodal neural vision pipeline and real-time iris biometric analyzer performing sub-pixel landmark detection in real time.",
     challenge: "Running edge model inference on resource-constrained browser canvases.",
@@ -47,7 +45,6 @@ const ALL_PROJECTS = [
     category: "DEVOPS",
     image: "/images/project_cloudwatch.jpg",
     client: "Enterprise Cloud",
-    year: "2025",
     role: "SRE & Cloud Architect",
     description: "Distributed telemetry infrastructure and multi-region log monitoring engine collecting 50M+ events per day with live tracing.",
     challenge: "Preventing write amplification and storage bloat on multi-terabyte log indices.",
@@ -63,7 +60,6 @@ const ALL_PROJECTS = [
     category: "WEB DESIGN",
     image: "/images/project_mastermail.jpg",
     client: "Global Communications",
-    year: "2025",
     role: "Full-Stack Engineer",
     description: "High-deliverability transactional messaging operator for global scale with zero message drops and real-time bounce classification.",
     challenge: "Handling sudden recipient burst spikes without triggering ISP throttling.",
@@ -79,7 +75,6 @@ const ALL_PROJECTS = [
     category: "DEVOPS",
     image: "/images/project_warpspeed.jpg",
     client: "Ultra-Low Latency Lab",
-    year: "2025",
     role: "Systems Programmer",
     description: "Sub-millisecond low-latency packet streaming protocol in Rust and Go with zero-copy deserialization and custom flow control.",
     challenge: "Packet reordering under jittery WAN conditions without stalling receiver pipelines.",
@@ -95,7 +90,6 @@ const ALL_PROJECTS = [
     category: "WEB DESIGN",
     image: "/images/project_powersurge.jpg",
     client: "Clean Mobility Corp",
-    year: "2025",
     role: "Lead Frontend Engineer",
     description: "Telemetry compute cluster orchestrating dynamic power grids, battery health telemetry, and EV fleet logistics across 4 continents.",
     challenge: "Rendering 100k+ dynamic geo-spatial nodes simultaneously with 60 FPS fluidity.",
@@ -118,20 +112,15 @@ export default function ProjectsPage() {
 
   return (
     <div className={styles.pageSection}>
-      {/* 1. Header Section (Clean, matching reference) */}
+      {/* 1. Clean Header Section (No [27], No Projects., No ©2025) */}
       <div className={styles.headerContainer}>
-        <div className={styles.metaRow}>
-          <span className={styles.indexTag}>[27]</span>
-          <span className={styles.yearTag}>&copy;2025</span>
-        </div>
-
         <motion.h1
           className={styles.headline}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          Projects.
+          Projects
         </motion.h1>
 
         <motion.p
@@ -144,7 +133,7 @@ export default function ProjectsPage() {
         </motion.p>
       </div>
 
-      {/* 2. Category Filter Bar (Clean rectangular style) */}
+      {/* 2. Category Filter Bar (Clean square style) */}
       <div className={styles.filterBar}>
         {CATEGORIES.map((cat) => {
           const isActive = selectedCat === cat;
@@ -161,7 +150,7 @@ export default function ProjectsPage() {
         })}
       </div>
 
-      {/* 3. Projects Grid */}
+      {/* 3. Projects Grid with SQUARE Corners */}
       <div className={styles.projectsGrid}>
         {filteredProjects.map((project, idx) => (
           <motion.div
@@ -173,15 +162,13 @@ export default function ProjectsPage() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, delay: (idx % 2) * 0.15 }}
           >
-            {/* Top Bar matching reference */}
+            {/* Top Bar: Clean Title and Dots (NO //year) */}
             <div className={styles.cardTopBar}>
-              <div className={styles.cardTopLeft}>
-                <span className={styles.cardTitle}>{project.title}</span>
-                <span className={styles.cardYear}>//{project.year}</span>
-              </div>
+              <span className={styles.cardTitle}>{project.title}</span>
               <span className={styles.dotsIcon}>&bull;&bull;&bull;</span>
             </div>
 
+            {/* SQUARE Image Wrapper */}
             <div className={styles.imageWrapper}>
               <Image
                 src={project.image}
@@ -205,7 +192,7 @@ export default function ProjectsPage() {
               ))}
             </div>
 
-            {/* Clean rectangular action buttons, no arrows */}
+            {/* Clean rectangular action buttons */}
             <div className={styles.actionLinks}>
               {project.liveUrl && (
                 <a

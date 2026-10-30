@@ -9,7 +9,6 @@ import styles from "./SelectedWork.module.css";
 interface ProjectItem {
   id: string;
   name: string;
-  year: string;
   image: string;
   badgeIcon: string;
   badgeName: string;
@@ -21,7 +20,6 @@ const PROJECTS: ProjectItem[] = [
   {
     id: "boltshift",
     name: "Boltshift",
-    year: "//2025",
     image: "/images/project_boltshift.jpg",
     badgeIcon: "⚡",
     badgeName: "Boltshift",
@@ -31,7 +29,6 @@ const PROJECTS: ProjectItem[] = [
   {
     id: "euphoria",
     name: "Euphoria",
-    year: "//2025",
     image: "/images/project_euphoria.jpg",
     badgeIcon: "👁",
     badgeName: "Ephemeral",
@@ -41,7 +38,6 @@ const PROJECTS: ProjectItem[] = [
   {
     id: "cloudwatch",
     name: "CloudWatch",
-    year: "//2025",
     image: "/images/project_cloudwatch.jpg",
     badgeIcon: "☁",
     badgeName: "CloudWatch",
@@ -51,7 +47,6 @@ const PROJECTS: ProjectItem[] = [
   {
     id: "mastermail",
     name: "Mastermail",
-    year: "//2025",
     image: "/images/project_mastermail.jpg",
     badgeIcon: "❖",
     badgeName: "Mastermail",
@@ -61,7 +56,6 @@ const PROJECTS: ProjectItem[] = [
   {
     id: "warpspeed",
     name: "Warpspeed",
-    year: "//2025",
     image: "/images/project_warpspeed.jpg",
     badgeIcon: "🔗",
     badgeName: "Warpspeed",
@@ -71,7 +65,6 @@ const PROJECTS: ProjectItem[] = [
   {
     id: "powersurge",
     name: "Powersurge",
-    year: "//2025",
     image: "/images/project_powersurge.jpg",
     badgeIcon: "⬛",
     badgeName: "Powersurge",
@@ -84,12 +77,10 @@ export default function SelectedWork() {
   return (
     <section className={styles.projectsSection} id="projects">
       <div className={styles.container}>
-        {/* Editorial Header Section matching reference */}
+        {/* Clean Header: NO [27], NO period after Projects, NO ©2025 */}
         <div className={styles.header}>
           <div className={styles.headerLeft}>
-            <span className={styles.counterTag}>[27]</span>
-            <h2 className={styles.title}>Projects.</h2>
-            <span className={styles.yearTag}>&copy;2025</span>
+            <h2 className={styles.title}>Projects</h2>
           </div>
 
           <div className={styles.headerRight}>
@@ -99,7 +90,7 @@ export default function SelectedWork() {
           </div>
         </div>
 
-        {/* 2-Column Grid */}
+        {/* 2-Column Grid with SQUARE Corners */}
         <div className={styles.grid}>
           {PROJECTS.map((item, idx) => (
             <motion.div
@@ -110,18 +101,15 @@ export default function SelectedWork() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.6, delay: (idx % 2) * 0.15 }}
             >
-              {/* Top Meta Bar */}
+              {/* Top Meta Bar: Clean name only (NO //2025) */}
               <div className={styles.cardTopBar}>
-                <div className={styles.metaLeft}>
-                  <span className={styles.projectName}>{item.name}</span>
-                  <span className={styles.projectYear}>{item.year}</span>
-                </div>
-                <div className={styles.dotsIcon} aria-hidden="true">
+                <span className={styles.projectName}>{item.name}</span>
+                <span className={styles.dotsIcon} aria-hidden="true">
                   &bull;&bull;&bull;
-                </div>
+                </span>
               </div>
 
-              {/* Rounded Image Canvas */}
+              {/* Square Image Canvas (border-radius: 0) */}
               <Link href={`/projects#${item.slug}`} className={styles.imageCanvas}>
                 <Image
                   src={item.image}

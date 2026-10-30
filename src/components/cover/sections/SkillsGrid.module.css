@@ -90,7 +90,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
-  border-radius: 8px;
+  border-radius: 0; /* STRICTLY SQUARE */
   overflow: hidden;
   background-color: #16181d;
   border: 1px solid rgba(255, 255, 255, 0.06);
