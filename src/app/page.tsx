@@ -1,5 +1,6 @@
 import HeroSkyLabs from "@/components/cover/sections/HeroSkyLabs";
 import SelectedWork from "@/components/cover/sections/SelectedWork";
+import SkillsGrid from "@/components/cover/sections/SkillsGrid";
 import PreFooter from "@/components/cover/sections/PreFooter";
 import { Metadata } from "next";
 
@@ -19,6 +20,7 @@ export default function Home() {
     <>
       <HeroSkyLabs hideHeader={true} />
       <SelectedWork />
+      <SkillsGrid />
       <PreFooter />
     </>
   );
