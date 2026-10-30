@@ -1,5 +1,5 @@
 .preFooter {
-  background-color: #0a0a0a;
+  background-color: #090a0c;
   padding: 10rem var(--container-padding);
   display: flex;
   flex-direction: column;
@@ -9,6 +9,7 @@
   gap: 0;
   position: relative;
   overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .preFooter::before {

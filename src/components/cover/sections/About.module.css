@@ -1,6 +1,8 @@
 .aboutSection {
   padding: clamp(6rem, 15vw, 12rem) var(--container-padding);
-  background-color: var(--background);
+  background-color: #090a0c;
+  color: #ffffff;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .container {
@@ -12,7 +14,7 @@
 }
 
 .header {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding-bottom: 1.5rem;
 }
 
@@ -21,7 +23,7 @@
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--muted);
+  color: #cbd5e1;
 }
 
 .content {
@@ -50,11 +52,11 @@
   font-weight: 500;
   margin: 0;
   letter-spacing: -0.02em;
-  color: var(--foreground);
+  color: #ffffff;
 }
 
 .mutedText {
-  color: #666666; /* Neutral mid-gray for contrast */
+  color: #888d96; /* Neutral clean gray for readable contrast */
 }
 
 .imageWrapper {
