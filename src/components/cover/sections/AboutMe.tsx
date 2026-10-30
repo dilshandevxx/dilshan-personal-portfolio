@@ -2,16 +2,14 @@
 
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import styles from "./AboutMe.module.css";
 
 export default function AboutMe() {
   return (
     <section className={styles.aboutMeSection} id="about-me">
       <div className={styles.container}>
-        {/* Col 1: White Dot Indicator + ABOUT ME Label */}
+        {/* Col 1: Clean Section Label (No dots) */}
         <motion.div
           className={styles.labelCol}
           initial={{ opacity: 0, x: -16 }}
@@ -19,11 +17,10 @@ export default function AboutMe() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5 }}
         >
-          <span className={styles.dot} aria-hidden="true" />
           <span className={styles.labelText}>ABOUT ME</span>
         </motion.div>
 
-        {/* Col 2: Statement + Strict RECTANGULAR Button */}
+        {/* Col 2: Statement + Clean Rectangular [Talk Today] Button (No arrows) */}
         <motion.div
           className={styles.contentCol}
           initial={{ opacity: 0, y: 24 }}
@@ -36,21 +33,19 @@ export default function AboutMe() {
           </p>
 
           <div>
-            <Link
-              href="mailto:dilshandevxx@gmail.com"
-              className={styles.connectButton}
-              title="Let's connect"
+            <a
+              href="mailto:dilshan.devxx@gmail.com"
+              className={styles.talkButton}
             >
-              <span>Let&apos;s connect</span>
-              <ArrowUpRight size={16} className={styles.buttonArrow} />
-            </Link>
+              Talk Today
+            </a>
           </div>
         </motion.div>
 
         {/* Col 3: Circular Profile Photo */}
         <motion.div
           className={styles.avatarCol}
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -58,7 +53,7 @@ export default function AboutMe() {
           <div className={styles.avatarWrapper}>
             <Image
               src="/dilshan_profile.jpg"
-              alt="Dilshan Seneviratne"
+              alt="Dilshan Ramesh"
               fill
               sizes="(max-width: 900px) 130px, 180px"
               priority={false}

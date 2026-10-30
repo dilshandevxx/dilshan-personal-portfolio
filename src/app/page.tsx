@@ -2,16 +2,16 @@ import HeroSkyLabs from "@/components/cover/sections/HeroSkyLabs";
 import AboutMe from "@/components/cover/sections/AboutMe";
 import SelectedWork from "@/components/cover/sections/SelectedWork";
 import SkillsGrid from "@/components/cover/sections/SkillsGrid";
-import PreFooter from "@/components/cover/sections/PreFooter";
+import ContactSection from "@/components/cover/sections/ContactSection";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Dilshan Seneviratne | Sky Labs — Digital Landscapes",
+  title: "Dilshan Ramesh | Full-Stack Engineer & System Architect",
   description:
-    "Crafting digital landscapes. Driven by data & design. Structuring the future through architectural digital experiences.",
+    "Sri Lankan born full-stack engineer and system architect focusing on distributed systems, modern web experiences & scalable architectures.",
   openGraph: {
-    title: "Dilshan Seneviratne | Sky Labs",
-    description: "Crafting digital landscapes. Driven by data & design.",
+    title: "Dilshan Ramesh | Full-Stack Engineer & System Architect",
+    description: "Distributed systems, modern web experiences & scalable architectures.",
     type: "website",
   },
 };
@@ -19,11 +19,11 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <HeroSkyLabs hideHeader={true} />
-      <AboutMe />
+      <HeroSkyLabs />
       <SelectedWork />
       <SkillsGrid />
-      <PreFooter />
+      <AboutMe />
+      <ContactSection />
     </>
   );
 }

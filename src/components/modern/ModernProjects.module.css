@@ -1,4 +1,4 @@
-/* Modern Projects Page Styles (Sky Labs Style) */
+/* Modern Projects Page Styles (Matching Reference) */
 .pageSection {
   width: 100%;
   min-height: 80vh;
@@ -15,76 +15,71 @@
 }
 
 .headerContainer {
-  max-width: 1280px;
+  max-width: 1240px;
   margin: 0 auto 3.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.75rem;
 }
 
-/* EST / Category Pill Badge */
-.pillBadge {
-  display: inline-flex;
+.metaRow {
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 0.4rem 0.95rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #cbd5e1;
-  width: fit-content;
+  gap: 1.25rem;
+  margin-bottom: 0.5rem;
 }
 
-.badgeDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #10b981;
-  box-shadow: 0 0 8px #10b981;
+.indexTag {
+  color: #7b828d;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8125rem;
+  font-weight: 500;
 }
 
-/* Massive Grotesque Uppercase Headline */
+.yearTag {
+  color: #7b828d;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
 .headline {
-  font-family: var(--font-display, "Syne", sans-serif);
-  font-size: clamp(2.2rem, 5.5vw, 4.5rem);
-  font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: -0.025em;
-  text-transform: uppercase;
+  font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
+  font-size: clamp(3rem, 6.5vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
   color: #ffffff;
   margin: 0;
 }
 
 .subtitle {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.9375rem;
   line-height: 1.6;
-  color: #9497a1;
-  max-width: 760px;
-  margin: 0;
+  color: #8f96a3;
+  max-width: 680px;
+  margin: 0.5rem 0 0;
 }
 
 /* Category Filter Bar */
 .filterBar {
-  max-width: 1280px;
+  max-width: 1240px;
   margin: 0 auto 3.5rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.65rem;
+  gap: 0.75rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   padding-bottom: 1.5rem;
 }
 
 .filterBtn {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #94a3b8;
-  padding: 0.55rem 1.15rem;
-  border-radius: 0px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #9da4ae;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0;
+  font-family: var(--font-body, -apple-system, sans-serif);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -94,9 +89,8 @@
 }
 
 .filterBtn:hover {
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.35);
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.03);
 }
 
 .filterBtnActive {
@@ -113,17 +107,17 @@
 
 /* Projects Grid */
 .projectsGrid {
-  max-width: 1280px;
+  max-width: 1240px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 3rem 2.5rem;
+  gap: 3.5rem 2.5rem;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 880px) {
   .projectsGrid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 3rem;
   }
 }
 
@@ -131,19 +125,53 @@
 .projectCard {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  group: pointer;
-  text-decoration: none;
-  color: inherit;
+  gap: 0.85rem;
+}
+
+/* Card Top Bar matching reference */
+.cardTopBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.25rem;
+}
+
+.cardTopLeft {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.cardTitle {
+  color: #ffffff;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.cardYear {
+  color: #6a717c;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.dotsIcon {
+  color: #555b66;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  line-height: 1;
+  user-select: none;
 }
 
 .imageWrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  border-radius: 12px;
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
   overflow: hidden;
-  background-color: #121316;
+  background-color: #121418;
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -153,7 +181,7 @@
 }
 
 .projectCard:hover .projectImage {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .cardMeta {
@@ -161,6 +189,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  margin-top: 0.25rem;
 }
 
 .categoryTag {
@@ -168,50 +197,20 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #d2a072;
+  color: #ffffff;
 }
 
-.yearText {
+.clientText {
   font-size: 0.8rem;
   color: #64748b;
   font-family: var(--font-mono, monospace);
 }
 
-.projectTitle {
-  font-family: var(--font-display, "Syne", sans-serif);
-  font-size: 1.45rem;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-  text-transform: uppercase;
-  color: #ffffff;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: color 0.2s ease;
-}
-
-.projectCard:hover .projectTitle {
-  color: #d2a072;
-}
-
-.arrowIcon {
-  opacity: 0;
-  transform: translate(-4px, 4px);
-  transition: all 0.25s ease;
-  color: #d2a072;
-}
-
-.projectCard:hover .arrowIcon {
-  opacity: 1;
-  transform: translate(0, 0);
-}
-
 .projectDescription {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.92rem;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.875rem;
   line-height: 1.6;
-  color: #9497a1;
+  color: #8f96a3;
   margin: 0;
 }
 
@@ -229,28 +228,36 @@
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.04);
   color: #cbd5e1;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .actionLinks {
   display: flex;
-  gap: 1.25rem;
-  margin-top: 0.5rem;
+  gap: 1rem;
+  margin-top: 0.75rem;
 }
 
-.actionBtn {
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #d2a072;
-  text-decoration: none;
+/* Rectangular [Talk Today] Style Button */
+.talkButton {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  transition: color 0.2s ease;
+  justify-content: center;
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0;
+  padding: 0.75rem 1.75rem;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s ease;
 }
 
-.actionBtn:hover {
-  color: #ffffff;
+.talkButton:hover {
+  background-color: #ffffff;
+  color: #090a0c;
+  border-color: #ffffff;
 }

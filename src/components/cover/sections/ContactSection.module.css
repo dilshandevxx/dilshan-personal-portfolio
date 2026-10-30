@@ -1,0 +1,216 @@
+/* Contact Section (FEEL FREE TO CONTACT ME - matching reference) */
+.contactSection {
+  background-color: #090a0c;
+  padding: 8rem 2rem 9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .contactSection {
+    padding: 5rem 1.5rem 6rem;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+}
+
+/* Left Column */
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.heading {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
+}
+
+.headingWhite {
+  color: #ffffff;
+  font-size: clamp(2.2rem, 4vw, 3.25rem);
+  font-weight: 700;
+}
+
+.headingAccent {
+  color: #e2d5b5; /* Warm light cream/gold accent */
+  font-size: clamp(2.2rem, 4vw, 3.25rem);
+  font-weight: 700;
+}
+
+.description {
+  color: #8f96a3;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  margin: 0;
+  max-width: 500px;
+}
+
+/* Right Column / Form */
+.rightCol {
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+/* Two-column Input Row */
+.inputRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 540px) {
+  .inputRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #1a1d22;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1.1rem 1.25rem;
+  color: #ffffff;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.input::placeholder {
+  color: #6a717c;
+}
+
+.input:focus {
+  border-color: rgba(255, 255, 255, 0.25);
+  background-color: #1e2228;
+}
+
+/* Textarea */
+.textareaWrapper {
+  width: 100%;
+}
+
+.textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #1a1d22;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1.1rem 1.25rem;
+  color: #ffffff;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.875rem;
+  resize: vertical;
+  min-height: 140px;
+  outline: none;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.textarea::placeholder {
+  color: #6a717c;
+}
+
+.textarea:focus {
+  border-color: rgba(255, 255, 255, 0.25);
+  background-color: #1e2228;
+}
+
+/* Solid White Send Button */
+.sendButton {
+  width: 100%;
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  padding: 1.1rem;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.2s ease, opacity 0.25s ease;
+}
+
+.sendButton:hover:not(:disabled) {
+  background-color: #e5e5e5;
+  transform: translateY(-1px);
+}
+
+.sendButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Submission Feedback */
+.successMessage {
+  background-color: #1a1d22;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 3rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.successTitle {
+  color: #ffffff;
+  font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.successText {
+  color: #9da4ae;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.9375rem;
+  margin: 0;
+}
+
+.resetButton {
+  background: transparent;
+  color: #e2d5b5;
+  border: 1px solid #e2d5b5;
+  border-radius: 6px;
+  padding: 0.6rem 1.4rem;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.resetButton:hover {
+  background: #e2d5b5;
+  color: #090a0c;
+}

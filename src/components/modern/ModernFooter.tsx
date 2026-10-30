@@ -7,14 +7,13 @@ import styles from "./ModernFooter.module.css";
 export function ModernFooter() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.logo}>SKY LABS</div>
+      <div className={styles.logo}>DILSHAN RAMESH</div>
 
       <div className={styles.navLinks}>
         <Link href="/" className={styles.link}>HOME</Link>
-        <Link href="/projects" className={styles.link}>PROJECTS</Link>
-        <Link href="/shelves" className={styles.link}>SERVICES</Link>
-        <Link href="/about" className={styles.link}>STUDIO</Link>
-        <Link href="/blog" className={styles.link}>BLOG</Link>
+        <Link href="/projects" className={styles.link}>WORK</Link>
+        <Link href="/about" className={styles.link}>ABOUT</Link>
+        <Link href="/#contact" className={styles.link}>CONTACT</Link>
       </div>
 
       <div className={styles.socialIcons}>
@@ -48,7 +47,7 @@ export function ModernFooter() {
       </div>
 
       <div className={styles.copyright}>
-        © 2026 Sky Labs. Dilshan Seneviratne. All rights reserved.
+        &copy; 2026 Dilshan Ramesh. All rights reserved.
       </div>
     </footer>
   );
