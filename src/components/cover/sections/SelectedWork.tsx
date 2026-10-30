@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import styles from "./SelectedWork.module.css";
-import { PROJECTS } from "@/data/projects";
+import { PROJECTS } from "@/data/coverProjects";
 
 export default function SelectedWork() {
   return (
@@ -16,7 +16,7 @@ export default function SelectedWork() {
 
       <div className={styles.grid}>
         {PROJECTS.map((project, index) => (
-          <Link key={project.id} href="/portfolio/projects" className={styles.projectLink}>
+          <Link key={project.id} href="/projects" className={styles.projectLink}>
             <motion.div
               className={styles.projectCard}
               initial={{ opacity: 0, y: 50 }}
@@ -33,9 +33,6 @@ export default function SelectedWork() {
                   className={styles.image}
                 />
                 <div className={styles.overlay}>
-                  <div className={styles.viewBadge}>
-                    View<br />Project
-                  </div>
                   <h3 className={styles.projectName}>{project.title}</h3>
                   <span className={styles.projectCategory}>{project.category}</span>
                 </div>
@@ -52,7 +49,7 @@ export default function SelectedWork() {
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        <Link href="/portfolio/projects" className={styles.viewAllBtn}>
+        <Link href="/projects" className={styles.viewAllBtn}>
           <span>View All Projects</span>
           <ArrowRight className={styles.btnIcon} size={20} />
         </Link>

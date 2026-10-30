@@ -1,0 +1,226 @@
+/* Modern Header Styles (Coverpage Style) */
+.headerNav {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.35rem 3rem;
+  background: rgba(9, 10, 12, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .headerNav {
+    padding: 1.15rem 1.5rem;
+  }
+}
+
+/* Brand Logo (Sky Labs with geometric S badge) */
+.brandLogo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: #ffffff;
+  user-select: none;
+  transition: opacity 0.2s ease;
+}
+
+.brandLogo:hover {
+  opacity: 0.88;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.95;
+  font-family: var(--font-display, "Syne", -apple-system, sans-serif);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.brandIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: #ffffff;
+  border-radius: 3px;
+  color: #090a0c;
+  padding: 2px;
+}
+
+.brandIconSvg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Desktop Navigation Menu */
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 2.75rem;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  color: #b3b9c1;
+  text-decoration: none;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+  position: relative;
+  padding: 0.35rem 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.navLink:hover {
+  color: #ffffff;
+}
+
+.navLinkActive {
+  color: #ffffff;
+}
+
+.activeDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #d2a072;
+}
+
+/* Tan / Caramel Rectangular Action Button */
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d2a072;
+  color: #0c0d10;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.65rem;
+  border-radius: 0px;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(210, 160, 114, 0.18);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.ctaButton:hover {
+  background-color: #e0b084;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(210, 160, 114, 0.3);
+}
+
+.ctaButton:active {
+  transform: translateY(0);
+}
+
+/* Mobile Toggle Hamburger */
+.mobileMenuToggle {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #ffffff;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.hamburgerLine {
+  width: 22px;
+  height: 2px;
+  background-color: #ffffff;
+  transition: transform 0.2s ease;
+}
+
+/* Mobile Drawer */
+.mobileDrawer {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .desktopNav {
+    display: none;
+  }
+
+  .mobileMenuToggle {
+    display: flex;
+  }
+
+  .mobileDrawer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(9, 10, 12, 0.98);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 2rem 1.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  }
+
+  .mobileNavLink {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .mobileNavLinkActive {
+    color: #d2a072;
+  }
+
+  .mobileCtaButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d2a072;
+    color: #0c0d10;
+    font-size: 0.875rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.9rem;
+    margin-top: 0.5rem;
+    text-align: center;
+    text-decoration: none;
+  }
+}

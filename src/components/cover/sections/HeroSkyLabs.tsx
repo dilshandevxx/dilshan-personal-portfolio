@@ -6,13 +6,15 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./HeroSkyLabs.module.css";
 
-export default function HeroSkyLabs() {
+export default function HeroSkyLabs({ hideHeader = false }: { hideHeader?: boolean } = {}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <section className={styles.heroSection} aria-label="Hero">
       {/* 1. Header / Top Navigation */}
-      <header className={styles.headerNav}>
+      {!hideHeader && (
+        <>
+          <header className={styles.headerNav}>
         {/* Brand: Sky Labs [S] */}
         <Link href="/" className={styles.brandLogo} aria-label="Sky Labs Home">
           <div className={styles.brandText}>
@@ -133,6 +135,8 @@ export default function HeroSkyLabs() {
           </motion.div>
         )}
       </AnimatePresence>
+        </>
+      )}
 
       {/* 2. Main Content */}
       <div className={styles.heroContent}>

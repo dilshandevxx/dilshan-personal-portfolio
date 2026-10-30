@@ -1,9 +1,11 @@
 import HeroSkyLabs from "@/components/cover/sections/HeroSkyLabs";
-import Footer from "@/components/cover/Footer";
+import SelectedWork from "@/components/cover/sections/SelectedWork";
+import About from "@/components/cover/sections/About";
+import PreFooter from "@/components/cover/sections/PreFooter";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Dilshan Seneviratne | Software Engineer & Systems Architect",
+  title: "Dilshan Seneviratne | Sky Labs — Digital Landscapes",
   description:
     "Crafting digital landscapes. Driven by data & design. Structuring the future through architectural digital experiences.",
   openGraph: {
@@ -15,11 +17,11 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="xudo-cover-wrapper">
-      <main>
-        <HeroSkyLabs />
-      </main>
-      <Footer />
-    </div>
+    <>
+      <HeroSkyLabs hideHeader={true} />
+      <SelectedWork />
+      <About />
+      <PreFooter />
+    </>
   );
 }

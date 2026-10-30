@@ -1,49 +1,70 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
+import { Plus_Jakarta_Sans, Outfit, Inter, JetBrains_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/context/ThemeContext";
+import { ThemeProvider } from "@/components/ThemeContext";
+import { AudioProvider } from "@/components/AudioContext";
+import { AppShell } from "@/components/AppShell";
+import { siteConfig } from "@/data/siteConfig";
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  style: "normal",
+  variable: "--font-artistic",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Dilshan K. — Software Engineer & Systems Thinker",
-  description:
-    "An editorial personal website and engineering portfolio exploring distributed systems, local-first software, and mindful interface design.",
+  title: `${siteConfig.name} — ${siteConfig.siteName}`,
+  description: siteConfig.sidebarBio,
   keywords: [
     "Dilshan",
-    "Software Engineer",
-    "Distributed Systems",
-    "Full-Stack",
-    "TypeScript",
-    "Go",
-    "Rust",
+    "Full-Stack Developer",
+    "AI/ML Engineer",
+    "DevOps",
+    "Machine Learning",
     "Next.js",
-    "Editorial Design",
+    "Python",
+    "PyTorch",
+    "Kubernetes",
   ],
-  authors: [{ name: "Dilshan K." }],
-  creator: "Dilshan K.",
+  authors: [{ name: siteConfig.name, url: siteConfig.social.github }],
   openGraph: {
+    title: `${siteConfig.name} — ${siteConfig.siteName}`,
+    description: siteConfig.sidebarBio,
     type: "website",
     locale: "en_US",
-    url: "https://dilshan.dev",
-    siteName: "Dilshan K. — Editorial Portfolio",
-    title: "Dilshan K. — Software Engineer & Systems Thinker",
-    description:
-      "An editorial personal website combining a digital-book landing page with a thoughtful software engineering portfolio.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dilshan K. — Software Engineer & Systems Thinker",
-    description:
-      "Editorial personal website combining a digital book landing page with an engineering portfolio.",
+    title: `${siteConfig.name} — ${siteConfig.siteName}`,
+    description: siteConfig.sidebarBio,
+    creator: "@dilshanverse",
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
-
-export const viewport: Viewport = {
-  themeColor: "#151816",
-  width: "device-width",
-  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -55,9 +76,8 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      data-theme="dark-moss"
-      data-accent="sage"
-      className="h-full"
+      data-scroll-behavior="smooth"
+      className={`${outfit.variable} ${plusJakartaSans.variable} ${inter.variable} ${jetbrainsMono.variable} ${newsreader.variable}`}
     >
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -66,15 +86,29 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap"
           rel="stylesheet"
         />
-        {/* Anti-flash inline script to restore persisted theme before paint */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('editorial-theme')||'dark-moss';var a=localStorage.getItem('editorial-accent')||'sage';document.documentElement.setAttribute('data-theme',t);document.documentElement.setAttribute('data-accent',a);}catch(e){document.documentElement.setAttribute('data-theme','dark-moss');document.documentElement.setAttribute('data-accent','sage');}})();`,
+            __html: `
+              try {
+                var t = localStorage.getItem('portfolio_theme');
+                if (t && ['light', 'dark', 'midnight', 'forest', 'nord'].indexOf(t) !== -1) {
+                  document.documentElement.setAttribute('data-theme', t);
+                } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                  document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                  document.documentElement.setAttribute('data-theme', 'light');
+                }
+              } catch (e) {}
+            `,
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-sans antialiased selection:bg-[var(--accent-subtle)] selection:text-[var(--accent-color)]">
-        <ThemeProvider>{children}</ThemeProvider>
+      <body>
+        <ThemeProvider>
+          <AudioProvider>
+            <AppShell>{children}</AppShell>
+          </AudioProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
