@@ -1,19 +1,19 @@
-/* Projects Section (Staggered 2-Column Grid with SQUARE Corners) */
+/* Projects Section (Spacious Staggered Exhibition Layout) */
 .projectsSection {
   background-color: #090a0c;
-  padding: 7rem 3.5rem 8rem;
+  padding: 8.5rem 3.5rem 12rem;
   position: relative;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 @media (max-width: 900px) {
   .projectsSection {
-    padding: 5rem 1.75rem 6rem;
+    padding: 5.5rem 1.75rem 7rem;
   }
 }
 
 .container {
-  max-width: 1280px;
+  max-width: 1360px;
   margin: 0 auto;
 }
 
@@ -22,12 +22,12 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
 }
 
 @media (max-width: 768px) {
   .header {
-    margin-bottom: 2.75rem;
+    margin-bottom: 3rem;
   }
 }
 
@@ -46,28 +46,41 @@
   margin: 0;
 }
 
-/* Staggered 2-Column Grid matching reference */
-.grid {
+/* Dual Column Staggered Container matching reference */
+.editorialStaggerContainer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  column-gap: clamp(2.5rem, 5vw, 4.5rem);
-  row-gap: 5.5rem;
-  align-items: start;
+  column-gap: clamp(3.5rem, 7vw, 7.5rem);
+  width: 100%;
 }
 
-/* Editorial Stagger: Right column is offset downwards */
-.projectCard:nth-child(even) {
-  margin-top: clamp(3.5rem, 7vw, 6.5rem);
+/* Left Column: starts at top */
+.columnLeft {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12rem, 20vw, 22rem); /* Expansive vertical breathing room between projects */
+  width: 100%;
+}
+
+/* Right Column: offset downwards for authentic editorial stagger */
+.columnRight {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12rem, 20vw, 22rem); /* Expansive vertical breathing room between projects */
+  padding-top: clamp(14rem, 24vw, 26rem); /* Staggers right cards so top aligns near bottom of left cards */
+  width: 100%;
 }
 
 @media (max-width: 820px) {
-  .grid {
+  .editorialStaggerContainer {
     grid-template-columns: 1fr;
-    gap: 3.5rem;
+    gap: 4.5rem;
   }
 
-  .projectCard:nth-child(even) {
-    margin-top: 0;
+  .columnLeft,
+  .columnRight {
+    gap: 4.5rem;
+    padding-top: 0;
   }
 }
 
@@ -76,12 +89,13 @@
   display: flex;
   flex-direction: column;
   border-radius: 0; /* Strictly SQUARE corners */
+  width: 100%;
 }
 
 .cardLink {
   display: flex;
   flex-direction: column;
-  gap: 1.15rem;
+  gap: 1.25rem;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
@@ -96,14 +110,14 @@
   overflow: hidden;
   background-color: #121418;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 .cardLink:hover .imageCanvas {
-  transform: translateY(-3px);
-  border-color: rgba(255, 255, 255, 0.24);
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.75);
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.85);
 }
 
 .image {
@@ -151,7 +165,7 @@
 
 /* CTA Wrapper */
 .ctaWrapper {
-  margin-top: 6rem;
+  margin-top: clamp(8rem, 14vw, 15rem);
   display: flex;
   justify-content: center;
 }

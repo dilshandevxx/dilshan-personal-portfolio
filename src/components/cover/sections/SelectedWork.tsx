@@ -15,7 +15,7 @@ interface ProjectItem {
   slug: string;
 }
 
-const PROJECTS: ProjectItem[] = [
+const PROJECTS_LEFT: ProjectItem[] = [
   {
     id: "creative-collective",
     name: "Creative Collective",
@@ -25,20 +25,23 @@ const PROJECTS: ProjectItem[] = [
     slug: "creative-collective",
   },
   {
-    id: "brutalist-manifesto",
-    name: "Brutalist Manifesto",
-    category: "Urban Architecture & Graphic Grid",
-    image: "/images/project_brutalist.jpg",
-    description: "Typographic exploration and architectural design system for urban spaces.",
-    slug: "brutalist-manifesto",
-  },
-  {
     id: "cloudwatch-telemetry",
     name: "CloudWatch Telemetry",
     category: "Distributed Systems & Telemetry",
     image: "/images/project_analytics.jpg",
     description: "Real-time telemetry infrastructure and multi-region log monitoring engine.",
     slug: "cloudwatch",
+  },
+];
+
+const PROJECTS_RIGHT: ProjectItem[] = [
+  {
+    id: "brutalist-manifesto",
+    name: "Brutalist Manifesto",
+    category: "Urban Architecture & Graphic Grid",
+    image: "/images/project_brutalist.jpg",
+    description: "Typographic exploration and architectural design system for urban spaces.",
+    slug: "brutalist-manifesto",
   },
   {
     id: "warpspeed-protocol",
@@ -61,38 +64,75 @@ export default function SelectedWork() {
           </div>
         </div>
 
-        {/* Staggered Editorial 2-Column Grid matching reference */}
-        <div className={styles.grid}>
-          {PROJECTS.map((item, idx) => (
-            <motion.div
-              key={item.id}
-              className={styles.projectCard}
-              initial={{ opacity: 0, y: 35 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.65, delay: (idx % 2) * 0.15 }}
-            >
-              <Link href={`/projects#${item.slug}`} className={styles.cardLink}>
-                {/* 1:1 Square Flatlay Image Canvas (border-radius: 0) */}
-                <div className={styles.imageCanvas}>
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    priority={idx < 2}
-                    className={styles.image}
-                  />
-                </div>
+        {/* Editorial Staggered Layout matching reference */}
+        <div className={styles.editorialStaggerContainer}>
+          {/* Left Column (starts at y = 0) */}
+          <div className={styles.columnLeft}>
+            {PROJECTS_LEFT.map((item, idx) => (
+              <motion.div
+                key={item.id}
+                className={styles.projectCard}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: idx * 0.15 }}
+              >
+                <Link href={`/projects#${item.slug}`} className={styles.cardLink}>
+                  {/* 1:1 Square Flatlay Image Canvas (border-radius: 0) */}
+                  <div className={styles.imageCanvas}>
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      sizes="(max-width: 820px) 100vw, 46vw"
+                      priority={idx === 0}
+                      className={styles.image}
+                    />
+                  </div>
 
-                {/* Clean Minimal Metadata below image */}
-                <div className={styles.cardMeta}>
-                  <h3 className={styles.projectName}>{item.name}</h3>
-                  <span className={styles.projectCategory}>{item.category}</span>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+                  {/* Clean Minimal Metadata below image */}
+                  <div className={styles.cardMeta}>
+                    <h3 className={styles.projectName}>{item.name}</h3>
+                    <span className={styles.projectCategory}>{item.category}</span>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Right Column (offset downwards for authentic staggered positioning) */}
+          <div className={styles.columnRight}>
+            {PROJECTS_RIGHT.map((item, idx) => (
+              <motion.div
+                key={item.id}
+                className={styles.projectCard}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: 0.15 + idx * 0.15 }}
+              >
+                <Link href={`/projects#${item.slug}`} className={styles.cardLink}>
+                  {/* 1:1 Square Flatlay Image Canvas (border-radius: 0) */}
+                  <div className={styles.imageCanvas}>
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      sizes="(max-width: 820px) 100vw, 46vw"
+                      priority={idx === 0}
+                      className={styles.image}
+                    />
+                  </div>
+
+                  {/* Clean Minimal Metadata below image */}
+                  <div className={styles.cardMeta}>
+                    <h3 className={styles.projectName}>{item.name}</h3>
+                    <span className={styles.projectCategory}>{item.category}</span>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* Clean Rectangular [Talk Today] Style Button */}
