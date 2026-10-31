@@ -1,101 +1,207 @@
-/* Billie Duvalle Clean Minimal Hero Section */
+/* Aoki Minimalist Editorial Hero Section */
 .heroSection {
   background-color: #090a0c;
-  min-height: calc(100vh - 85px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
-  padding: 6rem 2rem 8rem;
+  width: 100%;
   box-sizing: border-box;
   overflow: hidden;
 }
 
-@media (max-width: 768px) {
-  .heroSection {
-    min-height: calc(85vh - 70px);
-    padding: 4rem 1.5rem 6rem;
-  }
+/* Visibility Control between Mobile and Desktop */
+.mobileHeroWrapper {
+  display: none;
 }
 
-.heroContainer {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+.desktopHeroWrapper {
+  display: block;
   width: 100%;
 }
 
-/* Massive Display Title (Billie Duvalle style) */
-.displayTitle {
+@media (max-width: 820px) {
+  .mobileHeroWrapper {
+    display: block;
+  }
+  .desktopHeroWrapper {
+    display: none;
+  }
+}
+
+/* Desktop Container */
+.heroContainer {
+  max-width: 1440px;
+  min-height: calc(100vh - 75px);
+  margin: 0 auto;
+  padding: 3.5rem 3.5rem 4rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3.5rem;
+}
+
+@media (min-width: 1440px) {
+  .heroContainer {
+    padding: 4.5rem 4.5rem 4.5rem;
+    min-height: calc(100vh - 85px);
+  }
+}
+
+@media (max-width: 1100px) {
+  .heroContainer {
+    padding: 2.5rem 2rem 3rem;
+    gap: 2.5rem;
+  }
+}
+
+/* Top Row: Left Portrait + Right Gallery */
+.topRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 3rem;
+  width: 100%;
+}
+
+/* Left Portrait Column */
+.leftPortraitCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.portraitFrame {
+  width: clamp(180px, 16vw, 240px);
+  aspect-ratio: 2 / 3;
+  background: #ffffff;
+  padding: 6px;
+  border-radius: 0; /* Strictly square corners */
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.portraitFrame:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.85);
+}
+
+.photoInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #1a1c20;
+}
+
+.framedImage {
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portraitFrame:hover .framedImage,
+.galleryFrame:hover .framedImage {
+  transform: scale(1.04);
+}
+
+.locationTag {
+  margin-top: 1rem;
   color: #ffffff;
-  font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
-  font-size: clamp(3.8rem, 12vw, 9.5rem);
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.6875rem;
   font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: -0.04em;
-  margin: 0 0 2rem 0;
-  text-align: center;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Right Gallery Column: 3-Image Triptych */
+.rightGalleryCol {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.galleryTriptych {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 1.2vw, 1.25rem);
+}
+
+.galleryFrame {
+  width: clamp(120px, 11vw, 175px);
+  aspect-ratio: 2 / 3;
+  background: #ffffff;
+  padding: 6px;
+  border-radius: 0; /* Strictly square corners */
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.galleryFrame:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.85);
+}
+
+/* Bottom Row: DILSH + Right Narrative */
+.bottomRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 3rem;
+  width: 100%;
+  padding-top: 1rem;
+}
+
+/* Left Title Column */
+.leftTitleCol {
+  flex: 1;
+}
+
+.dilshTitle {
+  color: #c27059; /* Warm terracotta tone matching reference */
+  font-family: var(--font-artistic, "Newsreader"), "Playfair Display", "Cinzel", Georgia, serif;
+  font-size: clamp(5.2rem, 14.5vw, 12.5rem);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-transform: uppercase;
   user-select: none;
 }
 
-/* Minimal Subtle Accent Dot */
-.dotAccent {
-  width: 8px;
-  height: 8px;
-  background-color: #ffffff;
-  border-radius: 50%;
-  margin: 0 auto 2.5rem;
-  opacity: 0.9;
-}
-
-/* Uppercase Centered Editorial Tagline */
-.editorialTagline {
-  color: #b5bcc4;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: clamp(0.75rem, 1.4vw, 0.9375rem);
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  line-height: 1.8;
-  text-transform: uppercase;
-  max-width: 720px;
-  margin: 0 auto 3rem;
-  padding: 0 1rem;
-}
-
-/* Action Container */
-.actionContainer {
+/* Right Narrative Column */
+.rightNarrativeCol {
+  max-width: 440px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding-bottom: 0.75rem;
 }
 
-/* Rectangular Button Style: [Talk Today](mailto:dilshan.devxx@gmail.com) */
-.talkButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 0; /* Strictly rectangular */
-  padding: 1.15rem 2.75rem;
+.narrativeParagraph {
+  color: #f2f2f4;
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.68;
+  margin: 0;
+}
+
+.scrollLink {
+  color: #8e95a2;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: color 0.25s ease, transform 0.25s ease;
+  display: inline-block;
   cursor: pointer;
 }
 
-.talkButton:hover {
-  background-color: #ffffff;
-  color: #090a0c;
-  border-color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(255, 255, 255, 0.08);
+.scrollLink:hover {
+  color: #c27059;
+  transform: translateY(2px);
 }

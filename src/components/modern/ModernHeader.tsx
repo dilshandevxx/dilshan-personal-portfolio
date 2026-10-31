@@ -22,22 +22,27 @@ export function ModernHeader() {
         DILSHAN RAMESH
       </Link>
 
-      {/* Center: Clean Nav Links (WORK  ABOUT  CONTACT) */}
+      {/* Center: Clean Nav Links matching Aoki reference (HOME  /  ABOUT  /  PORTFOLIO) */}
       <nav className={styles.desktopNav} aria-label="Main Navigation">
         <ul className={styles.navLinks}>
           <li>
-            <Link href={workHref} className={styles.navLink}>
-              WORK
+            <Link
+              href="/"
+              className={`${styles.navLink} ${isHome ? styles.activeNavLink : ""}`}
+            >
+              HOME
             </Link>
           </li>
+          <li className={styles.navSeparator} aria-hidden="true">/</li>
           <li>
             <Link href={aboutHref} className={styles.navLink}>
               ABOUT
             </Link>
           </li>
+          <li className={styles.navSeparator} aria-hidden="true">/</li>
           <li>
-            <Link href={contactHref} className={styles.navLink}>
-              CONTACT
+            <Link href={workHref} className={styles.navLink}>
+              PORTFOLIO
             </Link>
           </li>
         </ul>
