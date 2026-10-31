@@ -7,58 +7,61 @@ import styles from "./AboutMe.module.css";
 
 export default function AboutMe() {
   return (
-    <section className={styles.aboutMeSection} id="about-me">
+    <section className={styles.aboutSection} id="about-me" aria-label="About Me">
       <div className={styles.container}>
-        {/* Frame matching the Steve Harrington testimonial / portrait design */}
-        <div className={styles.aboutCard}>
-          {/* Left Column: Narrative Statement + Signature + Rectangular Talk Today Button */}
+        <div className={styles.aboutLayout}>
+          {/* Left Column: White dot + ABOUT ME badge */}
           <motion.div
-            className={styles.contentCol}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className={styles.labelCol}
+            initial={{ opacity: 0, x: -16 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6 }}
           >
-            <span className={styles.sectionSubtitle}>ABOUT ME</span>
+            <div className={styles.sectionBadge}>
+              <span className={styles.dot} aria-hidden="true" />
+              <span className={styles.badgeText}>ABOUT ME</span>
+            </div>
+          </motion.div>
 
-            <p className={styles.statement}>
-              &ldquo;I&apos;m passionate about digital design, software architecture, and AI engineering, and enjoy solving complex problems through refined systems and tactile digital experiences with ambitious teams.&rdquo;
+          {/* Center Column: Bio Statement + Rounded Pill "Let's connect" Button */}
+          <motion.div
+            className={styles.centerCol}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <p className={styles.bioStatement}>
+              I&apos;m passionate about digital design and art direction, and enjoy solving problems through beautiful designs and experiences with agencies and enthusiastic people
             </p>
 
-            <div className={styles.metaRow}>
-              <span className={styles.authorTag}>@dilshan</span>
-              <span className={styles.roleTag}>Dilshan Ramesh &middot; Systems Architect</span>
-            </div>
-
-            <div className={styles.actionRow}>
+            <div className={styles.actionWrapper}>
               <a
                 href="mailto:dilshan.devxx@gmail.com"
-                className={styles.talkButton}
+                className={styles.connectButton}
               >
-                Talk Today
+                Let&apos;s connect
               </a>
             </div>
           </motion.div>
 
-          {/* Right Column: High-contrast B&W portrait with SQUARE corners */}
+          {/* Right Column: Circular Profile Avatar matching reference */}
           <motion.div
-            className={styles.portraitCol}
-            initial={{ opacity: 0, scale: 0.96 }}
+            className={styles.avatarCol}
+            initial={{ opacity: 0, scale: 0.92 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6, delay: 0.15 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className={styles.portraitFrame}>
-              <div className={styles.portraitWrapper}>
-                <Image
-                  src="/images/about_portrait.jpg"
-                  alt="Dilshan Ramesh — Systems Architect"
-                  fill
-                  sizes="(max-width: 900px) 100vw, 460px"
-                  priority={false}
-                  className={styles.portraitImage}
-                />
-              </div>
+            <div className={styles.avatarCircle}>
+              <Image
+                src="/images/about_avatar.jpg"
+                alt="Dilshan"
+                fill
+                sizes="170px"
+                className={styles.avatarImage}
+              />
             </div>
           </motion.div>
         </div>

@@ -1,153 +1,152 @@
-/* About Me Section (Matching Reference Portrait Frame) */
-.aboutMeSection {
+/* Clean Minimalist About Me Section matching reference */
+.aboutSection {
   background-color: #090a0c;
-  padding: 6.5rem 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 6.5rem 3.5rem;
   position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  box-sizing: border-box;
+  width: 100%;
 }
 
-@media (max-width: 768px) {
-  .aboutMeSection {
+@media (max-width: 900px) {
+  .aboutSection {
     padding: 4.5rem 1.5rem;
   }
 }
 
 .container {
-  max-width: 1240px;
+  max-width: 1280px;
   margin: 0 auto;
 }
 
-/* Outer Card Frame with STRICT SQUARE CORNERS */
-.aboutCard {
-  background-color: #0e1013;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0; /* STRICTLY SQUARE */
-  padding: 4rem 4.5rem;
+.aboutLayout {
   display: grid;
-  grid-template-columns: 1.25fr 1fr;
-  gap: 4.5rem;
-  align-items: center;
+  grid-template-columns: 160px 1fr auto;
+  align-items: flex-start;
+  gap: 3.5rem;
 }
 
-@media (max-width: 960px) {
-  .aboutCard {
-    grid-template-columns: 1fr;
-    padding: 2.5rem 2rem;
-    gap: 3rem;
+@media (max-width: 1040px) {
+  .aboutLayout {
+    grid-template-columns: 140px 1fr auto;
+    gap: 2rem;
   }
 }
 
-/* Col 1: Narrative Content */
-.contentCol {
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
+@media (max-width: 860px) {
+  .aboutLayout {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.25rem;
+  }
 }
 
-.sectionSubtitle {
-  color: #7b828d;
+/* Left: White Dot + ABOUT ME */
+.labelCol {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 0.35rem;
+}
+
+.sectionBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.badgeText {
+  color: #ffffff;
   font-family: var(--font-body, -apple-system, sans-serif);
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.statement {
-  color: #f1f4f7;
-  font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
-  font-size: clamp(1.25rem, 2.3vw, 1.95rem);
+/* Center: Bio Statement + Button */
+.centerCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.5rem;
+  max-width: 580px;
+}
+
+.bioStatement {
+  color: #f4f4f5;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
   font-weight: 400;
-  line-height: 1.55;
+  line-height: 1.52;
   letter-spacing: -0.015em;
   margin: 0;
 }
 
-.metaRow {
+.actionWrapper {
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  margin-top: 0.5rem;
+  align-items: center;
 }
 
-.authorTag {
-  color: #ffffff;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.9375rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.roleTag {
-  color: #7b828d;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.8125rem;
-}
-
-.actionRow {
-  margin-top: 1rem;
-}
-
-/* Rectangular [Talk Today] Style Button */
-.talkButton {
+/* Rounded Pill Button matching reference: "Let's connect" */
+.connectButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: transparent;
+  padding: 0.65rem 2.25rem;
+  background-color: #121418;
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 0; /* STRICTLY SQUARE */
-  padding: 1.15rem 2.75rem;
+  border-radius: 999px; /* Rounded pill style matching screenshot */
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  font-size: 0.875rem;
+  font-weight: 500;
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
-.talkButton:hover {
+.connectButton:hover {
   background-color: #ffffff;
   color: #090a0c;
   border-color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.12);
 }
 
-/* Col 2: Portrait Frame with SQUARE corners */
-.portraitCol {
+/* Right: Circular Profile Avatar */
+.avatarCol {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
+  padding-right: 1.5rem;
 }
 
-.portraitFrame {
-  width: 100%;
-  max-width: 440px;
-  background-color: #14171c;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0; /* STRICTLY SQUARE */
-  padding: 1rem;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+@media (max-width: 860px) {
+  .avatarCol {
+    order: -1;
+    padding-right: 0;
+  }
 }
 
-.portraitWrapper {
+.avatarCircle {
   position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 4.6;
-  border-radius: 0; /* STRICTLY SQUARE */
+  width: clamp(140px, 13vw, 175px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
   overflow: hidden;
-  background-color: #090a0c;
+  background-color: #1a1d21;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
 }
 
-.portraitImage {
+.avatarImage {
   object-fit: cover;
-  border-radius: 0; /* STRICTLY SQUARE */
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.portraitFrame:hover .portraitImage {
-  transform: scale(1.02);
 }
