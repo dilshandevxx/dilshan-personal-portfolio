@@ -82,12 +82,6 @@ export default function SelectedWork() {
           <div className={styles.headerLeft}>
             <h2 className={styles.title}>Projects</h2>
           </div>
-
-          <div className={styles.headerRight}>
-            <p className={styles.headerDescription}>
-              We&apos;ve helped businesses across industries achieve their goals. Here are some of our recent projects.
-            </p>
-          </div>
         </div>
 
         {/* 2-Column Grid with SQUARE Corners */}
@@ -118,12 +112,6 @@ export default function SelectedWork() {
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className={styles.image}
                 />
-
-                {/* Centered Brand Emblem Badge */}
-                <div className={styles.centeredBadge}>
-                  <span className={styles.badgeGlyph}>{item.badgeIcon}</span>
-                  <span className={styles.badgeLabel}>{item.badgeName}</span>
-                </div>
               </Link>
             </motion.div>
           ))}

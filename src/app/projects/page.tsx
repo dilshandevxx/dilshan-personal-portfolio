@@ -122,15 +122,6 @@ export default function ProjectsPage() {
         >
           Projects
         </motion.h1>
-
-        <motion.p
-          className={styles.subtitle}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          We&apos;ve helped businesses across industries achieve their goals. Here are some of our recent projects.
-        </motion.p>
       </div>
 
       {/* 2. Category Filter Bar (Clean square style) */}
@@ -184,7 +175,6 @@ export default function ProjectsPage() {
               <span className={styles.clientText}>{project.client}</span>
             </div>
 
-            <p className={styles.projectDescription}>{project.description}</p>
 
             <div className={styles.techStack}>
               {project.tech.map((t: string) => (

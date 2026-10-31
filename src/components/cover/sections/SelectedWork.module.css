@@ -20,18 +20,14 @@
 /* Header */
 .header {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: 4rem;
-  gap: 3rem;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 3.5rem;
 }
 
 @media (max-width: 768px) {
   .header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.25rem;
-    margin-bottom: 2.75rem;
+    margin-bottom: 2.5rem;
   }
 }
 
@@ -47,18 +43,6 @@
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.03em;
-  margin: 0;
-}
-
-.headerRight {
-  max-width: 380px;
-}
-
-.headerDescription {
-  color: #8f96a3;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.875rem;
-  line-height: 1.6;
   margin: 0;
 }
 
@@ -137,43 +121,7 @@
   transform: scale(1.04);
 }
 
-/* Centered Brand Emblem Badge */
-.centeredBadge {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.5rem 1.15rem;
-  background: rgba(15, 17, 21, 0.5);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 999px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-  pointer-events: none;
-  transition: background 0.3s ease, border-color 0.3s ease;
-}
 
-.imageCanvas:hover .centeredBadge {
-  background: rgba(15, 17, 21, 0.75);
-  border-color: rgba(255, 255, 255, 0.45);
-}
-
-.badgeGlyph {
-  font-size: 0.875rem;
-  line-height: 1;
-}
-
-.badgeLabel {
-  color: #ffffff;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
 
 /* CTA Wrapper */
 .ctaWrapper {
