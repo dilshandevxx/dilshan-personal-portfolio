@@ -1,14 +1,14 @@
 /* Accordion Skills Section (Matching Reference Design) */
 .skillsSection {
   background-color: #090a0c;
-  padding: 6.5rem 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 7.5rem 3.5rem 8.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   position: relative;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .skillsSection {
-    padding: 4.5rem 1.5rem;
+    padding: 5rem 1.75rem 6rem;
   }
 }
 
@@ -19,28 +19,74 @@
 
 /* Header */
 .header {
-  margin-bottom: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 4.5rem;
+  gap: 1.25rem;
 }
 
+@media (max-width: 768px) {
+  .header {
+    margin-bottom: 3rem;
+  }
+}
+
+/* Pill Badge: OUR SERVICES */
+.badgeWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.pillBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 1.25rem;
+  background-color: #14171c;
+  color: #c9ced8;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Big Headline: ELEVATING BRANDS THROUGH DESIGN AND ENGINEERING */
 .headline {
-  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
   font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
-  font-size: clamp(2.2rem, 5vw, 3.75rem);
+  font-size: clamp(2.1rem, 4.8vw, 3.8rem);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
   margin: 0;
+}
+
+.headlineTop {
+  color: #ffffff;
+}
+
+.headlineBottom {
+  color: #a2a8b4;
 }
 
 /* Accordion List */
 .accordionList {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .accordionItem {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 /* Row Trigger Button */
@@ -59,12 +105,12 @@
 }
 
 .rowTrigger:hover .itemTitle {
-  color: #d8dfa6;
+  color: #d1d5db;
 }
 
 .itemTitle {
-  font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
-  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: clamp(1.35rem, 2.3vw, 1.85rem);
   font-weight: 600;
   letter-spacing: -0.015em;
   color: #ffffff;
@@ -72,13 +118,15 @@
 }
 
 .plusIcon {
-  font-family: var(--font-mono, monospace);
-  font-size: 1.75rem;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 1.65rem;
+  font-weight: 300;
   line-height: 1;
-  color: #cbd5e1;
+  color: #ffffff;
   display: inline-block;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease;
   user-select: none;
+  padding-right: 0.5rem;
 }
 
 .plusIconOpen {
@@ -86,14 +134,14 @@
   color: #ffffff;
 }
 
-/* Expanded Content Wrapper */
+/* Expanded Content */
 .expandedContentWrapper {
   overflow: hidden;
 }
 
 .expandedContent {
   display: grid;
-  grid-template-columns: 340px 1fr;
+  grid-template-columns: 320px 1fr;
   gap: 3.5rem;
   padding: 0.5rem 0.5rem 3rem;
   align-items: center;
@@ -138,7 +186,7 @@
   color: #ffffff;
   font-family: var(--font-body, -apple-system, sans-serif);
   font-size: 1.15rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.01em;
   margin: 0;
 }

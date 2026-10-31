@@ -8,8 +8,8 @@ import styles from "./SkillsGrid.module.css";
 interface SkillItem {
   id: string;
   name: string;
-  image: string;
   subtitle: string;
+  image: string;
   description: string;
   tags: string[];
 }
@@ -51,10 +51,18 @@ const SKILL_ITEMS: SkillItem[] = [
       "Building resilient distributed backends, microservice meshes, event-driven streaming pipelines with Apache Kafka, and automated GitOps Kubernetes infrastructure.",
     tags: ["GOLANG", "RUST", "KUBERNETES", "KAFKA", "GITOPS", "POSTGRESQL"],
   },
+  {
+    id: "cloud-devops",
+    name: "Cloud & DevOps",
+    subtitle: "Resilient Multi-Cloud & Telemetry Infrastructure",
+    image: "/images/project_analytics.jpg",
+    description:
+      "Architecting highly available cloud environments across AWS and GCP using Terraform, automated GitOps CI/CD delivery pipelines, proactive distributed telemetry, and zero-downtime deployments.",
+    tags: ["AWS", "GCP", "TERRAFORM", "DOCKER", "KUBERNETES", "CI/CD", "PROMETHEUS"],
+  },
 ];
 
 export default function SkillsGrid() {
-  // First item open by default for immediate visual interest
   const [openId, setOpenId] = useState<string | null>("web-dev");
 
   const toggleItem = (id: string) => {
@@ -62,11 +70,17 @@ export default function SkillsGrid() {
   };
 
   return (
-    <section className={styles.skillsSection} id="skills">
+    <section className={styles.skillsSection} id="skills" aria-label="Skills & Capabilities">
       <div className={styles.container}>
-        {/* Clean Header */}
+        {/* Top Header matching reference */}
         <div className={styles.header}>
-          <h2 className={styles.headline}>Skills &amp; Capabilities</h2>
+          <div className={styles.badgeWrapper}>
+            <span className={styles.pillBadge}>OUR SERVICES</span>
+          </div>
+          <h2 className={styles.headline}>
+            <span className={styles.headlineTop}>ELEVATING BRANDS THROUGH</span>
+            <span className={styles.headlineBottom}>DESIGN AND ENGINEERING</span>
+          </h2>
         </div>
 
         {/* Accordion List matching the user reference */}
