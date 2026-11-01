@@ -9,9 +9,7 @@ import styles from "./SelectedWork.module.css";
 interface ProjectItem {
   id: string;
   name: string;
-  category: string;
   image: string;
-  description: string;
   slug: string;
 }
 
@@ -19,17 +17,13 @@ const PROJECTS_LEFT: ProjectItem[] = [
   {
     id: "creative-collective",
     name: "Creative Collective",
-    category: "Design System & Brand Vision",
     image: "/images/project_collective.jpg",
-    description: "Modern digital editorial presentation and high-impact brand strategy framework.",
     slug: "creative-collective",
   },
   {
     id: "cloudwatch-telemetry",
     name: "CloudWatch Telemetry",
-    category: "Distributed Systems & Telemetry",
     image: "/images/project_analytics.jpg",
-    description: "Real-time telemetry infrastructure and multi-region log monitoring engine.",
     slug: "cloudwatch",
   },
 ];
@@ -38,17 +32,13 @@ const PROJECTS_RIGHT: ProjectItem[] = [
   {
     id: "brutalist-manifesto",
     name: "Brutalist Manifesto",
-    category: "Urban Architecture & Graphic Grid",
     image: "/images/project_brutalist.jpg",
-    description: "Typographic exploration and architectural design system for urban spaces.",
     slug: "brutalist-manifesto",
   },
   {
     id: "warpspeed-protocol",
     name: "Warpspeed Protocol",
-    category: "Low-Latency Compute",
     image: "/images/project_warpspeed_desk.jpg",
-    description: "Sub-millisecond low-latency packet streaming protocol in Rust & Go.",
     slug: "warpspeed",
   },
 ];
@@ -64,7 +54,7 @@ export default function SelectedWork() {
           </div>
         </div>
 
-        {/* Editorial Staggered Layout matching reference */}
+        {/* Editorial Staggered Layout */}
         <div className={styles.editorialStaggerContainer}>
           {/* Left Column (starts at y = 0) */}
           <div className={styles.columnLeft}>
@@ -88,12 +78,11 @@ export default function SelectedWork() {
                       priority={idx === 0}
                       className={styles.image}
                     />
-                  </div>
 
-                  {/* Clean Minimal Metadata below image */}
-                  <div className={styles.cardMeta}>
-                    <h3 className={styles.projectName}>{item.name}</h3>
-                    <span className={styles.projectCategory}>{item.category}</span>
+                    {/* Clean Simple Title ON the card */}
+                    <div className={styles.cardOverlay}>
+                      <h3 className={styles.cardTitle}>{item.name}</h3>
+                    </div>
                   </div>
                 </Link>
               </motion.div>
@@ -122,12 +111,11 @@ export default function SelectedWork() {
                       priority={idx === 0}
                       className={styles.image}
                     />
-                  </div>
 
-                  {/* Clean Minimal Metadata below image */}
-                  <div className={styles.cardMeta}>
-                    <h3 className={styles.projectName}>{item.name}</h3>
-                    <span className={styles.projectCategory}>{item.category}</span>
+                    {/* Clean Simple Title ON the card */}
+                    <div className={styles.cardOverlay}>
+                      <h3 className={styles.cardTitle}>{item.name}</h3>
+                    </div>
                   </div>
                 </Link>
               </motion.div>

@@ -2,6 +2,7 @@ import HeroSkyLabs from "@/components/cover/sections/HeroSkyLabs";
 import AboutMe from "@/components/cover/sections/AboutMe";
 import SelectedWork from "@/components/cover/sections/SelectedWork";
 import SkillsGrid from "@/components/cover/sections/SkillsGrid";
+import FaqSection from "@/components/cover/sections/FaqSection";
 import ContactSection from "@/components/cover/sections/ContactSection";
 import { Metadata } from "next";
 
@@ -23,6 +24,7 @@ export default function Home() {
       <AboutMe />
       <SelectedWork />
       <SkillsGrid />
+      <FaqSection />
       <ContactSection />
     </>
   );
