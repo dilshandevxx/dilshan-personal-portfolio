@@ -63,7 +63,7 @@ const SKILL_ITEMS: SkillItem[] = [
 ];
 
 export default function SkillsGrid() {
-  const [openId, setOpenId] = useState<string | null>("web-dev");
+  const [openId, setOpenId] = useState<string | null>(null);
 
   const toggleItem = (id: string) => {
     setOpenId((prev) => (prev === id ? null : id));
@@ -75,7 +75,9 @@ export default function SkillsGrid() {
         {/* Top Header matching reference */}
         <div className={styles.header}>
           <div className={styles.badgeWrapper}>
-            <span className={styles.pillBadge}>OUR SERVICES</span>
+            <span className={styles.pillBadge}>
+              <span className={styles.badgeDot}>•</span> OUR SERVICES
+            </span>
           </div>
           <h2 className={styles.headline}>
             <span className={styles.headlineTop}>ELEVATING BRANDS THROUGH</span>

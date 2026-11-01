@@ -103,7 +103,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <ThemeProvider>
           <AudioProvider>
             <AppShell>{children}</AppShell>
