@@ -1,152 +1,154 @@
-/* Clean Minimalist About Me Section matching reference */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap');
+
+/* Editorial Split Layout — The Second Issue (Matching Exact Reference) */
 .aboutSection {
-  background-color: #090a0c;
-  padding: 6.5rem 3.5rem;
-  position: relative;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  box-sizing: border-box;
+  background-color: #000000;
+  padding: 8rem 3.5rem 9rem;
   width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .aboutSection {
-    padding: 4.5rem 1.5rem;
+    padding: 6rem 2rem 7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutSection {
+    padding: 4.5rem 1.25rem 5.5rem;
   }
 }
 
 .container {
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
+  width: 100%;
 }
 
-.aboutLayout {
+.grid {
   display: grid;
-  grid-template-columns: 160px 1fr auto;
-  align-items: flex-start;
-  gap: 3.5rem;
-}
-
-@media (max-width: 1040px) {
-  .aboutLayout {
-    grid-template-columns: 140px 1fr auto;
-    gap: 2rem;
-  }
-}
-
-@media (max-width: 860px) {
-  .aboutLayout {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2.25rem;
-  }
-}
-
-/* Left: White Dot + ABOUT ME */
-.labelCol {
-  display: flex;
-  align-items: flex-start;
-  padding-top: 0.35rem;
-}
-
-.sectionBadge {
-  display: inline-flex;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: 0.75rem;
+  gap: 5rem;
 }
 
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #ffffff;
-  display: inline-block;
-  flex-shrink: 0;
+@media (max-width: 990px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    text-align: center;
+  }
 }
 
-.badgeText {
-  color: #ffffff;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-/* Center: Bio Statement + Button */
-.centerCol {
+/* Left Column: Editorial Headline & Typography */
+.leftColumn {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 2.5rem;
-  max-width: 580px;
-}
-
-.bioStatement {
-  color: #f4f4f5;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: clamp(1.2rem, 2vw, 1.55rem);
-  font-weight: 400;
-  line-height: 1.52;
-  letter-spacing: -0.015em;
-  margin: 0;
-}
-
-.actionWrapper {
-  display: flex;
-  align-items: center;
-}
-
-/* Rounded Pill Button matching reference: "Let's connect" */
-.connectButton {
-  display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.65rem 2.25rem;
-  background-color: #121418;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 999px; /* Rounded pill style matching screenshot */
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
+  width: 100%;
 }
 
-.connectButton:hover {
-  background-color: #ffffff;
-  color: #090a0c;
-  border-color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.12);
-}
-
-/* Right: Circular Profile Avatar */
-.avatarCol {
+.textBlock {
   display: flex;
-  justify-content: flex-end;
-  padding-right: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 520px;
 }
 
-@media (max-width: 860px) {
-  .avatarCol {
-    order: -1;
-    padding-right: 0;
-  }
+/* Big High-Contrast Roman Serif Headline */
+.issueHeading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  color: #ffffff !important;
+  font-family: 'Cormorant Garamond', 'Playfair Display', 'Didot', 'Bodoni MT', Georgia, 'Times New Roman', serif !important;
+  font-size: clamp(2.8rem, 5.6vw, 4.75rem) !important;
+  font-weight: 300 !important;
+  line-height: 1.16 !important;
+  letter-spacing: 0.07em !important;
+  text-transform: uppercase !important;
 }
 
-.avatarCircle {
+.headingLine {
+  display: block;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+}
+
+/* Italic Subtitle */
+.issueSubtitle {
+  margin: 2rem 0 0;
+  color: #a2a8b3;
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+/* (Order) Action Link */
+.linkContainer {
+  margin-top: 1.5rem;
+}
+
+.orderLink {
+  display: inline-block;
+  color: #ffffff;
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+  font-weight: 400;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.orderLink:hover {
+  opacity: 0.75;
+  transform: translateY(-1px);
+}
+
+.underlinedText {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+/* Right Column: Open Magazine Spread Image */
+.rightColumn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.imageFrame {
   position: relative;
-  width: clamp(140px, 13vw, 175px);
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
+  width: 100%;
+  max-width: 660px;
+  aspect-ratio: 1200 / 896;
   overflow: hidden;
-  background-color: #1a1d21;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+  border-radius: 0;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  background-color: #111215;
 }
 
-.avatarImage {
+.magazinePhoto {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  display: block;
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.imageFrame:hover .magazinePhoto {
+  transform: scale(1.025);
 }

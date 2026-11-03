@@ -13,7 +13,7 @@
 }
 
 .container {
-  max-width: 1180px;
+  max-width: 1040px;
   margin: 0 auto;
 }
 
@@ -23,13 +23,13 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: 4.5rem;
-  gap: 1.25rem;
+  margin-bottom: 3.5rem;
+  gap: 1rem;
 }
 
 @media (max-width: 768px) {
   .header {
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
   }
 }
 
@@ -43,36 +43,36 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.45rem 1.35rem;
+  gap: 0.45rem;
+  padding: 0.35rem 1.15rem;
   background-color: #121418;
-  color: #c9ced8;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #b8bec9;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 999px;
   font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .badgeDot {
   color: #ffffff;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   line-height: 1;
 }
 
-/* Big Headline: ELEVATING BRANDS THROUGH DESIGN AND ENGINEERING */
+/* Headline: ELEVATING BRANDS THROUGH DESIGN AND ENGINEERING */
 .headline {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.25rem;
   font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
-  font-size: clamp(2.75rem, 5.2vw, 4.25rem);
+  font-size: clamp(1.75rem, 2.8vw, 2.35rem);
   font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.025em;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
   text-transform: uppercase;
   margin: 0;
 }
@@ -82,19 +82,19 @@
 }
 
 .headlineBottom {
-  color: #c4cad6;
+  color: #b4bac6;
 }
 
 /* Accordion List */
 .accordionList {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   width: 100%;
 }
 
 .accordionItem {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Row Trigger Button matching reference */
@@ -103,39 +103,39 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2.75rem 0.5rem;
+  padding: 1.5rem 0.25rem;
   background: transparent;
   border: none;
   color: #ffffff;
   cursor: pointer;
   text-align: left;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
 }
 
 .rowTrigger:hover .itemTitle {
   color: #ffffff;
-  opacity: 0.85;
+  opacity: 0.88;
 }
 
 .itemTitle {
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: clamp(1.75rem, 2.5vw, 2.35rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-size: clamp(1.2rem, 1.6vw, 1.45rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
   color: #ffffff;
   transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 .plusIcon {
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 2.1rem;
-  font-weight: 350;
+  font-size: 1.45rem;
+  font-weight: 300;
   line-height: 1;
   color: #ffffff;
   display: inline-block;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
   user-select: none;
-  padding-right: 0.5rem;
+  padding-right: 0.25rem;
   flex-shrink: 0;
 }
 

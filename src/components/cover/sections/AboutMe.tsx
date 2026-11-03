@@ -2,65 +2,66 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import styles from "./AboutMe.module.css";
 
 export default function AboutMe() {
   return (
-    <section className={styles.aboutSection} id="about-me" aria-label="About Me">
+    <section className={styles.aboutSection} id="about-me" aria-label="The Second Issue">
       <div className={styles.container}>
-        <div className={styles.aboutLayout}>
-          {/* Left Column: White dot + ABOUT ME badge */}
+        <div className={styles.grid}>
+          {/* Left Side: Elegant Editorial Serif Typography */}
           <motion.div
-            className={styles.labelCol}
-            initial={{ opacity: 0, x: -16 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className={styles.sectionBadge}>
-              <span className={styles.dot} aria-hidden="true" />
-              <span className={styles.badgeText}>ABOUT ME</span>
-            </div>
-          </motion.div>
-
-          {/* Center Column: Bio Statement + Rounded Pill "Let's connect" Button */}
-          <motion.div
-            className={styles.centerCol}
-            initial={{ opacity: 0, y: 20 }}
+            className={styles.leftColumn}
+            initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className={styles.bioStatement}>
-              I&apos;m passionate about digital design and art direction, and enjoy solving problems through beautiful designs and experiences with agencies and enthusiastic people
-            </p>
-
-            <div className={styles.actionWrapper}>
-              <a
-                href="mailto:dilshan.devxx@gmail.com"
-                className={styles.connectButton}
+            <div className={styles.textBlock}>
+              <h2
+                className={styles.issueHeading}
+                style={{
+                  fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Didot', 'Bodoni MT', Georgia, serif",
+                  fontWeight: 300,
+                  letterSpacing: "0.07em",
+                }}
               >
-                Let&apos;s connect
-              </a>
+                <span className={styles.headingLine}>THE</span>
+                <span className={styles.headingLine}>SECOND</span>
+                <span className={styles.headingLine}>ISSUE</span>
+              </h2>
+
+              <p className={styles.issueSubtitle}>
+                Issue No.02 is now available.
+              </p>
+
+              <div className={styles.linkContainer}>
+                <Link href="#projects" className={styles.orderLink}>
+                  (<span className={styles.underlinedText}>Order</span>)
+                </Link>
+              </div>
             </div>
           </motion.div>
 
-          {/* Right Column: Circular Profile Avatar matching reference */}
+          {/* Right Side: Editorial Open Magazine Spread Image */}
           <motion.div
-            className={styles.avatarCol}
-            initial={{ opacity: 0, scale: 0.92 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            className={styles.rightColumn}
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className={styles.avatarCircle}>
+            <div className={styles.imageFrame}>
               <Image
-                src="/images/about_avatar.jpg"
-                alt="Dilshan"
-                fill
-                sizes="170px"
-                className={styles.avatarImage}
+                src="/images/about_the_second_issue.jpg"
+                alt="The Second Issue Editorial Magazine"
+                width={1200}
+                height={896}
+                priority
+                className={styles.magazinePhoto}
+                sizes="(max-width: 900px) 100vw, (max-width: 1400px) 50vw, 680px"
               />
             </div>
           </motion.div>

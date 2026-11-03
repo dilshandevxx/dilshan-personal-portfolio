@@ -1,246 +1,259 @@
-/* Aoki Minimalist Editorial Hero Section */
+/* SkyLabs Hero Section — Matching Exact Reference Design with Looping Video */
 .heroSection {
-  background-color: #090a0c;
+  background-color: #000000;
   position: relative;
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
+  padding-bottom: 5rem;
 }
 
-/* Visibility Control between Mobile and Desktop */
-.mobileHeroWrapper {
-  display: none;
-}
-
-.desktopHeroWrapper {
-  display: block;
+/* 1. Top Navbar */
+.navHeader {
   width: 100%;
-  height: 100vh;
-  height: 100dvh;
-}
-
-@media (max-width: 820px) {
-  .mobileHeroWrapper {
-    display: block;
-  }
-  .desktopHeroWrapper {
-    display: none;
-  }
-}
-
-/* Desktop Container: Perfectly fit inside 100vh without overflowing */
-.heroContainer {
-  max-width: 1440px;
-  height: 100%;
-  margin: 0 auto;
-  padding: 1.75rem 3.5rem 2rem;
+  padding: 1.75rem 3.5rem 1.25rem;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.5rem;
 }
 
-@media (min-width: 1440px) {
-  .heroContainer {
-    padding: 2.25rem 4.5rem 2.5rem;
+@media (max-width: 900px) {
+  .navHeader {
+    padding: 1.25rem 1.5rem 1rem;
   }
 }
 
-@media (max-width: 1100px) {
-  .heroContainer {
-    padding: 1.5rem 2rem 1.75rem;
+.navContainer {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* Brand Logo (SkyLabs with S mark) */
+.brandLink {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.logoText {
+  color: #ffffff;
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
+}
+
+.logoBadge {
+  width: 32px;
+  height: 32px;
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.badgeLetter {
+  color: #ffffff;
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* Navigation Right */
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 2.75rem;
+}
+
+@media (max-width: 768px) {
+  .navRight {
     gap: 1.25rem;
   }
 }
 
-/* Top Centered Navigation */
-.topNav {
+.navLinks {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-  padding: 0.25rem 0 0.5rem;
-  width: 100%;
+  gap: 2.25rem;
 }
 
-.topNavLink {
-  color: #8e95a2;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.75rem;
+@media (max-width: 768px) {
+  .navLinks {
+    display: none;
+  }
+}
+
+.navLink {
+  color: #c0c6d2;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.topNavLink:hover {
+.navLink:hover {
   color: #ffffff;
 }
 
-.topNavActive {
-  color: #ffffff;
-  font-weight: 700;
-}
-
-.topNavSlash {
-  color: rgba(255, 255, 255, 0.25);
-  font-size: 0.75rem;
-  user-select: none;
-}
-
-/* Top Row: Left Portrait + Right Gallery */
-.topRow {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 2.5rem;
-  width: 100%;
-  flex: 1;
-  max-height: 48vh;
-}
-
-/* Left Portrait Column */
-.leftPortraitCol {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.portraitFrame {
-  width: clamp(125px, 11vw, 155px);
-  aspect-ratio: 2 / 3;
-  background: #ffffff;
-  padding: 5px;
-  border-radius: 0; /* Strictly square corners */
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65);
-  box-sizing: border-box;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-}
-
-.portraitFrame:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
-}
-
-.photoInner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-color: #1a1c20;
-}
-
-.framedImage {
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.portraitFrame:hover .framedImage,
-.galleryFrame:hover .framedImage {
-  transform: scale(1.04);
-}
-
-.locationTag {
-  margin-top: 0.75rem;
-  color: #ffffff;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.625rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-/* Right Gallery Column: 3-Image Triptych */
-.rightGalleryCol {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
-}
-
-.galleryTriptych {
-  display: flex;
+/* Tan / Camel Rectangular [LET'S TALK] Button */
+.talkButton {
+  display: inline-flex;
   align-items: center;
-  gap: clamp(0.6rem, 1vw, 1rem);
-}
-
-.galleryFrame {
-  width: clamp(92px, 8vw, 118px);
-  aspect-ratio: 2 / 3;
-  background: #ffffff;
-  padding: 5px;
-  border-radius: 0; /* Strictly square corners */
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65);
-  box-sizing: border-box;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-}
-
-.galleryFrame:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
-}
-
-/* Bottom Row: DILSH + Right Narrative */
-.bottomRow {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 2.5rem;
-  width: 100%;
-  padding-bottom: 0.5rem;
-}
-
-/* Left Title Column */
-.leftTitleCol {
-  flex: 1;
-}
-
-.dilshTitle {
-  color: #c27059; /* Warm terracotta tone matching reference */
-  font-family: var(--font-artistic, "Newsreader"), "Playfair Display", "Cinzel", Georgia, serif;
-  font-size: clamp(3.8rem, 8.5vw, 6.8rem);
-  font-weight: 700;
-  line-height: 0.85;
-  letter-spacing: -0.02em;
-  margin: 0;
-  text-transform: uppercase;
-  user-select: none;
-}
-
-/* Right Narrative Column */
-.rightNarrativeCol {
-  max-width: 350px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.15rem;
-  padding-bottom: 0.5rem;
-}
-
-.narrativeParagraph {
-  color: #d1d5db;
+  justify-content: center;
+  padding: 0.75rem 1.65rem;
+  background-color: #d2a779;
+  color: #000000;
+  border: 1px solid #d2a779;
+  border-radius: 3px;
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.8125rem;
-  font-weight: 400;
-  line-height: 1.6;
-  margin: 0;
-}
-
-.scrollLink {
-  color: #8e95a2;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.6875rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: color 0.25s ease, transform 0.25s ease;
-  display: inline-block;
-  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
 }
 
-.scrollLink:hover {
-  color: #c27059;
-  transform: translateY(2px);
+.talkButton:hover {
+  background-color: #deb789;
+  transform: translateY(-1px);
+}
+
+/* 2. Main Hero Content */
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 3.5rem;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .heroContent {
+    padding-top: 2.5rem;
+  }
+}
+
+/* Centered Capsule Badge: EST. 2016 */
+.badgeWrapper {
+  margin-bottom: 2rem;
+}
+
+.pillBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 1.05rem;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+
+.greenDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #9fe824;
+  box-shadow: 0 0 10px rgba(159, 232, 36, 0.75);
+}
+
+.badgeLabel {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #b5bcc7;
+}
+
+/* Massive 3-Line Centered Display Headline */
+.displayHeadline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffffff;
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
+  font-size: clamp(2.4rem, 6.8vw, 5.8rem);
+  font-weight: 850;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  margin: 0 0 4.5rem;
+  padding: 0 1.5rem;
+  max-width: 1360px;
+}
+
+@media (max-width: 768px) {
+  .displayHeadline {
+    margin-bottom: 3rem;
+  }
+}
+
+.headlineRow {
+  display: block;
+  white-space: normal;
+}
+
+/* 3. Cinematic Banner Video Container */
+.bannerContainer {
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .bannerContainer {
+    padding: 0 1.25rem;
+  }
+}
+
+.bannerFrame {
+  position: relative;
+  width: 100%;
+  height: clamp(340px, 48vh, 580px);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+  background-color: #121418;
+}
+
+.bannerVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+.bannerOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
+  pointer-events: none;
 }
