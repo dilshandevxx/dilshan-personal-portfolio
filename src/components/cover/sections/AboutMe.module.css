@@ -1,9 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap');
-
-/* Editorial Split Layout — The Second Issue (Matching Exact Reference) */
+/* Clean Modern About Section (Matching SkyLabs Reference) */
 .aboutSection {
   background-color: #000000;
-  padding: 8rem 3.5rem 9rem;
+  padding: 8.5rem 3.5rem 9.5rem;
   width: 100%;
   box-sizing: border-box;
   position: relative;
@@ -23,31 +21,29 @@
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1380px;
   margin: 0 auto;
   width: 100%;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.05fr 0.95fr;
   align-items: center;
-  gap: 5rem;
+  gap: 5.5rem;
 }
 
 @media (max-width: 990px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: 4rem;
-    text-align: center;
+    gap: 3.5rem;
   }
 }
 
-/* Left Column: Editorial Headline & Typography */
+/* Left Column: Modern Description */
 .leftColumn {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   width: 100%;
 }
@@ -55,71 +51,79 @@
 .textBlock {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 520px;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 580px;
 }
 
-/* Big High-Contrast Roman Serif Headline */
-.issueHeading {
+.accentBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #d2a779;
+  margin-bottom: 1.5rem;
+}
+
+.leadText {
+  color: #ffffff;
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
+  font-size: clamp(1.4rem, 2.2vw, 1.95rem);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.75rem;
+}
+
+.paragraphs {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 2.25rem;
+}
+
+.paragraphs p {
+  color: #a1a1aa;
+  font-family: var(--font-body, "Inter", -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: clamp(1rem, 1.1vw, 1.1rem);
+  line-height: 1.75;
   margin: 0;
-  padding: 0;
-  color: #ffffff !important;
-  font-family: 'Cormorant Garamond', 'Playfair Display', 'Didot', 'Bodoni MT', Georgia, 'Times New Roman', serif !important;
-  font-size: clamp(2.8rem, 5.6vw, 4.75rem) !important;
-  font-weight: 300 !important;
-  line-height: 1.16 !important;
-  letter-spacing: 0.07em !important;
-  text-transform: uppercase !important;
 }
 
-.headingLine {
-  display: block;
-  font-family: inherit !important;
-  font-weight: inherit !important;
-  letter-spacing: inherit !important;
+.actionRow {
+  display: flex;
+  align-items: center;
 }
 
-/* Italic Subtitle */
-.issueSubtitle {
-  margin: 2rem 0 0;
-  color: #a2a8b3;
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, 'Times New Roman', serif;
-  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
-  font-style: italic;
-  font-weight: 400;
-  line-height: 1.4;
-  letter-spacing: 0.01em;
-}
-
-/* (Order) Action Link */
-.linkContainer {
-  margin-top: 1.5rem;
-}
-
-.orderLink {
-  display: inline-block;
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.85rem;
+  background-color: transparent;
   color: #ffffff;
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, 'Times New Roman', serif;
-  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
-  font-weight: 400;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 3px;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   text-decoration: none;
-  letter-spacing: 0.02em;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: all 0.25s ease;
 }
 
-.orderLink:hover {
-  opacity: 0.75;
-  transform: translateY(-1px);
-}
-
-.underlinedText {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1px;
+.actionButton:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
 }
 
 /* Right Column: Open Magazine Spread Image */
@@ -136,8 +140,8 @@
   max-width: 660px;
   aspect-ratio: 1200 / 896;
   overflow: hidden;
-  border-radius: 0;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  border-radius: 3px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
   background-color: #111215;
 }
 

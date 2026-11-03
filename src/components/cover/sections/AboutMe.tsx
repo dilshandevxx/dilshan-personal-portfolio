@@ -8,10 +8,10 @@ import styles from "./AboutMe.module.css";
 
 export default function AboutMe() {
   return (
-    <section className={styles.aboutSection} id="about-me" aria-label="The Second Issue">
+    <section className={styles.aboutSection} id="about-me" aria-label="About Dilshan">
       <div className={styles.container}>
         <div className={styles.grid}>
-          {/* Left Side: Elegant Editorial Serif Typography */}
+          {/* Left Side: Clean Modern Bio Description (No Title, Pure Modern Typography) */}
           <motion.div
             className={styles.leftColumn}
             initial={{ opacity: 0, y: 25 }}
@@ -20,26 +20,26 @@ export default function AboutMe() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className={styles.textBlock}>
-              <h2
-                className={styles.issueHeading}
-                style={{
-                  fontFamily: "'Cormorant Garamond', 'Playfair Display', 'Didot', 'Bodoni MT', Georgia, serif",
-                  fontWeight: 300,
-                  letterSpacing: "0.07em",
-                }}
-              >
-                <span className={styles.headingLine}>THE</span>
-                <span className={styles.headingLine}>SECOND</span>
-                <span className={styles.headingLine}>ISSUE</span>
-              </h2>
+              <div className={styles.accentBadge}>
+                <span>ENGINEERING &amp; ARCHITECTURE</span>
+              </div>
 
-              <p className={styles.issueSubtitle}>
-                Issue No.02 is now available.
+              <p className={styles.leadText}>
+                Crafting resilient distributed systems, modern web experiences, and scalable infrastructure that outlive ephemeral trends.
               </p>
 
-              <div className={styles.linkContainer}>
-                <Link href="#projects" className={styles.orderLink}>
-                  (<span className={styles.underlinedText}>Order</span>)
+              <div className={styles.paragraphs}>
+                <p>
+                  I&apos;m Dilshan — a full-stack engineer and system architect based in Sri Lanka, working with teams globally. Over the past several years, I have engineered across the stack — from high-throughput distributed services and event-driven data pipelines to accessible, ultra-fast web clients.
+                </p>
+                <p>
+                  My engineering philosophy is anchored in durable principles: favor explicit architectures over magic abstractions, prioritize deterministic performance over brute computing power, and craft purposeful digital products that respect human attention.
+                </p>
+              </div>
+
+              <div className={styles.actionRow}>
+                <Link href="#projects" className={styles.actionButton}>
+                  Explore Selected Work &rarr;
                 </Link>
               </div>
             </div>
@@ -56,7 +56,7 @@ export default function AboutMe() {
             <div className={styles.imageFrame}>
               <Image
                 src="/images/about_the_second_issue.jpg"
-                alt="The Second Issue Editorial Magazine"
+                alt="Dilshan's Editorial Monograph & Systems Spread"
                 width={1200}
                 height={896}
                 priority
