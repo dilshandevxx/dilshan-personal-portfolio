@@ -1,42 +1,10 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Outfit, Inter, JetBrains_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeContext";
 import { AudioProvider } from "@/components/AudioContext";
 import { AppShell } from "@/components/AppShell";
 import { siteConfig } from "@/data/siteConfig";
 import { Analytics } from "@vercel/analytics/react";
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-heading",
-  display: "swap",
-});
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  style: "normal",
-  variable: "--font-artistic",
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: `${siteConfig.name} — ${siteConfig.siteName}`,
@@ -77,7 +45,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${outfit.variable} ${plusJakartaSans.variable} ${inter.variable} ${jetbrainsMono.variable} ${newsreader.variable}`}
+      className="font-sans"
     >
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -16,19 +16,18 @@
   right: 0;
   z-index: 100;
   width: 100%;
-  padding: 1rem 3.5rem;
+  padding: 1.15rem 3.5rem;
   box-sizing: border-box;
-  background: rgba(8, 9, 12, 0.82);
+  background: rgba(8, 9, 12, 0.85);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
   transition: all 0.25s ease;
 }
 
 @media (max-width: 900px) {
   .navHeader {
-    padding: 0.85rem 1.5rem;
+    padding: 0.9rem 1.5rem;
   }
 }
 
@@ -41,12 +40,11 @@
   gap: 2rem;
 }
 
-/* Brand Logo (SkyLabs with S mark & Live Availability Tag) */
+/* Brand Logo (SkyLabs with S mark) */
 .brandLink {
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 1.25rem;
 }
 
 .logoWrapper {
@@ -66,9 +64,9 @@
 }
 
 .logoBadge {
-  width: 32px;
-  height: 32px;
-  border: 2px solid #ffffff;
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid #ffffff;
   border-radius: 0px;
   display: flex;
   align-items: center;
@@ -81,7 +79,7 @@
 .badgeLetter {
   color: #ffffff;
   font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 800;
   line-height: 1;
   transition: color 0.2s ease;
@@ -95,42 +93,11 @@
   color: #000000;
 }
 
-.brandMeta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0 0.35rem 1.25rem;
-  border-left: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-@media (max-width: 1040px) {
-  .brandMeta {
-    display: none;
-  }
-}
-
-.brandMetaDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #22c55e;
-  box-shadow: 0 0 8px #22c55e;
-}
-
-.brandMetaText {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.6);
-  text-transform: uppercase;
-}
-
 /* Navigation Right */
 .navRight {
   display: flex;
   align-items: center;
-  gap: 2.25rem;
+  gap: 2.5rem;
 }
 
 @media (max-width: 900px) {
@@ -142,7 +109,7 @@
 .navLinks {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 2.25rem;
 }
 
 @media (max-width: 900px) {
@@ -155,28 +122,15 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  color: #8e95a5;
+  color: rgba(255, 255, 255, 0.65);
   text-decoration: none;
-  padding: 0.45rem 0;
-  transition: color 0.2s ease;
-}
-
-.navIndex {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.3);
-  margin-right: 0.45rem;
-  transition: color 0.2s ease;
-}
-
-.navText {
   font-family: var(--font-body, -apple-system, sans-serif);
   font-size: 0.74rem;
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
 }
 
 .navLink::after {
@@ -186,8 +140,8 @@
   left: 0;
   width: 0%;
   height: 1.5px;
-  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.4) 100%);
-  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #ffffff;
+  transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .navLink:hover,
@@ -195,21 +149,15 @@
   color: #ffffff;
 }
 
-.navLink:hover .navIndex,
-.navLinkActive .navIndex {
-  color: #d2a779;
-}
-
 .navLink:hover::after,
 .navLinkActive::after {
   width: 100%;
 }
 
-/* Button Group on Right */
+/* Single Rectangular Action Button */
 .navActions {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
 }
 
 @media (max-width: 680px) {
@@ -218,26 +166,25 @@
   }
 }
 
-/* Crisp Rectangular PORTFOLIO Button */
 .portfolioButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  height: 40px;
-  padding: 0 1.35rem;
+  gap: 0.45rem;
+  height: 38px;
+  padding: 0 1.25rem;
   background-color: #ffffff;
-  color: #000000;
+  color: #08090c;
   border: 1px solid #ffffff;
   border-radius: 0px !important;
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   text-decoration: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
 }
 
@@ -245,8 +192,7 @@
   background-color: transparent;
   color: #ffffff;
   border-color: #ffffff;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
 }
 
 .btnIcon {
@@ -257,43 +203,14 @@
   transform: translate(2px, -2px);
 }
 
-/* Refined Rectangular LET'S TALK Button */
-.talkButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  padding: 0 1.35rem;
-  background-color: rgba(210, 167, 121, 0.1);
-  color: #d2a779;
-  border: 1px solid rgba(210, 167, 121, 0.5);
-  border-radius: 0px !important;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
-}
-
-.talkButton:hover {
-  background-color: #d2a779;
-  color: #000000;
-  border-color: #d2a779;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 18px rgba(210, 167, 121, 0.35);
-}
-
 /* Mobile Toggle Button (Rectangular) */
 .mobileToggleBtn {
   display: none;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 0px;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   color: #ffffff;
   padding: 0;
   cursor: pointer;
@@ -340,7 +257,7 @@
   align-items: center;
   color: #c0c6d2;
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -348,13 +265,6 @@
   padding: 0.65rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.2s ease;
-}
-
-.mobileNavIndex {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
-  color: #d2a779;
-  margin-right: 0.75rem;
 }
 
 .mobileNavLink:hover {
@@ -370,7 +280,7 @@
 }
 
 .mobilePortfolioButton {
-  height: 44px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -381,7 +291,7 @@
   border: 1px solid #ffffff;
   border-radius: 0px;
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;

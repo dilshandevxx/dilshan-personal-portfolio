@@ -13,7 +13,7 @@ export default function HeroSkyLabs() {
   useEffect(() => {
     const handleScroll = () => {
       // ScrollSpy for landing sections
-      const sections = ["skills", "about-me", "contact"];
+      const sections = ["skills", "projects", "about-me", "contact"];
       const scrollPos = window.scrollY + 220;
 
       for (const sectionId of sections) {
@@ -39,10 +39,10 @@ export default function HeroSkyLabs() {
 
   return (
     <section className={styles.heroSection} aria-label="Hero">
-      {/* 1. Swiss Architectural Navbar */}
+      {/* 1. Minimal & Beautiful SkyLabs Navbar */}
       <header className={styles.navHeader}>
         <div className={styles.navContainer}>
-          {/* Left: Pure SkyLabs Brand Wordmark, Geometric [S] Badge & Status Tag */}
+          {/* Left: Pure SkyLabs Brand Wordmark & Geometric Badge */}
           <Link href="/" className={styles.brandLink}>
             <div className={styles.logoWrapper}>
               <span className={styles.logoText}>
@@ -52,54 +52,42 @@ export default function HeroSkyLabs() {
                 <span className={styles.badgeLetter}>S</span>
               </div>
             </div>
-            <div className={styles.brandMeta}>
-              <span className={styles.brandMetaDot} />
-              <span className={styles.brandMetaText}>AVAILABLE FOR WORK</span>
-            </div>
           </Link>
 
-          {/* Right: Architectural Nav Links + Crisp Rectangular Action Buttons */}
+          {/* Right: Clean Nav Links + Single Refined Rectangular Action Button */}
           <div className={styles.navRight}>
             <nav className={styles.navLinks} aria-label="Main Navigation">
               <Link
                 href="#skills"
                 className={`${styles.navLink} ${activeSection === "skills" ? styles.navLinkActive : ""}`}
               >
-                <span className={styles.navIndex}>01</span>
-                <span className={styles.navText}>SERVICES</span>
+                SERVICES
               </Link>
-              <Link href="/projects" className={styles.navLink}>
-                <span className={styles.navIndex}>02</span>
-                <span className={styles.navText}>PROJECTS</span>
+              <Link
+                href="#projects"
+                className={`${styles.navLink} ${activeSection === "projects" ? styles.navLinkActive : ""}`}
+              >
+                PROJECTS
               </Link>
               <Link
                 href="#about-me"
                 className={`${styles.navLink} ${activeSection === "about-me" ? styles.navLinkActive : ""}`}
               >
-                <span className={styles.navIndex}>03</span>
-                <span className={styles.navText}>ABOUT</span>
+                ABOUT
               </Link>
               <Link
                 href="#contact"
                 className={`${styles.navLink} ${activeSection === "contact" ? styles.navLinkActive : ""}`}
               >
-                <span className={styles.navIndex}>04</span>
-                <span className={styles.navText}>CONTACT</span>
+                CONTACT
               </Link>
             </nav>
 
             <div className={styles.navActions}>
               <Link href="/projects" className={styles.portfolioButton}>
                 <span>PORTFOLIO</span>
-                <ArrowUpRight size={13} className={styles.btnIcon} />
+                <ArrowUpRight size={14} className={styles.btnIcon} />
               </Link>
-
-              <a
-                href="mailto:dilshan.devxx@gmail.com"
-                className={styles.talkButton}
-              >
-                <span>LET&apos;S TALK</span>
-              </a>
             </div>
 
             {/* Mobile Hamburger Toggle */}
@@ -131,32 +119,28 @@ export default function HeroSkyLabs() {
                   className={styles.mobileNavLink}
                   onClick={() => setMobileOpen(false)}
                 >
-                  <span className={styles.mobileNavIndex}>01</span>
-                  <span>SERVICES</span>
+                  SERVICES
                 </Link>
                 <Link
-                  href="/projects"
+                  href="#projects"
                   className={styles.mobileNavLink}
                   onClick={() => setMobileOpen(false)}
                 >
-                  <span className={styles.mobileNavIndex}>02</span>
-                  <span>PROJECTS</span>
+                  PROJECTS
                 </Link>
                 <Link
                   href="#about-me"
                   className={styles.mobileNavLink}
                   onClick={() => setMobileOpen(false)}
                 >
-                  <span className={styles.mobileNavIndex}>03</span>
-                  <span>ABOUT</span>
+                  ABOUT
                 </Link>
                 <Link
                   href="#contact"
                   className={styles.mobileNavLink}
                   onClick={() => setMobileOpen(false)}
                 >
-                  <span className={styles.mobileNavIndex}>04</span>
-                  <span>CONTACT</span>
+                  CONTACT
                 </Link>
 
                 <div className={styles.mobileDrawerActions}>
@@ -168,13 +152,6 @@ export default function HeroSkyLabs() {
                     <span>PORTFOLIO</span>
                     <ArrowUpRight size={14} />
                   </Link>
-                  <a
-                    href="mailto:dilshan.devxx@gmail.com"
-                    className={styles.mobileTalkButton}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    <span>LET&apos;S TALK</span>
-                  </a>
                 </div>
               </div>
             </motion.div>
