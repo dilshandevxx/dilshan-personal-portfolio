@@ -37,6 +37,45 @@ export default function HeroSkyLabs() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Proper slow, weighted scroll animation with custom easeInOutCubic curve
+  const handleSlowScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    sectionId: string
+  ) => {
+    e.preventDefault();
+    setMobileOpen(false);
+
+    const el = document.getElementById(sectionId);
+    if (!el) return;
+
+    const navbarHeight = 75;
+    const targetY =
+      el.getBoundingClientRect().top + window.scrollY - navbarHeight;
+    const startY = window.scrollY;
+    const distance = targetY - startY;
+    const duration = 1200; // 1.2s slow, graceful glide
+    let startTime: number | null = null;
+
+    const easeInOutCubic = (t: number) =>
+      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const ease = easeInOutCubic(progress);
+
+      window.scrollTo(0, startY + distance * ease);
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        window.history.pushState(null, "", `#${sectionId}`);
+      }
+    };
+
+    requestAnimationFrame(step);
+  };
+
   return (
     <section className={styles.heroSection} aria-label="Hero">
       {/* 1. Minimal & Beautiful SkyLabs Navbar */}
@@ -59,24 +98,28 @@ export default function HeroSkyLabs() {
             <nav className={styles.navLinks} aria-label="Main Navigation">
               <Link
                 href="#skills"
+                onClick={(e) => handleSlowScroll(e, "skills")}
                 className={`${styles.navLink} ${activeSection === "skills" ? styles.navLinkActive : ""}`}
               >
                 SERVICES
               </Link>
               <Link
                 href="#projects"
+                onClick={(e) => handleSlowScroll(e, "projects")}
                 className={`${styles.navLink} ${activeSection === "projects" ? styles.navLinkActive : ""}`}
               >
                 PROJECTS
               </Link>
               <Link
                 href="#about-me"
+                onClick={(e) => handleSlowScroll(e, "about-me")}
                 className={`${styles.navLink} ${activeSection === "about-me" ? styles.navLinkActive : ""}`}
               >
                 ABOUT
               </Link>
               <Link
                 href="#contact"
+                onClick={(e) => handleSlowScroll(e, "contact")}
                 className={`${styles.navLink} ${activeSection === "contact" ? styles.navLinkActive : ""}`}
               >
                 CONTACT
@@ -117,28 +160,28 @@ export default function HeroSkyLabs() {
                 <Link
                   href="#skills"
                   className={styles.mobileNavLink}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={(e) => handleSlowScroll(e, "skills")}
                 >
                   SERVICES
                 </Link>
                 <Link
                   href="#projects"
                   className={styles.mobileNavLink}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={(e) => handleSlowScroll(e, "projects")}
                 >
                   PROJECTS
                 </Link>
                 <Link
                   href="#about-me"
                   className={styles.mobileNavLink}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={(e) => handleSlowScroll(e, "about-me")}
                 >
                   ABOUT
                 </Link>
                 <Link
                   href="#contact"
                   className={styles.mobileNavLink}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={(e) => handleSlowScroll(e, "contact")}
                 >
                   CONTACT
                 </Link>

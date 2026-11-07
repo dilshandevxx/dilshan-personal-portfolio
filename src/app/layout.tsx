@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeContext";
 import { AudioProvider } from "@/components/AudioContext";
 import { AppShell } from "@/components/AppShell";
+import { SmoothScrollProvider } from "@/components/SmoothScroll";
 import { siteConfig } from "@/data/siteConfig";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -74,7 +75,9 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <ThemeProvider>
           <AudioProvider>
-            <AppShell>{children}</AppShell>
+            <SmoothScrollProvider>
+              <AppShell>{children}</AppShell>
+            </SmoothScrollProvider>
           </AudioProvider>
         </ThemeProvider>
         <Analytics />
