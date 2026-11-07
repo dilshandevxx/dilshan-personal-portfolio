@@ -1,8 +1,8 @@
 /* Contact Section (FEEL FREE TO CONTACT ME - strictly square corners) */
 .contactSection {
-  background-color: #090a0c;
+  background-color: #000000;
   padding: 8rem 2rem 9rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   position: relative;
 }
 
@@ -214,5 +214,5 @@
 
 .resetButton:hover {
   background: #e2d5b5;
-  color: #090a0c;
+  color: #000000;
 }
