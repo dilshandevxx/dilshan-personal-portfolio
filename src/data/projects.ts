@@ -12,7 +12,7 @@ export interface Project {
   slug: string;
   title: string;
   date: string;
-  category: "AI/ML" | "Full-Stack" | "DevOps" | "Systems";
+  category: "AI/ML" | "DevOps" | "Web" | "Landing" | "Systems" | "Full-Stack";
   tagline: string;
   description: string;
   longDescription: string;
@@ -29,6 +29,8 @@ export interface Project {
   metrics?: string;
   metricsDetail: ProjectMetric[];
   stackLayers: ProjectStackLayer[];
+  image?: string;
+  aliases?: string[];
 }
 
 export const projectsList: Project[] = [
@@ -71,6 +73,7 @@ export const projectsList: Project[] = [
       { layer: "Backend & API", technologies: ["Python", "FastAPI", "WebSockets", "Pydantic"] },
       { layer: "Infrastructure", technologies: ["Docker", "Redis", "Nginx", "GitHub Actions"] },
     ],
+    image: "/images/project_boltshift.jpg",
   },
   {
     slug: "cloudscale-gitops-pipeline",
@@ -111,12 +114,14 @@ export const projectsList: Project[] = [
       { layer: "Infrastructure as Code", technologies: ["Terraform", "AWS / VPS", "Linux", "Docker"] },
       { layer: "Observability & Telemetry", technologies: ["Prometheus", "Grafana", "Alertmanager", "FluentBit"] },
     ],
+    image: "/images/project_collective.jpg",
+    aliases: ["cloudwatch"],
   },
   {
     slug: "omni-commerce-platform",
     title: "OmniStore Distributed E-Commerce",
     date: "2024",
-    category: "Full-Stack",
+    category: "Web",
     stars: 1226,
     tagline: "Event-driven microservices architecture with real-time inventory and Stripe billing.",
     description:
@@ -151,6 +156,8 @@ export const projectsList: Project[] = [
       { layer: "Backend & Gateway", technologies: ["Node.js", "Express", "REST", "Zod"] },
       { layer: "Data & Event Bus", technologies: ["PostgreSQL", "Apache Kafka", "Redis", "Prisma"] },
     ],
+    image: "/images/project_brutalist.jpg",
+    aliases: ["mastermail"],
   },
   {
     slug: "vision-edge-infer",
@@ -190,6 +197,8 @@ export const projectsList: Project[] = [
       { layer: "Runtime & Streaming", technologies: ["Python", "WebSockets", "WebRTC", "NumPy"] },
       { layer: "Packaging", technologies: ["Docker", "Linux Systemd", "CUDA Toolkit"] },
     ],
+    image: "/images/ecommerce_card.png",
+    aliases: ["euphoria"],
   },
   {
     slug: "sentinel-infra-watch",
@@ -229,12 +238,13 @@ export const projectsList: Project[] = [
       { layer: "Integration & Monitoring", technologies: ["Docker API", "Prometheus", "REST", "Webhooks"] },
       { layer: "Delivery", technologies: ["Slack API", "Discord Webhooks", "Systemd"] },
     ],
+    image: "/images/project_powersurge.jpg",
   },
   {
     slug: "hyperflow-task-orchestrator",
     title: "HyperFlow Workflow Orchestrator",
     date: "2023",
-    category: "Full-Stack",
+    category: "Web",
     stars: 1120,
     tagline: "Visual DAG-based task execution engine with distributed worker queues.",
     description:
@@ -268,12 +278,14 @@ export const projectsList: Project[] = [
       { layer: "Execution Engine", technologies: ["FastAPI", "Python", "Celery", "Pydantic"] },
       { layer: "Queue & Persistence", technologies: ["Redis", "PostgreSQL", "Docker Compose"] },
     ],
+    image: "/images/project_warpspeed_desk.jpg",
+    aliases: ["powersurge"],
   },
   {
     slug: "dilshan-personal-portfolio",
     title: "dilshan.dev",
     date: "2025",
-    category: "Full-Stack",
+    category: "Landing",
     stars: 315,
     tagline: "The source code of this personal digital garden and portfolio.",
     description:
@@ -308,6 +320,8 @@ export const projectsList: Project[] = [
       { layer: "Styling & Tokens", technologies: ["Vanilla CSS", "CSS Variables", "Modern Typography"] },
       { layer: "Hosting", technologies: ["Vercel", "Edge Network", "GitHub CI"] },
     ],
+    image: "/images/project_brutalist.jpg",
+    aliases: ["brutalist-manifesto"],
   },
   {
     slug: "cxx-tensor-graph",
@@ -347,6 +361,8 @@ export const projectsList: Project[] = [
       { layer: "Graph & Autograd", technologies: ["DAG Topological Sort", "Reverse-Mode AD"] },
       { layer: "Bindings", technologies: ["Python C-API", "Pybind11", "CMake"] },
     ],
+    image: "/images/project_collective.jpg",
+    aliases: ["creative-collective"],
   },
   {
     slug: "ebpf-network-tracer",
@@ -386,6 +402,8 @@ export const projectsList: Project[] = [
       { layer: "User-space Agent", technologies: ["Go", "Cilium/ebpf", "Ring Buffer"] },
       { layer: "Metrics Exporter", technologies: ["Prometheus", "OpenTelemetry", "Grafana"] },
     ],
+    image: "/images/project_warpspeed.jpg",
+    aliases: ["warpspeed"],
   },
   {
     slug: "crdt-sync-engine",
@@ -425,6 +443,7 @@ export const projectsList: Project[] = [
       { layer: "Encoding", technologies: ["TypeScript", "Uint8Array", "Varint Encoding"] },
       { layer: "Transport", technologies: ["WebSockets", "WebRTC Data Channels"] },
     ],
+    image: "/images/project_warpspeed_desk.jpg",
   },
   {
     slug: "distroless-k8s-operator",
@@ -464,6 +483,7 @@ export const projectsList: Project[] = [
       { layer: "Kubernetes APIs", technologies: ["Admission Webhooks", "CustomResourceDefinitions"] },
       { layer: "Security Tooling", technologies: ["CIS Benchmarks", "Distroless", "Trivy"] },
     ],
+    image: "/images/science_tech.png",
   },
   {
     slug: "micro-cache-allocator",
@@ -503,5 +523,128 @@ export const projectsList: Project[] = [
       { layer: "Concurrency", technologies: ["Atomic CAS", "Lock-Free Treiber Stack", "Memory Fences"] },
       { layer: "Language", technologies: ["Modern C++20", "GTest Benchmarks", "Valgrind/ASan"] },
     ],
+    image: "/images/biometric_scan.png",
+  },
+  {
+    slug: "aura-creative-studio",
+    title: "Aura Creative Studio",
+    date: "2025",
+    category: "Landing",
+    stars: 840,
+    tagline: "High-fashion editorial agency portfolio with WebGL interactive physics.",
+    description:
+      "Modern editorial landing page featuring smooth inertial scrolling, WebGL fluid shaders, and tactile typography crafted for high-end digital studios.",
+    longDescription:
+      "Aura is an award-winning creative studio landing page engineered with Next.js App Router, Three.js, and GLSL fragment shaders. Designed to evoke tactile luxury and editorial confidence, it blends editorial print layout standards with smooth 60 FPS hardware-accelerated transitions.",
+    highlights: [
+      "Custom WebGL canvas rendering interactive particle fluid physics on mouse move",
+      "Zero-layout-shift typography using variable fonts and CSS subgrid layout",
+      "Dynamic theme transition shaders animating background hue shifts seamlessly",
+      "Lighthouse 100 performance score with progressive asset hydration",
+      "Accessible keyboard navigation with focus traps and screen-reader narration",
+    ],
+    architecture:
+      "Built with React 19 and Three.js running within a shared canvas context. Post-processing passes utilize custom GLSL distortion shaders managed through Framer Motion layout states.",
+    challenges:
+      "Achieving silky 60 FPS WebGL render loops without draining mobile battery. Solved using visibility observer triggers, delta-time throttling, and adaptive render resolution.",
+    tags: ["Next.js", "Three.js", "WebGL", "Framer Motion", "TypeScript", "Tailwind"],
+    highlight: true,
+    featured: false,
+    githubUrl: "https://github.com/dilshandevxx/aura-creative-studio",
+    demoUrl: "https://aura-studio.dilshan.dev",
+    metrics: "60 FPS WebGL canvas with 100 Lighthouse Performance score",
+    metricsDetail: [
+      { label: "Frame Rate", value: "60 FPS" },
+      { label: "Lighthouse Score", value: "100/100" },
+      { label: "First Input Delay", value: "< 12ms" },
+      { label: "Bundle Size", value: "38KB Gzip" },
+    ],
+    stackLayers: [
+      { layer: "Frontend & 3D", technologies: ["Next.js", "Three.js", "Framer Motion", "GLSL Shaders"] },
+      { layer: "Styling", technologies: ["Tailwind CSS", "CSS Subgrid", "Variable Fonts"] },
+      { layer: "Deployment", technologies: ["Vercel Edge", "Cloudflare CDN"] },
+    ],
+    image: "/images/project_collective.jpg",
+    aliases: ["creative-collective"],
+  },
+  {
+    slug: "warpspeed-protocol-landing",
+    title: "Warpspeed Cloud SaaS Landing",
+    date: "2024",
+    category: "Landing",
+    stars: 670,
+    tagline: "Ultra-low-latency packet engine developer platform landing page.",
+    description:
+      "Conversion-focused developer SaaS product landing page with interactive latency benchmarks, dark mode aesthetic, and code playground.",
+    longDescription:
+      "Warpspeed Cloud Landing is a developer-centric product landing page crafted for sub-millisecond network streaming protocol software. It features live throughput simulators, interactive pricing matrices, and copy-paste CLI integration snippets.",
+    highlights: [
+      "Interactive latency calculator visualizing packet savings over traditional TCP",
+      "Interactive code playground with syntax-highlighted Rust and Go sample drivers",
+      "Refined dark matte surfaces with precision 1px borders and subtle glow highlights",
+      "Stripe customer portal deep linking with dynamic pricing tiers",
+    ],
+    architecture:
+      "Next.js App Router with React Server Components, Tailwind CSS, and lightweight SVG charting engines for latency graphs.",
+    challenges:
+      "Creating dense technical charts that load instantaneously without third-party heavy charting libraries. Solved with custom SVG path generators.",
+    tags: ["React 19", "Next.js", "Tailwind CSS", "TypeScript", "SVG"],
+    highlight: true,
+    featured: false,
+    githubUrl: "https://github.com/dilshandevxx/warpspeed-landing",
+    demoUrl: "https://warpspeed.dilshan.dev",
+    metrics: "Sub-50ms FCP with instant interactive latency calculator",
+    metricsDetail: [
+      { label: "FCP", value: "48ms" },
+      { label: "Conversion Rate", value: "8.4%" },
+      { label: "Zero Janky JS", value: "100%" },
+    ],
+    stackLayers: [
+      { layer: "Frontend", technologies: ["Next.js", "React 19", "TypeScript", "Tailwind CSS"] },
+      { layer: "Visuals", technologies: ["Custom SVG Charts", "Framer Motion"] },
+      { layer: "Analytics", technologies: ["Plausible", "Vercel Analytics"] },
+    ],
+    image: "/images/project_warpspeed.jpg",
+    aliases: ["warpspeed"],
+  },
+  {
+    slug: "boltshift-fintech-gateway",
+    title: "Boltshift Real-Time Payment Engine",
+    date: "2024",
+    category: "Web",
+    stars: 1450,
+    tagline: "High-throughput cloud inference engine and real-time payment gateway.",
+    description:
+      "Deterministic sub-50ms payment processing operator with cryptographic ledger auditing, Kafka event streaming, and live transaction dashboards.",
+    longDescription:
+      "Boltshift is an institutional-grade payment routing and settlement engine built for multi-currency transactions. Handling over 10,000 transactions per second with sub-50ms deterministic latency, it guarantees ACID compliance across distributed database nodes.",
+    highlights: [
+      "Processes 10,000+ operations/sec with deterministic sub-50ms p99 latency",
+      "Rust worker threads with zero-copy buffer serialization and event-driven Kafka pipelines",
+      "Cryptographic ledger auditing ensuring tamper-proof reconciliation",
+      "Live operational telemetry dashboard built with Next.js and WebSockets",
+    ],
+    architecture:
+      "Rust high-throughput core service connected via Kafka message buses to Go settlement workers. Post-settlement ledger entries are signed cryptographically and persisted into distributed PostgreSQL clusters.",
+    challenges:
+      "Preventing write amplification under high concurrency. Solved with memory-mapped ring buffers and debounced batch commits.",
+    tags: ["Rust", "Go", "Kafka", "PostgreSQL", "Docker", "Kubernetes", "Next.js"],
+    highlight: true,
+    featured: false,
+    githubUrl: "https://github.com/dilshandevxx/boltshift-gateway",
+    demoUrl: "https://boltshift.dilshan.dev",
+    metrics: "10,000+ TPS with sub-50ms deterministic settlement latency",
+    metricsDetail: [
+      { label: "Peak TPS", value: "10k+ / sec" },
+      { label: "P99 Latency", value: "< 48ms" },
+      { label: "Ledger Integrity", value: "100% Cryptographic" },
+    ],
+    stackLayers: [
+      { layer: "Core Engine", technologies: ["Rust", "Go", "Kafka", "Zero-Copy Buffers"] },
+      { layer: "Data", technologies: ["PostgreSQL", "Redis", "Ledger Logs"] },
+      { layer: "UI & Ops", technologies: ["Next.js", "WebSockets", "Tailwind CSS"] },
+    ],
+    image: "/images/project_boltshift.jpg",
+    aliases: ["boltshift"],
   },
 ];

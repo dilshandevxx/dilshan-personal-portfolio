@@ -10,14 +10,24 @@
 
 /* 1. Top Navbar */
 .navHeader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
   width: 100%;
-  padding: 1.75rem 3.5rem 1.25rem;
+  padding: 1.15rem 3.5rem;
   box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.25s ease;
 }
 
 @media (max-width: 900px) {
   .navHeader {
-    padding: 1.25rem 1.5rem 1rem;
+    padding: 1rem 1.5rem;
   }
 }
 
@@ -57,11 +67,13 @@
   width: 32px;
   height: 32px;
   border: 2px solid #ffffff;
-  border-radius: 4px;
+  border-radius: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
+  background-color: transparent;
+  transition: all 0.2s ease;
 }
 
 .badgeLetter {
@@ -70,18 +82,27 @@
   font-size: 1.15rem;
   font-weight: 800;
   line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.brandLink:hover .logoBadge {
+  background-color: #ffffff;
+}
+
+.brandLink:hover .badgeLetter {
+  color: #000000;
 }
 
 /* Navigation Right */
 .navRight {
   display: flex;
   align-items: center;
-  gap: 2.75rem;
+  gap: 2rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .navRight {
-    gap: 1.25rem;
+    gap: 1rem;
   }
 }
 
@@ -91,37 +112,110 @@
   gap: 2.25rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .navLinks {
     display: none;
   }
 }
 
 .navLink {
-  color: #c0c6d2;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: #a0a6b2;
   font-family: var(--font-body, -apple-system, sans-serif);
   font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   text-decoration: none;
+  padding: 0.35rem 0;
   transition: color 0.2s ease;
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1.5px;
+  background-color: #ffffff;
+  transition: width 0.22s ease;
 }
 
 .navLink:hover {
   color: #ffffff;
 }
 
-/* Tan / Camel Rectangular [LET'S TALK] Button */
+.navLink:hover::after,
+.navLinkActive::after {
+  width: 100%;
+}
+
+.navLinkActive {
+  color: #ffffff;
+}
+
+/* Button Group on Right */
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+@media (max-width: 680px) {
+  .navActions {
+    display: none;
+  }
+}
+
+/* Crisp Rectangular PORTFOLIO Button */
+.portfolioButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1.35rem;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+  border-radius: 0px !important;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.portfolioButton:hover {
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btnIcon {
+  transition: transform 0.2s ease;
+}
+
+.portfolioButton:hover .btnIcon {
+  transform: translate(2px, -2px);
+}
+
+/* Crisp Rectangular LET'S TALK Button */
 .talkButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.65rem;
+  padding: 0.65rem 1.35rem;
   background-color: #d2a779;
   color: #000000;
   border: 1px solid #d2a779;
-  border-radius: 3px;
+  border-radius: 0px !important;
   font-family: var(--font-body, -apple-system, sans-serif);
   font-size: 0.78rem;
   font-weight: 700;
@@ -134,7 +228,118 @@
 
 .talkButton:hover {
   background-color: #deb789;
+  border-color: #deb789;
   transform: translateY(-1px);
+}
+
+/* Mobile Toggle Button (Rectangular) */
+.mobileToggleBtn {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0px;
+  color: #ffffff;
+  padding: 0.45rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease;
+}
+
+@media (max-width: 900px) {
+  .mobileToggleBtn {
+    display: inline-flex;
+  }
+}
+
+.mobileToggleBtn:hover {
+  border-color: #ffffff;
+}
+
+/* Mobile Drawer (Rectangular) */
+.mobileDrawer {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(8, 9, 11, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0px;
+  padding: 1.5rem 1.5rem 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
+}
+
+.mobileDrawerInner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.mobileNavLink {
+  color: #c0c6d2;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: color 0.2s ease;
+}
+
+.mobileNavLink:hover {
+  color: #ffffff;
+}
+
+.mobileDrawerActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.mobilePortfolioButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.85rem;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+  border-radius: 0px;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.mobileTalkButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.85rem;
+  background-color: #d2a779;
+  color: #000000;
+  border: 1px solid #d2a779;
+  border-radius: 0px;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
 }
 
 /* 2. Main Hero Content */
@@ -143,13 +348,13 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding-top: 3.5rem;
+  padding-top: 6.5rem;
   width: 100%;
 }
 
 @media (max-width: 900px) {
   .heroContent {
-    padding-top: 2.5rem;
+    padding-top: 5rem;
   }
 }
 

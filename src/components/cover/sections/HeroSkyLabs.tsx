@@ -1,17 +1,48 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import styles from "./HeroSkyLabs.module.css";
 
 export default function HeroSkyLabs() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // ScrollSpy for landing sections
+      const sections = ["skills", "about-me", "contact"];
+      const scrollPos = window.scrollY + 220;
+
+      for (const sectionId of sections) {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveSection(sectionId);
+            return;
+          }
+        }
+      }
+      if (window.scrollY < 260) {
+        setActiveSection("");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section className={styles.heroSection} aria-label="Hero">
-      {/* 1. Top Navbar matching SkyLabs reference */}
+      {/* 1. Swiss Architectural Navbar */}
       <header className={styles.navHeader}>
         <div className={styles.navContainer}>
-          {/* Left: SkyLabs Brand Wordmark & Geometric Badge */}
+          {/* Left: Pure SkyLabs Brand Wordmark & Geometric Square [S] Badge */}
           <Link href="/" className={styles.brandLink}>
             <div className={styles.logoWrapper}>
               <span className={styles.logoText}>
@@ -23,28 +54,120 @@ export default function HeroSkyLabs() {
             </div>
           </Link>
 
-          {/* Right: Navigation Links + Warm Tan [LET'S TALK] Button */}
+          {/* Right: Architectural Nav Links + Crisp Rectangular Action Buttons */}
           <div className={styles.navRight}>
             <nav className={styles.navLinks} aria-label="Main Navigation">
-              <Link href="#skills" className={styles.navLink}>
+              <Link
+                href="#skills"
+                className={`${styles.navLink} ${activeSection === "skills" ? styles.navLinkActive : ""}`}
+              >
                 SERVICES
               </Link>
-              <Link href="#projects" className={styles.navLink}>
+              <Link href="/projects" className={styles.navLink}>
                 PROJECTS
               </Link>
-              <Link href="#about-me" className={styles.navLink}>
-                STUDIO
+              <Link
+                href="#about-me"
+                className={`${styles.navLink} ${activeSection === "about-me" ? styles.navLinkActive : ""}`}
+              >
+                ABOUT
+              </Link>
+              <Link
+                href="#contact"
+                className={`${styles.navLink} ${activeSection === "contact" ? styles.navLinkActive : ""}`}
+              >
+                CONTACT
               </Link>
             </nav>
 
-            <a
-              href="mailto:dilshan.devxx@gmail.com"
-              className={styles.talkButton}
+            <div className={styles.navActions}>
+              <Link href="/projects" className={styles.portfolioButton}>
+                <span>PORTFOLIO</span>
+                <ArrowUpRight size={13} className={styles.btnIcon} />
+              </Link>
+
+              <a
+                href="mailto:dilshan.devxx@gmail.com"
+                className={styles.talkButton}
+              >
+                LET&apos;S TALK
+              </a>
+            </div>
+
+            {/* Mobile Hamburger Toggle */}
+            <button
+              type="button"
+              className={styles.mobileToggleBtn}
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
             >
-              LET&apos;S TALK
-            </a>
+              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Drawer */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              className={styles.mobileDrawer}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className={styles.mobileDrawerInner}>
+                <Link
+                  href="#skills"
+                  className={styles.mobileNavLink}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  SERVICES
+                </Link>
+                <Link
+                  href="/projects"
+                  className={styles.mobileNavLink}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  PROJECTS
+                </Link>
+                <Link
+                  href="#about-me"
+                  className={styles.mobileNavLink}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  ABOUT
+                </Link>
+                <Link
+                  href="#contact"
+                  className={styles.mobileNavLink}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  CONTACT
+                </Link>
+
+                <div className={styles.mobileDrawerActions}>
+                  <Link
+                    href="/projects"
+                    className={styles.mobilePortfolioButton}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <span>PORTFOLIO</span>
+                    <ArrowUpRight size={14} />
+                  </Link>
+                  <a
+                    href="mailto:dilshan.devxx@gmail.com"
+                    className={styles.mobileTalkButton}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    LET&apos;S TALK
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* 2. Main Hero Content */}

@@ -1,165 +1,227 @@
-"use client";
-
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import styles from "@/components/modern/ModernAbout.module.css";
+import { siteConfig } from "@/data/siteConfig";
+import { timelineEras } from "@/data/timeline";
+import { TechMatrix } from "@/components/TechMatrix";
+import { AmbientPlayer } from "@/components/AmbientPlayer";
 
-const VALUES = [
-  {
-    title: "Zero Compromise on Performance",
-    desc: "Obsessive optimization of execution paths, memory boundaries, TTFT latency, and rendering threads.",
-  },
-  {
-    title: "Determinism Over Magic",
-    desc: "Explicit architectural boundaries, reproducible state machines, and transparent failure domains.",
-  },
-  {
-    title: "Aesthetic Discipline",
-    desc: "Monolithic typography, generous breathing room, rich dark surfaces, and purposeful micro-interactions.",
-  },
-  {
-    title: "Open-Source Mindset",
-    desc: "Giving back verified benchmarks, architectural playbooks, and production tools to the developer craft.",
-  },
-];
+export const metadata = {
+  title: `About — ${siteConfig.siteName}`,
+  description: siteConfig.sidebarBio,
+};
 
-const TIMELINE = [
-  {
-    period: "2024 — PRESENT",
-    role: "Lead Systems Architect & Founder",
-    company: "Engineering Studio",
-    location: "Global / Remote",
-  },
-  {
-    period: "2022 — 2024",
-    role: "Senior Distributed Systems Engineer",
-    company: "Scalable Infrastructure Platforms",
-    location: "San Francisco, CA",
-  },
-  {
-    period: "2020 — 2022",
-    role: "Full-Stack AI Software Engineer",
-    company: "Autonomous ML Pipelines",
-    location: "Singapore",
-  },
-  {
-    period: "2018 — 2020",
-    role: "Core Platform Developer",
-    company: "Cloud Microservices Lab",
-    location: "Colombo / Remote",
-  },
-];
+function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
+  return (
+    <h2 id={id} className="about-section-heading">
+      <a href={`#${id}`} className="heading-anchor" aria-label={`Permalink to ${id}`}>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M6.5 9.5a3.5 3.5 0 0 0 5 0l2-2a3.5 3.5 0 0 0-5-5l-1 1" />
+          <path d="M9.5 6.5a3.5 3.5 0 0 0-5 0l-2 2a3.5 3.5 0 0 0 5 5l1-1" />
+        </svg>
+      </a>
+      <span>{children}</span>
+    </h2>
+  );
+}
 
 export default function AboutPage() {
   return (
-    <div className={styles.pageSection}>
-      {/* 1. Header Section */}
-      <div className={styles.headerContainer}>
-        <motion.h1
-          className={styles.headline}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          About Dilshan Ramesh
-        </motion.h1>
-
-        <motion.p
-          className={styles.subtitle}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          Full-Stack Engineer &amp; Systems Architect dedicated to crafting resilient distributed infrastructure and clean, tactile digital experiences.
-        </motion.p>
-      </div>
-
-      {/* 2. Split Hero Section */}
-      <div className={styles.splitSection}>
-        <motion.div
-          className={styles.imageContainer}
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7 }}
-        >
-          <Image
-            src="/images/about.png"
-            alt="Dilshan Ramesh — Systems Architect"
-            fill
-            sizes="(max-width: 900px) 100vw, 50vw"
-            className={styles.portraitImage}
-            priority
-          />
-        </motion.div>
-
-        <motion.div
-          className={styles.narrativeContent}
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, delay: 0.15 }}
-        >
-          <h2 className={styles.statement}>
-            We build platforms where <span className={styles.statementHighlight}>concurrency</span>, scalability, and design harmony co-exist.
-          </h2>
-
-          <p className={styles.paragraph}>
-            With over eight years of hands-on systems programming, cloud orchestration, and interface engineering, I operate across the entire modern technical stack. From writing custom CUDA kernels and high-throughput vLLM inference brokers to structuring enterprise React 19 micro-frontends with 60 FPS Canvas visualizers.
-          </p>
-
-          <p className={styles.paragraph}>
-            I believe software should feel monolithic, fast, and unyielding in production. Reject visual bloat and artificial complexity in favor of crisp mathematical precision and understated luxury.
-          </p>
-
-          <div style={{ marginTop: "1.5rem" }}>
-            <a
-              href="mailto:dilshan.devxx@gmail.com"
-              className={styles.talkButton}
-            >
-              Talk Today
-            </a>
+    <div className="about-content-narrow">
+      <header className="page-header">
+        <div className="page-header-top">
+          <h1 className="page-title">About Me</h1>
+          <div className="page-header-actions">
+            <AmbientPlayer />
           </div>
-        </motion.div>
-      </div>
-
-      {/* 3. Core Values Grid */}
-      <div className={styles.valuesSection}>
-        <h2 className={styles.sectionHeading}>ARCHITECTURAL PRINCIPLES</h2>
-        <div className={styles.valuesGrid}>
-          {VALUES.map((val, idx) => (
-            <motion.div
-              key={val.title}
-              className={styles.valueCard}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-            >
-              <h3 className={styles.valueTitle}>{val.title}</h3>
-              <p className={styles.valueDesc}>{val.desc}</p>
-            </motion.div>
-          ))}
         </div>
-      </div>
+        <p className="page-subtitle">
+          Software engineer and open-source builder specializing in distributed systems, applied AI architectures, high-concurrency backends, and resilient infrastructure.
+        </p>
+      </header>
 
-      {/* 4. Experience & Trajectory Timeline */}
-      <div className={styles.timelineSection}>
-        <h2 className={styles.sectionHeading}>EXPERIENCE &amp; DISTINCTION</h2>
-        <div className={styles.timelineList}>
-          {TIMELINE.map((item, idx) => (
-            <div key={idx} className={styles.timelineItem}>
-              <span className={styles.timelinePeriod}>{item.period}</span>
-              <div>
-                <h3 className={styles.timelineRole}>{item.role}</h3>
-                <p className={styles.timelineCompany}>{item.company}</p>
+      {/* Main Content Stream */}
+      <div className="about-sections-stream">
+        {/* Side-by-side Story & Photo */}
+        <div className="about-intro-grid">
+          <div className="about-prose-block">
+            <p>
+              Hey, I&apos;m <strong>Dilshan</strong>! Welcome to my spot on the web for{" "}
+              <Link href="/blog" className="text-link">writing</Link>,{" "}
+              <Link href="/projects" className="text-link">projects</Link>, and{" "}
+              <Link href="/shelves" className="text-link">open knowledge</Link>. I work across the stack as an AI/ML engineer, full-stack developer, and DevOps practitioner, focusing on scalable backend services, distributed systems, and real-time LLM inference pipelines.
+            </p>
+            <p>
+              This site is a personal space for technical self-expression and sharing real-world software architecture lessons without advertisements, affiliate links, sponsored posts, or paywalls.
+            </p>
+            <p>
+              If you want to keep up with my engineering logs and notes, explore the{" "}
+              <Link href="/blog" className="text-link">blog stream</Link> or subscribe to the{" "}
+              <Link href="/rss.xml" className="text-link">RSS feed</Link>. Feel free to reach out via{" "}
+              <a href={`mailto:${siteConfig.social.email}`} className="text-link">email</a> or explore my code on{" "}
+              <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer" className="text-link">GitHub</a>.
+            </p>
+          </div>
+
+          <div className="about-photo-wrapper">
+            <img
+              src="/dilshan_profile.jpg"
+              alt="Dilshan at work"
+              className="about-photo-img"
+            />
+          </div>
+        </div>
+
+        {/* Quick Stats Grid */}
+        <div className="about-stats-grid">
+          <div className="about-stat-box">
+            <div className="about-stat-label">Primary Roles</div>
+            <div className="about-stat-value">AI/ML &bull; Full-Stack &bull; DevOps</div>
+          </div>
+          <div className="about-stat-box">
+            <div className="about-stat-label">Core Focus</div>
+            <div className="about-stat-value">LLMs, Web Scale &amp; GitOps</div>
+          </div>
+          <div className="about-stat-box">
+            <div className="about-stat-label">Primary Languages</div>
+            <div className="about-stat-value">TypeScript, Python, Go, SQL</div>
+          </div>
+          <div className="about-stat-box">
+            <div className="about-stat-label">Availability</div>
+            <div className="about-stat-value">Remote / Global Relocation</div>
+          </div>
+        </div>
+
+        {/* Career & Timeline */}
+        <section className="about-section-block">
+          <SectionHeading id="timeline">Engineering Timeline</SectionHeading>
+          <div className="about-timeline-list">
+            {timelineEras.map((era) => (
+              <div key={era.period} className="about-timeline-row">
+                <span className="about-timeline-period">{era.period}</span>
+                <div className="about-timeline-details">
+                  <h3 className="about-timeline-role">{era.role}</h3>
+                  <p className="about-timeline-desc">{era.description}</p>
+                  {era.tags && (
+                    <div className="about-timeline-tags">
+                      {era.tags.map((tag) => (
+                        <span key={tag} className="about-timeline-tag">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
-              <span className={styles.timelineLocation}>{item.location}</span>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Technical Competencies */}
+        <section className="about-section-block">
+          <SectionHeading id="competencies">Technical Competencies</SectionHeading>
+          <TechMatrix />
+        </section>
+
+        {/* Songs Section */}
+        <section className="about-section-block">
+          <SectionHeading id="songs">Songs</SectionHeading>
+          <ul className="about-link-list">
+            <li>
+              <a href="https://soundcloud.com/ivoryandivory/rain" target="_blank" rel="noopener noreferrer">
+                Rain
+              </a>
+            </li>
+            <li>
+              <a href="https://soundcloud.com/ivoryandivory/let-it-be" target="_blank" rel="noopener noreferrer">
+                Let It Be
+              </a>
+            </li>
+            <li>
+              <a href="https://soundcloud.com/ivoryandivory/id-like-to-walk-around-in-your-mind" target="_blank" rel="noopener noreferrer">
+                I&apos;d Like to Walk Around In Your Mind
+              </a>
+            </li>
+            <li>
+              <a href="https://soundcloud.com/ivoryandivory/el-pasadiscos" target="_blank" rel="noopener noreferrer">
+                El Pasadiscos
+              </a>
+            </li>
+            <li>
+              <a href="https://soundcloud.com/john-termaat/such-great-heights" target="_blank" rel="noopener noreferrer">
+                Such Great Heights
+              </a>{" "}
+              <span className="about-link-note">(Duet)</span>
+            </li>
+            <li>
+              <a href="https://soundcloud.com/john-termaat/night-nurse" target="_blank" rel="noopener noreferrer">
+                Night Nurse
+              </a>{" "}
+              <span className="about-link-note">(Duet)</span>
+            </li>
+          </ul>
+        </section>
+
+        {/* Miscellaneous Section */}
+        <section className="about-section-block">
+          <SectionHeading id="miscellaneous">Miscellaneous</SectionHeading>
+          <ul className="about-link-list">
+            <li>
+              <Link href="/about">Resume</Link>
+            </li>
+            <li>
+              <Link href="/shelves">Digital Garden &amp; Shelves</Link>
+            </li>
+            <li>
+              <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer">
+                Open Source Repositories
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        {/* Connect Section */}
+        <section className="about-section-block">
+          <SectionHeading id="connect">Connect</SectionHeading>
+          <p className="about-connect-text">
+            I am actively exploring high-impact software engineering roles, technical advisory engagements, and open-source collaboration. Feel free to reach out across any channel:
+          </p>
+          <ul className="about-link-list">
+            <li>
+              <strong>Email:</strong>{" "}
+              <a href={`mailto:${siteConfig.social.email}`}>
+                {siteConfig.social.email}
+              </a>
+            </li>
+            <li>
+              <strong>GitHub:</strong>{" "}
+              <a href={siteConfig.social.github} target="_blank" rel="noopener noreferrer">
+                github.com/dilshandevxx
+              </a>
+            </li>
+            <li>
+              <strong>LinkedIn:</strong>{" "}
+              <a href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer">
+                linkedin.com/in/heydilshan
+              </a>
+            </li>
+            <li>
+              <strong>X (Twitter):</strong>{" "}
+              <a href={siteConfig.social.x} target="_blank" rel="noopener noreferrer">
+                @dilshanverse
+              </a>
+            </li>
+          </ul>
+        </section>
       </div>
     </div>
   );

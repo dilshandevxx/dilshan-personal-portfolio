@@ -32,7 +32,11 @@ export function PortfolioSidebar() {
       id: "projects",
       label: "PROJECTS",
       path: "/portfolio/projects",
-      isActive: pathname.startsWith("/portfolio/projects"),
+      isActive:
+        pathname === "/portfolio" ||
+        pathname === "/portfolio/" ||
+        pathname.startsWith("/portfolio/projects") ||
+        pathname.startsWith("/projects"),
     },
     {
       id: "writing",
@@ -54,8 +58,7 @@ export function PortfolioSidebar() {
       path: "/portfolio/about",
       isActive:
         pathname === "/portfolio/about" ||
-        pathname === "/portfolio" ||
-        pathname === "/portfolio/",
+        pathname.startsWith("/portfolio/about"),
     },
     {
       id: "resume",
@@ -75,9 +78,18 @@ export function PortfolioSidebar() {
     <>
       {/* Mobile Top Navigation Header (< 1020px) */}
       <header className="stefano-mobile-header">
-        <Link href="/" className="stefano-brand text-sm tracking-[0.22em]">
-          DILSHAN
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link href="/" className="stefano-brand text-sm tracking-[0.22em]">
+            DILSHAN
+          </Link>
+          <Link
+            href="/"
+            className="text-[10px] uppercase font-mono tracking-wider text-neutral-400 hover:text-white px-2 py-0.5 rounded border border-white/10"
+            title="Return to Main Landing Page"
+          >
+            &larr; MAIN
+          </Link>
+        </div>
         <div className="flex items-center gap-1.5">
           <div className="stefano-controls">
             <ColorPicker />
@@ -103,7 +115,7 @@ export function PortfolioSidebar() {
               href="/"
               className="stefano-brand"
               onClick={() => setMobileOpen(false)}
-              title="Return to Cover Page"
+              title="Return to Main Landing Page"
             >
               DILSHAN
             </Link>
@@ -118,6 +130,20 @@ export function PortfolioSidebar() {
 
         {/* Center Minimal Spaced Navigation */}
         <nav className="stefano-nav" aria-label="Main Navigation">
+          <Link
+            href="/"
+            onClick={() => setMobileOpen(false)}
+            className="stefano-nav-link"
+            style={{
+              opacity: 0.75,
+              borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+              paddingBottom: "0.75rem",
+              marginBottom: "0.5rem",
+            }}
+            title="Return to Main Landing Page"
+          >
+            <span>&larr; MAIN SITE</span>
+          </Link>
           {navLinks.map((item) => (
             <Link
               key={item.id}

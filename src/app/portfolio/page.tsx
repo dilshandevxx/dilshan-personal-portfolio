@@ -1,10 +1,5 @@
-import AboutRoutePage, { metadata as aboutMetadata } from './about/page';
+import { redirect } from 'next/navigation';
 
-export const metadata = {
-  ...aboutMetadata,
-  title: 'Dilshan — Software Engineer & Open-Source Creator',
-};
-
-export default function PortfolioMainPage() {
-  return <AboutRoutePage />;
+export default function PortfolioRedirectPage() {
+  redirect('/projects');
 }

@@ -4,15 +4,15 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 50;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 3.5rem;
-  background: rgba(9, 10, 12, 0.9);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1.15rem 3.5rem;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   width: 100%;
   box-sizing: border-box;
   transition: all 0.25s ease;
@@ -20,7 +20,7 @@
 
 @media (max-width: 900px) {
   .headerNav {
-    padding: 1.25rem 1.5rem;
+    padding: 1rem 1.5rem;
   }
 }
 
@@ -93,7 +93,13 @@
   user-select: none;
 }
 
-/* Right Year Stamp */
+/* Right: Nav Right (Year Stamp + Portfolio Button) */
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
 .yearStamp {
   color: #888e96;
   font-family: var(--font-mono, monospace);
@@ -102,8 +108,50 @@
   letter-spacing: 0.08em;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .yearStamp {
+    display: none;
+  }
+}
+
+/* High-Contrast Architectural PORTFOLIO Button */
+.portfolioButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1.15rem;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+  border-radius: 0px;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.portfolioButton:hover {
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btnIcon {
+  transition: transform 0.2s ease;
+}
+
+.portfolioButton:hover .btnIcon {
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 680px) {
+  .portfolioButton {
     display: none;
   }
 }
@@ -140,13 +188,16 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: #090a0c;
+  background: rgba(8, 9, 11, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding: 1.5rem 1.5rem 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
   z-index: 55;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
 }
 
 .mobileNavLink {
@@ -158,4 +209,34 @@
   text-transform: uppercase;
   padding: 0.5rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: color 0.2s ease;
+}
+
+.mobileNavLink:hover {
+  color: #a0a6b2;
+}
+
+.mobileDrawerActions {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.5rem;
+}
+
+.mobilePortfolioButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.85rem;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+  border-radius: 0px;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
 }

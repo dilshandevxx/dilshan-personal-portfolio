@@ -17,6 +17,7 @@ import {
   Rss,
   Menu,
   X as CloseIcon,
+  ArrowLeft,
 } from "lucide-react";
 
 export function Sidebar() {
@@ -58,16 +59,35 @@ export function Sidebar() {
     <>
       {/* Mobile Top Navigation Header */}
       <header className="mobile-header">
-        <Link href="/" className="mobile-brand-link">
-          <img
-            src="/nav-floppy.png"
-            className="navbar-logo"
-            alt="dilshan.dev"
-            width={20}
-            height={20}
-          />
-          <span className="site-name">dilshan.dev</span>
-        </Link>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <Link href="/" className="mobile-brand-link">
+            <img
+              src="/nav-floppy.png"
+              className="navbar-logo"
+              alt="dilshan.dev"
+              width={20}
+              height={20}
+            />
+            <span className="site-name">dilshan.dev</span>
+          </Link>
+          <Link
+            href="/"
+            style={{
+              fontSize: "10px",
+              fontFamily: "monospace",
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              padding: "2px 6px",
+              borderRadius: "4px",
+              border: "1px solid var(--color-border)",
+              color: "var(--color-text-muted)",
+              textDecoration: "none",
+            }}
+            title="Return to Main Landing Page"
+          >
+            &larr; MAIN
+          </Link>
+        </div>
         <div className="mobile-header-actions">
           <AmbientPlayer variant="header" />
           <ColorPicker />
@@ -134,6 +154,24 @@ export function Sidebar() {
         {/* Section 3: Primary Navigation Links (Clean Framer Aesthetic) */}
         <section className="sidebar-section">
           <nav className="sidebar-nav-links">
+            <Link
+              href="/"
+              onClick={() => setMobileOpen(false)}
+              className="sidebar-nav-item"
+              style={{
+                opacity: 0.75,
+                borderBottom: "1px solid var(--color-border)",
+                paddingBottom: "0.5rem",
+                marginBottom: "0.35rem",
+                fontSize: "0.84rem",
+              }}
+              title="Return to Main Landing Page"
+            >
+              <span className="sidebar-nav-icon-wrap" aria-hidden="true">
+                <ArrowLeft size={16} strokeWidth={1.75} />
+              </span>
+              <span className="sidebar-nav-label">&larr; Main Site</span>
+            </Link>
             {navLinks.map((item) => {
               const Icon = item.icon;
               return (

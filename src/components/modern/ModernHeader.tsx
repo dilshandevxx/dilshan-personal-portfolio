@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import styles from "./ModernHeader.module.css";
 
 export function ModernHeader() {
@@ -11,8 +12,7 @@ export function ModernHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isHome = pathname === "/";
 
-  const workHref = isHome ? "#projects" : "/projects";
-  const aboutHref = isHome ? "#about-me" : "/about";
+  const aboutHref = isHome ? "#about-me" : "/#about-me";
   const contactHref = isHome ? "#contact" : "/#contact";
 
   return (
@@ -22,7 +22,7 @@ export function ModernHeader() {
         DILSHAN RAMESH
       </Link>
 
-      {/* Center: Clean Nav Links matching Aoki reference (HOME  /  ABOUT  /  PORTFOLIO) */}
+      {/* Center: Clean Nav Links (HOME / PROJECTS / ABOUT / CONTACT) */}
       <nav className={styles.desktopNav} aria-label="Main Navigation">
         <ul className={styles.navLinks}>
           <li>
@@ -35,49 +35,64 @@ export function ModernHeader() {
           </li>
           <li className={styles.navSeparator} aria-hidden="true">/</li>
           <li>
+            <Link
+              href="/projects"
+              className={`${styles.navLink} ${pathname === "/projects" ? styles.activeNavLink : ""}`}
+            >
+              PROJECTS
+            </Link>
+          </li>
+          <li className={styles.navSeparator} aria-hidden="true">/</li>
+          <li>
             <Link href={aboutHref} className={styles.navLink}>
               ABOUT
             </Link>
           </li>
           <li className={styles.navSeparator} aria-hidden="true">/</li>
           <li>
-            <Link href={workHref} className={styles.navLink}>
-              PORTFOLIO
+            <Link href={contactHref} className={styles.navLink}>
+              CONTACT
             </Link>
           </li>
         </ul>
       </nav>
 
-      {/* Right: Year Stamp */}
-      <div className={styles.yearStamp} aria-hidden="true">
-        &copy;2026
-      </div>
+      {/* Right: Year Stamp + PORTFOLIO Action Button */}
+      <div className={styles.navRight}>
+        <div className={styles.yearStamp} aria-hidden="true">
+          &copy;2026
+        </div>
+        <Link href="/projects" className={styles.portfolioButton}>
+          <span>PORTFOLIO</span>
+          <ArrowUpRight size={13} className={styles.btnIcon} />
+        </Link>
 
-      {/* Mobile Hamburger Toggle */}
-      <button
-        type="button"
-        className={styles.mobileMenuToggle}
-        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-        aria-expanded={mobileMenuOpen}
-      >
-        <span
-          className={styles.hamburgerLine}
-          style={
-            mobileMenuOpen
-              ? { transform: "rotate(45deg) translate(4px, 4px)" }
-              : {}
-          }
-        />
-        <span
-          className={styles.hamburgerLine}
-          style={
-            mobileMenuOpen
-              ? { transform: "rotate(-45deg) translate(4px, -4px)" }
-              : {}
-          }
-        />
-      </button>
+        {/* Mobile Hamburger Toggle */}
+        <button
+          type="button"
+          className={styles.mobileMenuToggle}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileMenuOpen}
+        >
+          <span
+            className={styles.hamburgerLine}
+            style={
+              mobileMenuOpen
+                ? { transform: "rotate(45deg) translate(4px, 4px)" }
+                : {}
+            }
+          />
+          <span
+            className={styles.hamburgerLine}
+            style={
+              mobileMenuOpen
+                ? { transform: "rotate(-45deg) translate(4px, -4px)" }
+                : {}
+            }
+          />
+        </button>
+      </div>
 
       {/* Mobile Drawer */}
       <AnimatePresence>
@@ -90,11 +105,18 @@ export function ModernHeader() {
             transition={{ duration: 0.2 }}
           >
             <Link
-              href={workHref}
+              href="/"
               className={styles.mobileNavLink}
               onClick={() => setMobileMenuOpen(false)}
             >
-              WORK
+              HOME
+            </Link>
+            <Link
+              href="/projects"
+              className={styles.mobileNavLink}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              PROJECTS
             </Link>
             <Link
               href={aboutHref}
@@ -110,6 +132,16 @@ export function ModernHeader() {
             >
               CONTACT
             </Link>
+            <div className={styles.mobileDrawerActions}>
+              <Link
+                href="/projects"
+                className={styles.mobilePortfolioButton}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span>PORTFOLIO</span>
+                <ArrowUpRight size={14} />
+              </Link>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
