@@ -11,47 +11,71 @@ export default function AboutMe() {
     <section className={styles.aboutSection} id="about-me" aria-label="About Dilshan">
       <div className={styles.container}>
         <div className={styles.grid}>
-          {/* Left Side: Clean Modern Bio Description (No Title, Pure Modern Typography) */}
+          {/* Left Column: Clean Modern Editorial Bio */}
           <motion.div
             className={styles.leftColumn}
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className={styles.textBlock}>
+              {/* Refined Minimalist Badge */}
               <div className={styles.accentBadge}>
+                <span className={styles.accentDot} aria-hidden="true" />
                 <span>ENGINEERING &amp; ARCHITECTURE</span>
               </div>
 
-              <p className={styles.leadText}>
-                Crafting resilient distributed systems, modern web experiences, and scalable infrastructure that outlive ephemeral trends.
-              </p>
+              {/* Bold Editorial Headline */}
+              <h2 className={styles.leadText}>
+                Crafting resilient distributed systems, modern web experiences &amp; scalable infrastructure.
+              </h2>
 
+              {/* Clean Structured Narrative */}
               <div className={styles.paragraphs}>
                 <p>
-                  I&apos;m Dilshan — a full-stack engineer and system architect based in Sri Lanka, working with teams globally. Over the past several years, I have engineered across the stack — from high-throughput distributed services and event-driven data pipelines to accessible, ultra-fast web clients.
+                  I&apos;m <span className={styles.nameHighlight}>Dilshan</span> — a full-stack engineer and system architect based in Sri Lanka, collaborating with engineering teams globally. Over the past several years, I have architected across the entire stack — from high-throughput distributed services and event-driven data pipelines to accessible, ultra-fast web clients.
                 </p>
                 <p>
                   My engineering philosophy is anchored in durable principles: favor explicit architectures over magic abstractions, prioritize deterministic performance over brute computing power, and craft purposeful digital products that respect human attention.
                 </p>
               </div>
 
+              {/* Minimalist 3-Column Architectural Metrics */}
+              <div className={styles.statsStrip}>
+                <div className={styles.statBox}>
+                  <span className={styles.statNumber}>08+</span>
+                  <span className={styles.statLabel}>Years of Craft</span>
+                </div>
+                <div className={styles.statDivider} aria-hidden="true" />
+                <div className={styles.statBox}>
+                  <span className={styles.statNumber}>100%</span>
+                  <span className={styles.statLabel}>Deterministic Logic</span>
+                </div>
+                <div className={styles.statDivider} aria-hidden="true" />
+                <div className={styles.statBox}>
+                  <span className={styles.statNumber}>GLOBAL</span>
+                  <span className={styles.statLabel}>Team Collaboration</span>
+                </div>
+              </div>
+
+              {/* Strictly Rectangular Action Button */}
               <div className={styles.actionRow}>
                 <Link href="#projects" className={styles.actionButton}>
-                  Explore Selected Work &rarr;
+                  <span>EXPLORE SELECTED WORK</span>
+                  <span className={styles.arrowIcon} aria-hidden="true">&rarr;</span>
                 </Link>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Side: Editorial Open Magazine Spread Image */}
+          {/* Right Column: Editorial Open Magazine Spread Image */}
           <motion.div
             className={styles.rightColumn}
-            initial={{ opacity: 0, y: 35 }}
+            initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className={styles.imageFrame}>
               <Image
@@ -63,6 +87,9 @@ export default function AboutMe() {
                 className={styles.magazinePhoto}
                 sizes="(max-width: 900px) 100vw, (max-width: 1400px) 50vw, 680px"
               />
+              <div className={styles.imageCornerTag}>
+                <span>VOL. 02 // ARCHIVE</span>
+              </div>
             </div>
           </motion.div>
         </div>
