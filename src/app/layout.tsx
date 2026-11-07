@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/ThemeContext";
 import { AudioProvider } from "@/components/AudioContext";
 import { AppShell } from "@/components/AppShell";
 import { siteConfig } from "@/data/siteConfig";
+import { Analytics } from "@vercel/analytics/react";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -108,6 +109,7 @@ export default function RootLayout({
             <AppShell>{children}</AppShell>
           </AudioProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
