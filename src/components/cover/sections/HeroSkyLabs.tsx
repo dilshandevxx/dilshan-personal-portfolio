@@ -42,7 +42,7 @@ export default function HeroSkyLabs() {
       {/* 1. Swiss Architectural Navbar */}
       <header className={styles.navHeader}>
         <div className={styles.navContainer}>
-          {/* Left: Pure SkyLabs Brand Wordmark & Geometric Square [S] Badge */}
+          {/* Left: Pure SkyLabs Brand Wordmark, Geometric [S] Badge & Status Tag */}
           <Link href="/" className={styles.brandLink}>
             <div className={styles.logoWrapper}>
               <span className={styles.logoText}>
@@ -51,6 +51,10 @@ export default function HeroSkyLabs() {
               <div className={styles.logoBadge} aria-hidden="true">
                 <span className={styles.badgeLetter}>S</span>
               </div>
+            </div>
+            <div className={styles.brandMeta}>
+              <span className={styles.brandMetaDot} />
+              <span className={styles.brandMetaText}>AVAILABLE FOR WORK</span>
             </div>
           </Link>
 
@@ -61,22 +65,26 @@ export default function HeroSkyLabs() {
                 href="#skills"
                 className={`${styles.navLink} ${activeSection === "skills" ? styles.navLinkActive : ""}`}
               >
-                SERVICES
+                <span className={styles.navIndex}>01</span>
+                <span className={styles.navText}>SERVICES</span>
               </Link>
               <Link href="/projects" className={styles.navLink}>
-                PROJECTS
+                <span className={styles.navIndex}>02</span>
+                <span className={styles.navText}>PROJECTS</span>
               </Link>
               <Link
                 href="#about-me"
                 className={`${styles.navLink} ${activeSection === "about-me" ? styles.navLinkActive : ""}`}
               >
-                ABOUT
+                <span className={styles.navIndex}>03</span>
+                <span className={styles.navText}>ABOUT</span>
               </Link>
               <Link
                 href="#contact"
                 className={`${styles.navLink} ${activeSection === "contact" ? styles.navLinkActive : ""}`}
               >
-                CONTACT
+                <span className={styles.navIndex}>04</span>
+                <span className={styles.navText}>CONTACT</span>
               </Link>
             </nav>
 
@@ -90,7 +98,7 @@ export default function HeroSkyLabs() {
                 href="mailto:dilshan.devxx@gmail.com"
                 className={styles.talkButton}
               >
-                LET&apos;S TALK
+                <span>LET&apos;S TALK</span>
               </a>
             </div>
 
@@ -123,28 +131,32 @@ export default function HeroSkyLabs() {
                   className={styles.mobileNavLink}
                   onClick={() => setMobileOpen(false)}
                 >
-                  SERVICES
+                  <span className={styles.mobileNavIndex}>01</span>
+                  <span>SERVICES</span>
                 </Link>
                 <Link
                   href="/projects"
                   className={styles.mobileNavLink}
                   onClick={() => setMobileOpen(false)}
                 >
-                  PROJECTS
+                  <span className={styles.mobileNavIndex}>02</span>
+                  <span>PROJECTS</span>
                 </Link>
                 <Link
                   href="#about-me"
                   className={styles.mobileNavLink}
                   onClick={() => setMobileOpen(false)}
                 >
-                  ABOUT
+                  <span className={styles.mobileNavIndex}>03</span>
+                  <span>ABOUT</span>
                 </Link>
                 <Link
                   href="#contact"
                   className={styles.mobileNavLink}
                   onClick={() => setMobileOpen(false)}
                 >
-                  CONTACT
+                  <span className={styles.mobileNavIndex}>04</span>
+                  <span>CONTACT</span>
                 </Link>
 
                 <div className={styles.mobileDrawerActions}>
@@ -161,7 +173,7 @@ export default function HeroSkyLabs() {
                     className={styles.mobileTalkButton}
                     onClick={() => setMobileOpen(false)}
                   >
-                    LET&apos;S TALK
+                    <span>LET&apos;S TALK</span>
                   </a>
                 </div>
               </div>
