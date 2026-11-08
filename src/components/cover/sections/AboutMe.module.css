@@ -1,127 +1,98 @@
-/* Clean Modern About & Philosophy Section (Driftime & SkyLabs High-End Aesthetic) */
+/* Clean, Minimalist About Section */
 .aboutSection {
   background-color: #000000;
-  padding: clamp(6.5rem, 12vw, 10.5rem) clamp(1.5rem, 4vw, 3.5rem);
+  padding: 8.5rem 3.5rem 10rem;
   width: 100%;
   box-sizing: border-box;
   position: relative;
-  overflow: hidden;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+@media (max-width: 900px) {
+  .aboutSection {
+    padding: 5.5rem 1.75rem 7rem;
+  }
+}
+
 .container {
-  max-width: 1380px;
+  max-width: 1360px;
   margin: 0 auto;
   width: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
-/* 1. Subtle Editorial Section Header */
-.sectionHeader {
+/* Header */
+.header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  margin-bottom: 3.5rem;
-  gap: 1.5rem;
-  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 4rem;
 }
 
-.tagWrapper {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
+@media (max-width: 768px) {
+  .header {
+    margin-bottom: 2.5rem;
+  }
 }
 
-.greenDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #9fe824;
-  box-shadow: 0 0 10px rgba(159, 232, 36, 0.5);
-  display: inline-block;
-}
-
-.sectionTag {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+.title {
   color: #ffffff;
-}
-
-.locationTag {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #727a86;
-}
-
-/* 2. Bold High-Impact Display Statement */
-.statementWrapper {
-  max-width: 1220px;
-  margin-bottom: 4.5rem;
-}
-
-.statementHeadline {
-  color: #ffffff;
-  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(2.2rem, 4.4vw, 3.75rem);
+  font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
   font-weight: 700;
-  line-height: 1.16;
+  line-height: 1;
   letter-spacing: -0.025em;
   margin: 0;
 }
 
-/* 3. Clean Dual-Column Architectural Breakdown */
-.narrativeGrid {
+/* Content Grid */
+.contentGrid {
   display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: clamp(3.5rem, 6vw, 6.5rem);
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 6.5rem);
   align-items: flex-start;
 }
 
-@media (max-width: 1024px) {
-  .narrativeGrid {
+@media (max-width: 900px) {
+  .contentGrid {
     grid-template-columns: 1fr;
-    gap: 3.5rem;
+    gap: 2.5rem;
   }
 }
 
-/* Left Column: Narrative Bio */
-.bioColumn {
+/* Left Column: Bold Lead */
+.leadCol {
   display: flex;
   flex-direction: column;
 }
 
-.bioPrimary {
-  color: #f0f2f5;
-  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
-  font-size: clamp(1.05rem, 1.25vw, 1.22rem);
-  line-height: 1.7;
-  margin: 0 0 1.5rem;
-  font-weight: 400;
-}
-
-.highlight {
+.leadText {
   color: #ffffff;
-  font-weight: 700;
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
+  font-size: clamp(1.45rem, 2.1vw, 2rem);
+  font-weight: 600;
+  line-height: 1.38;
+  letter-spacing: -0.02em;
+  margin: 0;
 }
 
-.bioSecondary {
-  color: #8a929e;
+/* Right Column: Narrative */
+.narrativeCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.paragraph {
+  color: #9da4ae;
   font-family: var(--font-body, "Inter", -apple-system, sans-serif);
-  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
-  line-height: 1.75;
-  margin: 0 0 2.5rem;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin: 0;
 }
 
 /* Action Button: Strictly Rectangular */
 .actionRow {
+  margin-top: 1.5rem;
   display: flex;
   align-items: center;
 }
@@ -131,11 +102,11 @@
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  padding: 1.1rem 2.5rem;
   background-color: transparent;
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 0 !important; /* STRICTLY RECTANGULAR */
+  padding: 1.15rem 2.5rem;
   font-family: var(--font-body, -apple-system, sans-serif);
   font-size: 0.8125rem;
   font-weight: 700;
@@ -151,83 +122,15 @@
   color: #000000;
   border-color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 28px rgba(255, 255, 255, 0.08);
 }
 
-.arrowIcon {
-  font-size: 1.05rem;
+.arrow {
+  font-size: 1rem;
   transition: transform 0.25s ease;
   display: inline-block;
 }
 
-.actionButton:hover .arrowIcon {
+.actionButton:hover .arrow {
   transform: translateX(4px);
-}
-
-/* Right Column: 3 Architectural Pillars */
-.pillarsColumn {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.pillarCard {
-  background: #0d0f12;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 0 !important; /* STRICTLY SQUARE */
-  padding: 1.75rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, background-color 0.3s ease;
-}
-
-.pillarCard:hover {
-  transform: translateX(6px);
-  border-color: rgba(255, 255, 255, 0.2);
-  background: #111317;
-}
-
-@media (max-width: 768px) {
-  .pillarCard {
-    padding: 1.5rem 1.25rem;
-  }
-}
-
-.pillarHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.pillarNum {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.pillarBadge {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.6875rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #727a86;
-}
-
-.pillarTitle {
-  color: #ffffff;
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  margin: 0;
-}
-
-.pillarDesc {
-  color: #8c93a0;
-  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
-  font-size: 0.9375rem;
-  line-height: 1.6;
-  margin: 0;
 }
