@@ -246,7 +246,7 @@ export default function HeroSkyLabs() {
               poster="/images/hero_phone_flare.jpg"
             >
               <source
-                src="https://res.cloudinary.com/dqfcsavwj/video/upload/v1782389596/walking-people_chkyso.webm"
+                src="https://res.cloudinary.com/dqfcsavwj/video/upload/v1782389244/hero-video_dimbpq.webm"
                 type="video/webm"
               />
               <source src="/videos/hero.mp4" type="video/mp4" />

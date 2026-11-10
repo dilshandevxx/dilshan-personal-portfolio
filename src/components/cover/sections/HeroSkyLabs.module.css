@@ -397,7 +397,7 @@
 /* 3. Cinematic Banner Video Container */
 .bannerContainer {
   width: 100%;
-  max-width: 1380px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 2rem;
   box-sizing: border-box;
@@ -412,18 +412,25 @@
 .bannerFrame {
   position: relative;
   width: 100%;
-  height: clamp(340px, 48vh, 580px);
-  border-radius: 4px;
+  height: clamp(520px, 75vh, 880px);
+  border-radius: 0; /* Strictly square corners */
   overflow: hidden;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
-  background-color: #121418;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.95);
+  background-color: #0c0d10;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 768px) {
+  .bannerFrame {
+    height: clamp(340px, 55vh, 500px);
+  }
 }
 
 .bannerVideo {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center;
   display: block;
 }
 
@@ -432,9 +439,9 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.15) 0%,
     rgba(0, 0, 0, 0) 50%,
-    rgba(0, 0, 0, 0.25) 100%
+    rgba(0, 0, 0, 0.35) 100%
   );
   pointer-events: none;
 }
