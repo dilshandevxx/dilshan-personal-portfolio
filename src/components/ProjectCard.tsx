@@ -4,7 +4,6 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Project } from "@/data/projects";
-import { Star } from "lucide-react";
 
 export function ProjectCard({ project }: { project: Project }) {
   const router = useRouter();
