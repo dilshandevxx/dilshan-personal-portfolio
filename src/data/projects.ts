@@ -1,650 +1,1537 @@
-export interface ProjectMetric {
-  label: string;
-  value: string;
-}
-
-export interface ProjectStackLayer {
-  layer: string;
-  technologies: string[];
-}
-
+export interface ProjectMetric { label: string; value: string; }
+export interface ProjectStackLayer { layer: string; technologies: string[]; }
+export type ProjectStatus = "Existing" | "Planned";
+export type ProjectCategory = "AI/ML" | "AI Infrastructure" | "MLOps" | "Platform Engineering" | "SRE" | "Systems" | "Security" | "Distributed Systems" | "Data Engineering" | "DevOps" | "Full-Stack";
 export interface Project {
-  slug: string;
-  title: string;
-  date: string;
-  category: "AI/ML" | "DevOps" | "Web" | "Landing" | "Systems" | "Full-Stack";
-  tagline: string;
-  description: string;
-  longDescription: string;
-  highlights: string[];
-  architecture: string;
-  challenges: string;
-  tags: string[];
-  stars: number;
-  highlight?: boolean;
-  featured?: boolean;
-  githubUrl: string;
-  demoUrl?: string;
-  writeupUrl?: string;
-  metrics?: string;
-  metricsDetail: ProjectMetric[];
-  stackLayers: ProjectStackLayer[];
-  image?: string;
-  aliases?: string[];
+  slug: string; title: string; date: string; category: ProjectCategory; tagline: string;
+  description: string; longDescription: string; highlights: string[]; architecture: string;
+  challenges: string; tags: string[]; stars: number; highlight?: boolean; featured?: boolean;
+  githubUrl: string; demoUrl?: string; writeupUrl?: string; metrics?: string;
+  metricsDetail: ProjectMetric[]; stackLayers: ProjectStackLayer[]; image?: string;
+  aliases?: string[]; status: ProjectStatus;
 }
 
 export const projectsList: Project[] = [
   {
-    slug: "nexus-agent-rag",
-    title: "Nexus RAG & Multi-Agent Engine",
-    date: "2025",
-    category: "AI/ML",
-    stars: 2135,
-    tagline: "Autonomous multi-agent research and reasoning engine powered by hybrid vector search.",
-    description:
-      "A production-ready RAG system orchestrating LLM agents with specialized tools, dynamic reranking, and low-latency vector retrieval across millions of documents.",
-    longDescription:
-      "Nexus is an enterprise-grade Retrieval-Augmented Generation (RAG) and autonomous multi-agent reasoning engine built to overcome hallucination and context-window degradation in massive knowledge bases. It features a dual-phase retrieval pipeline combining dense vector embeddings with sparse BM25 keyword matching, followed by cross-encoder re-ranking to yield highly relevant context for LLM agents.",
-    highlights: [
-      "Hybrid dense-sparse retrieval combining Qdrant cosine similarity with BM25 keyword search",
-      "Cross-encoder reranking step cutting context noise and eliminating token window waste",
-      "LangGraph autonomous multi-agent cyclic execution with tool-calling sandbox",
-      "Streaming response protocol via FastAPI WebSockets for instantaneous token delivery",
-      "Sub-120ms p95 retrieval latency across 500k ingested technical documentation chunks",
+    "slug": "production-rag-platform",
+    "title": "Production RAG Platform",
+    "category": "AI/ML",
+    "tagline": "Document ingestion and semantic retrieval for grounded LLM applications.",
+    "description": "A FastAPI-based RAG application using PostgreSQL with pgvector and Google Gemini for document ingestion, embeddings, retrieval, and streamed responses.",
+    "longDescription": "The repository README describes a modular backend with transport-layer API routes, service-layer ingestion/retrieval/chat orchestration, and reusable packages for database, LLM, and embedding integrations. The documented stack includes asynchronous Python services, PostgreSQL/pgvector, Redis, Docker Compose, SQLAlchemy, and Alembic.",
+    "architecture": "Document upload → chunking and embedding generation → PostgreSQL/pgvector persistence → semantic retrieval → Gemini response generation → server-sent event streaming. The README documents async processing and separated API, service, and package layers.",
+    "highlights": [
+      "Modular API, service, and package separation documented in the repository README",
+      "Document chunking and embedding generation",
+      "PostgreSQL with pgvector for semantic similarity search",
+      "Server-sent event response streaming",
+      "Docker Compose development dependencies and Alembic migrations"
     ],
-    architecture:
-      "The ingest service consumes raw PDF/Markdown documents, recursively splits tokens with semantic overlap, computes embeddings using Hugging Face sentence transformers, and indexes vectors into Qdrant. When queries arrive, an orchestrator agent decomposes user intent, performs parallel hybrid searches, reranks candidates, and delegates tasks to specialized sub-agents via LangGraph before synthesizing citations.",
-    challenges:
-      "Balancing high retrieval precision against inference latency. Solved by decoupling embedding generation into an asynchronous queue and caching vector lookups in Redis for high-frequency queries.",
-    tags: ["Python", "PyTorch", "FastAPI", "Qdrant", "LangGraph", "Docker"],
-    highlight: true,
-    featured: true,
-    githubUrl: "https://github.com/dilshandevxx/nexus-agent-rag",
-    demoUrl: "https://nexus-agent.dilshan.dev",
-    metrics: "Sub-120ms retrieval latency across 500k chunks",
-    metricsDetail: [
-      { label: "P95 Retrieval Latency", value: "118ms" },
-      { label: "Knowledge Base Size", value: "500k Chunks" },
-      { label: "Re-rank Precision Gain", value: "+34%" },
-      { label: "Agent Task Success Rate", value: "94.2%" },
+    "challenges": "Review retrieval quality, chunking strategy, authorization boundaries, prompt-injection handling, embedding versioning, and async database behavior before making production-readiness claims.",
+    "tags": [
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "pgvector",
+      "Gemini",
+      "Redis",
+      "Docker",
+      "SQLAlchemy"
     ],
-    stackLayers: [
-      { layer: "AI & Vector Search", technologies: ["PyTorch", "Hugging Face", "Qdrant", "LangGraph"] },
-      { layer: "Backend & API", technologies: ["Python", "FastAPI", "WebSockets", "Pydantic"] },
-      { layer: "Infrastructure", technologies: ["Docker", "Redis", "Nginx", "GitHub Actions"] },
+    "githubUrl": "https://github.com/dilshandevxx/Production_RAG_Platform",
+    "stackLayers": [
+      {
+        "layer": "API & Services",
+        "technologies": [
+          "Python",
+          "FastAPI",
+          "Pydantic",
+          "asyncio"
+        ]
+      },
+      {
+        "layer": "Retrieval & Data",
+        "technologies": [
+          "PostgreSQL",
+          "pgvector",
+          "SQLAlchemy",
+          "Alembic"
+        ]
+      },
+      {
+        "layer": "AI & Runtime",
+        "technologies": [
+          "Google Gemini",
+          "Redis",
+          "Docker Compose"
+        ]
+      }
     ],
-    image: "/images/project_boltshift.jpg",
+    "featured": true,
+    "date": "Existing",
+    "stars": 0,
+    "highlight": true,
+    "metricsDetail": [],
+    "image": "",
+    "aliases": [],
+    "writeupUrl": "",
+    "status": "Existing"
   },
   {
-    slug: "cloudscale-gitops-pipeline",
-    title: "CloudScale K8s GitOps Platform",
-    date: "2024",
-    category: "DevOps",
-    stars: 890,
-    tagline: "Automated container orchestration, blue-green deployments, and distributed telemetry.",
-    description:
-      "Production-grade Infrastructure-as-Code and Kubernetes GitOps repository utilizing ArgoCD, Terraform, Prometheus/Grafana monitoring, and automated Helm releases.",
-    longDescription:
-      "CloudScale is an end-to-end Infrastructure-as-Code and Kubernetes GitOps deployment blueprint designed for zero-downtime microservice operations. It implements automated blue-green and canary release strategies managed by ArgoCD, infrastructure provisioning using Terraform, and comprehensive cluster observability using Prometheus, Grafana, and Alertmanager.",
-    highlights: [
-      "Declarative GitOps architecture synchronized continuously with ArgoCD",
-      "Automated blue-green deployments with zero dropped TCP connections",
-      "Multi-stage Terraform modules for reproducible VPC, subnet, and cluster provisioning",
-      "Comprehensive Prometheus telemetry and customized Grafana dashboards for latency and resource saturation",
-      "Sealed Secrets integration for encrypted Git repository credentials",
+    "slug": "foodlence-backend",
+    "title": "FoodLence Backend",
+    "category": "AI/ML",
+    "tagline": "Ingredient parsing and semantic allergen matching backend.",
+    "description": "A Python FastAPI backend for food ingredient parsing, additive identification, and personalized allergen-profile evaluation.",
+    "longDescription": "The repository README describes a backend for processing ingredient names and synonyms, identifying additives, matching allergens, and returning confidence-aware structured results. The documented pipeline includes text cleaning/tokenization, exact matching, fuzzy or semantic matching, evaluation against user/family profiles, and confidence scoring.",
+    "architecture": "Mobile OCR output → FastAPI analysis endpoint → normalization/tokenization → exact knowledge-base matching → fuzzy/semantic matching → allergen and additive evaluation → structured response with confidence metadata.",
+    "highlights": [
+      "FastAPI analysis API documented in the repository README",
+      "Ingredient synonym and allergen matching workflow",
+      "Additive and E-number identification",
+      "Personalized profile evaluation",
+      "Confidence scoring to signal uncertain extraction"
     ],
-    architecture:
-      "Developers push code to GitHub, triggering CI pipelines that run automated linting, unit tests, container vulnerability scans (Trivy), and Docker image builds pushed to container registries. ArgoCD watches Git repository manifests and reconciles cluster state, orchestrating automated progressive delivery.",
-    challenges:
-      "Ensuring zero downtime during database migrations and ingress routing cutovers. Solved by implementing Kubernetes pre-stop lifecycle hooks, readiness probe grace periods, and backward-compatible schema migration gates.",
-    tags: ["Kubernetes", "Docker", "Terraform", "GitHub Actions", "Prometheus", "Helm"],
-    highlight: true,
-    featured: true,
-    githubUrl: "https://github.com/dilshandevxx/cloudscale-gitops",
-    demoUrl: "https://cloudscale.dilshan.dev",
-    metrics: "99.98% uptime with automated zero-downtime rollouts",
-    metricsDetail: [
-      { label: "Cluster Uptime", value: "99.98%" },
-      { label: "Deployment Frequency", value: "12+ / day" },
-      { label: "Mean Time to Recovery", value: "< 3 mins" },
-      { label: "Zero-Downtime Rollouts", value: "100%" },
+    "challenges": "Review domain-data quality, false-negative handling, confidence calibration, explainability, privacy of profile data, and the need for expert validation before presenting outputs as health advice.",
+    "tags": [
+      "Python",
+      "FastAPI",
+      "spaCy",
+      "scikit-learn",
+      "RapidFuzz",
+      "PostgreSQL",
+      "SQLAlchemy",
+      "Alembic"
     ],
-    stackLayers: [
-      { layer: "Orchestration & GitOps", technologies: ["Kubernetes", "ArgoCD", "Helm", "Kustomize"] },
-      { layer: "Infrastructure as Code", technologies: ["Terraform", "AWS / VPS", "Linux", "Docker"] },
-      { layer: "Observability & Telemetry", technologies: ["Prometheus", "Grafana", "Alertmanager", "FluentBit"] },
+    "githubUrl": "https://github.com/dilshandevxx/FoodLence-Backend",
+    "stackLayers": [
+      {
+        "layer": "API",
+        "technologies": [
+          "Python",
+          "FastAPI",
+          "JWT"
+        ]
+      },
+      {
+        "layer": "Text & Matching",
+        "technologies": [
+          "spaCy",
+          "RapidFuzz",
+          "scikit-learn"
+        ]
+      },
+      {
+        "layer": "Persistence",
+        "technologies": [
+          "PostgreSQL",
+          "SQLAlchemy",
+          "Alembic"
+        ]
+      }
     ],
-    image: "/images/project_collective.jpg",
-    aliases: ["cloudwatch"],
+    "featured": true,
+    "date": "Existing",
+    "stars": 0,
+    "highlight": true,
+    "metricsDetail": [],
+    "image": "",
+    "aliases": [],
+    "writeupUrl": "",
+    "status": "Existing"
   },
   {
-    slug: "omni-commerce-platform",
-    title: "OmniStore Distributed E-Commerce",
-    date: "2024",
-    category: "Web",
-    stars: 1226,
-    tagline: "Event-driven microservices architecture with real-time inventory and Stripe billing.",
-    description:
-      "High-throughput modern commerce engine built with Next.js App Router, Node.js microservices, Apache Kafka event streaming, and PostgreSQL with Redis caching.",
-    longDescription:
-      "OmniStore is a high-throughput, event-driven commerce and inventory platform engineered to handle peak traffic spikes during major release events. Designed around an asynchronous microservices architecture, it coordinates order processing, real-time stock reservations, Stripe payment reconciliation, and customer notifications via Apache Kafka event streaming.",
-    highlights: [
-      "Event-driven architecture with Apache Kafka ensuring exactly-once order event handling",
-      "Next.js App Router storefront with optimistic UI updates and instant cache invalidation",
-      "Distributed Redis locking preventing inventory overselling during concurrent checkout rushes",
-      "Stripe webhook idempotent processing pipeline with automatic exponential backoff retries",
-      "PostgreSQL transactional guarantees with multi-master read replicas",
+    "slug": "business-idea-generator",
+    "title": "IdeaSpark — AI Business Idea Generator",
+    "category": "AI/ML",
+    "tagline": "Streaming AI idea generation through a full-stack application.",
+    "description": "A Next.js and FastAPI application that streams generated business ideas using Google Gemini or OpenAI-compatible model configuration.",
+    "longDescription": "The repository README documents a full-stack application with a Next.js frontend, FastAPI backend, Server-Sent Events streaming, selectable topic presets, markdown rendering, and a mock demo fallback when no model key is configured.",
+    "architecture": "Browser → Next.js frontend → FastAPI endpoint → Gemini/OpenAI-compatible model API → SSE stream → incremental markdown rendering in the browser.",
+    "highlights": [
+      "Server-Sent Events for incremental model output",
+      "Gemini and OpenAI provider configuration documented",
+      "Mock streaming fallback for local demonstration",
+      "Topic presets and custom audience inputs",
+      "Local reverse-proxy development setup"
     ],
-    architecture:
-      "The frontend is a server-rendered Next.js application that communicates with a Node.js API gateway. Orders dispatch events onto Kafka topics. Separate worker services handle inventory allocation, Stripe billing intents, and email dispatch independently, ensuring no bottleneck impacts checkout latency.",
-    challenges:
-      "Race conditions during flash sales where thousands of buyers attempt to purchase limited inventory simultaneously. Solved by implementing Redlock distributed mutex locks and atomic database decrement operations.",
-    tags: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Kafka", "Redis"],
-    highlight: true,
-    featured: true,
-    githubUrl: "https://github.com/dilshandevxx/omnistore-platform",
-    demoUrl: "https://omnistore.dilshan.dev",
-    metrics: "Handles 10k+ concurrent requests with sub-50ms cache response",
-    metricsDetail: [
-      { label: "Peak Throughput", value: "10k+ req/sec" },
-      { label: "Checkout Cache Latency", value: "< 45ms" },
-      { label: "Inventory Consistency", value: "100%" },
-      { label: "Payment Idempotency", value: "Guaranteed" },
+    "challenges": "Review API-key handling, request quotas, cancellation, provider timeouts, abuse prevention, and whether generated ideas are evaluated for usefulness rather than presentation quality.",
+    "tags": [
+      "Next.js",
+      "TypeScript",
+      "FastAPI",
+      "Python",
+      "Gemini",
+      "OpenAI-compatible API",
+      "SSE"
     ],
-    stackLayers: [
-      { layer: "Frontend & UI", technologies: ["Next.js App Router", "React 19", "TypeScript", "Vanilla CSS"] },
-      { layer: "Backend & Gateway", technologies: ["Node.js", "Express", "REST", "Zod"] },
-      { layer: "Data & Event Bus", technologies: ["PostgreSQL", "Apache Kafka", "Redis", "Prisma"] },
+    "githubUrl": "https://github.com/dilshandevxx/business-idea-generator",
+    "stackLayers": [
+      {
+        "layer": "Frontend",
+        "technologies": [
+          "Next.js",
+          "TypeScript",
+          "Tailwind CSS"
+        ]
+      },
+      {
+        "layer": "Backend",
+        "technologies": [
+          "Python",
+          "FastAPI",
+          "SSE"
+        ]
+      },
+      {
+        "layer": "Model Integration",
+        "technologies": [
+          "Google Gemini",
+          "OpenAI-compatible API"
+        ]
+      }
     ],
-    image: "/images/project_brutalist.jpg",
-    aliases: ["mastermail"],
+    "featured": true,
+    "date": "Existing",
+    "stars": 0,
+    "highlight": true,
+    "metricsDetail": [],
+    "image": "",
+    "aliases": [],
+    "writeupUrl": "",
+    "status": "Existing"
   },
   {
-    slug: "vision-edge-infer",
-    title: "VisionEdge Real-time Inference",
-    date: "2024",
-    category: "AI/ML",
-    stars: 645,
-    tagline: "Quantized computer vision pipeline for real-time edge object detection and tracking.",
-    description:
-      "Lightweight model pipeline utilizing YOLOv8 and TensorRT optimization deployed in containerized edge microservices with WebRTC streaming output.",
-    longDescription:
-      "VisionEdge is an ultra-fast computer vision inference pipeline optimized for edge devices and resource-constrained environments. Utilizing TensorRT acceleration and INT8 model quantization, it performs real-time multi-class object detection and tracking on high-definition video streams with minimal hardware requirements.",
-    highlights: [
-      "YOLOv8 pipeline compiled with NVIDIA TensorRT achieving 60+ FPS on consumer GPUs",
-      "INT8 post-training quantization reducing model memory footprint by 4x without accuracy degradation",
-      "Low-latency WebRTC and WebSocket streaming delivering real-time bounding boxes to browser dashboards",
-      "Containerized microservice packaging with minimal Docker alpine runtime",
-      "Configurable region-of-interest (ROI) virtual tripwires and anomaly detection alerts",
+    "slug": "roamora-travel-project",
+    "title": "Roamora — Travel Discovery Website",
+    "category": "Full-Stack",
+    "tagline": "University travel website for destinations, attractions, and trip discovery.",
+    "description": "A travel website repository describing destination browsing, attraction information, travel tips, and interactive maps.",
+    "longDescription": "The repository README identifies Roamora as a university software engineering project. It documents responsive destination and attraction discovery, travel recommendations, and interactive maps. The README lists HTML, CSS, JavaScript, Bootstrap, Firebase, and a possible Node/Express backend; backend usage should be verified in source before being stated as fact.",
+    "architecture": "The documented product flow is destination discovery → attraction detail → travel tips and recommendations → map-based exploration. Confirm the actual frontend/backend boundaries and Firebase usage from the source before extending this description.",
+    "highlights": [
+      "Destination browsing and attraction information",
+      "Travel tips and recommendations",
+      "Interactive map feature documented",
+      "Responsive desktop and mobile interface",
+      "University team project"
     ],
-    architecture:
-      "Video feeds are ingested via OpenCV or RTSP streams into a C++/Python processing daemon. Frames are passed into a TensorRT execution engine running asynchronous batch inference. Detection coordinates and confidence scores are packaged into binary WebSocket packets broadcast to connected web clients.",
-    challenges:
-      "Overcoming thermal throttling and memory bandwidth saturation on small edge hardware. Solved by implementing dynamic frame dropping, circular buffer memory pools, and optimized TensorRT memory planning.",
-    tags: ["Python", "YOLOv8", "TensorRT", "OpenCV", "WebSockets", "Docker"],
-    highlight: true,
-    featured: false,
-    githubUrl: "https://github.com/dilshandevxx/vision-edge-infer",
-    metrics: "60 FPS inference on consumer hardware with 4x memory reduction",
-    metricsDetail: [
-      { label: "Frame Rate", value: "60+ FPS" },
-      { label: "Memory Reduction", value: "4x (INT8)" },
-      { label: "End-to-End Latency", value: "16ms" },
-      { label: "Detection mAP@50", value: "87.4%" },
+    "challenges": "Verify actual implemented features, data model, Firebase rules, map provider, accessibility, and deployment before assigning completion claims.",
+    "tags": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Bootstrap",
+      "Firebase"
     ],
-    stackLayers: [
-      { layer: "Deep Learning & Vision", technologies: ["PyTorch", "YOLOv8", "NVIDIA TensorRT", "OpenCV"] },
-      { layer: "Runtime & Streaming", technologies: ["Python", "WebSockets", "WebRTC", "NumPy"] },
-      { layer: "Packaging", technologies: ["Docker", "Linux Systemd", "CUDA Toolkit"] },
+    "githubUrl": "https://github.com/dilshandevxx/roamora",
+    "stackLayers": [
+      {
+        "layer": "Frontend",
+        "technologies": [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "Bootstrap"
+        ]
+      },
+      {
+        "layer": "Data / Services",
+        "technologies": [
+          "Firebase — README documented"
+        ]
+      }
     ],
-    image: "/images/ecommerce_card.png",
-    aliases: ["euphoria"],
+    "featured": false,
+    "date": "Existing",
+    "stars": 0,
+    "highlight": true,
+    "metricsDetail": [],
+    "image": "",
+    "aliases": [],
+    "writeupUrl": "",
+    "status": "Existing"
   },
   {
-    slug: "sentinel-infra-watch",
-    title: "Sentinel Cluster Monitor",
-    date: "2023",
-    category: "DevOps",
-    stars: 430,
-    tagline: "Lightweight distributed cluster health check agent with Discord & Slack alerting.",
-    description:
-      "A Go-based daemon tracking memory, CPU, disk anomalies, and Docker container lifecycles across VPS nodes with zero-configuration peer discovery.",
-    longDescription:
-      "Sentinel is a zero-dependency, lightweight cluster monitoring daemon written in Go. Designed to run as an unprivileged background agent on bare-metal and virtual private servers, it autonomously discovers peer nodes, monitors critical system metrics (CPU, RAM, disk I/O, network sockets, Docker container health), and dispatches structured alerts via Discord and Slack webhooks.",
-    highlights: [
-      "Written in pure Go with zero external dependencies and a tiny 12MB compiled binary",
-      "P2P gossip protocol for autonomous peer health checks and cluster membership tracking",
-      "Real-time Docker socket monitoring tracking container restarts and OOM kills",
-      "Prometheus-compatible `/metrics` scrape endpoint for Grafana integration",
-      "Configurable threshold alert rules with rate limiting and flapping prevention",
+    "slug": "travel-website",
+    "title": "Travel Website",
+    "category": "Full-Stack",
+    "tagline": "Full-stack travel discovery with destinations, guides, hotels, and stories.",
+    "description": "A travel website repository whose README documents HTML, CSS, JavaScript, Bootstrap, Node.js, Express, and MySQL.",
+    "longDescription": "The repository README describes a travel platform with user sign-up, guide registration, destination pages, hotels and restaurants, blog stories, and a photo gallery. This entry records the repository's documented scope without adding unverified usage or performance claims.",
+    "architecture": "Browser frontend → Node.js/Express backend → MySQL persistence. The README documents destination, accommodation, guide, story, and gallery areas; inspect route handlers and schema before asserting detailed data flow.",
+    "highlights": [
+      "User start and sign-up flow documented",
+      "Guide registration feature documented",
+      "Destination, hotel, and restaurant listings",
+      "Blog/story sharing and photo gallery",
+      "Node.js, Express, and MySQL documented"
     ],
-    architecture:
-      "The Sentinel daemon spins up lightweight goroutines for OS kernel metric collectors, Docker engine socket polling, and network heartbeats. If a peer misses three heartbeat intervals or a node exceeds memory thresholds, a debounced notification payload is sent to notification webhooks.",
-    challenges:
-      "Maintaining a sub-15MB resident memory footprint while sampling high-frequency kernel statistics. Solved by avoiding heavy runtime allocations, pooling byte buffers, and leveraging direct `/proc` filesystem reads.",
-    tags: ["Go", "Docker", "Linux", "REST APIs", "Prometheus"],
-    highlight: false,
-    featured: false,
-    githubUrl: "https://github.com/dilshandevxx/sentinel-infra-watch",
-    metrics: "<15MB resident memory footprint across target nodes",
-    metricsDetail: [
-      { label: "Memory Footprint", value: "< 14MB RAM" },
-      { label: "Binary Size", value: "12MB Static" },
-      { label: "CPU Overhead", value: "< 0.4%" },
-      { label: "Alert Latency", value: "< 1.2s" },
+    "challenges": "Verify authentication/session handling, SQL query safety, input validation, image storage, role authorization, and the completeness of each documented feature.",
+    "tags": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Bootstrap",
+      "Node.js",
+      "Express",
+      "MySQL"
     ],
-    stackLayers: [
-      { layer: "Core Daemon", technologies: ["Go (Golang)", "Goroutines", "Linux Syscalls", "Procfs"] },
-      { layer: "Integration & Monitoring", technologies: ["Docker API", "Prometheus", "REST", "Webhooks"] },
-      { layer: "Delivery", technologies: ["Slack API", "Discord Webhooks", "Systemd"] },
+    "githubUrl": "https://github.com/dilshandevxx/travel-website",
+    "stackLayers": [
+      {
+        "layer": "Frontend",
+        "technologies": [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "Bootstrap"
+        ]
+      },
+      {
+        "layer": "Backend",
+        "technologies": [
+          "Node.js",
+          "Express.js"
+        ]
+      },
+      {
+        "layer": "Database",
+        "technologies": [
+          "MySQL"
+        ]
+      }
     ],
-    image: "/images/project_powersurge.jpg",
+    "featured": false,
+    "date": "Existing",
+    "stars": 0,
+    "highlight": true,
+    "metricsDetail": [],
+    "image": "",
+    "aliases": [],
+    "writeupUrl": "",
+    "status": "Existing"
   },
   {
-    slug: "hyperflow-task-orchestrator",
-    title: "HyperFlow Workflow Orchestrator",
-    date: "2023",
-    category: "Web",
-    stars: 1120,
-    tagline: "Visual DAG-based task execution engine with distributed worker queues.",
-    description:
-      "Interactive drag-and-drop workflow builder designed for asynchronous batch data extraction, transformation, and automated notifications.",
-    longDescription:
-      "HyperFlow is a visual directed acyclic graph (DAG) workflow orchestrator and distributed task scheduler. It empowers teams to visually connect data ingestion, transformation, model evaluation, and notification jobs via an interactive browser canvas, executing tasks reliably across distributed Celery worker nodes backed by Redis.",
-    highlights: [
-      "Interactive drag-and-drop canvas with real-time topological sorting and DAG cycle detection",
-      "Distributed task execution engine leveraging Celery and Redis message queues",
-      "Granular step-level retry policies with exponential backoff and dead-letter queues",
-      "Live node status telemetry via WebSockets showing task completion, stdout logs, and execution duration",
-      "RESTful workflow definition format allowing code-first or UI-first job creation",
+    "slug": "distributed-llm-inference-platform",
+    "title": "Distributed LLM Inference Platform",
+    "date": "Roadmap",
+    "category": "AI Infrastructure",
+    "tagline": "Schedule and serve multiple LLMs across shared GPU capacity with latency, fairness, and cost controls.",
+    "description": "Schedule and serve multiple LLMs across shared GPU capacity with latency, fairness, and cost controls.",
+    "longDescription": "Schedule and serve multiple LLMs across shared GPU capacity with latency, fairness, and cost controls. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Dynamic batching",
+      "GPU-aware placement",
+      "Tenant quotas",
+      "Autoscaling",
+      "Canary model rollout",
+      "And TTFT/token-throughput benchmarks."
     ],
-    architecture:
-      "Users build workflows in a React canvas, which compiles node graphs into JSON DAG specifications. A FastAPI backend validates dependency trees, schedules tasks according to topology, and dispatches job payloads to Celery workers. Execution states are broadcast over WebSockets to provide instantaneous UI updates.",
-    challenges:
-      "Preventing race conditions and circular deadlocks in dynamic workflows with branch merges. Solved by implementing Kahn's topological sort algorithm on graph saves and atomic Redis transaction locks during task completion.",
-    tags: ["React", "TypeScript", "FastAPI", "Celery", "Redis", "Tailwind"],
-    highlight: false,
-    featured: false,
-    githubUrl: "https://github.com/dilshandevxx/hyperflow-orchestrator",
-    metrics: "Processes 20k+ async tasks/min with distributed Celery workers",
-    metricsDetail: [
-      { label: "Task Throughput", value: "20k+ / min" },
-      { label: "Worker Concurrency", value: "64 nodes" },
-      { label: "Execution Reliability", value: "99.95%" },
-      { label: "Graph Parse Time", value: "< 5ms" },
+    "architecture": "Gateway → model router → admission queue → GPU workers (vLLM/Triton) → streaming responses; control plane tracks capacity and model rollouts.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Python",
+      "vLLM",
+      "Kubernetes",
+      "NVIDIA GPU Operator",
+      "KEDA",
+      "Prometheus"
     ],
-    stackLayers: [
-      { layer: "Canvas & UI", technologies: ["React", "TypeScript", "React Flow / Canvas", "Tailwind"] },
-      { layer: "Execution Engine", technologies: ["FastAPI", "Python", "Celery", "Pydantic"] },
-      { layer: "Queue & Persistence", technologies: ["Redis", "PostgreSQL", "Docker Compose"] },
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/distributed-llm-inference-platform/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Python",
+          "vLLM",
+          "Kubernetes",
+          "NVIDIA GPU Operator",
+          "KEDA",
+          "Prometheus"
+        ]
+      }
     ],
-    image: "/images/project_warpspeed_desk.jpg",
-    aliases: ["powersurge"],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
   },
   {
-    slug: "dilshan-personal-portfolio",
-    title: "dilshan.dev",
-    date: "2025",
-    category: "Landing",
-    stars: 315,
-    tagline: "The source code of this personal digital garden and portfolio.",
-    description:
-      "Fast, minimalist, authentic personal website and digital garden built with Next.js App Router, vanilla CSS design tokens, and Markdown content pipelines.",
-    longDescription:
-      "dilshan.dev is an open-source personal digital garden crafted with deliberate restraint and content-first minimalism. Inspired by the legendary handcrafted web aesthetic, it features custom theme switching, harmonic palettes, server-rendered routes, and zero heavy UI framework bloat.",
-    highlights: [
-      "Next.js App Router architecture with instant static generation and minimal bundle size",
-      "Harmonic dynamic palette switcher with synchronized light/dark mode tokens",
-      "Vanilla CSS architecture with custom CSS variables and no utility framework dependencies",
-      "Full mobile responsiveness and accessible keyboard navigation",
-      "Integrated RSS feeds, code snippets, and dynamic project showcase",
+    "slug": "llm-api-gateway",
+    "title": "LLM API Gateway & Model Router",
+    "date": "Roadmap",
+    "category": "AI/ML",
+    "tagline": "Provide a unified, policy-controlled API across hosted and self-hosted model providers.",
+    "description": "Provide a unified, policy-controlled API across hosted and self-hosted model providers.",
+    "longDescription": "Provide a unified, policy-controlled API across hosted and self-hosted model providers. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Provider adapters",
+      "Weighted routing",
+      "Fallback",
+      "Quotas",
+      "Rate limits",
+      "Bounded retries",
+      "Streaming",
+      "Audit logs",
+      "And usage metering."
     ],
-    architecture:
-      "Built with Next.js 15, React 19, and TypeScript. All pages are statically generated with incremental revalidation where necessary. Styling is powered entirely by a bespoke CSS token design system.",
-    challenges:
-      "Achieving an authentic, non-glossy matte design while supporting dynamic multi-tone theme adjustments. Solved through HSL-calculated complementary harmonies and CSS custom properties.",
-    tags: ["Next.js", "React", "TypeScript", "CSS", "RSS"],
-    highlight: true,
-    featured: true,
-    githubUrl: "https://github.com/dilshandevxx/dilshan-personal-portfolio",
-    demoUrl: "https://dilshan.dev",
-    metrics: "100 Lighthouse performance score with sub-80ms first contentful paint",
-    metricsDetail: [
-      { label: "Lighthouse Score", value: "100 / 100" },
-      { label: "First Contentful Paint", value: "78ms" },
-      { label: "Total CSS Size", value: "< 14KB gzip" },
-      { label: "Zero Janky JS", value: "100%" },
+    "architecture": "Client → authenticated gateway → quota/policy engine → provider adapters → model endpoints; usage events flow to analytics.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Go",
+      "FastAPI",
+      "PostgreSQL",
+      "Redis",
+      "OPA",
+      "OpenTelemetry"
     ],
-    stackLayers: [
-      { layer: "Framework", technologies: ["Next.js", "React 19", "TypeScript"] },
-      { layer: "Styling & Tokens", technologies: ["Vanilla CSS", "CSS Variables", "Modern Typography"] },
-      { layer: "Hosting", technologies: ["Vercel", "Edge Network", "GitHub CI"] },
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/llm-api-gateway/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Go",
+          "FastAPI",
+          "PostgreSQL",
+          "Redis",
+          "OPA",
+          "OpenTelemetry"
+        ]
+      }
     ],
-    image: "/images/project_brutalist.jpg",
-    aliases: ["brutalist-manifesto"],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
   },
   {
-    slug: "cxx-tensor-graph",
-    title: "TensorGraph C++",
-    date: "2024",
-    category: "Systems",
-    stars: 580,
-    tagline: "Tensor compute graph with reverse-mode automatic differentiation.",
-    description:
-      "A from-scratch C++ tensor library and autograd computation engine featuring lazy evaluation, memory arena pooling, and SIMD matrix operations.",
-    longDescription:
-      "TensorGraph C++ is a minimalist deep learning computational graph library implemented in modern C++20. Designed to explore how PyTorch and TensorFlow compute gradients under the hood, it implements reverse-mode automatic differentiation (autograd) on dynamically constructed directed acyclic graphs.",
-    highlights: [
-      "Pure C++20 implementation with custom multi-dimensional strided tensor representation",
-      "Dynamic compute graph execution with reverse-mode automatic gradient backpropagation",
-      "SIMD vectorization (AVX2/NEON) for accelerated float32 matrix multiplications",
-      "Custom memory arena allocator eliminating runtime heap allocation thrashing",
-      "Python C-API bindings allowing seamless integration with NumPy arrays",
+    "slug": "production-mlops-platform",
+    "title": "Production MLOps Platform",
+    "date": "Roadmap",
+    "category": "MLOps",
+    "tagline": "Make model training, evaluation, registration, deployment, and rollback reproducible.",
+    "description": "Make model training, evaluation, registration, deployment, and rollback reproducible.",
+    "longDescription": "Make model training, evaluation, registration, deployment, and rollback reproducible. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Dataset lineage",
+      "Reproducible pipelines",
+      "CI evaluation gates",
+      "Canary/shadow rollout",
+      "Rollback",
+      "Drift monitoring",
+      "And runbooks."
     ],
-    architecture:
-      "Operations on Tensor instances construct computational graph nodes recording parents and gradient backward closures. Calling `.backward()` traverses the DAG in reverse topological order, accumulating gradients at leaf nodes.",
-    challenges:
-      "Minimizing cache misses during non-contiguous tensor transpose and slicing. Solved by implementing optimized strided index iterators and tiled matrix multiplication algorithms.",
-    tags: ["C++", "Autograd", "SIMD", "Python C-API", "Algorithms"],
-    highlight: false,
-    featured: false,
-    githubUrl: "https://github.com/dilshandevxx/cxx-tensor-graph",
-    metrics: "3.8x faster matrix operations via AVX2 SIMD vectorization",
-    metricsDetail: [
-      { label: "SIMD Speedup", value: "3.8x AVX2" },
-      { label: "Memory Overhead", value: "Zero Heap Thrash" },
-      { label: "Autograd Graph Depth", value: "10k+ nodes" },
-      { label: "Language Standard", value: "C++20" },
+    "architecture": "Versioned data → pipeline orchestration → training/experiments → model registry → evaluation gates → staged serving → drift monitoring.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Python",
+      "MLflow",
+      "DVC",
+      "Airflow",
+      "Kubernetes",
+      "KServe"
     ],
-    stackLayers: [
-      { layer: "Core Engine", technologies: ["C++20", "AVX2 SIMD", "Memory Arenas"] },
-      { layer: "Graph & Autograd", technologies: ["DAG Topological Sort", "Reverse-Mode AD"] },
-      { layer: "Bindings", technologies: ["Python C-API", "Pybind11", "CMake"] },
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/production-mlops-platform/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Python",
+          "MLflow",
+          "DVC",
+          "Airflow",
+          "Kubernetes",
+          "KServe"
+        ]
+      }
     ],
-    image: "/images/project_collective.jpg",
-    aliases: ["creative-collective"],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
   },
   {
-    slug: "ebpf-network-tracer",
-    title: "eBPF Kernel Tracer",
-    date: "2024",
-    category: "DevOps",
-    stars: 420,
-    tagline: "Zero-overhead Linux kernel network socket observability.",
-    description:
-      "High-performance system observability agent utilizing eBPF programs loaded into the Linux kernel to monitor TCP/UDP connections and dropped packets.",
-    longDescription:
-      "eBPF Kernel Tracer is an in-kernel network monitoring agent that hooks into Linux socket tracepoints (sock:inet_sock_set_state) to deliver nanosecond-precision telemetry without modifying application code or introducing packet capture overhead.",
-    highlights: [
-      "Attaches directly to kernel sock tracepoints using modern CO-RE (Compile Once – Run Everywhere)",
-      "Zero application performance penalty with ring buffer user-space data transmission",
-      "Detects TCP retransmissions, connection latency spikes, and socket resets in real time",
-      "Lightweight Go user-space agent exporting Prometheus metrics and OpenTelemetry spans",
-      "Sub-5MB memory footprint on Linux server nodes",
+    "slug": "distributed-feature-store",
+    "title": "Distributed Feature Store",
+    "date": "Roadmap",
+    "category": "MLOps",
+    "tagline": "Serve consistent features to offline training and low-latency online inference.",
+    "description": "Serve consistent features to offline training and low-latency online inference.",
+    "longDescription": "Serve consistent features to offline training and low-latency online inference. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Feature registry",
+      "Point-in-time joins",
+      "Online lookup API",
+      "Freshness/TTL",
+      "Schema compatibility",
+      "Backfills",
+      "And lineage."
     ],
-    architecture:
-      "C-based eBPF bytecode is validated and JIT-compiled into the Linux kernel by the BPF verifier. Events are written to a shared BPF ring buffer. A Go daemon reads the buffer asynchronously and exposes Prometheus metrics.",
-    challenges:
-      "Passing strict BPF verifier bounds checks while maintaining multi-kernel compatibility. Solved by leveraging BPF CO-RE and BTF (BPF Type Format) relocations.",
-    tags: ["eBPF", "C", "Go", "Linux Kernel", "Prometheus"],
-    highlight: false,
-    featured: false,
-    githubUrl: "https://github.com/dilshandevxx/ebpf-network-tracer",
-    metrics: "Sub-1% CPU overhead while capturing 100k socket events/second",
-    metricsDetail: [
-      { label: "Event Throughput", value: "100k / sec" },
-      { label: "CPU Overhead", value: "< 0.8%" },
-      { label: "User-space Daemon", value: "Go / Cilium BPF" },
-      { label: "Kernel Compatibility", value: "Linux 5.8+" },
+    "architecture": "Batch/stream sources → transformations → offline store; streaming updates → online KV store; registry tracks definitions and lineage.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Python",
+      "Feast",
+      "Kafka",
+      "PostgreSQL",
+      "Redis",
+      "Airflow"
     ],
-    stackLayers: [
-      { layer: "In-Kernel", technologies: ["eBPF / BPF", "C", "Linux Tracepoints", "BTF"] },
-      { layer: "User-space Agent", technologies: ["Go", "Cilium/ebpf", "Ring Buffer"] },
-      { layer: "Metrics Exporter", technologies: ["Prometheus", "OpenTelemetry", "Grafana"] },
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/distributed-feature-store/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Python",
+          "Feast",
+          "Kafka",
+          "PostgreSQL",
+          "Redis",
+          "Airflow"
+        ]
+      }
     ],
-    image: "/images/project_warpspeed.jpg",
-    aliases: ["warpspeed"],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
   },
   {
-    slug: "crdt-sync-engine",
-    title: "CRDT Sync Engine",
-    date: "2023",
-    category: "Systems",
-    stars: 910,
-    tagline: "Conflict-free replicated data type engine for real-time state.",
-    description:
-      "State-based and operation-based CRDT implementation providing eventual consistency for collaborative text documents and multi-user canvas boards.",
-    longDescription:
-      "CRDT Sync Engine is a robust, mathematically proven replication library implementing YATA and fractional indexing algorithms for peer-to-peer real-time collaborative applications. It guarantees strong eventual consistency across offline-first clients with zero merge conflicts.",
-    highlights: [
-      "Implements state-based RGA and LWW-Element-Set CRDT data structures",
-      "Compact binary state vector encoding reducing network synchronization bandwidth by 70%",
-      "Deterministic convergence under arbitrary network partitions and out-of-order delivery",
-      "WebSocket and WebRTC data channel transport adapters for peer-to-peer mesh sync",
-      "Zero external runtime dependencies with high-concurrency benchmarks",
+    "slug": "realtime-fraud-detection-platform",
+    "title": "Real-Time Fraud Detection Platform",
+    "date": "Roadmap",
+    "category": "AI/ML",
+    "tagline": "Score transactions from streaming features while preserving auditability and graceful fallback.",
+    "description": "Score transactions from streaming features while preserving auditability and graceful fallback.",
+    "longDescription": "Score transactions from streaming features while preserving auditability and graceful fallback. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Streaming ingestion",
+      "Online scoring",
+      "Rules-plus-model decisions",
+      "Idempotency",
+      "Delayed labels",
+      "Replay",
+      "And backtesting."
     ],
-    architecture:
-      "Document mutations are recorded as causal item structs with Lamport timestamps and client IDs. When peers connect, they exchange compact state vectors to compute diffs, merging incoming operations into local trees without central locking.",
-    challenges:
-      "Garbage collection of deletion tombstones without breaking causal history. Solved by implementing state vector snapshot compaction during quiescence periods.",
-    tags: ["TypeScript", "CRDT", "WebSockets", "WebRTC", "Distributed"],
-    highlight: false,
-    featured: false,
-    githubUrl: "https://github.com/dilshandevxx/crdt-sync-engine",
-    metrics: "Sub-15ms peer-to-peer convergence with 70% compressed delta payloads",
-    metricsDetail: [
-      { label: "Convergence Latency", value: "< 15ms" },
-      { label: "Delta Compression", value: "70% Binary" },
-      { label: "Conflict Rate", value: "0% Mathematical" },
-      { label: "Max Concurrent Peers", value: "250+ / room" },
+    "architecture": "Transaction API → event stream → feature enrichment → model scorer → policy engine → decision/audit log.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Python",
+      "Kafka",
+      "Flink",
+      "FastAPI",
+      "Redis",
+      "MLflow"
     ],
-    stackLayers: [
-      { layer: "Algorithm", technologies: ["RGA CRDT", "Lamport Timestamps", "YATA Algorithm"] },
-      { layer: "Encoding", technologies: ["TypeScript", "Uint8Array", "Varint Encoding"] },
-      { layer: "Transport", technologies: ["WebSockets", "WebRTC Data Channels"] },
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/realtime-fraud-detection-platform/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Python",
+          "Kafka",
+          "Flink",
+          "FastAPI",
+          "Redis",
+          "MLflow"
+        ]
+      }
     ],
-    image: "/images/project_warpspeed_desk.jpg",
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
   },
   {
-    slug: "distroless-k8s-operator",
-    title: "Distroless K8s Operator",
-    date: "2023",
-    category: "DevOps",
-    stars: 512,
-    tagline: "Kubernetes controller for automated zero-privilege container hardening.",
-    description:
-      "Kubernetes admission webhook and custom controller that automatically strips root permissions, read-write filesystems, and shell utilities from cluster workloads.",
-    longDescription:
-      "Distroless K8s Operator is a cloud-native security automation controller built using the Kubebuilder framework. It intercepts pod creation requests, validates security contexts against CIS benchmarks, and automatically patches manifests with read-only root filesystems, non-root user IDs, and dropped Linux capabilities.",
-    highlights: [
-      "Dynamic Mutating and Validating Admission Webhook controller written in Go",
-      "Enforces NSA/CISA Kubernetes Hardening Guidance out of the box",
-      "Automated migration from bloated base images to GoogleContainerTools distroless containers",
-      "Generates continuous cluster compliance audit reports in Prometheus format",
-      "Integrated with cert-manager for automated webhook TLS certificate rotation",
+    "slug": "ai-sre-incident-copilot",
+    "title": "AI SRE Incident Copilot",
+    "date": "Roadmap",
+    "category": "AI/ML",
+    "tagline": "Help on-call engineers correlate alerts, traces, deployments, and runbooks with evidence-backed suggestions.",
+    "description": "Help on-call engineers correlate alerts, traces, deployments, and runbooks with evidence-backed suggestions.",
+    "longDescription": "Help on-call engineers correlate alerts, traces, deployments, and runbooks with evidence-backed suggestions. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Service catalog",
+      "Alert correlation",
+      "Grounded retrieval",
+      "Read-only tools",
+      "Cited hypotheses",
+      "Confidence",
+      "And human approval."
     ],
-    architecture:
-      "The Kubernetes API server invokes the operator's mutating webhook on pod creation. The controller inspects `securityContext` parameters, applies hardening patches, and logs admissions to a structured audit topic.",
-    challenges:
-      "Preventing breaking legacy workloads that legitimately require write access to specific directories. Solved by introducing selective ephemeral volume mounting and granular namespace annotation overrides.",
-    tags: ["Kubernetes", "Go", "Security", "Kubebuilder", "Helm"],
-    highlight: false,
-    featured: false,
-    githubUrl: "https://github.com/dilshandevxx/distroless-k8s-operator",
-    metrics: "100% compliance with CIS Kubernetes benchmarks across 40+ namespaces",
-    metricsDetail: [
-      { label: "CIS Compliance", value: "100%" },
-      { label: "Webhook Latency", value: "< 8ms" },
-      { label: "Attack Surface", value: "92% Reduction" },
-      { label: "Namespaces Guarded", value: "40+" },
+    "architecture": "Alert intake → context builder → runbook retrieval → bounded read-only telemetry tools → cited incident timeline; approval gates for writes.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Python",
+      "LangGraph",
+      "OpenTelemetry",
+      "Prometheus",
+      "Loki",
+      "pgvector"
     ],
-    stackLayers: [
-      { layer: "Controller", technologies: ["Go", "Kubebuilder", "Controller-Runtime"] },
-      { layer: "Kubernetes APIs", technologies: ["Admission Webhooks", "CustomResourceDefinitions"] },
-      { layer: "Security Tooling", technologies: ["CIS Benchmarks", "Distroless", "Trivy"] },
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/ai-sre-incident-copilot/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Python",
+          "LangGraph",
+          "OpenTelemetry",
+          "Prometheus",
+          "Loki",
+          "pgvector"
+        ]
+      }
     ],
-    image: "/images/science_tech.png",
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
   },
   {
-    slug: "micro-cache-allocator",
-    title: "MicroCache Allocator",
-    date: "2023",
-    category: "Systems",
-    stars: 724,
-    tagline: "Lock-free jemalloc-inspired custom memory allocator in C++.",
-    description:
-      "High-concurrency fixed-size memory allocator designed for ultra-low latency key-value caching engines with near-zero fragmentation.",
-    longDescription:
-      "MicroCache Allocator is a specialized C++ memory management subsystem engineered to replace standard `malloc`/`free` in high-throughput database caching layers. Using thread-local size-class arenas and lock-free freelists, it completely eliminates lock contention across high-core-count server CPUs.",
-    highlights: [
-      "Thread-local slab allocation arenas eliminating multithreaded mutex contention",
-      "Segregated size-classes aligned to 64-byte CPU cache lines avoiding false sharing",
-      "Lock-free atomic freelists for cross-thread memory deallocation",
-      "Virtual memory management leveraging Linux `mmap` with transparent huge pages",
-      "Benchmark showing 4.2x faster allocation throughput compared to standard glibc malloc",
+    "slug": "internal-developer-platform",
+    "title": "Internal Developer Platform",
+    "date": "Roadmap",
+    "category": "Platform Engineering",
+    "tagline": "Give developers a self-service path to provision services and environments through governed golden paths.",
+    "description": "Give developers a self-service path to provision services and environments through governed golden paths.",
+    "longDescription": "Give developers a self-service path to provision services and environments through governed golden paths. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Service catalog",
+      "Templates",
+      "Self-service environments",
+      "Secrets integration",
+      "Policy-as-code",
+      "Ownership metadata",
+      "And scorecards."
     ],
-    architecture:
-      "Each thread maintains private size-class bins for allocations under 4KB. Deallocations by other threads push nodes into an atomic lock-free queue, reclaimed during the owning thread's next allocation cycle.",
-    challenges:
-      "Preventing cross-thread memory return overhead and avoiding lock convoying. Solved using Treiber stacks and atomic pointer exchange operations.",
-    tags: ["C++", "Memory Management", "Concurrency", "Linux", "Performance"],
-    highlight: false,
-    featured: false,
-    githubUrl: "https://github.com/dilshandevxx/micro-cache-allocator",
-    metrics: "4.2x higher allocation throughput with zero thread contention",
-    metricsDetail: [
-      { label: "Throughput Boost", value: "4.2x vs Glibc" },
-      { label: "Cache Line Alignment", value: "64-byte True" },
-      { label: "Lock Contention", value: "0% Free-List" },
-      { label: "P99 Alloc Latency", value: "8.4ns" },
+    "architecture": "Portal/catalog → templates and policy checks → Git scaffolding → CI → Terraform/GitOps → Kubernetes runtime.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Backstage",
+      "Kubernetes",
+      "Terraform",
+      "Crossplane",
+      "Argo CD",
+      "OPA"
     ],
-    stackLayers: [
-      { layer: "Low-Level Kernel", technologies: ["Linux mmap", "Transparent Huge Pages", "Virtual Memory"] },
-      { layer: "Concurrency", technologies: ["Atomic CAS", "Lock-Free Treiber Stack", "Memory Fences"] },
-      { layer: "Language", technologies: ["Modern C++20", "GTest Benchmarks", "Valgrind/ASan"] },
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/internal-developer-platform/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Backstage",
+          "Kubernetes",
+          "Terraform",
+          "Crossplane",
+          "Argo CD",
+          "OPA"
+        ]
+      }
     ],
-    image: "/images/biometric_scan.png",
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
   },
   {
-    slug: "aura-creative-studio",
-    title: "Aura Creative Studio",
-    date: "2025",
-    category: "Landing",
-    stars: 840,
-    tagline: "High-fashion editorial agency portfolio with WebGL interactive physics.",
-    description:
-      "Modern editorial landing page featuring smooth inertial scrolling, WebGL fluid shaders, and tactile typography crafted for high-end digital studios.",
-    longDescription:
-      "Aura is an award-winning creative studio landing page engineered with Next.js App Router, Three.js, and GLSL fragment shaders. Designed to evoke tactile luxury and editorial confidence, it blends editorial print layout standards with smooth 60 FPS hardware-accelerated transitions.",
-    highlights: [
-      "Custom WebGL canvas rendering interactive particle fluid physics on mouse move",
-      "Zero-layout-shift typography using variable fonts and CSS subgrid layout",
-      "Dynamic theme transition shaders animating background hue shifts seamlessly",
-      "Lighthouse 100 performance score with progressive asset hydration",
-      "Accessible keyboard navigation with focus traps and screen-reader narration",
+    "slug": "kubernetes-policy-operator",
+    "title": "Kubernetes Policy & Reliability Operator",
+    "date": "Roadmap",
+    "category": "Platform Engineering",
+    "tagline": "Continuously validate Kubernetes workloads against reliability and security policies.",
+    "description": "Continuously validate Kubernetes workloads against reliability and security policies.",
+    "longDescription": "Continuously validate Kubernetes workloads against reliability and security policies. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Policy CRDs",
+      "Reconciliation",
+      "Dry-run",
+      "Status conditions",
+      "Exemptions",
+      "Audit events",
+      "And staged enforcement."
     ],
-    architecture:
-      "Built with React 19 and Three.js running within a shared canvas context. Post-processing passes utilize custom GLSL distortion shaders managed through Framer Motion layout states.",
-    challenges:
-      "Achieving silky 60 FPS WebGL render loops without draining mobile battery. Solved using visibility observer triggers, delta-time throttling, and adaptive render resolution.",
-    tags: ["Next.js", "Three.js", "WebGL", "Framer Motion", "TypeScript", "Tailwind"],
-    highlight: true,
-    featured: false,
-    githubUrl: "https://github.com/dilshandevxx/aura-creative-studio",
-    demoUrl: "https://aura-studio.dilshan.dev",
-    metrics: "60 FPS WebGL canvas with 100 Lighthouse Performance score",
-    metricsDetail: [
-      { label: "Frame Rate", value: "60 FPS" },
-      { label: "Lighthouse Score", value: "100/100" },
-      { label: "First Input Delay", value: "< 12ms" },
-      { label: "Bundle Size", value: "38KB Gzip" },
+    "architecture": "Kubernetes API watch → controller reconciliation → policy evaluation → status conditions; optional admission webhook.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Go",
+      "Kubebuilder",
+      "Kubernetes",
+      "OPA/Rego",
+      "Helm",
+      "Prometheus"
     ],
-    stackLayers: [
-      { layer: "Frontend & 3D", technologies: ["Next.js", "Three.js", "Framer Motion", "GLSL Shaders"] },
-      { layer: "Styling", technologies: ["Tailwind CSS", "CSS Subgrid", "Variable Fonts"] },
-      { layer: "Deployment", technologies: ["Vercel Edge", "Cloudflare CDN"] },
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/kubernetes-policy-operator/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Go",
+          "Kubebuilder",
+          "Kubernetes",
+          "OPA/Rego",
+          "Helm",
+          "Prometheus"
+        ]
+      }
     ],
-    image: "/images/project_collective.jpg",
-    aliases: ["creative-collective"],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
   },
   {
-    slug: "warpspeed-protocol-landing",
-    title: "Warpspeed Cloud SaaS Landing",
-    date: "2024",
-    category: "Landing",
-    stars: 670,
-    tagline: "Ultra-low-latency packet engine developer platform landing page.",
-    description:
-      "Conversion-focused developer SaaS product landing page with interactive latency benchmarks, dark mode aesthetic, and code playground.",
-    longDescription:
-      "Warpspeed Cloud Landing is a developer-centric product landing page crafted for sub-millisecond network streaming protocol software. It features live throughput simulators, interactive pricing matrices, and copy-paste CLI integration snippets.",
-    highlights: [
-      "Interactive latency calculator visualizing packet savings over traditional TCP",
-      "Interactive code playground with syntax-highlighted Rust and Go sample drivers",
-      "Refined dark matte surfaces with precision 1px borders and subtle glow highlights",
-      "Stripe customer portal deep linking with dynamic pricing tiers",
+    "slug": "distributed-observability-platform",
+    "title": "Distributed Observability Platform",
+    "date": "Roadmap",
+    "category": "SRE",
+    "tagline": "Collect, route, retain, and query logs, metrics, and traces with cardinality and cost controls.",
+    "description": "Collect, route, retain, and query logs, metrics, and traces with cardinality and cost controls.",
+    "longDescription": "Collect, route, retain, and query logs, metrics, and traces with cardinality and cost controls. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Sampling",
+      "Tenant isolation",
+      "Cardinality guardrails",
+      "Retention tiers",
+      "Ingest SLOs",
+      "Dashboards",
+      "And failure testing."
     ],
-    architecture:
-      "Next.js App Router with React Server Components, Tailwind CSS, and lightweight SVG charting engines for latency graphs.",
-    challenges:
-      "Creating dense technical charts that load instantaneously without third-party heavy charting libraries. Solved with custom SVG path generators.",
-    tags: ["React 19", "Next.js", "Tailwind CSS", "TypeScript", "SVG"],
-    highlight: true,
-    featured: false,
-    githubUrl: "https://github.com/dilshandevxx/warpspeed-landing",
-    demoUrl: "https://warpspeed.dilshan.dev",
-    metrics: "Sub-50ms FCP with instant interactive latency calculator",
-    metricsDetail: [
-      { label: "FCP", value: "48ms" },
-      { label: "Conversion Rate", value: "8.4%" },
-      { label: "Zero Janky JS", value: "100%" },
+    "architecture": "OTel collectors → regional gateway → stream/buffer → telemetry backends → query/alert layer.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "OpenTelemetry",
+      "Prometheus",
+      "Grafana",
+      "Loki",
+      "Tempo",
+      "Kafka"
     ],
-    stackLayers: [
-      { layer: "Frontend", technologies: ["Next.js", "React 19", "TypeScript", "Tailwind CSS"] },
-      { layer: "Visuals", technologies: ["Custom SVG Charts", "Framer Motion"] },
-      { layer: "Analytics", technologies: ["Plausible", "Vercel Analytics"] },
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/distributed-observability-platform/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "OpenTelemetry",
+          "Prometheus",
+          "Grafana",
+          "Loki",
+          "Tempo",
+          "Kafka"
+        ]
+      }
     ],
-    image: "/images/project_warpspeed.jpg",
-    aliases: ["warpspeed"],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
   },
   {
-    slug: "boltshift-fintech-gateway",
-    title: "Boltshift Real-Time Payment Engine",
-    date: "2024",
-    category: "Web",
-    stars: 1450,
-    tagline: "High-throughput cloud inference engine and real-time payment gateway.",
-    description:
-      "Deterministic sub-50ms payment processing operator with cryptographic ledger auditing, Kafka event streaming, and live transaction dashboards.",
-    longDescription:
-      "Boltshift is an institutional-grade payment routing and settlement engine built for multi-currency transactions. Handling over 10,000 transactions per second with sub-50ms deterministic latency, it guarantees ACID compliance across distributed database nodes.",
-    highlights: [
-      "Processes 10,000+ operations/sec with deterministic sub-50ms p99 latency",
-      "Rust worker threads with zero-copy buffer serialization and event-driven Kafka pipelines",
-      "Cryptographic ledger auditing ensuring tamper-proof reconciliation",
-      "Live operational telemetry dashboard built with Next.js and WebSockets",
+    "slug": "ebpf-network-observability",
+    "title": "eBPF Network Observability Agent",
+    "date": "Roadmap",
+    "category": "Systems",
+    "tagline": "Expose kernel-level network signals without packet capture or application instrumentation.",
+    "description": "Expose kernel-level network signals without packet capture or application instrumentation.",
+    "longDescription": "Expose kernel-level network signals without packet capture or application instrumentation. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "TCP lifecycle events",
+      "Retransmission/reset counters",
+      "Process attribution",
+      "Bounded buffers",
+      "Kernel compatibility",
+      "And overhead benchmarks."
     ],
-    architecture:
-      "Rust high-throughput core service connected via Kafka message buses to Go settlement workers. Post-settlement ledger entries are signed cryptographically and persisted into distributed PostgreSQL clusters.",
-    challenges:
-      "Preventing write amplification under high concurrency. Solved with memory-mapped ring buffers and debounced batch commits.",
-    tags: ["Rust", "Go", "Kafka", "PostgreSQL", "Docker", "Kubernetes", "Next.js"],
-    highlight: true,
-    featured: false,
-    githubUrl: "https://github.com/dilshandevxx/boltshift-gateway",
-    demoUrl: "https://boltshift.dilshan.dev",
-    metrics: "10,000+ TPS with sub-50ms deterministic settlement latency",
-    metricsDetail: [
-      { label: "Peak TPS", value: "10k+ / sec" },
-      { label: "P99 Latency", value: "< 48ms" },
-      { label: "Ledger Integrity", value: "100% Cryptographic" },
+    "architecture": "eBPF tracepoints/socket hooks → ring buffer → Go agent → Prometheus/OpenTelemetry exporter.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "C",
+      "eBPF",
+      "Go",
+      "Linux",
+      "Cilium/ebpf",
+      "Prometheus"
     ],
-    stackLayers: [
-      { layer: "Core Engine", technologies: ["Rust", "Go", "Kafka", "Zero-Copy Buffers"] },
-      { layer: "Data", technologies: ["PostgreSQL", "Redis", "Ledger Logs"] },
-      { layer: "UI & Ops", technologies: ["Next.js", "WebSockets", "Tailwind CSS"] },
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/ebpf-network-observability/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "C",
+          "eBPF",
+          "Go",
+          "Linux",
+          "Cilium/ebpf",
+          "Prometheus"
+        ]
+      }
     ],
-    image: "/images/project_boltshift.jpg",
-    aliases: ["boltshift"],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
   },
+  {
+    "slug": "multi-tenant-vector-search",
+    "title": "Multi-Tenant Vector Search Service",
+    "date": "Roadmap",
+    "category": "AI Infrastructure",
+    "tagline": "Provide tenant-isolated semantic retrieval with predictable latency and correct access filtering.",
+    "description": "Provide tenant-isolated semantic retrieval with predictable latency and correct access filtering.",
+    "longDescription": "Provide tenant-isolated semantic retrieval with predictable latency and correct access filtering. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Tenant isolation",
+      "Metadata filters",
+      "Hybrid retrieval",
+      "Document versioning",
+      "Deletion guarantees",
+      "Query budgets",
+      "Backup/restore."
+    ],
+    "architecture": "Authenticated API → tenant/ACL filter compiler → embedding service → vector index + metadata store → optional reranker.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Python",
+      "FastAPI",
+      "Qdrant",
+      "PostgreSQL",
+      "Redis",
+      "Docker"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/multi-tenant-vector-search/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Python",
+          "FastAPI",
+          "Qdrant",
+          "PostgreSQL",
+          "Redis",
+          "Docker"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
+  },
+  {
+    "slug": "gpu-workload-scheduler",
+    "title": "GPU Workload Scheduler",
+    "date": "Roadmap",
+    "category": "AI Infrastructure",
+    "tagline": "Schedule training and inference jobs by GPU type, memory, priority, and fairness.",
+    "description": "Schedule training and inference jobs by GPU type, memory, priority, and fairness.",
+    "longDescription": "Schedule training and inference jobs by GPU type, memory, priority, and fairness. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "GPU discovery",
+      "Quotas",
+      "Placement constraints",
+      "Queueing",
+      "Preemption experiments",
+      "Fairness metrics",
+      "And workload simulation."
+    ],
+    "architecture": "Workload API → admission/queue → resource-fit scheduler → Kubernetes jobs/pods → GPU telemetry feedback.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Go",
+      "Kubernetes Scheduler",
+      "NVIDIA Device Plugin",
+      "Kueue",
+      "Prometheus"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/gpu-workload-scheduler/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Go",
+          "Kubernetes Scheduler",
+          "NVIDIA Device Plugin",
+          "Kueue",
+          "Prometheus"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
+  },
+  {
+    "slug": "ai-security-gateway",
+    "title": "AI Security Gateway",
+    "date": "Roadmap",
+    "category": "Security",
+    "tagline": "Apply security policy to LLM inputs, outputs, sensitive data, and tool execution.",
+    "description": "Apply security policy to LLM inputs, outputs, sensitive data, and tool execution.",
+    "longDescription": "Apply security policy to LLM inputs, outputs, sensitive data, and tool execution. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "PII redaction",
+      "Prompt/output policies",
+      "Tool allowlists",
+      "Tenant policies",
+      "Audit events",
+      "Adversarial corpus",
+      "And policy versioning."
+    ],
+    "architecture": "Application → policy gateway → DLP/input checks → model → output validation; tool calls use a separate authorization broker.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Python",
+      "FastAPI",
+      "OPA",
+      "Presidio",
+      "Redis",
+      "OpenTelemetry"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/ai-security-gateway/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Python",
+          "FastAPI",
+          "OPA",
+          "Presidio",
+          "Redis",
+          "OpenTelemetry"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
+  },
+  {
+    "slug": "llm-evaluation-observability",
+    "title": "LLM Evaluation & Observability Workbench",
+    "date": "Roadmap",
+    "category": "AI/ML",
+    "tagline": "Measure LLM application quality across prompt/model changes, datasets, latency, and cost.",
+    "description": "Measure LLM application quality across prompt/model changes, datasets, latency, and cost.",
+    "longDescription": "Measure LLM application quality across prompt/model changes, datasets, latency, and cost. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Golden datasets",
+      "Redacted traces",
+      "Evaluator harness",
+      "Human annotation",
+      "Regression comparisons",
+      "And CI quality gates."
+    ],
+    "architecture": "Instrumented traces → versioned evaluation datasets → automated evaluators + human review → experiment comparison → release gate.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Python",
+      "OpenTelemetry",
+      "MLflow",
+      "PostgreSQL",
+      "ClickHouse",
+      "FastAPI"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/llm-evaluation-observability/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Python",
+          "OpenTelemetry",
+          "MLflow",
+          "PostgreSQL",
+          "ClickHouse",
+          "FastAPI"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
+  },
+  {
+    "slug": "agent-runtime-orchestrator",
+    "title": "Secure Agent Runtime & Orchestrator",
+    "date": "Roadmap",
+    "category": "AI/ML",
+    "tagline": "Run tool-using agents as bounded, resumable workflows with durable state and explicit permissions.",
+    "description": "Run tool-using agents as bounded, resumable workflows with durable state and explicit permissions.",
+    "longDescription": "Run tool-using agents as bounded, resumable workflows with durable state and explicit permissions. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Checkpoints",
+      "Typed tools",
+      "Per-step budgets",
+      "Cancellation",
+      "Idempotency",
+      "Human approval",
+      "Tenant isolation",
+      "And replay."
+    ],
+    "architecture": "API → workflow state machine → durable queue → isolated tool workers → model adapter; each step has budget, timeout, retry, and audit.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Python",
+      "LangGraph",
+      "Temporal",
+      "PostgreSQL",
+      "Redis",
+      "OPA"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/agent-runtime-orchestrator/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Python",
+          "LangGraph",
+          "Temporal",
+          "PostgreSQL",
+          "Redis",
+          "OPA"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
+  },
+  {
+    "slug": "event-driven-workflow-engine",
+    "title": "Event-Driven Workflow Engine",
+    "date": "Roadmap",
+    "category": "Distributed Systems",
+    "tagline": "Coordinate long-running workflows across services despite retries, duplicate events, and partial failures.",
+    "description": "Coordinate long-running workflows across services despite retries, duplicate events, and partial failures.",
+    "longDescription": "Coordinate long-running workflows across services despite retries, duplicate events, and partial failures. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Durable state",
+      "Outbox/inbox",
+      "Idempotent consumers",
+      "Retries",
+      "Compensation",
+      "Dead-letter tooling",
+      "And schema evolution."
+    ],
+    "architecture": "Command API → workflow state store → event bus → idempotent workers → outbox/inbox → saga coordinator and DLQ.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Go",
+      "PostgreSQL",
+      "Kafka",
+      "Redis",
+      "OpenTelemetry",
+      "Docker"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/event-driven-workflow-engine/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Go",
+          "PostgreSQL",
+          "Kafka",
+          "Redis",
+          "OpenTelemetry",
+          "Docker"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
+  },
+  {
+    "slug": "distributed-cache-engine",
+    "title": "Distributed Cache & Consistency Lab",
+    "date": "Roadmap",
+    "category": "Distributed Systems",
+    "tagline": "Explore partitioning, replication, eviction, consistency, and failure behavior in a measurable key-value service.",
+    "description": "Explore partitioning, replication, eviction, consistency, and failure behavior in a measurable key-value service.",
+    "longDescription": "Explore partitioning, replication, eviction, consistency, and failure behavior in a measurable key-value service. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Sharding",
+      "TTL/eviction",
+      "Replication",
+      "Read/write policies",
+      "Rebalancing",
+      "Hot-key mitigation",
+      "And failure detection."
+    ],
+    "architecture": "Client SDK → routing layer → sharded cache nodes → replication protocol → snapshot layer; membership drives rebalancing.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Go",
+      "Rust",
+      "gRPC",
+      "Consistent Hashing",
+      "Prometheus"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/distributed-cache-engine/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Go",
+          "Rust",
+          "gRPC",
+          "Consistent Hashing",
+          "Prometheus"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
+  },
+  {
+    "slug": "object-storage-service",
+    "title": "S3-Compatible Object Storage Service",
+    "date": "Roadmap",
+    "category": "Distributed Systems",
+    "tagline": "Study object storage primitives including multipart uploads, metadata consistency, and lifecycle management.",
+    "description": "Study object storage primitives including multipart uploads, metadata consistency, and lifecycle management.",
+    "longDescription": "Study object storage primitives including multipart uploads, metadata consistency, and lifecycle management. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Bucket/object API subset",
+      "Multipart upload",
+      "Checksums",
+      "Metadata transactions",
+      "Versioning",
+      "Lifecycle",
+      "And integrity scanner."
+    ],
+    "architecture": "S3-like API → metadata service → object placement layer → storage nodes; checksums and repair jobs protect integrity.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Go",
+      "PostgreSQL",
+      "S3 API",
+      "Docker",
+      "Prometheus"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/object-storage-service/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Go",
+          "PostgreSQL",
+          "S3 API",
+          "Docker",
+          "Prometheus"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
+  },
+  {
+    "slug": "service-mesh-traffic-lab",
+    "title": "Service Mesh Traffic Management Lab",
+    "date": "Roadmap",
+    "category": "DevOps",
+    "tagline": "Evaluate how service-to-service traffic policies affect latency, reliability, security, and complexity.",
+    "description": "Evaluate how service-to-service traffic policies affect latency, reliability, security, and complexity.",
+    "longDescription": "Evaluate how service-to-service traffic policies affect latency, reliability, security, and complexity. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "MTLS",
+      "Traffic splitting",
+      "Retries/timeouts",
+      "Circuit breaking",
+      "Fault injection",
+      "Authorization",
+      "Telemetry",
+      "And rollout experiments."
+    ],
+    "architecture": "Sample services → mesh dataplane → control-plane policy distribution → telemetry backend; compare direct and mesh traffic.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Kubernetes",
+      "Istio",
+      "Linkerd",
+      "Envoy",
+      "Prometheus",
+      "OpenTelemetry"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/service-mesh-traffic-lab/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Kubernetes",
+          "Istio",
+          "Linkerd",
+          "Envoy",
+          "Prometheus",
+          "OpenTelemetry"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
+  },
+  {
+    "slug": "zero-trust-cloud-foundation",
+    "title": "Zero-Trust Cloud Foundation",
+    "date": "Roadmap",
+    "category": "Security",
+    "tagline": "Build a reproducible cloud landing zone with least-privilege identity, segmented networking, and auditable deployments.",
+    "description": "Build a reproducible cloud landing zone with least-privilege identity, segmented networking, and auditable deployments.",
+    "longDescription": "Build a reproducible cloud landing zone with least-privilege identity, segmented networking, and auditable deployments. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "OIDC CI identity",
+      "Least-privilege roles",
+      "Private subnets",
+      "Egress controls",
+      "Secret rotation",
+      "Audit logs",
+      "Drift detection."
+    ],
+    "architecture": "Identity + short-lived credentials → policy-controlled CI/CD → segmented VPC → private workloads → centralized audit.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Terraform",
+      "AWS IAM",
+      "OIDC",
+      "Vault",
+      "GitHub Actions",
+      "OPA"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/zero-trust-cloud-foundation/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Terraform",
+          "AWS IAM",
+          "OIDC",
+          "Vault",
+          "GitHub Actions",
+          "OPA"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
+  },
+  {
+    "slug": "cloud-cost-intelligence",
+    "title": "Cloud Cost Intelligence Platform",
+    "date": "Roadmap",
+    "category": "DevOps",
+    "tagline": "Attribute cloud spend to teams and workloads, detect anomalies, and explain cost/performance trade-offs.",
+    "description": "Attribute cloud spend to teams and workloads, detect anomalies, and explain cost/performance trade-offs.",
+    "longDescription": "Attribute cloud spend to teams and workloads, detect anomalies, and explain cost/performance trade-offs. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Tag coverage",
+      "Shared-cost allocation",
+      "Unit-cost metrics",
+      "Anomaly detection",
+      "Budgets",
+      "Forecasts",
+      "And recommendations."
+    ],
+    "architecture": "Billing exports + resource inventory → normalization → allocation/anomaly analysis → analytical store → dashboards.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Python",
+      "dbt",
+      "DuckDB",
+      "PostgreSQL",
+      "Grafana"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/cloud-cost-intelligence/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Python",
+          "dbt",
+          "DuckDB",
+          "PostgreSQL",
+          "Grafana"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
+  },
+  {
+    "slug": "database-replication-lab",
+    "title": "Database Replication & Recovery Lab",
+    "date": "Roadmap",
+    "category": "Systems",
+    "tagline": "Study replication lag, failover, consistency, backup, and point-in-time recovery with repeatable experiments.",
+    "description": "Study replication lag, failover, consistency, backup, and point-in-time recovery with repeatable experiments.",
+    "longDescription": "Study replication lag, failover, consistency, backup, and point-in-time recovery with repeatable experiments. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Replication modes",
+      "Read routing",
+      "Failover",
+      "Split-brain prevention",
+      "Backup verification",
+      "PITR",
+      "And RPO/RTO runbooks."
+    ],
+    "architecture": "Application → primary database → replicas → failover controller; WAL backups support restore/PITR.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "PostgreSQL",
+      "Patroni",
+      "PgBouncer",
+      "WAL-G",
+      "Prometheus",
+      "Grafana"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/database-replication-lab/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "PostgreSQL",
+          "Patroni",
+          "PgBouncer",
+          "WAL-G",
+          "Prometheus",
+          "Grafana"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
+  },
+  {
+    "slug": "edge-model-serving-platform",
+    "title": "Edge Model Serving Platform",
+    "date": "Roadmap",
+    "category": "AI Infrastructure",
+    "tagline": "Deploy versioned models to constrained devices with intermittent connectivity and safe fleet updates.",
+    "description": "Deploy versioned models to constrained devices with intermittent connectivity and safe fleet updates.",
+    "longDescription": "Deploy versioned models to constrained devices with intermittent connectivity and safe fleet updates. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Model packaging",
+      "Hardware profiles",
+      "Signed artifacts",
+      "Staged rollout",
+      "Offline inference",
+      "Telemetry buffering",
+      "And rollback."
+    ],
+    "architecture": "Model registry → signed packages → fleet manager → edge runtime with local queue/health agent; staged device updates.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Python",
+      "ONNX Runtime",
+      "TensorRT",
+      "MQTT",
+      "Docker",
+      "MLflow"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/edge-model-serving-platform/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Python",
+          "ONNX Runtime",
+          "TensorRT",
+          "MQTT",
+          "Docker",
+          "MLflow"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
+  },
+  {
+    "slug": "data-contract-governance-platform",
+    "title": "Data Contracts & Quality Platform",
+    "date": "Roadmap",
+    "category": "Data Engineering",
+    "tagline": "Detect breaking schema and semantic changes before they corrupt downstream analytics or ML features.",
+    "description": "Detect breaking schema and semantic changes before they corrupt downstream analytics or ML features.",
+    "longDescription": "Detect breaking schema and semantic changes before they corrupt downstream analytics or ML features. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Versioned contracts",
+      "Compatibility rules",
+      "Ownership",
+      "CI checks",
+      "Runtime validation",
+      "Quality SLIs",
+      "Lineage",
+      "And deprecation."
+    ],
+    "architecture": "Producer contracts → CI compatibility checks → runtime validators → catalog/ownership registry → quality signals.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Python",
+      "JSON Schema",
+      "Kafka",
+      "PostgreSQL",
+      "dbt",
+      "GitHub Actions"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/data-contract-governance-platform/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Python",
+          "JSON Schema",
+          "Kafka",
+          "PostgreSQL",
+          "dbt",
+          "GitHub Actions"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
+  },
+  {
+    "slug": "resilient-api-platform",
+    "title": "Resilient API Platform & Load Lab",
+    "date": "Roadmap",
+    "category": "SRE",
+    "tagline": "Build an API baseline demonstrating rate limits, backpressure, caching, graceful degradation, and measurable SLOs.",
+    "description": "Build an API baseline demonstrating rate limits, backpressure, caching, graceful degradation, and measurable SLOs.",
+    "longDescription": "Build an API baseline demonstrating rate limits, backpressure, caching, graceful degradation, and measurable SLOs. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Request budgets",
+      "Rate limits",
+      "Bounded queues",
+      "Idempotency",
+      "Graceful shutdown",
+      "Timeouts",
+      "SLOs",
+      "And failure injection."
+    ],
+    "architecture": "Edge proxy → API → cache/database → worker queue; budgets, bulkheads, circuit breakers, and probes protect dependencies.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Go",
+      "FastAPI",
+      "PostgreSQL",
+      "Redis",
+      "Kubernetes",
+      "OpenTelemetry",
+      "k6"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/resilient-api-platform/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Go",
+          "FastAPI",
+          "PostgreSQL",
+          "Redis",
+          "Kubernetes",
+          "OpenTelemetry",
+          "k6"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
+  }
 ];
