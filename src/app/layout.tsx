@@ -5,7 +5,7 @@ import { AudioProvider } from "@/components/AudioContext";
 import { AppShell } from "@/components/AppShell";
 import { SmoothScrollProvider } from "@/components/SmoothScroll";
 import { siteConfig } from "@/data/siteConfig";
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: `${siteConfig.name} — ${siteConfig.siteName}`,
