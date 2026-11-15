@@ -1,72 +1,63 @@
 # Dilshan K. — Editorial Personal Website & Portfolio
 
-An editorial-style personal website combining a digital-book landing page with a software engineering portfolio, inspired by Brittany Chiang and Tania Rascia. Built with Next.js App Router, TypeScript, and CSS Custom Properties.
+An editorial-style personal website combining a digital-book landing page with a software engineering portfolio. Built with Next.js App Router, TypeScript, and CSS Custom Properties.
 
 ---
 
 ## Architecture Overview
 
-1. **Digital-Book Landing Page (`/`)**:
-   - Editorial frontispiece design with monogram stamp, elegant typography, biographical overview, selected focus areas, and colophon.
-   - Distinct "Explore My Portfolio" call to action linking to `/portfolio`.
-2. **Persistent Sidebar Portfolio (`/portfolio`)**:
-   - Fixed/sticky left navigation on desktop; accessible drawer navigation on mobile.
-   - Comprehensive sections: **Overview**, **Projects**, **Writing / Blog**, **About Me**, **Skills**, **Life & Library**, **Curriculum Vitae**, and **Contact**.
-3. **Dedicated Sub-Routes**:
-   - Direct link support for `/portfolio/projects`, `/portfolio/blog`, `/portfolio/blog/[slug]`, `/portfolio/about`, `/portfolio/skills`, `/portfolio/life`, `/portfolio/resume`, and `/portfolio/contact`.
+1. **Digital-Book Landing Page (`/`)** — editorial frontispiece, biography, focus areas, and portfolio entry point.
+2. **Portfolio (`/portfolio`)** — overview, projects, writing, about, skills, life/library, resume, and contact.
+3. **Projects (`/projects`)** — existing repositories and a separately labelled engineering roadmap.
+4. **Project details (`/projects/[slug]`)** — overview, architecture, technical scope, risks, and GitHub documentation link.
 
----
+## Project portfolio and roadmap
+
+The project catalogue deliberately separates existing work from future proposals:
+
+- **Existing repository** — a repository and supporting README/source are present; completion and claims still require review.
+- **Planned** — a documentation-only proposal. It is not represented as implemented or production-tested.
+
+The 25 future project proposals include problem statements, candidate architecture and technology choices, functional scope, non-functional concerns, risks, validation strategy, milestones, and definition of done.
+
+**[Explore the 25-project engineering roadmap](./project-proposals/README.md)**
+
+Proposal READMEs live under `project-proposals/<project-slug>/README.md`. They currently live in this central portfolio repository; they are not separate GitHub repositories.
 
 ## Theming & Visual System
 
 ### 4 Coordinated Base Themes (`data-theme`)
-- **Dark Moss**: Soft matte charcoal surfaces (`#151816`), warm off-white typography (`#f2eee8`), muted flora green accents.
-- **Paper**: Warm ivory background (`#fbf8f3`), pure cream cards, dark charcoal text (`#24211e`).
-- **Sage**: Muted green-grey surfaces (`#edf2ee`), forest-green text (`#19271e`).
-- **Sandstone**: Warm beige surfaces (`#f5efe6`), roasted brown typography (`#2d231b`).
+- **Dark Moss** — matte charcoal surfaces and warm off-white typography.
+- **Paper** — warm ivory background and dark charcoal text.
+- **Sage** — muted green-grey surfaces and forest-green text.
+- **Sandstone** — warm beige surfaces and roasted brown typography.
 
 ### 6 Accessible Accents (`data-accent`)
-- **Sage Green** (`sage`)
-- **Muted Blue** (`blue`)
-- **Terracotta** (`terracotta`)
-- **Lavender** (`lavender`)
-- **Burgundy** (`burgundy`)
-- **Graphite** (`graphite`)
+Sage Green, Muted Blue, Terracotta, Lavender, Burgundy, and Graphite.
 
-All preferences are persisted in `localStorage` and restored synchronously via an inline head script in `src/app/layout.tsx` to eliminate theme flashing (FOUT).
+## Centralized Project Data
 
----
+The Projects page is driven by:
 
-## Centralized Content Editing
-
-All portfolio content is structured and strongly typed in:
-```bash
-src/data/content.ts
-src/types/content.ts
+```text
+src/data/projects.ts
+src/components/ProjectCard.tsx
+src/app/projects/page.tsx
+src/app/projects/[slug]/page.tsx
+project-proposals/
 ```
 
-To update personal data, modify `siteConfig` in `src/data/content.ts`:
-- **Identity & Bio**: `name`, `wordmark`, `edition`, `title`, `tagline`, `shortBio`, `extendedBio`.
-- **Projects**: Title, description, architecture notes, challenges, outcomes, stack, and repositories.
-- **Blog Essays**: Title, subtitle, read time, publication date, tags, and content.
-- **Skills**: Real categories without fabricated percentage bars.
-- **Reading Desk**: Books, reading status, and analog hobbies.
-- **Experience & Education**: Timeline entries and verified credentials.
-
----
-
-## Scripts & Development
+## Development
 
 ```bash
-# Run local development server
+npm install
 npm run dev
-
-# Build optimized production bundle
-npm run build
-
-# Start production server
-npm run start
-
-# Run linting
 npm run lint
+npm run build
 ```
+
+---
+
+## Portfolio integrity
+
+Do not publish invented metrics, unverified deployment claims, or planned systems as completed work. Add evidence for implementation status, tests, deployment, performance, security, and reliability before promoting a project to completed status.
