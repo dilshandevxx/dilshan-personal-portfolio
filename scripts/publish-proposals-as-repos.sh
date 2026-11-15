@@ -54,7 +54,7 @@ for readme in "$PROPOSALS_DIR"/*/README.md; do
   fi
 
   # Replace the proposal-document URL with the dedicated repository URL.
-  sed -i.bak "/\\"slug\\": \\"$slug\\"/,/\\"status\\":/ s#\\"githubUrl\\": \\"[^\\"]*\\"#\\"githubUrl\\": \\"https://github.com/$OWNER/$slug\\"#" "$ROOT/src/data/projects.ts"
+  sed -i.bak "/\"slug\": \"$slug\"/,/\"status\":/ s#\"githubUrl\": \"[^\"]*\"#\"githubUrl\": \"https://github.com/$OWNER/$slug\"#" "$ROOT/src/data/projects.ts"
   rm -f "$ROOT/src/data/projects.ts.bak"
 done
 
