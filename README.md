@@ -22,7 +22,7 @@ The 25 future project proposals include problem statements, candidate architectu
 
 **[Explore the 25-project engineering roadmap](./project-proposals/README.md)**
 
-Proposal READMEs live under `project-proposals/<project-slug>/README.md`. They currently live in this central portfolio repository; they are not separate GitHub repositories.
+Proposal READMEs live under `project-proposals/<project-slug>/README.md`. They currently live in this central portfolio repository; they are not separate GitHub repositories. To publish each proposal as its own public repository, clone this repository, authenticate with GitHub CLI (`gh auth login`), and run `bash scripts/publish-proposals-as-repos.sh`. The script skips repositories that already exist.
 
 ## Theming & Visual System
 
