@@ -12,6 +12,10 @@ PROPOSALS_DIR="$ROOT/project-proposals"
 command -v gh >/dev/null 2>&1 || { echo "GitHub CLI (gh) is required."; exit 1; }
 command -v git >/dev/null 2>&1 || { echo "Git is required."; exit 1; }
 gh auth status >/dev/null 2>&1 || { echo "Authenticate first with: gh auth login"; exit 1; }
+if [[ -n "$(git -C "$ROOT" status --porcelain)" ]]; then
+  echo "Please commit or stash local changes before publishing repositories."
+  exit 1
+fi
 
 LOGIN="$(gh api user --jq .login)"
 if [[ "$LOGIN" != "$OWNER" ]]; then
@@ -30,8 +34,7 @@ for readme in "$PROPOSALS_DIR"/*/README.md; do
   if gh repo view "$repo" >/dev/null 2>&1; then
     echo "SKIP: $repo already exists"
     ((skipped+=1))
-    continue
-  fi
+  else
 
   title="$(sed -n '1s/^# //p' "$readme")"
   description="Planned engineering project proposal: $title"
@@ -48,6 +51,18 @@ for readme in "$PROPOSALS_DIR"/*/README.md; do
   gh repo create "$repo" --public --description "$description" --source "$workdir" --remote origin --push
   rm -rf "$workdir"
   ((created+=1))
+  fi
+
+  # Replace the proposal-document URL with the dedicated repository URL.
+  sed -i.bak "/\\"slug\\": \\"$slug\\"/,/\\"status\\":/ s#\\"githubUrl\\": \\"[^\\"]*\\"#\\"githubUrl\\": \\"https://github.com/$OWNER/$slug\\"#" "$ROOT/src/data/projects.ts"
+  rm -f "$ROOT/src/data/projects.ts.bak"
 done
+
+if ! git -C "$ROOT" diff --quiet -- src/data/projects.ts; then
+  git -C "$ROOT" add src/data/projects.ts
+  git -C "$ROOT" commit -m "chore: link planned projects to dedicated repositories"
+  branch="$(git -C "$ROOT" branch --show-current)"
+  git -C "$ROOT" push origin "$branch"
+fi
 
 echo "Finished. Created: $created | Skipped (already existed): $skipped"
