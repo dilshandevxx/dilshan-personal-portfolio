@@ -313,6 +313,60 @@ export const projectsList: Project[] = [
     "status": "Existing"
   },
   {
+    "slug": "familycare-eldercare-system",
+    "title": "FamilyCare — Eldercare Monitoring System",
+    "date": "Existing",
+    "category": "Full-Stack",
+    "tagline": "A family-facing eldercare platform with caregiver discovery and protected family dashboards.",
+    "description": "A university team project repository describing an eldercare monitoring platform for families coordinating care for elderly parents.",
+    "longDescription": "The repository README describes public pages for product information and caregiver discovery, JWT-protected login and registration, and a family dashboard with summaries of health-related measurements and alerts. The documented stack includes React, Node.js, and MySQL, with Vercel deployment badges. This portfolio entry records the README's stated scope, not a clinical validation claim.",
+    "highlights": [
+      "Public product and feature pages",
+      "Caregiver listing/discovery described in the README",
+      "JWT-protected login and registration",
+      "Family dashboard with measurement summaries and alerts described in the README",
+      "React, Node.js, and MySQL stack badges in the repository README"
+    ],
+    "architecture": "Browser client → React application → Node.js backend → MySQL persistence. The README describes public access and authenticated family dashboard areas; inspect the implementation to verify API boundaries, authorization rules, and data update mechanisms.",
+    "challenges": "Verify authentication and authorization at every API boundary, protect sensitive family data, validate alert correctness, audit access, and document privacy and retention. Do not present the application as a clinically validated monitoring device.",
+    "tags": [
+      "React",
+      "Node.js",
+      "MySQL",
+      "JWT",
+      "Vercel"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/FamilyCare-Univercity-Project",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Frontend",
+        "technologies": [
+          "React"
+        ]
+      },
+      {
+        "layer": "Backend",
+        "technologies": [
+          "Node.js",
+          "JWT"
+        ]
+      },
+      {
+        "layer": "Persistence",
+        "technologies": [
+          "MySQL"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Existing"
+  },
+  {
     "slug": "distributed-llm-inference-platform",
     "title": "Distributed LLM Inference Platform",
     "date": "Roadmap",
