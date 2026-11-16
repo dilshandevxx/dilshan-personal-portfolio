@@ -7,7 +7,7 @@ function formatProjectsTs(projects: Project[]): string {
   return `export interface ProjectMetric { label: string; value: string; }
 export interface ProjectStackLayer { layer: string; technologies: string[]; }
 export type ProjectStatus = "Existing" | "Planned";
-export type ProjectCategory = "AI/ML" | "DevOps" | "Systems" | "Full-Stack";
+export type ProjectCategory = "AI/ML" | "DevOps" | "Systems" | "Full-Stack" | "Landing" | "Others";
 export interface Project {
   slug: string; title: string; date: string; category: ProjectCategory; tagline: string;
   description: string; longDescription: string; highlights: string[]; architecture: string;

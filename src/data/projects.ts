@@ -1,7 +1,7 @@
 export interface ProjectMetric { label: string; value: string; }
 export interface ProjectStackLayer { layer: string; technologies: string[]; }
 export type ProjectStatus = "Existing" | "Planned";
-export type ProjectCategory = "AI/ML" | "DevOps" | "Systems" | "Full-Stack";
+export type ProjectCategory = "AI/ML" | "DevOps" | "Systems" | "Full-Stack" | "Landing" | "Others";
 export interface Project {
   slug: string; title: string; date: string; category: ProjectCategory; tagline: string;
   description: string; longDescription: string; highlights: string[]; architecture: string;
@@ -204,7 +204,7 @@ export const projectsList: Project[] = [
   {
     "slug": "roamora-travel-project",
     "title": "Roamora — Travel Discovery Website",
-    "category": "Full-Stack",
+    "category": "Landing",
     "tagline": "University travel website for destinations, attractions, and trip discovery.",
     "description": "A travel website repository describing destination browsing, attraction information, travel tips, and interactive maps.",
     "longDescription": "The repository README identifies Roamora as a university software engineering project. It documents responsive destination and attraction discovery, travel recommendations, and interactive maps. The README lists HTML, CSS, JavaScript, Bootstrap, Firebase, and a possible Node/Express backend; backend usage should be verified in source before being stated as fact.",
@@ -255,7 +255,7 @@ export const projectsList: Project[] = [
   {
     "slug": "travel-website",
     "title": "Travel Website",
-    "category": "Full-Stack",
+    "category": "Landing",
     "tagline": "Full-stack travel discovery with destinations, guides, hotels, and stories.",
     "description": "A travel website repository whose README documents HTML, CSS, JavaScript, Bootstrap, Node.js, Express, and MySQL.",
     "longDescription": "The repository README describes a travel platform with user sign-up, guide registration, destination pages, hotels and restaurants, blog stories, and a photo gallery. This entry records the repository's documented scope without adding unverified usage or performance claims.",
@@ -1490,7 +1490,7 @@ export const projectsList: Project[] = [
     "slug": "data-contract-governance-platform",
     "title": "Data Contracts & Quality Platform",
     "date": "Roadmap",
-    "category": "Systems",
+    "category": "Others",
     "tagline": "Detect breaking schema and semantic changes before they corrupt downstream analytics or ML features.",
     "description": "Detect breaking schema and semantic changes before they corrupt downstream analytics or ML features.",
     "longDescription": "Detect breaking schema and semantic changes before they corrupt downstream analytics or ML features. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",

@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { GithubIcon } from "@/components/SocialIcons";
 
-const CATEGORIES: ProjectCategory[] = ["AI/ML", "DevOps", "Systems", "Full-Stack"];
+const CATEGORIES: ProjectCategory[] = ["AI/ML", "DevOps", "Systems", "Full-Stack", "Landing", "Others"];
 const DEFAULT_PASSKEY = "dilshan2026";
 
 export default function AdminPage() {
@@ -255,7 +255,7 @@ export default function AdminPage() {
     const code = `export interface ProjectMetric { label: string; value: string; }
 export interface ProjectStackLayer { layer: string; technologies: string[]; }
 export type ProjectStatus = "Existing" | "Planned";
-export type ProjectCategory = "AI/ML" | "DevOps" | "Systems" | "Full-Stack";
+export type ProjectCategory = "AI/ML" | "DevOps" | "Systems" | "Full-Stack" | "Landing" | "Others";
 export interface Project {
   slug: string; title: string; date: string; category: ProjectCategory; tagline: string;
   description: string; longDescription: string; highlights: string[]; architecture: string;
@@ -278,7 +278,7 @@ export const projectsList: Project[] = ${JSON.stringify(projects, null, 2)};
     const code = `export interface ProjectMetric { label: string; value: string; }
 export interface ProjectStackLayer { layer: string; technologies: string[]; }
 export type ProjectStatus = "Existing" | "Planned";
-export type ProjectCategory = "AI/ML" | "DevOps" | "Systems" | "Full-Stack";
+export type ProjectCategory = "AI/ML" | "DevOps" | "Systems" | "Full-Stack" | "Landing" | "Others";
 export interface Project {
   slug: string; title: string; date: string; category: ProjectCategory; tagline: string;
   description: string; longDescription: string; highlights: string[]; architecture: string;
