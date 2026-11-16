@@ -1,4 +1,4 @@
-/* Clean Modern About Section */
+/* Clean, Modern & Beautiful About Me Section */
 .aboutSection {
   background-color: #000000;
   padding: clamp(6.5rem, 11vw, 10.5rem) clamp(1.5rem, 4vw, 3.5rem);
@@ -9,89 +9,119 @@
 }
 
 .container {
-  max-width: 1360px;
+  max-width: 1380px;
   margin: 0 auto;
   width: 100%;
 }
 
-/* 1. Header with Editorial Hairline Rule */
+/* 1. Header with Badge & Headline */
 .header {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding-bottom: 2.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: clamp(3rem, 5vw, 4.5rem);
+  padding-bottom: 2rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  margin-bottom: 4rem;
 }
 
-@media (max-width: 768px) {
-  .header {
-    padding-bottom: 1.75rem;
-    margin-bottom: 3rem;
-  }
+.badgeWrapper {
+  display: inline-flex;
+  margin-bottom: 1.25rem;
+}
+
+.pillBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.42rem 1.25rem;
+  background-color: #121418;
+  color: #b8bec9;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.badgeDot {
+  color: #ffffff;
+  font-size: 0.85rem;
+  line-height: 1;
 }
 
 .title {
   color: #ffffff;
   font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
-  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.05;
   letter-spacing: -0.025em;
+  margin: 0 0 1rem;
+}
+
+.headerSubtitle {
+  color: #9da4ae;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  line-height: 1.6;
+  max-width: 700px;
   margin: 0;
 }
 
-/* 2. Expansive Two-Tone Display Statement */
-.statementWrapper {
-  max-width: 1240px;
-  margin-bottom: clamp(3.5rem, 6vw, 5.5rem);
-}
-
-.leadText {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(1.85rem, 3.2vw, 2.85rem);
-  font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: -0.025em;
-  margin: 0;
-}
-
-.leadBright {
-  color: #ffffff;
-}
-
-.leadMuted {
-  color: #8c93a0;
-}
-
-/* 3. Balanced Dual-Column Grid */
+/* 2. Main Dual-Column Grid */
 .grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: clamp(3.5rem, 6vw, 6.5rem);
-  align-items: center;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(3.5rem, 6vw, 6rem);
+  align-items: flex-start;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .grid {
     grid-template-columns: 1fr;
     gap: 3.5rem;
   }
 }
 
-/* Left Column: Narrative */
-.narrativeCol {
+/* Left Column: Narrative & Engineering Pillars */
+.leftCol {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
-  max-width: 620px;
+  gap: 2.25rem;
+}
+
+/* Two-Tone Statement */
+.statement {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
+  font-size: clamp(1.5rem, 2.4vw, 2.15rem);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.statementBright {
+  color: #ffffff;
+}
+
+.statementMuted {
+  color: #7b8494;
+}
+
+/* Narrative Prose */
+.narrativeGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .paragraph {
   color: #9da4ae;
   font-family: var(--font-body, "Inter", -apple-system, sans-serif);
-  font-size: clamp(1.025rem, 1.15vw, 1.125rem);
-  line-height: 1.85;
+  font-size: 1.05rem;
+  line-height: 1.8;
   margin: 0;
 }
 
@@ -100,79 +130,157 @@
   font-weight: 600;
 }
 
-/* Action Button: Strictly Rectangular */
-.actionRow {
-  margin-top: 1.25rem;
+/* 3 Core Engineering Principles */
+.principlesSection {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.actionButton {
+.principlesHeader {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8bb397;
+  margin-bottom: 0.25rem;
+}
+
+.principleCard {
+  background-color: #0b0d12;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  transition: all 0.2s ease;
+}
+
+.principleCard:hover {
+  background-color: #0f121a;
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateX(3px);
+}
+
+.principleIndex {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #8bb397;
+  padding-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+.principleContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.principleTitle {
+  font-family: var(--font-display, "Outfit", sans-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.principleDesc {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #8c93a0;
+  margin: 0;
+}
+
+/* Action Buttons */
+.actionRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  padding-top: 1rem;
+}
+
+.primaryAction {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  background-color: transparent;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 0 !important; /* STRICTLY RECTANGULAR */
-  padding: 1.15rem 2.6rem;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
-}
-
-.actionButton:hover {
+  gap: 0.65rem;
   background-color: #ffffff;
   color: #000000;
-  border-color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(255, 255, 255, 0.1);
+  border: 1px solid #ffffff;
+  border-radius: 0px !important;
+  padding: 0.95rem 1.85rem;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s ease;
 }
 
-.arrow {
-  font-size: 1rem;
-  transition: transform 0.25s ease;
-  display: inline-block;
+.primaryAction:hover {
+  background-color: transparent;
+  color: #ffffff;
 }
 
-.actionButton:hover .arrow {
-  transform: translateX(4px);
-}
-
-/* Right Column: Monochrome Editorial Portrait Frame */
-.imageCol {
-  display: flex;
-  justify-content: center;
+.secondaryAction {
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 0px !important;
+  padding: 0.95rem 1.85rem;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.secondaryAction:hover {
+  border-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Right Column: Editorial Portrait & Technical Specs Card */
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
   width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
 }
 
 .imageFrame {
   position: relative;
   width: 100%;
-  max-width: 520px;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  border-radius: 0 !important; /* STRICTLY SQUARE */
+  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: #0e1013;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9);
+  background-color: #0b0d12;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
 }
 
 .portraitImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 20%;
+  object-position: center 25%;
   display: block;
-  border-radius: 0;
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .imageFrame:hover .portraitImage {
@@ -184,10 +292,40 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0) 60%,
-    rgba(0, 0, 0, 0.7) 100%
+    rgba(0, 0, 0, 0) 55%,
+    rgba(8, 9, 12, 0.85) 100%
   );
   pointer-events: none;
+}
+
+/* Floating Status Pill */
+.statusPill {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(8, 9, 12, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e5e7eb;
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
 }
 
 .imageCaption {
@@ -197,15 +335,53 @@
   right: 1.5rem;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   pointer-events: none;
 }
 
-.imageCaption span {
+.captionName {
+  font-family: var(--font-display, "Outfit", sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.captionTitle {
   font-family: var(--font-mono, monospace);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: #d1d5db;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: #8bb397;
   text-transform: uppercase;
+}
+
+/* Quick Specs Card underneath Portrait */
+.specsCard {
+  background-color: #0b0d12;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem 1.75rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.specItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.specLabel {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #727a88;
+}
+
+.specValue {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
 }
