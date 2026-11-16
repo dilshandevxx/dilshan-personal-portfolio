@@ -60,7 +60,7 @@ export default function RootLayout({
             __html: `
               try {
                 var t = localStorage.getItem('portfolio_theme');
-                if (t && ['light', 'dark', 'midnight', 'forest', 'nord'].indexOf(t) !== -1) {
+                if (t && ['light', 'dark', 'midnight'].indexOf(t) !== -1) {
                   document.documentElement.setAttribute('data-theme', t);
                 } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
                   document.documentElement.setAttribute('data-theme', 'dark');

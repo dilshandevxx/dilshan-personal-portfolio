@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { ACCENT_COLORS, useTheme } from "./ThemeContext";
+import { ACCENT_COLORS, useTheme, ColorAccent } from "./ThemeContext";
 
 export function ColorPicker() {
   const { accent, setAccent, theme } = useTheme();
@@ -18,8 +18,13 @@ export function ColorPicker() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const isDarkCanvas = theme !== "light";
-  const currentVal = isDarkCanvas ? accent.darkValue : accent.lightValue;
+  const getThemeValue = (c: ColorAccent) => {
+    if (theme === "light") return c.lightValue;
+    if (theme === "midnight") return c.midnightValue;
+    return c.darkValue;
+  };
+
+  const currentVal = getThemeValue(accent);
 
   return (
     <div className="dropdown tooltip-container" ref={dropdownRef}>
@@ -27,7 +32,7 @@ export function ColorPicker() {
         type="button"
         className={`navbar-button ${isOpen ? "active" : ""}`}
         onClick={() => setIsOpen(!isOpen)}
-        aria-label="Theme color"
+        aria-label="Theme color pattern"
       >
         <div
           className="circle"
@@ -41,7 +46,7 @@ export function ColorPicker() {
         <div className="dropdown-results">
           <div className="circles">
             {ACCENT_COLORS.map((c) => {
-              const dotColor = isDarkCanvas ? c.darkValue : c.lightValue;
+              const dotColor = getThemeValue(c);
               const isActive = c.id === accent.id;
               return (
                 <div
@@ -51,7 +56,7 @@ export function ColorPicker() {
                     setAccent(c);
                     setIsOpen(false);
                   }}
-                  title={c.name}
+                  title={`${c.name} Pattern`}
                 >
                   <div
                     className="circle"
@@ -67,7 +72,7 @@ export function ColorPicker() {
           </div>
         </div>
       )}
-      {!isOpen && <div className="tooltip">Color</div>}
+      {!isOpen && <div className="tooltip">Color Pattern</div>}
     </div>
   );
 }
