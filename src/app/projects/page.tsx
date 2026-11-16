@@ -9,27 +9,18 @@ import { GithubIcon, XIcon } from "@/components/SocialIcons";
 import { AmbientPlayer } from "@/components/AmbientPlayer";
 import { Code2, Mail, Rss, Binary, Server, Cpu, Layers } from "lucide-react";
 
-const DOMAINS = [
-  { id: "All", label: "All", match: () => true },
-  { id: "AI & MLOps", label: "AI & MLOps", match: (c: string) => ["AI/ML", "AI Infrastructure", "MLOps"].includes(c) },
-  { id: "Cloud & DevOps", label: "Cloud & DevOps", match: (c: string) => ["DevOps", "Platform Engineering", "SRE", "Security"].includes(c) },
-  { id: "Systems & Web", label: "Systems & Web", match: (c: string) => ["Distributed Systems", "Systems", "Data Engineering", "Full-Stack"].includes(c) },
-] as const;
+const CATEGORIES = ["All", "AI/ML", "DevOps", "Systems", "Full-Stack"] as const;
 
 export default function ProjectsPage() {
-  const [selectedDomain, setSelectedDomain] = useState<string>("All");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedStatus, setSelectedStatus] = useState<"All" | "Existing" | "Planned">("All");
-
-  const activeDomain = useMemo(() => {
-    return DOMAINS.find((d) => d.id === selectedDomain) || DOMAINS[0];
-  }, [selectedDomain]);
 
   const filteredProjects = useMemo(() => {
     return projectsList.filter((project) =>
-      activeDomain.match(project.category) &&
+      (selectedCategory === "All" || project.category === selectedCategory) &&
       (selectedStatus === "All" || project.status === selectedStatus)
     );
-  }, [activeDomain, selectedStatus]);
+  }, [selectedCategory, selectedStatus]);
 
   return (
     <div className="projects-container">
@@ -39,42 +30,42 @@ export default function ProjectsPage() {
           <div className="page-header-actions"><AmbientPlayer /></div>
         </div>
         <p className="page-subtitle">
-          A curated engineering catalog of production systems and architecture blueprints across AI infrastructure, distributed platforms, and cloud engineering.
+          Curated engineering systems and architecture blueprints across AI/ML, cloud infrastructure, and distributed systems.
         </p>
       </header>
 
-      {/* Clean Primary Category Filter: 4 focused domains */}
-      <div className="projects-filter-bar" role="tablist" aria-label="Core Engineering Domains">
-        {DOMAINS.map((domain) => {
-          const isActive = selectedDomain === domain.id;
-          const count = domain.id === "All"
+      {/* Short & Concise Category Filter */}
+      <div className="projects-filter-bar" role="tablist" aria-label="Project Categories">
+        {CATEGORIES.map((cat) => {
+          const isActive = selectedCategory === cat;
+          const count = cat === "All"
             ? projectsList.length
-            : projectsList.filter((p) => domain.match(p.category)).length;
+            : projectsList.filter((p) => p.category === cat).length;
 
           return (
             <button
-              key={domain.id}
+              key={cat}
               type="button"
               role="tab"
               aria-selected={isActive}
-              onClick={() => setSelectedDomain(domain.id)}
+              onClick={() => setSelectedCategory(cat)}
               className={`segmented-pill-btn ${isActive ? "active" : ""}`}
             >
-              {domain.label} ({count})
+              {cat} ({count})
             </button>
           );
         })}
       </div>
 
-      {/* Subtle Secondary Status Filter */}
-      <div className="projects-filter-bar" style={{ marginTop: "0.5rem", opacity: 0.85 }} aria-label="Project Status Filter">
+      {/* Clean Status Filter */}
+      <div className="projects-filter-bar" style={{ marginTop: "0.5rem" }} aria-label="Status Filter">
         <button
           type="button"
           onClick={() => setSelectedStatus("All")}
           className={`segmented-pill-btn ${selectedStatus === "All" ? "active" : ""}`}
           style={{ fontSize: "0.75rem", padding: "4px 10px" }}
         >
-          All Status ({projectsList.length})
+          All ({projectsList.length})
         </button>
         <button
           type="button"
@@ -82,7 +73,7 @@ export default function ProjectsPage() {
           className={`segmented-pill-btn ${selectedStatus === "Existing" ? "active" : ""}`}
           style={{ fontSize: "0.75rem", padding: "4px 10px" }}
         >
-          ● Live &amp; Built ({projectsList.filter((p) => p.status === "Existing").length})
+          <span style={{ color: "#4ade80", marginRight: "4px" }}>●</span> Live Built ({projectsList.filter((p) => p.status === "Existing").length})
         </button>
         <button
           type="button"
@@ -90,7 +81,7 @@ export default function ProjectsPage() {
           className={`segmented-pill-btn ${selectedStatus === "Planned" ? "active" : ""}`}
           style={{ fontSize: "0.75rem", padding: "4px 10px" }}
         >
-          ◌ Architecture RFCs ({projectsList.filter((p) => p.status === "Planned").length})
+          <span style={{ color: "#93c5fd", marginRight: "4px" }}>◌</span> RFC Spec ({projectsList.filter((p) => p.status === "Planned").length})
         </button>
       </div>
       <div className="cards">{filteredProjects.map((project)=><ProjectCard key={project.slug} project={project}/>)}</div>
