@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ColorPicker } from "./ColorPicker";
-import { ThemeToggle } from "./ThemeToggle";
 import { Menu, X as CloseIcon } from "lucide-react";
 
 export interface NavigationItem {
@@ -93,7 +92,6 @@ export function PortfolioSidebar() {
         <div className="flex items-center gap-1.5">
           <div className="stefano-controls">
             <ColorPicker />
-            <ThemeToggle />
           </div>
           <button
             type="button"
@@ -120,10 +118,9 @@ export function PortfolioSidebar() {
               DILSHAN
             </Link>
 
-            {/* Seamless Theme & Accent Color Controls */}
+            {/* Seamless Accent Color Controls */}
             <div className="stefano-controls">
               <ColorPicker />
-              <ThemeToggle />
             </div>
           </div>
         </div>

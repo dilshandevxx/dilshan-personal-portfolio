@@ -63,84 +63,7 @@ section[id] {
   --accent-blue: #235c94;
   --accent-blue-dark: #82aaff;
 
-  /* Calm Studio Alabaster (Light Theme) */
-  --color-primary: var(--accent-amber);
-  --color-primary-rgb: 194, 94, 26;
-
-  --color-background: var(--stone-50);
-  --color-background-sidebar: var(--stone-100);
-  --color-background-alternate: var(--stone-150);
-  --color-background-card: #ffffff;
-  --color-background-card-hover: #ffffff;
-  --color-background-input: #ffffff;
-  --color-background-tag: #edeae0;
-  --color-background-navbar-link-hover: var(--stone-200);
-  --color-background-navbar-link-active: #e3ded0;
-
-  --color-text: var(--stone-800);
-  --color-text-emphasized: var(--stone-900);
-  --color-text-muted: var(--stone-600);
-  --color-text-heading: var(--stone-900);
-  --color-text-link: var(--color-primary);
-
-  --color-border: var(--stone-300);
-  --color-border-card: var(--stone-300);
-  --color-border-emphasized: var(--stone-400);
-
-  --card-shadow: 0px 1px 3px rgba(0, 0, 0, 0.04), 0px 3px 8px rgba(0, 0, 0, 0.02);
-  --card-shadow-hover: 0px 6px 18px rgba(0, 0, 0, 0.07);
-
-  /* Layout dimensions (exact from taniarascia.com) */
-  --navbar-height: 60px;
-  --footer-height: 60px;
-  --content-width: 760px;
-  --sidebar-width: 270px;
-  --post-sidebar-width: 260px;
-  --layout-padding-vertical: 2rem;
-  --layout-padding-horizontal: 2rem;
-
-  --border-radius: 8px;
-  --border-radius-sm: 4px;
-  --border-radius-lg: 12px;
-  --transition: 0.15s ease;
-
-  color-scheme: light;
-}
-
-/* Dark Mode Tokens (exact from taniarascia.com) */
-[data-theme="dark"] {
-  --color-primary: var(--accent-amber-dark);
-  --color-primary-rgb: 254, 222, 145;
-
-  /* Tania Rascia's signature matte slate-charcoal canvas */
-  --color-background: var(--gray-9);
-  --color-background-sidebar: var(--gray-9);
-  --color-background-alternate: var(--gray-11);
-  --color-background-card: var(--gray-8);
-  --color-background-card-hover: var(--gray-7);
-  --color-background-input: var(--gray-11);
-  --color-background-tag: var(--gray-8);
-  --color-background-navbar-link-hover: var(--gray-8);
-  --color-background-navbar-link-active: var(--gray-7);
-
-  --color-text: var(--gray-3);
-  --color-text-emphasized: var(--gray-0);
-  --color-text-muted: var(--gray-5);
-  --color-text-heading: var(--gray-0);
-  --color-text-link: var(--color-primary);
-
-  --color-border: var(--gray-7);
-  --color-border-card: var(--gray-7);
-  --color-border-emphasized: var(--gray-6);
-
-  --card-shadow: 0px 4px 7px rgba(0, 1, 2, 0.3), 0px 2px 2px rgba(0, 1, 2, 0.3), 0px 1px 1px rgba(0, 1, 2, 0.3);
-  --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.35);
-
-  color-scheme: dark;
-}
-
-/* Midnight Mode Tokens: Deep pitch-black OLED minimal canvas */
-[data-theme="midnight"] {
+  /* Unified Main Site Obsidian Dark Canvas (Always Consistent) */
   --color-primary: var(--accent-amber-dark);
   --color-primary-rgb: 254, 222, 145;
 
@@ -156,7 +79,54 @@ section[id] {
 
   --color-text: #d2d5df;
   --color-text-emphasized: #ffffff;
-  --color-text-muted: #6f768b;
+  --color-text-muted: #8b92a5;
+  --color-text-heading: #ffffff;
+  --color-text-link: var(--color-primary);
+
+  --color-border: #181b22;
+  --color-border-card: #181b22;
+  --color-border-emphasized: #272c38;
+
+  --card-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6), 0px 2px 2px rgba(0, 0, 0, 0.6);
+  --card-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.85);
+
+  /* Layout dimensions (exact from taniarascia.com) */
+  --navbar-height: 60px;
+  --footer-height: 60px;
+  --content-width: 760px;
+  --sidebar-width: 270px;
+  --post-sidebar-width: 260px;
+  --layout-padding-vertical: 2rem;
+  --layout-padding-horizontal: 2rem;
+
+  --border-radius: 8px;
+  --border-radius-sm: 4px;
+  --border-radius-lg: 12px;
+  --transition: 0.15s ease;
+
+  color-scheme: dark;
+}
+
+/* Dark & Midnight Mode Tokens: Deep pitch-black OLED minimal canvas matching main site */
+[data-theme="dark"],
+[data-theme="midnight"],
+[data-theme="light"] {
+  --color-primary: var(--accent-amber-dark);
+  --color-primary-rgb: 254, 222, 145;
+
+  --color-background: #08090c;
+  --color-background-sidebar: #08090c;
+  --color-background-alternate: #040406;
+  --color-background-card: #0f1116;
+  --color-background-card-hover: #161820;
+  --color-background-input: #040406;
+  --color-background-tag: #12141a;
+  --color-background-navbar-link-hover: #12141a;
+  --color-background-navbar-link-active: #161820;
+
+  --color-text: #d2d5df;
+  --color-text-emphasized: #ffffff;
+  --color-text-muted: #8b92a5;
   --color-text-heading: #ffffff;
   --color-text-link: var(--color-primary);
 
@@ -188,8 +158,8 @@ html {
 
 body {
   font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: var(--color-text);
-  background-color: var(--color-background);
+  color: var(--color-text, #d2d5df);
+  background-color: #08090c !important;
   line-height: 1.6;
   min-height: 100vh;
 }
@@ -4134,7 +4104,7 @@ a.text-link:hover {
 .portfolio-shell-wrapper {
   width: 100%;
   min-height: 100vh;
-  background-color: var(--color-background, #0d0f12);
+  background-color: #08090c !important;
   color: var(--color-text, #f0f0f2);
   display: flex;
   flex-direction: column;
@@ -4144,6 +4114,7 @@ a.text-link:hover {
 .portfolio-shell-wrapper .app-shell {
   width: 100%;
   padding-top: 0 !important;
+  background-color: #08090c !important;
 }
 
 /* ==========================================================================
@@ -4153,7 +4124,7 @@ a.text-link:hover {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #090a0c;
+  background-color: #08090c !important;
   color: #ffffff;
   width: 100%;
 }
@@ -4161,6 +4132,7 @@ a.text-link:hover {
 .modern-main-content {
   flex-grow: 1;
   width: 100%;
+  background-color: #08090c !important;
 }
 
 .modern-main-content .blog-container {
@@ -4175,7 +4147,7 @@ a.text-link:hover {
   display: flex;
   min-height: 100vh;
   width: 100%;
-  background-color: var(--color-background, #0b0c0e);
+  background-color: #08090c !important;
 }
 
 .portfolio-main-column {
@@ -4183,11 +4155,11 @@ a.text-link:hover {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-background, #0b0c0e);
+  background-color: #08090c !important;
 }
 
 .portfolio-top-bar {
-  background-color: #0b0b0d;
+  background-color: #08090c;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -4213,7 +4185,7 @@ a.text-link:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #0b0b0d;
+  background-color: #08090c;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
   padding: 3rem 2rem 2.5rem 2.5rem;
   box-sizing: border-box;

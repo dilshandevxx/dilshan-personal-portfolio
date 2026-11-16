@@ -59,14 +59,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                var t = localStorage.getItem('portfolio_theme');
-                if (t && ['light', 'dark', 'midnight'].indexOf(t) !== -1) {
-                  document.documentElement.setAttribute('data-theme', t);
-                } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                  document.documentElement.setAttribute('data-theme', 'dark');
-                } else {
-                  document.documentElement.setAttribute('data-theme', 'light');
-                }
+                document.documentElement.setAttribute('data-theme', 'midnight');
               } catch (e) {}
             `,
           }}
