@@ -157,18 +157,11 @@ export function Sidebar() {
             <Link
               href="/"
               onClick={() => setMobileOpen(false)}
-              className="sidebar-nav-item"
-              style={{
-                opacity: 0.75,
-                borderBottom: "1px solid var(--color-border)",
-                paddingBottom: "0.5rem",
-                marginBottom: "0.35rem",
-                fontSize: "0.84rem",
-              }}
+              className="sidebar-nav-item sidebar-nav-main-site"
               title="Return to Main Landing Page"
             >
               <span className="sidebar-nav-icon-wrap" aria-hidden="true">
-                <ArrowLeft size={15} strokeWidth={1.75} />
+                <ArrowLeft size={15} strokeWidth={1.8} />
               </span>
               <span className="sidebar-nav-label">Main Site</span>
             </Link>

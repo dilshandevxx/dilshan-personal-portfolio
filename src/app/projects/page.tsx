@@ -21,18 +21,12 @@ const CATEGORIES: readonly ("All" | ProjectCategory)[] = [
 
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [selectedStatus, setSelectedStatus] = useState<"All" | "Existing" | "Planned">("All");
 
   const filteredProjects = useMemo(() => {
-    return projectsList.filter((project) =>
-      (selectedCategory === "All" || project.category === selectedCategory) &&
-      (selectedStatus === "All" || project.status === selectedStatus)
+    return projectsList.filter(
+      (project) => selectedCategory === "All" || project.category === selectedCategory
     );
-  }, [selectedCategory, selectedStatus]);
-
-  const liveTotal = projectsList.filter((p) => p.status === "Existing").length;
-  const rfcTotal = projectsList.filter((p) => p.status === "Planned").length;
-  const isFiltered = selectedCategory !== "All" || selectedStatus !== "All";
+  }, [selectedCategory]);
 
   return (
     <div className="projects-container">
@@ -48,7 +42,7 @@ export default function ProjectsPage() {
         </p>
       </header>
 
-      {/* Primary Category Navigation Bar */}
+      {/* Clean Category Navigation Bar */}
       <div className="projects-filter-bar" role="tablist" aria-label="Project Categories">
         {CATEGORIES.map((cat) => {
           const isActive = selectedCategory === cat;
@@ -69,7 +63,7 @@ export default function ProjectsPage() {
               <span>{cat}</span>
               <span
                 style={{
-                  opacity: isActive ? 0.9 : 0.6,
+                  opacity: isActive ? 0.95 : 0.6,
                   fontSize: "0.76rem",
                   marginLeft: "5px",
                   fontFamily: "var(--font-mono)",
@@ -82,141 +76,56 @@ export default function ProjectsPage() {
         })}
       </div>
 
-      {/* Integrated Meta & Status Control Strip (No duplicate 'All (31)') */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-          gap: "0.75rem",
-          marginTop: "0.6rem",
-          marginBottom: "1.75rem",
-          padding: "0.65rem 0.9rem",
-          background: "var(--color-background-card, rgba(255, 255, 255, 0.02))",
-          border: "1px solid var(--color-border, rgba(255, 255, 255, 0.08))",
-        }}
-      >
-        {/* Left: Dynamic Results Summary */}
-        <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-          <span
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.76rem",
-              letterSpacing: "0.05em",
-              textTransform: "uppercase",
-              color: "var(--color-text-muted)",
-            }}
-          >
-            Showing <strong style={{ color: "var(--color-text-emphasized)" }}>{filteredProjects.length}</strong> of{" "}
-            {projectsList.length} repositories
-          </span>
-
-          {isFiltered && (
-            <button
-              type="button"
-              onClick={() => {
-                setSelectedCategory("All");
-                setSelectedStatus("All");
-              }}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.3rem",
-                background: "none",
-                border: "none",
-                color: "var(--color-primary)",
-                fontFamily: "var(--font-mono)",
-                fontSize: "0.72rem",
-                cursor: "pointer",
-                padding: "2px 6px",
-                textDecoration: "underline",
-              }}
-            >
-              <RotateCcw size={11} />
-              <span>Reset</span>
-            </button>
-          )}
-        </div>
-
-        {/* Right: Status Switch (Distinct labels, no repeated 'All (31)') */}
-        <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
-          <span
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.72rem",
-              textTransform: "uppercase",
-              letterSpacing: "0.06em",
-              color: "var(--color-text-muted)",
-              marginRight: "0.35rem",
-            }}
-          >
-            Status:
-          </span>
-
-          <button
-            type="button"
-            onClick={() => setSelectedStatus("All")}
-            className={`segmented-pill-btn ${selectedStatus === "All" ? "active" : ""}`}
-            style={{ fontSize: "0.75rem", padding: "3px 9px" }}
-          >
-            Any
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setSelectedStatus("Existing")}
-            className={`segmented-pill-btn ${selectedStatus === "Existing" ? "active" : ""}`}
-            style={{ fontSize: "0.75rem", padding: "3px 9px" }}
-          >
-            <span style={{ color: "#4ade80", marginRight: "4px" }}>●</span> Live Built ({liveTotal})
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setSelectedStatus("Planned")}
-            className={`segmented-pill-btn ${selectedStatus === "Planned" ? "active" : ""}`}
-            style={{ fontSize: "0.75rem", padding: "3px 9px" }}
-          >
-            <span style={{ color: "#93c5fd", marginRight: "4px" }}>◌</span> RFC Spec ({rfcTotal})
-          </button>
-        </div>
-      </div>
-
-      {/* Projects Grid or Empty State */}
-      {filteredProjects.length === 0 ? (
+      {/* Subtle Active Filter Indication (Only shown when filtered) */}
+      {selectedCategory !== "All" && (
         <div
           style={{
-            padding: "3.5rem 1.5rem",
-            textAlign: "center",
-            background: "var(--color-background-card, rgba(255, 255, 255, 0.02))",
-            border: "1px solid var(--color-border, rgba(255, 255, 255, 0.08))",
-            color: "var(--color-text-muted)",
-            fontFamily: "var(--font-mono)",
-            fontSize: "0.85rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginTop: "1rem",
+            marginBottom: "0.5rem",
+            padding: "0 0.25rem",
           }}
         >
-          <p style={{ margin: "0 0 1rem 0" }}>No projects match the selected category and status.</p>
+          <span
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "0.78rem",
+              letterSpacing: "0.04em",
+              color: "var(--color-text-muted)",
+            }}
+          >
+            Filtered by <strong style={{ color: "var(--color-text-emphasized)" }}>{selectedCategory}</strong> ({filteredProjects.length})
+          </span>
           <button
             type="button"
-            onClick={() => {
-              setSelectedCategory("All");
-              setSelectedStatus("All");
+            onClick={() => setSelectedCategory("All")}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.35rem",
+              background: "none",
+              border: "none",
+              color: "var(--color-primary)",
+              fontFamily: "var(--font-mono)",
+              fontSize: "0.75rem",
+              cursor: "pointer",
+              padding: 0,
             }}
-            className="segmented-pill-btn active"
-            style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
           >
-            <RotateCcw size={13} />
-            <span>View All Projects</span>
+            <RotateCcw size={12} />
+            <span>Show all ({projectsList.length})</span>
           </button>
         </div>
-      ) : (
-        <div className="cards">
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
-        </div>
       )}
+
+      {/* Projects Grid */}
+      <div className="cards" style={{ marginTop: selectedCategory === "All" ? "1.75rem" : "1.25rem" }}>
+        {filteredProjects.map((project) => (
+          <ProjectCard key={project.slug} project={project} />
+        ))}
+      </div>
 
       {/* Footer Strip */}
       <footer className="guides-footer-strip" style={{ maxWidth: "100%", marginTop: "4rem" }}>
