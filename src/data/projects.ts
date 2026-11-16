@@ -395,7 +395,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/distributed-llm-inference-platform/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/distributed-llm-inference-platform",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -446,7 +446,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/llm-api-gateway/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/llm-api-gateway",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -495,7 +495,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/production-mlops-platform/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/production-mlops-platform",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -544,7 +544,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/distributed-feature-store/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/distributed-feature-store",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -642,7 +642,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/ai-sre-incident-copilot/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/ai-sre-incident-copilot",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -691,7 +691,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/internal-developer-platform/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/internal-developer-platform",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -740,7 +740,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/kubernetes-policy-operator/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/kubernetes-policy-operator",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -789,7 +789,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/distributed-observability-platform/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/distributed-observability-platform",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -837,7 +837,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/ebpf-network-observability/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/ebpf-network-observability",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -886,7 +886,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/multi-tenant-vector-search/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/multi-tenant-vector-search",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -934,7 +934,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/gpu-workload-scheduler/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/gpu-workload-scheduler",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -982,7 +982,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/ai-security-gateway/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/ai-security-gateway",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -1030,7 +1030,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/llm-evaluation-observability/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/llm-evaluation-observability",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -1080,7 +1080,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/agent-runtime-orchestrator/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/agent-runtime-orchestrator",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -1129,7 +1129,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/event-driven-workflow-engine/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/event-driven-workflow-engine",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -1177,7 +1177,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/distributed-cache-engine/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/distributed-cache-engine",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -1224,7 +1224,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/object-storage-service/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/object-storage-service",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -1370,7 +1370,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/cloud-cost-intelligence/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/cloud-cost-intelligence",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -1418,7 +1418,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/database-replication-lab/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/database-replication-lab",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -1467,7 +1467,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/edge-model-serving-platform/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/edge-model-serving-platform",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -1517,7 +1517,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/data-contract-governance-platform/README.md",
+    "githubUrl": "https://github.com/dilshandevxx/data-contract-governance-platform",
     "metricsDetail": [],
     "stackLayers": [
       {
