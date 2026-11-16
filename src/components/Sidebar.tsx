@@ -168,9 +168,9 @@ export function Sidebar() {
               title="Return to Main Landing Page"
             >
               <span className="sidebar-nav-icon-wrap" aria-hidden="true">
-                <ArrowLeft size={16} strokeWidth={1.75} />
+                <ArrowLeft size={15} strokeWidth={1.75} />
               </span>
-              <span className="sidebar-nav-label">&larr; Main Site</span>
+              <span className="sidebar-nav-label">Main Site</span>
             </Link>
             {navLinks.map((item) => {
               const Icon = item.icon;
