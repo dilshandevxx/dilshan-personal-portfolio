@@ -21,7 +21,7 @@ import {
 import { GithubIcon } from "@/components/SocialIcons";
 
 const CATEGORIES: ProjectCategory[] = ["AI/ML", "DevOps", "Systems", "Full-Stack", "Landing", "Others"];
-const DEFAULT_PASSKEY = "dilshan2026";
+const DEFAULT_PASSKEY = "Dilshan775944600";
 
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -65,12 +65,12 @@ export default function AdminPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (passkeyInput === DEFAULT_PASSKEY || passkeyInput === "admin") {
+    if (passkeyInput === DEFAULT_PASSKEY) {
       setIsAuthenticated(true);
       localStorage.setItem("dilshan_admin_auth", "authenticated");
       setAuthError("");
     } else {
-      setAuthError("Incorrect passkey. Default is: dilshan2026");
+      setAuthError("Incorrect passkey.");
     }
   };
 
@@ -364,7 +364,7 @@ export const projectsList: Project[] = ${JSON.stringify(projects, null, 2)};
             <div>
               <input
                 type="password"
-                placeholder="Editorial Passkey (default: dilshan2026)"
+                placeholder="Enter Editorial Passkey"
                 value={passkeyInput}
                 onChange={(e) => setPasskeyInput(e.target.value)}
                 autoFocus
