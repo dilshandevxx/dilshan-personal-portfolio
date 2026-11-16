@@ -6,9 +6,15 @@ import { Sidebar } from "./Sidebar";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isLandingPage = pathname === "/";
 
-  if (isLandingPage) {
+  // Full-width modern pages (matching main page vibe, without the old 270px sidebar)
+  const isFullWidthPage =
+    pathname === "/" ||
+    pathname === "/projects" ||
+    pathname?.startsWith("/projects/") ||
+    pathname?.startsWith("/portfolio");
+
+  if (isFullWidthPage) {
     return <main className="landing-page-wrapper">{children}</main>;
   }
 

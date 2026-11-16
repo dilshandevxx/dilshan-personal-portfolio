@@ -2,12 +2,13 @@
 
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import { projectsList, ProjectCategory } from "@/data/projects";
-import { ProjectCard } from "@/components/ProjectCard";
-import { siteConfig } from "@/data/siteConfig";
-import { GithubIcon, XIcon } from "@/components/SocialIcons";
-import { AmbientPlayer } from "@/components/AmbientPlayer";
-import { Code2, Mail, Rss, Binary, Server, Cpu, Layers, RotateCcw } from "lucide-react";
+import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
+import { GithubIcon } from "@/components/SocialIcons";
+import { ExternalLink, ArrowRight, ArrowUpRight } from "lucide-react";
+import styles from "./projectsPage.module.css";
 
 const CATEGORIES: readonly ("All" | ProjectCategory)[] = [
   "All",
@@ -20,6 +21,7 @@ const CATEGORIES: readonly ("All" | ProjectCategory)[] = [
 ] as const;
 
 export default function ProjectsPage() {
+  const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   const filteredProjects = useMemo(() => {
@@ -28,169 +30,226 @@ export default function ProjectsPage() {
     );
   }, [selectedCategory]);
 
+  const liveProjectsCount = useMemo(() => {
+    return projectsList.filter((p) => Boolean(p.demoUrl)).length;
+  }, []);
+
+  const handleCardClick = (slug: string, e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.closest("a") || target.closest("button")) return;
+    router.push(`/projects/${slug}`);
+  };
+
   return (
-    <div className="projects-container">
-      <header className="page-header">
-        <div className="page-header-top">
-          <h1 className="page-title">Projects &amp; Architecture</h1>
-          <div className="page-header-actions">
-            <AmbientPlayer />
+    <div className={styles.pageRoot}>
+      {/* 1. Signature SkyLabs Top Navigation Header */}
+      <SkyLabsNavbar activeTab="projects" />
+
+      {/* 2. Main Content Container */}
+      <main className={styles.mainContainer}>
+        {/* Editorial Hero */}
+        <section className={styles.heroSection}>
+          <div className={styles.badgeWrapper}>
+            <span className={styles.pillBadge}>
+              <span className={styles.badgeDot}>•</span>
+              ENGINEERING REPOSITORIES &amp; SYSTEMS
+            </span>
           </div>
-        </div>
-        <p className="page-subtitle">
-          Curated engineering systems and architecture blueprints across AI/ML, cloud infrastructure, distributed systems, and modern landing platforms.
-        </p>
-      </header>
 
-      {/* Clean Category Navigation Bar */}
-      <div className="projects-filter-bar" role="tablist" aria-label="Project Categories">
-        {CATEGORIES.map((cat) => {
-          const isActive = selectedCategory === cat;
-          const count =
-            cat === "All"
-              ? projectsList.length
-              : projectsList.filter((p) => p.category === cat).length;
+          <h1 className={styles.title}>Curated Systems &amp; Architecture</h1>
+          <p className={styles.subtitle}>
+            A comprehensive catalog of 31 engineering projects spanning production AI/ML architectures, high-throughput distributed pipelines, cloud automation, and modern web applications.
+          </p>
 
-          return (
-            <button
-              key={cat}
-              type="button"
-              role="tab"
-              aria-selected={isActive}
-              onClick={() => setSelectedCategory(cat)}
-              className={`segmented-pill-btn ${isActive ? "active" : ""}`}
-            >
-              <span>{cat}</span>
-              <span
-                style={{
-                  opacity: isActive ? 0.95 : 0.6,
-                  fontSize: "0.76rem",
-                  marginLeft: "5px",
-                  fontFamily: "var(--font-mono)",
-                }}
-              >
-                ({count})
-              </span>
-            </button>
-          );
-        })}
-      </div>
+          {/* Clean Quick Metrics Row */}
+          <div className={styles.metricsRow}>
+            <div className={styles.metricItem}>
+              <span className={styles.metricValue}>{projectsList.length}</span>
+              <span className={styles.metricLabel}>Total Systems</span>
+            </div>
+            <div className={styles.metricItem}>
+              <span className={styles.metricValue}>{projectsList.filter((p) => p.category === "AI/ML").length}</span>
+              <span className={styles.metricLabel}>AI &amp; ML Models</span>
+            </div>
+            <div className={styles.metricItem}>
+              <span className={styles.metricValue}>{projectsList.filter((p) => p.category === "DevOps").length}</span>
+              <span className={styles.metricLabel}>Cloud &amp; DevOps</span>
+            </div>
+            <div className={styles.metricItem}>
+              <span className={styles.metricValue}>{projectsList.filter((p) => p.category === "Systems").length}</span>
+              <span className={styles.metricLabel}>Distributed Systems</span>
+            </div>
+            <div className={styles.metricItem}>
+              <span className={styles.metricValue}>{liveProjectsCount}</span>
+              <span className={styles.metricLabel}>Live Deployments</span>
+            </div>
+          </div>
+        </section>
 
-      {/* Subtle Active Filter Indication (Only shown when filtered) */}
-      {selectedCategory !== "All" && (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginTop: "1rem",
-            marginBottom: "0.5rem",
-            padding: "0 0.25rem",
-          }}
-        >
-          <span
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.78rem",
-              letterSpacing: "0.04em",
-              color: "var(--color-text-muted)",
-            }}
-          >
-            Filtered by <strong style={{ color: "var(--color-text-emphasized)" }}>{selectedCategory}</strong> ({filteredProjects.length})
-          </span>
-          <button
-            type="button"
-            onClick={() => setSelectedCategory("All")}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.35rem",
-              background: "none",
-              border: "none",
-              color: "var(--color-primary)",
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.75rem",
-              cursor: "pointer",
-              padding: 0,
-            }}
-          >
-            <RotateCcw size={12} />
-            <span>Show all ({projectsList.length})</span>
-          </button>
-        </div>
-      )}
+        {/* 3. Category Filter Tabs */}
+        <section className={styles.filterBarSection} aria-label="Project Categories">
+          <div className={styles.filterTabs} role="tablist">
+            {CATEGORIES.map((cat) => {
+              const isActive = selectedCategory === cat;
+              const count =
+                cat === "All"
+                  ? projectsList.length
+                  : projectsList.filter((p) => p.category === cat).length;
 
-      {/* Projects Grid */}
-      <div className="cards" style={{ marginTop: selectedCategory === "All" ? "1.75rem" : "1.25rem" }}>
-        {filteredProjects.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
-        ))}
-      </div>
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`${styles.categoryBtn} ${isActive ? styles.categoryBtnActive : ""}`}
+                >
+                  <span>{cat}</span>
+                  <span className={styles.categoryCount}>({count})</span>
+                </button>
+              );
+            })}
+          </div>
+        </section>
 
-      {/* Footer Strip */}
-      <footer className="guides-footer-strip" style={{ maxWidth: "100%", marginTop: "4rem" }}>
-        <nav className="guides-footer-links" aria-label="Quick contact links">
-          <a
-            href={`mailto:${siteConfig.social.email}`}
-            className="guides-footer-link"
-            title="Email Dilshan"
+        {/* 4. Projects Cards Grid */}
+        <section aria-label="Projects Grid">
+          <motion.div
+            layout
+            className={styles.cardsGrid}
           >
-            <Mail size={14} strokeWidth={1.8} />
-            <span>Email contact</span>
-          </a>
-          <Link href="/rss.xml" className="guides-footer-link" title="Subscribe to RSS Feed">
-            <Rss size={14} strokeWidth={1.8} />
-            <span>RSS feed</span>
-          </Link>
-          <a
-            href={siteConfig.social.x}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="guides-footer-link"
-            title="Follow on X"
-          >
-            <XIcon size={12} />
-            <span>X (Twitter)</span>
-          </a>
-          <a
-            href={siteConfig.social.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="guides-footer-link"
-            title="GitHub Profile"
-          >
-            <GithubIcon size={13} />
-            <span>GitHub</span>
-          </a>
-        </nav>
-        <div className="guides-footer-badges" aria-label="Core Engineering Stack">
-          <span className="guides-badge-pill">
-            <Code2 size={13} />
-            <span>Next.js</span>
-          </span>
-          <span className="guides-badge-pill">
-            <Binary size={13} />
-            <span>TypeScript</span>
-          </span>
-          <span className="guides-badge-pill">
-            <Server size={13} />
-            <span>Docker</span>
-          </span>
-          <span className="guides-badge-pill">
-            <Cpu size={13} />
-            <span>PyTorch</span>
-          </span>
-          <span className="guides-badge-pill">
-            <Layers size={13} />
-            <span>Kubernetes</span>
-          </span>
-        </div>
-        <div className="guides-footer-credit">
-          <span>Crafted by {siteConfig.name}</span>
-          <span className="credit-dot">&bull;</span>
-          <span>Open Digital Garden</span>
-        </div>
-      </footer>
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, idx) => {
+                const visibleTags = project.tags?.slice(0, 4) || [];
+                return (
+                  <motion.article
+                    key={project.slug}
+                    layout
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.35, delay: idx * 0.03 }}
+                    className={styles.projectCard}
+                    onClick={(e) => handleCardClick(project.slug, e)}
+                    style={{ cursor: "pointer" }}
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        router.push(`/projects/${project.slug}`);
+                      }
+                    }}
+                    aria-label={`View details for ${project.title}`}
+                  >
+                    {/* Card Top Meta */}
+                    <div className={styles.cardMetaRow}>
+                      <span className={styles.categoryBadge}>{project.category}</span>
+                      {project.demoUrl && (
+                        <a
+                          href={project.demoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className={styles.liveBadge}
+                          title="Open Live Deployment"
+                        >
+                          <span className={styles.liveDot} />
+                          <span>LIVE DEMO</span>
+                          <ExternalLink size={12} />
+                        </a>
+                      )}
+                    </div>
+
+                    {/* Card Title */}
+                    <h2 className={styles.cardTitle}>
+                      <Link
+                        href={`/projects/${project.slug}`}
+                        onClick={(e) => e.stopPropagation()}
+                        style={{ color: "inherit", textDecoration: "none" }}
+                      >
+                        {project.title}
+                      </Link>
+                    </h2>
+
+                    {/* Card Tagline / Description */}
+                    <p className={styles.cardDescription}>{project.tagline}</p>
+
+                    {/* Tech Stack Chips */}
+                    {visibleTags.length > 0 && (
+                      <div className={styles.tagList}>
+                        {visibleTags.map((tag) => (
+                          <span key={tag} className={styles.techChip}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Card Footer */}
+                    <div className={styles.cardFooter}>
+                      <Link
+                        href={`/projects/${project.slug}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className={styles.exploreLink}
+                      >
+                        <span>Architecture</span>
+                        <ArrowRight size={14} />
+                      </Link>
+
+                      <div className={styles.actionIcons}>
+                        {project.demoUrl && (
+                          <a
+                            href={project.demoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className={styles.iconBtn}
+                            title="Live Application"
+                            aria-label="Live Application"
+                          >
+                            <ExternalLink size={14} />
+                          </a>
+                        )}
+
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className={styles.iconBtn}
+                          title="GitHub Repository"
+                          aria-label="GitHub Repository"
+                        >
+                          <GithubIcon size={15} />
+                        </a>
+                      </div>
+                    </div>
+                  </motion.article>
+                );
+              })}
+            </AnimatePresence>
+          </motion.div>
+        </section>
+
+        {/* 5. Bottom Architectural Callout matching SkyLabs Vibe */}
+        <section className={styles.bottomCtaSection}>
+          <h2 className={styles.ctaTitle}>Interested in Building Together?</h2>
+          <p className={styles.ctaText}>
+            Whether designing high-throughput distributed systems, deploying enterprise machine learning infrastructure, or crafting modern web experiences, let&apos;s connect.
+          </p>
+          <div className={styles.ctaActions}>
+            <Link href="/#contact" className={styles.primaryCtaBtn}>
+              <span>Get In Touch</span>
+              <ArrowRight size={14} />
+            </Link>
+            <Link href="/portfolio" className={styles.secondaryCtaBtn}>
+              <span>Explore Portfolio</span>
+              <ArrowUpRight size={14} />
+            </Link>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { projectsList } from "@/data/projects";
 import { siteConfig } from "@/data/siteConfig";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/SocialIcons";
+import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
 import styles from "./projectDetail.module.css";
 
 export async function generateStaticParams() {
@@ -40,14 +41,16 @@ export default async function ProjectDetailPage({
   const isLive = project.status === "Existing";
 
   return (
-    <article className={styles.container}>
-      {/* Back Navigation */}
-      <nav className={styles.backNav}>
-        <Link href="/projects" className={styles.backLink}>
-          <ArrowLeft size={16} />
-          <span>Back to Projects</span>
-        </Link>
-      </nav>
+    <div className={styles.pageRoot}>
+      <SkyLabsNavbar activeTab="projects" />
+      <article className={styles.container}>
+        {/* Back Navigation */}
+        <nav className={styles.backNav}>
+          <Link href="/projects" className={styles.backLink}>
+            <ArrowLeft size={16} />
+            <span>Back to All Projects</span>
+          </Link>
+        </nav>
 
       {/* Editorial Header */}
       <header className={styles.header}>
@@ -252,5 +255,6 @@ export default async function ProjectDetailPage({
         )}
       </footer>
     </article>
+  </div>
   );
 }

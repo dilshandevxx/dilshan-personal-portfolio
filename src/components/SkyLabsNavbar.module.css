@@ -1,0 +1,289 @@
+/* 1. Top SkyLabs Navbar */
+.navHeader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  width: 100%;
+  padding: 1.15rem 3.5rem;
+  box-sizing: border-box;
+  background: rgba(8, 9, 12, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.25s ease;
+}
+
+@media (max-width: 900px) {
+  .navHeader {
+    padding: 0.9rem 1.5rem;
+  }
+}
+
+.navContainer {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* Brand Logo (SkyLabs with S mark) */
+.brandLink {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.logoText {
+  color: #ffffff;
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  text-transform: capitalize;
+}
+
+.logoBadge {
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid #ffffff;
+  border-radius: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.badgeLetter {
+  color: #ffffff;
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.brandLink:hover .logoBadge {
+  background-color: #ffffff;
+}
+
+.brandLink:hover .badgeLetter {
+  color: #000000;
+}
+
+/* Navigation Right */
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+@media (max-width: 900px) {
+  .navRight {
+    gap: 1rem;
+  }
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+}
+
+@media (max-width: 900px) {
+  .navLinks {
+    display: none;
+  }
+}
+
+.navLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1.5px;
+  background: #ffffff;
+  transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navLink:hover,
+.navLinkActive {
+  color: #ffffff;
+}
+
+.navLink:hover::after,
+.navLinkActive::after {
+  width: 100%;
+}
+
+/* Single Rectangular Action Button */
+.navActions {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 680px) {
+  .navActions {
+    display: none;
+  }
+}
+
+.portfolioButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  height: 38px;
+  padding: 0 1.25rem;
+  background-color: #ffffff;
+  color: #08090c;
+  border: 1px solid #ffffff;
+  border-radius: 0px !important;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.portfolioButton:hover {
+  background-color: transparent;
+  color: #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+}
+
+.btnIcon {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portfolioButton:hover .btnIcon {
+  transform: translate(2px, -2px);
+}
+
+/* Mobile Toggle Button */
+.mobileToggleBtn {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0px;
+  width: 38px;
+  height: 38px;
+  color: #ffffff;
+  padding: 0;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease;
+}
+
+@media (max-width: 900px) {
+  .mobileToggleBtn {
+    display: inline-flex;
+  }
+}
+
+.mobileToggleBtn:hover {
+  border-color: #ffffff;
+}
+
+/* Mobile Drawer */
+.mobileDrawer {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(8, 9, 11, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0px;
+  padding: 1.5rem 1.5rem 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
+}
+
+.mobileDrawerInner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.mobileNavLink {
+  display: flex;
+  align-items: center;
+  color: #c0c6d2;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+}
+
+.mobileNavLink:hover,
+.mobileNavLinkActive {
+  color: #ffffff;
+  padding-left: 0.35rem;
+}
+
+.mobileDrawerActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+}
+
+.mobilePortfolioButton {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background-color: #ffffff;
+  color: #08090c;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid #ffffff;
+  border-radius: 0px !important;
+}

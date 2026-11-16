@@ -104,9 +104,9 @@ export default function HeroSkyLabs() {
                 SERVICES
               </Link>
               <Link
-                href="#projects"
-                onClick={(e) => handleSlowScroll(e, "projects")}
-                className={`${styles.navLink} ${activeSection === "projects" ? styles.navLinkActive : ""}`}
+                href="/projects"
+                className={styles.navLink}
+                title="View All Projects & Architecture"
               >
                 PROJECTS
               </Link>
@@ -127,7 +127,7 @@ export default function HeroSkyLabs() {
             </nav>
 
             <div className={styles.navActions}>
-              <Link href="/projects" className={styles.portfolioButton}>
+              <Link href="/portfolio" className={styles.portfolioButton} title="Explore Lifestyle Portfolio">
                 <span>PORTFOLIO</span>
                 <ArrowUpRight size={14} className={styles.btnIcon} />
               </Link>
@@ -165,9 +165,9 @@ export default function HeroSkyLabs() {
                   SERVICES
                 </Link>
                 <Link
-                  href="#projects"
+                  href="/projects"
                   className={styles.mobileNavLink}
-                  onClick={(e) => handleSlowScroll(e, "projects")}
+                  onClick={() => setMobileOpen(false)}
                 >
                   PROJECTS
                 </Link>
@@ -188,11 +188,11 @@ export default function HeroSkyLabs() {
 
                 <div className={styles.mobileDrawerActions}>
                   <Link
-                    href="/projects"
+                    href="/portfolio"
                     className={styles.mobilePortfolioButton}
                     onClick={() => setMobileOpen(false)}
                   >
-                    <span>PORTFOLIO</span>
+                    <span>EXPLORE PORTFOLIO</span>
                     <ArrowUpRight size={14} />
                   </Link>
                 </div>
