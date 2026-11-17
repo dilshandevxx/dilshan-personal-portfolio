@@ -11,6 +11,49 @@ export interface Project {
   aliases?: string[]; status: ProjectStatus;
 }
 
+export const PROJECT_THUMBNAILS: Record<string, string> = {
+  "production-rag-platform": "/images/project_collective.jpg",
+  "foodlence-backend": "/images/project_brutalist.jpg",
+  "ideaspark-ai-business-idea-generator": "/images/project_analytics.jpg",
+  "roamora-travel-discovery-website": "/images/story_travel.jpg",
+  "travel-website": "/images/story_coffee.jpg",
+  "familycare-eldercare-monitoring-system": "/images/project_warpspeed_desk.jpg",
+  "distributed-llm-inference-platform": "/images/project_powersurge.jpg",
+  "llm-api-gateway-model-router": "/images/project_cloudwatch.jpg",
+  "production-mlops-platform": "/images/skill_workflow_automation.jpg",
+  "distributed-feature-store": "/images/project_boltshift.jpg",
+  "real-time-fraud-detection-platform": "/images/project_euphoria.jpg",
+  "ai-sre-incident-copilot": "/images/project_warpspeed.jpg",
+  "internal-developer-platform": "/images/project_mastermail.jpg",
+  "kubernetes-policy-reliability-operator": "/images/biometric_scan.png",
+  "distributed-observability-platform": "/images/skyline_twilight.jpg",
+  "creative-collective": "/images/project_collective.jpg",
+  "brutalist-manifesto": "/images/project_brutalist.jpg",
+  "cloudwatch-telemetry": "/images/project_analytics.jpg",
+  "warpspeed-protocol": "/images/project_warpspeed_desk.jpg",
+};
+
+export const FALLBACK_THUMBNAILS = [
+  "/images/project_collective.jpg",
+  "/images/project_brutalist.jpg",
+  "/images/project_analytics.jpg",
+  "/images/project_boltshift.jpg",
+  "/images/project_cloudwatch.jpg",
+  "/images/project_euphoria.jpg",
+  "/images/project_mastermail.jpg",
+  "/images/project_powersurge.jpg",
+  "/images/project_warpspeed_desk.jpg",
+  "/images/project_warpspeed.jpg",
+  "/images/story_travel.jpg",
+  "/images/skyline_twilight.jpg",
+];
+
+export function getProjectThumbnail(slug: string, image?: string, index: number = 0): string {
+  if (image && image.trim() !== "") return image;
+  if (PROJECT_THUMBNAILS[slug]) return PROJECT_THUMBNAILS[slug];
+  return FALLBACK_THUMBNAILS[index % FALLBACK_THUMBNAILS.length];
+}
+
 export const projectsList: Project[] = [
   {
     "slug": "production-rag-platform",

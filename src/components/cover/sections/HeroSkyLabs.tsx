@@ -104,9 +104,10 @@ export default function HeroSkyLabs() {
                 SERVICES
               </Link>
               <Link
-                href="/projects"
-                className={styles.navLink}
-                title="View All Projects & Architecture"
+                href="#projects"
+                onClick={(e) => handleSlowScroll(e, "projects")}
+                className={`${styles.navLink} ${activeSection === "projects" ? styles.navLinkActive : ""}`}
+                title="Explore Featured Projects"
               >
                 PROJECTS
               </Link>
@@ -165,9 +166,9 @@ export default function HeroSkyLabs() {
                   SERVICES
                 </Link>
                 <Link
-                  href="/projects"
+                  href="#projects"
                   className={styles.mobileNavLink}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={(e) => handleSlowScroll(e, "projects")}
                 >
                   PROJECTS
                 </Link>

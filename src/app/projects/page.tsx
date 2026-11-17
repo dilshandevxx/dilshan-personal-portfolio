@@ -2,9 +2,10 @@
 
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { projectsList, ProjectCategory } from "@/data/projects";
+import { projectsList, ProjectCategory, getProjectThumbnail } from "@/data/projects";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
 import { GithubIcon } from "@/components/SocialIcons";
 import { ExternalLink, ArrowRight, ArrowUpRight } from "lucide-react";
@@ -113,7 +114,7 @@ export default function ProjectsPage() {
           </div>
         </section>
 
-        {/* 4. Projects Cards Grid */}
+        {/* 4. Projects Cards Grid (matching uploaded design) */}
         <section aria-label="Projects Grid">
           <motion.div
             layout
@@ -121,7 +122,8 @@ export default function ProjectsPage() {
           >
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project, idx) => {
-                const visibleTags = project.tags?.slice(0, 4) || [];
+                const thumbnailSrc = getProjectThumbnail(project.slug, project.image, idx);
+
                 return (
                   <motion.article
                     key={project.slug}
@@ -132,7 +134,6 @@ export default function ProjectsPage() {
                     transition={{ duration: 0.35, delay: idx * 0.03 }}
                     className={styles.projectCard}
                     onClick={(e) => handleCardClick(project.slug, e)}
-                    style={{ cursor: "pointer" }}
                     tabIndex={0}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") {
@@ -142,9 +143,21 @@ export default function ProjectsPage() {
                     }}
                     aria-label={`View details for ${project.title}`}
                   >
-                    {/* Card Top Meta */}
-                    <div className={styles.cardMetaRow}>
+                    {/* 16:10 Image Thumbnail with Bottom-Left Category Pill */}
+                    <div className={styles.imageFrame}>
+                      <Image
+                        src={thumbnailSrc}
+                        alt={project.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        priority={idx < 6}
+                        className={styles.cardImage}
+                      />
+                      <div className={styles.imageVignette} />
+
+                      {/* Bottom-Left Pill Badge */}
                       <span className={styles.categoryBadge}>{project.category}</span>
+
                       {project.demoUrl && (
                         <a
                           href={project.demoUrl}
@@ -155,74 +168,61 @@ export default function ProjectsPage() {
                           title="Open Live Deployment"
                         >
                           <span className={styles.liveDot} />
-                          <span>LIVE DEMO</span>
-                          <ExternalLink size={12} />
+                          <span>LIVE</span>
                         </a>
                       )}
                     </div>
 
-                    {/* Card Title */}
-                    <h2 className={styles.cardTitle}>
-                      <Link
-                        href={`/projects/${project.slug}`}
-                        onClick={(e) => e.stopPropagation()}
-                        style={{ color: "inherit", textDecoration: "none" }}
-                      >
-                        {project.title}
-                      </Link>
-                    </h2>
+                    {/* Card Content Below Image */}
+                    <div className={styles.cardBody}>
+                      <h2 className={styles.cardTitle}>
+                        <Link
+                          href={`/projects/${project.slug}`}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          {project.title}
+                        </Link>
+                      </h2>
 
-                    {/* Card Tagline / Description */}
-                    <p className={styles.cardDescription}>{project.tagline}</p>
+                      <p className={styles.cardDescription}>{project.tagline}</p>
 
-                    {/* Tech Stack Chips */}
-                    {visibleTags.length > 0 && (
-                      <div className={styles.tagList}>
-                        {visibleTags.map((tag) => (
-                          <span key={tag} className={styles.techChip}>
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+                      <div className={styles.cardFooter}>
+                        <Link
+                          href={`/projects/${project.slug}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className={styles.exploreLink}
+                        >
+                          <span>Architecture</span>
+                          <ArrowRight size={14} />
+                        </Link>
 
-                    {/* Card Footer */}
-                    <div className={styles.cardFooter}>
-                      <Link
-                        href={`/projects/${project.slug}`}
-                        onClick={(e) => e.stopPropagation()}
-                        className={styles.exploreLink}
-                      >
-                        <span>Architecture</span>
-                        <ArrowRight size={14} />
-                      </Link>
+                        <div className={styles.actionIcons}>
+                          {project.demoUrl && (
+                            <a
+                              href={project.demoUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className={styles.iconBtn}
+                              title="Live Application"
+                              aria-label="Live Application"
+                            >
+                              <ExternalLink size={14} />
+                            </a>
+                          )}
 
-                      <div className={styles.actionIcons}>
-                        {project.demoUrl && (
                           <a
-                            href={project.demoUrl}
+                            href={project.githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
                             className={styles.iconBtn}
-                            title="Live Application"
-                            aria-label="Live Application"
+                            title="GitHub Repository"
+                            aria-label="GitHub Repository"
                           >
-                            <ExternalLink size={14} />
+                            <GithubIcon size={15} />
                           </a>
-                        )}
-
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className={styles.iconBtn}
-                          title="GitHub Repository"
-                          aria-label="GitHub Repository"
-                        >
-                          <GithubIcon size={15} />
-                        </a>
+                        </div>
                       </div>
                     </div>
                   </motion.article>
