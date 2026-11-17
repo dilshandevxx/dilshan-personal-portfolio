@@ -81,16 +81,17 @@ export default function AboutRoutePage() {
           </p>
         </div>
 
-        {/* Right Column: Outdoor Candid Portrait Photo (5 cols on desktop) */}
+        {/* Right Column: Outdoor Candid Portrait Photo (Screenshot 1) */}
         <div className="md:col-span-5 flex justify-center md:justify-end">
-          <div className="relative w-full max-w-[340px] aspect-[3/4] rounded-xl overflow-hidden shadow-xl border border-[var(--border-subtle)] bg-[var(--surface-card)]">
+          <div className="w-full max-w-[340px] rounded-2xl overflow-hidden shadow-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)]">
             <Image
               src="/dilshan_portrait.jpg"
-              alt="Dilshan smiling outdoors in nature"
-              fill
+              alt="Dilshan"
+              width={400}
+              height={533}
               priority
               sizes="(max-width: 768px) 100vw, 340px"
-              className="object-cover transition-transform duration-500 hover:scale-[1.02]"
+              className="w-full h-auto object-cover transition-transform duration-500 hover:scale-[1.02] block"
             />
           </div>
         </div>

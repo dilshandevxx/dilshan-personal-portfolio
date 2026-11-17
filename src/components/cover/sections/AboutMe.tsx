@@ -10,35 +10,18 @@ import styles from "./AboutMe.module.css";
 export default function AboutMe() {
   return (
     <section className={styles.aboutSection} id="about-me" aria-label="About Dilshan">
-      {/* Background cinematic atmospheric glow */}
-      <div className={styles.ambientGlow} aria-hidden="true" />
+      <div className={styles.ambientSpotlight} aria-hidden="true" />
 
       <div className={styles.container}>
         <motion.div
           className={styles.cinematicStage}
-          initial={{ opacity: 0, y: 35 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* 1. Integrated Cinematic Image Canvas (Merged Seamlessly into Black void, Zero Separate Avatar) */}
-          <div className={styles.imageBackdrop} aria-hidden="true">
-            <Image
-              src="/dilshan_portrait.jpg"
-              alt="Dilshan"
-              fill
-              priority
-              className={styles.cinematicImage}
-              sizes="(max-width: 1024px) 100vw, 750px"
-            />
-            {/* Cinematic Gradient Scrims: Left dissolve, Bottom dissolve & Vignette */}
-            <div className={styles.gradientLeft} />
-            <div className={styles.gradientBottom} />
-            <div className={styles.gradientVignette} />
-          </div>
-
-          {/* 2. Overlaid High-End Editorial Typography */}
-          <div className={styles.contentOverlay}>
+          {/* Left Column: Typographic Philosophy Statement & Button */}
+          <div className={styles.statementCol}>
             <div className={styles.kickerBadge}>
               <span className={styles.kickerLine} aria-hidden="true" />
               <span className={styles.kickerText}>PHILOSOPHY &amp; ARCHITECTURE</span>
@@ -63,8 +46,23 @@ export default function AboutMe() {
               <div className={styles.authorTag}>
                 <span className={styles.authorName}>DILSHAN</span>
                 <span className={styles.authorDivider}>/</span>
-                <span className={styles.authorTitle}>FULL-STACK ENGINEER &amp; SYSTEM ARCHITECT</span>
+                <span className={styles.authorTitle}>FULL-STACK &amp; ARCHITECTURE</span>
               </div>
+            </div>
+          </div>
+
+          {/* Right Column: High-Impact Cinematic Portrait (Integrated into Stage) */}
+          <div className={styles.portraitCol}>
+            <div className={styles.imageFrame}>
+              <Image
+                src="/dilshan_portrait.jpg"
+                alt="Dilshan"
+                fill
+                priority
+                sizes="(max-width: 900px) 100vw, 560px"
+                className={styles.portraitPhoto}
+              />
+              <div className={styles.imageVignette} />
             </div>
           </div>
         </motion.div>
