@@ -1,0 +1,399 @@
+/* Shelves Page — Authentic Editorial Digital Garden Aesthetics */
+.pageContainer {
+  max-width: 820px;
+  width: 100%;
+  margin: 0 auto;
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  color: #d2d5df;
+  line-height: 1.75;
+  font-size: 1.05rem;
+  padding-bottom: 5rem;
+}
+
+/* Header Area */
+.headerTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
+  font-size: clamp(2.15rem, 3.6vw, 2.75rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.025em;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.searchEmoji {
+  font-size: 2.2rem;
+  line-height: 1;
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
+.headerLead {
+  margin: 0.85rem 0 1.25rem 0;
+  color: #d1d5db;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* Anchor Navigation Pills */
+.jumpPillsRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.jumpPill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.75rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.76rem;
+  color: #9da4ae;
+  background-color: #0f1117;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.jumpPill:hover {
+  border-color: #dc8167;
+  color: #dc8167;
+}
+
+/* Section Blocks (Clean Editorial Spacing) */
+.sectionBlock {
+  margin-top: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  scroll-margin-top: 5rem;
+}
+
+.sectionHeading {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
+  font-size: clamp(1.65rem, 2.5vw, 2rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.25;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.65rem;
+}
+
+.sectionIcon {
+  color: #dc8167;
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.sectionDesc {
+  color: #94a3b8;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  margin: -0.25rem 0 0.5rem 0;
+}
+
+/* Shelf Group */
+.shelfGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+
+.groupTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0.75rem 0 0 0;
+  letter-spacing: -0.015em;
+}
+
+.groupDesc {
+  font-size: 0.92rem;
+  color: #788090;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.55;
+}
+
+/* Guide Item Rows */
+.guideGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 0.85rem;
+}
+
+.guideCard {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.15rem;
+  background-color: #0f1117;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.guideCard:hover {
+  border-color: rgba(220, 129, 103, 0.5);
+  background-color: #141620;
+  transform: translateY(-1px);
+}
+
+.guideMain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1 1 auto;
+}
+
+.guideTag {
+  align-self: flex-start;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #9da4ae;
+}
+
+.guideTitle {
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #e2e8f0;
+  margin: 0;
+  transition: color 0.15s ease;
+}
+
+.guideCard:hover .guideTitle {
+  color: #dc8167;
+}
+
+.guideArrow {
+  color: #64748b;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.guideCard:hover .guideArrow {
+  color: #dc8167;
+  transform: translateX(2px);
+}
+
+/* Bookshelf Entries */
+.booksGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.15rem;
+}
+
+.bookCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1.25rem;
+  background-color: #0f1117;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  transition: border-color 0.2s ease;
+}
+
+.bookCard:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.bookMetaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.74rem;
+}
+
+.bookCategory {
+  color: #788090;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.bookStatus {
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.statusReading {
+  background: rgba(220, 129, 103, 0.15);
+  color: #dc8167;
+  border: 1px solid rgba(220, 129, 103, 0.35);
+}
+
+.statusRead {
+  background: rgba(255, 255, 255, 0.04);
+  color: #788090;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bookTitle {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.bookAuthor {
+  font-size: 0.88rem;
+  color: #dc8167;
+  margin: -0.25rem 0 0 0;
+}
+
+.bookNote {
+  font-size: 0.92rem;
+  color: #9da4ae;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Analog Gear / Rituals */
+.gearGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.15rem;
+}
+
+.gearCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background-color: #0f1117;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+}
+
+.gearHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gearCategory {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  color: #dc8167;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.gearTitle {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.gearDesc {
+  font-size: 0.92rem;
+  color: #9da4ae;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.gearKitList {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.gearKitItem {
+  position: relative;
+  padding-left: 1.25rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  color: #cbd5e1;
+}
+
+.gearKitItem::before {
+  content: "•";
+  position: absolute;
+  left: 0.35rem;
+  color: #64748b;
+}
+
+/* Philosophy Callout */
+.colophonBox {
+  margin-top: 3.5rem;
+  padding: 1.5rem 1.75rem;
+  background-color: #0b0d12;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.colophonKicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.76rem;
+  color: #dc8167;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.colophonQuote {
+  font-size: 0.96rem;
+  color: #9da4ae;
+  line-height: 1.7;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .headerTitle {
+    font-size: 2rem;
+  }
+
+  .guideGrid,
+  .booksGrid,
+  .gearGrid {
+    grid-template-columns: 1fr;
+  }
+}

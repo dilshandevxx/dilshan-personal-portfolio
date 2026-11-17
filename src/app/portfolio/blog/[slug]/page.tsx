@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { siteConfig } from '@/data/content';
 import { ArrowLeft, Bookmark } from 'lucide-react';
+import styles from './post.module.css';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -47,43 +48,31 @@ export default async function BlogPostPage({ params }: PageProps) {
   };
 
   return (
-    <article className="max-w-3xl mx-auto space-y-10 selection:bg-[var(--accent-subtle)] selection:text-[var(--accent-color)]">
+    <article className={styles.articleContainer}>
       {/* Top Navigation / Breadcrumbs */}
-      <div className="flex items-center justify-between text-xs font-mono text-[var(--text-muted)] border-b border-[var(--border-subtle)] pb-4">
-        <Link
-          href="/portfolio/blog"
-          className="hover:text-[var(--text-primary)] transition-colors flex items-center gap-1.5"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
+      <nav className={styles.topNav} aria-label="Breadcrumb">
+        <Link href="/portfolio/blog" className={styles.backLink}>
+          <ArrowLeft size={14} />
           <span>All Essays</span>
         </Link>
-        <div className="flex items-center gap-2">
-          <span>{post.readingTime}</span>
-        </div>
-      </div>
+        <span>{post.readingTime}</span>
+      </nav>
 
       {/* Article Header */}
-      <header className="space-y-4">
-        <div className="flex items-center gap-2 text-xs font-mono text-[var(--accent-color)]">
-          <Bookmark className="w-3.5 h-3.5" />
+      <header className={styles.postHeader}>
+        <div className={styles.dateRow}>
+          <Bookmark size={14} />
           <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[var(--text-primary)] tracking-tight leading-[1.15]">
-          {post.title}
-        </h1>
+        <h1 className={styles.postTitle}>{post.title}</h1>
 
-        <p className="font-serif italic text-lg sm:text-xl text-[var(--text-secondary)] leading-relaxed">
-          {post.subtitle}
-        </p>
+        <p className={styles.postSubtitle}>{post.subtitle}</p>
 
         {/* Tags */}
-        <div className="flex flex-wrap gap-1.5 pt-2">
+        <div className={styles.tagsRow}>
           {post.tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-2.5 py-0.5 rounded text-xs font-mono bg-[var(--badge-bg)] text-[var(--text-muted)] border border-[var(--border-subtle)]"
-            >
+            <span key={tag} className={styles.tagPill}>
               #{tag}
             </span>
           ))}
@@ -91,19 +80,16 @@ export default async function BlogPostPage({ params }: PageProps) {
       </header>
 
       {/* Editorial Rule */}
-      <div className="w-20 h-0.5 bg-[var(--accent-color)] opacity-60" aria-hidden="true" />
+      <div className={styles.editorialRule} aria-hidden="true" />
 
       {/* Article Body Content */}
-      <div className="font-sans text-[var(--text-primary)] leading-[1.8] text-base space-y-6">
+      <div className={styles.contentArea}>
         {post.content.split('\n\n').map((paragraph, idx) => {
           // Check for code blocks
           if (paragraph.startsWith('```')) {
             const cleanCode = paragraph.replace(/```[a-z]*\n?/g, '');
             return (
-              <pre
-                key={idx}
-                className="my-6 p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-strong)] font-mono text-xs overflow-x-auto text-[var(--text-secondary)] leading-relaxed"
-              >
+              <pre key={idx} className={styles.codeBlock}>
                 <code>{cleanCode}</code>
               </pre>
             );
@@ -112,10 +98,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           // Check for Blockquotes
           if (paragraph.startsWith('> ')) {
             return (
-              <blockquote
-                key={idx}
-                className="my-6 pl-4 border-l-2 border-[var(--accent-color)] font-serif italic text-base sm:text-lg text-[var(--text-secondary)] bg-[var(--bg-subtle)]/60 py-2 pr-3 rounded-r"
-              >
+              <blockquote key={idx} className={styles.blockquote}>
                 {paragraph.replace('> ', '')}
               </blockquote>
             );
@@ -124,17 +107,14 @@ export default async function BlogPostPage({ params }: PageProps) {
           // Check for Headings
           if (paragraph.startsWith('### ')) {
             return (
-              <h3
-                key={idx}
-                className="text-xl sm:text-2xl font-serif font-semibold text-[var(--text-primary)] pt-6 pb-2"
-              >
+              <h3 key={idx} className={styles.contentHeading}>
                 {paragraph.replace('### ', '')}
               </h3>
             );
           }
 
           return (
-            <p key={idx} className="text-sm sm:text-base text-[var(--text-secondary)]">
+            <p key={idx} className={styles.paragraph}>
               {paragraph}
             </p>
           );
@@ -142,37 +122,30 @@ export default async function BlogPostPage({ params }: PageProps) {
       </div>
 
       {/* Post Footer */}
-      <footer className="pt-8 border-t border-[var(--border-subtle)] space-y-6">
-        <div className="p-5 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-secondary)] space-y-2 text-xs font-mono">
-          <p className="font-semibold text-[var(--text-primary)] font-serif text-sm">
-            Dilshan
-          </p>
-          <p className="text-[var(--text-muted)] font-sans">
+      <footer className={styles.footerArea}>
+        <div className={styles.authorBox}>
+          <p className={styles.authorName}>Dilshan</p>
+          <p className={styles.authorBio}>
             Software engineer focusing on distributed systems and mindful computing.
             Have thoughts, questions, or alternative perspectives on this essay?
           </p>
-          <div className="pt-2">
-            <a
-              href="mailto:hello@dilshan.dev"
-              className="text-[var(--accent-color)] hover:underline inline-flex items-center gap-1 font-mono"
-            >
-              <span>Send response via email</span>
-              <span>→</span>
-            </a>
-          </div>
+          <a
+            href={`mailto:hello@dilshan.dev?subject=Re:%20${encodeURIComponent(post.title)}`}
+            className={styles.emailPrompt}
+          >
+            <span>Send response via email</span>
+            <span>&rarr;</span>
+          </a>
         </div>
 
-        <div className="flex items-center justify-between text-xs font-mono text-[var(--text-muted)]">
-          <Link
-            href="/portfolio/blog"
-            className="text-[var(--accent-color)] hover:underline flex items-center gap-1"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
+        <div className={styles.bottomNav}>
+          <Link href="/portfolio/blog" className={styles.backLink}>
+            <ArrowLeft size={14} />
             <span>Back to Writing Index</span>
           </Link>
           <Link
             href="/portfolio"
-            className="hover:text-[var(--text-primary)] transition-colors"
+            style={{ color: '#788090', textDecoration: 'none' }}
           >
             Portfolio Overview
           </Link>
