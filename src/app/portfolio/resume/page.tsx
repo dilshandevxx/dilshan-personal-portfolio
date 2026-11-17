@@ -3,186 +3,323 @@
 import React from 'react';
 import Link from 'next/link';
 import { siteConfig } from '@/data/content';
-import { ArrowLeft, Printer } from 'lucide-react';
+import {
+  ArrowLeft,
+  Printer,
+  Mail,
+  ExternalLink,
+  Globe,
+  MapPin,
+} from 'lucide-react';
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa6';
+import styles from './resume.module.css';
 
 export default function ResumeRoutePage() {
+  const handlePrint = () => {
+    window.print();
+  };
+
   return (
-    <div className="space-y-10">
-      {/* Breadcrumb & Print Controls (Hidden when printing) */}
-      <div className="no-print flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4 text-xs font-mono">
-        <div className="flex items-center gap-2 text-[var(--text-muted)]">
-          <Link href="/portfolio" className="hover:text-[var(--text-primary)] transition-colors flex items-center gap-1">
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Portfolio Index</span>
+    <div className={styles.cvWrapper}>
+      {/* ------------------------------------------------------------- */}
+      {/* 1. TOP TOOLBAR (Hidden when printing)                         */}
+      {/* ------------------------------------------------------------- */}
+      <div className={styles.toolbar} role="region" aria-label="Resume toolbar">
+        <div className={styles.breadcrumb}>
+          <Link href="/portfolio" className={styles.breadcrumbLink}>
+            <ArrowLeft size={14} />
+            <span>Portfolio</span>
           </Link>
-          <span>/</span>
-          <span className="text-[var(--accent-color)]">Curriculum Vitae</span>
+          <span aria-hidden="true">/</span>
+          <span className={styles.breadcrumbCurrent}>Curriculum Vitae</span>
         </div>
 
-        <button
-          type="button"
-          onClick={() => window.print()}
-          aria-label="Print or save Curriculum Vitae as PDF"
-          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-[var(--border-strong)] bg-[var(--bg-secondary)] hover:bg-[var(--bg-tertiary)] text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all shadow-xs"
-        >
-          <Printer className="w-3.5 h-3.5 text-[var(--accent-color)]" />
-          <span>Print / Save PDF</span>
-        </button>
+        <div className={styles.toolbarActions}>
+          <a
+            href="mailto:hello@dilshan.dev"
+            className={styles.emailBtn}
+            title="Send Email"
+          >
+            <Mail size={13} />
+            <span>hello@dilshan.dev</span>
+          </a>
+
+          <button
+            type="button"
+            onClick={handlePrint}
+            aria-label="Print or save Curriculum Vitae as PDF"
+            className={styles.printBtn}
+          >
+            <Printer size={14} className={styles.printIcon} />
+            <span>Print / Save PDF</span>
+          </button>
+        </div>
       </div>
 
-      {/* Printable Resume Container */}
-      <div className="rounded-xl border border-[var(--border-strong)] bg-[var(--surface-card)] p-6 sm:p-10 space-y-10 card-shadow">
+      {/* ------------------------------------------------------------- */}
+      {/* 2. THE CV DOCUMENT                                            */}
+      {/* ------------------------------------------------------------- */}
+      <article className={styles.cvPaper} aria-label="Curriculum Vitae Document">
         {/* Header Block */}
-        <header className="border-b border-[var(--border-subtle)] pb-6 flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-          <div className="space-y-1">
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[var(--text-primary)]">
-              {siteConfig.name}
-            </h1>
-            <p className="text-sm font-mono text-[var(--accent-color)] font-medium">
-              {siteConfig.title}
-            </p>
-            <p className="text-xs font-sans text-[var(--text-muted)] max-w-xl">
-              {siteConfig.location} • Available for roles &amp; technical advisory
+        <header className={styles.cvHeader}>
+          <div className={styles.headerMain}>
+            <h1 className={styles.candidateName}>{siteConfig.name}</h1>
+            <p className={styles.candidateTitle}>{siteConfig.title}</p>
+            <p className={styles.candidateMeta}>
+              <MapPin size={13} aria-hidden="true" />
+              <span>Colombo, Sri Lanka &bull; Available Worldwide for Senior Engineering &amp; Advisory</span>
             </p>
           </div>
 
-          <div className="text-xs font-mono text-[var(--text-muted)] space-y-1 sm:text-right">
-            <p>
-              <a href="mailto:hello@dilshan.dev" className="text-[var(--accent-color)] hover:underline">
-                hello@dilshan.dev
+          <div className={styles.contactStrip}>
+            <div>
+              <a
+                href="mailto:hello@dilshan.dev"
+                className={styles.contactLink}
+                title="Email Dilshan"
+              >
+                <Mail size={12} aria-hidden="true" />
+                <span>hello@dilshan.dev</span>
               </a>
-            </p>
-            <p>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:underline">
-                github.com/dilshan
+            </div>
+            <div>
+              <a
+                href="https://dilshan.dev"
+                className={styles.contactLink}
+                title="Personal Website"
+              >
+                <Globe size={12} aria-hidden="true" />
+                <span>dilshan.dev</span>
               </a>
-            </p>
-            <p>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:underline">
-                linkedin.com/in/dilshan
+            </div>
+            <div>
+              <a
+                href="https://github.com/dilshandevxx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.contactLink}
+                title="GitHub Profile"
+              >
+                <FaGithub size={12} aria-hidden="true" />
+                <span>github.com/dilshandevxx</span>
               </a>
-            </p>
+            </div>
+            <div>
+              <a
+                href="https://linkedin.com/in/heydilshan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.contactLink}
+                title="LinkedIn Profile"
+              >
+                <FaLinkedinIn size={12} aria-hidden="true" />
+                <span>linkedin.com/in/heydilshan</span>
+              </a>
+            </div>
           </div>
         </header>
 
         {/* Executive Summary */}
-        <section className="space-y-2">
-          <h2 className="text-xs font-mono uppercase tracking-widest text-[var(--accent-color)] font-semibold">
+        <section className={styles.section} aria-labelledby="sec-summary">
+          <h2 id="sec-summary" className={styles.sectionHeading}>
             Executive Summary
           </h2>
-          <p className="text-xs sm:text-sm font-sans text-[var(--text-secondary)] leading-relaxed">
-            {siteConfig.shortBio}
+          <p className={styles.summaryText}>
+            Full-stack software engineer and systems architect with 5+ years of experience designing high-throughput distributed backends, resilient event-driven architectures, and fast, accessible modern web clients. Dedicated to clean engineering craft: favoring explicit systems over brittle abstractions, ensuring sub-50ms deterministic latencies, and crafting digital interfaces that respect user attention.
           </p>
         </section>
 
-        {/* Professional Experience */}
-        <section className="space-y-6">
-          <h2 className="text-xs font-mono uppercase tracking-widest text-[var(--accent-color)] font-semibold border-b border-[var(--border-subtle)] pb-2">
-            Work Experience
+        {/* Core Competencies / Technical Skills */}
+        <section className={styles.section} aria-labelledby="sec-skills">
+          <h2 id="sec-skills" className={styles.sectionHeading}>
+            Technical Competencies
           </h2>
-
-          <div className="space-y-6">
-            {siteConfig.experience.map((exp, idx) => (
-              <div key={idx} className="space-y-2">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs font-mono">
-                  <span className="font-semibold text-sm font-serif text-[var(--text-primary)]">
-                    {exp.role} — <span className="text-[var(--text-secondary)] font-normal">{exp.company}</span>
-                  </span>
-                  <span className="text-[var(--text-muted)]">{exp.period}</span>
-                </div>
-                <p className="text-xs font-sans text-[var(--text-secondary)] leading-relaxed">
-                  {exp.description}
-                </p>
-                {exp.technologies && (
-                  <div className="flex flex-wrap gap-1.5 pt-1">
-                    {exp.technologies.map((t) => (
-                      <span
-                        key={t}
-                        className="px-2 py-0.5 rounded text-[10px] font-mono bg-[var(--bg-secondary)] text-[var(--text-muted)] border border-[var(--border-subtle)]"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Key Projects */}
-        <section className="space-y-6">
-          <h2 className="text-xs font-mono uppercase tracking-widest text-[var(--accent-color)] font-semibold border-b border-[var(--border-subtle)] pb-2">
-            Architectural Projects
-          </h2>
-
-          <div className="grid grid-cols-1 gap-4">
-            {siteConfig.projects.map((proj) => (
-              <div key={proj.id} className="p-4 rounded-lg bg-[var(--bg-subtle)] border border-[var(--border-subtle)] space-y-2">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs font-mono">
-                  <span className="font-semibold text-sm font-serif text-[var(--text-primary)]">
-                    {proj.title}
-                  </span>
-                  <span className="text-[var(--text-muted)]">{proj.category} • {proj.year}</span>
-                </div>
-                <p className="text-xs font-sans text-[var(--text-secondary)]">
-                  {proj.description}
-                </p>
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {proj.stack.map((s) => (
-                    <span
-                      key={s}
-                      className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[var(--badge-bg)] text-[var(--text-muted)]"
-                    >
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Education */}
-        <section className="space-y-4">
-          <h2 className="text-xs font-mono uppercase tracking-widest text-[var(--accent-color)] font-semibold border-b border-[var(--border-subtle)] pb-2">
-            Education
-          </h2>
-
-          {siteConfig.education.map((edu, idx) => (
-            <div key={idx} className="space-y-1 text-xs">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 font-mono">
-                <span className="font-serif font-semibold text-sm text-[var(--text-primary)]">
-                  {edu.degree}
-                </span>
-                <span className="text-[var(--text-muted)]">{edu.period}</span>
-              </div>
-              <p className="text-xs font-sans text-[var(--text-secondary)]">
-                {edu.institution} — <span className="font-mono text-[var(--accent-color)]">{edu.honors}</span>
-              </p>
+          <div className={styles.skillsGrid}>
+            <div className={styles.skillCategoryRow}>
+              <span className={styles.skillCategoryName}>Languages &amp; Runtimes</span>
+              <span className={styles.skillItemsText}>
+                Go (Golang), TypeScript, JavaScript (ESNext), Python, SQL (PostgreSQL / SQLite), Rust (Tooling)
+              </span>
             </div>
-          ))}
-        </section>
-
-        {/* Skills Summary */}
-        <section className="space-y-3">
-          <h2 className="text-xs font-mono uppercase tracking-widest text-[var(--accent-color)] font-semibold border-b border-[var(--border-subtle)] pb-2">
-            Technical Stack
-          </h2>
-          <div className="space-y-2 text-xs font-mono">
-            {siteConfig.skills.map((cat) => (
-              <div key={cat.title} className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4">
-                <span className="text-[var(--text-primary)] font-semibold sm:w-48 shrink-0">
-                  {cat.title}:
-                </span>
-                <span className="text-[var(--text-muted)]">
-                  {cat.items.join(' • ')}
-                </span>
-              </div>
-            ))}
+            <div className={styles.skillCategoryRow}>
+              <span className={styles.skillCategoryName}>Web &amp; UI Architecture</span>
+              <span className={styles.skillItemsText}>
+                Next.js (App Router), React 19, Server Components, Tailwind CSS, Semantic HTML5, WAI-ARIA, Design Systems, Core Web Vitals
+              </span>
+            </div>
+            <div className={styles.skillCategoryRow}>
+              <span className={styles.skillCategoryName}>Distributed &amp; Backend</span>
+              <span className={styles.skillItemsText}>
+                Microservices, Event-Driven Architecture, Apache Kafka, Redis, PostgreSQL (Indexing &amp; Partitioning), REST &amp; gRPC APIs
+              </span>
+            </div>
+            <div className={styles.skillCategoryRow}>
+              <span className={styles.skillCategoryName}>Cloud, DevOps &amp; Tooling</span>
+              <span className={styles.skillItemsText}>
+                Docker, Kubernetes, Linux Internals, CI/CD Automation (GitHub Actions), Observability (Prometheus / Grafana), Git, Vitest, Jest
+              </span>
+            </div>
           </div>
         </section>
-      </div>
+
+        {/* Professional Experience */}
+        <section className={styles.section} aria-labelledby="sec-experience">
+          <h2 id="sec-experience" className={styles.sectionHeading}>
+            Professional Experience
+          </h2>
+
+          <div className={styles.timelineList}>
+            {/* Role 1 */}
+            <article className={styles.experienceItem}>
+              <div className={styles.itemHeader}>
+                <h3 className={styles.roleTitle}>
+                  Senior Systems Engineer — <span className={styles.companyName}>Distributed Infrastructure &amp; Cloud Platforms</span>
+                </h3>
+                <span className={styles.itemPeriod}>2024 — Present &bull; Colombo / Remote</span>
+              </div>
+              <ul className={styles.bulletList}>
+                <li className={styles.bulletItem}>
+                  Architected and deployed event-driven ingestion platform in Go and Apache Kafka handling 100K+ concurrent event streams with under 45ms P99 latency.
+                </li>
+                <li className={styles.bulletItem}>
+                  Optimized PostgreSQL schema partition pruning and caching strategies, reducing database IOPS spikes by 40% and cutting average query latency from 180ms to 42ms.
+                </li>
+                <li className={styles.bulletItem}>
+                  Led design-system standardisation across web clients, implementing accessible keyboard navigation, WAI-ARIA compliance, and zero-flash theme persistence.
+                </li>
+                <li className={styles.bulletItem}>
+                  Standardized continuous delivery pipelines using Docker and Kubernetes, decreasing production deployment cycle times from 25 minutes to under 4 minutes.
+                </li>
+              </ul>
+              <div className={styles.techPillsRow} aria-label="Technologies used">
+                {["Go", "TypeScript", "Next.js", "Docker", "PostgreSQL", "Kafka", "Kubernetes"].map((tech) => (
+                  <span key={tech} className={styles.techPill}>{tech}</span>
+                ))}
+              </div>
+            </article>
+
+            {/* Role 2 */}
+            <article className={styles.experienceItem}>
+              <div className={styles.itemHeader}>
+                <h3 className={styles.roleTitle}>
+                  Software Engineer — <span className={styles.companyName}>Modern Web &amp; Enterprise Solutions</span>
+                </h3>
+                <span className={styles.itemPeriod}>2022 — 2024 &bull; Colombo, Sri Lanka</span>
+              </div>
+              <ul className={styles.bulletList}>
+                <li className={styles.bulletItem}>
+                  Engineered modular React 18/Next.js customer dashboards used by enterprise teams, ensuring zero Cumulative Layout Shift (CLS) and sub-second load times.
+                </li>
+                <li className={styles.bulletItem}>
+                  Migrated high-traffic legacy monolithic endpoints to modern decoupled Node.js and GraphQL microservices, trimming network payload sizes by 35%.
+                </li>
+                <li className={styles.bulletItem}>
+                  Built robust data validation layers using Zod and TypeScript, eliminating runtime data type mismatches across frontend and backend boundaries.
+                </li>
+              </ul>
+              <div className={styles.techPillsRow} aria-label="Technologies used">
+                {["React", "TypeScript", "Node.js", "GraphQL", "Tailwind CSS", "Redis", "PostgreSQL"].map((tech) => (
+                  <span key={tech} className={styles.techPill}>{tech}</span>
+                ))}
+              </div>
+            </article>
+
+            {/* Role 3 */}
+            <article className={styles.experienceItem}>
+              <div className={styles.itemHeader}>
+                <h3 className={styles.roleTitle}>
+                  Associate Software Engineer — <span className={styles.companyName}>Technology Consultancy &amp; Research Lab</span>
+                </h3>
+                <span className={styles.itemPeriod}>2020 — 2022 &bull; Colombo, Sri Lanka</span>
+              </div>
+              <ul className={styles.bulletList}>
+                <li className={styles.bulletItem}>
+                  Collaborated on customer-facing web applications, wrote rigorous automated unit and integration tests with Jest, achieving over 85% branch coverage.
+                </li>
+                <li className={styles.bulletItem}>
+                  Contributed to developer CLI tools and automated Docker testing environments, improving onboarding velocity for incoming engineering cohorts.
+                </li>
+              </ul>
+              <div className={styles.techPillsRow} aria-label="Technologies used">
+                {["JavaScript", "Python", "React", "REST APIs", "Docker", "Jest", "Git"].map((tech) => (
+                  <span key={tech} className={styles.techPill}>{tech}</span>
+                ))}
+              </div>
+            </article>
+          </div>
+        </section>
+
+        {/* Featured Architectural Projects */}
+        <section className={styles.section} aria-labelledby="sec-projects">
+          <h2 id="sec-projects" className={styles.sectionHeading}>
+            Key Architectural Projects
+          </h2>
+
+          <div className={styles.projectsList}>
+            <div className={styles.projectRow}>
+              <div className={styles.projectHeader}>
+                <a
+                  href="https://github.com/dilshandevxx/my-lifestyle-portfolio"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.projectTitleLink}
+                >
+                  <span>dilshan.dev &bull; Personal Engineering Portfolio</span>
+                  <ExternalLink size={12} style={{ display: "inline", marginLeft: 4 }} />
+                </a>
+                <span className={styles.projectMeta}>UI &amp; Architecture &bull; 2026</span>
+              </div>
+              <p className={styles.projectDesc}>
+                Editorial digital garden and software engineering portfolio built with Next.js App Router, TypeScript, and CSS tokens. Features synchronous anti-flash theme scripts, accessible mobile drawers, and sub-100ms static prerendering.
+              </p>
+              <div className={styles.techPillsRow}>
+                {["Next.js", "React 19", "TypeScript", "Tailwind CSS"].map((s) => (
+                  <span key={s} className={styles.techPill}>{s}</span>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.projectRow}>
+              <div className={styles.projectHeader}>
+                <span className={styles.projectTitleLink}>
+                  Production RAG Architecture &amp; Reranking Platform
+                </span>
+                <span className={styles.projectMeta}>AI / ML &bull; 2025</span>
+              </div>
+              <p className={styles.projectDesc}>
+                High-throughput retrieval-augmented generation engine with hybrid vector search, cross-encoder reranking, and dynamic query routing. Achieves sub-60ms retrieval across 500K+ technical documents.
+              </p>
+              <div className={styles.techPillsRow}>
+                {["Python", "FastAPI", "Qdrant", "vLLM", "Docker"].map((s) => (
+                  <span key={s} className={styles.techPill}>{s}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Education & Distinction */}
+        <section className={styles.section} aria-labelledby="sec-education">
+          <h2 id="sec-education" className={styles.sectionHeading}>
+            Education &amp; Distinction
+          </h2>
+
+          <div className={styles.educationItem}>
+            <div className={styles.institutionRow}>
+              <h3 className={styles.degreeTitle}>
+                B.Sc. (Hons) in Computer Science &amp; Software Engineering
+              </h3>
+              <span className={styles.honorsBadge}>First Class Honors / Distinction &bull; 2018 — 2022</span>
+            </div>
+            <p className={styles.summaryText} style={{ fontSize: "0.9rem" }}>
+              Faculty of Computing &amp; Information Technology
+            </p>
+            <p className={styles.courseworkText}>
+              Core Focus: Distributed Computing &amp; Parallel Systems, Database Internals &amp; Indexing, Operating Systems &amp; Compiler Design, Human-Computer Interaction (HCI).
+            </p>
+          </div>
+        </section>
+      </article>
     </div>
   );
 }

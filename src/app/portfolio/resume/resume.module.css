@@ -1,0 +1,519 @@
+/* Modern, Clean, Clear & Standard Curriculum Vitae (Screen + Print) */
+
+.cvWrapper {
+  max-width: 920px;
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 5rem;
+  font-family: var(--font-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  color: #cbd5e1;
+}
+
+/* ------------------------------------------------------------- */
+/* 1. TOP TOOLBAR (Hidden on Print)                              */
+/* ------------------------------------------------------------- */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+}
+
+@media (max-width: 640px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #788090;
+}
+
+.breadcrumbLink {
+  color: #94a3b8;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: color 0.15s ease;
+}
+
+.breadcrumbLink:hover {
+  color: #ffffff;
+}
+
+.breadcrumbCurrent {
+  color: var(--color-pattern-primary, #4ade80);
+  font-weight: 500;
+}
+
+.toolbarActions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.printBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.printBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.printIcon {
+  color: var(--color-pattern-primary, #4ade80);
+}
+
+.emailBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.emailBtn:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ------------------------------------------------------------- */
+/* 2. THE CV DOCUMENT (Clean, Standard, Editorial Paper)         */
+/* ------------------------------------------------------------- */
+.cvPaper {
+  background-color: #17181d;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  padding: 3.5rem 3.75rem;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .cvPaper {
+    padding: 2.25rem 1.5rem;
+    border-radius: 8px;
+  }
+}
+
+/* Header Area */
+.cvHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap;
+}
+
+.headerMain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.candidateName {
+  font-family: var(--font-artistic), "Playfair Display", Georgia, serif;
+  font-size: clamp(2.2rem, 4vw, 2.85rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.candidateTitle {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-pattern-primary, #4ade80);
+  margin: 0.2rem 0 0 0;
+  letter-spacing: 0.02em;
+}
+
+.candidateMeta {
+  font-size: 0.85rem;
+  color: #8892b0;
+  margin: 0.35rem 0 0 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Contact Details Strip */
+.contactStrip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  color: #8892b0;
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .contactStrip {
+    text-align: left;
+    margin-top: 0.5rem;
+  }
+}
+
+.contactLink {
+  color: #cbd5e1;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.15s ease;
+}
+
+.contactLink:hover {
+  color: var(--color-pattern-primary, #4ade80);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ------------------------------------------------------------- */
+/* 3. SECTIONS & TYPOGRAPHY HIERARCHY                           */
+/* ------------------------------------------------------------- */
+.section {
+  margin-top: 2.5rem;
+}
+
+.sectionHeading {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-pattern-primary, #4ade80);
+  margin: 0 0 1.25rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.summaryText {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+/* Experience List */
+.timelineList {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+.experienceItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.itemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.roleTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.companyName {
+  font-weight: 400;
+  color: #94a3b8;
+}
+
+.itemPeriod {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  color: #788090;
+  white-space: nowrap;
+}
+
+.roleLocation {
+  font-size: 0.78rem;
+  color: #64748b;
+  margin-left: 0.5rem;
+}
+
+.bulletList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.bulletItem {
+  position: relative;
+  padding-left: 1.25rem;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #cbd5e1;
+}
+
+.bulletItem::before {
+  content: "•";
+  position: absolute;
+  left: 0.2rem;
+  top: 0;
+  color: var(--color-pattern-primary, #4ade80);
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.techPillsRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.techPill {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  color: #94a3b8;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+}
+
+/* Skills Grid */
+.skillsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.skillCategoryRow {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+@media (max-width: 680px) {
+  .skillCategoryRow {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}
+
+.skillCategoryName {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.skillItemsText {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #94a3b8;
+}
+
+/* Projects Section (Clean, Standard Table/Rows) */
+.projectsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.projectRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.projectHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.projectTitleLink {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-pattern-secondary, #f472b6);
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.projectTitleLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: #ffffff;
+}
+
+.projectMeta {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  color: #788090;
+}
+
+.projectDesc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+  margin: 0;
+}
+
+/* Education Block */
+.educationItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.degreeTitle {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.institutionRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: 0.88rem;
+  color: #94a3b8;
+  flex-wrap: wrap;
+}
+
+.honorsBadge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  color: var(--color-pattern-primary, #4ade80);
+}
+
+.courseworkText {
+  font-size: 0.85rem;
+  color: #788090;
+  margin-top: 0.25rem;
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------- */
+/* 4. PRINTER-PERFECT PRINT STYLES (@media print)                */
+/* ------------------------------------------------------------- */
+@media print {
+  @page {
+    margin: 1.2cm;
+    size: letter portrait;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  .toolbar {
+    display: none !important;
+  }
+
+  .cvWrapper {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .cvPaper {
+    background: #ffffff !important;
+    color: #111111 !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .candidateName {
+    color: #000000 !important;
+  }
+
+  .candidateTitle {
+    color: #1a4d2e !important;
+  }
+
+  .sectionHeading {
+    color: #1a4d2e !important;
+    border-bottom: 1.5px solid #000000 !important;
+  }
+
+  .roleTitle {
+    color: #000000 !important;
+  }
+
+  .companyName, .itemPeriod, .projectMeta, .institutionRow, .contactStrip {
+    color: #333333 !important;
+  }
+
+  .bulletItem, .summaryText, .projectDesc, .skillItemsText {
+    color: #222222 !important;
+  }
+
+  .bulletItem::before {
+    color: #1a4d2e !important;
+  }
+
+  .techPill {
+    background: none !important;
+    border: 1px solid #cccccc !important;
+    color: #333333 !important;
+  }
+
+  .projectTitleLink {
+    color: #000000 !important;
+    text-decoration: underline !important;
+  }
+}
