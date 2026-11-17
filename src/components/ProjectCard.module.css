@@ -72,12 +72,6 @@
   letter-spacing: 0.02em;
   z-index: 2;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  transition: border-color 0.2s ease, color 0.2s ease;
-}
-
-.cardLink:hover .categoryBadge {
-  border-color: var(--color-pattern-secondary, #f472b6);
-  color: var(--color-pattern-secondary, #f472b6);
 }
 
 /* Card Body Below Image */

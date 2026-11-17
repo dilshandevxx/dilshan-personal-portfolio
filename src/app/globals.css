@@ -954,11 +954,11 @@ button.navbar-button:hover .circle {
 }
 
 .segmented-pill-btn.active {
-  background-color: var(--color-pattern-primary-subtle, var(--color-background-card-hover));
-  color: var(--color-pattern-primary, var(--color-primary));
+  background-color: var(--pf-card-hover, #31313a);
+  color: #ffffff;
   font-weight: 600;
-  border-color: var(--color-pattern-primary, var(--color-primary));
-  box-shadow: 0 0 0 1px var(--color-pattern-primary, var(--color-primary));
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: none;
 }
 
 /* Search Bar */
@@ -4356,9 +4356,9 @@ html[data-portfolio-theme="light"] body {
 
 .portfolio-app-shell .sidebar-nav-item.active,
 .portfolio-shell-wrapper .sidebar-nav-item.active {
-  background: var(--color-pattern-primary-subtle, var(--pf-active-pill)) !important;
-  color: var(--color-pattern-primary, var(--pf-text-heading)) !important;
-  border: 1px solid var(--color-pattern-primary-border, var(--pf-active-pill-border)) !important;
+  background: var(--pf-active-pill, rgba(255, 255, 255, 0.08)) !important;
+  color: var(--pf-text-heading, #ffffff) !important;
+  border: 1px solid var(--pf-active-pill-border, rgba(255, 255, 255, 0.12)) !important;
   border-left: none !important;
   border-radius: 8px !important;
   box-shadow: var(--pf-shadow) !important;
@@ -4366,7 +4366,7 @@ html[data-portfolio-theme="light"] body {
 
 .portfolio-app-shell .sidebar-nav-item.active .sidebar-nav-label,
 .portfolio-shell-wrapper .sidebar-nav-item.active .sidebar-nav-label {
-  color: var(--color-pattern-primary, var(--pf-text-heading)) !important;
+  color: var(--pf-text-heading, #ffffff) !important;
   font-weight: 600;
 }
 

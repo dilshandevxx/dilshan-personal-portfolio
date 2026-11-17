@@ -352,44 +352,19 @@
   gap: 0.6rem;
   padding: 0.45rem 1rem;
   border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   background-color: var(--pf-card-bg, #282830);
   font-family: var(--font-mono, monospace);
   font-size: 0.78rem;
   font-weight: 600;
+  color: #ffffff;
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
-.badgePrimary {
-  border: 1px solid var(--color-pattern-primary-border, rgba(74, 222, 128, 0.45));
-  color: var(--color-pattern-primary, #4ade80);
-}
-
-.badgePrimary:hover {
-  background-color: var(--color-pattern-primary-subtle, rgba(74, 222, 128, 0.15));
-  border-color: var(--color-pattern-primary, #4ade80);
-  transform: translateY(-1px);
-}
-
-.badgeSecondary {
-  border: 1px solid var(--color-pattern-secondary-border, rgba(244, 114, 182, 0.45));
-  color: var(--color-pattern-secondary, #f472b6);
-}
-
-.badgeSecondary:hover {
-  background-color: var(--color-pattern-secondary-subtle, rgba(244, 114, 182, 0.15));
-  border-color: var(--color-pattern-secondary, #f472b6);
-  transform: translateY(-1px);
-}
-
-.badgeTertiary {
-  border: 1px solid var(--color-pattern-tertiary-border, rgba(253, 224, 71, 0.45));
-  color: var(--color-pattern-tertiary, #fde047);
-}
-
-.badgeTertiary:hover {
-  background-color: var(--color-pattern-tertiary-subtle, rgba(253, 224, 71, 0.15));
-  border-color: var(--color-pattern-tertiary, #fde047);
+.badgePill:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  background-color: var(--pf-card-hover, #31313a);
   transform: translateY(-1px);
 }
 

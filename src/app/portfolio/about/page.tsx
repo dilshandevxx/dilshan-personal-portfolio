@@ -417,9 +417,9 @@ export default function AboutRoutePage() {
           </a>
         </div>
 
-        {/* Pill Badges with Pattern Borders: [ Next.js ] [ GitHub ] [ Vercel ] */}
+        {/* Pill Badges: [ Next.js ] [ GitHub ] [ Vercel ] */}
         <div className={styles.badgesRow}>
-          <span className={`${styles.badgePill} ${styles.badgePrimary}`}>
+          <span className={styles.badgePill}>
             <NextjsIcon className={styles.badgeIcon} />
             <span>Next.js</span>
           </span>
@@ -427,7 +427,7 @@ export default function AboutRoutePage() {
             href="https://github.com/dilshandevxx"
             target="_blank"
             rel="noopener noreferrer"
-            className={`${styles.badgePill} ${styles.badgeSecondary}`}
+            className={styles.badgePill}
           >
             <GithubIcon className={styles.badgeIcon} />
             <span>GitHub</span>
@@ -436,7 +436,7 @@ export default function AboutRoutePage() {
             href="https://vercel.com"
             target="_blank"
             rel="noopener noreferrer"
-            className={`${styles.badgePill} ${styles.badgeTertiary}`}
+            className={styles.badgePill}
           >
             <VercelIcon className={styles.badgeIcon} />
             <span>Vercel</span>
