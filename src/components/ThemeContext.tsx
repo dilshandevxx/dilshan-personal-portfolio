@@ -220,15 +220,15 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>("dark");
   const [accent, setAccentState] = useState<ColorAccent>(ACCENT_COLORS[0]);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    // Read persisted theme (default: "light" = Warm Alabaster)
+    // Read persisted theme (default: "dark" = Classic Signature Obsidian)
     const savedTheme = localStorage.getItem("portfolio_theme") as Theme | null;
-    const initialTheme: Theme = savedTheme === "dark" ? "dark" : "light";
+    const initialTheme: Theme = savedTheme === "light" ? "light" : "dark";
     setTheme(initialTheme);
     document.documentElement.setAttribute("data-portfolio-theme", initialTheme);
     document.documentElement.setAttribute("data-theme", initialTheme);
@@ -246,7 +246,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     applyAccent(initialAccent, initialTheme);
   }, []);
 
-  const applyAccent = (currAccent: ColorAccent, currTheme: Theme = "light") => {
+  const applyAccent = (currAccent: ColorAccent, currTheme: Theme = "dark") => {
     // Select harmonic palette matching the current theme mode
     const palette = currTheme === "light" ? currAccent.light : (currAccent.dark || currAccent.midnight);
 

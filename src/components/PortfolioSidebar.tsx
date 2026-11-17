@@ -135,7 +135,7 @@ export function PortfolioSidebar() {
             onClick={() => setMobileOpen(false)}
             className="stefano-nav-link stefano-nav-main-site"
             style={{
-              borderBottom: "1px solid var(--border-subtle, #e8e2d5)",
+              borderBottom: "1px solid var(--border-subtle, rgba(255, 255, 255, 0.08))",
               paddingBottom: "0.75rem",
               marginBottom: "0.5rem",
             }}

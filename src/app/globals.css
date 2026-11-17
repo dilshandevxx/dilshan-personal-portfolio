@@ -4079,59 +4079,66 @@ a.text-link:hover {
 }
 
 /* ==========================================================================
-   PORTFOLIO DUAL THEME TOKENS (Light: Warm Alabaster / Dark: Matte Obsidian)
+   PORTFOLIO DUAL THEME TOKENS 
+   - Theme 1 (Default / Classic Design): Signature Deep Obsidian (#08090c)
+   - Theme 2 (Toggle / High-Contrast Studio): Clean Minimal Slate (#f8fafc)
    ========================================================================== */
 
-/* Theme 1: Warm Alabaster & Linen Paper (Light Mode / Default) */
-html[data-portfolio-theme="light"],
-html:not([data-portfolio-theme="dark"]) {
-  --pf-canvas-bg: #fbf8f3;
-  --pf-panel-bg: #f4efe6;
-  --pf-card-bg: #ffffff;
-  --pf-card-hover: #fdfbf7;
-  --pf-border: #e8e2d5;
-  --pf-border-strong: #d5ccbe;
-  --pf-text-primary: #24211e;
-  --pf-text-secondary: #5c554e;
-  --pf-text-muted: #7d756c;
-  --pf-text-heading: #1a1715;
-  --pf-badge-bg: #ede7dc;
-  --pf-active-pill: #eae3d5;
-  --pf-active-pill-border: #d5ccbe;
-  --pf-active-pill-text: #1a1715;
-  --pf-social-bg: #ffffff;
-  --pf-social-border: #e2dbce;
-  --pf-social-text: #5c554e;
-  --pf-shadow: 0 1px 3px rgba(36, 33, 30, 0.05);
-  --pf-shadow-hover: 0 4px 14px rgba(36, 33, 30, 0.08);
-  --pf-color-scheme: light;
-}
-
-/* Theme 2: Matte Obsidian Slate / Sumi Ink (Dark Mode) */
-html[data-portfolio-theme="dark"] {
-  --pf-canvas-bg: #0c0d10;
-  --pf-panel-bg: #12141a;
-  --pf-card-bg: #161922;
-  --pf-card-hover: #1c212d;
-  --pf-border: #212631;
-  --pf-border-strong: #2e3545;
+/* Theme 1: Signature Obsidian Dark (Default & Classic Aesthetic) */
+html[data-portfolio-theme="dark"],
+html:not([data-portfolio-theme="light"]) {
+  --pf-canvas-bg: #08090c;
+  --pf-panel-bg: #08090c;
+  --pf-card-bg: #0f1116;
+  --pf-card-hover: #161820;
+  --pf-border: rgba(255, 255, 255, 0.08);
+  --pf-border-strong: rgba(255, 255, 255, 0.16);
   --pf-text-primary: #f0ecdf;
-  --pf-text-secondary: #a6adb9;
-  --pf-text-muted: #6b7280;
+  --pf-text-secondary: #9da4ae;
+  --pf-text-muted: #727278;
   --pf-text-heading: #ffffff;
-  --pf-badge-bg: #1e2330;
+  --pf-badge-bg: #141720;
   --pf-active-pill: rgba(255, 255, 255, 0.08);
   --pf-active-pill-border: rgba(255, 255, 255, 0.12);
   --pf-active-pill-text: #ffffff;
   --pf-social-bg: rgba(255, 255, 255, 0.08);
-  --pf-social-border: rgba(255, 255, 255, 0.12);
-  --pf-social-text: #a6adb9;
-  --pf-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-  --pf-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.55);
+  --pf-social-border: rgba(255, 255, 255, 0.1);
+  --pf-social-text: #b5b5ba;
+  --pf-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --pf-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.65);
   --pf-color-scheme: dark;
 }
 
-/* Theme Toggle Button Styling */
+/* Theme 2: Studio Minimal Slate (Clean, Crisp, Modern Light Theme) */
+html[data-portfolio-theme="light"] {
+  --pf-canvas-bg: #f8fafc;
+  --pf-panel-bg: #ffffff;
+  --pf-card-bg: #ffffff;
+  --pf-card-hover: #f1f5f9;
+  --pf-border: #e2e8f0;
+  --pf-border-strong: #cbd5e1;
+  --pf-text-primary: #0f172a;
+  --pf-text-secondary: #475569;
+  --pf-text-muted: #64748b;
+  --pf-text-heading: #0f172a;
+  --pf-badge-bg: #f1f5f9;
+  --pf-active-pill: #f1f5f9;
+  --pf-active-pill-border: #cbd5e1;
+  --pf-active-pill-text: #0f172a;
+  --pf-social-bg: #f8fafc;
+  --pf-social-border: #e2e8f0;
+  --pf-social-text: #475569;
+  --pf-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --pf-shadow-hover: 0 6px 18px rgba(15, 23, 42, 0.08);
+  --pf-color-scheme: light;
+}
+
+html[data-portfolio-theme="light"] body {
+  background-color: var(--pf-canvas-bg, #f8fafc) !important;
+  color: var(--pf-text-primary, #0f172a);
+}
+
+/* Theme Toggle Button & Unified Stefano Controls Styling */
 .theme-toggle-btn {
   display: inline-flex;
   align-items: center;
@@ -4143,7 +4150,7 @@ html[data-portfolio-theme="dark"] {
   border: 1px solid var(--pf-border, rgba(255, 255, 255, 0.1));
   color: var(--pf-text-secondary, #a6adb9);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
 }
 
@@ -4160,6 +4167,27 @@ html[data-portfolio-theme="dark"] {
 
 .theme-toggle-btn:hover .theme-toggle-icon {
   transform: rotate(15deg) scale(1.08);
+}
+
+.stefano-controls button.navbar-button,
+.portfolio-top-bar button.navbar-button {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 8px;
+  background: var(--pf-card-bg, rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--pf-border, rgba(255, 255, 255, 0.1));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stefano-controls button.navbar-button:hover,
+.portfolio-top-bar button.navbar-button:hover {
+  background: var(--pf-active-pill, rgba(255, 255, 255, 0.1));
+  border-color: var(--pf-border-strong, rgba(255, 255, 255, 0.25));
+  transform: translateY(-1px);
 }
 
 /* ==========================================================================
@@ -4338,6 +4366,7 @@ html[data-portfolio-theme="dark"] {
   --border-subtle: var(--pf-border);
   --border-strong: var(--pf-border-strong);
   --badge-bg: var(--pf-badge-bg);
+  --accent-color: var(--color-primary);
 }
 
 .portfolio-main-column {

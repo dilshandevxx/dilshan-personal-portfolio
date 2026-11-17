@@ -13,8 +13,8 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
       type="button"
       className={`theme-toggle-btn ${className}`}
       onClick={toggleTheme}
-      aria-label={isLight ? "Switch to Matte Obsidian (Dark)" : "Switch to Warm Alabaster (Light)"}
-      title={isLight ? "Switch to Matte Obsidian (Dark)" : "Switch to Warm Alabaster (Light)"}
+      aria-label={isLight ? "Switch to Signature Obsidian (Dark)" : "Switch to Studio Minimal (Light)"}
+      title={isLight ? "Switch to Signature Obsidian (Dark)" : "Switch to Studio Minimal (Light)"}
     >
       {isLight ? (
         <Moon size={16} strokeWidth={2} className="theme-toggle-icon" />
