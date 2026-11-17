@@ -1,0 +1,150 @@
+/* Project Card matching user reference design (3-column exhibition with thumbnail & bottom-left category badge) */
+.projectCard {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
+  background: transparent;
+  border: none;
+  padding: 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cardLink {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* 16:10 Rounded Image Banner */
+.imageFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--color-background-card, #12141a);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.cardLink:hover .imageFrame {
+  border-color: var(--color-border-emphasized, rgba(255, 255, 255, 0.28));
+  box-shadow: 0 22px 46px -12px rgba(0, 0, 0, 0.85);
+}
+
+.cardImage {
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cardLink:hover .cardImage {
+  transform: scale(1.04);
+}
+
+.imageVignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 0.45) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Bottom-Left Translucent Category Badge (matching screenshot: design, Web App, Corporate) */
+.categoryBadge {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  background: rgba(14, 16, 22, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 6px;
+  padding: 0.22rem 0.55rem;
+  color: #ffffff;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Card Body Below Image */
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  gap: 0.4rem;
+  flex: 1 1 auto;
+}
+
+.cardTitle {
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--color-text-emphasized, #ffffff);
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+.cardLink:hover .cardTitle {
+  color: var(--color-primary, #dc8167);
+}
+
+.cardDescription {
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--color-text-muted, #94a3b8);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Card Actions (GitHub & Live Links) */
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.liveLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--color-primary, #dc8167);
+  text-decoration: none;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s ease;
+}
+
+.liveLink:hover {
+  text-decoration: underline;
+}
+
+.githubLink {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-text-muted, #788090);
+  transition: color 0.2s ease;
+}
+
+.githubLink:hover {
+  color: var(--color-text-emphasized, #ffffff);
+}

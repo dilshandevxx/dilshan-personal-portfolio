@@ -2,13 +2,22 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Project } from "@/data/projects";
+import { Project, getProjectThumbnail } from "@/data/projects";
 import { GithubIcon } from "@/components/SocialIcons";
 import { ExternalLink } from "lucide-react";
+import styles from "./ProjectCard.module.css";
 
-export function ProjectCard({ project }: { project: Project }) {
+export function ProjectCard({
+  project,
+  index = 0,
+}: {
+  project: Project;
+  index?: number;
+}) {
   const router = useRouter();
+  const thumbnailSrc = getProjectThumbnail(project.slug, project.image, index);
 
   const handleCardClick = (e: React.MouseEvent<HTMLElement>) => {
     const target = e.target as HTMLElement;
@@ -17,8 +26,8 @@ export function ProjectCard({ project }: { project: Project }) {
   };
 
   return (
-    <div
-      className="card"
+    <article
+      className={styles.projectCard}
       onClick={handleCardClick}
       role="link"
       tabIndex={0}
@@ -29,44 +38,33 @@ export function ProjectCard({ project }: { project: Project }) {
         }
       }}
       aria-label={`View details for ${project.title}`}
-      style={{ cursor: "pointer", display: "flex", flexDirection: "column" }}
     >
-      {/* Category Header */}
-      <div style={{ marginBottom: "0.6rem" }}>
-        <span
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: "0.75rem",
-            textTransform: "uppercase",
-            letterSpacing: "0.06em",
-            color: "var(--color-primary)",
-            fontWeight: 600,
-          }}
-        >
-          {project.category}
-        </span>
-      </div>
+      <Link href={`/projects/${project.slug}`} className={styles.cardLink}>
+        {/* 16:10 Rounded Image Thumbnail with Bottom-Left Category Pill (matching screenshot) */}
+        <div className={styles.imageFrame}>
+          <Image
+            src={thumbnailSrc}
+            alt={project.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority={index < 6}
+            className={styles.cardImage}
+          />
+          <div className={styles.imageVignette} />
 
-      {/* Project Title */}
-      <Link className="card-header" href={`/projects/${project.slug}`}>
-        {project.title}
+          {/* Bottom-Left Translucent Pill Badge (e.g. AI/ML, Systems, Web App) */}
+          <span className={styles.categoryBadge}>{project.category}</span>
+        </div>
+
+        {/* Card Body Below Image */}
+        <div className={styles.cardBody}>
+          <h2 className={styles.cardTitle}>{project.title}</h2>
+          <p className={styles.cardDescription}>{project.tagline}</p>
+        </div>
       </Link>
 
-      {/* Tagline */}
-      <p style={{ flex: "1 1 auto" }}>{project.tagline}</p>
-
       {/* Card Action Icons (Clean GitHub Icon + Live Icon only if live demo exists) */}
-      <div
-        className="card-links"
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
-          gap: "0.75rem",
-          marginTop: "auto",
-          paddingTop: "0.85rem",
-        }}
-      >
+      <div className={styles.cardFooter}>
         {project.demoUrl && (
           <a
             href={project.demoUrl}
@@ -75,38 +73,27 @@ export function ProjectCard({ project }: { project: Project }) {
             onClick={(e) => e.stopPropagation()}
             title="Live Application"
             aria-label="Live Application"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.3rem",
-              color: "var(--color-primary)",
-              textDecoration: "none",
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.78rem",
-            }}
+            className={styles.liveLink}
           >
-            <ExternalLink size={14} />
+            <ExternalLink size={13} />
             <span>Live</span>
           </a>
         )}
 
-        <a
-          href={project.githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          title="GitHub Repository"
-          aria-label="GitHub Repository"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            color: "var(--color-text-muted)",
-            transition: "color 0.2s ease",
-          }}
-        >
-          <GithubIcon size={16} />
-        </a>
+        {project.githubUrl && (
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            title="GitHub Repository"
+            aria-label="GitHub Repository"
+            className={styles.githubLink}
+          >
+            <GithubIcon size={16} />
+          </a>
+        )}
       </div>
-    </div>
+    </article>
   );
 }

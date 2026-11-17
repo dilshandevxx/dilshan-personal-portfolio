@@ -1,7 +1,16 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { MailIcon, RssIcon, BlueskyIcon, CoffeeIcon, NextjsIcon, GithubIcon, VercelIcon } from '@/components/Icons';
+import {
+  MailIcon,
+  RssIcon,
+  BlueskyIcon,
+  CoffeeIcon,
+  NextjsIcon,
+  GithubIcon,
+  VercelIcon,
+} from '@/components/Icons';
+import styles from './about.module.css';
 
 export const metadata = {
   title: 'About Me — Dilshan',
@@ -10,52 +19,52 @@ export const metadata = {
 
 export default function AboutRoutePage() {
   return (
-    <div className="space-y-12 animate-in fade-in duration-200">
+    <article className={styles.pageContainer}>
       {/* 💾 About Me Header (Screenshot 1) */}
-      <div className="border-b border-[var(--border-subtle)] pb-6">
-        <h1 className="text-3xl sm:text-4xl font-bold font-sans text-[var(--text-primary)] flex items-center gap-3">
-          <span className="text-3xl" role="img" aria-label="Floppy disk">💾</span>
-          <span>About Me</span>
-        </h1>
-      </div>
+      <h1 className={styles.headerTitle}>
+        <span className={styles.floppyEmoji} role="img" aria-label="Floppy disk">
+          💾
+        </span>
+        <span>About Me</span>
+      </h1>
 
       {/* Two-Column Intro & Portrait Section (Screenshot 1) */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start">
-        {/* Left Column: Narrative (7 cols on desktop) */}
-        <div className="md:col-span-7 space-y-5 text-sm sm:text-base font-sans text-[var(--text-secondary)] leading-relaxed">
+      <div className={styles.introLayout}>
+        {/* Left Column: Narrative */}
+        <div className={styles.introStory}>
           <p>
             Hey, I&apos;m Dilshan! Welcome to my spot on the web for{' '}
-            <Link
-              href="/portfolio/blog"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4 decoration-[var(--accent-color)]"
-            >
+            <Link href="/portfolio/blog" className={styles.accentLink}>
               writing
             </Link>
             ,{' '}
-            <Link
-              href="/portfolio"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4 decoration-[var(--accent-color)]"
-            >
+            <Link href="/portfolio" className={styles.accentLink}>
               projects
             </Link>
-            , and art! I&apos;m currently working as a software engineer specializing in distributed systems and local-first architecture, and in my free time I like working out, biking, playing video games, and reading. I spend most of my time exploring durable software design and timeless computing literature.
+            , and art! I&apos;m currently working as a software engineer specializing in
+            distributed systems and local-first architecture, and in my free time I like
+            working out, biking, playing video games, and reading. I spend most of my time
+            exploring durable software design and timeless computing literature.
           </p>
 
           <p>
-            This site is a space for self-expression and to share what I&apos;ve learned with the world, and has always had{' '}
-            <strong className="text-[var(--text-primary)] font-semibold">
-              no ads, no affiliate links, no tracking or analytics, no sponsored posts, and no paywall
+            This site is a space for self-expression and to share what I&apos;ve learned with
+            the world, and has always had{' '}
+            <strong className={styles.strongText}>
+              no ads, no affiliate links, no tracking or analytics, no sponsored posts, and no
+              paywall
             </strong>
             .
           </p>
 
           <p>
-            I hope I can inspire others to make their own creative corner on the web even against the tsunami of{' '}
+            I hope I can inspire others to make their own creative corner on the web even
+            against the tsunami of{' '}
             <a
               href="https://en.wikipedia.org/wiki/Enshittification"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4 decoration-[var(--accent-color)]"
+              className={styles.accentLink}
             >
               enshittification
             </a>{' '}
@@ -66,80 +75,73 @@ export default function AboutRoutePage() {
             If you want to stay up to date with my posts, sign up for the{' '}
             <a
               href="mailto:hello@dilshan.dev?subject=Newsletter%20Signup"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4 decoration-[var(--accent-color)]"
+              className={styles.accentLink}
             >
               newsletter
             </a>{' '}
             or subscribe to the{' '}
-            <Link
-              href="/rss.xml"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4 decoration-[var(--accent-color)]"
-            >
+            <Link href="/rss.xml" className={styles.accentLink}>
               RSS feed
             </Link>
-            . There&apos;s over a decade of articles and open-source code to peruse through, so please enjoy!
+            . There&apos;s over a decade of articles and open-source code to peruse through,
+            so please enjoy!
           </p>
         </div>
 
         {/* Right Column: Outdoor Candid Portrait Photo (Screenshot 1) */}
-        <div className="md:col-span-5 flex justify-center md:justify-end">
-          <div className="w-full max-w-[340px] rounded-2xl overflow-hidden shadow-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)]">
+        <div className={styles.photoWrapper}>
+          <div className={styles.photoFrame}>
             <Image
               src="/dilshan_portrait.jpg"
               alt="Dilshan"
-              width={400}
-              height={533}
+              width={340}
+              height={425}
               priority
-              sizes="(max-width: 768px) 100vw, 340px"
-              className="w-full h-auto object-cover transition-transform duration-500 hover:scale-[1.02] block"
+              className={styles.portraitImg}
+              sizes="(max-width: 820px) 320px, 340px"
             />
           </div>
         </div>
       </div>
 
       {/* Contact Section (Screenshot 2) */}
-      <section id="contact" className="pt-6 border-t border-[var(--border-subtle)] space-y-4">
-        <h2 className="text-2xl sm:text-3xl font-bold font-sans text-[var(--text-primary)]">
-          Contact
-        </h2>
-        <p className="text-sm sm:text-base font-sans text-[var(--text-secondary)] leading-relaxed">
+      <section id="contact" className={styles.sectionBlock}>
+        <h2 className={styles.sectionHeading}>Contact</h2>
+        <p className={styles.sectionLead}>
           Send me an email to say hi, or connect via the socials.
         </p>
 
-        <ul className="list-disc pl-5 space-y-2 text-sm sm:text-base font-sans marker:text-[var(--text-muted)] text-[var(--text-secondary)]">
-          <li>
+        <ul className={styles.bulletList}>
+          <li className={styles.bulletItem}>
             Email:{' '}
-            <a
-              href="mailto:hello@dilshan.dev"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
-            >
+            <a href="mailto:hello@dilshan.dev" className={styles.accentLink}>
               hello@dilshan.dev
             </a>
           </li>
-          <li>
+          <li className={styles.bulletItem}>
             <a
               href="mailto:hello@dilshan.dev?subject=Newsletter%20Signup"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+              className={styles.accentLink}
             >
               Email Newsletter
             </a>
           </li>
-          <li>
+          <li className={styles.bulletItem}>
             <a
               href="https://github.com/dilshandevxx"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+              className={styles.accentLink}
             >
               GitHub
             </a>
           </li>
-          <li>
+          <li className={styles.bulletItem}>
             <a
               href="https://bsky.app"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+              className={styles.accentLink}
             >
               Bluesky
             </a>
@@ -148,41 +150,35 @@ export default function AboutRoutePage() {
       </section>
 
       {/* What I'm Doing Now Section (Screenshot 2) */}
-      <section className="pt-6 border-t border-[var(--border-subtle)] space-y-4">
-        <h2 className="text-2xl sm:text-3xl font-bold font-sans text-[var(--text-primary)]">
-          What I&apos;m Doing Now
-        </h2>
-        <p className="text-xs sm:text-sm font-sans italic text-[var(--text-muted)]">
-          Updated August 16th, 2026
-        </p>
+      <section className={styles.sectionBlock}>
+        <h2 className={styles.sectionHeading}>What I&apos;m Doing Now</h2>
+        <p className={styles.updatedTimestamp}>Updated August 16th, 2026</p>
 
-        <ul className="list-disc pl-5 space-y-2 text-sm sm:text-base font-sans marker:text-[var(--text-muted)] text-[var(--text-secondary)]">
-          <li>Working full-time on distributed systems &amp; open-source software</li>
-          <li>Tweaking this digital garden website</li>
-          <li>Building durable offline-first systems, local sync engines, and developer tooling</li>
-          <li>Brewing specialty pour-over coffee (V60 &amp; Aeropress single-origin roasts)</li>
-          <li>Reading classic systems architecture and computing history books</li>
+        <ul className={styles.bulletList}>
+          <li className={styles.bulletItem}>Working full-time on systems &amp; web architecture</li>
+          <li className={styles.bulletItem}>Tweaking this website</li>
+          <li className={styles.bulletItem}>Working on other websites &amp; local-first sync engines</li>
+          <li className={styles.bulletItem}>Playing Marvel Rivals</li>
+          <li className={styles.bulletItem}>Playing Clair Obscur</li>
+          <li className={styles.bulletItem}>Brewing specialty pour-over coffee (V60 &amp; Aeropress)</li>
+          <li className={styles.bulletItem}>Reading classic computer architecture &amp; systems literature</li>
         </ul>
       </section>
 
       {/* Tools Section: Software & Hardware (Screenshot 3) */}
-      <section className="pt-6 border-t border-[var(--border-subtle)] space-y-6">
-        <h2 className="text-2xl sm:text-3xl font-bold font-sans text-[var(--text-primary)]">
-          Tools
-        </h2>
+      <section className={styles.sectionBlock}>
+        <h2 className={styles.sectionHeading}>Tools</h2>
 
         {/* Software Sub-section */}
-        <div className="space-y-3">
-          <h3 className="text-xl sm:text-2xl font-bold font-sans text-[var(--text-primary)]">
-            Software
-          </h3>
-          <p className="text-sm sm:text-base font-sans text-[var(--text-secondary)] leading-relaxed">
+        <div>
+          <h3 className={styles.subHeading}>Software</h3>
+          <p className={styles.sectionLead}>
             This website is hosted on{' '}
             <a
               href="https://vercel.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+              className={styles.accentLink}
             >
               Vercel
             </a>{' '}
@@ -191,42 +187,42 @@ export default function AboutRoutePage() {
               href="https://nextjs.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+              className={styles.accentLink}
             >
               Next.js
             </a>{' '}
             (App Router) &amp; React framework.
           </p>
 
-          <ul className="list-disc pl-5 space-y-2 text-sm sm:text-base font-sans marker:text-[var(--text-muted)] text-[var(--text-secondary)]">
-            <li>
-              <strong className="text-[var(--text-primary)] font-semibold">Coding:</strong>{' '}
+          <ul className={styles.bulletList} style={{ marginTop: '0.85rem' }}>
+            <li className={styles.bulletItem}>
+              <strong className={styles.strongText}>Coding:</strong>{' '}
               <a
                 href="https://code.visualstudio.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+                className={styles.accentLink}
               >
                 Visual Studio Code
               </a>
-              <ul className="list-[circle] pl-5 mt-1 space-y-1 text-xs sm:text-sm text-[var(--text-muted)]">
-                <li>
-                  <strong className="text-[var(--text-primary)] font-medium">Theme:</strong>{' '}
-                  <span className="text-[var(--accent-color)] font-medium">New Moon Theme</span> / Tokyo Night, my custom syntax theme!
+              <ul className={styles.subBulletList}>
+                <li className={styles.subBulletItem}>
+                  <strong className={styles.strongText}>Theme:</strong>{' '}
+                  <span className={styles.accentLink}>New Moon Theme</span>, my custom syntax theme!
                 </li>
               </ul>
             </li>
-            <li>
-              <strong className="text-[var(--text-primary)] font-semibold">Terminal:</strong>{' '}
-              <span className="text-[var(--accent-color)] font-medium">iTerm2</span> / WezTerm / pwsh
+            <li className={styles.bulletItem}>
+              <strong className={styles.strongText}>Terminal:</strong>{' '}
+              <span className={styles.accentLink}>iTerm2</span>
             </li>
-            <li>
-              <strong className="text-[var(--text-primary)] font-semibold">Notes:</strong>{' '}
+            <li className={styles.bulletItem}>
+              <strong className={styles.strongText}>Notes:</strong>{' '}
               <a
                 href="https://obsidian.md"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+                className={styles.accentLink}
               >
                 Obsidian
               </a>
@@ -235,34 +231,60 @@ export default function AboutRoutePage() {
         </div>
 
         {/* Hardware Sub-section */}
-        <div className="space-y-3 pt-2">
-          <h3 className="text-xl sm:text-2xl font-bold font-sans text-[var(--text-primary)]">
-            Hardware
-          </h3>
+        <div>
+          <h3 className={styles.subHeading}>Hardware</h3>
 
-          <ul className="list-disc pl-5 space-y-2 text-sm sm:text-base font-sans marker:text-[var(--text-muted)] text-[var(--text-secondary)]">
-            <li>
-              <strong className="text-[var(--text-primary)] font-semibold">Coding PC:</strong>{' '}
+          <ul className={styles.bulletList}>
+            <li className={styles.bulletItem}>
+              <strong className={styles.strongText}>Coding PC:</strong>{' '}
               M1 MacBook Pro 16&quot; 2021, 32GB RAM
             </li>
-            <li>
-              <strong className="text-[var(--text-primary)] font-semibold">Gaming &amp; Workstation PC</strong>
-              <ul className="list-[circle] pl-5 mt-1 space-y-1 text-xs sm:text-sm text-[var(--text-secondary)]">
-                <li>
-                  <span className="text-[var(--text-muted)]">CPU:</span>{' '}
-                  <span className="text-[var(--accent-color)] font-medium">AMD Ryzen 9 5900X / 12-Core</span>
+            <li className={styles.bulletItem}>
+              <strong className={styles.strongText}>Gaming PC</strong>
+              <ul className={styles.subBulletList}>
+                <li className={styles.subBulletItem}>
+                  <span>CPU:</span>{' '}
+                  <a
+                    href="https://www.amd.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.accentLink}
+                  >
+                    AMD Ryzen 9 5900X
+                  </a>
                 </li>
-                <li>
-                  <span className="text-[var(--text-muted)]">Motherboard:</span>{' '}
-                  <span className="text-[var(--accent-color)] font-medium">ASUS ProArt X570-Creator Gaming</span>
+                <li className={styles.subBulletItem}>
+                  <span>Motherboard:</span>{' '}
+                  <a
+                    href="https://www.asus.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.accentLink}
+                  >
+                    ASUS ProArt X570-Creator Gaming
+                  </a>
                 </li>
-                <li>
-                  <span className="text-[var(--text-muted)]">Memory:</span>{' '}
-                  <span className="text-[var(--accent-color)] font-medium">Crucial Ballistix 64GB DDR4</span>
+                <li className={styles.subBulletItem}>
+                  <span>Memory:</span>{' '}
+                  <a
+                    href="https://www.crucial.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.accentLink}
+                  >
+                    Crucial Ballistix 64GB DDR4
+                  </a>
                 </li>
-                <li>
-                  <span className="text-[var(--text-muted)]">Storage:</span>{' '}
-                  <span className="text-[var(--accent-color)] font-medium">SSD 970 EVO NVMe M.2 2TB</span>
+                <li className={styles.subBulletItem}>
+                  <span>Storage:</span>{' '}
+                  <a
+                    href="https://www.samsung.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.accentLink}
+                  >
+                    SSD 970 EVO NVMe M.2 2TB
+                  </a>
                 </li>
               </ul>
             </li>
@@ -271,102 +293,88 @@ export default function AboutRoutePage() {
       </section>
 
       {/* Publications Section (Screenshot 4) */}
-      <section className="pt-6 border-t border-[var(--border-subtle)] space-y-4">
-        <h2 className="text-2xl sm:text-3xl font-bold font-sans text-[var(--text-primary)]">
-          Publications
-        </h2>
+      <section className={styles.sectionBlock}>
+        <h2 className={styles.sectionHeading}>Publications</h2>
 
-        <ul className="list-disc pl-5 space-y-3 text-sm sm:text-base font-sans marker:text-[var(--text-muted)]">
-          <li>
-            <Link
-              href="/portfolio/blog"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
-            >
-              Understanding the GraphQL &amp; Distributed Consensus Systems
+        <ul className={styles.bulletList} style={{ gap: '0.9rem' }}>
+          <li className={styles.pubItem}>
+            <Link href="/portfolio/blog" className={styles.accentLink}>
+              Understanding the GraphQL Type System
             </Link>
-            <p className="text-xs sm:text-sm italic text-[var(--text-muted)] pl-1 pt-0.5">
-              DigitalOcean &amp; Architecture Notes, 2024
-            </p>
+            <span className={styles.pubMeta}>DigitalOcean, 2023</span>
           </li>
-          <li>
-            <Link
-              href="/portfolio/blog"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
-            >
-              How To Set Up a Resilient Microservices API Cluster with Docker &amp; Kubernetes
+          <li className={styles.pubItem}>
+            <Link href="/portfolio/blog" className={styles.accentLink}>
+              How To Set Up a GraphQL API Server in Node.js
             </Link>
-            <p className="text-xs sm:text-sm italic text-[var(--text-muted)] pl-1 pt-0.5">
-              Systems Engineering Guide, 2024
-            </p>
+            <span className={styles.pubMeta}>DigitalOcean, 2022</span>
           </li>
-          <li>
-            <Link
-              href="/portfolio/blog"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
-            >
-              Zero-Dependency Web Design &amp; The Timeless Web
+          <li className={styles.pubItem}>
+            <Link href="/portfolio/blog" className={styles.accentLink}>
+              An Introduction to GraphQL
             </Link>
-            <p className="text-xs sm:text-sm italic text-[var(--text-muted)] pl-1 pt-0.5">
-              Digital Garden Essay Series, 2023
-            </p>
+            <span className={styles.pubMeta}>DigitalOcean, 2021</span>
           </li>
-          <li>
-            <Link
-              href="/portfolio/blog"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
-            >
-              Setting up a Production RAG Platform with Hybrid Retrieval &amp; Vector Search
+          <li className={styles.pubItem}>
+            <Link href="/portfolio/blog" className={styles.accentLink}>
+              How to Code in JavaScript (Tutorial Series, 32 articles)
             </Link>
-            <p className="text-xs sm:text-sm italic text-[var(--text-muted)] pl-1 pt-0.5">
-              AI/ML Engineering, 2023
-            </p>
+            <span className={styles.pubMeta}>DigitalOcean, 2017 - 2020</span>
           </li>
-          <li>
-            <Link
-              href="/portfolio/blog"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
-            >
-              The Lost Art of Readable &amp; Maintainable Software
+          <li className={styles.pubItem}>
+            <Link href="/portfolio/blog" className={styles.accentLink}>
+              Understanding the DOM — Document Object Model (Tutorial Series, 8 articles)
             </Link>
-            <p className="text-xs sm:text-sm italic text-[var(--text-muted)] pl-1 pt-0.5">
-              Software Craftsmanship, 2022
-            </p>
+            <span className={styles.pubMeta}>DigitalOcean, 2017 - 2018</span>
+          </li>
+          <li className={styles.pubItem}>
+            <Link href="/portfolio/blog" className={styles.accentLink}>
+              Setting up a RESTful API with Node.js and PostgreSQL
+            </Link>
+            <span className={styles.pubMeta}>LogRocket, 2018</span>
+          </li>
+          <li className={styles.pubItem}>
+            <Link href="/portfolio/blog" className={styles.accentLink}>
+              An Introduction to CSS Shapes
+            </Link>
+            <span className={styles.pubMeta}>Tympanus Codrops, 2018</span>
+          </li>
+          <li className={styles.pubItem}>
+            <Link href="/portfolio/blog" className={styles.accentLink}>
+              ES6 Syntax, Features and Additions: A Reference Guide
+            </Link>
+            <span className={styles.pubMeta}>Progress Telerik, 2018</span>
           </li>
         </ul>
       </section>
 
-      {/* Miscellaneous Section (Screenshot 5) */}
-      <section className="pt-6 border-t border-[var(--border-subtle)] space-y-4">
-        <h2 className="text-2xl sm:text-3xl font-bold font-sans text-[var(--text-primary)]">
-          Miscellaneous
-        </h2>
+      {/* Faint divider only above Miscellaneous (Screenshot 5) */}
+      <hr className={styles.subtleDivider} />
 
-        <ul className="list-disc pl-5 space-y-2 text-sm sm:text-base font-sans marker:text-[var(--text-muted)]">
-          <li>
-            <Link
-              href="/portfolio/resume"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
-            >
+      {/* Miscellaneous Section (Screenshot 5) */}
+      <section className={styles.sectionBlock} style={{ marginTop: '2.5rem' }}>
+        <h2 className={styles.sectionHeading}>Miscellaneous</h2>
+
+        <ul className={styles.bulletList}>
+          <li className={styles.bulletItem}>
+            <Link href="/portfolio/resume" className={styles.accentLink}>
               Resume
             </Link>
           </li>
-          <li>
-            <Link
-              href="/portfolio/shelves"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
-            >
-              Shelves &amp; Everyday Gear
+          <li className={styles.bulletItem}>
+            <Link href="/portfolio/shelves" className={styles.accentLink}>
+              Illustrations &amp; Shelves
             </Link>
           </li>
         </ul>
 
-        <p className="text-sm font-sans text-[var(--text-secondary)] pt-2">
+        <p className={styles.sectionLead} style={{ paddingTop: '0.5rem' }}>
           Special thanks to{' '}
           <a
             href="https://vercel.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+            className={styles.accentLink}
           >
             Vercel
           </a>{' '}
@@ -375,74 +383,69 @@ export default function AboutRoutePage() {
       </section>
 
       {/* Bottom Footer Actions & Tech Badges (Screenshot 5) */}
-      <div className="pt-10 border-t border-[var(--border-subtle)] space-y-6">
+      <footer className={styles.footerArea}>
         {/* Quick Links Row: Email signup, RSS feed, Bluesky, Buy me a coffee */}
-        <div className="flex flex-wrap items-center gap-6 text-sm font-sans text-[var(--text-secondary)]">
+        <div className={styles.footerActions}>
           <a
             href="mailto:hello@dilshan.dev?subject=Newsletter"
-            className="flex items-center gap-2 hover:text-[var(--accent-color)] transition-colors"
+            className={styles.actionItem}
           >
-            <MailIcon className="w-4 h-4 text-[var(--text-muted)]" />
+            <MailIcon className={styles.actionIcon} />
             <span>Email signup</span>
           </a>
-          <Link
-            href="/rss.xml"
-            className="flex items-center gap-2 hover:text-[var(--accent-color)] transition-colors"
-          >
-            <RssIcon className="w-4 h-4 text-[var(--text-muted)]" />
+          <Link href="/rss.xml" className={styles.actionItem}>
+            <RssIcon className={styles.actionIcon} />
             <span>RSS feed</span>
           </Link>
           <a
             href="https://bsky.app"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 hover:text-[var(--accent-color)] transition-colors"
+            className={styles.actionItem}
           >
-            <BlueskyIcon className="w-4 h-4 text-[var(--text-muted)]" />
+            <BlueskyIcon className={styles.actionIcon} />
             <span>Bluesky</span>
           </a>
           <a
             href="https://buymeacoffee.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 hover:text-[var(--accent-color)] transition-colors"
+            className={styles.actionItem}
           >
-            <CoffeeIcon className="w-4 h-4 text-[var(--text-muted)]" />
+            <CoffeeIcon className={styles.actionIcon} />
             <span>Buy me a coffee</span>
           </a>
         </div>
 
-        {/* Pill Badges: [ Next.js ] [ GitHub ] [ Vercel ] */}
-        <div className="flex flex-wrap items-center gap-3">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-[var(--border-strong)] bg-[var(--surface-card)] text-xs font-mono text-[var(--text-primary)]">
-            <NextjsIcon className="w-4 h-4" />
+        {/* Pill Badges with Coral Borders: [ Next.js ] [ GitHub ] [ Vercel ] */}
+        <div className={styles.badgesRow}>
+          <span className={styles.badgePill}>
+            <NextjsIcon className={styles.badgeIcon} />
             <span>Next.js</span>
           </span>
           <a
             href="https://github.com/dilshandevxx"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-[var(--border-strong)] bg-[var(--surface-card)] text-xs font-mono text-[var(--text-primary)] hover:border-[var(--accent-color)] transition-colors"
+            className={styles.badgePill}
           >
-            <GithubIcon className="w-4 h-4" />
+            <GithubIcon className={styles.badgeIcon} />
             <span>GitHub</span>
           </a>
           <a
             href="https://vercel.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-[var(--border-strong)] bg-[var(--surface-card)] text-xs font-mono text-[var(--text-primary)] hover:border-[var(--accent-color)] transition-colors"
+            className={styles.badgePill}
           >
-            <VercelIcon className="w-3.5 h-3.5" />
+            <VercelIcon className={styles.badgeIcon} />
             <span>Vercel</span>
           </a>
         </div>
 
         {/* Made with ❤️ by Dilshan */}
-        <p className="text-sm font-sans text-[var(--text-muted)]">
-          Made with ❤️ by Dilshan
-        </p>
-      </div>
-    </div>
+        <p className={styles.signatureLine}>Made with ❤️ by Dilshan</p>
+      </footer>
+    </article>
   );
 }

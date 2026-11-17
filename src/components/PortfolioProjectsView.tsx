@@ -122,8 +122,8 @@ export function PortfolioProjectsView() {
 
       {/* Projects Grid */}
       <div className="cards" style={{ marginTop: selectedCategory === "All" ? "1.75rem" : "1.25rem" }}>
-        {filteredProjects.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
+        {filteredProjects.map((project, idx) => (
+          <ProjectCard key={project.slug} project={project} index={idx} />
         ))}
       </div>
 
