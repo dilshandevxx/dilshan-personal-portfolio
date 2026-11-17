@@ -3,12 +3,10 @@
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { projectsList, ProjectCategory, getProjectThumbnail } from "@/data/projects";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
-import { GithubIcon } from "@/components/SocialIcons";
-import { ExternalLink, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import styles from "./projectsPage.module.css";
 
 const CATEGORIES: readonly ("All" | ProjectCategory)[] = [
@@ -22,7 +20,6 @@ const CATEGORIES: readonly ("All" | ProjectCategory)[] = [
 ] as const;
 
 export default function ProjectsPage() {
-  const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
   const filteredProjects = useMemo(() => {
@@ -34,12 +31,6 @@ export default function ProjectsPage() {
   const liveProjectsCount = useMemo(() => {
     return projectsList.filter((p) => Boolean(p.demoUrl)).length;
   }, []);
-
-  const handleCardClick = (slug: string, e: React.MouseEvent) => {
-    const target = e.target as HTMLElement;
-    if (target.closest("a") || target.closest("button")) return;
-    router.push(`/projects/${slug}`);
-  };
 
   return (
     <div className={styles.pageRoot}>
@@ -133,98 +124,34 @@ export default function ProjectsPage() {
                     exit={{ opacity: 0, scale: 0.96 }}
                     transition={{ duration: 0.35, delay: idx * 0.03 }}
                     className={styles.projectCard}
-                    onClick={(e) => handleCardClick(project.slug, e)}
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        router.push(`/projects/${project.slug}`);
-                      }
-                    }}
-                    aria-label={`View details for ${project.title}`}
                   >
-                    {/* 16:10 Image Thumbnail with Bottom-Left Category Pill */}
-                    <div className={styles.imageFrame}>
-                      <Image
-                        src={thumbnailSrc}
-                        alt={project.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        priority={idx < 6}
-                        className={styles.cardImage}
-                      />
-                      <div className={styles.imageVignette} />
+                    <Link
+                      href={`/projects/${project.slug}`}
+                      className={styles.cardLink}
+                      aria-label={`View details for ${project.title}`}
+                    >
+                      {/* 16:10 Rounded Image Thumbnail with Bottom-Left Category Pill */}
+                      <div className={styles.imageFrame}>
+                        <Image
+                          src={thumbnailSrc}
+                          alt={project.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          priority={idx < 6}
+                          className={styles.cardImage}
+                        />
+                        <div className={styles.imageVignette} />
 
-                      {/* Bottom-Left Pill Badge */}
-                      <span className={styles.categoryBadge}>{project.category}</span>
-
-                      {project.demoUrl && (
-                        <a
-                          href={project.demoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className={styles.liveBadge}
-                          title="Open Live Deployment"
-                        >
-                          <span className={styles.liveDot} />
-                          <span>LIVE</span>
-                        </a>
-                      )}
-                    </div>
-
-                    {/* Card Content Below Image */}
-                    <div className={styles.cardBody}>
-                      <h2 className={styles.cardTitle}>
-                        <Link
-                          href={`/projects/${project.slug}`}
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          {project.title}
-                        </Link>
-                      </h2>
-
-                      <p className={styles.cardDescription}>{project.tagline}</p>
-
-                      <div className={styles.cardFooter}>
-                        <Link
-                          href={`/projects/${project.slug}`}
-                          onClick={(e) => e.stopPropagation()}
-                          className={styles.exploreLink}
-                        >
-                          <span>Architecture</span>
-                          <ArrowRight size={14} />
-                        </Link>
-
-                        <div className={styles.actionIcons}>
-                          {project.demoUrl && (
-                            <a
-                              href={project.demoUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={(e) => e.stopPropagation()}
-                              className={styles.iconBtn}
-                              title="Live Application"
-                              aria-label="Live Application"
-                            >
-                              <ExternalLink size={14} />
-                            </a>
-                          )}
-
-                          <a
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            className={styles.iconBtn}
-                            title="GitHub Repository"
-                            aria-label="GitHub Repository"
-                          >
-                            <GithubIcon size={15} />
-                          </a>
-                        </div>
+                        {/* Bottom-Left Pill Badge matching reference (e.g. design, Web App, Corporate) */}
+                        <span className={styles.categoryBadge}>{project.category}</span>
                       </div>
-                    </div>
+
+                      {/* Card Content Below Image */}
+                      <div className={styles.cardBody}>
+                        <h2 className={styles.cardTitle}>{project.title}</h2>
+                        <p className={styles.cardDescription}>{project.tagline}</p>
+                      </div>
+                    </Link>
                   </motion.article>
                 );
               })}
