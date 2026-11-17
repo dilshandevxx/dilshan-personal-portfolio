@@ -70,7 +70,7 @@
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background-color: #12141a;
+  background-color: var(--pf-card-bg, #282830);
 }
 
 .portraitImg {
@@ -291,7 +291,7 @@
   padding: 0.45rem 1rem;
   border-radius: 8px;
   border: 1px solid rgba(220, 129, 103, 0.5);
-  background-color: #12141a;
+  background-color: var(--pf-card-bg, #282830);
   font-family: var(--font-mono, monospace);
   font-size: 0.78rem;
   font-weight: 600;
@@ -302,7 +302,7 @@
 
 .badgePill:hover {
   border-color: #dc8167;
-  background-color: #1a1d26;
+  background-color: var(--pf-card-hover, #31313a);
   transform: translateY(-1px);
 }
 

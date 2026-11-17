@@ -357,7 +357,7 @@
 .colophonBox {
   margin-top: 3.5rem;
   padding: 1.5rem 1.75rem;
-  background-color: #0b0d12;
+  background-color: var(--pf-card-bg, #282830);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   display: flex;

@@ -67,13 +67,13 @@ section[id] {
   --color-primary: var(--accent-amber-dark);
   --color-primary-rgb: 254, 222, 145;
 
-  --color-background: #08090c;
-  --color-background-sidebar: #08090c;
-  --color-background-alternate: #040406;
-  --color-background-card: #0f1116;
-  --color-background-card-hover: #161820;
-  --color-background-input: #040406;
-  --color-background-tag: #12141a;
+  --color-background: #202025;
+  --color-background-sidebar: #202025;
+  --color-background-alternate: #202025;
+  --color-background-card: #282830;
+  --color-background-card-hover: #31313a;
+  --color-background-input: #19191e;
+  --color-background-tag: #282830;
   --color-background-navbar-link-hover: #12141a;
   --color-background-navbar-link-active: #161820;
 
@@ -114,13 +114,13 @@ section[id] {
   --color-primary: var(--accent-amber-dark);
   --color-primary-rgb: 254, 222, 145;
 
-  --color-background: #08090c;
-  --color-background-sidebar: #08090c;
-  --color-background-alternate: #040406;
-  --color-background-card: #0f1116;
-  --color-background-card-hover: #161820;
-  --color-background-input: #040406;
-  --color-background-tag: #12141a;
+  --color-background: #202025;
+  --color-background-sidebar: #202025;
+  --color-background-alternate: #202025;
+  --color-background-card: #282830;
+  --color-background-card-hover: #31313a;
+  --color-background-input: #19191e;
+  --color-background-tag: #282830;
   --color-background-navbar-link-hover: #12141a;
   --color-background-navbar-link-active: #161820;
 
@@ -159,7 +159,7 @@ html {
 body {
   font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--color-text, #d2d5df);
-  background-color: #08090c !important;
+  background-color: var(--color-background, #202025);
   line-height: 1.6;
   min-height: 100vh;
 }
@@ -4084,20 +4084,20 @@ a.text-link:hover {
    - Theme 2 (Toggle / High-Contrast Studio): Clean Minimal Slate (#f8fafc)
    ========================================================================== */
 
-/* Theme 1: Signature Obsidian Dark (Default & Classic Aesthetic) */
+/* Theme 1: Signature Obsidian Dark (Default & Classic Aesthetic — #202025 Background) */
 html[data-portfolio-theme="dark"],
 html:not([data-portfolio-theme="light"]) {
-  --pf-canvas-bg: #08090c;
-  --pf-panel-bg: #08090c;
-  --pf-card-bg: #0f1116;
-  --pf-card-hover: #161820;
+  --pf-canvas-bg: #202025;
+  --pf-panel-bg: #202025;
+  --pf-card-bg: #282830;
+  --pf-card-hover: #31313a;
   --pf-border: rgba(255, 255, 255, 0.08);
   --pf-border-strong: rgba(255, 255, 255, 0.16);
   --pf-text-primary: #f0ecdf;
   --pf-text-secondary: #9da4ae;
-  --pf-text-muted: #727278;
+  --pf-text-muted: #787885;
   --pf-text-heading: #ffffff;
-  --pf-badge-bg: #141720;
+  --pf-badge-bg: #282830;
   --pf-active-pill: rgba(255, 255, 255, 0.08);
   --pf-active-pill-border: rgba(255, 255, 255, 0.12);
   --pf-active-pill-text: #ffffff;
@@ -4131,6 +4131,12 @@ html[data-portfolio-theme="light"] {
   --pf-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
   --pf-shadow-hover: 0 6px 18px rgba(15, 23, 42, 0.08);
   --pf-color-scheme: light;
+}
+
+html[data-portfolio-theme="dark"] body,
+html:not([data-portfolio-theme="light"]) body {
+  background-color: var(--pf-canvas-bg, #202025);
+  color: var(--pf-text-primary, #f0ecdf);
 }
 
 html[data-portfolio-theme="light"] body {

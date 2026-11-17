@@ -72,7 +72,7 @@
 .searchInput {
   width: 100%;
   padding: 0.75rem 2.8rem 0.75rem 2.75rem;
-  background-color: #0f1117;
+  background-color: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   font-family: var(--font-body, -apple-system, sans-serif);
@@ -141,7 +141,7 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.78rem;
   color: #9da4ae;
-  background-color: #0f1117;
+  background-color: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 999px;
   cursor: pointer;
@@ -167,7 +167,7 @@
   padding: 3.5rem 1.5rem;
   border: 1px dashed rgba(255, 255, 255, 0.12);
   border-radius: 12px;
-  background-color: #0b0d12;
+  background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
