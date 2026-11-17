@@ -69,8 +69,8 @@
 }
 
 .jumpPill:hover {
-  border-color: #dc8167;
-  color: #dc8167;
+  border-color: var(--color-pattern-primary, #4ade80);
+  color: var(--color-pattern-primary, #4ade80);
 }
 
 /* Section Blocks (Clean Editorial Spacing) */
@@ -98,7 +98,7 @@
 }
 
 .sectionIcon {
-  color: #dc8167;
+  color: var(--color-pattern-primary, #4ade80);
   width: 1.35rem;
   height: 1.35rem;
 }
@@ -147,7 +147,7 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 1.15rem;
-  background-color: #0f1117;
+  background-color: var(--pf-card-bg, #282830);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   text-decoration: none;
@@ -155,8 +155,8 @@
 }
 
 .guideCard:hover {
-  border-color: rgba(220, 129, 103, 0.5);
-  background-color: #141620;
+  border-color: var(--color-pattern-primary-border, rgba(74, 222, 128, 0.5));
+  background-color: var(--pf-card-hover, #31313a);
   transform: translateY(-1px);
 }
 
@@ -189,7 +189,7 @@
 }
 
 .guideCard:hover .guideTitle {
-  color: #dc8167;
+  color: var(--color-pattern-primary, #4ade80);
 }
 
 .guideArrow {
@@ -202,7 +202,7 @@
 }
 
 .guideCard:hover .guideArrow {
-  color: #dc8167;
+  color: var(--color-pattern-primary, #4ade80);
   transform: translateX(2px);
 }
 
@@ -218,7 +218,7 @@
   flex-direction: column;
   gap: 0.65rem;
   padding: 1.25rem;
-  background-color: #0f1117;
+  background-color: var(--pf-card-bg, #282830);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   transition: border-color 0.2s ease;
@@ -249,9 +249,9 @@
 }
 
 .statusReading {
-  background: rgba(220, 129, 103, 0.15);
-  color: #dc8167;
-  border: 1px solid rgba(220, 129, 103, 0.35);
+  background: var(--color-pattern-secondary-subtle, rgba(244, 114, 182, 0.15));
+  color: var(--color-pattern-secondary, #f472b6);
+  border: 1px solid var(--color-pattern-secondary-border, rgba(244, 114, 182, 0.35));
 }
 
 .statusRead {
@@ -270,7 +270,7 @@
 
 .bookAuthor {
   font-size: 0.88rem;
-  color: #dc8167;
+  color: var(--color-pattern-secondary, #f472b6);
   margin: -0.25rem 0 0 0;
 }
 
@@ -293,7 +293,7 @@
   flex-direction: column;
   gap: 0.75rem;
   padding: 1.25rem;
-  background-color: #0f1117;
+  background-color: var(--pf-card-bg, #282830);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
 }
@@ -307,7 +307,7 @@
 .gearCategory {
   font-family: var(--font-mono, monospace);
   font-size: 0.75rem;
-  color: #dc8167;
+  color: var(--color-pattern-tertiary, #fde047);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 600;
@@ -371,7 +371,7 @@
   gap: 0.5rem;
   font-family: var(--font-mono, monospace);
   font-size: 0.76rem;
-  color: #dc8167;
+  color: var(--color-pattern-secondary, #f472b6);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 600;

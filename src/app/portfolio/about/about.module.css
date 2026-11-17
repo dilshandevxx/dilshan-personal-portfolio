@@ -123,24 +123,81 @@
 
 .updatedTimestamp {
   font-style: italic;
-  color: #94a3b8;
+  color: var(--color-pattern-tertiary, #fde047);
   font-size: 0.98rem;
   margin: -0.5rem 0 0.25rem 0;
 }
 
-/* Tania Rascia Warm Coral / Salmon Link Accent */
-.accentLink {
-  color: #dc8167;
+/* Harmonic Color Pattern Accents */
+.accentPrimary {
+  color: var(--color-pattern-primary, #4ade80);
   text-decoration: underline;
-  text-decoration-color: rgba(220, 129, 103, 0.45);
+  text-decoration-color: var(--color-pattern-primary-border, rgba(74, 222, 128, 0.45));
   text-underline-offset: 3.5px;
   font-weight: 500;
-  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+  transition: all 0.15s ease;
+}
+
+.accentPrimary:hover {
+  color: #ffffff;
+  text-decoration-color: var(--color-pattern-primary, #4ade80);
+}
+
+.accentSecondary {
+  color: var(--color-pattern-secondary, #f472b6);
+  text-decoration: underline;
+  text-decoration-color: var(--color-pattern-secondary-border, rgba(244, 114, 182, 0.45));
+  text-underline-offset: 3.5px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.accentSecondary:hover {
+  color: #ffffff;
+  text-decoration-color: var(--color-pattern-secondary, #f472b6);
+}
+
+.accentTertiary {
+  color: var(--color-pattern-tertiary, #fde047);
+  text-decoration: underline;
+  text-decoration-color: var(--color-pattern-tertiary-border, rgba(253, 224, 71, 0.45));
+  text-underline-offset: 3.5px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.accentTertiary:hover {
+  color: #ffffff;
+  text-decoration-color: var(--color-pattern-tertiary, #fde047);
+}
+
+.accentQuaternary {
+  color: var(--color-pattern-quaternary, #c084fc);
+  text-decoration: underline;
+  text-decoration-color: rgba(192, 132, 252, 0.45);
+  text-underline-offset: 3.5px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.accentQuaternary:hover {
+  color: #ffffff;
+  text-decoration-color: var(--color-pattern-quaternary, #c084fc);
+}
+
+/* Backwards compatibility */
+.accentLink {
+  color: var(--color-pattern-secondary, #f472b6);
+  text-decoration: underline;
+  text-decoration-color: var(--color-pattern-secondary-border, rgba(244, 114, 182, 0.45));
+  text-underline-offset: 3.5px;
+  font-weight: 500;
+  transition: all 0.15s ease;
 }
 
 .accentLink:hover {
-  color: #ff8c73;
-  text-decoration-color: #ff8c73;
+  color: var(--color-pattern-primary, #4ade80);
+  text-decoration-color: var(--color-pattern-primary, #4ade80);
 }
 
 /* Bulleted Lists */
@@ -267,16 +324,21 @@
 }
 
 .actionItem:hover {
-  color: #dc8167;
+  color: var(--color-pattern-primary, #4ade80);
 }
 
 .actionIcon {
   color: #94a3b8;
   width: 1rem;
   height: 1rem;
+  transition: color 0.15s ease;
 }
 
-/* Pill Badges with Coral Borders (Screenshot 5) */
+.actionItem:hover .actionIcon {
+  color: var(--color-pattern-primary, #4ade80);
+}
+
+/* Multi-Color Pattern Badges */
 .badgesRow {
   display: flex;
   flex-wrap: wrap;
@@ -290,19 +352,44 @@
   gap: 0.6rem;
   padding: 0.45rem 1rem;
   border-radius: 8px;
-  border: 1px solid rgba(220, 129, 103, 0.5);
   background-color: var(--pf-card-bg, #282830);
   font-family: var(--font-mono, monospace);
   font-size: 0.78rem;
   font-weight: 600;
-  color: #ffffff;
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
-.badgePill:hover {
-  border-color: #dc8167;
-  background-color: var(--pf-card-hover, #31313a);
+.badgePrimary {
+  border: 1px solid var(--color-pattern-primary-border, rgba(74, 222, 128, 0.45));
+  color: var(--color-pattern-primary, #4ade80);
+}
+
+.badgePrimary:hover {
+  background-color: var(--color-pattern-primary-subtle, rgba(74, 222, 128, 0.15));
+  border-color: var(--color-pattern-primary, #4ade80);
+  transform: translateY(-1px);
+}
+
+.badgeSecondary {
+  border: 1px solid var(--color-pattern-secondary-border, rgba(244, 114, 182, 0.45));
+  color: var(--color-pattern-secondary, #f472b6);
+}
+
+.badgeSecondary:hover {
+  background-color: var(--color-pattern-secondary-subtle, rgba(244, 114, 182, 0.15));
+  border-color: var(--color-pattern-secondary, #f472b6);
+  transform: translateY(-1px);
+}
+
+.badgeTertiary {
+  border: 1px solid var(--color-pattern-tertiary-border, rgba(253, 224, 71, 0.45));
+  color: var(--color-pattern-tertiary, #fde047);
+}
+
+.badgeTertiary:hover {
+  background-color: var(--color-pattern-tertiary-subtle, rgba(253, 224, 71, 0.15));
+  border-color: var(--color-pattern-tertiary, #fde047);
   transform: translateY(-1px);
 }
 

@@ -137,7 +137,7 @@ export function PortfolioSidebar() {
                 onClick={() => setMobileOpen(false)}
                 style={{
                   textDecoration: "underline",
-                  textDecorationColor: "var(--color-primary)",
+                  textDecorationColor: "var(--color-pattern-secondary, #f472b6)",
                   textUnderlineOffset: "3px",
                   color: "var(--pf-text-heading, #ffffff)",
                   fontWeight: 600,
@@ -145,7 +145,11 @@ export function PortfolioSidebar() {
               >
                 Dilshan
               </Link>
-              , software engineer and open-source creator. This is my digital garden.{" "}
+              , software engineer and open-source creator. This is my{" "}
+              <span style={{ color: "var(--color-pattern-primary, #4ade80)", fontWeight: 500 }}>
+                digital garden
+              </span>
+              .{" "}
               <span role="img" aria-label="Seedling">🌱</span>
             </p>
           </div>

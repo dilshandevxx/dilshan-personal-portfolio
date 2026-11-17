@@ -87,8 +87,8 @@
 }
 
 .searchInput:focus {
-  border-color: #dc8167;
-  box-shadow: 0 0 0 2px rgba(220, 129, 103, 0.15);
+  border-color: var(--color-pattern-primary, #4ade80);
+  box-shadow: 0 0 0 2px var(--color-pattern-primary-subtle, rgba(74, 222, 128, 0.15));
 }
 
 .searchActions {
@@ -155,9 +155,9 @@
 }
 
 .filterPillActive {
-  background-color: #dc8167 !important;
-  color: #ffffff !important;
-  border-color: #dc8167 !important;
+  background-color: var(--color-pattern-primary, #4ade80) !important;
+  color: #151816 !important;
+  border-color: var(--color-pattern-primary, #4ade80) !important;
   font-weight: 600;
 }
 
@@ -192,17 +192,17 @@
   padding: 0.45rem 1.1rem;
   font-family: var(--font-mono, monospace);
   font-size: 0.78rem;
-  color: #dc8167;
+  color: var(--color-pattern-secondary, #f472b6);
   background: none;
-  border: 1px solid rgba(220, 129, 103, 0.4);
+  border: 1px solid var(--color-pattern-secondary-border, rgba(244, 114, 182, 0.4));
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 .resetBtn:hover {
-  border-color: #dc8167;
-  background: rgba(220, 129, 103, 0.1);
+  border-color: var(--color-pattern-secondary, #f472b6);
+  background: var(--color-pattern-secondary-subtle, rgba(244, 114, 182, 0.1));
 }
 
 /* Year Stacks */
@@ -276,16 +276,16 @@
   font-size: 1.18rem;
   font-weight: 700;
   line-height: 1.35;
-  color: #dc8167;
+  color: var(--color-pattern-secondary, #f472b6);
   text-decoration: underline;
-  text-decoration-color: rgba(220, 129, 103, 0.45);
+  text-decoration-color: var(--color-pattern-secondary-border, rgba(244, 114, 182, 0.45));
   text-underline-offset: 3.5px;
   transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 
 .articleLink:hover {
-  color: #ff8c73;
-  text-decoration-color: #ff8c73;
+  color: var(--color-pattern-primary, #4ade80);
+  text-decoration-color: var(--color-pattern-primary, #4ade80);
 }
 
 .readingTime {
@@ -325,7 +325,7 @@
 }
 
 .tagBtn:hover {
-  color: #dc8167;
+  color: var(--color-pattern-primary, #4ade80);
 }
 
 /* Responsive */

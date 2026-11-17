@@ -34,11 +34,11 @@ export default function AboutRoutePage() {
         <div className={styles.introStory}>
           <p>
             Hey, I&apos;m Dilshan! Welcome to my spot on the web for{' '}
-            <Link href="/portfolio/blog" className={styles.accentLink}>
+            <Link href="/portfolio/blog" className={styles.accentSecondary}>
               writing
             </Link>
             ,{' '}
-            <Link href="/portfolio" className={styles.accentLink}>
+            <Link href="/portfolio" className={styles.accentPrimary}>
               projects
             </Link>
             , and art! I&apos;m currently working as a software engineer specializing in
@@ -64,7 +64,7 @@ export default function AboutRoutePage() {
               href="https://en.wikipedia.org/wiki/Enshittification"
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.accentLink}
+              className={styles.accentTertiary}
             >
               enshittification
             </a>{' '}
@@ -75,12 +75,12 @@ export default function AboutRoutePage() {
             If you want to stay up to date with my posts, sign up for the{' '}
             <a
               href="mailto:hello@dilshan.dev?subject=Newsletter%20Signup"
-              className={styles.accentLink}
+              className={styles.accentSecondary}
             >
               newsletter
             </a>{' '}
             or subscribe to the{' '}
-            <Link href="/rss.xml" className={styles.accentLink}>
+            <Link href="/rss.xml" className={styles.accentPrimary}>
               RSS feed
             </Link>
             . There&apos;s over a decade of articles and open-source code to peruse through,
@@ -114,14 +114,14 @@ export default function AboutRoutePage() {
         <ul className={styles.bulletList}>
           <li className={styles.bulletItem}>
             Email:{' '}
-            <a href="mailto:hello@dilshan.dev" className={styles.accentLink}>
+            <a href="mailto:hello@dilshan.dev" className={styles.accentSecondary}>
               hello@dilshan.dev
             </a>
           </li>
           <li className={styles.bulletItem}>
             <a
               href="mailto:hello@dilshan.dev?subject=Newsletter%20Signup"
-              className={styles.accentLink}
+              className={styles.accentPrimary}
             >
               Email Newsletter
             </a>
@@ -131,7 +131,7 @@ export default function AboutRoutePage() {
               href="https://github.com/dilshandevxx"
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.accentLink}
+              className={styles.accentTertiary}
             >
               GitHub
             </a>
@@ -141,7 +141,7 @@ export default function AboutRoutePage() {
               href="https://bsky.app"
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.accentLink}
+              className={styles.accentQuaternary}
             >
               Bluesky
             </a>
@@ -178,7 +178,7 @@ export default function AboutRoutePage() {
               href="https://vercel.com"
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.accentLink}
+              className={styles.accentSecondary}
             >
               Vercel
             </a>{' '}
@@ -187,7 +187,7 @@ export default function AboutRoutePage() {
               href="https://nextjs.org"
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.accentLink}
+              className={styles.accentPrimary}
             >
               Next.js
             </a>{' '}
@@ -201,20 +201,20 @@ export default function AboutRoutePage() {
                 href="https://code.visualstudio.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.accentLink}
+                className={styles.accentPrimary}
               >
                 Visual Studio Code
               </a>
               <ul className={styles.subBulletList}>
                 <li className={styles.subBulletItem}>
                   <strong className={styles.strongText}>Theme:</strong>{' '}
-                  <span className={styles.accentLink}>New Moon Theme</span>, my custom syntax theme!
+                  <span className={styles.accentTertiary}>New Moon Theme</span>, my custom syntax theme!
                 </li>
               </ul>
             </li>
             <li className={styles.bulletItem}>
               <strong className={styles.strongText}>Terminal:</strong>{' '}
-              <span className={styles.accentLink}>iTerm2</span>
+              <span className={styles.accentPrimary}>iTerm2</span>
             </li>
             <li className={styles.bulletItem}>
               <strong className={styles.strongText}>Notes:</strong>{' '}
@@ -222,7 +222,7 @@ export default function AboutRoutePage() {
                 href="https://obsidian.md"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.accentLink}
+                className={styles.accentSecondary}
               >
                 Obsidian
               </a>
@@ -237,7 +237,7 @@ export default function AboutRoutePage() {
           <ul className={styles.bulletList}>
             <li className={styles.bulletItem}>
               <strong className={styles.strongText}>Coding PC:</strong>{' '}
-              M1 MacBook Pro 16&quot; 2021, 32GB RAM
+              <span className={styles.accentPrimary}>M1 MacBook Pro 16&quot; 2021, 32GB RAM</span>
             </li>
             <li className={styles.bulletItem}>
               <strong className={styles.strongText}>Gaming PC</strong>
@@ -248,7 +248,7 @@ export default function AboutRoutePage() {
                     href="https://www.amd.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={styles.accentLink}
+                    className={styles.accentSecondary}
                   >
                     AMD Ryzen 9 5900X
                   </a>
@@ -259,7 +259,7 @@ export default function AboutRoutePage() {
                     href="https://www.asus.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={styles.accentLink}
+                    className={styles.accentTertiary}
                   >
                     ASUS ProArt X570-Creator Gaming
                   </a>
@@ -270,7 +270,7 @@ export default function AboutRoutePage() {
                     href="https://www.crucial.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={styles.accentLink}
+                    className={styles.accentPrimary}
                   >
                     Crucial Ballistix 64GB DDR4
                   </a>
@@ -281,7 +281,7 @@ export default function AboutRoutePage() {
                     href="https://www.samsung.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={styles.accentLink}
+                    className={styles.accentSecondary}
                   >
                     SSD 970 EVO NVMe M.2 2TB
                   </a>
@@ -298,49 +298,49 @@ export default function AboutRoutePage() {
 
         <ul className={styles.bulletList} style={{ gap: '0.9rem' }}>
           <li className={styles.pubItem}>
-            <Link href="/portfolio/blog" className={styles.accentLink}>
+            <Link href="/portfolio/blog" className={styles.accentSecondary}>
               Understanding the GraphQL Type System
             </Link>
             <span className={styles.pubMeta}>DigitalOcean, 2023</span>
           </li>
           <li className={styles.pubItem}>
-            <Link href="/portfolio/blog" className={styles.accentLink}>
+            <Link href="/portfolio/blog" className={styles.accentPrimary}>
               How To Set Up a GraphQL API Server in Node.js
             </Link>
             <span className={styles.pubMeta}>DigitalOcean, 2022</span>
           </li>
           <li className={styles.pubItem}>
-            <Link href="/portfolio/blog" className={styles.accentLink}>
+            <Link href="/portfolio/blog" className={styles.accentTertiary}>
               An Introduction to GraphQL
             </Link>
             <span className={styles.pubMeta}>DigitalOcean, 2021</span>
           </li>
           <li className={styles.pubItem}>
-            <Link href="/portfolio/blog" className={styles.accentLink}>
+            <Link href="/portfolio/blog" className={styles.accentSecondary}>
               How to Code in JavaScript (Tutorial Series, 32 articles)
             </Link>
             <span className={styles.pubMeta}>DigitalOcean, 2017 - 2020</span>
           </li>
           <li className={styles.pubItem}>
-            <Link href="/portfolio/blog" className={styles.accentLink}>
+            <Link href="/portfolio/blog" className={styles.accentPrimary}>
               Understanding the DOM — Document Object Model (Tutorial Series, 8 articles)
             </Link>
             <span className={styles.pubMeta}>DigitalOcean, 2017 - 2018</span>
           </li>
           <li className={styles.pubItem}>
-            <Link href="/portfolio/blog" className={styles.accentLink}>
+            <Link href="/portfolio/blog" className={styles.accentTertiary}>
               Setting up a RESTful API with Node.js and PostgreSQL
             </Link>
             <span className={styles.pubMeta}>LogRocket, 2018</span>
           </li>
           <li className={styles.pubItem}>
-            <Link href="/portfolio/blog" className={styles.accentLink}>
+            <Link href="/portfolio/blog" className={styles.accentSecondary}>
               An Introduction to CSS Shapes
             </Link>
             <span className={styles.pubMeta}>Tympanus Codrops, 2018</span>
           </li>
           <li className={styles.pubItem}>
-            <Link href="/portfolio/blog" className={styles.accentLink}>
+            <Link href="/portfolio/blog" className={styles.accentPrimary}>
               ES6 Syntax, Features and Additions: A Reference Guide
             </Link>
             <span className={styles.pubMeta}>Progress Telerik, 2018</span>
@@ -357,12 +357,12 @@ export default function AboutRoutePage() {
 
         <ul className={styles.bulletList}>
           <li className={styles.bulletItem}>
-            <Link href="/portfolio/resume" className={styles.accentLink}>
+            <Link href="/portfolio/resume" className={styles.accentPrimary}>
               Resume
             </Link>
           </li>
           <li className={styles.bulletItem}>
-            <Link href="/portfolio/shelves" className={styles.accentLink}>
+            <Link href="/portfolio/shelves" className={styles.accentSecondary}>
               Illustrations &amp; Shelves
             </Link>
           </li>
@@ -374,7 +374,7 @@ export default function AboutRoutePage() {
             href="https://vercel.com"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.accentLink}
+            className={styles.accentTertiary}
           >
             Vercel
           </a>{' '}
@@ -417,9 +417,9 @@ export default function AboutRoutePage() {
           </a>
         </div>
 
-        {/* Pill Badges with Coral Borders: [ Next.js ] [ GitHub ] [ Vercel ] */}
+        {/* Pill Badges with Pattern Borders: [ Next.js ] [ GitHub ] [ Vercel ] */}
         <div className={styles.badgesRow}>
-          <span className={styles.badgePill}>
+          <span className={`${styles.badgePill} ${styles.badgePrimary}`}>
             <NextjsIcon className={styles.badgeIcon} />
             <span>Next.js</span>
           </span>
@@ -427,7 +427,7 @@ export default function AboutRoutePage() {
             href="https://github.com/dilshandevxx"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.badgePill}
+            className={`${styles.badgePill} ${styles.badgeSecondary}`}
           >
             <GithubIcon className={styles.badgeIcon} />
             <span>GitHub</span>
@@ -436,7 +436,7 @@ export default function AboutRoutePage() {
             href="https://vercel.com"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.badgePill}
+            className={`${styles.badgePill} ${styles.badgeTertiary}`}
           >
             <VercelIcon className={styles.badgeIcon} />
             <span>Vercel</span>
