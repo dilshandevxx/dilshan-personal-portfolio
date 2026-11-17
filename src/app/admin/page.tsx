@@ -55,15 +55,15 @@ const PRESET_IMAGES = [
   { label: "Travel Story", url: "/images/story_travel.jpg" },
   { label: "Twilight City", url: "/images/skyline_twilight.jpg" },
   {
-    label: "Unsplash Modern Arch",
+    label: "Modern Arch",
     url: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
   },
   {
-    label: "Unsplash Clean Tech",
+    label: "Clean Tech",
     url: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80",
   },
   {
-    label: "Unsplash Data Flow",
+    label: "Data Flow",
     url: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
   },
 ];
@@ -97,7 +97,7 @@ export default function AdminPage() {
   );
   const [toastMessage, setToastMessage] = useState<string>("");
 
-  // Comprehensive Form State
+  // Clean Form State
   const [formTitle, setFormTitle] = useState(initialProjects[0]?.title || "");
   const [formSlug, setFormSlug] = useState(initialProjects[0]?.slug || "");
   const [formCategory, setFormCategory] = useState<ProjectCategory>(
@@ -229,7 +229,7 @@ export default function AdminPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Duplicate current project
+  // Duplicate current project as a new draft
   const handleDuplicateCurrent = () => {
     setEditingSlug(null);
     setFormTitle(`${formTitle} (Copy)`);
@@ -415,7 +415,7 @@ export default function AdminPage() {
           : `✓ "${projectData.title}" saved successfully`
       );
     } catch {
-      showToast(`✓ "${projectData.title}" updated in local memory`);
+      showToast(`✓ "${projectData.title}" updated in local state`);
     }
   };
 
@@ -427,7 +427,7 @@ export default function AdminPage() {
       2
     )};`;
     navigator.clipboard.writeText(code);
-    showToast("TypeScript projects array copied to clipboard!");
+    showToast("TypeScript array copied to clipboard!");
   };
 
   // Filtered projects for directory list
@@ -458,7 +458,7 @@ export default function AdminPage() {
   // Active preview object to pass to ProjectCard in real-time
   const previewProjectObj: Project = {
     slug: formSlug || "preview-slug",
-    title: formTitle || "Untitled Architecture Project",
+    title: formTitle || "Untitled Project",
     date: formDate || "2026",
     category: formCategory,
     tagline: formTagline || "One-line punchy subtitle rendered live on project cards.",
@@ -491,7 +491,7 @@ export default function AdminPage() {
       )}
 
       {/* ------------------------------------------------------------- */}
-      {/* TOP CONTROL BAR (Editorial SkyLabs Brand Style)                */}
+      {/* TOP CONTROL BAR (Clean Header)                                */}
       {/* ------------------------------------------------------------- */}
       <header className={styles.topBar}>
         <div className={styles.topBarInner}>
@@ -499,13 +499,13 @@ export default function AdminPage() {
             <Link href="/" className={styles.brandLogoGroup} title="View SkyLabs Home">
               <div className={styles.brandLogoBadge}>S</div>
               <div className={styles.brandTitleGroup}>
-                <span className={styles.brandTitle}>SkyLabs Studio</span>
-                <span className={styles.brandSubtitle}>Project Manager</span>
+                <span className={styles.brandTitle}>Project Studio</span>
+                <span className={styles.brandSubtitle}>Admin Console</span>
               </div>
             </Link>
 
-            {/* Explicit Mode Switcher Tabs (Immediate Visibility) */}
-            <nav className={styles.navTabs} aria-label="Admin Navigation Tabs">
+            {/* Mode Switcher Tabs */}
+            <nav className={styles.navTabs} aria-label="Mode Tabs">
               <button
                 type="button"
                 onClick={() => setActiveTab("studio")}
@@ -564,13 +564,13 @@ export default function AdminPage() {
       <div className={styles.mainContainer}>
         {activeTab === "studio" ? (
           /* ========================================================== */
-          /* TAB 1: STUDIO CUSTOMIZER & LIVE CARD PREVIEW (PRIMARY)     */
+          /* TAB 1: STUDIO CUSTOMIZER & LIVE CARD PREVIEW               */
           /* ========================================================== */
           <div className={styles.studioWorkspace}>
-            {/* Quick System Selector Bar */}
+            {/* Clean Selector Bar */}
             <div className={styles.selectorBar}>
               <div className={styles.selectorLeft}>
-                <span className={styles.selectorLabel}>Editing System:</span>
+                <span className={styles.selectorLabel}>Select System:</span>
                 <select
                   value={editingSlug || "__new__"}
                   onChange={(e) => {
@@ -603,7 +603,7 @@ export default function AdminPage() {
                   title="Duplicate current project fields into a new draft"
                 >
                   <Copy size={13} />
-                  <span>Duplicate Draft</span>
+                  <span>Duplicate</span>
                 </button>
 
                 <button
@@ -621,12 +621,12 @@ export default function AdminPage() {
             <div className={styles.editorLayout}>
               {/* Form Column */}
               <form onSubmit={handleSaveForm} className={styles.formColumn}>
-                {/* 1. Identity, Category & Image URL */}
+                {/* 1. Basic Info & Image URL */}
                 <div className={styles.formSectionCard}>
                   <h3 className={styles.formSectionTitle}>
                     <Layers size={16} color="var(--color-primary, #8bb397)" />
                     <span className={styles.formSectionIndex}>01 //</span>
-                    <span>Identity, Category &amp; Card Image URL</span>
+                    <span>Basic Information &amp; Card Image</span>
                   </h3>
 
                   <div className={styles.formRow}>
@@ -661,7 +661,7 @@ export default function AdminPage() {
                   {/* Image URL input with direct test presets */}
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
-                      Project Card Image URL (supports any web URL, CDN, Unsplash, or local path)
+                      Project Card Image URL (supports web URL or /images/ path)
                     </label>
                     <input
                       type="text"
@@ -671,7 +671,7 @@ export default function AdminPage() {
                       className={styles.formInput}
                     />
                     <span className={styles.formHint}>
-                      Paste any external URL (Unsplash, Cloudinary, AWS S3) or pick a preset below:
+                      Paste any image link or click a preset below:
                     </span>
 
                     {/* Presets Row */}
@@ -711,7 +711,7 @@ export default function AdminPage() {
                     </div>
 
                     <div className={styles.formGroup}>
-                      <label className={styles.formLabel}>Status</label>
+                      <label className={styles.formLabel}>Deployment Status</label>
                       <select
                         value={formStatus}
                         onChange={(e) =>
@@ -719,8 +719,8 @@ export default function AdminPage() {
                         }
                         className={styles.formSelect}
                       >
-                        <option value="Existing">Live Production Service</option>
-                        <option value="Planned">Planned / RFC Roadmap</option>
+                        <option value="Existing">Live Production</option>
+                        <option value="Planned">Planned / RFC</option>
                       </select>
                     </div>
                   </div>
@@ -745,7 +745,7 @@ export default function AdminPage() {
                           onChange={(e) => setFormFeatured(e.target.checked)}
                           className={styles.checkboxInput}
                         />
-                        <span>Feature this project with highlighted badge</span>
+                        <span>Feature this project on card badges</span>
                       </label>
                     </div>
                   </div>
@@ -756,7 +756,7 @@ export default function AdminPage() {
                   <h3 className={styles.formSectionTitle}>
                     <FileCode2 size={16} color="var(--color-primary, #8bb397)" />
                     <span className={styles.formSectionIndex}>02 //</span>
-                    <span>Card Copy &amp; Architectural Descriptions</span>
+                    <span>Card Copy &amp; Descriptions</span>
                   </h3>
 
                   <div className={styles.formGroup}>
@@ -766,11 +766,11 @@ export default function AdminPage() {
                       required
                       value={formTagline}
                       onChange={(e) => setFormTagline(e.target.value)}
-                      placeholder="One-line punchy subtitle shown directly on the project card"
+                      placeholder="One-line punchy subtitle shown directly on project cards"
                       className={styles.formInput}
                     />
                     <span className={styles.formHint}>
-                      Concise 1-line summary displayed immediately under title on all project cards.
+                      1-line subtitle displayed on all project cards.
                     </span>
                   </div>
 
@@ -796,11 +796,11 @@ export default function AdminPage() {
                       rows={5}
                       value={formLongDescription}
                       onChange={(e) => setFormLongDescription(e.target.value)}
-                      placeholder="In-depth technical narrative detailing the service topology, motivation, and system architecture..."
+                      placeholder="Detailed narrative describing service topology, background motivation, and system architecture..."
                       className={styles.formTextarea}
                     />
                     <span className={styles.formHint}>
-                      Used in Section 01 // System Overview on the dedicated project page.
+                      Detailed narrative shown on the project detail page.
                     </span>
                   </div>
                 </div>
@@ -810,7 +810,7 @@ export default function AdminPage() {
                   <h3 className={styles.formSectionTitle}>
                     <Globe size={16} color="var(--color-primary, #8bb397)" />
                     <span className={styles.formSectionIndex}>03 //</span>
-                    <span>Live Deployment &amp; Repository URLs</span>
+                    <span>Deployment &amp; Repository URLs</span>
                   </h3>
 
                   <div className={styles.formRow}>
@@ -844,7 +844,7 @@ export default function AdminPage() {
 
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
-                      Technical Case Study / Article URL (Optional)
+                      Technical Case Study URL (Optional)
                     </label>
                     <input
                       type="text"
@@ -879,7 +879,7 @@ export default function AdminPage() {
 
                     {/* Quick Add Tag Chips */}
                     <div className={styles.quickTagsRow}>
-                      <span style={{ fontSize: "0.7rem", color: "#64748b" }}>
+                      <span style={{ fontSize: "0.72rem", color: "#64748b" }}>
                         Quick add:
                       </span>
                       {POPULAR_TAGS.map((tag) => (
@@ -897,7 +897,7 @@ export default function AdminPage() {
 
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
-                      Key Architectural Highlights (one bullet per line)
+                      Key Architectural Highlights (one per line)
                     </label>
                     <textarea
                       rows={4}
@@ -910,7 +910,7 @@ export default function AdminPage() {
 
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
-                      System Architecture Flow Breakdown
+                      Architecture &amp; Data Flow Topology
                     </label>
                     <textarea
                       rows={4}
@@ -923,7 +923,7 @@ export default function AdminPage() {
 
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
-                      Technical Bottlenecks &amp; Resolution
+                      Technical Bottlenecks &amp; Resolutions
                     </label>
                     <textarea
                       rows={4}
@@ -936,7 +936,7 @@ export default function AdminPage() {
 
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
-                      Primary Benchmark / Metric Badge
+                      Benchmark / Metric Highlight
                     </label>
                     <input
                       type="text"
@@ -953,7 +953,7 @@ export default function AdminPage() {
                   <button
                     type="submit"
                     className={styles.primaryBtn}
-                    style={{ padding: "0.75rem 2rem", fontSize: "0.88rem" }}
+                    style={{ padding: "0.8rem 2.25rem", fontSize: "0.9rem" }}
                   >
                     <Check size={16} />
                     <span>Save &amp; Deploy Project</span>
@@ -969,7 +969,7 @@ export default function AdminPage() {
               </form>
 
               {/* ------------------------------------------------------- */}
-              {/* STICKY REAL-TIME LIVE CARD PREVIEW                      */}
+              {/* STICKY RIGHT COLUMN: LIVE CARD PREVIEW                  */}
               {/* ------------------------------------------------------- */}
               <aside className={styles.previewColumn}>
                 <div className={styles.previewCardFrame}>

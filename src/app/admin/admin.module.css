@@ -1,4 +1,4 @@
-/* Studio Admin Console — Clean Editorial SkyLabs Aesthetic (No Slide Panels) */
+/* Studio Admin Console — Clean Typography & Effortless Customization (No Slide Panels) */
 
 .adminRoot {
   min-height: 100vh;
@@ -6,6 +6,7 @@
   color: var(--color-text, #d2d5df);
   font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
   padding-bottom: 8rem;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* ------------------------------------------------------------- */
@@ -15,11 +16,11 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background-color: rgba(9, 10, 12, 0.94);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background-color: rgba(9, 10, 12, 0.95);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 0.9rem 2rem;
+  padding: 0.95rem 2rem;
 }
 
 .topBarInner {
@@ -35,13 +36,13 @@
 .brandArea {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 .brandLogoGroup {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.75rem;
   text-decoration: none;
   color: inherit;
 }
@@ -67,7 +68,7 @@
 
 .brandTitle {
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", sans-serif);
-  font-size: 0.98rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.015em;
@@ -76,9 +77,9 @@
 
 .brandSubtitle {
   font-family: var(--font-mono, monospace);
-  font-size: 0.68rem;
-  color: #788090;
-  letter-spacing: 0.04em;
+  font-size: 0.7rem;
+  color: #8c93a0;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
@@ -87,7 +88,7 @@
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 6px;
   padding: 0.25rem;
@@ -96,11 +97,11 @@
 .navTabBtn {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.45rem 0.85rem;
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem;
   border-radius: 4px;
   font-family: var(--font-mono, monospace);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 500;
   color: #94a3b8;
   background: transparent;
@@ -122,18 +123,18 @@
 .topActions {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.65rem;
 }
 
 .primaryBtn {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.55rem 1rem;
+  padding: 0.6rem 1.15rem;
   background-color: #ffffff;
   color: #090a0c;
   font-family: var(--font-mono, monospace);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 600;
   border: 1px solid #ffffff;
   border-radius: 6px;
@@ -151,11 +152,11 @@
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.55rem 0.9rem;
+  padding: 0.6rem 1rem;
   background-color: rgba(255, 255, 255, 0.04);
   color: #d2d5df;
   font-family: var(--font-mono, monospace);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 500;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
@@ -176,12 +177,12 @@
 .mainContainer {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 2rem 2rem 0;
+  padding: 2.25rem 2rem 0;
   box-sizing: border-box;
 }
 
 /* ------------------------------------------------------------- */
-/* STUDIO / CUSTOMIZER VIEW (Primary Workspace)                  */
+/* STUDIO / CUSTOMIZER VIEW                                      */
 /* ------------------------------------------------------------- */
 .studioWorkspace {
   display: flex;
@@ -189,7 +190,7 @@
   gap: 2rem;
 }
 
-/* Selector Bar at Top of Studio */
+/* Clean Selector Bar at Top of Studio */
 .selectorBar {
   display: flex;
   align-items: center;
@@ -198,21 +199,21 @@
   background: #121318;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
-  padding: 1.25rem 1.5rem;
+  padding: 1.25rem 1.75rem;
   flex-wrap: wrap;
 }
 
 .selectorLeft {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
   flex: 1;
-  min-width: 280px;
+  min-width: 320px;
 }
 
 .selectorLabel {
   font-family: var(--font-mono, monospace);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--color-primary, #8bb397);
   letter-spacing: 0.06em;
@@ -222,14 +223,14 @@
 
 .projectSelectDropdown {
   flex: 1;
-  max-width: 480px;
-  padding: 0.65rem 1rem;
-  background-color: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  max-width: 500px;
+  padding: 0.7rem 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 6px;
   color: #ffffff;
   font-family: var(--font-body, sans-serif);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   outline: none;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -237,18 +238,19 @@
 
 .projectSelectDropdown:focus {
   border-color: var(--color-primary, #8bb397);
+  box-shadow: 0 0 0 2px rgba(139, 179, 151, 0.15);
 }
 
 .selectorActions {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.75rem;
 }
 
 /* 2-Column Split Layout */
 .editorLayout {
   display: grid;
-  grid-template-columns: 1fr 400px;
+  grid-template-columns: 1fr 410px;
   gap: 2.5rem;
   align-items: flex-start;
 }
@@ -262,43 +264,44 @@
 .formColumn {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 2rem;
 }
 
 .formSectionCard {
   background-color: #121318;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
-  padding: 1.75rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 .formSectionTitle {
   font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: #ffffff;
-  margin: 0 0 0.5rem 0;
+  margin: 0;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 0.6rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .formSectionIndex {
   font-family: var(--font-mono, monospace);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: var(--color-primary, #8bb397);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
+  font-weight: 600;
 }
 
 .formRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 @media (max-width: 640px) {
@@ -310,31 +313,38 @@
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.45rem;
 }
 
 .formLabel {
   font-family: var(--font-mono, monospace);
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  color: #cbd5e1;
-  letter-spacing: 0.02em;
+  color: #e2e8f0;
+  letter-spacing: 0.03em;
 }
 
 .formInput,
 .formSelect,
 .formTextarea {
   width: 100%;
-  padding: 0.75rem 0.9rem;
-  background-color: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.8rem 1rem;
+  background-color: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.11);
   border-radius: 6px;
   color: #ffffff;
   font-family: var(--font-body, sans-serif);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
   outline: none;
   transition: all 0.2s ease;
   box-sizing: border-box;
+}
+
+.formInput::placeholder,
+.formTextarea::placeholder {
+  color: #64748b;
+  font-size: 0.88rem;
 }
 
 .formInput:focus,
@@ -342,33 +352,34 @@
 .formTextarea:focus {
   border-color: var(--color-primary, #8bb397);
   box-shadow: 0 0 0 2px rgba(139, 179, 151, 0.15);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .formTextarea {
   resize: vertical;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .formHint {
   font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
-  color: #64748b;
-  line-height: 1.4;
+  font-size: 0.73rem;
+  color: #788090;
+  line-height: 1.45;
 }
 
 .checkboxLabel {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.85rem;
-  color: #cbd5e1;
+  gap: 0.65rem;
+  font-size: 0.88rem;
+  color: #d2d5df;
   cursor: pointer;
-  margin-top: 1.5rem;
+  margin-top: 1.6rem;
 }
 
 .checkboxInput {
-  width: 16px;
-  height: 16px;
+  width: 17px;
+  height: 17px;
   accent-color: var(--color-primary, #8bb397);
   cursor: pointer;
 }
@@ -377,46 +388,46 @@
 .presetPillsRow {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   flex-wrap: wrap;
-  margin-top: 0.35rem;
+  margin-top: 0.4rem;
 }
 
 .presetPill {
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 4px;
-  padding: 0.25rem 0.6rem;
+  padding: 0.28rem 0.65rem;
   color: #94a3b8;
   font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 .presetPill:hover {
-  background: rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 /* Quick Tag Chips */
 .quickTagsRow {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   flex-wrap: wrap;
-  margin-top: 0.4rem;
+  margin-top: 0.45rem;
 }
 
 .quickTagPill {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px dashed rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px dashed rgba(255, 255, 255, 0.14);
   border-radius: 4px;
-  padding: 0.2rem 0.5rem;
-  color: #788090;
+  padding: 0.22rem 0.55rem;
+  color: #8c93a0;
   font-family: var(--font-mono, monospace);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   cursor: pointer;
   transition: all 0.15s ease;
 }
@@ -424,6 +435,7 @@
 .quickTagPill:hover {
   border-color: var(--color-primary, #8bb397);
   color: #ffffff;
+  background: rgba(139, 179, 151, 0.08);
 }
 
 /* ------------------------------------------------------------- */
@@ -441,26 +453,26 @@
   background-color: #121318;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
-  padding: 1.25rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .previewHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.85rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .previewKicker {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   font-family: var(--font-mono, monospace);
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--color-primary, #8bb397);
@@ -470,9 +482,9 @@
 .previewLinkBtn {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.4rem;
   font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   color: #94a3b8;
   text-decoration: none;
   transition: color 0.15s ease;
@@ -487,26 +499,27 @@
   background-color: #121318;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
-  padding: 1.25rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
 .checklistTitle {
   font-family: var(--font-mono, monospace);
-  font-size: 0.74rem;
+  font-size: 0.76rem;
   color: #94a3b8;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  font-weight: 600;
 }
 
 .checklistItem {
   display: flex;
   align-items: center;
-  gap: 0.55rem;
-  font-size: 0.8rem;
-  color: #94a3b8;
+  gap: 0.6rem;
+  font-size: 0.84rem;
+  color: #cbd5e1;
 }
 
 .checkOk {
@@ -522,11 +535,11 @@
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  padding: 0.65rem 1rem;
+  padding: 0.7rem 1rem;
   background-color: transparent;
   color: #f87171;
   font-family: var(--font-mono, monospace);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 500;
   border: 1px solid rgba(239, 68, 68, 0.25);
   border-radius: 6px;
@@ -551,7 +564,7 @@
   background: #121318;
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 10px;
-  padding: 1.25rem 1.5rem;
+  padding: 1.5rem;
 }
 
 .searchBar {
@@ -572,13 +585,13 @@
 
 .searchInput {
   width: 100%;
-  padding: 0.75rem 2.5rem 0.75rem 2.6rem;
-  background-color: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  padding: 0.8rem 2.5rem 0.8rem 2.6rem;
+  background-color: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   color: #ffffff;
   font-family: var(--font-body, sans-serif);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   outline: none;
   transition: all 0.2s ease;
   box-sizing: border-box;
