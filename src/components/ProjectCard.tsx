@@ -46,6 +46,7 @@ export function ProjectCard({
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={index < 6}
+            unoptimized={thumbnailSrc.startsWith("http")}
             className={styles.cardImage}
           />
           <div className={styles.imageVignette} />

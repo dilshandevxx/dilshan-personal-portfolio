@@ -2,7 +2,15 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
-import { projectsList as initialProjects, Project, ProjectCategory, ProjectStatus } from "@/data/projects";
+import Image from "next/image";
+import {
+  projectsList as initialProjects,
+  Project,
+  ProjectCategory,
+  ProjectStatus,
+  getProjectThumbnail,
+  FALLBACK_THUMBNAILS,
+} from "@/data/projects";
 import {
   Plus,
   Edit3,
@@ -13,14 +21,39 @@ import {
   Search,
   Check,
   Copy,
-  Download,
   ArrowLeft,
   X,
   Sparkles,
+  Eye,
+  CheckCircle2,
+  FileCode2,
+  Layers,
+  Globe,
 } from "lucide-react";
-import { GithubIcon } from "@/components/SocialIcons";
+import styles from "./admin.module.css";
 
-const CATEGORIES: ProjectCategory[] = ["AI/ML", "DevOps", "Systems", "Full-Stack", "Landing", "Others"];
+const CATEGORIES: ProjectCategory[] = [
+  "AI/ML",
+  "DevOps",
+  "Systems",
+  "Full-Stack",
+  "Landing",
+  "Others",
+];
+
+const PRESET_IMAGES = [
+  { label: "Collective", url: "/images/project_collective.jpg" },
+  { label: "Brutalist", url: "/images/project_brutalist.jpg" },
+  { label: "Analytics", url: "/images/project_analytics.jpg" },
+  { label: "Cloudwatch", url: "/images/project_cloudwatch.jpg" },
+  { label: "Euphoria", url: "/images/project_euphoria.jpg" },
+  { label: "Boltshift", url: "/images/project_boltshift.jpg" },
+  { label: "Powersurge", url: "/images/project_powersurge.jpg" },
+  { label: "Warpspeed", url: "/images/project_warpspeed.jpg" },
+  { label: "Travel", url: "/images/story_travel.jpg" },
+  { label: "Twilight", url: "/images/skyline_twilight.jpg" },
+];
+
 const DEFAULT_PASSKEY = "Dilshan775944600";
 
 export default function AdminPage() {
@@ -29,31 +62,33 @@ export default function AdminPage() {
   const [authError, setAuthError] = useState<string>("");
 
   const [projects, setProjects] = useState<Project[]>(initialProjects);
+  const [viewMode, setViewMode] = useState<"directory" | "editor">("directory");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedStatus, setSelectedStatus] = useState<string>("All");
 
-  // Editor modal state
-  const [isEditorOpen, setIsEditorOpen] = useState<boolean>(false);
   const [editingSlug, setEditingSlug] = useState<string | null>(null);
-  const [copiedCode, setCopiedCode] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string>("");
 
-  // Form State
+  // Comprehensive Form State
   const [formTitle, setFormTitle] = useState("");
   const [formSlug, setFormSlug] = useState("");
   const [formCategory, setFormCategory] = useState<ProjectCategory>("AI/ML");
-  const [formStatus, setFormStatus] = useState<ProjectStatus>("Planned");
+  const [formStatus, setFormStatus] = useState<ProjectStatus>("Existing");
   const [formFeatured, setFormFeatured] = useState<boolean>(false);
+  const [formDate, setFormDate] = useState<string>("2026");
+  const [formImage, setFormImage] = useState<string>("");
   const [formTagline, setFormTagline] = useState("");
   const [formDescription, setFormDescription] = useState("");
   const [formLongDescription, setFormLongDescription] = useState("");
+  const [formDemoUrl, setFormDemoUrl] = useState("");
+  const [formGithubUrl, setFormGithubUrl] = useState("");
+  const [formWriteupUrl, setFormWriteupUrl] = useState("");
   const [formArchitecture, setFormArchitecture] = useState("");
   const [formChallenges, setFormChallenges] = useState("");
   const [formHighlightsText, setFormHighlightsText] = useState("");
   const [formTagsText, setFormTagsText] = useState("");
-  const [formGithubUrl, setFormGithubUrl] = useState("");
-  const [formDemoUrl, setFormDemoUrl] = useState("");
+  const [formMetrics, setFormMetrics] = useState("");
 
   // Check auth from localStorage on mount
   useEffect(() => {
@@ -70,7 +105,7 @@ export default function AdminPage() {
       localStorage.setItem("dilshan_admin_auth", "authenticated");
       setAuthError("");
     } else {
-      setAuthError("Incorrect passkey.");
+      setAuthError("Incorrect passkey. Please check credentials.");
     }
   };
 
@@ -81,63 +116,118 @@ export default function AdminPage() {
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
-    setTimeout(() => setToastMessage(""), 4000);
+    setTimeout(() => setToastMessage(""), 4500);
   };
 
-  // Filtered projects
+  // Filtered projects for directory list
   const filteredProjects = useMemo(() => {
     return projects.filter((p) => {
+      const q = searchQuery.toLowerCase().trim();
       const matchesSearch =
-        p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
-      const matchesCategory = selectedCategory === "All" || p.category === selectedCategory;
-      const matchesStatus = selectedStatus === "All" || p.status === selectedStatus;
+        q === "" ||
+        p.title.toLowerCase().includes(q) ||
+        p.slug.toLowerCase().includes(q) ||
+        p.tagline.toLowerCase().includes(q) ||
+        (p.tags && p.tags.some((t) => t.toLowerCase().includes(q)));
+
+      const matchesCategory =
+        selectedCategory === "All" || p.category === selectedCategory;
+      const matchesStatus =
+        selectedStatus === "All" || p.status === selectedStatus;
+
       return matchesSearch && matchesCategory && matchesStatus;
     });
   }, [projects, searchQuery, selectedCategory, selectedStatus]);
 
-  // Open modal for Create
+  // Open Full-Width Editor for Create
   const handleOpenCreate = () => {
     setEditingSlug(null);
     setFormTitle("");
     setFormSlug("");
     setFormCategory("AI/ML");
-    setFormStatus("Planned");
+    setFormStatus("Existing");
     setFormFeatured(false);
+    setFormDate("2026");
+    setFormImage("/images/project_collective.jpg");
     setFormTagline("");
     setFormDescription("");
     setFormLongDescription("");
+    setFormDemoUrl("");
+    setFormGithubUrl("https://github.com/dilshandevxx/");
+    setFormWriteupUrl("");
     setFormArchitecture("");
     setFormChallenges("");
     setFormHighlightsText("");
-    setFormTagsText("Python, Docker, FastAPI");
-    setFormGithubUrl("https://github.com/dilshandevxx/");
-    setFormDemoUrl("");
-    setIsEditorOpen(true);
+    setFormTagsText("TypeScript, Next.js, Go, Docker");
+    setFormMetrics("");
+    setViewMode("editor");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Open modal for Edit
+  // Open Full-Width Editor for Edit
   const handleOpenEdit = (project: Project) => {
     setEditingSlug(project.slug);
     setFormTitle(project.title);
     setFormSlug(project.slug);
     setFormCategory(project.category);
-    setFormStatus(project.status);
-    setFormFeatured(!!project.featured);
-    setFormTagline(project.tagline);
-    setFormDescription(project.description);
-    setFormLongDescription(project.longDescription || project.description);
+    setFormStatus(project.status || "Existing");
+    setFormFeatured(Boolean(project.featured));
+    setFormDate(project.date || "2026");
+    setFormImage(project.image || "");
+    setFormTagline(project.tagline || "");
+    setFormDescription(project.description || "");
+    setFormLongDescription(project.longDescription || project.description || "");
+    setFormDemoUrl(project.demoUrl || "");
+    setFormGithubUrl(project.githubUrl || "");
+    setFormWriteupUrl(project.writeupUrl || "");
     setFormArchitecture(project.architecture || "");
     setFormChallenges(project.challenges || "");
     setFormHighlightsText((project.highlights || []).join("\n"));
     setFormTagsText((project.tags || []).join(", "));
-    setFormGithubUrl(project.githubUrl || "");
-    setFormDemoUrl(project.demoUrl || "");
-    setIsEditorOpen(true);
+    setFormMetrics(project.metrics || "");
+    setViewMode("editor");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Quick Toggle Status
+  // Duplicate a project as a new template
+  const handleDuplicate = (project: Project) => {
+    setEditingSlug(null);
+    setFormTitle(`${project.title} (Copy)`);
+    setFormSlug(`${project.slug}-copy`);
+    setFormCategory(project.category);
+    setFormStatus("Planned");
+    setFormFeatured(false);
+    setFormDate(new Date().getFullYear().toString());
+    setFormImage(project.image || "");
+    setFormTagline(project.tagline);
+    setFormDescription(project.description);
+    setFormLongDescription(project.longDescription || project.description);
+    setFormDemoUrl(project.demoUrl || "");
+    setFormGithubUrl(project.githubUrl || "");
+    setFormWriteupUrl(project.writeupUrl || "");
+    setFormArchitecture(project.architecture || "");
+    setFormChallenges(project.challenges || "");
+    setFormHighlightsText((project.highlights || []).join("\n"));
+    setFormTagsText((project.tags || []).join(", "));
+    setFormMetrics(project.metrics || "");
+    setViewMode("editor");
+    showToast(`Created draft from "${project.title}"`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Auto-generate slug when title changes (if creating new)
+  const handleTitleChange = (val: string) => {
+    setFormTitle(val);
+    if (!editingSlug) {
+      const generated = val
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+      setFormSlug(generated);
+    }
+  };
+
+  // Quick toggle status between Existing (Live) and Planned
   const handleToggleStatus = async (slug: string) => {
     const updated = projects.map((p) => {
       if (p.slug === slug) {
@@ -157,7 +247,11 @@ export default function AdminPage() {
         body: JSON.stringify({ action: "toggle_status", slug }),
       });
       const data = await res.json();
-      showToast(data.savedLocally ? "Status toggled & saved to projects.ts" : "Status toggled in memory");
+      showToast(
+        data.savedLocally
+          ? "Status toggled & saved to projects.ts"
+          : "Status updated in session"
+      );
     } catch {
       showToast("Updated locally in browser state");
     }
@@ -165,7 +259,8 @@ export default function AdminPage() {
 
   // Delete project
   const handleDelete = async (slug: string, title: string) => {
-    if (!window.confirm(`Are you sure you want to remove "${title}"?`)) return;
+    if (!window.confirm(`Are you sure you want to permanently remove "${title}"?`))
+      return;
 
     const updated = projects.filter((p) => p.slug !== slug);
     setProjects(updated);
@@ -177,9 +272,13 @@ export default function AdminPage() {
         body: JSON.stringify({ action: "delete", slug }),
       });
       const data = await res.json();
-      showToast(data.savedLocally ? "Project removed from projects.ts" : "Project removed");
+      showToast(
+        data.savedLocally
+          ? "Project removed from projects.ts"
+          : "Project deleted from list"
+      );
     } catch {
-      showToast("Removed from browser state");
+      showToast("Removed from current browser state");
     }
   };
 
@@ -187,7 +286,12 @@ export default function AdminPage() {
   const handleSaveForm = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const slug =
+    if (!formTitle.trim()) {
+      alert("Please provide a Project Title.");
+      return;
+    }
+
+    const finalSlug =
       formSlug.trim() ||
       formTitle
         .toLowerCase()
@@ -205,9 +309,9 @@ export default function AdminPage() {
       .filter(Boolean);
 
     const projectData: Project = {
-      slug,
+      slug: finalSlug,
       title: formTitle.trim(),
-      date: new Date().toISOString().slice(0, 7),
+      date: formDate.trim() || "2026",
       category: formCategory,
       tagline: formTagline.trim(),
       description: formDescription.trim(),
@@ -220,22 +324,30 @@ export default function AdminPage() {
       featured: formFeatured,
       githubUrl: formGithubUrl.trim(),
       demoUrl: formDemoUrl.trim() || undefined,
+      writeupUrl: formWriteupUrl.trim() || undefined,
+      metrics: formMetrics.trim() || undefined,
       metricsDetail: [],
       stackLayers: [],
+      image: formImage.trim() || undefined,
       status: formStatus,
     };
 
     let updatedList = [...projects];
-    const existingIndex = updatedList.findIndex((p) => p.slug === slug || (editingSlug && p.slug === editingSlug));
+    const existingIndex = updatedList.findIndex(
+      (p) => p.slug === finalSlug || (editingSlug && p.slug === editingSlug)
+    );
 
     if (existingIndex >= 0) {
-      updatedList[existingIndex] = { ...updatedList[existingIndex], ...projectData };
+      updatedList[existingIndex] = {
+        ...updatedList[existingIndex],
+        ...projectData,
+      };
     } else {
       updatedList.unshift(projectData);
     }
 
     setProjects(updatedList);
-    setIsEditorOpen(false);
+    setViewMode("directory");
 
     try {
       const res = await fetch("/api/admin/projects", {
@@ -244,1328 +356,799 @@ export default function AdminPage() {
         body: JSON.stringify({ action: "save", project: projectData }),
       });
       const data = await res.json();
-      showToast(data.savedLocally ? "Project saved to src/data/projects.ts" : "Project updated");
+      showToast(
+        data.savedLocally
+          ? `✓ "${projectData.title}" saved directly to projects.ts`
+          : `✓ "${projectData.title}" updated successfully`
+      );
     } catch {
-      showToast("Saved in local browser memory");
+      showToast(`✓ "${projectData.title}" updated in local memory`);
     }
   };
 
-  // Export TS code to clipboard
+  // Copy TypeScript code
   const handleCopyTsCode = () => {
-    const code = `export interface ProjectMetric { label: string; value: string; }
-export interface ProjectStackLayer { layer: string; technologies: string[]; }
-export type ProjectStatus = "Existing" | "Planned";
-export type ProjectCategory = "AI/ML" | "DevOps" | "Systems" | "Full-Stack" | "Landing" | "Others";
-export interface Project {
-  slug: string; title: string; date: string; category: ProjectCategory; tagline: string;
-  description: string; longDescription: string; highlights: string[]; architecture: string;
-  challenges: string; tags: string[]; stars: number; highlight?: boolean; featured?: boolean;
-  githubUrl: string; demoUrl?: string; writeupUrl?: string; metrics?: string;
-  metricsDetail: ProjectMetric[]; stackLayers: ProjectStackLayer[]; image?: string;
-  aliases?: string[]; status: ProjectStatus;
-}
-
-export const projectsList: Project[] = ${JSON.stringify(projects, null, 2)};
-`;
+    const code = `export const projectsList: Project[] = ${JSON.stringify(
+      projects,
+      null,
+      2
+    )};`;
     navigator.clipboard.writeText(code);
-    setCopiedCode(true);
-    setTimeout(() => setCopiedCode(false), 2500);
-    showToast("TypeScript code copied to clipboard!");
+    showToast("TypeScript projects list copied to clipboard!");
   };
 
-  // Download projects.ts file
-  const handleDownloadTs = () => {
-    const code = `export interface ProjectMetric { label: string; value: string; }
-export interface ProjectStackLayer { layer: string; technologies: string[]; }
-export type ProjectStatus = "Existing" | "Planned";
-export type ProjectCategory = "AI/ML" | "DevOps" | "Systems" | "Full-Stack" | "Landing" | "Others";
-export interface Project {
-  slug: string; title: string; date: string; category: ProjectCategory; tagline: string;
-  description: string; longDescription: string; highlights: string[]; architecture: string;
-  challenges: string; tags: string[]; stars: number; highlight?: boolean; featured?: boolean;
-  githubUrl: string; demoUrl?: string; writeupUrl?: string; metrics?: string;
-  metricsDetail: ProjectMetric[]; stackLayers: ProjectStackLayer[]; image?: string;
-  aliases?: string[]; status: ProjectStatus;
-}
-
-export const projectsList: Project[] = ${JSON.stringify(projects, null, 2)};
-`;
-    const blob = new Blob([code], { type: "text/typescript;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "projects.ts";
-    a.click();
-    URL.revokeObjectURL(url);
-    showToast("projects.ts downloaded!");
-  };
-
-  // Auth Gate
+  // -------------------------------------------------------------
+  // AUTHENTICATION VIEW
+  // -------------------------------------------------------------
   if (!isAuthenticated) {
     return (
-      <div
-        style={{
-          minHeight: "80vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "2rem",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "420px",
-            width: "100%",
-            background: "var(--color-background-card, #151816)",
-            border: "1px solid var(--color-border, rgba(255, 255, 255, 0.12))",
-            padding: "2.5rem 2rem",
-            boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
-          }}
-        >
-          <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "48px",
-                height: "48px",
-                background: "rgba(139, 179, 151, 0.12)",
-                color: "var(--color-primary, #8bb397)",
-                marginBottom: "1rem",
-              }}
-            >
+      <main className={styles.adminRoot}>
+        <div className={styles.authContainer}>
+          <div className={styles.authCard}>
+            <div className={styles.authBadge}>
               <Lock size={22} />
             </div>
-            <h1
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "1.4rem",
-                fontWeight: 700,
-                color: "var(--color-text-emphasized, #fff)",
-                margin: "0 0 0.5rem 0",
-              }}
-            >
-              Admin Portal
-            </h1>
-            <p
-              style={{
-                fontSize: "0.85rem",
-                color: "var(--color-text-muted, #8c93a0)",
-                margin: 0,
-                lineHeight: 1.5,
-              }}
-            >
-              Enter the editorial passkey to manage projects and architecture specs.
+            <h1 className={styles.authTitle}>Project Studio Admin</h1>
+            <p className={styles.authSubtitle}>
+              Enter your master passkey to manage, customize, and publish architectural projects.
             </p>
-          </div>
 
-          <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            <div>
-              <input
-                type="password"
-                placeholder="Enter Editorial Passkey"
-                value={passkeyInput}
-                onChange={(e) => setPasskeyInput(e.target.value)}
-                autoFocus
-                style={{
-                  width: "100%",
-                  padding: "0.75rem 1rem",
-                  background: "rgba(255, 255, 255, 0.04)",
-                  border: "1px solid var(--color-border, rgba(255, 255, 255, 0.15))",
-                  color: "var(--color-text-emphasized, #fff)",
-                  fontFamily: "var(--font-mono)",
-                  fontSize: "0.85rem",
-                  borderRadius: 0,
-                  outline: "none",
-                }}
-              />
-              {authError && (
-                <div style={{ color: "#f87171", fontSize: "0.78rem", marginTop: "0.4rem" }}>{authError}</div>
-              )}
-            </div>
+            <form onSubmit={handleLogin} className={styles.authForm}>
+              <div>
+                <input
+                  type="password"
+                  placeholder="Enter Master Passkey"
+                  value={passkeyInput}
+                  onChange={(e) => setPasskeyInput(e.target.value)}
+                  autoFocus
+                  className={styles.authInput}
+                  aria-label="Admin passkey"
+                />
+                {authError && <div className={styles.authError}>{authError}</div>}
+              </div>
 
-            <button
-              type="submit"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "0.5rem",
-                padding: "0.8rem 1.25rem",
-                background: "var(--color-primary, #8bb397)",
-                color: "#111413",
-                fontWeight: 600,
-                fontFamily: "var(--font-mono)",
-                fontSize: "0.85rem",
-                textTransform: "uppercase",
-                letterSpacing: "0.06em",
-                border: "none",
-                cursor: "pointer",
-                borderRadius: 0,
-              }}
-            >
-              <Unlock size={16} />
-              <span>Unlock Dashboard</span>
-            </button>
-          </form>
+              <button type="submit" className={styles.authSubmitBtn}>
+                <Unlock size={16} />
+                <span>Unlock Control Center</span>
+              </button>
+            </form>
 
-          <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
-            <Link
-              href="/projects"
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: "0.78rem",
-                color: "var(--color-text-muted)",
-                textDecoration: "none",
-              }}
-            >
-              &larr; Return to Public Projects
+            <Link href="/" className={styles.authBackLink}>
+              &larr; Return to Main Landing Page
             </Link>
           </div>
         </div>
-      </div>
+      </main>
     );
   }
 
-  // Live vs RFC counts
+  // Live count calculations
   const liveCount = projects.filter((p) => p.status === "Existing").length;
-  const rfcCount = projects.filter((p) => p.status === "Planned").length;
+  const plannedCount = projects.filter((p) => p.status === "Planned").length;
+
+  // Active preview image src
+  const activePreviewImage = formImage.trim() || "/images/project_collective.jpg";
 
   return (
-    <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "2.5rem 1.5rem 6rem" }}>
+    <main className={styles.adminRoot}>
       {/* Toast Notification */}
       {toastMessage && (
-        <div
-          style={{
-            position: "fixed",
-            bottom: "2rem",
-            right: "2rem",
-            background: "#151816",
-            border: "1px solid var(--color-primary, #8bb397)",
-            padding: "0.85rem 1.25rem",
-            color: "var(--color-text-emphasized, #fff)",
-            fontFamily: "var(--font-mono)",
-            fontSize: "0.82rem",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
-            zIndex: 9999,
-          }}
-        >
-          {toastMessage}
+        <div className={styles.toastNotification} role="status">
+          <CheckCircle2 size={16} color="#4ade80" />
+          <span>{toastMessage}</span>
         </div>
       )}
 
-      {/* Top Bar */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-          gap: "1rem",
-          marginBottom: "2rem",
-          paddingBottom: "1.5rem",
-          borderBottom: "1px solid var(--color-border, rgba(255, 255, 255, 0.08))",
-        }}
-      >
-        <div>
-          <div
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.75rem",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "var(--color-primary)",
-              marginBottom: "0.25rem",
-            }}
-          >
-            DILSHAN.DEV // SYSTEM CONSOLE
-          </div>
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "1.85rem",
-              fontWeight: 800,
-              color: "var(--color-text-emphasized, #fff)",
-              margin: 0,
-            }}
-          >
-            Project &amp; Spec Architecture Manager
-          </h1>
-        </div>
-
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
-          <button
-            onClick={handleOpenCreate}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.45rem",
-              padding: "0.6rem 1rem",
-              background: "var(--color-primary, #8bb397)",
-              color: "#111413",
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.8rem",
-              fontWeight: 600,
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              border: "none",
-              borderRadius: 0,
-              cursor: "pointer",
-            }}
-          >
-            <Plus size={15} />
-            <span>New Project</span>
-          </button>
-
-          <button
-            onClick={handleCopyTsCode}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.45rem",
-              padding: "0.6rem 1rem",
-              background: "transparent",
-              color: "var(--color-text-emphasized, #fff)",
-              border: "1px solid var(--color-border, rgba(255, 255, 255, 0.15))",
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.8rem",
-              borderRadius: 0,
-              cursor: "pointer",
-            }}
-          >
-            {copiedCode ? <Check size={14} color="#4ade80" /> : <Copy size={14} />}
-            <span>{copiedCode ? "Copied" : "Copy TS"}</span>
-          </button>
-
-          <button
-            onClick={handleDownloadTs}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.45rem",
-              padding: "0.6rem 1rem",
-              background: "transparent",
-              color: "var(--color-text-emphasized, #fff)",
-              border: "1px solid var(--color-border, rgba(255, 255, 255, 0.15))",
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.8rem",
-              borderRadius: 0,
-              cursor: "pointer",
-            }}
-          >
-            <Download size={14} />
-            <span>Export</span>
-          </button>
-
-          <Link
-            href="/projects"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.45rem",
-              padding: "0.6rem 1rem",
-              background: "rgba(255, 255, 255, 0.05)",
-              color: "var(--color-text-muted)",
-              textDecoration: "none",
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.8rem",
-              borderRadius: 0,
-            }}
-          >
-            <span>Live Projects</span>
-            <ExternalLink size={13} />
-          </Link>
-
-          <button
-            onClick={handleLogout}
-            style={{
-              padding: "0.6rem 0.85rem",
-              background: "transparent",
-              color: "#94a3b8",
-              border: "none",
-              cursor: "pointer",
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.8rem",
-            }}
-          >
-            Lock
-          </button>
-        </div>
-      </div>
-
-      {/* Metrics Row */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-          gap: "1rem",
-          marginBottom: "2rem",
-        }}
-      >
-        <div
-          style={{
-            padding: "1.25rem",
-            background: "var(--color-background-card, rgba(255, 255, 255, 0.02))",
-            border: "1px solid var(--color-border, rgba(255, 255, 255, 0.08))",
-          }}
-        >
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--color-text-muted)" }}>
-            TOTAL REPOSITORIES
-          </div>
-          <div style={{ fontSize: "1.85rem", fontWeight: 700, color: "var(--color-text-emphasized)" }}>
-            {projects.length}
-          </div>
-        </div>
-
-        <div
-          style={{
-            padding: "1.25rem",
-            background: "var(--color-background-card, rgba(255, 255, 255, 0.02))",
-            border: "1px solid rgba(74, 222, 128, 0.25)",
-          }}
-        >
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "#4ade80" }}>
-            ● LIVE BUILT SERVICES
-          </div>
-          <div style={{ fontSize: "1.85rem", fontWeight: 700, color: "#4ade80" }}>{liveCount}</div>
-        </div>
-
-        <div
-          style={{
-            padding: "1.25rem",
-            background: "var(--color-background-card, rgba(255, 255, 255, 0.02))",
-            border: "1px solid rgba(147, 197, 253, 0.25)",
-          }}
-        >
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "#93c5fd" }}>
-            ◌ RFC ARCHITECTURE SPECS
-          </div>
-          <div style={{ fontSize: "1.85rem", fontWeight: 700, color: "#93c5fd" }}>{rfcCount}</div>
-        </div>
-
-        <div
-          style={{
-            padding: "1.25rem",
-            background: "var(--color-background-card, rgba(255, 255, 255, 0.02))",
-            border: "1px solid var(--color-border, rgba(255, 255, 255, 0.08))",
-          }}
-        >
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--color-text-muted)" }}>
-            ACTIVE CATEGORIES
-          </div>
-          <div style={{ fontSize: "1.85rem", fontWeight: 700, color: "var(--color-primary)" }}>4 DOMAINS</div>
-        </div>
-      </div>
-
-      {/* Filter and Search Bar */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          gap: "1rem",
-          flexWrap: "wrap",
-          marginBottom: "1.5rem",
-          padding: "1rem 1.25rem",
-          background: "rgba(255, 255, 255, 0.02)",
-          border: "1px solid var(--color-border, rgba(255, 255, 255, 0.08))",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flex: "1 1 280px" }}>
-          <Search size={16} color="var(--color-text-muted)" />
-          <input
-            type="text"
-            placeholder="Search projects by title, slug, or tech stack..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            style={{
-              width: "100%",
-              background: "transparent",
-              border: "none",
-              color: "var(--color-text-emphasized, #fff)",
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.85rem",
-              outline: "none",
-            }}
-          />
-        </div>
-
-        {/* Category Filter */}
-        <div style={{ display: "flex", gap: "0.35rem", flexWrap: "wrap" }}>
-          {["All", ...CATEGORIES].map((c) => (
-            <button
-              key={c}
-              onClick={() => setSelectedCategory(c)}
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: "0.75rem",
-                padding: "4px 8px",
-                background: selectedCategory === c ? "var(--color-primary)" : "transparent",
-                color: selectedCategory === c ? "#111413" : "var(--color-text-muted)",
-                border: "1px solid var(--color-border, rgba(255, 255, 255, 0.1))",
-                cursor: "pointer",
-                borderRadius: 0,
-                fontWeight: selectedCategory === c ? 600 : 400,
-              }}
-            >
-              {c}
-            </button>
-          ))}
-        </div>
-
-        {/* Status Filter */}
-        <div style={{ display: "flex", gap: "0.35rem" }}>
-          <button
-            onClick={() => setSelectedStatus("All")}
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.75rem",
-              padding: "4px 8px",
-              background: selectedStatus === "All" ? "rgba(255,255,255,0.15)" : "transparent",
-              color: "var(--color-text-emphasized)",
-              border: "1px solid var(--color-border, rgba(255, 255, 255, 0.1))",
-              cursor: "pointer",
-              borderRadius: 0,
-            }}
-          >
-            All
-          </button>
-          <button
-            onClick={() => setSelectedStatus("Existing")}
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.75rem",
-              padding: "4px 8px",
-              background: selectedStatus === "Existing" ? "rgba(74, 222, 128, 0.15)" : "transparent",
-              color: "#4ade80",
-              border: "1px solid rgba(74, 222, 128, 0.3)",
-              cursor: "pointer",
-              borderRadius: 0,
-            }}
-          >
-            ● Live
-          </button>
-          <button
-            onClick={() => setSelectedStatus("Planned")}
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.75rem",
-              padding: "4px 8px",
-              background: selectedStatus === "Planned" ? "rgba(147, 197, 253, 0.15)" : "transparent",
-              color: "#93c5fd",
-              border: "1px solid rgba(147, 197, 253, 0.3)",
-              cursor: "pointer",
-              borderRadius: 0,
-            }}
-          >
-            ◌ RFC
-          </button>
-        </div>
-      </div>
-
-      {/* Projects List */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-        {filteredProjects.length === 0 ? (
-          <div
-            style={{
-              padding: "3rem",
-              textAlign: "center",
-              background: "rgba(255,255,255,0.02)",
-              border: "1px solid var(--color-border)",
-              color: "var(--color-text-muted)",
-              fontFamily: "var(--font-mono)",
-              fontSize: "0.9rem",
-            }}
-          >
-            No matching projects found.
-          </div>
-        ) : (
-          filteredProjects.map((p) => {
-            const isLive = p.status === "Existing";
-            return (
-              <div
-                key={p.slug}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr auto",
-                  alignItems: "center",
-                  gap: "1.5rem",
-                  padding: "1.25rem 1.5rem",
-                  background: "var(--color-background-card, rgba(255, 255, 255, 0.02))",
-                  border: "1px solid var(--color-border, rgba(255, 255, 255, 0.08))",
-                  borderRadius: 0,
-                }}
-              >
-                <div>
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.4rem" }}>
-                    <span
-                      style={{
-                        fontFamily: "var(--font-mono)",
-                        fontSize: "0.72rem",
-                        letterSpacing: "0.06em",
-                        textTransform: "uppercase",
-                        color: "var(--color-primary)",
-                        fontWeight: 600,
-                      }}
-                    >
-                      {p.category}
-                    </span>
-
-                    {/* Quick Toggle Status Indicator */}
-                    <button
-                      onClick={() => handleToggleStatus(p.slug)}
-                      title={`Click to switch status to ${isLive ? "RFC Spec" : "Live"}`}
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "0.35rem",
-                        fontFamily: "var(--font-mono)",
-                        fontSize: "0.68rem",
-                        letterSpacing: "0.05em",
-                        textTransform: "uppercase",
-                        padding: "2px 7px",
-                        border: isLive ? "1px solid rgba(74, 222, 128, 0.4)" : "1px solid rgba(147, 197, 253, 0.4)",
-                        color: isLive ? "#4ade80" : "#93c5fd",
-                        background: isLive ? "rgba(74, 222, 128, 0.08)" : "rgba(147, 197, 253, 0.08)",
-                        cursor: "pointer",
-                        borderRadius: 0,
-                      }}
-                    >
-                      <span
-                        style={{
-                          width: "5px",
-                          height: "5px",
-                          borderRadius: "50%",
-                          background: isLive ? "#4ade80" : "#93c5fd",
-                          display: "inline-block",
-                        }}
-                      />
-                      {isLive ? "Live (Click to RFC)" : "RFC Spec (Click to Live)"}
-                    </button>
-
-                    {p.featured && (
-                      <span
-                        style={{
-                          fontFamily: "var(--font-mono)",
-                          fontSize: "0.68rem",
-                          letterSpacing: "0.06em",
-                          textTransform: "uppercase",
-                          padding: "2px 6px",
-                          border: "1px solid rgba(255, 255, 255, 0.15)",
-                          color: "var(--color-text-muted)",
-                        }}
-                      >
-                        Featured
-                      </span>
-                    )}
-                  </div>
-
-                  <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem", marginBottom: "0.3rem" }}>
-                    <h2
-                      style={{
-                        fontFamily: "var(--font-display)",
-                        fontSize: "1.1rem",
-                        fontWeight: 700,
-                        color: "var(--color-text-emphasized, #fff)",
-                        margin: 0,
-                      }}
-                    >
-                      {p.title}
-                    </h2>
-                    <span
-                      style={{
-                        fontFamily: "var(--font-mono)",
-                        fontSize: "0.75rem",
-                        color: "var(--color-text-muted)",
-                      }}
-                    >
-                      /{p.slug}
-                    </span>
-                  </div>
-
-                  <p
-                    style={{
-                      fontSize: "0.85rem",
-                      color: "var(--color-text-muted)",
-                      margin: "0 0 0.6rem 0",
-                      lineHeight: 1.5,
-                      maxWidth: "760px",
-                    }}
-                  >
-                    {p.tagline}
-                  </p>
-
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
-                    {p.tags.slice(0, 6).map((t) => (
-                      <span
-                        key={t}
-                        style={{
-                          fontFamily: "var(--font-mono)",
-                          fontSize: "0.72rem",
-                          padding: "1px 6px",
-                          background: "rgba(255, 255, 255, 0.04)",
-                          border: "1px solid rgba(255, 255, 255, 0.08)",
-                          color: "var(--color-text)",
-                        }}
-                      >
-                        {t}
-                      </span>
-                    ))}
-                    {p.tags.length > 6 && (
-                      <span
-                        style={{
-                          fontFamily: "var(--font-mono)",
-                          fontSize: "0.72rem",
-                          padding: "1px 6px",
-                          color: "var(--color-text-muted)",
-                        }}
-                      >
-                        +{p.tags.length - 6} more
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Row Actions */}
-                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                  <Link
-                    href={`/projects/${p.slug}`}
-                    target="_blank"
-                    title="View public detail page"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      padding: "0.5rem",
-                      color: "var(--color-text-muted)",
-                    }}
-                  >
-                    <ExternalLink size={16} />
-                  </Link>
-
-                  <a
-                    href={p.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="GitHub Repository"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      padding: "0.5rem",
-                      color: "var(--color-text-muted)",
-                    }}
-                  >
-                    <GithubIcon size={16} />
-                  </a>
-
-                  <button
-                    onClick={() => handleOpenEdit(p)}
-                    title="Edit project"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "0.35rem",
-                      padding: "0.5rem 0.85rem",
-                      background: "rgba(255, 255, 255, 0.06)",
-                      border: "1px solid var(--color-border, rgba(255, 255, 255, 0.12))",
-                      color: "var(--color-text-emphasized)",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.78rem",
-                      cursor: "pointer",
-                      borderRadius: 0,
-                    }}
-                  >
-                    <Edit3 size={13} />
-                    <span>Edit</span>
-                  </button>
-
-                  <button
-                    onClick={() => handleDelete(p.slug, p.title)}
-                    title="Delete project"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      padding: "0.5rem",
-                      background: "transparent",
-                      border: "1px solid rgba(248, 113, 113, 0.2)",
-                      color: "#f87171",
-                      cursor: "pointer",
-                      borderRadius: 0,
-                    }}
-                  >
-                    <Trash2 size={14} />
-                  </button>
-                </div>
-              </div>
-            );
-          })
-        )}
-      </div>
-
-      {/* Project Editor Modal */}
-      {isEditorOpen && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            background: "rgba(0, 0, 0, 0.75)",
-            backdropFilter: "blur(4px)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "1.5rem",
-            zIndex: 9999,
-          }}
-        >
-          <div
-            style={{
-              maxWidth: "800px",
-              width: "100%",
-              maxHeight: "90vh",
-              overflowY: "auto",
-              background: "#151816",
-              border: "1px solid var(--color-border, rgba(255, 255, 255, 0.15))",
-              padding: "2rem",
-              boxShadow: "0 25px 60px rgba(0, 0, 0, 0.6)",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: "1.5rem",
-                paddingBottom: "1rem",
-                borderBottom: "1px solid var(--color-border, rgba(255, 255, 255, 0.1))",
-              }}
-            >
-              <h2
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "1.35rem",
-                  fontWeight: 700,
-                  color: "var(--color-text-emphasized, #fff)",
-                  margin: 0,
-                }}
-              >
-                {editingSlug ? "Edit Architecture Project" : "New Architecture Project"}
-              </h2>
-              <button
-                onClick={() => setIsEditorOpen(false)}
-                style={{
-                  background: "transparent",
-                  border: "none",
-                  color: "var(--color-text-muted)",
-                  cursor: "pointer",
-                  padding: "0.25rem",
-                }}
-              >
-                <X size={20} />
-              </button>
+      {/* ------------------------------------------------------------- */}
+      {/* TOP STICKY BAR                                                */}
+      {/* ------------------------------------------------------------- */}
+      <header className={styles.topBar}>
+        <div className={styles.topBarInner}>
+          <div className={styles.brandArea}>
+            <div className={styles.brandPill}>
+              <span className={styles.brandDot} aria-hidden="true" />
+              <span>Studio Console</span>
             </div>
 
-            <form onSubmit={handleSaveForm} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-              {/* Row 1: Title & Slug */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.75rem",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
-                      color: "var(--color-text-muted)",
-                      marginBottom: "0.4rem",
-                    }}
-                  >
-                    Project Title *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formTitle}
-                    onChange={(e) => {
-                      setFormTitle(e.target.value);
-                      if (!editingSlug) {
-                        setFormSlug(
-                          e.target.value
-                            .toLowerCase()
-                            .replace(/[^a-z0-9]+/g, "-")
-                            .replace(/^-|-$/g, "")
-                        );
-                      }
-                    }}
-                    placeholder="e.g. Real-Time Analytics Pipeline"
-                    style={{
-                      width: "100%",
-                      padding: "0.65rem 0.85rem",
-                      background: "rgba(255, 255, 255, 0.04)",
-                      border: "1px solid var(--color-border, rgba(255, 255, 255, 0.15))",
-                      color: "#fff",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.85rem",
-                      borderRadius: 0,
-                    }}
-                  />
-                </div>
+            <div className={styles.statsCluster}>
+              <span className={styles.statBadge}>
+                Total: <strong className={styles.statHighlight}>{projects.length}</strong>
+              </span>
+              <span>&bull;</span>
+              <span className={styles.statBadge}>
+                Live: <strong style={{ color: "#4ade80" }}>{liveCount}</strong>
+              </span>
+              <span>&bull;</span>
+              <span className={styles.statBadge}>
+                Planned: <strong style={{ color: "#facc15" }}>{plannedCount}</strong>
+              </span>
+            </div>
+          </div>
 
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.75rem",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
-                      color: "var(--color-text-muted)",
-                      marginBottom: "0.4rem",
-                    }}
-                  >
-                    URL Slug *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formSlug}
-                    onChange={(e) => setFormSlug(e.target.value)}
-                    placeholder="real-time-analytics-pipeline"
-                    style={{
-                      width: "100%",
-                      padding: "0.65rem 0.85rem",
-                      background: "rgba(255, 255, 255, 0.04)",
-                      border: "1px solid var(--color-border, rgba(255, 255, 255, 0.15))",
-                      color: "#fff",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.85rem",
-                      borderRadius: 0,
-                    }}
-                  />
-                </div>
-              </div>
-
-              {/* Row 2: Category, Status, Featured */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem" }}>
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.75rem",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
-                      color: "var(--color-text-muted)",
-                      marginBottom: "0.4rem",
-                    }}
-                  >
-                    Category Domain *
-                  </label>
-                  <select
-                    value={formCategory}
-                    onChange={(e) => setFormCategory(e.target.value as ProjectCategory)}
-                    style={{
-                      width: "100%",
-                      padding: "0.65rem 0.85rem",
-                      background: "#1c211e",
-                      border: "1px solid var(--color-border, rgba(255, 255, 255, 0.15))",
-                      color: "#fff",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.85rem",
-                      borderRadius: 0,
-                    }}
-                  >
-                    {CATEGORIES.map((cat) => (
-                      <option key={cat} value={cat}>
-                        {cat}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.75rem",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
-                      color: "var(--color-text-muted)",
-                      marginBottom: "0.4rem",
-                    }}
-                  >
-                    Status Indicator *
-                  </label>
-                  <select
-                    value={formStatus}
-                    onChange={(e) => setFormStatus(e.target.value as ProjectStatus)}
-                    style={{
-                      width: "100%",
-                      padding: "0.65rem 0.85rem",
-                      background: "#1c211e",
-                      border: "1px solid var(--color-border, rgba(255, 255, 255, 0.15))",
-                      color: formStatus === "Existing" ? "#4ade80" : "#93c5fd",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.85rem",
-                      borderRadius: 0,
-                    }}
-                  >
-                    <option value="Existing">● Live Built Service</option>
-                    <option value="Planned">◌ RFC Architecture Spec</option>
-                  </select>
-                </div>
-
-                <div style={{ display: "flex", alignItems: "flex-end", paddingBottom: "0.5rem" }}>
-                  <label
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "0.5rem",
-                      cursor: "pointer",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.8rem",
-                      color: "var(--color-text-emphasized)",
-                    }}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={formFeatured}
-                      onChange={(e) => setFormFeatured(e.target.checked)}
-                      style={{ borderRadius: 0 }}
-                    />
-                    <span>Featured on Home</span>
-                  </label>
-                </div>
-              </div>
-
-              {/* Tagline */}
-              <div>
-                <label
-                  style={{
-                    display: "block",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.75rem",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.06em",
-                    color: "var(--color-text-muted)",
-                    marginBottom: "0.4rem",
-                  }}
-                >
-                  Tagline (One-sentence summary) *
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={formTagline}
-                  onChange={(e) => setFormTagline(e.target.value)}
-                  placeholder="Document ingestion and semantic retrieval for grounded LLM applications."
-                  style={{
-                    width: "100%",
-                    padding: "0.65rem 0.85rem",
-                    background: "rgba(255, 255, 255, 0.04)",
-                    border: "1px solid var(--color-border, rgba(255, 255, 255, 0.15))",
-                    color: "#fff",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.85rem",
-                    borderRadius: 0,
-                  }}
-                />
-              </div>
-
-              {/* System Overview (Long Description) */}
-              <div>
-                <label
-                  style={{
-                    display: "block",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.75rem",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.06em",
-                    color: "var(--color-text-muted)",
-                    marginBottom: "0.4rem",
-                  }}
-                >
-                  System Overview (Editorial Prose)
-                </label>
-                <textarea
-                  rows={4}
-                  value={formLongDescription}
-                  onChange={(e) => setFormLongDescription(e.target.value)}
-                  placeholder="Comprehensive description of the service motivation, technical requirements, and system design."
-                  style={{
-                    width: "100%",
-                    padding: "0.65rem 0.85rem",
-                    background: "rgba(255, 255, 255, 0.04)",
-                    border: "1px solid var(--color-border, rgba(255, 255, 255, 0.15))",
-                    color: "#fff",
-                    fontFamily: "inherit",
-                    fontSize: "0.88rem",
-                    lineHeight: 1.6,
-                    borderRadius: 0,
-                  }}
-                />
-              </div>
-
-              {/* Architecture & Data Flow */}
-              <div>
-                <label
-                  style={{
-                    display: "block",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.75rem",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.06em",
-                    color: "var(--color-text-muted)",
-                    marginBottom: "0.4rem",
-                  }}
-                >
-                  Architecture &amp; Data Flow
-                </label>
-                <textarea
-                  rows={3}
-                  value={formArchitecture}
-                  onChange={(e) => setFormArchitecture(e.target.value)}
-                  placeholder="Ingestion pipeline -> Vector Store -> LLM Context Assembly -> Server-Sent Event Streaming"
-                  style={{
-                    width: "100%",
-                    padding: "0.65rem 0.85rem",
-                    background: "rgba(255, 255, 255, 0.04)",
-                    border: "1px solid var(--color-border, rgba(255, 255, 255, 0.15))",
-                    color: "#fff",
-                    fontFamily: "inherit",
-                    fontSize: "0.88rem",
-                    lineHeight: 1.6,
-                    borderRadius: 0,
-                  }}
-                />
-              </div>
-
-              {/* Highlights */}
-              <div>
-                <label
-                  style={{
-                    display: "block",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.75rem",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.06em",
-                    color: "var(--color-text-muted)",
-                    marginBottom: "0.4rem",
-                  }}
-                >
-                  Key Highlights (One per line)
-                </label>
-                <textarea
-                  rows={3}
-                  value={formHighlightsText}
-                  onChange={(e) => setFormHighlightsText(e.target.value)}
-                  placeholder="Modular API and service layer separation&#10;PostgreSQL pgvector semantic search&#10;SSE streaming response endpoint"
-                  style={{
-                    width: "100%",
-                    padding: "0.65rem 0.85rem",
-                    background: "rgba(255, 255, 255, 0.04)",
-                    border: "1px solid var(--color-border, rgba(255, 255, 255, 0.15))",
-                    color: "#fff",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.82rem",
-                    lineHeight: 1.5,
-                    borderRadius: 0,
-                  }}
-                />
-              </div>
-
-              {/* Engineering Trade-offs / Challenges */}
-              <div>
-                <label
-                  style={{
-                    display: "block",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.75rem",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.06em",
-                    color: "var(--color-text-muted)",
-                    marginBottom: "0.4rem",
-                  }}
-                >
-                  Engineering Trade-offs &amp; Challenges
-                </label>
-                <textarea
-                  rows={2}
-                  value={formChallenges}
-                  onChange={(e) => setFormChallenges(e.target.value)}
-                  placeholder="Vector indexing tradeoffs, cache eviction strategies, cold start latency considerations."
-                  style={{
-                    width: "100%",
-                    padding: "0.65rem 0.85rem",
-                    background: "rgba(255, 255, 255, 0.04)",
-                    border: "1px solid var(--color-border, rgba(255, 255, 255, 0.15))",
-                    color: "#fff",
-                    fontFamily: "inherit",
-                    fontSize: "0.88rem",
-                    lineHeight: 1.6,
-                    borderRadius: 0,
-                  }}
-                />
-              </div>
-
-              {/* Tags */}
-              <div>
-                <label
-                  style={{
-                    display: "block",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.75rem",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.06em",
-                    color: "var(--color-text-muted)",
-                    marginBottom: "0.4rem",
-                  }}
-                >
-                  Tech Tags (comma separated)
-                </label>
-                <input
-                  type="text"
-                  value={formTagsText}
-                  onChange={(e) => setFormTagsText(e.target.value)}
-                  placeholder="Python, FastAPI, PostgreSQL, pgvector, Docker, Redis"
-                  style={{
-                    width: "100%",
-                    padding: "0.65rem 0.85rem",
-                    background: "rgba(255, 255, 255, 0.04)",
-                    border: "1px solid var(--color-border, rgba(255, 255, 255, 0.15))",
-                    color: "#fff",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.85rem",
-                    borderRadius: 0,
-                  }}
-                />
-              </div>
-
-              {/* URLs: GitHub & Live Demo */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.75rem",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
-                      color: "var(--color-text-muted)",
-                      marginBottom: "0.4rem",
-                    }}
-                  >
-                    GitHub URL *
-                  </label>
-                  <input
-                    type="url"
-                    required
-                    value={formGithubUrl}
-                    onChange={(e) => setFormGithubUrl(e.target.value)}
-                    placeholder="https://github.com/dilshandevxx/..."
-                    style={{
-                      width: "100%",
-                      padding: "0.65rem 0.85rem",
-                      background: "rgba(255, 255, 255, 0.04)",
-                      border: "1px solid var(--color-border, rgba(255, 255, 255, 0.15))",
-                      color: "#fff",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.85rem",
-                      borderRadius: 0,
-                    }}
-                  />
-                </div>
-
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.75rem",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
-                      color: "var(--color-text-muted)",
-                      marginBottom: "0.4rem",
-                    }}
-                  >
-                    Live Demo URL (Optional)
-                  </label>
-                  <input
-                    type="url"
-                    value={formDemoUrl}
-                    onChange={(e) => setFormDemoUrl(e.target.value)}
-                    placeholder="https://..."
-                    style={{
-                      width: "100%",
-                      padding: "0.65rem 0.85rem",
-                      background: "rgba(255, 255, 255, 0.04)",
-                      border: "1px solid var(--color-border, rgba(255, 255, 255, 0.15))",
-                      color: "#fff",
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.85rem",
-                      borderRadius: 0,
-                    }}
-                  />
-                </div>
-              </div>
-
-              {/* Submit / Cancel Buttons */}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  gap: "0.75rem",
-                  marginTop: "1rem",
-                  paddingTop: "1rem",
-                  borderTop: "1px solid var(--color-border, rgba(255, 255, 255, 0.1))",
-                }}
+          <div className={styles.topActions}>
+            {viewMode === "directory" ? (
+              <button
+                type="button"
+                onClick={handleOpenCreate}
+                className={styles.primaryBtn}
               >
+                <Plus size={15} />
+                <span>New Project</span>
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setViewMode("directory")}
+                className={styles.secondaryBtn}
+              >
+                <ArrowLeft size={14} />
+                <span>Directory</span>
+              </button>
+            )}
+
+            <button
+              type="button"
+              onClick={handleCopyTsCode}
+              className={styles.secondaryBtn}
+              title="Copy TypeScript array"
+            >
+              <Copy size={13} />
+              <span>Copy TS</span>
+            </button>
+
+            <Link href="/projects" className={styles.secondaryBtn}>
+              <Eye size={13} />
+              <span>View Site</span>
+            </Link>
+
+            <button
+              type="button"
+              onClick={handleLogout}
+              className={styles.secondaryBtn}
+              title="Log out of admin"
+            >
+              <Lock size={13} />
+              <span>Exit</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* ------------------------------------------------------------- */}
+      {/* MAIN CONTAINER                                                */}
+      {/* ------------------------------------------------------------- */}
+      <div className={styles.mainContainer}>
+        {viewMode === "directory" ? (
+          /* ========================================================== */
+          /* MODE A: DIRECTORY LISTING                                   */
+          /* ========================================================== */
+          <div>
+            <div className={styles.directoryControls}>
+              {/* Search Bar */}
+              <div className={styles.searchBar}>
+                <Search className={styles.searchIcon} />
+                <input
+                  type="text"
+                  placeholder={`Search ${projects.length} projects by title, slug, stack, or tagline...`}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className={styles.searchInput}
+                  aria-label="Search projects"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    className={styles.clearSearchBtn}
+                    aria-label="Clear search query"
+                  >
+                    <X size={16} />
+                  </button>
+                )}
+              </div>
+
+              {/* Category Filter Pills */}
+              <div className={styles.filterPillsRow}>
+                {["All", ...CATEGORIES].map((cat) => {
+                  const isActive = selectedCategory === cat;
+                  return (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={() => setSelectedCategory(cat)}
+                      className={`${styles.filterPill} ${
+                        isActive ? styles.filterPillActive : ""
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  );
+                })}
+
+                <span style={{ color: "#475569", margin: "0 0.25rem" }}>|</span>
+
+                {/* Status Filter */}
+                {[
+                  { id: "All", label: "All Status" },
+                  { id: "Existing", label: "Live Production" },
+                  { id: "Planned", label: "Planned / RFC" },
+                ].map((st) => {
+                  const isActive = selectedStatus === st.id;
+                  return (
+                    <button
+                      key={st.id}
+                      type="button"
+                      onClick={() => setSelectedStatus(st.id)}
+                      className={`${styles.filterPill} ${
+                        isActive ? styles.filterPillActive : ""
+                      }`}
+                    >
+                      {st.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Projects Grid */}
+            <div className={styles.projectGrid}>
+              {filteredProjects.map((p, idx) => {
+                const thumb = getProjectThumbnail(p.slug, p.image, idx);
+                const isLive = p.status === "Existing";
+
+                return (
+                  <article key={p.slug} className={styles.adminProjectCard}>
+                    {/* Thumbnail with overlay badges */}
+                    <div className={styles.cardThumbFrame}>
+                      <Image
+                        src={thumb}
+                        alt={p.title}
+                        fill
+                        unoptimized={thumb.startsWith("http")}
+                        className={styles.cardThumbImage}
+                        sizes="(max-width: 768px) 100vw, 360px"
+                      />
+                      <div className={styles.cardOverlayBadges}>
+                        <span className={styles.badgeCategory}>{p.category}</span>
+                        <button
+                          type="button"
+                          onClick={() => handleToggleStatus(p.slug)}
+                          className={`${styles.statusToggleBtn} ${
+                            isLive ? styles.statusLive : styles.statusPlanned
+                          }`}
+                          title="Click to toggle Live vs Planned status"
+                        >
+                          <span
+                            style={{
+                              width: 6,
+                              height: 6,
+                              borderRadius: "50%",
+                              backgroundColor: isLive ? "#4ade80" : "#facc15",
+                            }}
+                          />
+                          <span>{isLive ? "Live" : "Planned"}</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Card Content */}
+                    <div className={styles.cardContent}>
+                      <h2 className={styles.cardTitle}>{p.title}</h2>
+                      <p className={styles.cardTagline}>
+                        {p.tagline || p.description}
+                      </p>
+
+                      {/* Tech Tags */}
+                      <div className={styles.cardTagsRow}>
+                        {(p.tags || []).slice(0, 4).map((t) => (
+                          <span key={t} className={styles.techTag}>
+                            {t}
+                          </span>
+                        ))}
+                        {(p.tags || []).length > 4 && (
+                          <span className={styles.techTag}>
+                            +{(p.tags || []).length - 4}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Card Footer Actions */}
+                      <div className={styles.cardFooterActions}>
+                        <div className={styles.actionBtnGroup}>
+                          <button
+                            type="button"
+                            onClick={() => handleOpenEdit(p)}
+                            className={styles.iconActionBtn}
+                            title="Edit this project"
+                            aria-label={`Edit ${p.title}`}
+                          >
+                            <Edit3 size={15} />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleDuplicate(p)}
+                            className={styles.iconActionBtn}
+                            title="Duplicate as new template"
+                            aria-label={`Duplicate ${p.title}`}
+                          >
+                            <Copy size={14} />
+                          </button>
+                          <Link
+                            href={`/projects/${p.slug}`}
+                            target="_blank"
+                            className={styles.iconActionBtn}
+                            title="View public detail page"
+                            aria-label={`View public page for ${p.title}`}
+                          >
+                            <ExternalLink size={14} />
+                          </Link>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => handleDelete(p.slug, p.title)}
+                          className={`${styles.iconActionBtn} ${styles.deleteBtn}`}
+                          title="Delete project"
+                          aria-label={`Delete ${p.title}`}
+                        >
+                          <Trash2 size={15} />
+                        </button>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
+          /* ========================================================== */
+          /* MODE B: FULL-WIDTH STUDIO CUSTOMIZER & EDITOR              */
+          /* ========================================================== */
+          <div className={styles.editorContainer}>
+            {/* Editor Action Header */}
+            <div className={styles.editorHeader}>
+              <div className={styles.editorTitleGroup}>
                 <button
                   type="button"
-                  onClick={() => setIsEditorOpen(false)}
-                  style={{
-                    padding: "0.65rem 1.25rem",
-                    background: "transparent",
-                    border: "1px solid var(--color-border, rgba(255, 255, 255, 0.2))",
-                    color: "var(--color-text-muted)",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.85rem",
-                    borderRadius: 0,
-                    cursor: "pointer",
-                  }}
+                  onClick={() => setViewMode("directory")}
+                  className={styles.editorBackBtn}
+                >
+                  <ArrowLeft size={14} />
+                  <span>Return to Directory</span>
+                </button>
+                <h1 className={styles.editorHeading}>
+                  {editingSlug ? `Editing: ${formTitle}` : "New Project Customizer"}
+                </h1>
+              </div>
+
+              <div style={{ display: "flex", gap: "0.75rem" }}>
+                <button
+                  type="button"
+                  onClick={() => setViewMode("directory")}
+                  className={styles.secondaryBtn}
                 >
                   Cancel
                 </button>
                 <button
-                  type="submit"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    padding: "0.65rem 1.5rem",
-                    background: "var(--color-primary, #8bb397)",
-                    border: "none",
-                    color: "#111413",
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "0.85rem",
-                    fontWeight: 700,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.05em",
-                    borderRadius: 0,
-                    cursor: "pointer",
-                  }}
+                  type="button"
+                  onClick={handleSaveForm}
+                  className={styles.primaryBtn}
                 >
-                  <Sparkles size={15} />
-                  <span>{editingSlug ? "Update Project" : "Create Project"}</span>
+                  <Check size={15} />
+                  <span>Save &amp; Deploy Project</span>
                 </button>
               </div>
-            </form>
+            </div>
+
+            {/* Split Layout: Form on Left, Live Card Preview on Right */}
+            <div className={styles.editorLayout}>
+              {/* Form Column */}
+              <form onSubmit={handleSaveForm} className={styles.formColumn}>
+                {/* 1. Identity & Card Visuals */}
+                <div className={styles.formCard}>
+                  <h3 className={styles.formCardTitle}>
+                    <Layers size={15} />
+                    <span>01 // Project Card Identity &amp; Image URL</span>
+                  </h3>
+
+                  <div className={styles.formRow}>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>Project Title *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formTitle}
+                        onChange={(e) => handleTitleChange(e.target.value)}
+                        placeholder="e.g. Distributed Key-Value Store"
+                        className={styles.formInput}
+                      />
+                    </div>
+
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>URL Slug *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formSlug}
+                        onChange={(e) => setFormSlug(e.target.value)}
+                        placeholder="e.g. distributed-kv-store"
+                        className={styles.formInput}
+                      />
+                      <span className={styles.formHint}>
+                        Accessible at /projects/{formSlug || "your-slug"}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Image URL input with instant preview */}
+                  <div className={styles.formGroup}>
+                    <label className={styles.formLabel}>
+                      Project Card Image URL (supports any web URL or local path)
+                    </label>
+                    <input
+                      type="text"
+                      value={formImage}
+                      onChange={(e) => setFormImage(e.target.value)}
+                      placeholder="https://images.unsplash.com/... or /images/project_collective.jpg"
+                      className={styles.formInput}
+                    />
+                    <span className={styles.formHint}>
+                      Enter any external image URL (e.g. Unsplash, Cloudinary, AWS S3) or choose a preset below.
+                    </span>
+
+                    {/* Presets Row */}
+                    <div className={styles.presetPillsRow}>
+                      <span style={{ fontSize: "0.72rem", color: "#64748b", alignSelf: "center" }}>
+                        Presets:
+                      </span>
+                      {PRESET_IMAGES.map((preset) => (
+                        <button
+                          key={preset.label}
+                          type="button"
+                          onClick={() => setFormImage(preset.url)}
+                          className={styles.presetPill}
+                        >
+                          {preset.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className={styles.formRow}>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>Category</label>
+                      <select
+                        value={formCategory}
+                        onChange={(e) =>
+                          setFormCategory(e.target.value as ProjectCategory)
+                        }
+                        className={styles.formSelect}
+                      >
+                        {CATEGORIES.map((cat) => (
+                          <option key={cat} value={cat}>
+                            {cat}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>Status</label>
+                      <select
+                        value={formStatus}
+                        onChange={(e) =>
+                          setFormStatus(e.target.value as ProjectStatus)
+                        }
+                        className={styles.formSelect}
+                      >
+                        <option value="Existing">Live Production Service</option>
+                        <option value="Planned">Planned / RFC Roadmap</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className={styles.formRow}>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>Release Year</label>
+                      <input
+                        type="text"
+                        value={formDate}
+                        onChange={(e) => setFormDate(e.target.value)}
+                        placeholder="2026"
+                        className={styles.formInput}
+                      />
+                    </div>
+
+                    <div className={styles.formGroup}>
+                      <label className={styles.checkboxLabel}>
+                        <input
+                          type="checkbox"
+                          checked={formFeatured}
+                          onChange={(e) => setFormFeatured(e.target.checked)}
+                          className={styles.checkboxInput}
+                        />
+                        <span>Feature this project with badge</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. Descriptions */}
+                <div className={styles.formCard}>
+                  <h3 className={styles.formCardTitle}>
+                    <FileCode2 size={15} />
+                    <span>02 // Card Tagline &amp; Page Overview</span>
+                  </h3>
+
+                  <div className={styles.formGroup}>
+                    <label className={styles.formLabel}>Card Tagline *</label>
+                    <input
+                      type="text"
+                      required
+                      value={formTagline}
+                      onChange={(e) => setFormTagline(e.target.value)}
+                      placeholder="One-line punchy subtitle shown directly on the project card"
+                      className={styles.formInput}
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label className={styles.formLabel}>
+                      Short Summary Description *
+                    </label>
+                    <textarea
+                      required
+                      rows={3}
+                      value={formDescription}
+                      onChange={(e) => setFormDescription(e.target.value)}
+                      placeholder="1-2 sentences summarizing the core problem and technical resolution"
+                      className={styles.formTextarea}
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label className={styles.formLabel}>
+                      Full Architectural Overview (for /projects/[slug])
+                    </label>
+                    <textarea
+                      rows={5}
+                      value={formLongDescription}
+                      onChange={(e) => setFormLongDescription(e.target.value)}
+                      placeholder="In-depth technical narrative detailing the service topology, motivation, and system architecture..."
+                      className={styles.formTextarea}
+                    />
+                  </div>
+                </div>
+
+                {/* 3. Live Deployment & Repository Links */}
+                <div className={styles.formCard}>
+                  <h3 className={styles.formCardTitle}>
+                    <Globe size={15} />
+                    <span>03 // Live Deployment &amp; Repository URLs</span>
+                  </h3>
+
+                  <div className={styles.formRow}>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>
+                        Live Deployment / Demo URL
+                      </label>
+                      <input
+                        type="url"
+                        value={formDemoUrl}
+                        onChange={(e) => setFormDemoUrl(e.target.value)}
+                        placeholder="https://demo.dilshan.dev"
+                        className={styles.formInput}
+                      />
+                    </div>
+
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>
+                        GitHub Repository URL *
+                      </label>
+                      <input
+                        type="url"
+                        required
+                        value={formGithubUrl}
+                        onChange={(e) => setFormGithubUrl(e.target.value)}
+                        placeholder="https://github.com/dilshandevxx/..."
+                        className={styles.formInput}
+                      />
+                    </div>
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label className={styles.formLabel}>
+                      Technical Case Study / Article URL (Optional)
+                    </label>
+                    <input
+                      type="text"
+                      value={formWriteupUrl}
+                      onChange={(e) => setFormWriteupUrl(e.target.value)}
+                      placeholder="/portfolio/blog/zero-dependency-web-design"
+                      className={styles.formInput}
+                    />
+                  </div>
+                </div>
+
+                {/* 4. Engineering Deep Dive & Highlights */}
+                <div className={styles.formCard}>
+                  <h3 className={styles.formCardTitle}>
+                    <Sparkles size={15} />
+                    <span>04 // Engineering Deep Dive &amp; Highlights</span>
+                  </h3>
+
+                  <div className={styles.formGroup}>
+                    <label className={styles.formLabel}>
+                      Technology Stack Tags (comma-separated) *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formTagsText}
+                      onChange={(e) => setFormTagsText(e.target.value)}
+                      placeholder="Go, TypeScript, Next.js, Kafka, PostgreSQL, Docker"
+                      className={styles.formInput}
+                    />
+                    <span className={styles.formHint}>
+                      Used for project filtering and stack badges.
+                    </span>
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label className={styles.formLabel}>
+                      Key Architectural Highlights (one bullet per line)
+                    </label>
+                    <textarea
+                      rows={4}
+                      value={formHighlightsText}
+                      onChange={(e) => setFormHighlightsText(e.target.value)}
+                      placeholder="Sub-45ms P99 latency across 100K concurrent event streams&#10;Zero runtime layout shift on client renders&#10;Automated canary deployments via Kubernetes operator"
+                      className={styles.formTextarea}
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label className={styles.formLabel}>
+                      System Architecture Flow Breakdown
+                    </label>
+                    <textarea
+                      rows={4}
+                      value={formArchitecture}
+                      onChange={(e) => setFormArchitecture(e.target.value)}
+                      placeholder="Describe ingress, event queue partitioning, worker goroutines, and persistence..."
+                      className={styles.formTextarea}
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label className={styles.formLabel}>
+                      Technical Bottlenecks &amp; Resolution
+                    </label>
+                    <textarea
+                      rows={4}
+                      value={formChallenges}
+                      onChange={(e) => setFormChallenges(e.target.value)}
+                      placeholder="Describe critical challenges (e.g. database IOPS saturation, cache stampedes) and how you engineered solutions..."
+                      className={styles.formTextarea}
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label className={styles.formLabel}>
+                      Primary Benchmark / Metric Badge
+                    </label>
+                    <input
+                      type="text"
+                      value={formMetrics}
+                      onChange={(e) => setFormMetrics(e.target.value)}
+                      placeholder="e.g. < 45ms P99 Latency • 100K QPS • 99.99% Uptime"
+                      className={styles.formInput}
+                    />
+                  </div>
+                </div>
+
+                {/* Bottom Submit Actions */}
+                <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
+                  <button type="submit" className={styles.primaryBtn} style={{ padding: "0.75rem 2rem", fontSize: "0.9rem" }}>
+                    <Check size={16} />
+                    <span>Save &amp; Deploy Project</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setViewMode("directory")}
+                    className={styles.secondaryBtn}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+
+              {/* ------------------------------------------------------- */}
+              {/* STICKY RIGHT COLUMN: REAL-TIME LIVE CARD PREVIEW        */}
+              {/* ------------------------------------------------------- */}
+              <aside className={styles.previewColumn}>
+                <div className={styles.previewCardFrame}>
+                  <div className={styles.previewHeader}>
+                    <span className={styles.previewKicker}>
+                      <Eye size={13} />
+                      <span>Live Card Preview</span>
+                    </span>
+                    <span style={{ fontSize: "0.75rem", color: "#64748b", fontFamily: "var(--font-mono)" }}>
+                      16:10 Ratio
+                    </span>
+                  </div>
+
+                  {/* Mock Card Preview exactly as rendered in /projects and /portfolio */}
+                  <div className={styles.previewMockCard}>
+                    <div className={styles.previewImageFrame}>
+                      {activePreviewImage ? (
+                        <Image
+                          src={activePreviewImage}
+                          alt={formTitle || "Project Preview"}
+                          fill
+                          unoptimized={activePreviewImage.startsWith("http")}
+                          className={styles.previewImage}
+                          sizes="360px"
+                        />
+                      ) : (
+                        <div className={styles.previewNoImage}>
+                          No Image URL specified
+                        </div>
+                      )}
+
+                      {/* Translucent bottom-left category pill */}
+                      <span className={styles.badgeCategory} style={{ position: "absolute", bottom: "0.75rem", left: "0.75rem" }}>
+                        {formCategory}
+                      </span>
+                    </div>
+
+                    <div className={styles.previewMockBody}>
+                      <h4 className={styles.previewMockTitle}>
+                        {formTitle || "Untitled Project"}
+                      </h4>
+                      <p className={styles.previewMockTagline}>
+                        {formTagline || "Provide a tagline to see it rendered live here..."}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Quick Quality Checklist */}
+                <div className={styles.checklistCard}>
+                  <span style={{ fontSize: "0.76rem", fontFamily: "var(--font-mono)", color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                    Readiness Checklist
+                  </span>
+
+                  <div className={styles.checklistItem}>
+                    <CheckCircle2 size={13} className={formTitle ? styles.checkOk : styles.checkMissing} />
+                    <span>Title &amp; Slug Defined</span>
+                  </div>
+                  <div className={styles.checklistItem}>
+                    <CheckCircle2 size={13} className={formImage ? styles.checkOk : styles.checkMissing} />
+                    <span>Card Image URL Assigned</span>
+                  </div>
+                  <div className={styles.checklistItem}>
+                    <CheckCircle2 size={13} className={formTagline ? styles.checkOk : styles.checkMissing} />
+                    <span>Card Tagline Written</span>
+                  </div>
+                  <div className={styles.checklistItem}>
+                    <CheckCircle2 size={13} className={formDescription ? styles.checkOk : styles.checkMissing} />
+                    <span>Summary Description Ready</span>
+                  </div>
+                  <div className={styles.checklistItem}>
+                    <CheckCircle2 size={13} className={formGithubUrl ? styles.checkOk : styles.checkMissing} />
+                    <span>GitHub Repository Linked</span>
+                  </div>
+                  <div className={styles.checklistItem}>
+                    <CheckCircle2 size={13} className={formTagsText ? styles.checkOk : styles.checkMissing} />
+                    <span>Technology Stack Tags Set</span>
+                  </div>
+                </div>
+              </aside>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </main>
   );
 }
