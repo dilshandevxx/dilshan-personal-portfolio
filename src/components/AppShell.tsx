@@ -12,7 +12,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     pathname === "/" ||
     pathname === "/projects" ||
     pathname?.startsWith("/projects/") ||
-    pathname?.startsWith("/portfolio");
+    pathname?.startsWith("/portfolio") ||
+    pathname?.startsWith("/admin");
 
   if (isFullWidthPage) {
     return <main className="landing-page-wrapper">{children}</main>;

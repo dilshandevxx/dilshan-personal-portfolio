@@ -534,7 +534,7 @@ export default function AdminPage() {
             <button
               type="button"
               onClick={handleStartNewProject}
-              className={styles.primaryBtn}
+              className={styles.secondaryBtn}
             >
               <Plus size={14} />
               <span>New Project</span>
@@ -554,6 +554,16 @@ export default function AdminPage() {
               <Eye size={13} />
               <span>View Site</span>
             </Link>
+
+            <button
+              type="button"
+              onClick={handleSaveForm}
+              className={styles.primaryBtn}
+              title="Save project changes"
+            >
+              <Check size={14} />
+              <span>Save &amp; Deploy</span>
+            </button>
           </div>
         </div>
       </header>
@@ -562,6 +572,18 @@ export default function AdminPage() {
       {/* MAIN CONTAINER                                                */}
       {/* ------------------------------------------------------------- */}
       <div className={styles.mainContainer}>
+        {/* Editorial SkyLabs Hero Header */}
+        <div className={styles.heroHeader}>
+          <div className={styles.heroTag}>
+            <span className={styles.heroTagDot} />
+            <span>SYSTEM ARCHITECTURE STUDIO</span>
+          </div>
+          <h1 className={styles.heroTitle}>Customize Projects &amp; Systems</h1>
+          <p className={styles.heroSubtitle}>
+            Update project cards, architectural overviews, external image URLs, metrics, and deployment endpoints in real-time with zero rebuilds.
+          </p>
+        </div>
+
         {activeTab === "studio" ? (
           /* ========================================================== */
           /* TAB 1: STUDIO CUSTOMIZER & LIVE CARD PREVIEW               */
@@ -684,12 +706,54 @@ export default function AdminPage() {
                           key={preset.label}
                           type="button"
                           onClick={() => setFormImage(preset.url)}
-                          className={styles.presetPill}
+                          className={`${styles.presetPill} ${
+                            formImage === preset.url ? styles.presetPillActive : ""
+                          }`}
                         >
                           {preset.label}
                         </button>
                       ))}
                     </div>
+
+                    {/* Active Image Thumbnail Preview Banner */}
+                    {formImage && (
+                      <div className={styles.thumbnailBanner}>
+                        <img
+                          src={formImage}
+                          alt="Card Visual Preview"
+                          className={styles.thumbnailImg}
+                          onError={(e) => {
+                            (e.currentTarget as HTMLImageElement).src = "/images/projects/code-nexus.svg";
+                          }}
+                        />
+                        <div className={styles.thumbnailMeta}>
+                          <span className={styles.thumbnailStatus}>
+                            <Check size={13} color="#4ade80" /> Active Card Image URL
+                          </span>
+                          <span className={styles.thumbnailUrl} title={formImage}>
+                            {formImage}
+                          </span>
+                        </div>
+                        <div className={styles.thumbnailActions}>
+                          <a
+                            href={formImage}
+                            target="_blank"
+                            rel="noreferrer"
+                            className={styles.thumbnailActionBtn}
+                          >
+                            Open ↗
+                          </a>
+                          <button
+                            type="button"
+                            onClick={() => setFormImage("")}
+                            className={styles.thumbnailActionBtn}
+                            title="Clear image URL"
+                          >
+                            Clear
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   <div className={styles.formRow}>
