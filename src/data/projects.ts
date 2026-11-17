@@ -1,7 +1,7 @@
 export interface ProjectMetric { label: string; value: string; }
 export interface ProjectStackLayer { layer: string; technologies: string[]; }
 export type ProjectStatus = "Existing" | "Planned";
-export type ProjectCategory = "AI/ML" | "DevOps" | "Systems" | "Full-Stack" | "Landing" | "Others";
+export type ProjectCategory = "AI/ML" | "AI Infrastructure" | "MLOps" | "Platform Engineering" | "SRE" | "Systems" | "Security" | "Distributed Systems" | "Data Engineering" | "DevOps" | "Full-Stack" | "Landing" | "Others";
 export interface Project {
   slug: string; title: string; date: string; category: ProjectCategory; tagline: string;
   description: string; longDescription: string; highlights: string[]; architecture: string;
@@ -204,7 +204,7 @@ export const projectsList: Project[] = [
   {
     "slug": "roamora-travel-project",
     "title": "Roamora — Travel Discovery Website",
-    "category": "Landing",
+    "category": "Full-Stack",
     "tagline": "University travel website for destinations, attractions, and trip discovery.",
     "description": "A travel website repository describing destination browsing, attraction information, travel tips, and interactive maps.",
     "longDescription": "The repository README identifies Roamora as a university software engineering project. It documents responsive destination and attraction discovery, travel recommendations, and interactive maps. The README lists HTML, CSS, JavaScript, Bootstrap, Firebase, and a possible Node/Express backend; backend usage should be verified in source before being stated as fact.",
@@ -255,7 +255,7 @@ export const projectsList: Project[] = [
   {
     "slug": "travel-website",
     "title": "Travel Website",
-    "category": "Landing",
+    "category": "Full-Stack",
     "tagline": "Full-stack travel discovery with destinations, guides, hotels, and stories.",
     "description": "A travel website repository whose README documents HTML, CSS, JavaScript, Bootstrap, Node.js, Express, and MySQL.",
     "longDescription": "The repository README describes a travel platform with user sign-up, guide registration, destination pages, hotels and restaurants, blog stories, and a photo gallery. This entry records the repository's documented scope without adding unverified usage or performance claims.",
@@ -370,7 +370,7 @@ export const projectsList: Project[] = [
     "slug": "distributed-llm-inference-platform",
     "title": "Distributed LLM Inference Platform",
     "date": "Roadmap",
-    "category": "AI/ML",
+    "category": "AI Infrastructure",
     "tagline": "Schedule and serve multiple LLMs across shared GPU capacity with latency, fairness, and cost controls.",
     "description": "Schedule and serve multiple LLMs across shared GPU capacity with latency, fairness, and cost controls.",
     "longDescription": "Schedule and serve multiple LLMs across shared GPU capacity with latency, fairness, and cost controls. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
@@ -395,7 +395,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/distributed-llm-inference-platform",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/distributed-llm-inference-platform/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -446,7 +446,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/llm-api-gateway",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/llm-api-gateway/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -469,7 +469,7 @@ export const projectsList: Project[] = [
     "slug": "production-mlops-platform",
     "title": "Production MLOps Platform",
     "date": "Roadmap",
-    "category": "AI/ML",
+    "category": "MLOps",
     "tagline": "Make model training, evaluation, registration, deployment, and rollback reproducible.",
     "description": "Make model training, evaluation, registration, deployment, and rollback reproducible.",
     "longDescription": "Make model training, evaluation, registration, deployment, and rollback reproducible. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
@@ -495,7 +495,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/production-mlops-platform",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/production-mlops-platform/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -518,7 +518,7 @@ export const projectsList: Project[] = [
     "slug": "distributed-feature-store",
     "title": "Distributed Feature Store",
     "date": "Roadmap",
-    "category": "AI/ML",
+    "category": "MLOps",
     "tagline": "Serve consistent features to offline training and low-latency online inference.",
     "description": "Serve consistent features to offline training and low-latency online inference.",
     "longDescription": "Serve consistent features to offline training and low-latency online inference. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
@@ -544,7 +544,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/distributed-feature-store",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/distributed-feature-store/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -665,7 +665,7 @@ export const projectsList: Project[] = [
     "slug": "internal-developer-platform",
     "title": "Internal Developer Platform",
     "date": "Roadmap",
-    "category": "DevOps",
+    "category": "Platform Engineering",
     "tagline": "Give developers a self-service path to provision services and environments through governed golden paths.",
     "description": "Give developers a self-service path to provision services and environments through governed golden paths.",
     "longDescription": "Give developers a self-service path to provision services and environments through governed golden paths. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
@@ -691,7 +691,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/internal-developer-platform",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/internal-developer-platform/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -714,7 +714,7 @@ export const projectsList: Project[] = [
     "slug": "kubernetes-policy-operator",
     "title": "Kubernetes Policy & Reliability Operator",
     "date": "Roadmap",
-    "category": "DevOps",
+    "category": "Platform Engineering",
     "tagline": "Continuously validate Kubernetes workloads against reliability and security policies.",
     "description": "Continuously validate Kubernetes workloads against reliability and security policies.",
     "longDescription": "Continuously validate Kubernetes workloads against reliability and security policies. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
@@ -740,7 +740,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/kubernetes-policy-operator",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/kubernetes-policy-operator/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -763,7 +763,7 @@ export const projectsList: Project[] = [
     "slug": "distributed-observability-platform",
     "title": "Distributed Observability Platform",
     "date": "Roadmap",
-    "category": "DevOps",
+    "category": "SRE",
     "tagline": "Collect, route, retain, and query logs, metrics, and traces with cardinality and cost controls.",
     "description": "Collect, route, retain, and query logs, metrics, and traces with cardinality and cost controls.",
     "longDescription": "Collect, route, retain, and query logs, metrics, and traces with cardinality and cost controls. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
@@ -789,7 +789,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/distributed-observability-platform",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/distributed-observability-platform/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -837,7 +837,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/ebpf-network-observability",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/ebpf-network-observability/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -860,7 +860,7 @@ export const projectsList: Project[] = [
     "slug": "multi-tenant-vector-search",
     "title": "Multi-Tenant Vector Search Service",
     "date": "Roadmap",
-    "category": "AI/ML",
+    "category": "AI Infrastructure",
     "tagline": "Provide tenant-isolated semantic retrieval with predictable latency and correct access filtering.",
     "description": "Provide tenant-isolated semantic retrieval with predictable latency and correct access filtering.",
     "longDescription": "Provide tenant-isolated semantic retrieval with predictable latency and correct access filtering. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
@@ -886,7 +886,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/multi-tenant-vector-search",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/multi-tenant-vector-search/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -909,7 +909,7 @@ export const projectsList: Project[] = [
     "slug": "gpu-workload-scheduler",
     "title": "GPU Workload Scheduler",
     "date": "Roadmap",
-    "category": "AI/ML",
+    "category": "AI Infrastructure",
     "tagline": "Schedule training and inference jobs by GPU type, memory, priority, and fairness.",
     "description": "Schedule training and inference jobs by GPU type, memory, priority, and fairness.",
     "longDescription": "Schedule training and inference jobs by GPU type, memory, priority, and fairness. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
@@ -934,7 +934,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/gpu-workload-scheduler",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/gpu-workload-scheduler/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -956,7 +956,7 @@ export const projectsList: Project[] = [
     "slug": "ai-security-gateway",
     "title": "AI Security Gateway",
     "date": "Roadmap",
-    "category": "DevOps",
+    "category": "Security",
     "tagline": "Apply security policy to LLM inputs, outputs, sensitive data, and tool execution.",
     "description": "Apply security policy to LLM inputs, outputs, sensitive data, and tool execution.",
     "longDescription": "Apply security policy to LLM inputs, outputs, sensitive data, and tool execution. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
@@ -1030,7 +1030,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/llm-evaluation-observability",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/llm-evaluation-observability/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -1103,7 +1103,7 @@ export const projectsList: Project[] = [
     "slug": "event-driven-workflow-engine",
     "title": "Event-Driven Workflow Engine",
     "date": "Roadmap",
-    "category": "Systems",
+    "category": "Distributed Systems",
     "tagline": "Coordinate long-running workflows across services despite retries, duplicate events, and partial failures.",
     "description": "Coordinate long-running workflows across services despite retries, duplicate events, and partial failures.",
     "longDescription": "Coordinate long-running workflows across services despite retries, duplicate events, and partial failures. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
@@ -1129,7 +1129,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/event-driven-workflow-engine",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/event-driven-workflow-engine/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -1152,7 +1152,7 @@ export const projectsList: Project[] = [
     "slug": "distributed-cache-engine",
     "title": "Distributed Cache & Consistency Lab",
     "date": "Roadmap",
-    "category": "Systems",
+    "category": "Distributed Systems",
     "tagline": "Explore partitioning, replication, eviction, consistency, and failure behavior in a measurable key-value service.",
     "description": "Explore partitioning, replication, eviction, consistency, and failure behavior in a measurable key-value service.",
     "longDescription": "Explore partitioning, replication, eviction, consistency, and failure behavior in a measurable key-value service. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
@@ -1177,7 +1177,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/distributed-cache-engine",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/distributed-cache-engine/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -1199,7 +1199,7 @@ export const projectsList: Project[] = [
     "slug": "object-storage-service",
     "title": "S3-Compatible Object Storage Service",
     "date": "Roadmap",
-    "category": "Systems",
+    "category": "Distributed Systems",
     "tagline": "Study object storage primitives including multipart uploads, metadata consistency, and lifecycle management.",
     "description": "Study object storage primitives including multipart uploads, metadata consistency, and lifecycle management.",
     "longDescription": "Study object storage primitives including multipart uploads, metadata consistency, and lifecycle management. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
@@ -1224,7 +1224,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/object-storage-service",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/object-storage-service/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -1296,7 +1296,7 @@ export const projectsList: Project[] = [
     "slug": "zero-trust-cloud-foundation",
     "title": "Zero-Trust Cloud Foundation",
     "date": "Roadmap",
-    "category": "DevOps",
+    "category": "Security",
     "tagline": "Build a reproducible cloud landing zone with least-privilege identity, segmented networking, and auditable deployments.",
     "description": "Build a reproducible cloud landing zone with least-privilege identity, segmented networking, and auditable deployments.",
     "longDescription": "Build a reproducible cloud landing zone with least-privilege identity, segmented networking, and auditable deployments. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
@@ -1370,7 +1370,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/cloud-cost-intelligence",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/cloud-cost-intelligence/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -1418,7 +1418,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/database-replication-lab",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/database-replication-lab/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -1441,7 +1441,7 @@ export const projectsList: Project[] = [
     "slug": "edge-model-serving-platform",
     "title": "Edge Model Serving Platform",
     "date": "Roadmap",
-    "category": "AI/ML",
+    "category": "AI Infrastructure",
     "tagline": "Deploy versioned models to constrained devices with intermittent connectivity and safe fleet updates.",
     "description": "Deploy versioned models to constrained devices with intermittent connectivity and safe fleet updates.",
     "longDescription": "Deploy versioned models to constrained devices with intermittent connectivity and safe fleet updates. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
@@ -1467,7 +1467,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/edge-model-serving-platform",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/edge-model-serving-platform/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -1490,7 +1490,7 @@ export const projectsList: Project[] = [
     "slug": "data-contract-governance-platform",
     "title": "Data Contracts & Quality Platform",
     "date": "Roadmap",
-    "category": "Others",
+    "category": "Data Engineering",
     "tagline": "Detect breaking schema and semantic changes before they corrupt downstream analytics or ML features.",
     "description": "Detect breaking schema and semantic changes before they corrupt downstream analytics or ML features.",
     "longDescription": "Detect breaking schema and semantic changes before they corrupt downstream analytics or ML features. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
@@ -1517,7 +1517,7 @@ export const projectsList: Project[] = [
     "stars": 0,
     "featured": false,
     "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/data-contract-governance-platform",
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/data-contract-governance-platform/README.md",
     "metricsDetail": [],
     "stackLayers": [
       {
@@ -1540,7 +1540,7 @@ export const projectsList: Project[] = [
     "slug": "resilient-api-platform",
     "title": "Resilient API Platform & Load Lab",
     "date": "Roadmap",
-    "category": "DevOps",
+    "category": "SRE",
     "tagline": "Build an API baseline demonstrating rate limits, backpressure, caching, graceful degradation, and measurable SLOs.",
     "description": "Build an API baseline demonstrating rate limits, backpressure, caching, graceful degradation, and measurable SLOs.",
     "longDescription": "Build an API baseline demonstrating rate limits, backpressure, caching, graceful degradation, and measurable SLOs. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",

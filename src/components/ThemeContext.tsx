@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-export type Theme = "light" | "dark" | "midnight";
+export type Theme = "light" | "dark";
 
 export interface HarmonicPalette {
   main: string;        // Primary accent
@@ -207,7 +207,7 @@ export const ACCENT_COLORS: ColorAccent[] = [
   },
 ];
 
-const THEME_CYCLE: Theme[] = ["light", "dark", "midnight"];
+const THEME_CYCLE: Theme[] = ["light", "dark"];
 
 interface ThemeContextType {
   theme: Theme;
@@ -220,17 +220,18 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("midnight");
+  const [theme, setTheme] = useState<Theme>("light");
   const [accent, setAccentState] = useState<ColorAccent>(ACCENT_COLORS[0]);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    // Lock background canvas permanently to unified main site dark theme (midnight)
-    const activeTheme: Theme = "midnight";
-    setTheme(activeTheme);
-    document.documentElement.setAttribute("data-theme", "midnight");
-    localStorage.setItem("portfolio_theme", "midnight");
+    // Read persisted theme (default: "light" = Warm Alabaster)
+    const savedTheme = localStorage.getItem("portfolio_theme") as Theme | null;
+    const initialTheme: Theme = savedTheme === "dark" ? "dark" : "light";
+    setTheme(initialTheme);
+    document.documentElement.setAttribute("data-portfolio-theme", initialTheme);
+    document.documentElement.setAttribute("data-theme", initialTheme);
 
     // Read persisted accent
     const savedAccentId = localStorage.getItem("portfolio_accent");
@@ -242,12 +243,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         setAccentState(found);
       }
     }
-    applyAccent(initialAccent, activeTheme);
+    applyAccent(initialAccent, initialTheme);
   }, []);
 
-  const applyAccent = (currAccent: ColorAccent, currTheme: Theme = "midnight") => {
-    // Uses the optimized high-contrast luminous palette for deep dark background
-    const palette = currAccent.midnight || currAccent.dark;
+  const applyAccent = (currAccent: ColorAccent, currTheme: Theme = "light") => {
+    // Select harmonic palette matching the current theme mode
+    const palette = currTheme === "light" ? currAccent.light : (currAccent.dark || currAccent.midnight);
 
     const root = document.documentElement;
 
@@ -268,20 +269,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   };
 
   const selectTheme = (nextTheme: Theme) => {
-    setTheme("midnight");
-    document.documentElement.setAttribute("data-theme", "midnight");
-    localStorage.setItem("portfolio_theme", "midnight");
-    applyAccent(accent, "midnight");
+    setTheme(nextTheme);
+    document.documentElement.setAttribute("data-portfolio-theme", nextTheme);
+    document.documentElement.setAttribute("data-theme", nextTheme);
+    localStorage.setItem("portfolio_theme", nextTheme);
+    applyAccent(accent, nextTheme);
   };
 
   const toggleTheme = () => {
-    selectTheme("midnight");
+    selectTheme(theme === "light" ? "dark" : "light");
   };
 
   const setAccent = (newAccent: ColorAccent) => {
     setAccentState(newAccent);
     localStorage.setItem("portfolio_accent", newAccent.id);
-    applyAccent(newAccent, "midnight");
+    applyAccent(newAccent, theme);
   };
 
   return (

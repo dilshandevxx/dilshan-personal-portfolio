@@ -4079,133 +4079,216 @@ a.text-link:hover {
 }
 
 /* ==========================================================================
-   PORTFOLIO EDITORIAL PAGE HEADERS & LAYOUT (Warm Alabaster & Linen Paper)
+   PORTFOLIO DUAL THEME TOKENS (Light: Warm Alabaster / Dark: Matte Obsidian)
+   ========================================================================== */
+
+/* Theme 1: Warm Alabaster & Linen Paper (Light Mode / Default) */
+html[data-portfolio-theme="light"],
+html:not([data-portfolio-theme="dark"]) {
+  --pf-canvas-bg: #fbf8f3;
+  --pf-panel-bg: #f4efe6;
+  --pf-card-bg: #ffffff;
+  --pf-card-hover: #fdfbf7;
+  --pf-border: #e8e2d5;
+  --pf-border-strong: #d5ccbe;
+  --pf-text-primary: #24211e;
+  --pf-text-secondary: #5c554e;
+  --pf-text-muted: #7d756c;
+  --pf-text-heading: #1a1715;
+  --pf-badge-bg: #ede7dc;
+  --pf-active-pill: #eae3d5;
+  --pf-active-pill-border: #d5ccbe;
+  --pf-active-pill-text: #1a1715;
+  --pf-social-bg: #ffffff;
+  --pf-social-border: #e2dbce;
+  --pf-social-text: #5c554e;
+  --pf-shadow: 0 1px 3px rgba(36, 33, 30, 0.05);
+  --pf-shadow-hover: 0 4px 14px rgba(36, 33, 30, 0.08);
+  --pf-color-scheme: light;
+}
+
+/* Theme 2: Matte Obsidian Slate / Sumi Ink (Dark Mode) */
+html[data-portfolio-theme="dark"] {
+  --pf-canvas-bg: #0c0d10;
+  --pf-panel-bg: #12141a;
+  --pf-card-bg: #161922;
+  --pf-card-hover: #1c212d;
+  --pf-border: #212631;
+  --pf-border-strong: #2e3545;
+  --pf-text-primary: #f0ecdf;
+  --pf-text-secondary: #a6adb9;
+  --pf-text-muted: #6b7280;
+  --pf-text-heading: #ffffff;
+  --pf-badge-bg: #1e2330;
+  --pf-active-pill: rgba(255, 255, 255, 0.08);
+  --pf-active-pill-border: rgba(255, 255, 255, 0.12);
+  --pf-active-pill-text: #ffffff;
+  --pf-social-bg: rgba(255, 255, 255, 0.08);
+  --pf-social-border: rgba(255, 255, 255, 0.12);
+  --pf-social-text: #a6adb9;
+  --pf-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --pf-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.55);
+  --pf-color-scheme: dark;
+}
+
+/* Theme Toggle Button Styling */
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--pf-card-bg, rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--pf-border, rgba(255, 255, 255, 0.1));
+  color: var(--pf-text-secondary, #a6adb9);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.theme-toggle-btn:hover {
+  color: var(--pf-text-heading, #ffffff);
+  background: var(--pf-active-pill, rgba(255, 255, 255, 0.1));
+  border-color: var(--pf-border-strong, rgba(255, 255, 255, 0.25));
+  transform: translateY(-1px);
+}
+
+.theme-toggle-icon {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-toggle-btn:hover .theme-toggle-icon {
+  transform: rotate(15deg) scale(1.08);
+}
+
+/* ==========================================================================
+   PORTFOLIO EDITORIAL PAGE HEADERS & LAYOUT
    ========================================================================== */
 .portfolio-shell-wrapper {
   width: 100%;
   min-height: 100vh;
-  background-color: #fbf8f3 !important;
-  color: #24211e !important;
-  color-scheme: light;
+  background-color: var(--pf-canvas-bg) !important;
+  color: var(--pf-text-primary) !important;
+  color-scheme: var(--pf-color-scheme);
   display: flex;
   flex-direction: column;
   align-items: stretch;
 
-  /* Editorial Warm Alabaster Palette */
-  --color-background: #fbf8f3;
-  --color-background-sidebar: #f4efe6;
-  --color-background-alternate: #f5efe6;
-  --color-background-card: #ffffff;
-  --color-background-card-hover: #fdfbf7;
-  --color-background-input: #ffffff;
-  --color-background-tag: #ede7dc;
+  /* Editorial Palette Mappings */
+  --color-background: var(--pf-canvas-bg);
+  --color-background-sidebar: var(--pf-panel-bg);
+  --color-background-alternate: var(--pf-panel-bg);
+  --color-background-card: var(--pf-card-bg);
+  --color-background-card-hover: var(--pf-card-hover);
+  --color-background-input: var(--pf-card-bg);
+  --color-background-tag: var(--pf-badge-bg);
 
-  --color-text: #24211e;
-  --color-text-emphasized: #1a1715;
-  --color-text-muted: #6e675f;
-  --color-text-heading: #1a1715;
-  --color-text-link: #2e6345;
+  --color-text: var(--pf-text-primary);
+  --color-text-emphasized: var(--pf-text-heading);
+  --color-text-muted: var(--pf-text-muted);
+  --color-text-heading: var(--pf-text-heading);
 
-  --color-border: #e8e2d5;
-  --color-border-card: #e8e2d5;
-  --color-border-emphasized: #d5ccbe;
+  --color-border: var(--pf-border);
+  --color-border-card: var(--pf-border);
+  --color-border-emphasized: var(--pf-border-strong);
 
-  --card-shadow: 0 1px 3px rgba(36, 33, 30, 0.05);
-  --card-shadow-hover: 0 4px 14px rgba(36, 33, 30, 0.08);
+  --card-shadow: var(--pf-shadow);
+  --card-shadow-hover: var(--pf-shadow-hover);
 }
 
 .portfolio-shell-wrapper .app-shell {
   width: 100%;
   padding-top: 0 !important;
-  background-color: #fbf8f3 !important;
+  background-color: var(--pf-canvas-bg) !important;
 }
 
 .portfolio-shell-wrapper .app-sidebar {
-  background-color: #f4efe6 !important;
-  border-right: 1px solid #e8e2d5 !important;
+  background-color: var(--pf-panel-bg) !important;
+  border-right: 1px solid var(--pf-border) !important;
 }
 
 .portfolio-shell-wrapper .sidebar-section {
-  border-bottom: 1px solid #e8e2d5 !important;
+  border-bottom: 1px solid var(--pf-border) !important;
 }
 
 .portfolio-shell-wrapper .mobile-header {
-  background-color: #f4efe6 !important;
-  border-bottom: 1px solid #e8e2d5 !important;
+  background-color: var(--pf-panel-bg) !important;
+  border-bottom: 1px solid var(--pf-border) !important;
 }
 
 .portfolio-shell-wrapper .site-name {
-  color: #1a1715 !important;
+  color: var(--pf-text-heading) !important;
 }
 
 .portfolio-shell-wrapper .sidebar-content p {
-  color: #5c554e !important;
+  color: var(--pf-text-secondary) !important;
 }
 
 .portfolio-shell-wrapper .sidebar-bio-highlight {
-  color: #1a1715 !important;
+  color: var(--pf-text-heading) !important;
   font-weight: 600;
 }
 
 .portfolio-shell-wrapper .sidebar-bio-term {
-  color: #3d3731 !important;
+  color: var(--pf-text-primary) !important;
 }
 
 .portfolio-shell-wrapper .sidebar-bio-garden {
-  color: #2e6345 !important;
+  color: var(--color-primary);
   font-weight: 500;
 }
 
 .portfolio-shell-wrapper .sidebar-nav-main-site {
-  border-bottom: 1px solid #e8e2d5 !important;
-  color: #6e675f !important;
+  border-bottom: 1px solid var(--pf-border) !important;
+  color: var(--pf-text-muted) !important;
 }
 
 .portfolio-shell-wrapper .sidebar-nav-item {
-  color: #5c554e !important;
+  color: var(--pf-text-secondary) !important;
   border-radius: 12px !important;
   border-left: none !important;
 }
 
 .portfolio-shell-wrapper .sidebar-nav-item:hover {
-  color: #1a1715 !important;
-  background: rgba(36, 33, 30, 0.05) !important;
-  border-color: rgba(36, 33, 30, 0.06) !important;
+  color: var(--pf-text-heading) !important;
+  background: var(--pf-active-pill) !important;
+  border-color: var(--pf-active-pill-border) !important;
   border-left: none !important;
 }
 
 .portfolio-shell-wrapper .sidebar-nav-item.active {
-  background: #eae3d5 !important;
-  color: #1a1715 !important;
-  border: 1px solid #d5ccbe !important;
+  background: var(--pf-active-pill) !important;
+  color: var(--pf-active-pill-text) !important;
+  border: 1px solid var(--pf-active-pill-border) !important;
   border-left: none !important;
   border-radius: 12px !important;
-  box-shadow: 0 1px 3px rgba(36, 33, 30, 0.05) !important;
+  box-shadow: var(--pf-shadow) !important;
 }
 
 .portfolio-shell-wrapper .sidebar-nav-item.active .sidebar-nav-icon-wrap {
-  color: #2e6345 !important;
+  color: var(--color-primary) !important;
   opacity: 1;
 }
 
 .portfolio-shell-wrapper .sidebar-links a {
-  color: #5c554e !important;
+  color: var(--pf-text-secondary) !important;
 }
 
 .portfolio-shell-wrapper .sidebar-links a:hover {
-  color: #1a1715 !important;
+  color: var(--pf-text-heading) !important;
 }
 
 .portfolio-shell-wrapper .sidebar-sub-links a {
-  color: #7d756c !important;
+  color: var(--pf-text-muted) !important;
 }
 
 .portfolio-shell-wrapper .sidebar-sub-links a:hover {
-  color: #1a1715 !important;
+  color: var(--pf-text-heading) !important;
 }
 
 .portfolio-shell-wrapper .divider {
-  background-color: #e8e2d5 !important;
+  background-color: var(--pf-border) !important;
 }
 
 /* ==========================================================================
@@ -4232,30 +4315,29 @@ a.text-link:hover {
 }
 
 /* ==========================================================================
-   PORTFOLIO APP SHELL (Option 1: Warm Alabaster & Linen Paper Aesthetic)
+   PORTFOLIO APP SHELL (Dynamic Light / Dark Theme)
    ========================================================================== */
 .portfolio-app-shell {
   display: flex;
   min-height: 100vh;
   width: 100%;
-  background-color: #fbf8f3 !important;
-  color: #24211e !important;
-  color-scheme: light;
+  background-color: var(--pf-canvas-bg) !important;
+  color: var(--pf-text-primary) !important;
+  color-scheme: var(--pf-color-scheme);
 
-  /* Eye-Comfort Warm Alabaster & Linen Paper Tokens */
-  --bg-primary: #fbf8f3;
-  --bg-secondary: #f4efe6;
-  --bg-tertiary: #eae3d5;
-  --bg-subtle: #f5efe6;
-  --surface-card: #ffffff;
-  --surface-card-hover: #fdfbf7;
-  --text-primary: #24211e;
-  --text-secondary: #5c554e;
-  --text-muted: #7d756c;
-  --border-subtle: #e8e2d5;
-  --border-strong: #d5ccbe;
-  --accent-color: #2e6345;
-  --badge-bg: #ede7dc;
+  /* Dual Theme Dynamic Tokens */
+  --bg-primary: var(--pf-canvas-bg);
+  --bg-secondary: var(--pf-panel-bg);
+  --bg-tertiary: var(--pf-border);
+  --bg-subtle: var(--pf-panel-bg);
+  --surface-card: var(--pf-card-bg);
+  --surface-card-hover: var(--pf-card-hover);
+  --text-primary: var(--pf-text-primary);
+  --text-secondary: var(--pf-text-secondary);
+  --text-muted: var(--pf-text-muted);
+  --border-subtle: var(--pf-border);
+  --border-strong: var(--pf-border-strong);
+  --badge-bg: var(--pf-badge-bg);
 }
 
 .portfolio-main-column {
@@ -4263,13 +4345,13 @@ a.text-link:hover {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  background-color: #fbf8f3 !important;
-  color: #24211e !important;
+  background-color: var(--pf-canvas-bg) !important;
+  color: var(--pf-text-primary) !important;
 }
 
 .portfolio-top-bar {
-  background-color: #f4efe6 !important;
-  border-bottom: 1px solid #e8e2d5 !important;
+  background-color: var(--pf-panel-bg) !important;
+  border-bottom: 1px solid var(--pf-border) !important;
 }
 
 .portfolio-content-area {
@@ -4302,12 +4384,12 @@ a.text-link:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #f4efe6 !important;
-  border-right: 1px solid #e8e2d5 !important;
+  background-color: var(--pf-panel-bg) !important;
+  border-right: 1px solid var(--pf-border) !important;
   padding: 3rem 2rem 2.5rem 2.5rem;
   box-sizing: border-box;
   z-index: 50;
-  color: #24211e !important;
+  color: var(--pf-text-primary) !important;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   user-select: none;
 }
@@ -4324,7 +4406,7 @@ a.text-link:hover {
   font-size: 1.15rem;
   font-weight: 600;
   letter-spacing: 0.22em;
-  color: #24211e !important;
+  color: var(--pf-text-primary) !important;
   text-decoration: none;
   text-transform: uppercase;
   transition: opacity 0.2s ease, color 0.2s ease;
@@ -4333,7 +4415,7 @@ a.text-link:hover {
 }
 
 .stefano-brand:hover {
-  color: #000000 !important;
+  color: var(--pf-text-heading) !important;
   opacity: 0.9;
 }
 
@@ -4356,7 +4438,7 @@ a.text-link:hover {
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #6e675f !important;
+  color: var(--pf-text-muted) !important;
   text-decoration: none;
   padding: 0.62rem 0.95rem;
   border-radius: 12px;
@@ -4370,21 +4452,21 @@ a.text-link:hover {
 }
 
 .stefano-nav-link:hover {
-  color: #1a1715 !important;
-  background: rgba(36, 33, 30, 0.05);
-  border-color: rgba(36, 33, 30, 0.06);
+  color: var(--pf-text-heading) !important;
+  background: var(--pf-active-pill);
+  border-color: var(--pf-active-pill-border);
   border-left: none !important;
   transform: none;
 }
 
 .stefano-nav-link.active {
-  color: #1a1715 !important;
+  color: var(--pf-active-pill-text) !important;
   font-weight: 600;
-  background: #eae3d5 !important;
-  border: 1px solid #d5ccbe !important;
+  background: var(--pf-active-pill) !important;
+  border: 1px solid var(--pf-active-pill-border) !important;
   border-left: none !important;
   border-radius: 12px !important;
-  box-shadow: 0 1px 3px rgba(36, 33, 30, 0.05);
+  box-shadow: var(--pf-shadow);
 }
 
 .stefano-socials {
@@ -4397,22 +4479,22 @@ a.text-link:hover {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: #ffffff !important;
+  background: var(--pf-social-bg) !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #5c554e !important;
+  color: var(--pf-social-text) !important;
   text-decoration: none;
   transition: all 0.2s ease;
-  border: 1px solid #e2dbce !important;
+  border: 1px solid var(--pf-social-border) !important;
 }
 
 .stefano-social-circle:hover {
-  background: #24211e !important;
-  color: #ffffff !important;
+  background: var(--pf-text-heading) !important;
+  color: var(--pf-canvas-bg) !important;
   transform: translateY(-2px);
-  border-color: #24211e !important;
-  box-shadow: 0 4px 12px rgba(36, 33, 30, 0.12);
+  border-color: var(--pf-text-heading) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
 /* Mobile Header for Stefano Panel */
@@ -4428,13 +4510,13 @@ a.text-link:hover {
     left: 0;
     right: 0;
     height: 60px;
-    background: #f4efe6 !important;
-    border-bottom: 1px solid #e8e2d5 !important;
+    background: var(--pf-panel-bg) !important;
+    border-bottom: 1px solid var(--pf-border) !important;
     padding: 0 1.25rem;
     align-items: center;
     justify-content: space-between;
     z-index: 60;
-    color: #24211e !important;
+    color: var(--pf-text-primary) !important;
   }
 
   .stefano-sidebar {
@@ -4446,7 +4528,7 @@ a.text-link:hover {
     width: 280px;
     transform: translateX(-100%);
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 10px 0 35px rgba(36, 33, 30, 0.15);
+    box-shadow: 10px 0 35px rgba(0, 0, 0, 0.25);
     z-index: 70;
   }
 

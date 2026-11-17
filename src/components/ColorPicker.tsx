@@ -19,7 +19,7 @@ export function ColorPicker() {
   }, []);
 
   const getThemeValue = (c: ColorAccent) => {
-    return c.midnightValue || c.darkValue;
+    return theme === "light" ? c.lightValue : (c.darkValue || c.midnightValue);
   };
 
   const currentVal = getThemeValue(accent);

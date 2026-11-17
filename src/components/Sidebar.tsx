@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/data/siteConfig";
 import { ColorPicker } from "./ColorPicker";
+import { ThemeToggle } from "./ThemeToggle";
 import { AmbientPlayer } from "./AmbientPlayer";
 import { GithubIcon, BlueskyIcon } from "./SocialIcons";
 import {
@@ -89,6 +90,7 @@ export function Sidebar() {
         </div>
         <div className="mobile-header-actions">
           <AmbientPlayer variant="header" />
+          <ThemeToggle />
           <ColorPicker />
           <button
             type="button"
@@ -124,6 +126,7 @@ export function Sidebar() {
             </Link>
 
             <div className="sidebar-header-controls">
+              <ThemeToggle />
               <ColorPicker />
             </div>
           </div>
