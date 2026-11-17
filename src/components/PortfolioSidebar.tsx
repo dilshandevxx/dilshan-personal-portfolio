@@ -83,7 +83,7 @@ export function PortfolioSidebar() {
           </Link>
           <Link
             href="/"
-            className="text-[10px] uppercase font-mono tracking-wider text-neutral-400 hover:text-white px-2 py-0.5 rounded border border-white/10"
+            className="text-[10px] uppercase font-mono tracking-wider text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-2 py-0.5 rounded border border-[var(--border-subtle)]"
             title="Return to Main Landing Page"
           >
             &larr; MAIN
@@ -130,10 +130,9 @@ export function PortfolioSidebar() {
           <Link
             href="/"
             onClick={() => setMobileOpen(false)}
-            className="stefano-nav-link"
+            className="stefano-nav-link stefano-nav-main-site"
             style={{
-              opacity: 0.75,
-              borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+              borderBottom: "1px solid var(--border-subtle, #e8e2d5)",
               paddingBottom: "0.75rem",
               marginBottom: "0.5rem",
             }}
