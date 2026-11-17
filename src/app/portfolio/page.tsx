@@ -1,10 +1,12 @@
-import AboutRoutePage, { metadata as aboutMetadata } from './about/page';
+import { Metadata } from 'next';
+import { PortfolioProjectsView } from '@/components/PortfolioProjectsView';
+import { siteConfig } from '@/data/siteConfig';
 
-export const metadata = {
-  ...aboutMetadata,
-  title: 'Dilshan — Software Engineer & Open-Source Creator',
+export const metadata: Metadata = {
+  title: `Portfolio & Engineering Architecture — ${siteConfig.name}`,
+  description: siteConfig.sidebarBio,
 };
 
 export default function PortfolioMainPage() {
-  return <AboutRoutePage />;
+  return <PortfolioProjectsView />;
 }

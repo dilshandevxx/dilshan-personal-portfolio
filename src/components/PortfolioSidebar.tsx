@@ -15,7 +15,7 @@ export interface NavigationItem {
 }
 
 export const NAVIGATION_ITEMS: NavigationItem[] = [
-  { id: "projects", label: "PROJECTS", href: "/portfolio/projects" },
+  { id: "projects", label: "PROJECTS", href: "/portfolio" },
   { id: "blog", label: "WRITING", href: "/portfolio/blog" },
   { id: "shelves", label: "SHELVES", href: "/portfolio/shelves" },
   { id: "about", label: "ABOUT", href: "/portfolio/about" },
@@ -31,12 +31,11 @@ export function PortfolioSidebar() {
     {
       id: "projects",
       label: "PROJECTS",
-      path: "/portfolio/projects",
+      path: "/portfolio",
       isActive:
         pathname === "/portfolio" ||
         pathname === "/portfolio/" ||
-        pathname.startsWith("/portfolio/projects") ||
-        pathname.startsWith("/projects"),
+        pathname.startsWith("/portfolio/projects"),
     },
     {
       id: "writing",

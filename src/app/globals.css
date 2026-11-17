@@ -4367,6 +4367,19 @@ html[data-portfolio-theme="light"] body {
   --border-strong: var(--pf-border-strong);
   --badge-bg: var(--pf-badge-bg);
   --accent-color: var(--color-primary);
+
+  /* Bridge to unified editorial tokens */
+  --color-background: var(--pf-canvas-bg);
+  --color-background-card: var(--pf-card-bg);
+  --color-background-card-hover: var(--pf-card-hover);
+  --color-text: var(--pf-text-primary);
+  --color-text-emphasized: var(--pf-text-heading);
+  --color-text-muted: var(--pf-text-muted);
+  --color-border: var(--pf-border);
+  --color-border-card: var(--pf-border);
+  --color-border-emphasized: var(--pf-border-strong);
+  --card-shadow: var(--pf-shadow);
+  --card-shadow-hover: var(--pf-shadow-hover);
 }
 
 .portfolio-main-column {
