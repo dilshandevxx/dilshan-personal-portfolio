@@ -8,7 +8,7 @@ import { siteConfig } from "@/data/siteConfig";
 import { ColorPicker } from "./ColorPicker";
 import { ThemeToggle } from "./ThemeToggle";
 import { GithubIcon, BlueskyIcon } from "./SocialIcons";
-import { Mail, Rss, Menu, X as CloseIcon, ArrowLeft } from "lucide-react";
+import { Mail, Rss, Menu, X as CloseIcon, ArrowLeft, FileText } from "lucide-react";
 
 export interface NavigationItem {
   id: string;
@@ -18,10 +18,11 @@ export interface NavigationItem {
 }
 
 export const NAVIGATION_ITEMS: NavigationItem[] = [
+  { id: "about", label: "About me", href: "/portfolio/about", emoji: "💾" },
+  { id: "projects", label: "Projects", href: "/portfolio", emoji: "💻" },
   { id: "blog", label: "Blog", href: "/portfolio/blog", emoji: "📝" },
   { id: "shelves", label: "Shelves", href: "/portfolio/shelves", emoji: "🔍" },
-  { id: "projects", label: "Projects", href: "/portfolio", emoji: "💻" },
-  { id: "about", label: "About me", href: "/portfolio/about", emoji: "💾" },
+  { id: "resume", label: "CV", href: "/portfolio/resume", emoji: "📄" },
 ];
 
 export function PortfolioSidebar() {
@@ -30,9 +31,31 @@ export function PortfolioSidebar() {
 
   const navLinks = [
     {
+      id: "about",
+      label: "About me",
+      iconSrc: "/nav-floppy.png",
+      icon: null as React.ElementType | null,
+      path: "/portfolio/about",
+      isActive:
+        pathname === "/portfolio/about" ||
+        pathname.startsWith("/portfolio/about"),
+    },
+    {
+      id: "projects",
+      label: "Projects",
+      iconSrc: "/nav-projects.png",
+      icon: null as React.ElementType | null,
+      path: "/portfolio",
+      isActive:
+        pathname === "/portfolio" ||
+        pathname === "/portfolio/" ||
+        pathname.startsWith("/portfolio/projects"),
+    },
+    {
       id: "blog",
       label: "Blog",
       iconSrc: "/nav-blog.png",
+      icon: null as React.ElementType | null,
       path: "/portfolio/blog",
       isActive:
         pathname === "/portfolio/blog" ||
@@ -42,29 +65,19 @@ export function PortfolioSidebar() {
       id: "shelves",
       label: "Shelves",
       iconSrc: "/nav-search.png",
+      icon: null as React.ElementType | null,
       path: "/portfolio/shelves",
       isActive:
         pathname.startsWith("/portfolio/shelves") ||
         pathname.startsWith("/portfolio/life"),
     },
     {
-      id: "projects",
-      label: "Projects",
-      iconSrc: "/nav-projects.png",
-      path: "/portfolio",
-      isActive:
-        pathname === "/portfolio" ||
-        pathname === "/portfolio/" ||
-        pathname.startsWith("/portfolio/projects"),
-    },
-    {
-      id: "about",
-      label: "About me",
-      iconSrc: "/nav-floppy.png",
-      path: "/portfolio/about",
-      isActive:
-        pathname === "/portfolio/about" ||
-        pathname.startsWith("/portfolio/about"),
+      id: "resume",
+      label: "CV",
+      iconSrc: null as string | null,
+      icon: FileText as React.ElementType | null,
+      path: "/portfolio/resume",
+      isActive: pathname.startsWith("/portfolio/resume"),
     },
   ];
 
@@ -177,13 +190,17 @@ export function PortfolioSidebar() {
                 }}
               >
                 <span className="sidebar-nav-icon-wrap" aria-hidden="true" style={{ width: 20, height: 20, display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
-                  <Image
-                    src={item.iconSrc}
-                    alt=""
-                    width={18}
-                    height={18}
-                    className="navbar-logo"
-                  />
+                  {item.iconSrc ? (
+                    <Image
+                      src={item.iconSrc}
+                      alt=""
+                      width={18}
+                      height={18}
+                      className="navbar-logo"
+                    />
+                  ) : item.icon ? (
+                    <item.icon size={17} strokeWidth={2} style={{ color: "currentColor" }} />
+                  ) : null}
                 </span>
                 <span className="sidebar-nav-label">{item.label}</span>
               </Link>
@@ -231,16 +248,8 @@ export function PortfolioSidebar() {
             </nav>
           </section>
 
-          {/* Sub-links with dividers (Resume | Topics | Source) */}
+          {/* Sub-links with dividers (Topics | Source) */}
           <nav className="sidebar-sub-links" aria-label="Quick links">
-            <Link
-              href="/portfolio/resume"
-              onClick={() => setMobileOpen(false)}
-              className={pathname === "/portfolio/resume" ? "active" : ""}
-            >
-              Resume
-            </Link>
-            <div className="divider" />
             <Link
               href="/portfolio/shelves"
               onClick={() => setMobileOpen(false)}

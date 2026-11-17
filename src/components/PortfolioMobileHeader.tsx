@@ -38,7 +38,7 @@ export function PortfolioMobileHeader({ activeSection = 'about' }: PortfolioMobi
   const currentItem =
     NAVIGATION_ITEMS.find((item) => {
       if (pathname === item.href) return true;
-      if ((pathname === '/portfolio' || pathname === '/portfolio/') && item.id === 'about') return true;
+      if ((pathname === '/portfolio' || pathname === '/portfolio/') && item.id === 'projects') return true;
       if (pathname.startsWith(item.href) && item.href !== '/portfolio') return true;
       if (pathname === '/portfolio/life' && item.id === 'shelves') return true;
       if (pathname === '/portfolio' && activeSection === item.id) return true;

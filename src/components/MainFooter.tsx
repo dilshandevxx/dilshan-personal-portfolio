@@ -150,7 +150,7 @@ export default function MainFooter() {
                   </a>
                 </li>
                 <li>
-                  <Link href="/shelves" className={styles.navLink}>
+                  <Link href="/portfolio/shelves" className={styles.navLink}>
                     Shelves
                   </Link>
                 </li>

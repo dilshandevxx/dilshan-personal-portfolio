@@ -26,6 +26,18 @@ export function Sidebar() {
 
   const navLinks = [
     {
+      label: "About me",
+      icon: User,
+      path: "/about",
+      isActive: pathname.startsWith("/about"),
+    },
+    {
+      label: "Projects",
+      icon: Code2,
+      path: "/projects",
+      isActive: pathname.startsWith("/projects"),
+    },
+    {
       label: "Blog",
       icon: FileText,
       path: "/blog",
@@ -42,16 +54,10 @@ export function Sidebar() {
         pathname.startsWith("/shelves") || pathname.startsWith("/guides"),
     },
     {
-      label: "Projects",
-      icon: Code2,
-      path: "/projects",
-      isActive: pathname.startsWith("/projects"),
-    },
-    {
-      label: "About me",
-      icon: User,
-      path: "/about",
-      isActive: pathname.startsWith("/about"),
+      label: "CV",
+      icon: FileText,
+      path: "/portfolio/resume",
+      isActive: pathname.startsWith("/portfolio/resume"),
     },
   ];
 
