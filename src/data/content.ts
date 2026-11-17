@@ -388,6 +388,326 @@ article {
 
 ### Accessibility as Baseline Respect
 Understated design is not an excuse to sacrifice contrast. By systematically pairing light and dark theme tokens with calibrated contrast ratios (minimum 4.5:1 for body copy), we ensure our thoughts remain readable for everyone.`
+    },
+    {
+      id: "post-4",
+      slug: "enabling-apache-echarts-in-react",
+      title: "Enabling Apache ECharts in React for High-Density Telemetry",
+      subtitle: "Integrating and optimizing high-performance ECharts canvases within React 19 applications.",
+      publishedAt: "2025-03-31",
+      readingTime: "6 min read",
+      tags: ["React", "TypeScript", "Data Visualization", "JavaScript"],
+      summary: "A comprehensive guide on integrating and optimizing high-performance ECharts canvases within React 19 applications.",
+      content: `### High-Density Telemetry in the Browser
+
+Apache ECharts is one of the most powerful charting libraries for displaying high-density visual telemetry. This guide walks through setting up custom canvas instances, managing responsive resize observers, and ensuring smooth 60fps renders with React component wrappers.
+
+\`\`\`tsx
+import React, { useEffect, useRef } from 'react';
+import * as echarts from 'echarts';
+
+export function HighDensityChart({ data }: { data: number[][] }) {
+  const chartRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!chartRef.current) return;
+    const chart = echarts.init(chartRef.current);
+
+    chart.setOption({
+      animation: false,
+      tooltip: { trigger: 'axis' },
+      xAxis: { type: 'time' },
+      yAxis: { type: 'value' },
+      series: [{
+        type: 'line',
+        showSymbol: false,
+        data,
+      }]
+    });
+
+    const observer = new ResizeObserver(() => chart.resize());
+    observer.observe(chartRef.current);
+
+    return () => {
+      observer.disconnect();
+      chart.dispose();
+    };
+  }, [data]);
+
+  return <div ref={chartRef} className="w-full h-80" />;
+}
+\`\`\`
+
+### 1. Canvas vs SVG Renderers
+When rendering more than 10,000 data points, SVG elements overwhelm the browser DOM tree. Switching to ECharts' Canvas renderer eliminates DOM bloat and allows fluid zooming and pan interactions.
+
+### 2. Debouncing Resize Observers
+Window resize and layout shifts trigger layout thrashing if unthrottled. Wrapping chart.resize() in requestAnimationFrame keeps redraw operations synchronized with the browser's refresh rate.`
+    },
+    {
+      id: "post-5",
+      slug: "production-rag-architectures-and-reranking",
+      title: "Production RAG Architectures: Hybrid Retrieval and Cross-Encoder Reranking",
+      subtitle: "Moving beyond naive vector cosine similarity by combining dense embeddings with BM25 keyword matching and cross-encoder rerankers.",
+      publishedAt: "2025-03-15",
+      readingTime: "8 min read",
+      tags: ["AI/ML", "RAG", "Python", "Vector Search"],
+      summary: "When deploying Retrieval-Augmented Generation at scale, hybrid search using Reciprocal Rank Fusion (RRF) and second-stage cross-encoders drastically reduces hallucinations and improves recall.",
+      content: `### Why Naive Vector Search Fails in Production
+
+Pure dense embedding retrieval suffers from catastrophic blind spots when queries contain acronyms, SKU identifiers, or exact code symbols. High-dimensional vector cosine similarity measures semantic proximity, not lexical precision.
+
+\`\`\`python
+# Reciprocal Rank Fusion (RRF) for combining dense & sparse scores
+def reciprocal_rank_fusion(dense_ranks, sparse_ranks, k=60):
+    rrf_scores = {}
+    for rank, doc_id in enumerate(dense_ranks):
+        rrf_scores[doc_id] = rrf_scores.get(doc_id, 0.0) + 1.0 / (k + rank + 1)
+    for rank, doc_id in enumerate(sparse_ranks):
+        rrf_scores[doc_id] = rrf_scores.get(doc_id, 0.0) + 1.0 / (k + rank + 1)
+    
+    return sorted(rrf_scores.items(), key=lambda x: x[1], reverse=True)
+\`\`\`
+
+### 1. Dense + BM25 Hybrid Retrieval
+By indexing documents in both a dense vector store (e.g., Qdrant or Milvus) and an inverted BM25 index (e.g., Elasticsearch or Tantivy), we capture both conceptual nuance and exact keyword matches.
+
+### 2. Second-Stage Cross-Encoder Reranking
+While bi-encoders generate separate embeddings for query and document, cross-encoders pass the concatenated pair into multi-head attention. Reranking top-50 hybrid candidates down to top-5 delivers dramatic improvements in downstream generation accuracy.`
+    },
+    {
+      id: "post-6",
+      slug: "year-in-review-2024",
+      title: "Year in Review: 2024",
+      subtitle: "Reflections on shipping machine learning systems, deep diving into Kubernetes GitOps, and building open-source developer tooling.",
+      publishedAt: "2025-01-04",
+      readingTime: "5 min read",
+      tags: ["Reflections", "Open Source", "Architecture"],
+      summary: "A look back at 2024: migrating infrastructure to declarative GitOps with ArgoCD, experimenting with open-source LLMs, and publishing notes across modern full-stack development.",
+      content: `### 2024 Retrospective
+
+2024 was defined by a deliberate transition from sprawling cloud monoliths toward resilient, deterministic infrastructure and local-first software.
+
+> "The software engineer's true craft is not how much code they write, but how much unnecessary complexity they can safely prevent."
+
+### Key Milestones
+- **Declarative GitOps:** Migrated our production Kubernetes microservices cluster to pure ArgoCD sync loops, reducing deployment anomalies to near zero.
+- **Inference Optimization:** Experimented with vLLM, continuous batching, and AWQ quantization to serve open-weights models with sub-second time-to-first-token.
+- **Open-Source Notes:** Published over 20 architectural guides and launched this digital garden space.`
+    },
+    {
+      id: "post-7",
+      slug: "zero-downtime-kubernetes-gitops",
+      title: "Zero-Downtime Deployments with Kubernetes and ArgoCD GitOps",
+      subtitle: "Implementing automated blue-green and canary releases with robust readiness probes and pre-stop lifecycle hooks.",
+      publishedAt: "2024-11-18",
+      readingTime: "7 min read",
+      tags: ["DevOps", "Kubernetes", "Docker", "GitOps"],
+      summary: "Achieving true zero-downtime in microservices requires treating Git as the single source of truth. We look at rolling update configurations, health check policies, and ingress routing.",
+      content: `### The Myth of Instant Pod Termination
+
+When Kubernetes schedules a replacement Pod during a rolling deployment, traffic will be routed to terminating containers unless lifecycle hooks and readiness thresholds are calibrated with mechanical precision.
+
+\`\`\`yaml
+# Zero-downtime container lifecycle configuration
+lifecycle:
+  preStop:
+    exec:
+      command: ["/bin/sh", "-c", "sleep 15"]
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 3
+\`\`\`
+
+### 1. The PreStop Grace Period
+A preStop sleep hook allows kube-proxy and ingress load balancers sufficient time to deregister the pod IP from active iptables endpoints before the application process receives SIGTERM.
+
+### 2. Declarative Rollouts with Argo Rollouts
+Canary deployments with progressive traffic shifting (5% -> 20% -> 50% -> 100%) paired with Prometheus error-rate analysis ensure faulty releases are rolled back autonomously before reaching critical thresholds.`
+    },
+    {
+      id: "post-8",
+      slug: "react-19-server-components-mental-model",
+      title: "The Next.js App Router & React 19 Server Components Mental Model",
+      subtitle: "How React Server Components, Suspense boundaries, and Client Component leaves coordinate to eliminate client bundle size.",
+      publishedAt: "2024-09-22",
+      readingTime: "6 min read",
+      tags: ["React", "Next.js", "Web Architecture"],
+      summary: "Server Components represent a fundamental shift in web architecture. Here is how to think about data fetching at the component level without sending unnecessary JavaScript to the browser.",
+      content: `### Server Components Are Not SSR
+
+Server-Side Rendering (SSR) sends HTML to the client which then executes client-side hydration for every single node. React Server Components (RSC) execute exclusively on the server, streaming serialized UI trees directly into the DOM without client JavaScript runtime overhead.
+
+\`\`\`tsx
+// Pure Server Component: Zero client bundle footprint
+import db from '@/lib/db';
+
+export async function ProjectOverview({ id }: { id: string }) {
+  const project = await db.project.findUnique({ where: { id } });
+  
+  return (
+    <div className="project-card">
+      <h2>{project.title}</h2>
+      <p>{project.description}</p>
+    </div>
+  );
+}
+\`\`\`
+
+### 1. Pushing 'use client' to the Leaves
+Keep stateful interactive hooks (like useState, useEffect, and event handlers) in compact leaf components. The surrounding layout, data layer, and markdown renderers remain pure server code.
+
+### 2. Granular Suspense Streaming
+By wrapping slow asynchronous operations in React Suspense, the browser renders the instant shell immediately, streaming slower database queries into place as they resolve.`
+    },
+    {
+      id: "post-9",
+      slug: "quantizing-open-weights-llms-with-vllm",
+      title: "Serving Quantized LLMs in Production with vLLM & PagedAttention",
+      subtitle: "Maximizing GPU memory throughput and slashing inference latency using AWQ quantization and continuous batching.",
+      publishedAt: "2024-06-14",
+      readingTime: "8 min read",
+      tags: ["AI/ML", "vLLM", "Python", "GPU Inference"],
+      summary: "PagedAttention revolutionized transformer memory management. Benchmarking AWQ vs GPTQ models and building a lightweight API endpoint using FastAPI and vLLM.",
+      content: `### Eliminating GPU Memory Fragmentation
+
+Traditional autoregressive generation pre-allocates continuous GPU VRAM buffers for Key-Value (KV) cache. Under dynamic sequence lengths, up to 70% of GPU memory is wasted on fragmentation and reserved headroom.
+
+\`\`\`python
+# High-throughput vLLM engine initialization
+from vllm import LLM, SamplingParams
+
+sampling_params = SamplingParams(temperature=0.7, top_p=0.9, max_tokens=512)
+llm = LLM(
+    model="meta-llama/Llama-3-8B-Instruct",
+    quantization="awq",
+    gpu_memory_utilization=0.92,
+    max_model_len=4096
+)
+
+outputs = llm.generate(["Explain Paxos consensus simply:"], sampling_params)
+for output in outputs:
+    print(output.outputs[0].text)
+\`\`\`
+
+### 1. PagedAttention
+Inspired by OS virtual memory paging, PagedAttention partitions the KV cache into non-contiguous physical memory blocks. This allows concurrent requests to share memory dynamically and increases server throughput by 2x to 4x.
+
+### 2. AWQ vs GPTQ Quantization
+Activation-aware Weight Quantization (AWQ) protects salient weight channels that correlate with large activation outliers, preserving perplexity metrics while halving VRAM requirements.`
+    },
+    {
+      id: "post-10",
+      slug: "building-realtime-collaborative-apps-with-websockets",
+      title: "Building Real-Time Multi-User Apps with WebSockets & Redis Pub/Sub",
+      subtitle: "Scaling bi-directional WebSocket connections horizontally across distributed Node.js clusters using Redis adapters.",
+      publishedAt: "2024-02-28",
+      readingTime: "7 min read",
+      tags: ["Distributed Systems", "WebSockets", "Node.js", "Redis"],
+      summary: "Handling thousands of concurrent stateful WebSocket connections requires an event distribution backbone. Room broadcasting, heartbeats, and graceful reconnections.",
+      content: `### Horizontally Scaling Stateful Sockets
+
+A single Node.js instance can maintain tens of thousands of open TCP socket connections, but broadcasting an event to a user connected to a different container requires a distributed message fabric.
+
+\`\`\`typescript
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+import { createAdapter } from '@socket.io/redis-adapter';
+import { createClient } from 'redis';
+
+const pubClient = createClient({ url: process.env.REDIS_URL });
+const subClient = pubClient.duplicate();
+
+await Promise.all([pubClient.connect(), subClient.connect()]);
+
+const io = new Server(server, {
+  adapter: createAdapter(pubClient, subClient)
+});
+
+io.on('connection', (socket) => {
+  socket.on('document:edit', ({ docId, delta }) => {
+    socket.to(docId).emit('document:update', delta);
+  });
+});
+\`\`\`
+
+### 1. Heartbeats and Dead Connection Cleanup
+Stale TCP connections remain open indefinitely when mobile devices switch cellular towers or enter sleep mode. Aggressive ping-pong intervals detect dropped sockets within seconds.
+
+### 2. Conflict Resolution with CRDTs
+When multiple users edit shared canvases concurrently, last-write-wins creates data loss. Integrating Conflict-free Replicated Data Types (CRDTs) like Yjs guarantees eventual consistency across all clients.`
+    },
+    {
+      id: "post-11",
+      slug: "setting-up-a-hardened-linux-vps",
+      title: "Setting Up and Hardening a Linux VPS for Production",
+      subtitle: "Essential security checklist: SSH keys, UFW firewalls, fail2ban, automatic updates, and non-root user privileges.",
+      publishedAt: "2023-10-11",
+      readingTime: "6 min read",
+      tags: ["Linux", "Security", "DevOps"],
+      summary: "Before deploying Docker containers to a remote server, baseline OS hardening is vital. Step-by-step walkthrough for securing Ubuntu/Debian instances.",
+      content: `### The Zero-Trust Server Baseline
+
+Within 120 seconds of launching a public IPv4 cloud VPS, automated botnets begin probing port 22 with dictionary attacks. Hardening the operating system is the first non-negotiable step of any deployment.
+
+\`\`\`bash
+# Essential security baseline for Ubuntu/Debian
+# 1. Update system repositories
+sudo apt update && sudo apt upgrade -y
+
+# 2. Configure Uncomplicated Firewall (UFW)
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 22/tcp comment 'SSH'
+sudo ufw allow 80/tcp comment 'HTTP'
+sudo ufw allow 443/tcp comment 'HTTPS'
+sudo ufw enable
+
+# 3. Disable password authentication in SSH
+sudo sed -i -e 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+sudo systemctl restart ssh
+\`\`\`
+
+### 1. Fail2Ban Brute-Force Shielding
+Fail2ban scans system authentication logs and dynamically inserts iptables drop rules for IP addresses exhibiting suspicious authentication failures.
+
+### 2. Unattended Security Upgrades
+Enabling automated security kernel patches ensures known CVE vulnerabilities are remediated without manual operator intervention.`
+    },
+    {
+      id: "post-12",
+      slug: "complete-guide-to-full-stack-typescript",
+      title: "A Complete Guide to End-to-End Type Safety in TypeScript",
+      subtitle: "Sharing types between frontend and backend with Zod validation, Prisma schemas, and typed API clients.",
+      publishedAt: "2023-05-19",
+      readingTime: "8 min read",
+      tags: ["TypeScript", "Full-Stack", "Architecture"],
+      summary: "Eliminating runtime data mismatches by enforcing contract validation at the boundaries of your application with Zod, Prisma, and type inference.",
+      content: `### The Cost of Boundary Blindness
+
+TypeScript's compiler checks types at build time, but external data sources—HTTP request payloads, query parameters, and database results—arrive as untyped JSON at runtime.
+
+\`\`\`typescript
+import { z } from 'zod';
+
+// Shared schema: Single source of truth for runtime & static types
+export const UserRegistrationSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+  fullName: z.string().min(2),
+});
+
+export type UserRegistrationDTO = z.infer<typeof UserRegistrationSchema>;
+\`\`\`
+
+### 1. Schema-Driven Type Inference
+Instead of defining TypeScript interfaces and then manually writing runtime validation checks, define Zod schemas first and infer static TypeScript types with z.infer<T>.
+
+### 2. Boundary Verification
+Validate inputs at the edge of your HTTP handlers. Once data passes boundary parsing, the inner domain services can rely on complete, verified type safety.`
     }
   ],
 

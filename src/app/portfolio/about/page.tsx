@@ -5,13 +5,13 @@ import { MailIcon, RssIcon, BlueskyIcon, CoffeeIcon, NextjsIcon, GithubIcon, Ver
 
 export const metadata = {
   title: 'About Me — Dilshan',
-  description: 'Software engineer and open-source creator. Digital garden, contact, and miscellaneous.',
+  description: 'Software engineer and open-source creator. Digital garden, contact, publications, tools, and miscellaneous.',
 };
 
 export default function AboutRoutePage() {
   return (
     <div className="space-y-12 animate-in fade-in duration-200">
-      {/* 💾 About Me Header */}
+      {/* 💾 About Me Header (Screenshot 1) */}
       <div className="border-b border-[var(--border-subtle)] pb-6">
         <h1 className="text-3xl sm:text-4xl font-bold font-sans text-[var(--text-primary)] flex items-center gap-3">
           <span className="text-3xl" role="img" aria-label="Floppy disk">💾</span>
@@ -19,7 +19,7 @@ export default function AboutRoutePage() {
         </h1>
       </div>
 
-      {/* Two-Column Intro & Portrait Section Matching Screenshot 1 */}
+      {/* Two-Column Intro & Portrait Section (Screenshot 1) */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start">
         {/* Left Column: Narrative (7 cols on desktop) */}
         <div className="md:col-span-7 space-y-5 text-sm sm:text-base font-sans text-[var(--text-secondary)] leading-relaxed">
@@ -33,12 +33,12 @@ export default function AboutRoutePage() {
             </Link>
             ,{' '}
             <Link
-              href="/portfolio/projects"
+              href="/portfolio"
               className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4 decoration-[var(--accent-color)]"
             >
               projects
             </Link>
-            , and systems! I&apos;m currently working as a software engineer specializing in distributed systems and local-first architecture, and in my free time I like brewing specialty pour-over coffee, reading history &amp; architecture, and hiking. I spend most of my time exploring durable software design and timeless computing literature.
+            , and art! I&apos;m currently working as a software engineer specializing in distributed systems and local-first architecture, and in my free time I like working out, biking, playing video games, and reading. I spend most of my time exploring durable software design and timeless computing literature.
           </p>
 
           <p>
@@ -72,7 +72,7 @@ export default function AboutRoutePage() {
             </a>{' '}
             or subscribe to the{' '}
             <Link
-              href="/feed.xml"
+              href="/rss.xml"
               className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4 decoration-[var(--accent-color)]"
             >
               RSS feed
@@ -96,58 +96,252 @@ export default function AboutRoutePage() {
         </div>
       </div>
 
-      {/* Contact Section Matching Screenshot 1 */}
+      {/* Contact Section (Screenshot 2) */}
       <section id="contact" className="pt-6 border-t border-[var(--border-subtle)] space-y-4">
         <h2 className="text-2xl sm:text-3xl font-bold font-sans text-[var(--text-primary)]">
           Contact
         </h2>
-        <p className="text-sm sm:text-base font-sans text-[var(--text-secondary)] leading-relaxed max-w-2xl">
-          I&apos;m always glad to talk about distributed systems, local-first computing, or analog rituals. The fastest way to reach me is by direct email at{' '}
-          <a
-            href="mailto:hello@dilshan.dev"
-            className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4 decoration-[var(--accent-color)]"
-          >
-            hello@dilshan.dev
-          </a>
-          . You can also find me on{' '}
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
-          >
-            GitHub
-          </a>
-          ,{' '}
-          <a
-            href="https://bsky.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
-          >
-            Bluesky
-          </a>
-          , and{' '}
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
-          >
-            LinkedIn
-          </a>
-          .
+        <p className="text-sm sm:text-base font-sans text-[var(--text-secondary)] leading-relaxed">
+          Send me an email to say hi, or connect via the socials.
         </p>
+
+        <ul className="list-disc pl-5 space-y-2 text-sm sm:text-base font-sans marker:text-[var(--text-muted)] text-[var(--text-secondary)]">
+          <li>
+            Email:{' '}
+            <a
+              href="mailto:hello@dilshan.dev"
+              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+            >
+              hello@dilshan.dev
+            </a>
+          </li>
+          <li>
+            <a
+              href="mailto:hello@dilshan.dev?subject=Newsletter%20Signup"
+              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+            >
+              Email Newsletter
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/dilshandevxx"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+            >
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://bsky.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+            >
+              Bluesky
+            </a>
+          </li>
+        </ul>
       </section>
 
-      {/* Miscellaneous Section Matching Screenshot 3 */}
+      {/* What I'm Doing Now Section (Screenshot 2) */}
+      <section className="pt-6 border-t border-[var(--border-subtle)] space-y-4">
+        <h2 className="text-2xl sm:text-3xl font-bold font-sans text-[var(--text-primary)]">
+          What I&apos;m Doing Now
+        </h2>
+        <p className="text-xs sm:text-sm font-sans italic text-[var(--text-muted)]">
+          Updated August 16th, 2026
+        </p>
+
+        <ul className="list-disc pl-5 space-y-2 text-sm sm:text-base font-sans marker:text-[var(--text-muted)] text-[var(--text-secondary)]">
+          <li>Working full-time on distributed systems &amp; open-source software</li>
+          <li>Tweaking this digital garden website</li>
+          <li>Building durable offline-first systems, local sync engines, and developer tooling</li>
+          <li>Brewing specialty pour-over coffee (V60 &amp; Aeropress single-origin roasts)</li>
+          <li>Reading classic systems architecture and computing history books</li>
+        </ul>
+      </section>
+
+      {/* Tools Section: Software & Hardware (Screenshot 3) */}
+      <section className="pt-6 border-t border-[var(--border-subtle)] space-y-6">
+        <h2 className="text-2xl sm:text-3xl font-bold font-sans text-[var(--text-primary)]">
+          Tools
+        </h2>
+
+        {/* Software Sub-section */}
+        <div className="space-y-3">
+          <h3 className="text-xl sm:text-2xl font-bold font-sans text-[var(--text-primary)]">
+            Software
+          </h3>
+          <p className="text-sm sm:text-base font-sans text-[var(--text-secondary)] leading-relaxed">
+            This website is hosted on{' '}
+            <a
+              href="https://vercel.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+            >
+              Vercel
+            </a>{' '}
+            and uses the{' '}
+            <a
+              href="https://nextjs.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+            >
+              Next.js
+            </a>{' '}
+            (App Router) &amp; React framework.
+          </p>
+
+          <ul className="list-disc pl-5 space-y-2 text-sm sm:text-base font-sans marker:text-[var(--text-muted)] text-[var(--text-secondary)]">
+            <li>
+              <strong className="text-[var(--text-primary)] font-semibold">Coding:</strong>{' '}
+              <a
+                href="https://code.visualstudio.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+              >
+                Visual Studio Code
+              </a>
+              <ul className="list-[circle] pl-5 mt-1 space-y-1 text-xs sm:text-sm text-[var(--text-muted)]">
+                <li>
+                  <strong className="text-[var(--text-primary)] font-medium">Theme:</strong>{' '}
+                  <span className="text-[var(--accent-color)] font-medium">New Moon Theme</span> / Tokyo Night, my custom syntax theme!
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong className="text-[var(--text-primary)] font-semibold">Terminal:</strong>{' '}
+              <span className="text-[var(--accent-color)] font-medium">iTerm2</span> / WezTerm / pwsh
+            </li>
+            <li>
+              <strong className="text-[var(--text-primary)] font-semibold">Notes:</strong>{' '}
+              <a
+                href="https://obsidian.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+              >
+                Obsidian
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        {/* Hardware Sub-section */}
+        <div className="space-y-3 pt-2">
+          <h3 className="text-xl sm:text-2xl font-bold font-sans text-[var(--text-primary)]">
+            Hardware
+          </h3>
+
+          <ul className="list-disc pl-5 space-y-2 text-sm sm:text-base font-sans marker:text-[var(--text-muted)] text-[var(--text-secondary)]">
+            <li>
+              <strong className="text-[var(--text-primary)] font-semibold">Coding PC:</strong>{' '}
+              M1 MacBook Pro 16&quot; 2021, 32GB RAM
+            </li>
+            <li>
+              <strong className="text-[var(--text-primary)] font-semibold">Gaming &amp; Workstation PC</strong>
+              <ul className="list-[circle] pl-5 mt-1 space-y-1 text-xs sm:text-sm text-[var(--text-secondary)]">
+                <li>
+                  <span className="text-[var(--text-muted)]">CPU:</span>{' '}
+                  <span className="text-[var(--accent-color)] font-medium">AMD Ryzen 9 5900X / 12-Core</span>
+                </li>
+                <li>
+                  <span className="text-[var(--text-muted)]">Motherboard:</span>{' '}
+                  <span className="text-[var(--accent-color)] font-medium">ASUS ProArt X570-Creator Gaming</span>
+                </li>
+                <li>
+                  <span className="text-[var(--text-muted)]">Memory:</span>{' '}
+                  <span className="text-[var(--accent-color)] font-medium">Crucial Ballistix 64GB DDR4</span>
+                </li>
+                <li>
+                  <span className="text-[var(--text-muted)]">Storage:</span>{' '}
+                  <span className="text-[var(--accent-color)] font-medium">SSD 970 EVO NVMe M.2 2TB</span>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Publications Section (Screenshot 4) */}
+      <section className="pt-6 border-t border-[var(--border-subtle)] space-y-4">
+        <h2 className="text-2xl sm:text-3xl font-bold font-sans text-[var(--text-primary)]">
+          Publications
+        </h2>
+
+        <ul className="list-disc pl-5 space-y-3 text-sm sm:text-base font-sans marker:text-[var(--text-muted)]">
+          <li>
+            <Link
+              href="/portfolio/blog"
+              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+            >
+              Understanding the GraphQL &amp; Distributed Consensus Systems
+            </Link>
+            <p className="text-xs sm:text-sm italic text-[var(--text-muted)] pl-1 pt-0.5">
+              DigitalOcean &amp; Architecture Notes, 2024
+            </p>
+          </li>
+          <li>
+            <Link
+              href="/portfolio/blog"
+              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+            >
+              How To Set Up a Resilient Microservices API Cluster with Docker &amp; Kubernetes
+            </Link>
+            <p className="text-xs sm:text-sm italic text-[var(--text-muted)] pl-1 pt-0.5">
+              Systems Engineering Guide, 2024
+            </p>
+          </li>
+          <li>
+            <Link
+              href="/portfolio/blog"
+              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+            >
+              Zero-Dependency Web Design &amp; The Timeless Web
+            </Link>
+            <p className="text-xs sm:text-sm italic text-[var(--text-muted)] pl-1 pt-0.5">
+              Digital Garden Essay Series, 2023
+            </p>
+          </li>
+          <li>
+            <Link
+              href="/portfolio/blog"
+              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+            >
+              Setting up a Production RAG Platform with Hybrid Retrieval &amp; Vector Search
+            </Link>
+            <p className="text-xs sm:text-sm italic text-[var(--text-muted)] pl-1 pt-0.5">
+              AI/ML Engineering, 2023
+            </p>
+          </li>
+          <li>
+            <Link
+              href="/portfolio/blog"
+              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
+            >
+              The Lost Art of Readable &amp; Maintainable Software
+            </Link>
+            <p className="text-xs sm:text-sm italic text-[var(--text-muted)] pl-1 pt-0.5">
+              Software Craftsmanship, 2022
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      {/* Miscellaneous Section (Screenshot 5) */}
       <section className="pt-6 border-t border-[var(--border-subtle)] space-y-4">
         <h2 className="text-2xl sm:text-3xl font-bold font-sans text-[var(--text-primary)]">
           Miscellaneous
         </h2>
-        <ul className="space-y-2 text-sm sm:text-base font-sans">
-          <li className="flex items-center gap-2.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-color)]" />
+
+        <ul className="list-disc pl-5 space-y-2 text-sm sm:text-base font-sans marker:text-[var(--text-muted)]">
+          <li>
             <Link
               href="/portfolio/resume"
               className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
@@ -155,22 +349,12 @@ export default function AboutRoutePage() {
               Resume
             </Link>
           </li>
-          <li className="flex items-center gap-2.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-color)]" />
+          <li>
             <Link
               href="/portfolio/shelves"
               className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
             >
-              Shelves &amp; Analog Habits
-            </Link>
-          </li>
-          <li className="flex items-center gap-2.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-color)]" />
-            <Link
-              href="/portfolio/skills"
-              className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
-            >
-              Topics &amp; Systems Architecture
+              Shelves &amp; Everyday Gear
             </Link>
           </li>
         </ul>
@@ -189,7 +373,7 @@ export default function AboutRoutePage() {
         </p>
       </section>
 
-      {/* Bottom Footer Actions & Tech Badges Matching Screenshot 3 */}
+      {/* Bottom Footer Actions & Tech Badges (Screenshot 5) */}
       <div className="pt-10 border-t border-[var(--border-subtle)] space-y-6">
         {/* Quick Links Row: Email signup, RSS feed, Bluesky, Buy me a coffee */}
         <div className="flex flex-wrap items-center gap-6 text-sm font-sans text-[var(--text-secondary)]">
@@ -201,7 +385,7 @@ export default function AboutRoutePage() {
             <span>Email signup</span>
           </a>
           <Link
-            href="/feed.xml"
+            href="/rss.xml"
             className="flex items-center gap-2 hover:text-[var(--accent-color)] transition-colors"
           >
             <RssIcon className="w-4 h-4 text-[var(--text-muted)]" />
@@ -234,7 +418,7 @@ export default function AboutRoutePage() {
             <span>Next.js</span>
           </span>
           <a
-            href="https://github.com"
+            href="https://github.com/dilshandevxx"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-[var(--border-strong)] bg-[var(--surface-card)] text-xs font-mono text-[var(--text-primary)] hover:border-[var(--accent-color)] transition-colors"

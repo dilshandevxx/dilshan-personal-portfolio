@@ -145,7 +145,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       <footer className="pt-8 border-t border-[var(--border-subtle)] space-y-6">
         <div className="p-5 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-secondary)] space-y-2 text-xs font-mono">
           <p className="font-semibold text-[var(--text-primary)] font-serif text-sm">
-            Dilshan K.
+            Dilshan
           </p>
           <p className="text-[var(--text-muted)] font-sans">
             Software engineer focusing on distributed systems and mindful computing.
