@@ -19,7 +19,7 @@ export function ModernHeader() {
     <header className={styles.headerNav}>
       {/* Left: Monogram / Name matching Billie Duvalle screenshot */}
       <Link href="/" className={styles.brandTitle} onClick={() => setMobileMenuOpen(false)}>
-        DILSHAN RAMESH
+        DILSHAN
       </Link>
 
       {/* Center: Clean Nav Links (HOME / PROJECTS / ABOUT / CONTACT) */}

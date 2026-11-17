@@ -7,7 +7,7 @@ import styles from "./ModernFooter.module.css";
 export function ModernFooter() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.logo}>DILSHAN RAMESH</div>
+      <div className={styles.logo}>DILSHAN</div>
 
       <div className={styles.navLinks}>
         <Link href="/" className={styles.link}>HOME</Link>
@@ -47,7 +47,7 @@ export function ModernFooter() {
       </div>
 
       <div className={styles.copyright}>
-        &copy; 2026 Dilshan Ramesh. All rights reserved.
+        &copy; 2026 Dilshan. All rights reserved.
       </div>
     </footer>
   );

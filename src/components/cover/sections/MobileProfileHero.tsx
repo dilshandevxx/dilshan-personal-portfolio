@@ -38,8 +38,8 @@ export default function MobileProfileHero() {
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
         await navigator.share({
-          title: "Dilshan Ramesh — Systems Architect",
-          text: "Explore Dilshan Ramesh's engineering portfolio and distributed systems projects.",
+          title: "Dilshan — Systems Architect",
+          text: "Explore Dilshan's engineering portfolio and distributed systems projects.",
           url: window.location.href,
         });
       } catch (err) {
@@ -73,7 +73,7 @@ export default function MobileProfileHero() {
         <div className={styles.avatarInner}>
           <Image
             src="/dilshan_profile.jpg"
-            alt="Dilshan Ramesh"
+            alt="Dilshan"
             fill
             sizes="90px"
             priority
@@ -85,7 +85,7 @@ export default function MobileProfileHero() {
       {/* 3. Name & Golden Verified Badge */}
       <div className={styles.profileHeader}>
         <div className={styles.nameRow}>
-          <h1 className={styles.displayName}>Dilshan Ramesh</h1>
+          <h1 className={styles.displayName}>Dilshan</h1>
           <span className={styles.verifiedBadge} title="Verified Profile" aria-label="Verified">
             <svg viewBox="0 0 24 24" fill="none" className={styles.verifiedSvg}>
               <path
@@ -110,7 +110,7 @@ export default function MobileProfileHero() {
 
         {/* 5. Short Bio */}
         <p className={styles.bioText}>
-          Dilshan Ramesh is an avid software designer, systems architect and content creator based in Sri Lanka.
+          Dilshan is an avid software designer, systems architect and content creator.
         </p>
 
         {/* 6. Contact / Info Links */}

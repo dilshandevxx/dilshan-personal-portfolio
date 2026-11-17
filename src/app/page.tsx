@@ -7,11 +7,11 @@ import ContactSection from "@/components/cover/sections/ContactSection";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Dilshan Ramesh | Full-Stack Engineer & System Architect",
+  title: "Dilshan | Full-Stack Engineer & System Architect",
   description:
-    "Sri Lankan born full-stack engineer and system architect focusing on distributed systems, modern web experiences & scalable architectures.",
+    "Full-stack engineer and system architect focusing on distributed systems, modern web experiences & scalable architectures.",
   openGraph: {
-    title: "Dilshan Ramesh | Full-Stack Engineer & System Architect",
+    title: "Dilshan | Full-Stack Engineer & System Architect",
     description: "Distributed systems, modern web experiences & scalable architectures.",
     type: "website",
   },

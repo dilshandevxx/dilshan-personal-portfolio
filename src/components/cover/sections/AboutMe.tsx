@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import styles from "./AboutMe.module.css";
 
@@ -9,71 +10,59 @@ export default function AboutMe() {
   return (
     <section className={styles.aboutSection} id="about-me" aria-label="About Dilshan">
       <div className={styles.container}>
-        {/* Subtle Mono Category Label (No Big Clunky Title) */}
+        {/* 1. High-Impact Centered Studio Statement & Strict Rectangular Button (matching reference) */}
         <motion.div
-          className={styles.headerLabel}
-          initial={{ opacity: 0, y: 15 }}
+          className={styles.statementWrapper}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className={styles.labelTag}>[ 01 // PERSPECTIVE ]</span>
+          <h2 className={styles.statementText}>
+            <span className={styles.statementLine}>
+              Software engineering, system architecture and digital systems that turn
+            </span>
+            <span className={styles.statementLine}>
+              complex challenges into elegant products.
+            </span>
+            <span className={styles.statementMuted}>
+              Systems which scale under load, honor clarity and quietly endure.
+            </span>
+          </h2>
+
+          <div className={styles.buttonRow}>
+            <Link href="#contact" className={styles.whyButton}>
+              WHY DILSHAN?
+            </Link>
+          </div>
         </motion.div>
 
-        {/* Seamless Grid: Portrait Photo & Pure Philosophy Quote */}
-        <div className={styles.grid}>
-          {/* Left: Dilshan's Photo in Natural 1:1 Aspect Ratio */}
-          <motion.div
-            className={styles.photoCol}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className={styles.photoFrame}>
-              <Image
-                src="/images/about_portrait.jpg"
-                alt="Dilshan Ramesh"
-                width={1024}
-                height={1024}
-                priority
-                className={styles.photo}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 480px"
-              />
-              <div className={styles.photoOverlay} />
-            </div>
-            <div className={styles.photoMeta}>
-              <span className={styles.metaDot} />
-              <span className={styles.metaText}>Dilshan Ramesh // Sri Lanka</span>
-            </div>
-          </motion.div>
+        {/* 2. Beautiful Centered Portrait Presentation (Pure, Cinematic, Zero Dots) */}
+        <motion.div
+          className={styles.portraitWrapper}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className={styles.photoFrame}>
+            <Image
+              src="/images/about_portrait.jpg"
+              alt="Dilshan"
+              width={1024}
+              height={1024}
+              priority
+              className={styles.photo}
+              sizes="(max-width: 768px) 320px, 400px"
+            />
+            <div className={styles.photoOverlay} />
+          </div>
 
-          {/* Right: Thoughtful Quote & Clean Signature */}
-          <motion.div
-            className={styles.quoteCol}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <blockquote className={styles.quoteBlock}>
-              <p className={styles.quoteLead}>
-                &ldquo;Simplicity is prerequisite for reliability.&rdquo;
-              </p>
-              <p className={styles.quoteFollow}>
-                Good architecture doesn&apos;t shout for attention. It subtracts the noise, honors clarity over cleverness, and quietly endures.
-              </p>
-            </blockquote>
-
-            <div className={styles.authorBadge}>
-              <div className={styles.authorLine} />
-              <div className={styles.authorContent}>
-                <span className={styles.authorName}>Dilshan Ramesh</span>
-                <span className={styles.authorTitle}>Full-Stack Engineer &amp; System Architect</span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+          <div className={styles.authorMeta}>
+            <span className={styles.authorName}>DILSHAN</span>
+            <span className={styles.authorTitle}>Full-Stack Engineer &amp; System Architect</span>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
