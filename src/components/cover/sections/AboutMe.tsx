@@ -36,7 +36,7 @@ export default function AboutMe() {
             </div>
           </div>
 
-          {/* Integrated Portrait Photo (Clean & Unwrapped) */}
+          {/* Integrated Portrait Photo (Clean & Properly Sized) */}
           <div className={styles.portraitCol}>
             <div className={styles.photoFrame}>
               <Image
@@ -44,7 +44,7 @@ export default function AboutMe() {
                 alt="Dilshan"
                 fill
                 priority
-                sizes="(max-width: 900px) 100vw, 480px"
+                sizes="(max-width: 860px) 240px, 280px"
                 className={styles.portraitPhoto}
               />
             </div>

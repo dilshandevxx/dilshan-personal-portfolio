@@ -1,26 +1,28 @@
-/* About Section — Clean, Unwrapped Cinematic Typography & Portrait */
+/* About Section — Clean, Refined Cinematic Typography & Balanced Portrait */
 .aboutSection {
-  background-color: #000000;
-  padding: clamp(5.5rem, 9vw, 9rem) clamp(1.5rem, 4vw, 4rem);
+  background-color: var(--color-background, #202025);
+  padding: clamp(3.5rem, 6vw, 5.5rem) clamp(1.5rem, 4vw, 4rem);
   position: relative;
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .container {
-  max-width: 1240px;
+  max-width: 1100px;
   margin: 0 auto;
   width: 100%;
 }
 
-/* Clean 2-Column Layout with Generous Gap (No Enclosing Card Box) */
+/* Balanced 2-Column Grid (1fr left narrative, 280px right portrait) */
 .stageGrid {
   display: grid;
-  grid-template-columns: 1.25fr 0.85fr;
+  grid-template-columns: 1fr 280px;
   align-items: center;
-  column-gap: clamp(2.5rem, 5vw, 5rem);
-  row-gap: 3rem;
+  column-gap: clamp(2.5rem, 4.5vw, 4.5rem);
+  row-gap: 2.5rem;
   width: 100%;
 }
 
@@ -29,36 +31,36 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: clamp(2rem, 3.5vw, 2.75rem);
+  gap: 1.75rem;
   box-sizing: border-box;
 }
 
 .statementText {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
   margin: 0;
 }
 
 .statementPrimary {
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(1.65rem, 2.7vw, 2.45rem);
-  font-weight: 500;
-  line-height: 1.35;
-  letter-spacing: -0.025em;
-  color: #ffffff;
+  font-size: clamp(1.35rem, 2.1vw, 1.85rem);
+  font-weight: 600;
+  line-height: 1.42;
+  letter-spacing: -0.02em;
+  color: #f0ecdf;
 }
 
 .statementSecondary {
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  font-size: clamp(0.98rem, 1.35vw, 1.15rem);
   font-weight: 400;
-  line-height: 1.55;
+  line-height: 1.65;
   letter-spacing: -0.01em;
-  color: #8b949e;
+  color: #9da4ae;
 }
 
-/* Action Row & Rectangular Outline Button (No Arrow) */
+/* Action Row & Minimalist Rectangular Outline Button */
 .actionRow {
   display: flex;
   align-items: center;
@@ -70,14 +72,14 @@
   align-items: center;
   justify-content: center;
   background-color: transparent;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 0;
-  padding: 0.95rem 2.4rem;
+  color: #f0ecdf;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 4px;
+  padding: 0.75rem 1.85rem;
   font-family: var(--font-mono, monospace);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   text-decoration: none;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -88,36 +90,37 @@
 
 .whyButton:hover {
   background-color: #ffffff;
-  color: #000000;
+  color: #151816;
   border-color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Portrait Column (Clean Photo Frame) */
+/* Portrait Column (Properly Sized & Refined) */
 .portraitCol {
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .photoFrame {
   position: relative;
   width: 100%;
-  max-width: 440px;
+  max-width: 280px;
   aspect-ratio: 4 / 5;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
-  background-color: #0d0f15;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9);
+  background-color: var(--pf-card-bg, #282830);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.7);
 }
 
 .portraitPhoto {
   object-fit: cover;
   object-position: center 20%;
-  filter: contrast(1.04) brightness(0.97);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: contrast(1.03) brightness(0.98);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .photoFrame:hover .portraitPhoto {
@@ -125,37 +128,40 @@
 }
 
 /* Responsive Breakpoints */
-@media (max-width: 960px) {
+@media (max-width: 860px) {
   .stageGrid {
     grid-template-columns: 1fr;
-    row-gap: 3.5rem;
+    row-gap: 2.25rem;
   }
 
   .portraitCol {
-    order: -1; /* Photo above statement on mobile */
+    order: -1;
     justify-content: flex-start;
   }
 
   .photoFrame {
-    max-width: 360px;
+    max-width: 240px;
   }
 }
 
 @media (max-width: 640px) {
   .aboutSection {
-    padding: 4.5rem 1.25rem;
+    padding: 3rem 1.25rem;
   }
 
-  .statementText {
-    gap: 1rem;
+  .statementPrimary {
+    font-size: 1.25rem;
+  }
+
+  .statementSecondary {
+    font-size: 0.95rem;
   }
 
   .photoFrame {
-    max-width: 100%;
-    aspect-ratio: 4 / 5;
+    max-width: 220px;
   }
 
   .whyButton {
-    width: 100%;
+    width: auto;
   }
 }
