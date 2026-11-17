@@ -9,19 +9,16 @@ import {
   ProjectCategory,
   ProjectStatus,
   getProjectThumbnail,
-  FALLBACK_THUMBNAILS,
 } from "@/data/projects";
+import { ProjectCard } from "@/components/ProjectCard";
 import {
   Plus,
   Edit3,
   Trash2,
   ExternalLink,
-  Lock,
-  Unlock,
   Search,
   Check,
   Copy,
-  ArrowLeft,
   X,
   Sparkles,
   Eye,
@@ -29,6 +26,8 @@ import {
   FileCode2,
   Layers,
   Globe,
+  Sliders,
+  FolderGit2,
 } from "lucide-react";
 import styles from "./admin.module.css";
 
@@ -38,6 +37,8 @@ const CATEGORIES: ProjectCategory[] = [
   "Systems",
   "Full-Stack",
   "Landing",
+  "Platform Engineering",
+  "MLOps",
   "Others",
 ];
 
@@ -50,122 +51,136 @@ const PRESET_IMAGES = [
   { label: "Boltshift", url: "/images/project_boltshift.jpg" },
   { label: "Powersurge", url: "/images/project_powersurge.jpg" },
   { label: "Warpspeed", url: "/images/project_warpspeed.jpg" },
-  { label: "Travel", url: "/images/story_travel.jpg" },
-  { label: "Twilight", url: "/images/skyline_twilight.jpg" },
+  { label: "Desk Setup", url: "/images/project_warpspeed_desk.jpg" },
+  { label: "Travel Story", url: "/images/story_travel.jpg" },
+  { label: "Twilight City", url: "/images/skyline_twilight.jpg" },
+  {
+    label: "Unsplash Modern Arch",
+    url: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    label: "Unsplash Clean Tech",
+    url: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    label: "Unsplash Data Flow",
+    url: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
+  },
 ];
 
-const DEFAULT_PASSKEY = "Dilshan775944600";
+const POPULAR_TAGS = [
+  "TypeScript",
+  "Next.js",
+  "Go",
+  "Python",
+  "FastAPI",
+  "PostgreSQL",
+  "Docker",
+  "Kubernetes",
+  "Redis",
+  "Kafka",
+  "GraphQL",
+  "Tailwind CSS",
+  "AWS",
+  "gRPC",
+];
 
 export default function AdminPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [passkeyInput, setPasskeyInput] = useState<string>("");
-  const [authError, setAuthError] = useState<string>("");
-
   const [projects, setProjects] = useState<Project[]>(initialProjects);
-  const [viewMode, setViewMode] = useState<"directory" | "editor">("directory");
+  const [activeTab, setActiveTab] = useState<"studio" | "directory">("studio");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedStatus, setSelectedStatus] = useState<string>("All");
 
-  const [editingSlug, setEditingSlug] = useState<string | null>(null);
+  const [editingSlug, setEditingSlug] = useState<string | null>(
+    initialProjects[0]?.slug || null
+  );
   const [toastMessage, setToastMessage] = useState<string>("");
 
   // Comprehensive Form State
-  const [formTitle, setFormTitle] = useState("");
-  const [formSlug, setFormSlug] = useState("");
-  const [formCategory, setFormCategory] = useState<ProjectCategory>("AI/ML");
-  const [formStatus, setFormStatus] = useState<ProjectStatus>("Existing");
-  const [formFeatured, setFormFeatured] = useState<boolean>(false);
-  const [formDate, setFormDate] = useState<string>("2026");
-  const [formImage, setFormImage] = useState<string>("");
-  const [formTagline, setFormTagline] = useState("");
-  const [formDescription, setFormDescription] = useState("");
-  const [formLongDescription, setFormLongDescription] = useState("");
-  const [formDemoUrl, setFormDemoUrl] = useState("");
-  const [formGithubUrl, setFormGithubUrl] = useState("");
-  const [formWriteupUrl, setFormWriteupUrl] = useState("");
-  const [formArchitecture, setFormArchitecture] = useState("");
-  const [formChallenges, setFormChallenges] = useState("");
-  const [formHighlightsText, setFormHighlightsText] = useState("");
-  const [formTagsText, setFormTagsText] = useState("");
-  const [formMetrics, setFormMetrics] = useState("");
+  const [formTitle, setFormTitle] = useState(initialProjects[0]?.title || "");
+  const [formSlug, setFormSlug] = useState(initialProjects[0]?.slug || "");
+  const [formCategory, setFormCategory] = useState<ProjectCategory>(
+    initialProjects[0]?.category || "AI/ML"
+  );
+  const [formStatus, setFormStatus] = useState<ProjectStatus>(
+    initialProjects[0]?.status || "Existing"
+  );
+  const [formFeatured, setFormFeatured] = useState<boolean>(
+    Boolean(initialProjects[0]?.featured)
+  );
+  const [formDate, setFormDate] = useState<string>(
+    initialProjects[0]?.date || "2026"
+  );
+  const [formImage, setFormImage] = useState<string>(
+    initialProjects[0]?.image || ""
+  );
+  const [formTagline, setFormTagline] = useState(
+    initialProjects[0]?.tagline || ""
+  );
+  const [formDescription, setFormDescription] = useState(
+    initialProjects[0]?.description || ""
+  );
+  const [formLongDescription, setFormLongDescription] = useState(
+    initialProjects[0]?.longDescription || initialProjects[0]?.description || ""
+  );
+  const [formDemoUrl, setFormDemoUrl] = useState(
+    initialProjects[0]?.demoUrl || ""
+  );
+  const [formGithubUrl, setFormGithubUrl] = useState(
+    initialProjects[0]?.githubUrl || ""
+  );
+  const [formWriteupUrl, setFormWriteupUrl] = useState(
+    initialProjects[0]?.writeupUrl || ""
+  );
+  const [formArchitecture, setFormArchitecture] = useState(
+    initialProjects[0]?.architecture || ""
+  );
+  const [formChallenges, setFormChallenges] = useState(
+    initialProjects[0]?.challenges || ""
+  );
+  const [formHighlightsText, setFormHighlightsText] = useState(
+    (initialProjects[0]?.highlights || []).join("\n")
+  );
+  const [formTagsText, setFormTagsText] = useState(
+    (initialProjects[0]?.tags || []).join(", ")
+  );
+  const [formMetrics, setFormMetrics] = useState(
+    initialProjects[0]?.metrics || ""
+  );
 
-  // Check auth from localStorage on mount
+  // Sync projects from localStorage and API on mount
   useEffect(() => {
-    const stored = localStorage.getItem("dilshan_admin_auth");
-    if (stored === "authenticated") {
-      setIsAuthenticated(true);
-    }
+    try {
+      const localSaved = localStorage.getItem("dilshan_custom_projects");
+      if (localSaved) {
+        const parsed = JSON.parse(localSaved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setProjects(parsed);
+          return;
+        }
+      }
+    } catch {}
+
+    fetch("/api/admin/projects")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.projects && Array.isArray(data.projects)) {
+          setProjects(data.projects);
+        }
+      })
+      .catch(() => {
+        // Fallback to initialProjects
+      });
   }, []);
-
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (passkeyInput === DEFAULT_PASSKEY) {
-      setIsAuthenticated(true);
-      localStorage.setItem("dilshan_admin_auth", "authenticated");
-      setAuthError("");
-    } else {
-      setAuthError("Incorrect passkey. Please check credentials.");
-    }
-  };
-
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-    localStorage.removeItem("dilshan_admin_auth");
-  };
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
     setTimeout(() => setToastMessage(""), 4500);
   };
 
-  // Filtered projects for directory list
-  const filteredProjects = useMemo(() => {
-    return projects.filter((p) => {
-      const q = searchQuery.toLowerCase().trim();
-      const matchesSearch =
-        q === "" ||
-        p.title.toLowerCase().includes(q) ||
-        p.slug.toLowerCase().includes(q) ||
-        p.tagline.toLowerCase().includes(q) ||
-        (p.tags && p.tags.some((t) => t.toLowerCase().includes(q)));
-
-      const matchesCategory =
-        selectedCategory === "All" || p.category === selectedCategory;
-      const matchesStatus =
-        selectedStatus === "All" || p.status === selectedStatus;
-
-      return matchesSearch && matchesCategory && matchesStatus;
-    });
-  }, [projects, searchQuery, selectedCategory, selectedStatus]);
-
-  // Open Full-Width Editor for Create
-  const handleOpenCreate = () => {
-    setEditingSlug(null);
-    setFormTitle("");
-    setFormSlug("");
-    setFormCategory("AI/ML");
-    setFormStatus("Existing");
-    setFormFeatured(false);
-    setFormDate("2026");
-    setFormImage("/images/project_collective.jpg");
-    setFormTagline("");
-    setFormDescription("");
-    setFormLongDescription("");
-    setFormDemoUrl("");
-    setFormGithubUrl("https://github.com/dilshandevxx/");
-    setFormWriteupUrl("");
-    setFormArchitecture("");
-    setFormChallenges("");
-    setFormHighlightsText("");
-    setFormTagsText("TypeScript, Next.js, Go, Docker");
-    setFormMetrics("");
-    setViewMode("editor");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  // Open Full-Width Editor for Edit
-  const handleOpenEdit = (project: Project) => {
+  // Load a project into form
+  const populateFormWithProject = (project: Project) => {
     setEditingSlug(project.slug);
     setFormTitle(project.title);
     setFormSlug(project.slug);
@@ -185,33 +200,43 @@ export default function AdminPage() {
     setFormHighlightsText((project.highlights || []).join("\n"));
     setFormTagsText((project.tags || []).join(", "));
     setFormMetrics(project.metrics || "");
-    setViewMode("editor");
+    setActiveTab("studio");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Duplicate a project as a new template
-  const handleDuplicate = (project: Project) => {
+  // Start fresh project draft
+  const handleStartNewProject = () => {
     setEditingSlug(null);
-    setFormTitle(`${project.title} (Copy)`);
-    setFormSlug(`${project.slug}-copy`);
-    setFormCategory(project.category);
-    setFormStatus("Planned");
+    setFormTitle("");
+    setFormSlug("");
+    setFormCategory("AI/ML");
+    setFormStatus("Existing");
     setFormFeatured(false);
     setFormDate(new Date().getFullYear().toString());
-    setFormImage(project.image || "");
-    setFormTagline(project.tagline);
-    setFormDescription(project.description);
-    setFormLongDescription(project.longDescription || project.description);
-    setFormDemoUrl(project.demoUrl || "");
-    setFormGithubUrl(project.githubUrl || "");
-    setFormWriteupUrl(project.writeupUrl || "");
-    setFormArchitecture(project.architecture || "");
-    setFormChallenges(project.challenges || "");
-    setFormHighlightsText((project.highlights || []).join("\n"));
-    setFormTagsText((project.tags || []).join(", "));
-    setFormMetrics(project.metrics || "");
-    setViewMode("editor");
-    showToast(`Created draft from "${project.title}"`);
+    setFormImage("/images/project_collective.jpg");
+    setFormTagline("");
+    setFormDescription("");
+    setFormLongDescription("");
+    setFormDemoUrl("");
+    setFormGithubUrl("https://github.com/dilshandevxx/");
+    setFormWriteupUrl("");
+    setFormArchitecture("");
+    setFormChallenges("");
+    setFormHighlightsText("");
+    setFormTagsText("TypeScript, Next.js, Go, Docker");
+    setFormMetrics("");
+    setActiveTab("studio");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Duplicate current project
+  const handleDuplicateCurrent = () => {
+    setEditingSlug(null);
+    setFormTitle(`${formTitle} (Copy)`);
+    setFormSlug(`${formSlug}-copy`);
+    setFormStatus("Planned");
+    setFormFeatured(false);
+    showToast(`Draft created from "${formTitle}"`);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -239,6 +264,13 @@ export default function AdminPage() {
       return p;
     });
     setProjects(updated);
+    try {
+      localStorage.setItem("dilshan_custom_projects", JSON.stringify(updated));
+    } catch {}
+
+    if (editingSlug === slug) {
+      setFormStatus((prev) => (prev === "Existing" ? "Planned" : "Existing"));
+    }
 
     try {
       const res = await fetch("/api/admin/projects", {
@@ -249,7 +281,7 @@ export default function AdminPage() {
       const data = await res.json();
       showToast(
         data.savedLocally
-          ? "Status toggled & saved to projects.ts"
+          ? "Status updated & saved to projects.ts"
           : "Status updated in session"
       );
     } catch {
@@ -264,6 +296,13 @@ export default function AdminPage() {
 
     const updated = projects.filter((p) => p.slug !== slug);
     setProjects(updated);
+    try {
+      localStorage.setItem("dilshan_custom_projects", JSON.stringify(updated));
+    } catch {}
+
+    if (editingSlug === slug && updated.length > 0) {
+      populateFormWithProject(updated[0]);
+    }
 
     try {
       const res = await fetch("/api/admin/projects", {
@@ -274,11 +313,22 @@ export default function AdminPage() {
       const data = await res.json();
       showToast(
         data.savedLocally
-          ? "Project removed from projects.ts"
+          ? `Removed "${title}" from projects.ts`
           : "Project deleted from list"
       );
     } catch {
       showToast("Removed from current browser state");
+    }
+  };
+
+  // Quick append a tag to formTagsText
+  const handleAddQuickTag = (tag: string) => {
+    const current = formTagsText
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean);
+    if (!current.includes(tag)) {
+      setFormTagsText([...current, tag].join(", "));
     }
   };
 
@@ -347,7 +397,10 @@ export default function AdminPage() {
     }
 
     setProjects(updatedList);
-    setViewMode("directory");
+    setEditingSlug(finalSlug);
+    try {
+      localStorage.setItem("dilshan_custom_projects", JSON.stringify(updatedList));
+    } catch {}
 
     try {
       const res = await fetch("/api/admin/projects", {
@@ -359,7 +412,7 @@ export default function AdminPage() {
       showToast(
         data.savedLocally
           ? `✓ "${projectData.title}" saved directly to projects.ts`
-          : `✓ "${projectData.title}" updated successfully`
+          : `✓ "${projectData.title}" saved successfully`
       );
     } catch {
       showToast(`✓ "${projectData.title}" updated in local memory`);
@@ -374,60 +427,58 @@ export default function AdminPage() {
       2
     )};`;
     navigator.clipboard.writeText(code);
-    showToast("TypeScript projects list copied to clipboard!");
+    showToast("TypeScript projects array copied to clipboard!");
   };
 
-  // -------------------------------------------------------------
-  // AUTHENTICATION VIEW
-  // -------------------------------------------------------------
-  if (!isAuthenticated) {
-    return (
-      <main className={styles.adminRoot}>
-        <div className={styles.authContainer}>
-          <div className={styles.authCard}>
-            <div className={styles.authBadge}>
-              <Lock size={22} />
-            </div>
-            <h1 className={styles.authTitle}>Project Studio Admin</h1>
-            <p className={styles.authSubtitle}>
-              Enter your master passkey to manage, customize, and publish architectural projects.
-            </p>
+  // Filtered projects for directory list
+  const filteredProjects = useMemo(() => {
+    return projects.filter((p) => {
+      const q = searchQuery.toLowerCase().trim();
+      const matchesSearch =
+        q === "" ||
+        p.title.toLowerCase().includes(q) ||
+        p.slug.toLowerCase().includes(q) ||
+        (p.tagline && p.tagline.toLowerCase().includes(q)) ||
+        (p.description && p.description.toLowerCase().includes(q)) ||
+        (p.tags && p.tags.some((t) => t.toLowerCase().includes(q)));
 
-            <form onSubmit={handleLogin} className={styles.authForm}>
-              <div>
-                <input
-                  type="password"
-                  placeholder="Enter Master Passkey"
-                  value={passkeyInput}
-                  onChange={(e) => setPasskeyInput(e.target.value)}
-                  autoFocus
-                  className={styles.authInput}
-                  aria-label="Admin passkey"
-                />
-                {authError && <div className={styles.authError}>{authError}</div>}
-              </div>
+      const matchesCategory =
+        selectedCategory === "All" || p.category === selectedCategory;
+      const matchesStatus =
+        selectedStatus === "All" || p.status === selectedStatus;
 
-              <button type="submit" className={styles.authSubmitBtn}>
-                <Unlock size={16} />
-                <span>Unlock Control Center</span>
-              </button>
-            </form>
-
-            <Link href="/" className={styles.authBackLink}>
-              &larr; Return to Main Landing Page
-            </Link>
-          </div>
-        </div>
-      </main>
-    );
-  }
+      return matchesSearch && matchesCategory && matchesStatus;
+    });
+  }, [projects, searchQuery, selectedCategory, selectedStatus]);
 
   // Live count calculations
   const liveCount = projects.filter((p) => p.status === "Existing").length;
   const plannedCount = projects.filter((p) => p.status === "Planned").length;
 
-  // Active preview image src
-  const activePreviewImage = formImage.trim() || "/images/project_collective.jpg";
+  // Active preview object to pass to ProjectCard in real-time
+  const previewProjectObj: Project = {
+    slug: formSlug || "preview-slug",
+    title: formTitle || "Untitled Architecture Project",
+    date: formDate || "2026",
+    category: formCategory,
+    tagline: formTagline || "One-line punchy subtitle rendered live on project cards.",
+    description: formDescription || "Short summary description outlining the service.",
+    longDescription: formLongDescription || formDescription,
+    highlights: formHighlightsText.split("\n").filter(Boolean),
+    architecture: formArchitecture,
+    challenges: formChallenges,
+    tags: formTagsText.split(",").map((t) => t.trim()).filter(Boolean),
+    stars: 0,
+    featured: formFeatured,
+    githubUrl: formGithubUrl || "https://github.com",
+    demoUrl: formDemoUrl || undefined,
+    writeupUrl: formWriteupUrl || undefined,
+    metrics: formMetrics || undefined,
+    metricsDetail: [],
+    stackLayers: [],
+    image: formImage.trim() || undefined,
+    status: formStatus,
+  };
 
   return (
     <main className={styles.adminRoot}>
@@ -440,76 +491,69 @@ export default function AdminPage() {
       )}
 
       {/* ------------------------------------------------------------- */}
-      {/* TOP STICKY BAR                                                */}
+      {/* TOP CONTROL BAR (Editorial SkyLabs Brand Style)                */}
       {/* ------------------------------------------------------------- */}
       <header className={styles.topBar}>
         <div className={styles.topBarInner}>
           <div className={styles.brandArea}>
-            <div className={styles.brandPill}>
-              <span className={styles.brandDot} aria-hidden="true" />
-              <span>Studio Console</span>
-            </div>
+            <Link href="/" className={styles.brandLogoGroup} title="View SkyLabs Home">
+              <div className={styles.brandLogoBadge}>S</div>
+              <div className={styles.brandTitleGroup}>
+                <span className={styles.brandTitle}>SkyLabs Studio</span>
+                <span className={styles.brandSubtitle}>Project Manager</span>
+              </div>
+            </Link>
 
-            <div className={styles.statsCluster}>
-              <span className={styles.statBadge}>
-                Total: <strong className={styles.statHighlight}>{projects.length}</strong>
-              </span>
-              <span>&bull;</span>
-              <span className={styles.statBadge}>
-                Live: <strong style={{ color: "#4ade80" }}>{liveCount}</strong>
-              </span>
-              <span>&bull;</span>
-              <span className={styles.statBadge}>
-                Planned: <strong style={{ color: "#facc15" }}>{plannedCount}</strong>
-              </span>
-            </div>
+            {/* Explicit Mode Switcher Tabs (Immediate Visibility) */}
+            <nav className={styles.navTabs} aria-label="Admin Navigation Tabs">
+              <button
+                type="button"
+                onClick={() => setActiveTab("studio")}
+                className={`${styles.navTabBtn} ${
+                  activeTab === "studio" ? styles.navTabBtnActive : ""
+                }`}
+              >
+                <Sliders size={14} />
+                <span>Project Studio</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActiveTab("directory")}
+                className={`${styles.navTabBtn} ${
+                  activeTab === "directory" ? styles.navTabBtnActive : ""
+                }`}
+              >
+                <FolderGit2 size={14} />
+                <span>Catalog ({projects.length})</span>
+              </button>
+            </nav>
           </div>
 
           <div className={styles.topActions}>
-            {viewMode === "directory" ? (
-              <button
-                type="button"
-                onClick={handleOpenCreate}
-                className={styles.primaryBtn}
-              >
-                <Plus size={15} />
-                <span>New Project</span>
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setViewMode("directory")}
-                className={styles.secondaryBtn}
-              >
-                <ArrowLeft size={14} />
-                <span>Directory</span>
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={handleStartNewProject}
+              className={styles.primaryBtn}
+            >
+              <Plus size={14} />
+              <span>New Project</span>
+            </button>
 
             <button
               type="button"
               onClick={handleCopyTsCode}
               className={styles.secondaryBtn}
-              title="Copy TypeScript array"
+              title="Copy TypeScript array for backup"
             >
               <Copy size={13} />
               <span>Copy TS</span>
             </button>
 
-            <Link href="/projects" className={styles.secondaryBtn}>
+            <Link href="/projects" target="_blank" className={styles.secondaryBtn}>
               <Eye size={13} />
               <span>View Site</span>
             </Link>
-
-            <button
-              type="button"
-              onClick={handleLogout}
-              className={styles.secondaryBtn}
-              title="Log out of admin"
-            >
-              <Lock size={13} />
-              <span>Exit</span>
-            </button>
           </div>
         </div>
       </header>
@@ -518,237 +562,71 @@ export default function AdminPage() {
       {/* MAIN CONTAINER                                                */}
       {/* ------------------------------------------------------------- */}
       <div className={styles.mainContainer}>
-        {viewMode === "directory" ? (
+        {activeTab === "studio" ? (
           /* ========================================================== */
-          /* MODE A: DIRECTORY LISTING                                   */
+          /* TAB 1: STUDIO CUSTOMIZER & LIVE CARD PREVIEW (PRIMARY)     */
           /* ========================================================== */
-          <div>
-            <div className={styles.directoryControls}>
-              {/* Search Bar */}
-              <div className={styles.searchBar}>
-                <Search className={styles.searchIcon} />
-                <input
-                  type="text"
-                  placeholder={`Search ${projects.length} projects by title, slug, stack, or tagline...`}
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className={styles.searchInput}
-                  aria-label="Search projects"
-                />
-                {searchQuery && (
-                  <button
-                    type="button"
-                    onClick={() => setSearchQuery("")}
-                    className={styles.clearSearchBtn}
-                    aria-label="Clear search query"
-                  >
-                    <X size={16} />
-                  </button>
-                )}
-              </div>
-
-              {/* Category Filter Pills */}
-              <div className={styles.filterPillsRow}>
-                {["All", ...CATEGORIES].map((cat) => {
-                  const isActive = selectedCategory === cat;
-                  return (
-                    <button
-                      key={cat}
-                      type="button"
-                      onClick={() => setSelectedCategory(cat)}
-                      className={`${styles.filterPill} ${
-                        isActive ? styles.filterPillActive : ""
-                      }`}
-                    >
-                      {cat}
-                    </button>
-                  );
-                })}
-
-                <span style={{ color: "#475569", margin: "0 0.25rem" }}>|</span>
-
-                {/* Status Filter */}
-                {[
-                  { id: "All", label: "All Status" },
-                  { id: "Existing", label: "Live Production" },
-                  { id: "Planned", label: "Planned / RFC" },
-                ].map((st) => {
-                  const isActive = selectedStatus === st.id;
-                  return (
-                    <button
-                      key={st.id}
-                      type="button"
-                      onClick={() => setSelectedStatus(st.id)}
-                      className={`${styles.filterPill} ${
-                        isActive ? styles.filterPillActive : ""
-                      }`}
-                    >
-                      {st.label}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Projects Grid */}
-            <div className={styles.projectGrid}>
-              {filteredProjects.map((p, idx) => {
-                const thumb = getProjectThumbnail(p.slug, p.image, idx);
-                const isLive = p.status === "Existing";
-
-                return (
-                  <article key={p.slug} className={styles.adminProjectCard}>
-                    {/* Thumbnail with overlay badges */}
-                    <div className={styles.cardThumbFrame}>
-                      <Image
-                        src={thumb}
-                        alt={p.title}
-                        fill
-                        unoptimized={thumb.startsWith("http")}
-                        className={styles.cardThumbImage}
-                        sizes="(max-width: 768px) 100vw, 360px"
-                      />
-                      <div className={styles.cardOverlayBadges}>
-                        <span className={styles.badgeCategory}>{p.category}</span>
-                        <button
-                          type="button"
-                          onClick={() => handleToggleStatus(p.slug)}
-                          className={`${styles.statusToggleBtn} ${
-                            isLive ? styles.statusLive : styles.statusPlanned
-                          }`}
-                          title="Click to toggle Live vs Planned status"
-                        >
-                          <span
-                            style={{
-                              width: 6,
-                              height: 6,
-                              borderRadius: "50%",
-                              backgroundColor: isLive ? "#4ade80" : "#facc15",
-                            }}
-                          />
-                          <span>{isLive ? "Live" : "Planned"}</span>
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Card Content */}
-                    <div className={styles.cardContent}>
-                      <h2 className={styles.cardTitle}>{p.title}</h2>
-                      <p className={styles.cardTagline}>
-                        {p.tagline || p.description}
-                      </p>
-
-                      {/* Tech Tags */}
-                      <div className={styles.cardTagsRow}>
-                        {(p.tags || []).slice(0, 4).map((t) => (
-                          <span key={t} className={styles.techTag}>
-                            {t}
-                          </span>
-                        ))}
-                        {(p.tags || []).length > 4 && (
-                          <span className={styles.techTag}>
-                            +{(p.tags || []).length - 4}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Card Footer Actions */}
-                      <div className={styles.cardFooterActions}>
-                        <div className={styles.actionBtnGroup}>
-                          <button
-                            type="button"
-                            onClick={() => handleOpenEdit(p)}
-                            className={styles.iconActionBtn}
-                            title="Edit this project"
-                            aria-label={`Edit ${p.title}`}
-                          >
-                            <Edit3 size={15} />
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => handleDuplicate(p)}
-                            className={styles.iconActionBtn}
-                            title="Duplicate as new template"
-                            aria-label={`Duplicate ${p.title}`}
-                          >
-                            <Copy size={14} />
-                          </button>
-                          <Link
-                            href={`/projects/${p.slug}`}
-                            target="_blank"
-                            className={styles.iconActionBtn}
-                            title="View public detail page"
-                            aria-label={`View public page for ${p.title}`}
-                          >
-                            <ExternalLink size={14} />
-                          </Link>
-                        </div>
-
-                        <button
-                          type="button"
-                          onClick={() => handleDelete(p.slug, p.title)}
-                          className={`${styles.iconActionBtn} ${styles.deleteBtn}`}
-                          title="Delete project"
-                          aria-label={`Delete ${p.title}`}
-                        >
-                          <Trash2 size={15} />
-                        </button>
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          </div>
-        ) : (
-          /* ========================================================== */
-          /* MODE B: FULL-WIDTH STUDIO CUSTOMIZER & EDITOR              */
-          /* ========================================================== */
-          <div className={styles.editorContainer}>
-            {/* Editor Action Header */}
-            <div className={styles.editorHeader}>
-              <div className={styles.editorTitleGroup}>
-                <button
-                  type="button"
-                  onClick={() => setViewMode("directory")}
-                  className={styles.editorBackBtn}
+          <div className={styles.studioWorkspace}>
+            {/* Quick System Selector Bar */}
+            <div className={styles.selectorBar}>
+              <div className={styles.selectorLeft}>
+                <span className={styles.selectorLabel}>Editing System:</span>
+                <select
+                  value={editingSlug || "__new__"}
+                  onChange={(e) => {
+                    const slug = e.target.value;
+                    if (slug === "__new__") {
+                      handleStartNewProject();
+                    } else {
+                      const found = projects.find((p) => p.slug === slug);
+                      if (found) populateFormWithProject(found);
+                    }
+                  }}
+                  className={styles.projectSelectDropdown}
                 >
-                  <ArrowLeft size={14} />
-                  <span>Return to Directory</span>
-                </button>
-                <h1 className={styles.editorHeading}>
-                  {editingSlug ? `Editing: ${formTitle}` : "New Project Customizer"}
-                </h1>
+                  <option value="__new__">✨ + Create New System Draft</option>
+                  <optgroup label="Existing Systems">
+                    {projects.map((p) => (
+                      <option key={p.slug} value={p.slug}>
+                        {p.title} ({p.category} • {p.status})
+                      </option>
+                    ))}
+                  </optgroup>
+                </select>
               </div>
 
-              <div style={{ display: "flex", gap: "0.75rem" }}>
+              <div className={styles.selectorActions}>
                 <button
                   type="button"
-                  onClick={() => setViewMode("directory")}
+                  onClick={handleDuplicateCurrent}
                   className={styles.secondaryBtn}
+                  title="Duplicate current project fields into a new draft"
                 >
-                  Cancel
+                  <Copy size={13} />
+                  <span>Duplicate Draft</span>
                 </button>
+
                 <button
                   type="button"
                   onClick={handleSaveForm}
                   className={styles.primaryBtn}
                 >
-                  <Check size={15} />
-                  <span>Save &amp; Deploy Project</span>
+                  <Check size={14} />
+                  <span>Save &amp; Deploy</span>
                 </button>
               </div>
             </div>
 
-            {/* Split Layout: Form on Left, Live Card Preview on Right */}
+            {/* Split Layout: Form on Left, Sticky Real-Time Card Preview on Right */}
             <div className={styles.editorLayout}>
               {/* Form Column */}
               <form onSubmit={handleSaveForm} className={styles.formColumn}>
-                {/* 1. Identity & Card Visuals */}
-                <div className={styles.formCard}>
-                  <h3 className={styles.formCardTitle}>
-                    <Layers size={15} />
-                    <span>01 // Project Card Identity &amp; Image URL</span>
+                {/* 1. Identity, Category & Image URL */}
+                <div className={styles.formSectionCard}>
+                  <h3 className={styles.formSectionTitle}>
+                    <Layers size={16} color="var(--color-primary, #8bb397)" />
+                    <span className={styles.formSectionIndex}>01 //</span>
+                    <span>Identity, Category &amp; Card Image URL</span>
                   </h3>
 
                   <div className={styles.formRow}>
@@ -775,15 +653,15 @@ export default function AdminPage() {
                         className={styles.formInput}
                       />
                       <span className={styles.formHint}>
-                        Accessible at /projects/{formSlug || "your-slug"}
+                        Public URL: /projects/{formSlug || "your-slug"}
                       </span>
                     </div>
                   </div>
 
-                  {/* Image URL input with instant preview */}
+                  {/* Image URL input with direct test presets */}
                   <div className={styles.formGroup}>
                     <label className={styles.formLabel}>
-                      Project Card Image URL (supports any web URL or local path)
+                      Project Card Image URL (supports any web URL, CDN, Unsplash, or local path)
                     </label>
                     <input
                       type="text"
@@ -793,7 +671,7 @@ export default function AdminPage() {
                       className={styles.formInput}
                     />
                     <span className={styles.formHint}>
-                      Enter any external image URL (e.g. Unsplash, Cloudinary, AWS S3) or choose a preset below.
+                      Paste any external URL (Unsplash, Cloudinary, AWS S3) or pick a preset below:
                     </span>
 
                     {/* Presets Row */}
@@ -867,17 +745,18 @@ export default function AdminPage() {
                           onChange={(e) => setFormFeatured(e.target.checked)}
                           className={styles.checkboxInput}
                         />
-                        <span>Feature this project with badge</span>
+                        <span>Feature this project with highlighted badge</span>
                       </label>
                     </div>
                   </div>
                 </div>
 
-                {/* 2. Descriptions */}
-                <div className={styles.formCard}>
-                  <h3 className={styles.formCardTitle}>
-                    <FileCode2 size={15} />
-                    <span>02 // Card Tagline &amp; Page Overview</span>
+                {/* 2. Descriptions & Copy */}
+                <div className={styles.formSectionCard}>
+                  <h3 className={styles.formSectionTitle}>
+                    <FileCode2 size={16} color="var(--color-primary, #8bb397)" />
+                    <span className={styles.formSectionIndex}>02 //</span>
+                    <span>Card Copy &amp; Architectural Descriptions</span>
                   </h3>
 
                   <div className={styles.formGroup}>
@@ -890,6 +769,9 @@ export default function AdminPage() {
                       placeholder="One-line punchy subtitle shown directly on the project card"
                       className={styles.formInput}
                     />
+                    <span className={styles.formHint}>
+                      Concise 1-line summary displayed immediately under title on all project cards.
+                    </span>
                   </div>
 
                   <div className={styles.formGroup}>
@@ -917,14 +799,18 @@ export default function AdminPage() {
                       placeholder="In-depth technical narrative detailing the service topology, motivation, and system architecture..."
                       className={styles.formTextarea}
                     />
+                    <span className={styles.formHint}>
+                      Used in Section 01 // System Overview on the dedicated project page.
+                    </span>
                   </div>
                 </div>
 
                 {/* 3. Live Deployment & Repository Links */}
-                <div className={styles.formCard}>
-                  <h3 className={styles.formCardTitle}>
-                    <Globe size={15} />
-                    <span>03 // Live Deployment &amp; Repository URLs</span>
+                <div className={styles.formSectionCard}>
+                  <h3 className={styles.formSectionTitle}>
+                    <Globe size={16} color="var(--color-primary, #8bb397)" />
+                    <span className={styles.formSectionIndex}>03 //</span>
+                    <span>Live Deployment &amp; Repository URLs</span>
                   </h3>
 
                   <div className={styles.formRow}>
@@ -971,10 +857,11 @@ export default function AdminPage() {
                 </div>
 
                 {/* 4. Engineering Deep Dive & Highlights */}
-                <div className={styles.formCard}>
-                  <h3 className={styles.formCardTitle}>
-                    <Sparkles size={15} />
-                    <span>04 // Engineering Deep Dive &amp; Highlights</span>
+                <div className={styles.formSectionCard}>
+                  <h3 className={styles.formSectionTitle}>
+                    <Sparkles size={16} color="var(--color-primary, #8bb397)" />
+                    <span className={styles.formSectionIndex}>04 //</span>
+                    <span>Engineering Deep Dive &amp; Highlights</span>
                   </h3>
 
                   <div className={styles.formGroup}>
@@ -989,9 +876,23 @@ export default function AdminPage() {
                       placeholder="Go, TypeScript, Next.js, Kafka, PostgreSQL, Docker"
                       className={styles.formInput}
                     />
-                    <span className={styles.formHint}>
-                      Used for project filtering and stack badges.
-                    </span>
+
+                    {/* Quick Add Tag Chips */}
+                    <div className={styles.quickTagsRow}>
+                      <span style={{ fontSize: "0.7rem", color: "#64748b" }}>
+                        Quick add:
+                      </span>
+                      {POPULAR_TAGS.map((tag) => (
+                        <button
+                          key={tag}
+                          type="button"
+                          onClick={() => handleAddQuickTag(tag)}
+                          className={styles.quickTagPill}
+                        >
+                          +{tag}
+                        </button>
+                      ))}
+                    </div>
                   </div>
 
                   <div className={styles.formGroup}>
@@ -1049,22 +950,26 @@ export default function AdminPage() {
 
                 {/* Bottom Submit Actions */}
                 <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
-                  <button type="submit" className={styles.primaryBtn} style={{ padding: "0.75rem 2rem", fontSize: "0.9rem" }}>
+                  <button
+                    type="submit"
+                    className={styles.primaryBtn}
+                    style={{ padding: "0.75rem 2rem", fontSize: "0.88rem" }}
+                  >
                     <Check size={16} />
                     <span>Save &amp; Deploy Project</span>
                   </button>
                   <button
                     type="button"
-                    onClick={() => setViewMode("directory")}
+                    onClick={() => setActiveTab("directory")}
                     className={styles.secondaryBtn}
                   >
-                    Cancel
+                    View in Catalog
                   </button>
                 </div>
               </form>
 
               {/* ------------------------------------------------------- */}
-              {/* STICKY RIGHT COLUMN: REAL-TIME LIVE CARD PREVIEW        */}
+              {/* STICKY REAL-TIME LIVE CARD PREVIEW                      */}
               {/* ------------------------------------------------------- */}
               <aside className={styles.previewColumn}>
                 <div className={styles.previewCardFrame}>
@@ -1073,78 +978,258 @@ export default function AdminPage() {
                       <Eye size={13} />
                       <span>Live Card Preview</span>
                     </span>
-                    <span style={{ fontSize: "0.75rem", color: "#64748b", fontFamily: "var(--font-mono)" }}>
-                      16:10 Ratio
-                    </span>
+                    {formSlug && (
+                      <Link
+                        href={`/projects/${formSlug}`}
+                        target="_blank"
+                        className={styles.previewLinkBtn}
+                        title="Open project public page in new tab"
+                      >
+                        <span>View Page</span>
+                        <ExternalLink size={12} />
+                      </Link>
+                    )}
                   </div>
 
-                  {/* Mock Card Preview exactly as rendered in /projects and /portfolio */}
-                  <div className={styles.previewMockCard}>
-                    <div className={styles.previewImageFrame}>
-                      {activePreviewImage ? (
-                        <Image
-                          src={activePreviewImage}
-                          alt={formTitle || "Project Preview"}
-                          fill
-                          unoptimized={activePreviewImage.startsWith("http")}
-                          className={styles.previewImage}
-                          sizes="360px"
-                        />
-                      ) : (
-                        <div className={styles.previewNoImage}>
-                          No Image URL specified
-                        </div>
-                      )}
-
-                      {/* Translucent bottom-left category pill */}
-                      <span className={styles.badgeCategory} style={{ position: "absolute", bottom: "0.75rem", left: "0.75rem" }}>
-                        {formCategory}
-                      </span>
-                    </div>
-
-                    <div className={styles.previewMockBody}>
-                      <h4 className={styles.previewMockTitle}>
-                        {formTitle || "Untitled Project"}
-                      </h4>
-                      <p className={styles.previewMockTagline}>
-                        {formTagline || "Provide a tagline to see it rendered live here..."}
-                      </p>
-                    </div>
-                  </div>
+                  {/* Real Live ProjectCard Component Instance */}
+                  <ProjectCard project={previewProjectObj} index={0} />
                 </div>
 
-                {/* Quick Quality Checklist */}
+                {/* Readiness Checklist */}
                 <div className={styles.checklistCard}>
-                  <span style={{ fontSize: "0.76rem", fontFamily: "var(--font-mono)", color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                  <span className={styles.checklistTitle}>
                     Readiness Checklist
                   </span>
 
                   <div className={styles.checklistItem}>
-                    <CheckCircle2 size={13} className={formTitle ? styles.checkOk : styles.checkMissing} />
+                    <CheckCircle2
+                      size={14}
+                      className={formTitle ? styles.checkOk : styles.checkMissing}
+                    />
                     <span>Title &amp; Slug Defined</span>
                   </div>
                   <div className={styles.checklistItem}>
-                    <CheckCircle2 size={13} className={formImage ? styles.checkOk : styles.checkMissing} />
+                    <CheckCircle2
+                      size={14}
+                      className={formImage ? styles.checkOk : styles.checkMissing}
+                    />
                     <span>Card Image URL Assigned</span>
                   </div>
                   <div className={styles.checklistItem}>
-                    <CheckCircle2 size={13} className={formTagline ? styles.checkOk : styles.checkMissing} />
+                    <CheckCircle2
+                      size={14}
+                      className={formTagline ? styles.checkOk : styles.checkMissing}
+                    />
                     <span>Card Tagline Written</span>
                   </div>
                   <div className={styles.checklistItem}>
-                    <CheckCircle2 size={13} className={formDescription ? styles.checkOk : styles.checkMissing} />
+                    <CheckCircle2
+                      size={14}
+                      className={formDescription ? styles.checkOk : styles.checkMissing}
+                    />
                     <span>Summary Description Ready</span>
                   </div>
                   <div className={styles.checklistItem}>
-                    <CheckCircle2 size={13} className={formGithubUrl ? styles.checkOk : styles.checkMissing} />
+                    <CheckCircle2
+                      size={14}
+                      className={formGithubUrl ? styles.checkOk : styles.checkMissing}
+                    />
                     <span>GitHub Repository Linked</span>
                   </div>
                   <div className={styles.checklistItem}>
-                    <CheckCircle2 size={13} className={formTagsText ? styles.checkOk : styles.checkMissing} />
+                    <CheckCircle2
+                      size={14}
+                      className={formTagsText ? styles.checkOk : styles.checkMissing}
+                    />
                     <span>Technology Stack Tags Set</span>
                   </div>
                 </div>
+
+                {/* Delete Shortcut if editing existing project */}
+                {editingSlug && (
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(editingSlug, formTitle)}
+                    className={styles.dangerOutlineBtn}
+                  >
+                    <Trash2 size={13} />
+                    <span>Delete System from Catalog</span>
+                  </button>
+                )}
               </aside>
+            </div>
+          </div>
+        ) : (
+          /* ========================================================== */
+          /* TAB 2: ALL SYSTEMS CATALOG (DIRECTORY)                     */
+          /* ========================================================== */
+          <div>
+            <div className={styles.directoryControls}>
+              {/* Search Bar */}
+              <div className={styles.searchBar}>
+                <Search className={styles.searchIcon} />
+                <input
+                  type="text"
+                  placeholder={`Search ${projects.length} systems by title, slug, stack, or tagline...`}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className={styles.searchInput}
+                  aria-label="Search projects"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    className={styles.clearSearchBtn}
+                    aria-label="Clear search query"
+                  >
+                    <X size={15} />
+                  </button>
+                )}
+              </div>
+
+              {/* Category Filter Pills */}
+              <div className={styles.filterPillsRow}>
+                {["All", ...CATEGORIES].map((cat) => {
+                  const isActive = selectedCategory === cat;
+                  return (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={() => setSelectedCategory(cat)}
+                      className={`${styles.filterPill} ${
+                        isActive ? styles.filterPillActive : ""
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  );
+                })}
+
+                <span style={{ color: "#475569", margin: "0 0.25rem" }}>|</span>
+
+                {/* Status Filter */}
+                {[
+                  { id: "All", label: "All Status" },
+                  { id: "Existing", label: `Live (${liveCount})` },
+                  { id: "Planned", label: `Planned (${plannedCount})` },
+                ].map((st) => {
+                  const isActive = selectedStatus === st.id;
+                  return (
+                    <button
+                      key={st.id}
+                      type="button"
+                      onClick={() => setSelectedStatus(st.id)}
+                      className={`${styles.filterPill} ${
+                        isActive ? styles.filterPillActive : ""
+                      }`}
+                    >
+                      {st.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Projects Grid */}
+            <div className={styles.projectGrid}>
+              {filteredProjects.map((p, idx) => {
+                const thumb = getProjectThumbnail(p.slug, p.image, idx);
+                const isLive = p.status === "Existing";
+
+                return (
+                  <article key={p.slug} className={styles.adminProjectCard}>
+                    {/* Thumbnail with overlay badges */}
+                    <div className={styles.cardThumbFrame}>
+                      <Image
+                        src={thumb}
+                        alt={p.title}
+                        fill
+                        unoptimized={thumb.startsWith("http") || thumb.startsWith("data:")}
+                        className={styles.cardThumbImage}
+                        sizes="(max-width: 768px) 100vw, 360px"
+                      />
+                      <div className={styles.cardOverlayBadges}>
+                        <span className={styles.badgeCategory}>{p.category}</span>
+                        <button
+                          type="button"
+                          onClick={() => handleToggleStatus(p.slug)}
+                          className={`${styles.statusToggleBtn} ${
+                            isLive ? styles.statusLive : styles.statusPlanned
+                          }`}
+                          title="Click to toggle Live vs Planned status"
+                        >
+                          <span
+                            style={{
+                              width: 6,
+                              height: 6,
+                              borderRadius: "50%",
+                              backgroundColor: isLive ? "#4ade80" : "#93c5fd",
+                            }}
+                          />
+                          <span>{isLive ? "Live" : "Planned"}</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Card Content */}
+                    <div className={styles.cardContent}>
+                      <h2 className={styles.cardTitle}>{p.title}</h2>
+                      <p className={styles.cardTagline}>
+                        {p.tagline || p.description}
+                      </p>
+
+                      {/* Tech Tags */}
+                      <div className={styles.cardTagsRow}>
+                        {(p.tags || []).slice(0, 4).map((t) => (
+                          <span key={t} className={styles.techTag}>
+                            {t}
+                          </span>
+                        ))}
+                        {(p.tags || []).length > 4 && (
+                          <span className={styles.techTag}>
+                            +{(p.tags || []).length - 4}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Card Footer Actions */}
+                      <div className={styles.cardFooterActions}>
+                        <div className={styles.actionBtnGroup}>
+                          <button
+                            type="button"
+                            onClick={() => populateFormWithProject(p)}
+                            className={styles.iconActionBtn}
+                            title="Edit this project in Studio"
+                            aria-label={`Edit ${p.title}`}
+                          >
+                            <Edit3 size={14} />
+                          </button>
+                          <Link
+                            href={`/projects/${p.slug}`}
+                            target="_blank"
+                            className={styles.iconActionBtn}
+                            title="View public detail page"
+                            aria-label={`View public page for ${p.title}`}
+                          >
+                            <ExternalLink size={13} />
+                          </Link>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => handleDelete(p.slug, p.title)}
+                          className={`${styles.iconActionBtn} ${styles.deleteBtn}`}
+                          title="Delete project"
+                          aria-label={`Delete ${p.title}`}
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
         )}

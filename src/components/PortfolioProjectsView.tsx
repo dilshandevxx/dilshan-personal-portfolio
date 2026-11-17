@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
-import { projectsList, ProjectCategory } from "@/data/projects";
+import { projectsList as defaultProjects, Project, ProjectCategory } from "@/data/projects";
 import { ProjectCard } from "@/components/ProjectCard";
 import { siteConfig } from "@/data/siteConfig";
 import { GithubIcon, XIcon } from "@/components/SocialIcons";
@@ -20,13 +20,26 @@ const CATEGORIES: readonly ("All" | ProjectCategory)[] = [
 ] as const;
 
 export function PortfolioProjectsView() {
+  const [projects, setProjects] = useState<Project[]>(defaultProjects);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("dilshan_custom_projects");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setProjects(parsed);
+        }
+      }
+    } catch {}
+  }, []);
+
   const filteredProjects = useMemo(() => {
-    return projectsList.filter(
+    return projects.filter(
       (project) => selectedCategory === "All" || project.category === selectedCategory
     );
-  }, [selectedCategory]);
+  }, [projects, selectedCategory]);
 
   return (
     <div className="projects-container animate-in fade-in duration-200">
@@ -48,8 +61,8 @@ export function PortfolioProjectsView() {
           const isActive = selectedCategory === cat;
           const count =
             cat === "All"
-              ? projectsList.length
-              : projectsList.filter((p) => p.category === cat).length;
+              ? projects.length
+              : projects.filter((p) => p.category === cat).length;
 
           return (
             <button
@@ -115,7 +128,7 @@ export function PortfolioProjectsView() {
             }}
           >
             <RotateCcw size={12} />
-            <span>Show all ({projectsList.length})</span>
+            <span>Show all ({projects.length})</span>
           </button>
         </div>
       )}
