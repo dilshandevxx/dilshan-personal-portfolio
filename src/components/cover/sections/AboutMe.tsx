@@ -7,59 +7,73 @@ import styles from "./AboutMe.module.css";
 
 export default function AboutMe() {
   return (
-    <section className={styles.section} id="about-me" aria-label="About Dilshan">
+    <section className={styles.aboutSection} id="about-me" aria-label="About Dilshan">
       <div className={styles.container}>
+        {/* Subtle Mono Category Label (No Big Clunky Title) */}
         <motion.div
-          className={styles.editorialCard}
-          initial={{ opacity: 0, y: 22 }}
+          className={styles.headerLabel}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6 }}
         >
-          {/* Left: Minimalist Portrait Photo */}
-          <div className={styles.photoContainer}>
+          <span className={styles.labelTag}>[ 01 // PERSPECTIVE ]</span>
+        </motion.div>
+
+        {/* Seamless Grid: Portrait Photo & Pure Philosophy Quote */}
+        <div className={styles.grid}>
+          {/* Left: Dilshan's Photo in Natural 1:1 Aspect Ratio */}
+          <motion.div
+            className={styles.photoCol}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
             <div className={styles.photoFrame}>
               <Image
                 src="/images/about_portrait.jpg"
                 alt="Dilshan Ramesh"
-                width={800}
-                height={1000}
+                width={1024}
+                height={1024}
                 priority
                 className={styles.photo}
-                sizes="(max-width: 900px) 100vw, 380px"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 480px"
               />
-              <div className={styles.photoVignette} />
+              <div className={styles.photoOverlay} />
             </div>
-
-            <div className={styles.photoCaption}>
-              <span className={styles.statusDot} />
-              <span className={styles.captionText}>Dilshan Ramesh // Sri Lanka</span>
+            <div className={styles.photoMeta}>
+              <span className={styles.metaDot} />
+              <span className={styles.metaText}>Dilshan Ramesh // Sri Lanka</span>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right: Pure Thoughtful Quote & Author Signature */}
-          <div className={styles.quoteContainer}>
-            <span className={styles.quoteGlyph} aria-hidden="true">
-              &ldquo;
-            </span>
-
+          {/* Right: Thoughtful Quote & Clean Signature */}
+          <motion.div
+            className={styles.quoteCol}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          >
             <blockquote className={styles.quoteBlock}>
-              <p className={styles.quoteText}>
-                Good architecture is quiet. It subtracts the obvious, honors clarity over cleverness, and simply endures.
+              <p className={styles.quoteLead}>
+                &ldquo;Simplicity is prerequisite for reliability.&rdquo;
+              </p>
+              <p className={styles.quoteFollow}>
+                Good architecture doesn&apos;t shout for attention. It subtracts the noise, honors clarity over cleverness, and quietly endures.
               </p>
             </blockquote>
 
-            <div className={styles.signatureRow}>
-              <div className={styles.signatureDivider} />
-              <div className={styles.signatureDetails}>
-                <span className={styles.signatureName}>Dilshan Ramesh</span>
-                <span className={styles.signatureTag}>
-                  Systems Architect &amp; Full-Stack Engineer
-                </span>
+            <div className={styles.authorBadge}>
+              <div className={styles.authorLine} />
+              <div className={styles.authorContent}>
+                <span className={styles.authorName}>Dilshan Ramesh</span>
+                <span className={styles.authorTitle}>Full-Stack Engineer &amp; System Architect</span>
               </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
