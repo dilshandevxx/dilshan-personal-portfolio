@@ -51,15 +51,20 @@ export default function MainFooter() {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 2. BOTTOM MULTI-COLUMN FOOTER (Warm Paper Section)            */}
+      {/* 2. BOTTOM MULTI-COLUMN FOOTER (Dark, Clean & Organized)       */}
       {/* ------------------------------------------------------------- */}
-      <section className={styles.paperFooterSection}>
-        <div className={styles.paperContainer}>
+      <section className={styles.darkFooterSection}>
+        <div className={styles.footerContainer}>
           {/* Header Row: Wordmark & Social Icons */}
           <div className={styles.headerRow}>
-            <Link href="/" className={styles.brandWordmark} aria-label="Dilshan Home">
-              {siteConfig.name}
-            </Link>
+            <div className={styles.brandGroup}>
+              <Link href="/" className={styles.brandWordmark} aria-label="Dilshan Home">
+                {siteConfig.name}
+              </Link>
+              <span className={styles.brandTagline}>
+                Systems Architect &amp; Software Engineer
+              </span>
+            </div>
 
             <nav className={styles.socialRow} aria-label="Social Profiles">
               <a
@@ -122,6 +127,9 @@ export default function MainFooter() {
                 Crafted with care in Sri Lanka.
                 <br />
                 Software engineering, system architecture &amp; understated web interfaces.
+              </p>
+              <p className={styles.colophonTech}>
+                Next.js &bull; TypeScript &bull; React 19
               </p>
             </div>
 
