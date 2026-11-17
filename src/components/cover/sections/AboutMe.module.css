@@ -1,24 +1,11 @@
-/* About Section — Unified Cinematic Philosophy Stage */
+/* About Section — Clean, Unwrapped Cinematic Typography & Portrait */
 .aboutSection {
   background-color: #000000;
-  padding: clamp(5rem, 8vw, 8.5rem) clamp(1.25rem, 3.5vw, 3.5rem);
+  padding: clamp(5.5rem, 9vw, 9rem) clamp(1.5rem, 4vw, 4rem);
   position: relative;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
-}
-
-.ambientSpotlight {
-  position: absolute;
-  top: 50%;
-  right: 20%;
-  transform: translateY(-50%);
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0) 70%);
-  pointer-events: none;
-  filter: blur(80px);
 }
 
 .container {
@@ -27,95 +14,66 @@
   width: 100%;
 }
 
-/* Widescreen Cinematic Stage: 2-Column Grid Inside One Sleek Frame */
-.cinematicStage {
+/* Clean 2-Column Layout with Generous Gap (No Enclosing Card Box) */
+.stageGrid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  align-items: stretch;
-  background-color: #07090e;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 35px 90px -20px rgba(0, 0, 0, 0.95);
-  min-height: 520px;
+  grid-template-columns: 1.25fr 0.85fr;
+  align-items: center;
+  column-gap: clamp(2.5rem, 5vw, 5rem);
+  row-gap: 3rem;
+  width: 100%;
 }
 
-/* Left Column: Statement & Action */
+/* Statement Column */
 .statementCol {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
-  padding: clamp(2.5rem, 4.5vw, 4.5rem);
-  gap: clamp(1.5rem, 2.5vw, 2.25rem);
+  gap: clamp(2rem, 3.5vw, 2.75rem);
   box-sizing: border-box;
-  z-index: 2;
-}
-
-.kickerBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.kickerLine {
-  width: 24px;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.35);
-}
-
-.kickerText {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #94a3b8;
 }
 
 .statementText {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 1.25rem;
   margin: 0;
 }
 
 .statementPrimary {
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(1.4rem, 2.4vw, 2.15rem);
+  font-size: clamp(1.65rem, 2.7vw, 2.45rem);
   font-weight: 500;
-  line-height: 1.38;
+  line-height: 1.35;
   letter-spacing: -0.025em;
   color: #ffffff;
 }
 
 .statementSecondary {
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(1.05rem, 1.7vw, 1.32rem);
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
   font-weight: 400;
-  line-height: 1.52;
+  line-height: 1.55;
   letter-spacing: -0.01em;
   color: #8b949e;
 }
 
+/* Action Row & Rectangular Outline Button (No Arrow) */
 .actionRow {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 1.75rem;
-  width: 100%;
   padding-top: 0.25rem;
 }
 
 .whyButton {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  justify-content: center;
   background-color: transparent;
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 0;
-  padding: 0.95rem 2.2rem;
+  padding: 0.95rem 2.4rem;
   font-family: var(--font-mono, monospace);
   font-size: 0.8125rem;
   font-weight: 700;
@@ -128,131 +86,76 @@
   white-space: nowrap;
 }
 
-.buttonArrow {
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
 .whyButton:hover {
   background-color: #ffffff;
   color: #000000;
   border-color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 24px rgba(255, 255, 255, 0.12);
 }
 
-.whyButton:hover .buttonArrow {
-  transform: translate(2px, -2px);
-}
-
-.authorTag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: #64748b;
-  text-transform: uppercase;
-}
-
-.authorName {
-  font-weight: 700;
-  color: #e2e8f0;
-}
-
-.authorDivider {
-  color: rgba(255, 255, 255, 0.2);
-}
-
-.authorTitle {
-  font-weight: 500;
-  color: #64748b;
-}
-
-/* Right Column: Full-Height Integrated Portrait Frame */
+/* Portrait Column (Clean Photo Frame) */
 .portraitCol {
-  position: relative;
   width: 100%;
-  height: 100%;
-  min-height: 480px;
-  overflow: hidden;
-  background-color: #0b0e14;
+  display: flex;
+  justify-content: center;
 }
 
-.imageFrame {
+.photoFrame {
   position: relative;
   width: 100%;
-  height: 100%;
+  max-width: 440px;
+  aspect-ratio: 4 / 5;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #0d0f15;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9);
 }
 
 .portraitPhoto {
   object-fit: cover;
   object-position: center 20%;
-  filter: contrast(1.05) brightness(0.96);
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: contrast(1.04) brightness(0.97);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.cinematicStage:hover .portraitPhoto {
+.photoFrame:hover .portraitPhoto {
   transform: scale(1.03);
 }
 
-.imageVignette {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    #07090e 0%,
-    rgba(7, 9, 14, 0.4) 15%,
-    transparent 35%
-  );
-  pointer-events: none;
-}
-
 /* Responsive Breakpoints */
-@media (max-width: 900px) {
-  .cinematicStage {
+@media (max-width: 960px) {
+  .stageGrid {
     grid-template-columns: 1fr;
-    min-height: auto;
+    row-gap: 3.5rem;
   }
 
   .portraitCol {
-    min-height: 400px;
-    height: 400px;
-    order: -1; /* Image at top on mobile */
+    order: -1; /* Photo above statement on mobile */
+    justify-content: flex-start;
   }
 
-  .imageVignette {
-    background: linear-gradient(
-      0deg,
-      #07090e 0%,
-      rgba(7, 9, 14, 0.5) 25%,
-      transparent 50%
-    );
-  }
-
-  .statementCol {
-    padding: clamp(2.5rem, 6vw, 3.5rem) clamp(1.5rem, 4vw, 2.5rem);
+  .photoFrame {
+    max-width: 360px;
   }
 }
 
 @media (max-width: 640px) {
-  .cinematicStage {
-    border-radius: 18px;
+  .aboutSection {
+    padding: 4.5rem 1.25rem;
   }
 
-  .portraitCol {
-    min-height: 320px;
-    height: 320px;
+  .statementText {
+    gap: 1rem;
   }
 
-  .actionRow {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.25rem;
+  .photoFrame {
+    max-width: 100%;
+    aspect-ratio: 4 / 5;
   }
 
   .whyButton {
     width: 100%;
-    justify-content: center;
   }
 }
