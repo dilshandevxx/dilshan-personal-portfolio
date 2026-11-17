@@ -1,0 +1,294 @@
+/* Main Site Footer — Two-Tone Editorial Design matching reference image */
+
+.footerWrapper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ------------------------------------------------------------- */
+/* 1. TOP CALL TO ACTION SECTION (Deep Matte Charcoal / Black)   */
+/* ------------------------------------------------------------- */
+.ctaSection {
+  background-color: #111114;
+  padding: 6.5rem 1.5rem 5.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .ctaSection {
+    padding: 4.75rem 1.25rem 4.25rem;
+  }
+}
+
+.ctaContainer {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Rounded Pill Badge */
+.ctaBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.42rem 1.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.02);
+  color: rgba(255, 255, 255, 0.72);
+  font-family: var(--font-mono, "Google Sans Code", monospace, sans-serif);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.ctaBadge:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+/* Large Serif Headline */
+.ctaHeadlineLink {
+  margin-top: 1.85rem;
+  font-family: var(--font-artistic), "Playfair Display", "Newsreader", Georgia, serif;
+  font-size: clamp(3.5rem, 8.5vw, 6.25rem);
+  font-weight: 400;
+  line-height: 1.05;
+  color: #ffffff;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.ctaHeadlineLink:hover {
+  opacity: 0.92;
+  transform: translateY(-2px);
+}
+
+/* Horizontal Rule under "Let's Talk" */
+.ctaUnderline {
+  width: min(100%, 420px);
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 1.65rem auto 0;
+  transition: background-color 0.25s ease, width 0.3s ease;
+}
+
+.ctaContainer:hover .ctaUnderline {
+  background-color: rgba(255, 255, 255, 0.45);
+}
+
+/* ------------------------------------------------------------- */
+/* 2. BOTTOM FOOTER SECTION (Warm Ivory / Paper Tone)            */
+/* ------------------------------------------------------------- */
+.paperFooterSection {
+  background-color: #FAF6ED;
+  color: #211E1A;
+  padding: 3.75rem 2rem 4.5rem;
+  position: relative;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+@media (max-width: 768px) {
+  .paperFooterSection {
+    padding: 3rem 1.25rem 3.75rem;
+  }
+}
+
+.paperContainer {
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+/* Header Row: Name & Social Icons */
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.brandWordmark {
+  font-family: var(--font-artistic), "Playfair Display", Georgia, serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #1a1916;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.2s ease;
+}
+
+.brandWordmark:hover {
+  opacity: 0.8;
+}
+
+.socialRow {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.socialLink {
+  color: #211E1A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.socialLink:hover {
+  opacity: 0.6;
+  transform: translateY(-2px);
+}
+
+/* Full Width Divider */
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(33, 30, 26, 0.12);
+  margin: 1.75rem 0 2.75rem;
+}
+
+/* Multi-Column Grid */
+.columnsGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  gap: 3.5rem;
+}
+
+@media (max-width: 960px) {
+  .columnsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.75rem 2rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .columnsGrid {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+}
+
+/* Column 1: Colophon / Copyright */
+.colBio {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.copyrightText {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: rgba(33, 30, 26, 0.62);
+  margin: 0;
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+}
+
+.colophonSubtext {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: rgba(33, 30, 26, 0.48);
+  margin-top: 0.35rem;
+}
+
+/* Navigation Columns */
+.colTitle {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(33, 30, 26, 0.45);
+  text-transform: uppercase;
+  margin: 0 0 1.25rem 0;
+  font-family: var(--font-mono, monospace);
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.navLink {
+  font-size: 14px;
+  color: rgba(33, 30, 26, 0.86);
+  text-decoration: none;
+  display: inline-block;
+  transition: color 0.15s ease, transform 0.15s ease;
+  width: fit-content;
+}
+
+.navLink:hover {
+  color: #000000;
+  transform: translateX(3px);
+}
+
+/* Column 4: Contact */
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contactEmail {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1916;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.contactEmail:hover {
+  text-decoration: underline;
+  color: #000000;
+}
+
+.contactMeta {
+  font-size: 13.5px;
+  color: rgba(33, 30, 26, 0.62);
+  margin: 0.15rem 0 0.5rem;
+}
+
+.statusIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 12.5px;
+  color: rgba(33, 30, 26, 0.58);
+  margin-top: 0.25rem;
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #2e7d32;
+  box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+  flex-shrink: 0;
+}

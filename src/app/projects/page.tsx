@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { projectsList, ProjectCategory, getProjectThumbnail } from "@/data/projects";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
+import MainFooter from "@/components/MainFooter";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import styles from "./projectsPage.module.css";
 
@@ -177,6 +178,7 @@ export default function ProjectsPage() {
           </div>
         </section>
       </main>
+      <MainFooter />
     </div>
   );
 }

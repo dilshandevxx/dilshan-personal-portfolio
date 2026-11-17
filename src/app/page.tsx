@@ -4,6 +4,7 @@ import SelectedWork from "@/components/cover/sections/SelectedWork";
 import SkillsGrid from "@/components/cover/sections/SkillsGrid";
 import FaqSection from "@/components/cover/sections/FaqSection";
 import ContactSection from "@/components/cover/sections/ContactSection";
+import MainFooter from "@/components/MainFooter";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ export default function Home() {
       <SkillsGrid />
       <FaqSection />
       <ContactSection />
+      <MainFooter />
     </>
   );
 }
