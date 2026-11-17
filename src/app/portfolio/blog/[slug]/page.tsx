@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: PageProps) {
   if (!post) return { title: 'Essay Not Found' };
 
   return {
-    title: `${post.title} — Dilshan K.`,
+    title: `${post.title} — Dilshan`,
     description: post.summary,
   };
 }

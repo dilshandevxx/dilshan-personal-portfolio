@@ -4231,53 +4231,64 @@ html[data-portfolio-theme="light"] body {
   background-color: var(--pf-canvas-bg) !important;
 }
 
+.portfolio-app-shell .app-sidebar,
 .portfolio-shell-wrapper .app-sidebar {
   background-color: var(--pf-panel-bg) !important;
   border-right: 1px solid var(--pf-border) !important;
 }
 
+.portfolio-app-shell .sidebar-section,
 .portfolio-shell-wrapper .sidebar-section {
   border-bottom: 1px solid var(--pf-border) !important;
 }
 
+.portfolio-app-shell .mobile-header,
 .portfolio-shell-wrapper .mobile-header {
   background-color: var(--pf-panel-bg) !important;
   border-bottom: 1px solid var(--pf-border) !important;
 }
 
+.portfolio-app-shell .site-name,
 .portfolio-shell-wrapper .site-name {
   color: var(--pf-text-heading) !important;
 }
 
+.portfolio-app-shell .sidebar-content p,
 .portfolio-shell-wrapper .sidebar-content p {
   color: var(--pf-text-secondary) !important;
 }
 
+.portfolio-app-shell .sidebar-bio-highlight,
 .portfolio-shell-wrapper .sidebar-bio-highlight {
   color: var(--pf-text-heading) !important;
   font-weight: 600;
 }
 
+.portfolio-app-shell .sidebar-bio-term,
 .portfolio-shell-wrapper .sidebar-bio-term {
   color: var(--pf-text-primary) !important;
 }
 
+.portfolio-app-shell .sidebar-bio-garden,
 .portfolio-shell-wrapper .sidebar-bio-garden {
   color: var(--color-primary);
   font-weight: 500;
 }
 
+.portfolio-app-shell .sidebar-nav-main-site,
 .portfolio-shell-wrapper .sidebar-nav-main-site {
   border-bottom: 1px solid var(--pf-border) !important;
   color: var(--pf-text-muted) !important;
 }
 
+.portfolio-app-shell .sidebar-nav-item,
 .portfolio-shell-wrapper .sidebar-nav-item {
   color: var(--pf-text-secondary) !important;
-  border-radius: 12px !important;
+  border-radius: 8px !important;
   border-left: none !important;
 }
 
+.portfolio-app-shell .sidebar-nav-item:hover,
 .portfolio-shell-wrapper .sidebar-nav-item:hover {
   color: var(--pf-text-heading) !important;
   background: var(--pf-active-pill) !important;
@@ -4285,36 +4296,42 @@ html[data-portfolio-theme="light"] body {
   border-left: none !important;
 }
 
+.portfolio-app-shell .sidebar-nav-item.active,
 .portfolio-shell-wrapper .sidebar-nav-item.active {
   background: var(--pf-active-pill) !important;
-  color: var(--pf-active-pill-text) !important;
+  color: var(--pf-text-heading) !important;
   border: 1px solid var(--pf-active-pill-border) !important;
   border-left: none !important;
-  border-radius: 12px !important;
+  border-radius: 8px !important;
   box-shadow: var(--pf-shadow) !important;
 }
 
+.portfolio-app-shell .sidebar-nav-item.active .sidebar-nav-icon-wrap,
 .portfolio-shell-wrapper .sidebar-nav-item.active .sidebar-nav-icon-wrap {
-  color: var(--color-primary) !important;
   opacity: 1;
 }
 
+.portfolio-app-shell .sidebar-links a,
 .portfolio-shell-wrapper .sidebar-links a {
   color: var(--pf-text-secondary) !important;
 }
 
+.portfolio-app-shell .sidebar-links a:hover,
 .portfolio-shell-wrapper .sidebar-links a:hover {
   color: var(--pf-text-heading) !important;
 }
 
+.portfolio-app-shell .sidebar-sub-links a,
 .portfolio-shell-wrapper .sidebar-sub-links a {
   color: var(--pf-text-muted) !important;
 }
 
+.portfolio-app-shell .sidebar-sub-links a:hover,
 .portfolio-shell-wrapper .sidebar-sub-links a:hover {
   color: var(--pf-text-heading) !important;
 }
 
+.portfolio-app-shell .divider,
 .portfolio-shell-wrapper .divider {
   background-color: var(--pf-border) !important;
 }

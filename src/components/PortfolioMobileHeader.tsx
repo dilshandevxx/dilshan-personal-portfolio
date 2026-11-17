@@ -56,11 +56,6 @@ export function PortfolioMobileHeader({ activeSection = 'about' }: PortfolioMobi
               dilshan.dev
             </span>
           </Link>
-          <span
-            className="w-2 h-2 rounded-full bg-emerald-400"
-            title="Online"
-            aria-label="Online indicator"
-          />
           <span className="text-[var(--text-muted)] text-xs">/</span>
           <span className="text-xs font-sans text-[var(--accent-color)] font-medium truncate max-w-[100px]">
             {currentItem.label}

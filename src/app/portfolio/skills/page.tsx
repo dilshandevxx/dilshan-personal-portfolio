@@ -4,7 +4,7 @@ import { siteConfig } from '@/data/content';
 import { Cpu, ArrowLeft } from 'lucide-react';
 
 export const metadata = {
-  title: 'Skills & Architecture — Dilshan K.',
+  title: 'Skills & Architecture — Dilshan',
   description: 'Technical proficiencies, programming languages, and system architecture stacks.',
 };
 
