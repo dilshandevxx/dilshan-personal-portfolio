@@ -3139,6 +3139,30 @@ a.text-link:hover {
 }
 
 /* ==========================================================================
+   Portfolio Projects Grid (Exact 3 Cards Per Line Layout on Desktop)
+   ========================================================================== */
+.portfolio-projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: clamp(1.25rem, 2vw, 1.85rem);
+  row-gap: clamp(2.25rem, 3.5vw, 3.25rem);
+  width: 100%;
+  padding-bottom: 3.5rem;
+}
+
+@media screen and (min-width: 600px) {
+  .portfolio-projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .portfolio-projects-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* ==========================================================================
    Projects Grid & Cards (Exact Tania Rascia Layout & Minimal Matte Styling)
    ========================================================================== */
 .projects-container {

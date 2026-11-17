@@ -120,15 +120,11 @@ export function PortfolioProjectsView() {
         </div>
       )}
 
-      {/* Projects Grid */}
+      {/* Projects Grid: Exactly 3 project cards in a line on desktop */}
       <div
+        className="portfolio-projects-grid"
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-          columnGap: "clamp(1.5rem, 2.5vw, 2.5rem)",
-          rowGap: "clamp(2.5rem, 3.5vw, 3.5rem)",
           marginTop: selectedCategory === "All" ? "2.25rem" : "1.5rem",
-          paddingBottom: "3rem",
         }}
       >
         {filteredProjects.map((project, idx) => (
