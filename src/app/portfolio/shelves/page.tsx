@@ -2,14 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import { siteConfig } from '@/data/content';
 import { guidesData } from '@/data/guides';
-import { shelvesData } from '@/data/shelves';
 import {
   BookOpen,
   Coffee,
   Layers,
   ArrowRight,
   Compass,
-  Cpu,
 } from 'lucide-react';
 import { AmbientPlayer } from '@/components/AmbientPlayer';
 import styles from './shelves.module.css';
@@ -41,9 +39,6 @@ export default function ShelvesPage() {
         <nav className={styles.jumpPillsRow} aria-label="Section anchors">
           <a href="#guides" className={styles.jumpPill}>
             #guides
-          </a>
-          <a href="#technical-shelves" className={styles.jumpPill}>
-            #technical-shelves
           </a>
           <a href="#bookshelf" className={styles.jumpPill}>
             #bookshelf
@@ -88,69 +83,7 @@ export default function ShelvesPage() {
         ))}
       </section>
 
-      {/* 2. Technical Knowledge Shelves */}
-      <section id="technical-shelves" className={styles.sectionBlock}>
-        <h2 className={styles.sectionHeading}>
-          <Cpu className={styles.sectionIcon} />
-          <span>Technical Knowledge Shelves</span>
-        </h2>
-        <p className={styles.sectionDesc}>
-          Curated topic clusters across production AI/ML, full-stack systems architecture, and resilient cloud automation.
-        </p>
-
-        <div className={styles.guideGrid}>
-          {shelvesData.map((shelf) => (
-            <div key={shelf.slug} className={styles.bookCard}>
-              <h3 className={styles.bookTitle} style={{ color: '#dc8167' }}>
-                {shelf.title}
-              </h3>
-              <p className={styles.bookNote}>{shelf.description}</p>
-
-              <div style={{ marginTop: 'auto', paddingTop: '0.65rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
-                <span
-                  style={{
-                    display: 'block',
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.72rem',
-                    textTransform: 'uppercase',
-                    color: '#64748b',
-                    letterSpacing: '0.08em',
-                    marginBottom: '0.4rem',
-                  }}
-                >
-                  Key Domains
-                </span>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-                  {shelf.topics.map((t) => (
-                    <li
-                      key={t.name}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        fontSize: '0.82rem',
-                        fontFamily: 'var(--font-mono)',
-                      }}
-                    >
-                      <Link
-                        href="/portfolio/blog"
-                        style={{ color: '#cbd5e1', textDecoration: 'none' }}
-                      >
-                        {t.name}
-                      </Link>
-                      <span style={{ color: '#64748b', fontSize: '0.74rem' }}>
-                        {t.count} notes
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 3. Bookshelf & Reading List */}
+      {/* 2. Bookshelf & Reading List */}
       <section id="bookshelf" className={styles.sectionBlock}>
         <h2 className={styles.sectionHeading}>
           <BookOpen className={styles.sectionIcon} />
@@ -185,7 +118,7 @@ export default function ShelvesPage() {
         </div>
       </section>
 
-      {/* 4. Analog Rituals & Everyday Tools (Off the Clock) */}
+      {/* 3. Analog Rituals & Everyday Tools (Off the Clock) */}
       <section id="analog-gear" className={styles.sectionBlock}>
         <h2 className={styles.sectionHeading}>
           <Coffee className={styles.sectionIcon} />
@@ -217,7 +150,7 @@ export default function ShelvesPage() {
         </div>
       </section>
 
-      {/* 5. Shelf Philosophy & Colophon */}
+      {/* 4. Shelf Philosophy & Colophon */}
       <aside className={styles.colophonBox}>
         <div className={styles.colophonKicker}>
           <Compass size={14} />

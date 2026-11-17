@@ -5,8 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Project, getProjectThumbnail } from "@/data/projects";
-import { GithubIcon } from "@/components/SocialIcons";
-import { ExternalLink } from "lucide-react";
 import styles from "./ProjectCard.module.css";
 
 export function ProjectCard({
@@ -62,38 +60,6 @@ export function ProjectCard({
           <p className={styles.cardDescription}>{project.tagline}</p>
         </div>
       </Link>
-
-      {/* Card Action Icons (Clean GitHub Icon + Live Icon only if live demo exists) */}
-      <div className={styles.cardFooter}>
-        {project.demoUrl && (
-          <a
-            href={project.demoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            title="Live Application"
-            aria-label="Live Application"
-            className={styles.liveLink}
-          >
-            <ExternalLink size={13} />
-            <span>Live</span>
-          </a>
-        )}
-
-        {project.githubUrl && (
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            title="GitHub Repository"
-            aria-label="GitHub Repository"
-            className={styles.githubLink}
-          >
-            <GithubIcon size={16} />
-          </a>
-        )}
-      </div>
     </article>
   );
 }

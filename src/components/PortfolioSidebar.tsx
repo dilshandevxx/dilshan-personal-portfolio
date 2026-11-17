@@ -72,36 +72,17 @@ export function PortfolioSidebar() {
     <>
       {/* Mobile Top Navigation Header (< 1020px) */}
       <header className="mobile-header">
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-          <Link href="/" className="mobile-brand-link">
-            <Image
-              src="/nav-floppy.png"
-              className="navbar-logo"
-              alt="dilshan.dev"
-              width={20}
-              height={20}
-              priority
-            />
-            <span className="site-name">dilshan.dev</span>
-          </Link>
-          <Link
-            href="/"
-            style={{
-              fontSize: "10px",
-              fontFamily: "monospace",
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              padding: "2px 6px",
-              borderRadius: "4px",
-              border: "1px solid var(--pf-border, rgba(255, 255, 255, 0.1))",
-              color: "var(--pf-text-secondary, #9da4ae)",
-              textDecoration: "none",
-            }}
-            title="Return to Main Landing Page"
-          >
-            &larr; MAIN
-          </Link>
-        </div>
+        <Link href="/" className="mobile-brand-link">
+          <Image
+            src="/nav-floppy.png"
+            className="navbar-logo"
+            alt="dilshan.dev"
+            width={20}
+            height={20}
+            priority
+          />
+          <span className="site-name">dilshan.dev</span>
+        </Link>
         <div className="mobile-header-actions">
           <ColorPicker />
           <ThemeToggle />
@@ -173,26 +154,6 @@ export function PortfolioSidebar() {
         {/* Section 3: Primary Navigation Links (Blog, Shelves, Projects, About me) */}
         <section className="sidebar-section">
           <nav className="sidebar-nav-links" aria-label="Portfolio Navigation">
-            {/* Subtle Main Site Return Link */}
-            <Link
-              href="/"
-              onClick={() => setMobileOpen(false)}
-              className="sidebar-nav-item sidebar-nav-main-site"
-              title="Return to Main Landing Page"
-              style={{
-                borderBottom: "1px solid var(--pf-border, rgba(255, 255, 255, 0.08))",
-                paddingBottom: "0.6rem",
-                marginBottom: "0.5rem",
-              }}
-            >
-              <span className="sidebar-nav-icon-wrap" aria-hidden="true">
-                <ArrowLeft size={14} strokeWidth={1.8} />
-              </span>
-              <span className="sidebar-nav-label" style={{ fontSize: "0.82rem", textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "var(--font-mono, monospace)" }}>
-                Main site
-              </span>
-            </Link>
-
             {navLinks.map((item) => (
               <Link
                 key={item.path}

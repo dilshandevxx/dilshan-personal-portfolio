@@ -121,76 +121,20 @@ export function PortfolioProjectsView() {
       )}
 
       {/* Projects Grid */}
-      <div className="cards" style={{ marginTop: selectedCategory === "All" ? "1.75rem" : "1.25rem" }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+          columnGap: "clamp(1.5rem, 2.5vw, 2.5rem)",
+          rowGap: "clamp(2.5rem, 3.5vw, 3.5rem)",
+          marginTop: selectedCategory === "All" ? "2.25rem" : "1.5rem",
+          paddingBottom: "3rem",
+        }}
+      >
         {filteredProjects.map((project, idx) => (
           <ProjectCard key={project.slug} project={project} index={idx} />
         ))}
       </div>
-
-      {/* Footer Strip */}
-      <footer className="guides-footer-strip" style={{ maxWidth: "100%", marginTop: "4rem" }}>
-        <nav className="guides-footer-links" aria-label="Quick contact links">
-          <a
-            href={`mailto:${siteConfig.social.email}`}
-            className="guides-footer-link"
-            title="Email Dilshan"
-          >
-            <Mail size={14} strokeWidth={1.8} />
-            <span>Email contact</span>
-          </a>
-          <Link href="/rss.xml" className="guides-footer-link" title="Subscribe to RSS Feed">
-            <Rss size={14} strokeWidth={1.8} />
-            <span>RSS feed</span>
-          </Link>
-          <a
-            href={siteConfig.social.x}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="guides-footer-link"
-            title="Follow on X"
-          >
-            <XIcon size={12} />
-            <span>X (Twitter)</span>
-          </a>
-          <a
-            href={siteConfig.social.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="guides-footer-link"
-            title="GitHub Profile"
-          >
-            <GithubIcon size={13} />
-            <span>GitHub</span>
-          </a>
-        </nav>
-        <div className="guides-footer-badges" aria-label="Core Engineering Stack">
-          <span className="guides-badge-pill">
-            <Code2 size={13} />
-            <span>Next.js</span>
-          </span>
-          <span className="guides-badge-pill">
-            <Binary size={13} />
-            <span>TypeScript</span>
-          </span>
-          <span className="guides-badge-pill">
-            <Server size={13} />
-            <span>Docker</span>
-          </span>
-          <span className="guides-badge-pill">
-            <Cpu size={13} />
-            <span>PyTorch</span>
-          </span>
-          <span className="guides-badge-pill">
-            <Layers size={13} />
-            <span>Kubernetes</span>
-          </span>
-        </div>
-        <div className="guides-footer-credit">
-          <span>Crafted by {siteConfig.name}</span>
-          <span className="credit-dot">&bull;</span>
-          <span>Open Digital Garden</span>
-        </div>
-      </footer>
     </div>
   );
 }
