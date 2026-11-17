@@ -288,7 +288,7 @@ kbd {
   width: var(--sidebar-width);
   flex-shrink: 0;
   box-sizing: border-box;
-  padding: 2.25rem 1.35rem 1.75rem;
+  padding: 1.15rem 1.35rem 1.75rem;
 }
 
 @media screen and (min-width: 1020px) {
@@ -4416,10 +4416,11 @@ html[data-portfolio-theme="light"] body {
 .portfolio-content-area {
   flex: 1;
   min-width: 0;
-  padding: 2.75rem 2.25rem 5rem;
-  max-width: 1080px;
+  padding: 2rem clamp(1.25rem, 2.5vw, 2.5rem) 5rem;
+  max-width: 1240px;
   width: 100%;
-  margin: 0 auto;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 @media screen and (max-width: 1019px) {
@@ -4445,7 +4446,7 @@ html[data-portfolio-theme="light"] body {
   justify-content: space-between;
   background-color: var(--pf-panel-bg) !important;
   border-right: 1px solid var(--pf-border) !important;
-  padding: 3rem 2rem 2.5rem 2.5rem;
+  padding: 1.15rem 2rem 2rem 2rem;
   box-sizing: border-box;
   z-index: 50;
   color: var(--pf-text-primary) !important;
