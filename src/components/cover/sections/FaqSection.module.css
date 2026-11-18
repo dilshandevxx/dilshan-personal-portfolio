@@ -1,25 +1,25 @@
 /* Frequently Asked Questions Section (Matching Reference Design) */
 .faqSection {
   background-color: #000000;
-  padding: 8.5rem 3.5rem 10rem;
+  padding: 7.5rem 3.5rem 8.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   position: relative;
 }
 
 @media (max-width: 900px) {
   .faqSection {
-    padding: 5.5rem 1.75rem 7rem;
+    padding: 5rem 1.75rem 5.5rem;
   }
 }
 
 @media (max-width: 640px) {
   .faqSection {
-    padding: 4rem 1.15rem 4.5rem;
+    padding: 3.5rem 1.15rem 4rem;
   }
 }
 
 .container {
-  max-width: 1040px;
+  max-width: 980px;
   margin: 0 auto;
 }
 
@@ -29,28 +29,67 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: 3.5rem;
+  margin-bottom: 3rem;
+  gap: 0.85rem;
 }
 
 @media (max-width: 768px) {
   .header {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2.25rem;
+    gap: 0.75rem;
   }
+}
+
+/* Pill Badge: • FAQ */
+.badgeWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.pillBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.38rem 1.15rem;
+  background-color: #121418;
+  color: #b8bec9;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.badgeDot {
+  color: #ffffff;
+  font-size: 0.8rem;
+  line-height: 1;
 }
 
 .title {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.2rem;
   font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
-  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-size: clamp(1.6rem, 3.2vw, 2.35rem);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.18;
   letter-spacing: -0.015em;
   text-transform: uppercase;
   color: #ffffff;
   margin: 0;
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: clamp(1.35rem, 5.8vw, 1.7rem);
+    line-height: 1.15;
+    gap: 0.15rem;
+  }
 }
 
 .titleLine {
@@ -60,100 +99,190 @@
 .subtitle {
   color: #9da4ae;
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 1.05rem;
-  line-height: 1.65;
-  max-width: 580px;
-  margin: 0.85rem 0 0;
+  font-size: 0.96rem;
+  line-height: 1.62;
+  max-width: 540px;
+  margin: 0.35rem auto 0;
   text-align: center;
+}
+
+@media (max-width: 640px) {
+  .subtitle {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
 }
 
 /* Accordion List */
 .accordionList {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   width: 100%;
 }
 
 .accordionItem {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background-color 0.2s ease;
 }
 
-/* Row Trigger Button matching reference */
+.accordionItem:hover {
+  background-color: rgba(255, 255, 255, 0.012);
+}
+
+/* Row Trigger Button */
 .rowTrigger {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.65rem 0.25rem;
+  padding: 1.25rem 0.5rem;
   background: transparent;
   border: none;
   color: #ffffff;
   cursor: pointer;
   text-align: left;
   transition: all 0.2s ease;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
-.rowTrigger:hover .questionText {
-  color: #ffffff;
-  opacity: 0.88;
+@media (max-width: 640px) {
+  .rowTrigger {
+    padding: 0.95rem 0.25rem;
+    gap: 0.75rem;
+  }
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .titleGroup {
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+}
+
+.itemIndex {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #5c6473;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+@media (max-width: 640px) {
+  .itemIndex {
+    margin-top: 0.15rem;
+  }
+}
+
+.rowTrigger:hover .itemIndex {
+  color: #a4abb8;
 }
 
 .questionText {
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: clamp(1.22rem, 1.65vw, 1.48rem);
+  font-size: clamp(1.02rem, 1.35vw, 1.2rem);
   font-weight: 600;
-  letter-spacing: 0.015em;
-  text-transform: uppercase;
+  letter-spacing: -0.01em;
   color: #ffffff;
   transition: color 0.2s ease, opacity 0.2s ease;
-  line-height: 1.35;
+  line-height: 1.4;
 }
 
-.plusIcon {
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 1.75rem;
-  font-weight: 300;
-  line-height: 1;
+@media (max-width: 640px) {
+  .questionText {
+    font-size: 0.96rem;
+    line-height: 1.42;
+  }
+}
+
+.rowTrigger:hover .questionText {
   color: #ffffff;
-  display: inline-block;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
-  user-select: none;
+  opacity: 0.92;
+}
+
+/* Minimalist Circular Cross Toggle Button */
+.iconButton {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9299a6;
   flex-shrink: 0;
-  padding-right: 0.25rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
 }
 
-.plusIconOpen {
-  transform: rotate(45deg);
+.rowTrigger:hover .iconButton {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.15);
   color: #ffffff;
 }
 
-/* Expanded Answer Wrapper */
+.iconButtonOpen {
+  transform: rotate(45deg);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.svgCross {
+  transition: transform 0.2s ease;
+}
+
+/* Expanded Answer */
 .answerWrapper {
   overflow: hidden;
+}
+
+.answerInner {
+  padding: 0.2rem 0.5rem 1.85rem 2.15rem;
+}
+
+@media (max-width: 640px) {
+  .answerInner {
+    padding: 0.15rem 0.25rem 1.35rem 0;
+  }
 }
 
 .answerText {
   color: #9da4ae;
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 1.05rem;
-  line-height: 1.75;
+  font-size: 0.94rem;
+  line-height: 1.68;
   margin: 0;
-  padding: 0.25rem 0.25rem 2rem;
-  max-width: 860px;
+  max-width: 820px;
 }
 
-/* Bottom Contact Anchor matching reference */
+@media (max-width: 640px) {
+  .answerText {
+    font-size: 0.88rem;
+    line-height: 1.58;
+  }
+}
+
+/* Bottom Contact Callout */
 .bottomContact {
   display: flex;
   justify-content: center;
-  margin-top: 4.5rem;
+  margin-top: 3.5rem;
 }
 
 @media (max-width: 768px) {
   .bottomContact {
-    margin-top: 4rem;
+    margin-top: 2.75rem;
   }
 }
 
@@ -161,7 +290,7 @@
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.45rem;
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.25s ease;
@@ -174,31 +303,32 @@
 .contactBadge {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.55rem;
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background-color: #ffffff;
   display: inline-block;
   flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
 .contactLabel {
   color: #ffffff;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .contactSub {
   color: #8b929d;
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 1rem;
+  font-size: 0.88rem;
   font-weight: 400;
   letter-spacing: -0.01em;
   transition: color 0.2s ease;

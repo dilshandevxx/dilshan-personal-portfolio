@@ -87,8 +87,9 @@ export default function SkillsGrid() {
 
         {/* Accordion List matching the user reference */}
         <div className={styles.accordionList}>
-          {SKILL_ITEMS.map((item) => {
+          {SKILL_ITEMS.map((item, index) => {
             const isOpen = openId === item.id;
+            const indexStr = String(index + 1).padStart(2, "0");
             return (
               <div key={item.id} className={styles.accordionItem}>
                 {/* Accordion Row Trigger */}
@@ -98,16 +99,33 @@ export default function SkillsGrid() {
                   className={styles.rowTrigger}
                   aria-expanded={isOpen}
                 >
-                  <span className={styles.itemTitle}>{item.name}</span>
+                  <div className={styles.titleGroup}>
+                    <span className={styles.itemIndex}>{indexStr}</span>
+                    <span className={styles.itemTitle}>{item.name}</span>
+                  </div>
                   <span
-                    className={`${styles.plusIcon} ${isOpen ? styles.plusIconOpen : ""}`}
+                    className={`${styles.iconButton} ${isOpen ? styles.iconButtonOpen : ""}`}
                     aria-hidden="true"
                   >
-                    +
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={styles.svgCross}
+                    >
+                      <path
+                        d="M7 1.5V12.5M1.5 7H12.5"
+                        stroke="currentColor"
+                        strokeWidth="1.75"
+                        strokeLinecap="round"
+                      />
+                    </svg>
                   </span>
                 </button>
 
-                {/* Expanded Details matching current design with SQUARE corners */}
+                {/* Expanded Details */}
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
@@ -115,18 +133,18 @@ export default function SkillsGrid() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
                       className={styles.expandedContentWrapper}
                     >
                       <div className={styles.expandedContent}>
-                        {/* Square Image Thumbnail */}
+                        {/* Image Thumbnail */}
                         <div className={styles.imageCol}>
                           <div className={styles.imageFrame}>
                             <Image
                               src={item.image}
                               alt={item.name}
                               fill
-                              sizes="(max-width: 768px) 100vw, 360px"
+                              sizes="(max-width: 768px) 100vw, 320px"
                               className={styles.detailImage}
                             />
                           </div>

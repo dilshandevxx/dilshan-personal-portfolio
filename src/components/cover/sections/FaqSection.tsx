@@ -14,31 +14,31 @@ interface FaqItem {
 const FAQ_ITEMS: FaqItem[] = [
   {
     id: "tech-stack",
-    question: "WHAT IS YOUR PRIMARY TECHNOLOGY STACK?",
+    question: "What is your primary technology stack?",
     answer:
       "My core stack centers on TypeScript, React 19, Next.js, and Node.js for frontend interfaces, paired with Go, Rust, and PostgreSQL for high-performance backends. On cloud and DevOps, I engineer on Kubernetes, Docker, and Terraform across AWS and GCP.",
   },
   {
     id: "architecture-approach",
-    question: "HOW DO YOU APPROACH A NEW PROJECT OR ARCHITECTURE?",
+    question: "How do you approach a new project or architecture?",
     answer:
       "I start from first principles: modeling domain constraints, data flow patterns, and real user requirements before writing code. Every system is architected for mathematical clarity, observable telemetry, and long-term maintainability without unnecessary dependencies.",
   },
   {
     id: "remote-collaboration",
-    question: "DO YOU WORK WITH REMOTE TEAMS ACROSS DIFFERENT TIME ZONES?",
+    question: "Do you work with remote teams across different time zones?",
     answer:
       "Yes. I work seamlessly with engineering teams, design agencies, and founders across North America, Europe, and Asia-Pacific through asynchronous documentation, clear RFCs, and focused synchronous checkpoints.",
   },
   {
     id: "high-throughput-scale",
-    question: "HOW DO YOU HANDLE HIGH-THROUGHPUT & DISTRIBUTED SCALE?",
+    question: "How do you handle high-throughput and distributed scale?",
     answer:
       "Through proven distributed patterns: partitioned event streaming with Apache Kafka, sub-millisecond in-memory caching with Redis, optimized connection pooling, horizontal autoscaling with Kubernetes, and end-to-end tracing with OpenTelemetry.",
   },
   {
     id: "booking-consultation",
-    question: "HOW DO I BOOK AN ARCHITECTURAL CONSULTATION OR BUILD?",
+    question: "How do I book an architectural consultation or build?",
     answer:
       "Simply reach out through the contact form below or email me directly at dilshan.devxx@gmail.com. We will schedule an initial technical deep-dive to review your system roadmap, timeline, and delivery milestones.",
   },
@@ -56,19 +56,25 @@ export default function FaqSection() {
       <div className={styles.container}>
         {/* Header matching reference */}
         <div className={styles.header}>
+          <div className={styles.badgeWrapper}>
+            <span className={styles.pillBadge}>
+              <span className={styles.badgeDot}>•</span> FAQ
+            </span>
+          </div>
           <h2 className={styles.title}>
             <span className={styles.titleLine}>FREQUENTLY ASKED</span>
             <span className={styles.titleLine}>QUESTIONS</span>
           </h2>
           <p className={styles.subtitle}>
-            Here are some quick answers. If you have other questions, just reach out &mdash; I&apos;d love to help.
+            Quick answers regarding engineering approach, system architecture, and technical collaboration.
           </p>
         </div>
 
         {/* Accordion List */}
         <div className={styles.accordionList}>
-          {FAQ_ITEMS.map((item) => {
+          {FAQ_ITEMS.map((item, index) => {
             const isOpen = openId === item.id;
+            const indexStr = String(index + 1).padStart(2, "0");
             return (
               <div key={item.id} className={styles.accordionItem}>
                 <button
@@ -77,12 +83,29 @@ export default function FaqSection() {
                   className={styles.rowTrigger}
                   aria-expanded={isOpen}
                 >
-                  <span className={styles.questionText}>{item.question}</span>
+                  <div className={styles.titleGroup}>
+                    <span className={styles.itemIndex}>{indexStr}</span>
+                    <span className={styles.questionText}>{item.question}</span>
+                  </div>
                   <span
-                    className={`${styles.plusIcon} ${isOpen ? styles.plusIconOpen : ""}`}
+                    className={`${styles.iconButton} ${isOpen ? styles.iconButtonOpen : ""}`}
                     aria-hidden="true"
                   >
-                    +
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={styles.svgCross}
+                    >
+                      <path
+                        d="M7 1.5V12.5M1.5 7H12.5"
+                        stroke="currentColor"
+                        strokeWidth="1.75"
+                        strokeLinecap="round"
+                      />
+                    </svg>
                   </span>
                 </button>
 
@@ -93,10 +116,12 @@ export default function FaqSection() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
                       className={styles.answerWrapper}
                     >
-                      <p className={styles.answerText}>{item.answer}</p>
+                      <div className={styles.answerInner}>
+                        <p className={styles.answerText}>{item.answer}</p>
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -110,9 +135,9 @@ export default function FaqSection() {
           <Link href="#contact" className={styles.contactLink}>
             <div className={styles.contactBadge}>
               <span className={styles.dot} aria-hidden="true" />
-              <span className={styles.contactLabel}>CONTACT ME</span>
+              <span className={styles.contactLabel}>HAVE A DIFFERENT QUESTION?</span>
             </div>
-            <span className={styles.contactSub}>For more question</span>
+            <span className={styles.contactSub}>Get in touch directly &rarr;</span>
           </Link>
         </div>
       </div>
