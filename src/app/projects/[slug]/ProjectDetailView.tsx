@@ -13,6 +13,7 @@ import {
   CheckCircle2,
   Workflow,
   Layers,
+  ShieldCheck,
 } from "lucide-react";
 import { GithubIcon } from "@/components/SocialIcons";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
@@ -69,7 +70,7 @@ export function ProjectDetailView({
       <SkyLabsNavbar activeTab="projects" />
 
       <article className={styles.container}>
-        {/* Back Navigation Breadcrumb */}
+        {/* 1. Back Navigation Breadcrumb */}
         <nav className={styles.backNav}>
           <Link href="/projects" className={styles.backLink}>
             <ArrowLeft size={15} />
@@ -77,7 +78,7 @@ export function ProjectDetailView({
           </Link>
         </nav>
 
-        {/* Editorial Header Section */}
+        {/* 2. Editorial Header Section */}
         <header className={styles.header}>
           <div className={styles.metaRow}>
             <span className={styles.categoryBadge}>{project.category}</span>
@@ -106,14 +107,6 @@ export function ProjectDetailView({
 
           <h1 className={styles.title}>{project.title}</h1>
           <p className={styles.tagline}>{project.tagline}</p>
-
-          {/* Primary Metric Highlight Badge */}
-          {project.metrics && (
-            <div className={styles.metricsHighlight}>
-              <span className={styles.metricsDot}>•</span>
-              <span>{project.metrics}</span>
-            </div>
-          )}
 
           {/* Action Row */}
           <div className={styles.actionRow}>
@@ -153,7 +146,7 @@ export function ProjectDetailView({
           </div>
         </header>
 
-        {/* Hero Visual Showcase Frame */}
+        {/* 3. Widescreen Hero Visual Showcase Canvas (Full 1240px Width) */}
         <div className={styles.heroMediaFrame}>
           <Image
             src={heroSrc}
@@ -168,109 +161,157 @@ export function ProjectDetailView({
               setHeroSrc(fallback);
             }}
             className={styles.heroImage}
-            sizes="(max-width: 960px) 100vw, 960px"
+            sizes="(max-width: 1240px) 100vw, 1240px"
           />
           <div className={styles.heroMediaGlow} />
         </div>
 
-        {/* System Overview */}
-        <section className={styles.section}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>System Overview</h2>
-          </div>
-          <div className={styles.prose}>
-            <p>{project.longDescription || project.description}</p>
-          </div>
-        </section>
-
-        {/* Architecture & System Flow */}
-        {project.architecture && (
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Architecture &amp; System Flow</h2>
-            </div>
-            <div className={styles.architectureCard}>
-              <div className={styles.architectureCardHeader}>
-                <div className={styles.architectureHeaderLabel}>
-                  <Workflow size={14} className={styles.architectureIcon} />
-                  <span>Execution Pipeline &amp; Data Path</span>
-                </div>
-                <span className={styles.architectureStatusBadge}>Verified Data Flow</span>
+        {/* 4. Two-Column Narrative & Specs Layout */}
+        <div className={styles.contentGrid}>
+          {/* Left Column: Deep-dive Technical Narrative */}
+          <div className={styles.mainNarrative}>
+            {/* System Overview */}
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>System Overview</h2>
               </div>
-              <p className={styles.architectureBody}>{project.architecture}</p>
-            </div>
-          </section>
-        )}
+              <div className={styles.prose}>
+                <p>{project.longDescription || project.description}</p>
+              </div>
+            </section>
 
-        {/* Key Capabilities */}
-        {project.highlights && project.highlights.length > 0 && (
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>
-                {isLive ? "Key Capabilities" : "Technical Specification"}
-              </h2>
-            </div>
-            <div className={styles.capabilitiesGrid}>
-              {project.highlights.map((item, i) => (
-                <div key={i} className={styles.capabilityCard}>
-                  <div className={styles.capabilityIconWrap}>
-                    <CheckCircle2 size={15} className={styles.capabilityIcon} />
-                  </div>
-                  <span className={styles.capabilityText}>{item}</span>
+            {/* Architecture & System Flow */}
+            {project.architecture && (
+              <section className={styles.section}>
+                <div className={styles.sectionHeader}>
+                  <h2 className={styles.sectionTitle}>Architecture &amp; System Flow</h2>
                 </div>
-              ))}
-            </div>
-          </section>
-        )}
+                <div className={styles.architectureCard}>
+                  <div className={styles.architectureCardHeader}>
+                    <div className={styles.architectureHeaderLabel}>
+                      <Workflow size={14} className={styles.architectureIcon} />
+                      <span>Execution Pipeline &amp; Data Path</span>
+                    </div>
+                    <span className={styles.architectureStatusBadge}>Verified Flow</span>
+                  </div>
+                  <p className={styles.architectureBody}>{project.architecture}</p>
+                </div>
+              </section>
+            )}
 
-        {/* Engineering Considerations & Trade-offs */}
-        {project.challenges && (
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Engineering Trade-offs &amp; Analysis</h2>
-            </div>
-            <div className={styles.tradeoffsCard}>
-              <p className={styles.tradeoffsBody}>{project.challenges}</p>
-            </div>
-          </section>
-        )}
+            {/* Key Capabilities */}
+            {project.highlights && project.highlights.length > 0 && (
+              <section className={styles.section}>
+                <div className={styles.sectionHeader}>
+                  <h2 className={styles.sectionTitle}>
+                    {isLive ? "Key Capabilities" : "Technical Specification"}
+                  </h2>
+                </div>
+                <div className={styles.capabilitiesGrid}>
+                  {project.highlights.map((item, i) => (
+                    <div key={i} className={styles.capabilityCard}>
+                      <div className={styles.capabilityIconWrap}>
+                        <CheckCircle2 size={15} className={styles.capabilityIcon} />
+                      </div>
+                      <span className={styles.capabilityText}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
 
-        {/* Technology Stack */}
-        <section className={styles.section}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Technology Stack</h2>
+            {/* Engineering Considerations & Trade-offs */}
+            {project.challenges && (
+              <section className={styles.section}>
+                <div className={styles.sectionHeader}>
+                  <h2 className={styles.sectionTitle}>Engineering Trade-offs &amp; Analysis</h2>
+                </div>
+                <div className={styles.tradeoffsCard}>
+                  <p className={styles.tradeoffsBody}>{project.challenges}</p>
+                </div>
+              </section>
+            )}
           </div>
 
-          {project.stackLayers && project.stackLayers.length > 0 ? (
-            <div className={styles.stackLayersGrid}>
-              {project.stackLayers.map((layer, i) => (
-                <div key={i} className={styles.layerCard}>
-                  <div className={styles.layerHeader}>
-                    <Layers size={13} className={styles.layerIcon} />
-                    <span className={styles.layerTitle}>{layer.layer}</span>
-                  </div>
-                  <div className={styles.layerPills}>
-                    {layer.technologies.map((t) => (
-                      <span key={t} className={styles.layerPill}>
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className={styles.tagsCloud}>
-              {project.tags.map((t) => (
-                <span key={t} className={styles.layerPill}>
-                  {t}
-                </span>
-              ))}
-            </div>
-          )}
-        </section>
+          {/* Right Column: Sticky Sidebar with Specs & Tech Stack */}
+          <aside className={styles.sidebar}>
+            {/* System Specs Card */}
+            <div className={styles.sidebarCard}>
+              <div className={styles.sidebarCardHeader}>
+                <ShieldCheck size={14} className={styles.sidebarIcon} />
+                <span className={styles.sidebarTitle}>System Specifications</span>
+              </div>
 
-        {/* Pagination Footer */}
+              <div className={styles.specsList}>
+                <div className={styles.specItem}>
+                  <span className={styles.specLabel}>Category</span>
+                  <span className={styles.specValue}>{project.category}</span>
+                </div>
+
+                <div className={styles.specItem}>
+                  <span className={styles.specLabel}>Status</span>
+                  <span className={styles.specValue}>
+                    {isLive ? (
+                      <span className={styles.specLiveBadge}>
+                        <span className={styles.liveDot} />
+                        Active Production
+                      </span>
+                    ) : (
+                      <span className={styles.specRfcBadge}>Specification</span>
+                    )}
+                  </span>
+                </div>
+
+                <div className={styles.specItem}>
+                  <span className={styles.specLabel}>Release</span>
+                  <span className={styles.specValue}>{displayYear}</span>
+                </div>
+
+                {project.metrics && (
+                  <div className={styles.specItem}>
+                    <span className={styles.specLabel}>Performance</span>
+                    <span className={styles.specValueHighlight}>{project.metrics}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Technology Stack Card */}
+            <div className={styles.sidebarCard}>
+              <div className={styles.sidebarCardHeader}>
+                <Layers size={14} className={styles.sidebarIcon} />
+                <span className={styles.sidebarTitle}>Technology Stack</span>
+              </div>
+
+              {project.stackLayers && project.stackLayers.length > 0 ? (
+                <div className={styles.sidebarLayers}>
+                  {project.stackLayers.map((layer, i) => (
+                    <div key={i} className={styles.sidebarLayerGroup}>
+                      <div className={styles.sidebarLayerTitle}>{layer.layer}</div>
+                      <div className={styles.layerPills}>
+                        {layer.technologies.map((t) => (
+                          <span key={t} className={styles.layerPill}>
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className={styles.layerPills}>
+                  {project.tags.map((t) => (
+                    <span key={t} className={styles.layerPill}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </aside>
+        </div>
+
+        {/* 5. Pagination Navigation Footer (Full Width) */}
         <footer className={styles.paginationFooter}>
           {previous ? (
             <Link href={`/projects/${previous.slug}`} className={styles.paginationCard}>

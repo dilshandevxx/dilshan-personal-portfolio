@@ -1,4 +1,4 @@
-/* SkyLabs Editorial Project Description Page Styles */
+/* SkyLabs Widescreen Editorial Project Description Page Styles */
 
 .pageRoot {
   background-color: #000000;
@@ -10,10 +10,11 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* Widescreen Container: Eliminates Left/Right Empty Voids */
 .container {
-  max-width: 960px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: clamp(6.25rem, 8.5vw, 7.75rem) clamp(1.25rem, 4vw, 2.5rem) 6rem;
+  padding: clamp(6.25rem, 8.5vw, 7.75rem) clamp(1.25rem, 3.5vw, 2.5rem) 6rem;
   width: 100%;
   box-sizing: border-box;
 }
@@ -47,7 +48,7 @@
 /* 2. EDITORIAL HEADER SECTION                                   */
 /* ------------------------------------------------------------- */
 .header {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2.25rem;
 }
 
 .metaRow {
@@ -142,7 +143,7 @@
 
 .title {
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(2.3rem, 4.5vw, 3.4rem);
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
   font-weight: 700;
   letter-spacing: -0.028em;
   line-height: 1.15;
@@ -152,30 +153,11 @@
 
 .tagline {
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: clamp(1.05rem, 1.8vw, 1.22rem);
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
   line-height: 1.6;
   color: #949db0;
-  margin: 0 0 1.65rem 0;
-  max-width: 820px;
-}
-
-/* Primary Metric Highlight */
-.metricsHighlight {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.45rem 0.95rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 6px;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.8rem;
-  color: #cbd5e1;
-  margin-bottom: 1.75rem;
-}
-
-.metricsDot {
-  color: var(--color-primary, #8bb397);
+  margin: 0 0 1.75rem 0;
+  max-width: 900px;
 }
 
 /* Action Buttons */
@@ -224,18 +206,18 @@
 }
 
 /* ------------------------------------------------------------- */
-/* 3. HERO VISUAL SHOWCASE CANVAS                                */
+/* 3. WIDESCREEN HERO VISUAL SHOWCASE CANVAS                     */
 /* ------------------------------------------------------------- */
 .heroMediaFrame {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9.5;
+  aspect-ratio: 16 / 8.5;
   border-radius: 16px;
   overflow: hidden;
   background-color: #07090d;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.85);
-  margin: 2.75rem 0 3.75rem 0;
+  margin: 2.5rem 0 4rem 0;
 }
 
 .heroImage {
@@ -248,14 +230,25 @@
   background: linear-gradient(
     180deg,
     rgba(0, 0, 0, 0) 65%,
-    rgba(0, 0, 0, 0.5) 100%
+    rgba(0, 0, 0, 0.45) 100%
   );
   pointer-events: none;
 }
 
 /* ------------------------------------------------------------- */
-/* 4. CONTENT SECTIONS                                           */
+/* 4. TWO-COLUMN ASYMMETRIC GRID (CONTENT + SIDEBAR)             */
 /* ------------------------------------------------------------- */
+.contentGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.mainNarrative {
+  min-width: 0;
+}
+
 .section {
   margin-bottom: 3.5rem;
 }
@@ -281,9 +274,8 @@
 .prose {
   font-family: var(--font-body, -apple-system, sans-serif);
   font-size: 1.02rem;
-  line-height: 1.75;
+  line-height: 1.8;
   color: #c4cad4;
-  max-width: 820px;
 }
 
 .prose p {
@@ -298,8 +290,8 @@
 .architectureCard {
   background-color: #0d0f14;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 1.4rem 1.6rem;
+  border-radius: 14px;
+  padding: 1.5rem 1.65rem;
 }
 
 .architectureCardHeader {
@@ -349,7 +341,7 @@
 /* Key Capabilities Grid */
 .capabilitiesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 0.85rem;
 }
 
@@ -396,54 +388,127 @@
 .tradeoffsCard {
   background-color: #0d0f14;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 1.35rem 1.55rem;
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
 }
 
 .tradeoffsBody {
   margin: 0;
   font-family: var(--font-body, -apple-system, sans-serif);
   font-size: 0.98rem;
-  line-height: 1.7;
+  line-height: 1.75;
   color: #c4cad4;
 }
 
-/* Technology Stack */
-.stackLayersGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1rem;
+/* ------------------------------------------------------------- */
+/* 5. STICKY SIDEBAR (SPECS & TECH STACK)                        */
+/* ------------------------------------------------------------- */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: sticky;
+  top: 5.5rem;
 }
 
-.layerCard {
+.sidebarCard {
   background-color: #0d0f14;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 1.25rem 1.4rem;
+  border-radius: 14px;
+  padding: 1.4rem 1.5rem;
 }
 
-.layerHeader {
+.sidebarCardHeader {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.85rem;
+  gap: 0.55rem;
+  margin-bottom: 1.15rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.layerIcon {
+.sidebarIcon {
   color: var(--color-primary, #8bb397);
 }
 
-.layerTitle {
+.sidebarTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.specsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.specItem {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.specLabel {
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.85rem;
+  color: #8c93a0;
+}
+
+.specValue {
   font-family: var(--font-mono, monospace);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #ffffff;
+  text-align: right;
+}
+
+.specValueHighlight {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-primary, #8bb397);
+  text-align: right;
+}
+
+.specLiveBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #4ade80;
   font-size: 0.76rem;
+}
+
+.specRfcBadge {
+  color: #93c5fd;
+  font-size: 0.76rem;
+}
+
+.sidebarLayers {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebarLayerGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebarLayerTitle {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 600;
   color: var(--color-primary, #8bb397);
 }
 
-.layerPills,
-.tagsCloud {
+.layerPills {
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
@@ -471,14 +536,14 @@
 }
 
 /* ------------------------------------------------------------- */
-/* 5. PAGINATION FOOTER                                          */
+/* 6. FULL-WIDTH PAGINATION FOOTER                               */
 /* ------------------------------------------------------------- */
 .paginationFooter {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  gap: 1.25rem;
-  margin-top: 4.5rem;
+  gap: 1.5rem;
+  margin-top: 5rem;
   padding-top: 2.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -487,10 +552,10 @@
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  padding: 1.25rem 1.5rem;
+  padding: 1.35rem 1.65rem;
   background-color: #0d0f14;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
+  border-radius: 14px;
   text-decoration: none;
   color: inherit;
   flex: 1;
@@ -529,8 +594,19 @@
 }
 
 /* ------------------------------------------------------------- */
-/* 6. RESPONSIVE BREAKPOINTS                                     */
+/* 7. RESPONSIVE BREAKPOINTS                                     */
 /* ------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
+  }
+
+  .sidebar {
+    position: static;
+  }
+}
+
 @media (max-width: 640px) {
   .metaRow {
     gap: 0.5rem;
