@@ -14,6 +14,7 @@ export interface Project {
 export const PROJECT_THUMBNAILS: Record<string, string> = {
   "production-rag-platform": "/images/project_collective.jpg",
   "foodlence-backend": "/images/project_brutalist.jpg",
+  "business-idea-generator": "/images/project_analytics.jpg",
   "ideaspark-ai-business-idea-generator": "/images/project_analytics.jpg",
   "roamora-travel-discovery-website": "/images/story_travel.jpg",
   "travel-website": "/images/story_coffee.jpg",

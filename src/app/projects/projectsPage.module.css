@@ -316,7 +316,7 @@
   }
 }
 
-@media (min-width: 1060px) {
+@media (min-width: 980px) {
   .cardsGrid {
     grid-template-columns: repeat(3, 1fr);
   }

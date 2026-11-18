@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { ArrowUpRight } from "lucide-react";
 import { Project, getProjectThumbnail, FALLBACK_THUMBNAILS } from "@/data/projects";
 import styles from "./ProjectCard.module.css";
 
@@ -79,6 +80,9 @@ export function ProjectCard({
           className={styles.cardImage}
         />
 
+        {/* Cinematic bottom gradient overlay to enhance badge contrast & photographic depth */}
+        <div className={styles.imageOverlay} />
+
         {/* Bottom-Left Translucent Category Badge (Matches Reference Mock) */}
         {project.category && (
           <span className={styles.categoryBadge}>{project.category}</span>
@@ -87,11 +91,16 @@ export function ProjectCard({
 
       {/* Card Info Below Image: Bold Title + Clean Narrative Excerpt */}
       <div className={styles.cardBody}>
-        <h3 className={styles.cardTitle}>
-          <Link href={`/projects/${project.slug}`} className={styles.titleLink}>
-            {project.title}
-          </Link>
-        </h3>
+        <div className={styles.titleRow}>
+          <h3 className={styles.cardTitle}>
+            <Link href={`/projects/${project.slug}`} className={styles.titleLink}>
+              {project.title}
+            </Link>
+          </h3>
+          <span className={styles.titleArrow} aria-hidden="true">
+            <ArrowUpRight size={18} />
+          </span>
+        </div>
 
         {narrative && <p className={styles.cardDescription}>{narrative}</p>}
       </div>
