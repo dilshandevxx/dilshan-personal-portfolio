@@ -1,18 +1,26 @@
+/* SkyLabs Editorial Project Description Page Styles */
+
 .pageRoot {
-  background-color: var(--color-background, #090a0c);
+  background-color: #000000;
   min-height: 100vh;
   width: 100%;
-  color: var(--color-text, #d2d5df);
+  color: #ffffff;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 .container {
   max-width: 960px;
   margin: 0 auto;
-  padding: clamp(6.5rem, 9vw, 8rem) clamp(1.25rem, 4vw, 2.5rem) 6rem;
+  padding: clamp(6.25rem, 8.5vw, 7.75rem) clamp(1.25rem, 4vw, 2.5rem) 6rem;
   width: 100%;
   box-sizing: border-box;
 }
 
+/* ------------------------------------------------------------- */
+/* 1. BACK NAVIGATION BREADCRUMB                                 */
+/* ------------------------------------------------------------- */
 .backNav {
   margin-bottom: 2rem;
 }
@@ -22,78 +30,31 @@
   align-items: center;
   gap: 0.5rem;
   font-family: var(--font-mono, monospace);
-  font-size: 0.82rem;
-  color: var(--color-text-muted, #8c93a0);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #8c93a0;
   text-decoration: none;
   letter-spacing: 0.04em;
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .backLink:hover {
-  color: var(--color-text-emphasized, #ffffff);
+  color: #ffffff;
   transform: translateX(-3px);
 }
 
-/* Hero Image Visual Frame */
-.heroImageFrame {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 12px;
-  overflow: hidden;
-  background-color: #15161f;
-  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
-  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.7);
-  margin-bottom: 2.75rem;
-}
-
-.heroImage {
-  object-fit: cover;
-}
-
-.heroImageVignette {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(9, 10, 12, 0.1) 0%,
-    rgba(9, 10, 12, 0.3) 60%,
-    rgba(9, 10, 12, 0.85) 100%
-  );
-  pointer-events: none;
-}
-
-.heroCategoryPill {
-  position: absolute;
-  bottom: 1.25rem;
-  left: 1.25rem;
-  background: rgba(14, 16, 22, 0.88);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 4px;
-  padding: 0.3rem 0.75rem;
-  color: #ffffff;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.76rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  z-index: 2;
-}
-
-/* Header */
+/* ------------------------------------------------------------- */
+/* 2. EDITORIAL HEADER SECTION                                   */
+/* ------------------------------------------------------------- */
 .header {
-  margin-bottom: 3rem;
-  padding-bottom: 2.5rem;
-  border-bottom: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  margin-bottom: 2.5rem;
 }
 
 .metaRow {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  margin-bottom: 1.25rem;
+  gap: 0.65rem;
+  margin-bottom: 1.2rem;
   flex-wrap: wrap;
 }
 
@@ -107,7 +68,7 @@
   background: rgba(139, 179, 151, 0.08);
   border: 1px solid rgba(139, 179, 151, 0.25);
   padding: 0.25rem 0.65rem;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
 .statusPillLive {
@@ -116,13 +77,13 @@
   gap: 0.45rem;
   font-family: var(--font-mono, monospace);
   font-size: 0.72rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   padding: 0.25rem 0.65rem;
   color: #4ade80;
   background: rgba(74, 222, 128, 0.08);
-  border: 1px solid rgba(74, 222, 128, 0.35);
-  border-radius: 4px;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  border-radius: 5px;
 }
 
 .liveDot {
@@ -130,7 +91,7 @@
   height: 6px;
   border-radius: 50%;
   background: #4ade80;
-  box-shadow: 0 0 6px rgba(74, 222, 128, 0.8);
+  box-shadow: 0 0 6px rgba(74, 222, 128, 0.7);
   display: inline-block;
 }
 
@@ -140,13 +101,13 @@
   gap: 0.45rem;
   font-family: var(--font-mono, monospace);
   font-size: 0.72rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   padding: 0.25rem 0.65rem;
   color: #93c5fd;
   background: rgba(147, 197, 253, 0.08);
-  border: 1px solid rgba(147, 197, 253, 0.35);
-  border-radius: 4px;
+  border: 1px solid rgba(147, 197, 253, 0.3);
+  border-radius: 5px;
 }
 
 .rfcDot {
@@ -157,30 +118,45 @@
   display: inline-block;
 }
 
+.featuredBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 5px;
+  padding: 0.25rem 0.65rem;
+}
+
 .datePill {
   font-family: var(--font-mono, monospace);
   font-size: 0.74rem;
   color: #788090;
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.45rem;
 }
 
 .title {
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-size: clamp(2.3rem, 4.5vw, 3.4rem);
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.028em;
   line-height: 1.15;
   color: #ffffff;
-  margin: 0 0 1rem 0;
+  margin: 0 0 1.1rem 0;
 }
 
 .tagline {
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-  line-height: 1.55;
-  color: var(--color-text-muted, #94a3b8);
-  margin: 0 0 1.75rem 0;
-  max-width: 780px;
+  font-size: clamp(1.05rem, 1.8vw, 1.22rem);
+  line-height: 1.6;
+  color: #949db0;
+  margin: 0 0 1.65rem 0;
+  max-width: 820px;
 }
 
 /* Primary Metric Highlight */
@@ -188,23 +164,24 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.4rem 0.85rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.45rem 0.95rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 6px;
   font-family: var(--font-mono, monospace);
   font-size: 0.8rem;
   color: #cbd5e1;
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
 }
 
 .metricsDot {
   color: var(--color-primary, #8bb397);
 }
 
+/* Action Buttons */
 .actionRow {
   display: flex;
-  gap: 1rem;
+  gap: 0.85rem;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -213,126 +190,294 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.65rem 1.25rem;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.84rem;
+  padding: 0.7rem 1.35rem;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.86rem;
   font-weight: 500;
   text-decoration: none;
-  border-radius: 6px;
-  transition: all 0.2s ease;
+  border-radius: 8px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .actionButtonPrimary {
-  background: var(--color-text-emphasized, #ffffff);
-  color: #090a0c;
+  background: #ffffff;
+  color: #0a0c10;
   border: 1px solid #ffffff;
 }
 
 .actionButtonPrimary:hover {
   background: #e2e8f0;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -6px rgba(255, 255, 255, 0.2);
 }
 
 .actionButtonSecondary {
-  background: rgba(255, 255, 255, 0.04);
+  background: #0d0f14;
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .actionButtonSecondary:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: #141720;
   border-color: rgba(255, 255, 255, 0.25);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
-/* Sections */
+/* ------------------------------------------------------------- */
+/* 3. HERO VISUAL SHOWCASE CANVAS                                */
+/* ------------------------------------------------------------- */
+.heroMediaFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9.5;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #07090d;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.85);
+  margin: 2.75rem 0 3.75rem 0;
+}
+
+.heroImage {
+  object-fit: cover;
+}
+
+.heroMediaGlow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 65%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------- */
+/* 4. CONTENT SECTIONS                                           */
+/* ------------------------------------------------------------- */
 .section {
   margin-bottom: 3.5rem;
 }
 
 .sectionHeader {
   display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
+  align-items: center;
+  gap: 0.65rem;
   margin-bottom: 1.25rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.sectionIndex {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.85rem;
-  color: var(--color-primary, #8bb397);
-  letter-spacing: 0.08em;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .sectionTitle {
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: 1.35rem;
+  font-size: 1.32rem;
   font-weight: 700;
   color: #ffffff;
   margin: 0;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 .prose {
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 1rem;
+  font-size: 1.02rem;
   line-height: 1.75;
-  color: var(--color-text, #d2d5df);
+  color: #c4cad4;
+  max-width: 820px;
 }
 
 .prose p {
   margin: 0 0 1.25rem 0;
 }
 
-.highlightsList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+.prose p:last-child {
+  margin-bottom: 0;
 }
 
-.highlightItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.96rem;
-  line-height: 1.6;
-  color: var(--color-text, #d2d5df);
-}
-
-.highlightBullet {
-  color: var(--color-primary, #8bb397);
-  font-family: var(--font-mono, monospace);
-  font-weight: 700;
-}
-
-.techGrid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.techTag {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.82rem;
-  padding: 0.35rem 0.85rem;
-  background: rgba(255, 255, 255, 0.04);
+/* Architecture & System Flow Card */
+.architectureCard {
+  background-color: #0d0f14;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.4rem 1.6rem;
+}
+
+.architectureCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-wrap: wrap;
+}
+
+.architectureHeaderLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-primary, #8bb397);
+  font-weight: 600;
+}
+
+.architectureIcon {
+  color: var(--color-primary, #8bb397);
+}
+
+.architectureStatusBadge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  color: #8f98a8;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.2rem 0.5rem;
   border-radius: 4px;
+}
+
+.architectureBody {
+  margin: 0;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.98rem;
+  line-height: 1.7;
   color: #cbd5e1;
 }
 
-/* Pagination Footer */
+/* Key Capabilities Grid */
+.capabilitiesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.85rem;
+}
+
+.capabilityCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background-color: #0d0f14;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 1rem 1.15rem;
+  transition: all 0.2s ease;
+}
+
+.capabilityCard:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  background-color: #12151c;
+}
+
+.capabilityIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(139, 179, 151, 0.1);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.capabilityIcon {
+  color: var(--color-primary, #8bb397);
+}
+
+.capabilityText {
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: #d2d5df;
+}
+
+/* Engineering Trade-offs Card */
+.tradeoffsCard {
+  background-color: #0d0f14;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.35rem 1.55rem;
+}
+
+.tradeoffsBody {
+  margin: 0;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: #c4cad4;
+}
+
+/* Technology Stack */
+.stackLayersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.layerCard {
+  background-color: #0d0f14;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.25rem 1.4rem;
+}
+
+.layerHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.layerIcon {
+  color: var(--color-primary, #8bb397);
+}
+
+.layerTitle {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--color-primary, #8bb397);
+}
+
+.layerPills,
+.tagsCloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.layerPill {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: #cbd5e1;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 5px;
+  padding: 0.25rem 0.65rem;
+  line-height: 1.3;
+  transition: all 0.2s ease;
+}
+
+.layerPill:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ------------------------------------------------------------- */
+/* 5. PAGINATION FOOTER                                          */
+/* ------------------------------------------------------------- */
 .paginationFooter {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1.25rem;
   margin-top: 4.5rem;
   padding-top: 2.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -343,27 +488,33 @@
   flex-direction: column;
   gap: 0.4rem;
   padding: 1.25rem 1.5rem;
-  background: rgba(255, 255, 255, 0.02);
+  background-color: #0d0f14;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
+  border-radius: 12px;
   text-decoration: none;
   color: inherit;
   flex: 1;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .paginationCard:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background-color: #12151c;
   border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
 }
 
+.paginationCardNext {
+  text-align: right;
+  align-items: flex-end;
+}
+
 .paginationDirection {
   font-family: var(--font-mono, monospace);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--color-primary, #8bb397);
+  font-weight: 600;
 }
 
 .paginationTitle {
@@ -373,8 +524,37 @@
   color: #ffffff;
 }
 
+.paginationSpacer {
+  flex: 1;
+}
+
+/* ------------------------------------------------------------- */
+/* 6. RESPONSIVE BREAKPOINTS                                     */
+/* ------------------------------------------------------------- */
 @media (max-width: 640px) {
+  .metaRow {
+    gap: 0.5rem;
+  }
+
+  .actionRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actionButton {
+    justify-content: center;
+  }
+
+  .capabilitiesGrid {
+    grid-template-columns: 1fr;
+  }
+
   .paginationFooter {
     flex-direction: column;
+  }
+
+  .paginationCardNext {
+    text-align: left;
+    align-items: flex-start;
   }
 }
