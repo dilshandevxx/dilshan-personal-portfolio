@@ -1,4 +1,4 @@
-/* Main Site Footer — Clean, High-Contrast Editorial Design (Matching Reference Screenshot) */
+/* Centered Minimal Editorial Footer (Matching Reference Design) */
 
 .footerRoot {
   width: 100%;
@@ -11,284 +11,105 @@
 }
 
 .container {
-  max-width: 1320px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 5rem 2.5rem 3rem;
+  padding: clamp(4.5rem, 7vw, 5.75rem) 1.5rem clamp(3.25rem, 5vw, 4.5rem);
   box-sizing: border-box;
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 3.5rem 1.5rem 2.5rem;
-  }
-}
-
-/* ------------------------------------------------------------- */
-/* 1. 3-COLUMN MAIN FOOTER GRID                                  */
-/* ------------------------------------------------------------- */
-.footerGrid {
-  display: grid;
-  grid-template-columns: 1fr 1.25fr 1.85fr;
-  gap: 4.5rem;
-  align-items: flex-start;
-}
-
-@media (max-width: 1024px) {
-  .footerGrid {
-    grid-template-columns: 1fr 1.25fr;
-    gap: 3.5rem;
-  }
-  .colNewsletter {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (max-width: 640px) {
-  .footerGrid {
-    grid-template-columns: 1fr;
-    gap: 2.75rem;
-  }
-}
-
-.col {
   display: flex;
   flex-direction: column;
-}
-
-.colTitle {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: -0.015em;
-  margin: 0 0 1.5rem 0;
-  line-height: 1.2;
-}
-
-/* Link List (Sitemap) */
-.linkList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.navLink {
-  color: #8c93a0;
-  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: 0.92rem;
-  text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease;
-  display: inline-block;
-  width: fit-content;
-}
-
-.navLink:hover {
-  color: #ffffff;
-  transform: translateX(2px);
-}
-
-/* Contact Block */
-.contactBlock {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.contactAddress {
-  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: 0.92rem;
-  line-height: 1.6;
-  color: #8c93a0;
-  margin: 0;
-}
-
-.contactDetails {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-}
-
-.contactItem {
-  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: 0.92rem;
-  color: #8c93a0;
-  margin: 0;
-  display: flex;
-  align-items: baseline;
-  gap: 0.45rem;
-}
-
-.contactPrefix {
-  color: #ffffff;
-  font-family: var(--font-mono, monospace);
-  font-weight: 700;
-  font-size: 0.85rem;
-}
-
-.contactLink {
-  color: #8c93a0;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.contactLink:hover {
-  color: #ffffff;
-}
-
-/* ------------------------------------------------------------- */
-/* 2. NEWSLETTER SUBSCRIPTION COLUMN                             */
-/* ------------------------------------------------------------- */
-.colNewsletter {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.newsletterForm {
-  width: 100%;
-}
-
-.newsletterPill {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  background-color: #121319;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 9999px;
-  padding: 0.35rem 0.35rem 0.35rem 1.35rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.newsletterPill:focus-within {
-  border-color: rgba(255, 255, 255, 0.35);
-  background-color: #161822;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
-}
-
-.newsletterInput {
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #ffffff;
-  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: 0.92rem;
-  flex: 1;
-  min-width: 0;
-}
-
-.newsletterInput::placeholder {
-  color: #64748b;
-  font-size: 0.88rem;
-}
-
-.subscribeBtn {
-  display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
-  color: #000000;
-  border: none;
-  border-radius: 9999px;
-  padding: 0.75rem 1.65rem;
-  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  flex-shrink: 0;
+  text-align: center;
 }
 
-.subscribeBtn:hover {
-  background-color: #e2e8f0;
+/* 1. Bold Uppercase Brand Wordmark */
+.brandLogo {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0 0 1.75rem 0;
+  line-height: 1;
+  display: inline-block;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.brandLogo:hover {
+  opacity: 0.85;
   transform: translateY(-1px);
 }
 
-.disclaimerRow {
+/* 2. Centered Navigation Links */
+.navLinks {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.35rem;
-}
-
-.disclaimerDot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background-color: #64748b;
-  flex-shrink: 0;
-}
-
-.disclaimerText {
-  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: 0.8rem;
-  color: #788090;
-  line-height: 1.45;
-}
-
-.disclaimerText strong {
-  color: #cbd5e1;
-  font-weight: 600;
-}
-
-.subscribedBanner {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.85rem 1.25rem;
-  background-color: rgba(74, 222, 128, 0.08);
-  border: 1px solid rgba(74, 222, 128, 0.25);
-  border-radius: 9999px;
-  color: #4ade80;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.86rem;
-  font-weight: 500;
-}
-
-/* ------------------------------------------------------------- */
-/* 3. BOTTOM BAR (COPYRIGHT & SOCIAL PROFILES)                   */
-/* ------------------------------------------------------------- */
-.bottomBar {
-  margin-top: 4.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: clamp(1.35rem, 2.6vw, 2.25rem);
   flex-wrap: wrap;
-  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.copyrightText {
+.navLink {
   font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: 0.84rem;
-  color: #64748b;
-  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
+.navLink:hover {
+  color: var(--color-primary, #8bb397);
+  transform: translateY(-1px);
+}
+
+/* 3. Centered Social Icons */
 .socialNav {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2.75rem;
 }
 
 .socialIconLink {
-  color: #8c93a0;
-  transition: color 0.2s ease, transform 0.2s ease;
+  color: #9ca3af;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .socialIconLink:hover {
   color: #ffffff;
   transform: translateY(-2px);
+}
+
+/* 4. Centered Copyright Attribution */
+.copyrightText {
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .navLinks {
+    gap: 1.15rem;
+  }
+
+  .navLink {
+    font-size: 0.9rem;
+  }
+
+  .socialNav {
+    gap: 1.25rem;
+    margin-bottom: 2.25rem;
+  }
 }
