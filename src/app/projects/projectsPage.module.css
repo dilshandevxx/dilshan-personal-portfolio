@@ -12,133 +12,81 @@
 }
 
 .mainContainer {
-  max-width: 1400px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: clamp(7.5rem, 12vw, 9.5rem) clamp(1.5rem, 4vw, 3.5rem) 7rem;
+  padding: clamp(6.25rem, 9.5vw, 7.75rem) clamp(1.25rem, 3.5vw, 2.75rem) 5.5rem;
   box-sizing: border-box;
 }
 
 /* ------------------------------------------------------------- */
-/* 1. HERO SECTION                                               */
+/* 1. HERO SECTION (Refined Editorial Eyebrow & Title)           */
 /* ------------------------------------------------------------- */
 .heroSection {
-  margin-bottom: 3.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding-bottom: 3.5rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  padding-bottom: 2rem;
 }
 
 @media (max-width: 768px) {
   .heroSection {
-    margin-bottom: 2.5rem;
-    padding-bottom: 2.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
   }
 }
 
-.badgeWrapper {
-  display: inline-flex;
-  margin-bottom: 1.5rem;
+.eyebrowRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.85rem;
 }
 
-.pillBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.42rem 1.15rem;
-  background-color: #0d0f14;
-  color: #b8bec9;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 999px;
+.eyebrowTag {
   font-family: var(--font-mono, monospace);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  color: var(--color-primary, #8bb397);
 }
 
-.badgePulseDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--color-primary, #8bb397);
-  box-shadow: 0 0 8px rgba(139, 179, 151, 0.7);
+.eyebrowDot {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.75rem;
+}
+
+.eyebrowMeta {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: #788090;
 }
 
 .title {
   color: #ffffff;
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  margin: 0 0 1.25rem;
+  font-size: clamp(2.1rem, 3.8vw, 2.85rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.75rem;
 }
 
 .subtitle {
-  color: #9da4ae;
+  color: #9299a8;
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
-  line-height: 1.65;
-  max-width: 760px;
-  margin: 0 0 2.5rem;
-}
-
-/* Quick Metrics Deck */
-.metricsDeck {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  background: #0b0d12;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 1.5rem 2rem;
-}
-
-.metricItem {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.metricValue {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: #ffffff;
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
-.metricLabel {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.74rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #788090;
-}
-
-.metricDivider {
-  width: 1px;
-  height: 32px;
-  background-color: rgba(255, 255, 255, 0.08);
-}
-
-@media (max-width: 768px) {
-  .metricDivider {
-    display: none;
-  }
-  .metricsDeck {
-    gap: 1.25rem;
-    padding: 1.25rem;
-  }
+  font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+  line-height: 1.6;
+  max-width: 680px;
+  margin: 0;
 }
 
 /* ------------------------------------------------------------- */
 /* 2. CATEGORY FILTER & SEARCH SECTION                           */
 /* ------------------------------------------------------------- */
 .filterBarSection {
-  margin-bottom: 3.5rem;
+  margin-bottom: 2.75rem;
 }
 
 .filterControlsRow {

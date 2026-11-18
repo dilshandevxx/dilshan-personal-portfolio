@@ -50,10 +50,6 @@ export default function ProjectsPage() {
     });
   }, [projects, selectedCategory, searchQuery]);
 
-  const liveProjectsCount = useMemo(() => {
-    return projects.filter((p) => Boolean(p.demoUrl)).length;
-  }, [projects]);
-
   return (
     <div className={styles.pageRoot}>
       {/* 1. Signature SkyLabs Top Navigation Header */}
@@ -61,55 +57,18 @@ export default function ProjectsPage() {
 
       {/* 2. Main Content Container */}
       <main className={styles.mainContainer}>
-        {/* Editorial Hero */}
+        {/* Clean, Refined Editorial Hero */}
         <section className={styles.heroSection}>
-          <div className={styles.badgeWrapper}>
-            <span className={styles.pillBadge}>
-              <span className={styles.badgePulseDot} />
-              ENGINEERING SYSTEMS &amp; ARCHITECTURE
-            </span>
+          <div className={styles.eyebrowRow}>
+            <span className={styles.eyebrowTag}>SELECTED WORK</span>
+            <span className={styles.eyebrowDot}>•</span>
+            <span className={styles.eyebrowMeta}>{projects.length} Flagship Systems</span>
           </div>
 
           <h1 className={styles.title}>Curated Systems &amp; Architecture</h1>
           <p className={styles.subtitle}>
-            A curated catalog of {projects.length} flagship engineering systems spanning intelligent AI/ML models, scalable full-stack applications, and high-throughput distributed infrastructure.
+            A curated selection of {projects.length} production architectures spanning intelligent AI/ML models, scalable full-stack applications, and high-throughput distributed infrastructure.
           </p>
-
-          {/* Clean Quick Metrics Deck */}
-          <div className={styles.metricsDeck}>
-            <div className={styles.metricItem}>
-              <span className={styles.metricValue}>{projects.length}</span>
-              <span className={styles.metricLabel}>Total Systems</span>
-            </div>
-            <div className={styles.metricDivider} />
-            <div className={styles.metricItem}>
-              <span className={styles.metricValue}>
-                {projects.filter((p) => p.category === "AI/ML").length}
-              </span>
-              <span className={styles.metricLabel}>AI &amp; ML Models</span>
-            </div>
-            <div className={styles.metricDivider} />
-            <div className={styles.metricItem}>
-              <span className={styles.metricValue}>
-                {projects.filter((p) => p.category === "Full-Stack").length}
-              </span>
-              <span className={styles.metricLabel}>Full-Stack Apps</span>
-            </div>
-            <div className={styles.metricDivider} />
-            <div className={styles.metricItem}>
-              <span className={styles.metricValue}>
-                {projects.filter((p) => p.category === "Systems").length}
-              </span>
-              <span className={styles.metricLabel}>Distributed Systems</span>
-            </div>
-            <div className={styles.metricDivider} />
-            <div className={styles.metricItem}>
-              <span className={styles.metricValue}>
-                {projects.filter((p) => Boolean(p.githubUrl)).length}
-              </span>
-              <span className={styles.metricLabel}>Verified Repos</span>
-            </div>
-          </div>
         </section>
 
         {/* 3. Category Filter & Search Section */}
