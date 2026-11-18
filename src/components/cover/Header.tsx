@@ -8,9 +8,9 @@ import NavigationMenu from "./NavigationMenu";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/#work", label: "Work" },
+  { href: "/#projects", label: "Work" },
   { href: "/portfolio", label: "Portfolio" },
-  { href: "/portfolio/blog", label: "Insights" },
+  { href: "/#insights", label: "Insights" },
 ];
 
 export default function Header() {

@@ -1,0 +1,162 @@
+/* Insights Section (Exact Match to Reference Design) */
+.insightsSection {
+  background-color: #000000;
+  padding: clamp(6.5rem, 9.5vw, 9.5rem) clamp(1.5rem, 4vw, 3.5rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .insightsSection {
+    padding: 5rem 1.5rem 6.5rem;
+  }
+}
+
+.container {
+  max-width: 1360px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: clamp(2.5rem, 4.5vw, 4rem);
+  gap: 1.5rem;
+}
+
+.title {
+  color: #ffffff;
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+.allInsightsLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9da4ae;
+  text-decoration: none;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  background-color: #0d0f14;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.25s ease;
+}
+
+.allInsightsLink:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.28);
+  background-color: #151820;
+  transform: translateY(-2px);
+}
+
+/* 2-Column Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.5rem, 2.75vw, 2.75rem);
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.cardWrapper {
+  width: 100%;
+  min-width: 0;
+}
+
+.cardLink {
+  display: block;
+  text-decoration: none;
+  outline: none;
+  border-radius: 14px;
+  width: 100%;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cardLink:hover {
+  transform: translateY(-4px);
+}
+
+.cardLink:focus-visible {
+  outline: 2px solid var(--color-primary, #8bb397);
+  outline-offset: 4px;
+}
+
+/* Visual Canvas */
+.imageCanvas {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 15;
+  border-radius: 14px;
+  overflow: hidden;
+  background-color: #101218;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.7);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.cardLink:hover .imageCanvas {
+  border-color: rgba(255, 255, 255, 0.26);
+  box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.9);
+}
+
+.cardImage {
+  object-fit: cover;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cardLink:hover .cardImage {
+  transform: scale(1.045);
+}
+
+/* Hover Pill Badge */
+.hoverPill {
+  position: absolute;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  background: rgba(14, 16, 22, 0.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  padding: 0.42rem 0.95rem;
+  color: #ffffff;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease;
+  pointer-events: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+.cardLink:hover .hoverPill {
+  opacity: 1;
+  transform: translateY(0);
+}
