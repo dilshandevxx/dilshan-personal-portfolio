@@ -13,11 +13,8 @@ import styles from "./projectsPage.module.css";
 const CATEGORIES: readonly ("All" | ProjectCategory)[] = [
   "All",
   "AI/ML",
-  "DevOps",
-  "Systems",
-  "Landing",
   "Full-Stack",
-  "Others",
+  "Systems",
 ] as const;
 
 export default function ProjectsPage() {
@@ -75,7 +72,7 @@ export default function ProjectsPage() {
 
           <h1 className={styles.title}>Curated Systems &amp; Architecture</h1>
           <p className={styles.subtitle}>
-            A curated catalog of {projects.length} production architectures spanning intelligent AI/ML infrastructure, distributed pipelines, cloud automation, and resilient web platforms.
+            A curated catalog of {projects.length} flagship engineering systems spanning intelligent AI/ML models, scalable full-stack applications, and high-throughput distributed infrastructure.
           </p>
 
           {/* Clean Quick Metrics Deck */}
@@ -94,9 +91,9 @@ export default function ProjectsPage() {
             <div className={styles.metricDivider} />
             <div className={styles.metricItem}>
               <span className={styles.metricValue}>
-                {projects.filter((p) => p.category === "DevOps").length}
+                {projects.filter((p) => p.category === "Full-Stack").length}
               </span>
-              <span className={styles.metricLabel}>Cloud &amp; DevOps</span>
+              <span className={styles.metricLabel}>Full-Stack Apps</span>
             </div>
             <div className={styles.metricDivider} />
             <div className={styles.metricItem}>
@@ -107,8 +104,10 @@ export default function ProjectsPage() {
             </div>
             <div className={styles.metricDivider} />
             <div className={styles.metricItem}>
-              <span className={styles.metricValue}>{liveProjectsCount}</span>
-              <span className={styles.metricLabel}>Live Deployments</span>
+              <span className={styles.metricValue}>
+                {projects.filter((p) => Boolean(p.githubUrl)).length}
+              </span>
+              <span className={styles.metricLabel}>Verified Repos</span>
             </div>
           </div>
         </section>

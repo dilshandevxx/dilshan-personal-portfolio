@@ -18,6 +18,7 @@ export const PROJECT_THUMBNAILS: Record<string, string> = {
   "ideaspark-ai-business-idea-generator": "/images/project_analytics.jpg",
   "roamora-travel-discovery-website": "/images/story_travel.jpg",
   "travel-website": "/images/story_coffee.jpg",
+  "familycare-eldercare-system": "/images/project_warpspeed_desk.jpg",
   "familycare-eldercare-monitoring-system": "/images/project_warpspeed_desk.jpg",
   "distributed-llm-inference-platform": "/images/project_powersurge.jpg",
   "llm-api-gateway-model-router": "/images/project_cloudwatch.jpg",
@@ -187,7 +188,7 @@ export const projectsList: Project[] = [
   {
     "slug": "business-idea-generator",
     "title": "IdeaSpark — AI Business Idea Generator",
-    "category": "AI/ML",
+    "category": "Full-Stack",
     "tagline": "Streaming AI idea generation through a full-stack application.",
     "description": "A Next.js and FastAPI application that streams generated business ideas using Google Gemini or OpenAI-compatible model configuration.",
     "longDescription": "The repository README documents a full-stack application with a Next.js frontend, FastAPI backend, Server-Sent Events streaming, selectable topic presets, markdown rendering, and a mock demo fallback when no model key is configured.",
@@ -245,6 +246,111 @@ export const projectsList: Project[] = [
     "writeupUrl": "",
     "status": "Existing"
   },
+  {
+    "slug": "familycare-eldercare-system",
+    "title": "FamilyCare — Eldercare Monitoring System",
+    "date": "Existing",
+    "category": "Full-Stack",
+    "tagline": "A family-facing eldercare platform with caregiver discovery and protected family dashboards.",
+    "description": "A university team project repository describing an eldercare monitoring platform for families coordinating care for elderly parents.",
+    "longDescription": "The repository README describes public pages for product information and caregiver discovery, JWT-protected login and registration, and a family dashboard with summaries of health-related measurements and alerts. The documented stack includes React, Node.js, and MySQL, with Vercel deployment badges. This portfolio entry records the README's stated scope, not a clinical validation claim.",
+    "highlights": [
+      "Public product and feature pages",
+      "Caregiver listing/discovery described in the README",
+      "JWT-protected login and registration",
+      "Family dashboard with measurement summaries and alerts described in the README",
+      "React, Node.js, and MySQL stack badges in the repository README"
+    ],
+    "architecture": "Browser client → React application → Node.js backend → MySQL persistence. The README describes public access and authenticated family dashboard areas; inspect the implementation to verify API boundaries, authorization rules, and data update mechanisms.",
+    "challenges": "Verify authentication and authorization at every API boundary, protect sensitive family data, validate alert correctness, audit access, and document privacy and retention. Do not present the application as a clinically validated monitoring device.",
+    "tags": [
+      "React",
+      "Node.js",
+      "MySQL",
+      "JWT",
+      "Vercel"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/FamilyCare-Univercity-Project",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Frontend",
+        "technologies": [
+          "React"
+        ]
+      },
+      {
+        "layer": "Backend",
+        "technologies": [
+          "Node.js",
+          "JWT"
+        ]
+      },
+      {
+        "layer": "Persistence",
+        "technologies": [
+          "MySQL"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Existing"
+  },
+  {
+    "slug": "distributed-llm-inference-platform",
+    "title": "Distributed LLM Inference Platform",
+    "date": "Roadmap",
+    "category": "Systems",
+    "tagline": "Schedule and serve multiple LLMs across shared GPU capacity with latency, fairness, and cost controls.",
+    "description": "Schedule and serve multiple LLMs across shared GPU capacity with latency, fairness, and cost controls.",
+    "longDescription": "Schedule and serve multiple LLMs across shared GPU capacity with latency, fairness, and cost controls. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
+    "highlights": [
+      "Dynamic batching",
+      "GPU-aware placement",
+      "Tenant quotas",
+      "Autoscaling",
+      "Canary model rollout",
+      "And TTFT/token-throughput benchmarks."
+    ],
+    "architecture": "Gateway → model router → admission queue → GPU workers (vLLM/Triton) → streaming responses; control plane tracks capacity and model rollouts.",
+    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
+    "tags": [
+      "Python",
+      "vLLM",
+      "Kubernetes",
+      "NVIDIA GPU Operator",
+      "KEDA",
+      "Prometheus"
+    ],
+    "stars": 0,
+    "featured": false,
+    "highlight": false,
+    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/distributed-llm-inference-platform/README.md",
+    "metricsDetail": [],
+    "stackLayers": [
+      {
+        "layer": "Candidate stack",
+        "technologies": [
+          "Python",
+          "vLLM",
+          "Kubernetes",
+          "NVIDIA GPU Operator",
+          "KEDA",
+          "Prometheus"
+        ]
+      }
+    ],
+    "image": "",
+    "aliases": [],
+    "status": "Planned"
+  }
+];
+
+export const archivedProjectsList: Project[] = [
   {
     "slug": "roamora-travel-project",
     "title": "Roamora — Travel Discovery Website",
@@ -355,108 +461,6 @@ export const projectsList: Project[] = [
     "aliases": [],
     "writeupUrl": "",
     "status": "Existing"
-  },
-  {
-    "slug": "familycare-eldercare-system",
-    "title": "FamilyCare — Eldercare Monitoring System",
-    "date": "Existing",
-    "category": "Full-Stack",
-    "tagline": "A family-facing eldercare platform with caregiver discovery and protected family dashboards.",
-    "description": "A university team project repository describing an eldercare monitoring platform for families coordinating care for elderly parents.",
-    "longDescription": "The repository README describes public pages for product information and caregiver discovery, JWT-protected login and registration, and a family dashboard with summaries of health-related measurements and alerts. The documented stack includes React, Node.js, and MySQL, with Vercel deployment badges. This portfolio entry records the README's stated scope, not a clinical validation claim.",
-    "highlights": [
-      "Public product and feature pages",
-      "Caregiver listing/discovery described in the README",
-      "JWT-protected login and registration",
-      "Family dashboard with measurement summaries and alerts described in the README",
-      "React, Node.js, and MySQL stack badges in the repository README"
-    ],
-    "architecture": "Browser client → React application → Node.js backend → MySQL persistence. The README describes public access and authenticated family dashboard areas; inspect the implementation to verify API boundaries, authorization rules, and data update mechanisms.",
-    "challenges": "Verify authentication and authorization at every API boundary, protect sensitive family data, validate alert correctness, audit access, and document privacy and retention. Do not present the application as a clinically validated monitoring device.",
-    "tags": [
-      "React",
-      "Node.js",
-      "MySQL",
-      "JWT",
-      "Vercel"
-    ],
-    "stars": 0,
-    "featured": false,
-    "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/FamilyCare-Univercity-Project",
-    "metricsDetail": [],
-    "stackLayers": [
-      {
-        "layer": "Frontend",
-        "technologies": [
-          "React"
-        ]
-      },
-      {
-        "layer": "Backend",
-        "technologies": [
-          "Node.js",
-          "JWT"
-        ]
-      },
-      {
-        "layer": "Persistence",
-        "technologies": [
-          "MySQL"
-        ]
-      }
-    ],
-    "image": "",
-    "aliases": [],
-    "status": "Existing"
-  },
-  {
-    "slug": "distributed-llm-inference-platform",
-    "title": "Distributed LLM Inference Platform",
-    "date": "Roadmap",
-    "category": "AI Infrastructure",
-    "tagline": "Schedule and serve multiple LLMs across shared GPU capacity with latency, fairness, and cost controls.",
-    "description": "Schedule and serve multiple LLMs across shared GPU capacity with latency, fairness, and cost controls.",
-    "longDescription": "Schedule and serve multiple LLMs across shared GPU capacity with latency, fairness, and cost controls. This is a documentation-first engineering proposal; the detailed scope, risks, validation strategy, and milestones are in its linked README.",
-    "highlights": [
-      "Dynamic batching",
-      "GPU-aware placement",
-      "Tenant quotas",
-      "Autoscaling",
-      "Canary model rollout",
-      "And TTFT/token-throughput benchmarks."
-    ],
-    "architecture": "Gateway → model router → admission queue → GPU workers (vLLM/Triton) → streaming responses; control plane tracks capacity and model rollouts.",
-    "challenges": "Key risks include operational complexity, failure modes, security boundaries, observability gaps, and cost. Validate these through threat modeling, load testing, failure injection, and documented ADRs before making implementation claims.",
-    "tags": [
-      "Python",
-      "vLLM",
-      "Kubernetes",
-      "NVIDIA GPU Operator",
-      "KEDA",
-      "Prometheus"
-    ],
-    "stars": 0,
-    "featured": false,
-    "highlight": false,
-    "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/distributed-llm-inference-platform/README.md",
-    "metricsDetail": [],
-    "stackLayers": [
-      {
-        "layer": "Candidate stack",
-        "technologies": [
-          "Python",
-          "vLLM",
-          "Kubernetes",
-          "NVIDIA GPU Operator",
-          "KEDA",
-          "Prometheus"
-        ]
-      }
-    ],
-    "image": "",
-    "aliases": [],
-    "status": "Planned"
   },
   {
     "slug": "llm-api-gateway",
