@@ -1,237 +1,201 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import {
-  FaGithub,
+  FaFacebookF,
+  FaInstagram,
   FaXTwitter,
   FaLinkedinIn,
-  FaInstagram,
-  FaEnvelope,
+  FaGithub,
 } from "react-icons/fa6";
+import { Check } from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
 import styles from "./MainFooter.module.css";
 
 export default function MainFooter() {
-  const handleTalkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const contactEl = document.getElementById("contact");
-    if (contactEl) {
-      e.preventDefault();
-      contactEl.scrollIntoView({ behavior: "smooth" });
-    }
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim() || !email.includes("@")) return;
+    setSubscribed(true);
   };
 
+  const currentYear = 2026;
+
   return (
-    <footer className={styles.footerWrapper} role="contentinfo" aria-label="Site Footer">
-      {/* ------------------------------------------------------------- */}
-      {/* 1. TOP CALL TO ACTION BANNER (Dark Editorial Section)         */}
-      {/* ------------------------------------------------------------- */}
-      <section className={styles.ctaSection} aria-label="Call to action">
-        <div className={styles.ctaContainer}>
-          <a
-            href="/#contact"
-            onClick={handleTalkClick}
-            className={styles.ctaBadge}
-            aria-label="Have a project in mind? Contact Dilshan"
-          >
-            Have a project in mind?
-          </a>
+    <footer className={styles.footerRoot} role="contentinfo" aria-label="Site Footer">
+      <div className={styles.container}>
+        {/* Main 3-Column Footer Grid (Matching User Reference Layout) */}
+        <div className={styles.footerGrid}>
+          {/* Column 1: Sitemap */}
+          <div className={styles.col}>
+            <h3 className={styles.colTitle}>Sitemap</h3>
+            <ul className={styles.linkList}>
+              <li>
+                <Link href="/" className={styles.navLink}>
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/#about-me" className={styles.navLink}>
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/projects" className={styles.navLink}>
+                  Projects
+                </Link>
+              </li>
+              <li>
+                <Link href="/portfolio/blog" className={styles.navLink}>
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/portfolio/shelves" className={styles.navLink}>
+                  Shelves
+                </Link>
+              </li>
+              <li>
+                <Link href="/portfolio/resume" className={styles.navLink}>
+                  CV &amp; Resume
+                </Link>
+              </li>
+              <li>
+                <Link href="/#contact" className={styles.navLink}>
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
 
-          <a
-            href="/#contact"
-            onClick={handleTalkClick}
-            className={styles.ctaHeadlineLink}
-            aria-label="Let's Talk"
-          >
-            Let&apos;s Talk
-          </a>
+          {/* Column 2: Contact */}
+          <div className={styles.col}>
+            <h3 className={styles.colTitle}>Contact</h3>
+            <div className={styles.contactBlock}>
+              <p className={styles.contactAddress}>
+                Colombo, Sri Lanka
+                <br />
+                Available Worldwide &bull; Remote
+              </p>
 
-          <div className={styles.ctaUnderline} aria-hidden="true" />
-        </div>
-      </section>
+              <div className={styles.contactDetails}>
+                <p className={styles.contactItem}>
+                  <span className={styles.contactPrefix}>P:</span>
+                  <a href="tel:+94775944600" className={styles.contactLink}>
+                    +94 77 594 4600
+                  </a>
+                </p>
+                <p className={styles.contactItem}>
+                  <span className={styles.contactPrefix}>E:</span>
+                  <a
+                    href={`mailto:${siteConfig.social.email}`}
+                    className={styles.contactLink}
+                  >
+                    {siteConfig.social.email}
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
 
-      {/* ------------------------------------------------------------- */}
-      {/* 2. BOTTOM MULTI-COLUMN FOOTER (Dark, Clean & Organized)       */}
-      {/* ------------------------------------------------------------- */}
-      <section className={styles.darkFooterSection}>
-        <div className={styles.footerContainer}>
-          {/* Header Row: Wordmark & Social Icons */}
-          <div className={styles.headerRow}>
-            <div className={styles.brandGroup}>
-              <Link href="/" className={styles.brandWordmark} aria-label="Dilshan Home">
-                {siteConfig.name}
-              </Link>
-              <span className={styles.brandTagline}>
-                Systems Architect &amp; Software Engineer
+          {/* Column 3: Subscribe to our newsletter */}
+          <div className={styles.colNewsletter}>
+            <h3 className={styles.colTitle}>Subscribe to our newsletter</h3>
+
+            {subscribed ? (
+              <div className={styles.subscribedBanner}>
+                <Check size={16} color="#4ade80" />
+                <span>You&apos;re subscribed! Thank you for following along.</span>
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} className={styles.newsletterForm}>
+                <div className={styles.newsletterPill}>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email..."
+                    required
+                    className={styles.newsletterInput}
+                    aria-label="Email address for newsletter"
+                  />
+                  <button type="submit" className={styles.subscribeBtn}>
+                    Subscribe
+                  </button>
+                </div>
+              </form>
+            )}
+
+            <div className={styles.disclaimerRow}>
+              <span className={styles.disclaimerDot} aria-hidden="true" />
+              <span className={styles.disclaimerText}>
+                By subscribing you agree to our <strong>Terms &amp; Conditions</strong>.
               </span>
             </div>
-
-            <nav className={styles.socialRow} aria-label="Social Profiles">
-              <a
-                href={siteConfig.social.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-                aria-label="GitHub Profile"
-              >
-                <FaGithub size={18} />
-              </a>
-              <a
-                href={siteConfig.social.x}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-                aria-label="X (Twitter) Profile"
-              >
-                <FaXTwitter size={17} />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-                aria-label="Instagram Profile"
-              >
-                <FaInstagram size={18} />
-              </a>
-              <a
-                href={siteConfig.social.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-                aria-label="LinkedIn Profile"
-              >
-                <FaLinkedinIn size={18} />
-              </a>
-              <a
-                href={`mailto:${siteConfig.social.email}`}
-                className={styles.socialLink}
-                aria-label="Email Dilshan"
-              >
-                <FaEnvelope size={17} />
-              </a>
-            </nav>
-          </div>
-
-          {/* Full-width dividing rule */}
-          <div className={styles.divider} aria-hidden="true" />
-
-          {/* Columns Grid */}
-          <div className={styles.columnsGrid}>
-            {/* Column 1: Colophon & Copyright */}
-            <div className={styles.colBio}>
-              <p className={styles.copyrightText}>
-                &copy; 2026 {siteConfig.name}. All rights reserved.
-              </p>
-              <p className={styles.colophonSubtext}>
-                Crafted with care in Sri Lanka.
-                <br />
-                Software engineering, system architecture &amp; understated web interfaces.
-              </p>
-              <p className={styles.colophonTech}>
-                Next.js &bull; TypeScript &bull; React 19
-              </p>
-            </div>
-
-            {/* Column 2: Website Links */}
-            <div className={styles.colNav}>
-              <h3 className={styles.colTitle}>Website</h3>
-              <ul className={styles.linkList}>
-                <li>
-                  <Link href="/" className={styles.navLink}>
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/portfolio#projects" className={styles.navLink}>
-                    Projects
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/portfolio#about" className={styles.navLink}>
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <a href="/#contact" onClick={handleTalkClick} className={styles.navLink}>
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <Link href="/portfolio/shelves" className={styles.navLink}>
-                    Shelves
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/portfolio#blog" className={styles.navLink}>
-                    Blog
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 3: Explore / Portfolio Links */}
-            <div className={styles.colNav}>
-              <h3 className={styles.colTitle}>Explore</h3>
-              <ul className={styles.linkList}>
-                <li>
-                  <Link href="/portfolio" className={styles.navLink}>
-                    Digital Garden
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/portfolio#overview" className={styles.navLink}>
-                    Architecture
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/portfolio#skills" className={styles.navLink}>
-                    Technical Notes
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/portfolio#life" className={styles.navLink}>
-                    Reading Desk
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/portfolio#resume" className={styles.navLink}>
-                    Resume &amp; CV
-                  </Link>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/dilshandevxx/my-lifestyle-portfolio"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.navLink}
-                  >
-                    Source Code
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 4: Contact & Availability */}
-            <div className={styles.contactInfo}>
-              <h3 className={styles.colTitle}>Contact</h3>
-              <a
-                href={`mailto:${siteConfig.social.email}`}
-                className={styles.contactEmail}
-              >
-                {siteConfig.social.email}
-              </a>
-              <div className={styles.contactMeta}>
-                Colombo, Sri Lanka &bull; UTC+5:30
-              </div>
-              <div className={styles.statusIndicator}>
-                <span className={styles.statusDot} aria-hidden="true" />
-                <span>Open for select collaborations</span>
-              </div>
-            </div>
           </div>
         </div>
-      </section>
+
+        {/* Bottom Bar: Copyright & Social Profiles */}
+        <div className={styles.bottomBar}>
+          <p className={styles.copyrightText}>
+            &copy; {currentYear} {siteConfig.name}. Designed &amp; engineered with care.
+          </p>
+
+          <nav className={styles.socialNav} aria-label="Social Profiles">
+            {siteConfig.social.facebook && (
+              <a
+                href={siteConfig.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.socialIconLink}
+                aria-label="Facebook Profile"
+              >
+                <FaFacebookF size={14} />
+              </a>
+            )}
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialIconLink}
+              aria-label="Instagram Profile"
+            >
+              <FaInstagram size={15} />
+            </a>
+            <a
+              href={siteConfig.social.x}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialIconLink}
+              aria-label="X (Twitter) Profile"
+            >
+              <FaXTwitter size={14} />
+            </a>
+            <a
+              href={siteConfig.social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialIconLink}
+              aria-label="LinkedIn Profile"
+            >
+              <FaLinkedinIn size={15} />
+            </a>
+            <a
+              href={siteConfig.social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialIconLink}
+              aria-label="GitHub Profile"
+            >
+              <FaGithub size={15} />
+            </a>
+          </nav>
+        </div>
+      </div>
     </footer>
   );
 }
