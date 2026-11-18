@@ -9,13 +9,24 @@ import styles from "./HeroSkyLabs.module.css";
 export default function HeroSkyLabs() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [navVisible, setNavVisible] = useState(true);
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // Avoid rubber-banding on iOS
+      if (currentScrollY < 0) return;
+
       // ScrollSpy for landing sections
       const sections = ["skills", "projects", "about-me", "contact"];
-      const scrollPos = window.scrollY + 220;
+      const scrollPos = currentScrollY + 220;
 
+      let foundSection = false;
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
         if (el) {
@@ -23,13 +34,28 @@ export default function HeroSkyLabs() {
           const height = el.offsetHeight;
           if (scrollPos >= top && scrollPos < top + height) {
             setActiveSection(sectionId);
-            return;
+            foundSection = true;
+            break;
           }
         }
       }
-      if (window.scrollY < 260) {
+      if (!foundSection && currentScrollY < 260) {
         setActiveSection("");
       }
+
+      // Hide navbar when scrolling down or when scrolled near bottom
+      if (currentScrollY <= 60) {
+        setNavVisible(true);
+      } else if (windowHeight + currentScrollY >= documentHeight - 100) {
+        setNavVisible(false);
+      } else if (Math.abs(currentScrollY - lastScrollY) > 6) {
+        if (currentScrollY > lastScrollY) {
+          setNavVisible(false);
+        } else {
+          setNavVisible(true);
+        }
+      }
+      lastScrollY = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -79,7 +105,11 @@ export default function HeroSkyLabs() {
   return (
     <section className={styles.heroSection} aria-label="Hero">
       {/* 1. Minimal & Beautiful SkyLabs Navbar */}
-      <header className={styles.navHeader}>
+      <header
+        className={`${styles.navHeader} ${
+          !navVisible && !mobileOpen ? styles.navHidden : ""
+        }`}
+      >
         <div className={styles.navContainer}>
           {/* Left: Pure SkyLabs Brand Wordmark & Geometric Badge */}
           <Link href="/" className={styles.brandLink}>

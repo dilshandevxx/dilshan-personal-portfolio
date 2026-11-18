@@ -13,12 +13,50 @@ interface SkyLabsNavbarProps {
 
 export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [navVisible, setNavVisible] = useState(true);
   const pathname = usePathname();
+
+  React.useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // Avoid negative/rubberband scroll on iOS
+      if (currentScrollY < 0) return;
+
+      // Always show at top of page
+      if (currentScrollY <= 60) {
+        setNavVisible(true);
+      } else if (windowHeight + currentScrollY >= documentHeight - 100) {
+        // Hide when scrolled near the bottom of the page
+        setNavVisible(false);
+      } else if (Math.abs(currentScrollY - lastScrollY) > 6) {
+        // Scrolling down -> hide; Scrolling up -> show
+        if (currentScrollY > lastScrollY) {
+          setNavVisible(false);
+        } else {
+          setNavVisible(true);
+        }
+      }
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const isProjectsActive = activeTab === "projects" || pathname === "/projects" || pathname?.startsWith("/projects/");
 
   return (
-    <header className={styles.navHeader} role="banner">
+    <header
+      className={`${styles.navHeader} ${
+        !navVisible && !mobileOpen ? styles.navHidden : ""
+      }`}
+      role="banner"
+    >
       <div className={styles.navContainer}>
         {/* Left: Pure SkyLabs Brand Wordmark & Geometric Badge */}
         <Link href="/" className={styles.brandLink} title="SkyLabs Home">
