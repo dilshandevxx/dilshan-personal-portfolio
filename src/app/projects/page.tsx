@@ -68,34 +68,44 @@ export default function ProjectsPage() {
         <section className={styles.heroSection}>
           <div className={styles.badgeWrapper}>
             <span className={styles.pillBadge}>
-              <span className={styles.badgeDot}>•</span>
-              ENGINEERING REPOSITORIES &amp; SYSTEMS
+              <span className={styles.badgePulseDot} />
+              ENGINEERING SYSTEMS &amp; ARCHITECTURE
             </span>
           </div>
 
           <h1 className={styles.title}>Curated Systems &amp; Architecture</h1>
           <p className={styles.subtitle}>
-            A comprehensive catalog of {projects.length} engineering projects spanning production AI/ML architectures, high-throughput distributed pipelines, cloud automation, and modern web applications.
+            A curated catalog of {projects.length} production architectures spanning intelligent AI/ML infrastructure, distributed pipelines, cloud automation, and resilient web platforms.
           </p>
 
-          {/* Clean Quick Metrics Row */}
-          <div className={styles.metricsRow}>
+          {/* Clean Quick Metrics Deck */}
+          <div className={styles.metricsDeck}>
             <div className={styles.metricItem}>
               <span className={styles.metricValue}>{projects.length}</span>
               <span className={styles.metricLabel}>Total Systems</span>
             </div>
+            <div className={styles.metricDivider} />
             <div className={styles.metricItem}>
-              <span className={styles.metricValue}>{projects.filter((p) => p.category === "AI/ML").length}</span>
+              <span className={styles.metricValue}>
+                {projects.filter((p) => p.category === "AI/ML").length}
+              </span>
               <span className={styles.metricLabel}>AI &amp; ML Models</span>
             </div>
+            <div className={styles.metricDivider} />
             <div className={styles.metricItem}>
-              <span className={styles.metricValue}>{projects.filter((p) => p.category === "DevOps").length}</span>
+              <span className={styles.metricValue}>
+                {projects.filter((p) => p.category === "DevOps").length}
+              </span>
               <span className={styles.metricLabel}>Cloud &amp; DevOps</span>
             </div>
+            <div className={styles.metricDivider} />
             <div className={styles.metricItem}>
-              <span className={styles.metricValue}>{projects.filter((p) => p.category === "Systems").length}</span>
+              <span className={styles.metricValue}>
+                {projects.filter((p) => p.category === "Systems").length}
+              </span>
               <span className={styles.metricLabel}>Distributed Systems</span>
             </div>
+            <div className={styles.metricDivider} />
             <div className={styles.metricItem}>
               <span className={styles.metricValue}>{liveProjectsCount}</span>
               <span className={styles.metricLabel}>Live Deployments</span>
@@ -105,76 +115,81 @@ export default function ProjectsPage() {
 
         {/* 3. Category Filter & Search Section */}
         <section className={styles.filterBarSection} aria-label="Project Categories & Search">
-          <div className={styles.filterTabs} role="tablist">
-            {CATEGORIES.map((cat) => {
-              const isActive = selectedCategory === cat;
-              const count =
-                cat === "All"
-                  ? projects.length
-                  : projects.filter((p) => p.category === cat).length;
+          <div className={styles.filterControlsRow}>
+            {/* Category Tabs */}
+            <div className={styles.filterTabs} role="tablist">
+              {CATEGORIES.map((cat) => {
+                const isActive = selectedCategory === cat;
+                const count =
+                  cat === "All"
+                    ? projects.length
+                    : projects.filter((p) => p.category === cat).length;
 
-              return (
-                <button
-                  key={cat}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`${styles.categoryBtn} ${isActive ? styles.categoryBtnActive : ""}`}
-                >
-                  <span>{cat}</span>
-                  <span className={styles.categoryCount}>({count})</span>
-                </button>
-              );
-            })}
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`${styles.categoryBtn} ${
+                      isActive ? styles.categoryBtnActive : ""
+                    }`}
+                  >
+                    <span>{cat}</span>
+                    <span className={styles.categoryCount}>({count})</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Clean Search Input */}
+            <div className={styles.searchWrapper}>
+              <div className={styles.searchBox}>
+                <Search size={15} color="#788090" aria-hidden="true" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search systems, tags, keywords..."
+                  className={styles.searchInput}
+                  aria-label="Search systems"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    className={styles.clearSearchBtn}
+                    aria-label="Clear search query"
+                  >
+                    <X size={14} />
+                  </button>
+                )}
+              </div>
+            </div>
           </div>
 
-          {/* Search Input */}
-          <div style={{ marginTop: "1rem", position: "relative", maxWidth: "420px" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                padding: "0.55rem 0.9rem",
-                background: "rgba(255, 255, 255, 0.03)",
-                border: "1px solid rgba(255, 255, 255, 0.08)",
-                borderRadius: "6px",
-              }}
-            >
-              <Search size={14} color="#788090" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search systems by name, stack, or keyword..."
-                style={{
-                  background: "transparent",
-                  border: "none",
-                  outline: "none",
-                  color: "#ffffff",
-                  fontSize: "0.85rem",
-                  fontFamily: "var(--font-body, sans-serif)",
-                  width: "100%",
+          {/* Filter Status Strip */}
+          <div className={styles.filterStatusBar}>
+            <span className={styles.resultsCount}>
+              Showing {filteredProjects.length} of {projects.length} systems
+              {selectedCategory !== "All" && ` • ${selectedCategory}`}
+              {searchQuery && ` • matching "${searchQuery}"`}
+            </span>
+
+            {(selectedCategory !== "All" || searchQuery) && (
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedCategory("All");
+                  setSearchQuery("");
                 }}
-              />
-              {searchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setSearchQuery("")}
-                  style={{
-                    background: "transparent",
-                    border: "none",
-                    color: "#788090",
-                    cursor: "pointer",
-                    padding: 0,
-                  }}
-                  aria-label="Clear search"
-                >
-                  <X size={14} />
-                </button>
-              )}
-            </div>
+                className={styles.resetFiltersBtn}
+              >
+                <X size={11} />
+                <span>Reset Filters</span>
+              </button>
+            )}
           </div>
         </section>
 
@@ -201,9 +216,25 @@ export default function ProjectsPage() {
           </motion.div>
 
           {filteredProjects.length === 0 && (
-            <div style={{ textAlign: "center", padding: "4rem 1rem", color: "#788090" }}>
-              <p style={{ fontSize: "1rem", marginBottom: "0.5rem" }}>
-                No projects found matching &ldquo;{searchQuery}&rdquo; in {selectedCategory}.
+            <div className={styles.emptyState}>
+              <div
+                style={{
+                  width: 52,
+                  height: 52,
+                  borderRadius: "50%",
+                  background: "rgba(255, 255, 255, 0.04)",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: "0.25rem",
+                }}
+              >
+                <Search size={22} color="#788090" />
+              </div>
+              <h3 className={styles.emptyStateTitle}>No Systems Found</h3>
+              <p className={styles.emptyStateText}>
+                No engineering projects match &ldquo;{searchQuery}&rdquo; in {selectedCategory}. Try broadening your search or resetting filters.
               </p>
               <button
                 type="button"
@@ -212,9 +243,8 @@ export default function ProjectsPage() {
                   setSearchQuery("");
                 }}
                 className={styles.secondaryCtaBtn}
-                style={{ marginTop: "1rem" }}
               >
-                Reset Filters
+                Reset All Filters
               </button>
             </div>
           )}
