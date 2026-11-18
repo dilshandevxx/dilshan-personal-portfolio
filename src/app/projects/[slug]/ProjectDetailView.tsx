@@ -4,17 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Project, getProjectThumbnail, FALLBACK_THUMBNAILS } from "@/data/projects";
-import {
-  ArrowLeft,
-  ArrowUpRight,
-  ExternalLink,
-  Sparkles,
-  FileText,
-  CheckCircle2,
-  Workflow,
-  Layers,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "@/components/SocialIcons";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
 import MainFooter from "@/components/MainFooter";
@@ -35,7 +25,6 @@ export function ProjectDetailView({
 }: ProjectDetailViewProps) {
   const [project, setProject] = useState<Project>(initialProject);
 
-  // Sync client overrides from localStorage in production
   useEffect(() => {
     try {
       const stored = localStorage.getItem("dilshan_custom_projects");
@@ -56,7 +45,6 @@ export function ProjectDetailView({
     setHeroSrc(getProjectThumbnail(project.slug, project.image, index));
   }, [project.slug, project.image, index]);
 
-  const isLive = project.status === "Existing" || !project.status;
   const isExternalUrl =
     heroSrc.startsWith("http://") ||
     heroSrc.startsWith("https://") ||
@@ -70,54 +58,38 @@ export function ProjectDetailView({
       <SkyLabsNavbar activeTab="projects" />
 
       <article className={styles.container}>
-        {/* 1. Back Navigation Breadcrumb */}
-        <nav className={styles.backNav}>
+        {/* Back Navigation Breadcrumb */}
+        <div className={styles.backNav}>
           <Link href="/projects" className={styles.backLink}>
-            <ArrowLeft size={15} />
-            <span>Back to Projects</span>
+            <ArrowLeft size={16} />
+            <span>All Projects</span>
           </Link>
-        </nav>
+        </div>
 
-        {/* 2. Editorial Header Section */}
+        {/* Editorial Header */}
         <header className={styles.header}>
           <div className={styles.metaRow}>
-            <span className={styles.categoryBadge}>{project.category}</span>
-
-            {isLive ? (
-              <span className={styles.statusPillLive} title="Live Built & Deployed Service">
-                <span className={styles.liveDot} />
-                <span>Production Ready</span>
-              </span>
-            ) : (
-              <span className={styles.statusPillRfc} title="Architecture Specification / RFC Proposal">
-                <span className={styles.rfcDot} />
-                <span>Architecture Spec</span>
-              </span>
-            )}
-
-            {project.featured && (
-              <span className={styles.featuredBadge}>
-                <Sparkles size={11} />
-                <span>Featured Architecture</span>
-              </span>
-            )}
-
-            <span className={styles.datePill}>{displayYear}</span>
+            <span className={styles.metaCategory}>{project.category}</span>
+            <span className={styles.metaDivider}>/</span>
+            <span className={styles.metaYear}>{displayYear}</span>
           </div>
 
           <h1 className={styles.title}>{project.title}</h1>
-          <p className={styles.tagline}>{project.tagline}</p>
 
-          {/* Action Row */}
+          {project.tagline && (
+            <p className={styles.tagline}>{project.tagline}</p>
+          )}
+
+          {/* Action Buttons (Clean, Modern, Monochrome) */}
           <div className={styles.actionRow}>
             {project.demoUrl && (
               <a
                 href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${styles.actionButton} ${styles.actionButtonPrimary}`}
+                className={styles.primaryButton}
               >
-                <span>Explore Live Demo</span>
+                <span>Live Deployment</span>
                 <ArrowUpRight size={15} />
               </a>
             )}
@@ -127,27 +99,24 @@ export function ProjectDetailView({
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
+                className={styles.secondaryButton}
               >
-                <GithubIcon size={16} />
-                <span>{isLive ? "View Source Code" : "Read GitHub Spec"}</span>
+                <GithubIcon size={15} />
+                <span>Source Code</span>
               </a>
             )}
 
             {project.writeupUrl && (
-              <Link
-                href={project.writeupUrl}
-                className={`${styles.actionButton} ${styles.actionButtonSecondary}`}
-              >
-                <FileText size={15} />
-                <span>Technical Case Study</span>
+              <Link href={project.writeupUrl} className={styles.secondaryButton}>
+                <span>Case Study</span>
+                <ArrowUpRight size={15} />
               </Link>
             )}
           </div>
         </header>
 
-        {/* 3. Widescreen Hero Visual Showcase Canvas (Full 1240px Width) */}
-        <div className={styles.heroMediaFrame}>
+        {/* Cinematic Media Showcase */}
+        <div className={styles.showcaseFrame}>
           <Image
             src={heroSrc}
             alt={project.title}
@@ -160,138 +129,94 @@ export function ProjectDetailView({
                 "/images/project_collective.jpg";
               setHeroSrc(fallback);
             }}
-            className={styles.heroImage}
-            sizes="(max-width: 1240px) 100vw, 1240px"
+            className={styles.showcaseImage}
+            sizes="(max-width: 1100px) 100vw, 1100px"
           />
-          <div className={styles.heroMediaGlow} />
         </div>
 
-        {/* 4. Two-Column Narrative & Specs Layout */}
-        <div className={styles.contentGrid}>
-          {/* Left Column: Deep-dive Technical Narrative */}
-          <div className={styles.mainNarrative}>
-            {/* System Overview */}
-            <section className={styles.section}>
-              <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>System Overview</h2>
+        {/* Editorial Narrative Sections (Matching Main Page Vibe) */}
+        <div className={styles.storyContainer}>
+          {/* 1. Overview */}
+          <section className={styles.storySection}>
+            <div className={styles.sectionHeadingCol}>
+              <h2 className={styles.sectionHeading}>The Overview</h2>
+            </div>
+            <div className={styles.sectionBodyCol}>
+              <p className={styles.leadParagraph}>
+                {project.description}
+              </p>
+              {project.longDescription && project.longDescription !== project.description && (
+                <p className={styles.bodyParagraph}>
+                  {project.longDescription}
+                </p>
+              )}
+            </div>
+          </section>
+
+          {/* 2. Architecture & Data Flow */}
+          {project.architecture && (
+            <section className={styles.storySection}>
+              <div className={styles.sectionHeadingCol}>
+                <h2 className={styles.sectionHeading}>Architecture</h2>
               </div>
-              <div className={styles.prose}>
-                <p>{project.longDescription || project.description}</p>
+              <div className={styles.sectionBodyCol}>
+                <p className={styles.bodyParagraph}>
+                  {project.architecture}
+                </p>
               </div>
             </section>
+          )}
 
-            {/* Architecture & System Flow */}
-            {project.architecture && (
-              <section className={styles.section}>
-                <div className={styles.sectionHeader}>
-                  <h2 className={styles.sectionTitle}>Architecture &amp; System Flow</h2>
-                </div>
-                <div className={styles.architectureCard}>
-                  <div className={styles.architectureCardHeader}>
-                    <div className={styles.architectureHeaderLabel}>
-                      <Workflow size={14} className={styles.architectureIcon} />
-                      <span>Execution Pipeline &amp; Data Path</span>
-                    </div>
-                    <span className={styles.architectureStatusBadge}>Verified Flow</span>
-                  </div>
-                  <p className={styles.architectureBody}>{project.architecture}</p>
-                </div>
-              </section>
-            )}
-
-            {/* Key Capabilities */}
-            {project.highlights && project.highlights.length > 0 && (
-              <section className={styles.section}>
-                <div className={styles.sectionHeader}>
-                  <h2 className={styles.sectionTitle}>
-                    {isLive ? "Key Capabilities" : "Technical Specification"}
-                  </h2>
-                </div>
-                <div className={styles.capabilitiesGrid}>
+          {/* 3. Key Capabilities */}
+          {project.highlights && project.highlights.length > 0 && (
+            <section className={styles.storySection}>
+              <div className={styles.sectionHeadingCol}>
+                <h2 className={styles.sectionHeading}>Key Capabilities</h2>
+              </div>
+              <div className={styles.sectionBodyCol}>
+                <ul className={styles.highlightsList}>
                   {project.highlights.map((item, i) => (
-                    <div key={i} className={styles.capabilityCard}>
-                      <div className={styles.capabilityIconWrap}>
-                        <CheckCircle2 size={15} className={styles.capabilityIcon} />
-                      </div>
-                      <span className={styles.capabilityText}>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {/* Engineering Considerations & Trade-offs */}
-            {project.challenges && (
-              <section className={styles.section}>
-                <div className={styles.sectionHeader}>
-                  <h2 className={styles.sectionTitle}>Engineering Trade-offs &amp; Analysis</h2>
-                </div>
-                <div className={styles.tradeoffsCard}>
-                  <p className={styles.tradeoffsBody}>{project.challenges}</p>
-                </div>
-              </section>
-            )}
-          </div>
-
-          {/* Right Column: Sticky Sidebar with Specs & Tech Stack */}
-          <aside className={styles.sidebar}>
-            {/* System Specs Card */}
-            <div className={styles.sidebarCard}>
-              <div className={styles.sidebarCardHeader}>
-                <ShieldCheck size={14} className={styles.sidebarIcon} />
-                <span className={styles.sidebarTitle}>System Specifications</span>
-              </div>
-
-              <div className={styles.specsList}>
-                <div className={styles.specItem}>
-                  <span className={styles.specLabel}>Category</span>
-                  <span className={styles.specValue}>{project.category}</span>
-                </div>
-
-                <div className={styles.specItem}>
-                  <span className={styles.specLabel}>Status</span>
-                  <span className={styles.specValue}>
-                    {isLive ? (
-                      <span className={styles.specLiveBadge}>
-                        <span className={styles.liveDot} />
-                        Active Production
+                    <li key={i} className={styles.highlightItem}>
+                      <span className={styles.highlightIndex}>
+                        {String(i + 1).padStart(2, "0")}
                       </span>
-                    ) : (
-                      <span className={styles.specRfcBadge}>Specification</span>
-                    )}
-                  </span>
-                </div>
-
-                <div className={styles.specItem}>
-                  <span className={styles.specLabel}>Release</span>
-                  <span className={styles.specValue}>{displayYear}</span>
-                </div>
-
-                {project.metrics && (
-                  <div className={styles.specItem}>
-                    <span className={styles.specLabel}>Performance</span>
-                    <span className={styles.specValueHighlight}>{project.metrics}</span>
-                  </div>
-                )}
+                      <span className={styles.highlightText}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
+            </section>
+          )}
+
+          {/* 4. Engineering Notes & Challenges */}
+          {project.challenges && (
+            <section className={styles.storySection}>
+              <div className={styles.sectionHeadingCol}>
+                <h2 className={styles.sectionHeading}>Engineering Notes</h2>
+              </div>
+              <div className={styles.sectionBodyCol}>
+                <p className={styles.bodyParagraph}>
+                  {project.challenges}
+                </p>
+              </div>
+            </section>
+          )}
+
+          {/* 5. Technology Stack */}
+          <section className={styles.storySection}>
+            <div className={styles.sectionHeadingCol}>
+              <h2 className={styles.sectionHeading}>Technologies</h2>
             </div>
-
-            {/* Technology Stack Card */}
-            <div className={styles.sidebarCard}>
-              <div className={styles.sidebarCardHeader}>
-                <Layers size={14} className={styles.sidebarIcon} />
-                <span className={styles.sidebarTitle}>Technology Stack</span>
-              </div>
-
+            <div className={styles.sectionBodyCol}>
               {project.stackLayers && project.stackLayers.length > 0 ? (
-                <div className={styles.sidebarLayers}>
+                <div className={styles.techLayers}>
                   {project.stackLayers.map((layer, i) => (
-                    <div key={i} className={styles.sidebarLayerGroup}>
-                      <div className={styles.sidebarLayerTitle}>{layer.layer}</div>
-                      <div className={styles.layerPills}>
-                        {layer.technologies.map((t) => (
-                          <span key={t} className={styles.layerPill}>
-                            {t}
+                    <div key={i} className={styles.techLayerRow}>
+                      <span className={styles.techLayerTitle}>{layer.layer}</span>
+                      <div className={styles.techPillsWrap}>
+                        {layer.technologies.map((tech) => (
+                          <span key={tech} className={styles.techPill}>
+                            {tech}
                           </span>
                         ))}
                       </div>
@@ -299,40 +224,41 @@ export function ProjectDetailView({
                   ))}
                 </div>
               ) : (
-                <div className={styles.layerPills}>
-                  {project.tags.map((t) => (
-                    <span key={t} className={styles.layerPill}>
-                      {t}
+                <div className={styles.techPillsWrap}>
+                  {project.tags.map((tag) => (
+                    <span key={tag} className={styles.techPill}>
+                      {tag}
                     </span>
                   ))}
                 </div>
               )}
             </div>
-          </aside>
+          </section>
         </div>
 
-        {/* 5. Pagination Navigation Footer (Full Width) */}
-        <footer className={styles.paginationFooter}>
+        {/* Minimal Previous / Next Navigation */}
+        <nav className={styles.paginationNav} aria-label="Project Navigation">
           {previous ? (
-            <Link href={`/projects/${previous.slug}`} className={styles.paginationCard}>
-              <span className={styles.paginationDirection}>&larr; Previous System</span>
+            <Link href={`/projects/${previous.slug}`} className={styles.paginationLink}>
+              <span className={styles.paginationLabel}>&larr; Previous</span>
               <span className={styles.paginationTitle}>{previous.title}</span>
             </Link>
           ) : (
-            <div className={styles.paginationSpacer} />
+            <div />
           )}
+
           {next ? (
             <Link
               href={`/projects/${next.slug}`}
-              className={`${styles.paginationCard} ${styles.paginationCardNext}`}
+              className={`${styles.paginationLink} ${styles.paginationLinkNext}`}
             >
-              <span className={styles.paginationDirection}>Next System &rarr;</span>
+              <span className={styles.paginationLabel}>Next &rarr;</span>
               <span className={styles.paginationTitle}>{next.title}</span>
             </Link>
           ) : (
-            <div className={styles.paginationSpacer} />
+            <div />
           )}
-        </footer>
+        </nav>
       </article>
 
       <MainFooter />
