@@ -8,7 +8,7 @@
 
 @media (max-width: 768px) {
   .contactSection {
-    padding: 5rem 1.5rem 6rem;
+    padding: 4.5rem 1.25rem 5.5rem;
   }
 }
 
@@ -24,7 +24,7 @@
 @media (max-width: 900px) {
   .container {
     grid-template-columns: 1fr;
-    gap: 3.5rem;
+    gap: 3rem;
   }
 }
 
@@ -99,9 +99,15 @@
   padding: 1.1rem 1.25rem;
   color: #ffffff;
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.875rem;
+  font-size: 16px;
   outline: none;
   transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+@media (min-width: 768px) {
+  .input {
+    font-size: 0.875rem;
+  }
 }
 
 .input::placeholder {
@@ -127,11 +133,17 @@
   padding: 1.1rem 1.25rem;
   color: #ffffff;
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.875rem;
+  font-size: 16px;
   resize: vertical;
   min-height: 140px;
   outline: none;
   transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+@media (min-width: 768px) {
+  .textarea {
+    font-size: 0.875rem;
+  }
 }
 
 .textarea::placeholder {

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeContext";
 import { AudioProvider } from "@/components/AudioContext";
@@ -6,6 +6,12 @@ import { AppShell } from "@/components/AppShell";
 import { SmoothScrollProvider } from "@/components/SmoothScroll";
 import { siteConfig } from "@/data/siteConfig";
 import { Analytics } from "@vercel/analytics/next";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#000000",
+};
 
 export const metadata: Metadata = {
   title: `${siteConfig.name} — ${siteConfig.siteName}`,

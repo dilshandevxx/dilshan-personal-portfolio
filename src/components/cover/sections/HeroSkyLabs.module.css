@@ -37,6 +37,12 @@
   }
 }
 
+@media (max-width: 480px) {
+  .navHeader {
+    padding: 0.8rem 1.15rem;
+  }
+}
+
 .navContainer {
   max-width: 1440px;
   margin: 0 auto;
@@ -391,7 +397,34 @@
 
 @media (max-width: 768px) {
   .displayHeadline {
-    margin-bottom: 3rem;
+    margin-bottom: 2.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .heroSection {
+    padding-bottom: 3.5rem;
+  }
+  .heroContent {
+    padding-top: 4.5rem;
+  }
+  .displayHeadline {
+    font-size: clamp(1.75rem, 8vw, 2.35rem);
+    padding: 0 1rem;
+    margin-bottom: 2.25rem;
+    letter-spacing: -0.025em;
+  }
+  .bannerContainer {
+    padding: 0 1rem;
+  }
+  .bannerFrame {
+    height: clamp(260px, 46vh, 360px);
+  }
+}
+
+@media (max-width: 400px) {
+  .displayHeadline {
+    font-size: 1.6rem;
   }
 }
 

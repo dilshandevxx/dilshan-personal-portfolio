@@ -380,6 +380,8 @@
   .primaryButton,
   .secondaryButton {
     justify-content: center;
+    width: 100%;
+    min-height: 44px;
   }
 
   .paginationNav {
@@ -391,5 +393,57 @@
   .paginationLinkNext {
     text-align: left;
     align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: clamp(5.25rem, 8.5vw, 6.25rem) 1.15rem 4.5rem;
+  }
+
+  .title {
+    font-size: clamp(1.85rem, 7.5vw, 2.35rem);
+    line-height: 1.14;
+    margin-bottom: 0.9rem;
+  }
+
+  .tagline {
+    font-size: 1.05rem;
+    line-height: 1.55;
+    margin-bottom: 1.75rem;
+  }
+
+  .showcaseFrame {
+    aspect-ratio: 16 / 10;
+    margin-bottom: 3rem;
+    border-radius: 8px;
+  }
+
+  .leadParagraph {
+    font-size: 1.05rem;
+    line-height: 1.65;
+  }
+
+  .bodyParagraph {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .highlightItem {
+    gap: 0.85rem;
+    padding-bottom: 1rem;
+  }
+
+  .highlightText {
+    font-size: 0.95rem;
+  }
+
+  .techPill {
+    font-size: 0.78rem;
+    padding: 0.28rem 0.65rem;
+  }
+
+  .paginationTitle {
+    font-size: 1.05rem;
   }
 }

@@ -12,6 +12,12 @@
   }
 }
 
+@media (max-width: 640px) {
+  .faqSection {
+    padding: 4rem 1.15rem 4.5rem;
+  }
+}
+
 .container {
   max-width: 1040px;
   margin: 0 auto;

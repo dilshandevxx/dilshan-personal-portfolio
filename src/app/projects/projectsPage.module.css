@@ -390,3 +390,54 @@
   border-color: #ffffff;
   background-color: rgba(255, 255, 255, 0.05);
 }
+
+@media (max-width: 640px) {
+  .mainContainer {
+    padding: 5.25rem 1.15rem 4rem;
+  }
+
+  .heroSection {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .filterBarSection {
+    margin-bottom: 2rem;
+  }
+
+  .filterControlsRow {
+    gap: 1rem;
+  }
+
+  .categoryBtn {
+    padding: 0.48rem 0.95rem;
+    font-size: 0.74rem;
+    min-height: 38px;
+  }
+
+  .bottomCtaSection {
+    margin-top: 4.5rem;
+    padding: 2.75rem 1.25rem;
+    border-radius: 12px;
+  }
+
+  .ctaTitle {
+    font-size: 1.65rem;
+  }
+
+  .ctaActions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .primaryCtaBtn,
+  .secondaryCtaBtn {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+  }
+}

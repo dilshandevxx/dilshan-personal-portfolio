@@ -12,6 +12,12 @@
   }
 }
 
+@media (max-width: 640px) {
+  .projectsSection {
+    padding: 4rem 1.15rem 4.5rem;
+  }
+}
+
 .container {
   max-width: 1360px;
   margin: 0 auto;
@@ -74,13 +80,32 @@
 @media (max-width: 820px) {
   .editorialStaggerContainer {
     grid-template-columns: 1fr;
-    gap: 4.5rem;
+    gap: 4rem;
   }
 
   .columnLeft,
   .columnRight {
-    gap: 4.5rem;
+    gap: 4rem;
     padding-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .editorialStaggerContainer {
+    gap: 3rem;
+  }
+
+  .columnLeft,
+  .columnRight {
+    gap: 3rem;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .title {
+    font-size: clamp(2rem, 8vw, 2.75rem);
   }
 }
 
@@ -166,6 +191,12 @@
   justify-content: center;
 }
 
+@media (max-width: 640px) {
+  .ctaWrapper {
+    margin-top: 3.5rem;
+  }
+}
+
 /* Rectangular [Talk Today] Style Button */
 .talkButton {
   display: inline-flex;
@@ -184,6 +215,16 @@
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .talkButton {
+    width: 100%;
+    max-width: 320px;
+    padding: 1rem 1.5rem;
+    min-height: 48px;
+    touch-action: manipulation;
+  }
 }
 
 .talkButton:hover {
