@@ -383,7 +383,7 @@
 .projectTitleLink {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-pattern-secondary, #f472b6);
+  color: var(--color-pattern-primary, #4ade80);
   text-decoration: none;
   transition: all 0.15s ease;
 }

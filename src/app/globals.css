@@ -81,21 +81,21 @@ section[id] {
   --color-text-emphasized: #ffffff;
   --color-text-muted: #8b92a5;
   --color-text-heading: #ffffff;
-  --color-text-link: var(--color-pattern-secondary, var(--color-primary));
-  --color-link: var(--color-pattern-secondary, #f472b6);
+  --color-text-link: var(--color-pattern-primary, var(--color-primary));
+  --color-link: var(--color-pattern-primary, #4ade80);
   --color-link-hover: var(--color-pattern-primary, #4ade80);
 
-  /* Multi-Color Harmonic Pattern Tokens */
+  /* Unified Single-Color Accent Tokens */
   --color-pattern-primary: #4ade80;
-  --color-pattern-secondary: #f472b6;
-  --color-pattern-tertiary: #fde047;
-  --color-pattern-quaternary: #c084fc;
+  --color-pattern-secondary: #4ade80;
+  --color-pattern-tertiary: #4ade80;
+  --color-pattern-quaternary: #4ade80;
   --color-pattern-primary-subtle: rgba(74, 222, 128, 0.12);
-  --color-pattern-secondary-subtle: rgba(244, 114, 182, 0.12);
-  --color-pattern-tertiary-subtle: rgba(253, 224, 71, 0.12);
+  --color-pattern-secondary-subtle: rgba(74, 222, 128, 0.12);
+  --color-pattern-tertiary-subtle: rgba(74, 222, 128, 0.12);
   --color-pattern-primary-border: rgba(74, 222, 128, 0.38);
-  --color-pattern-secondary-border: rgba(244, 114, 182, 0.38);
-  --color-pattern-tertiary-border: rgba(253, 224, 71, 0.38);
+  --color-pattern-secondary-border: rgba(74, 222, 128, 0.38);
+  --color-pattern-tertiary-border: rgba(74, 222, 128, 0.38);
 
   --color-border: #181b22;
   --color-border-card: #181b22;
@@ -142,21 +142,21 @@ section[id] {
   --color-text-emphasized: #ffffff;
   --color-text-muted: #8b92a5;
   --color-text-heading: #ffffff;
-  --color-text-link: var(--color-pattern-secondary, var(--color-primary));
-  --color-link: var(--color-pattern-secondary, #f472b6);
+  --color-text-link: var(--color-pattern-primary, var(--color-primary));
+  --color-link: var(--color-pattern-primary, #4ade80);
   --color-link-hover: var(--color-pattern-primary, #4ade80);
 
-  /* Multi-Color Harmonic Pattern Tokens */
+  /* Unified Single-Color Accent Tokens */
   --color-pattern-primary: #4ade80;
-  --color-pattern-secondary: #f472b6;
-  --color-pattern-tertiary: #fde047;
-  --color-pattern-quaternary: #c084fc;
+  --color-pattern-secondary: #4ade80;
+  --color-pattern-tertiary: #4ade80;
+  --color-pattern-quaternary: #4ade80;
   --color-pattern-primary-subtle: rgba(74, 222, 128, 0.12);
-  --color-pattern-secondary-subtle: rgba(244, 114, 182, 0.12);
-  --color-pattern-tertiary-subtle: rgba(253, 224, 71, 0.12);
+  --color-pattern-secondary-subtle: rgba(74, 222, 128, 0.12);
+  --color-pattern-tertiary-subtle: rgba(74, 222, 128, 0.12);
   --color-pattern-primary-border: rgba(74, 222, 128, 0.38);
-  --color-pattern-secondary-border: rgba(244, 114, 182, 0.38);
-  --color-pattern-tertiary-border: rgba(253, 224, 71, 0.38);
+  --color-pattern-secondary-border: rgba(74, 222, 128, 0.38);
+  --color-pattern-tertiary-border: rgba(74, 222, 128, 0.38);
 
   --color-border: #181b22;
   --color-border-card: #181b22;

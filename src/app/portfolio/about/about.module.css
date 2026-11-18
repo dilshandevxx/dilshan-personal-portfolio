@@ -123,12 +123,12 @@
 
 .updatedTimestamp {
   font-style: italic;
-  color: var(--color-pattern-tertiary, #fde047);
+  color: var(--color-text-muted, #8b92a5);
   font-size: 0.98rem;
   margin: -0.5rem 0 0.25rem 0;
 }
 
-/* Harmonic Color Pattern Accents */
+/* Unified Single-Color Accents */
 .accentPrimary {
   color: var(--color-pattern-primary, #4ade80);
   text-decoration: underline;
@@ -144,9 +144,9 @@
 }
 
 .accentSecondary {
-  color: var(--color-pattern-secondary, #f472b6);
+  color: var(--color-pattern-primary, #4ade80);
   text-decoration: underline;
-  text-decoration-color: var(--color-pattern-secondary-border, rgba(244, 114, 182, 0.45));
+  text-decoration-color: var(--color-pattern-primary-border, rgba(74, 222, 128, 0.45));
   text-underline-offset: 3.5px;
   font-weight: 500;
   transition: all 0.15s ease;
@@ -154,13 +154,13 @@
 
 .accentSecondary:hover {
   color: #ffffff;
-  text-decoration-color: var(--color-pattern-secondary, #f472b6);
+  text-decoration-color: var(--color-pattern-primary, #4ade80);
 }
 
 .accentTertiary {
-  color: var(--color-pattern-tertiary, #fde047);
+  color: var(--color-pattern-primary, #4ade80);
   text-decoration: underline;
-  text-decoration-color: var(--color-pattern-tertiary-border, rgba(253, 224, 71, 0.45));
+  text-decoration-color: var(--color-pattern-primary-border, rgba(74, 222, 128, 0.45));
   text-underline-offset: 3.5px;
   font-weight: 500;
   transition: all 0.15s ease;
@@ -168,13 +168,13 @@
 
 .accentTertiary:hover {
   color: #ffffff;
-  text-decoration-color: var(--color-pattern-tertiary, #fde047);
+  text-decoration-color: var(--color-pattern-primary, #4ade80);
 }
 
 .accentQuaternary {
-  color: var(--color-pattern-quaternary, #c084fc);
+  color: var(--color-pattern-primary, #4ade80);
   text-decoration: underline;
-  text-decoration-color: rgba(192, 132, 252, 0.45);
+  text-decoration-color: var(--color-pattern-primary-border, rgba(74, 222, 128, 0.45));
   text-underline-offset: 3.5px;
   font-weight: 500;
   transition: all 0.15s ease;
@@ -182,21 +182,21 @@
 
 .accentQuaternary:hover {
   color: #ffffff;
-  text-decoration-color: var(--color-pattern-quaternary, #c084fc);
+  text-decoration-color: var(--color-pattern-primary, #4ade80);
 }
 
 /* Backwards compatibility */
 .accentLink {
-  color: var(--color-pattern-secondary, #f472b6);
+  color: var(--color-pattern-primary, #4ade80);
   text-decoration: underline;
-  text-decoration-color: var(--color-pattern-secondary-border, rgba(244, 114, 182, 0.45));
+  text-decoration-color: var(--color-pattern-primary-border, rgba(74, 222, 128, 0.45));
   text-underline-offset: 3.5px;
   font-weight: 500;
   transition: all 0.15s ease;
 }
 
 .accentLink:hover {
-  color: var(--color-pattern-primary, #4ade80);
+  color: #ffffff;
   text-decoration-color: var(--color-pattern-primary, #4ade80);
 }
 

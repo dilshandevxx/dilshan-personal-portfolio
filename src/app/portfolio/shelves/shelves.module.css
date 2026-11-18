@@ -256,15 +256,16 @@
   font-size: 1.18rem;
   font-weight: 700;
   line-height: 1.35;
-  color: var(--color-pattern-secondary, #f472b6);
-  text-decoration: none;
+  color: var(--color-pattern-primary, #4ade80);
+  text-decoration: underline;
+  text-decoration-color: var(--color-pattern-primary-border, rgba(74, 222, 128, 0.45));
+  text-underline-offset: 3.5px;
   transition: all 0.15s ease;
 }
 
 .itemTitleLink:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  opacity: 0.85;
+  color: #ffffff;
+  text-decoration-color: var(--color-pattern-primary, #4ade80);
 }
 
 .itemTitleStatic {

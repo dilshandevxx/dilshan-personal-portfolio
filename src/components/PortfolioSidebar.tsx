@@ -150,7 +150,7 @@ export function PortfolioSidebar() {
                 onClick={() => setMobileOpen(false)}
                 style={{
                   textDecoration: "underline",
-                  textDecorationColor: "var(--color-pattern-secondary, #f472b6)",
+                  textDecorationColor: "var(--color-pattern-primary-border, rgba(74, 222, 128, 0.45))",
                   textUnderlineOffset: "3px",
                   color: "var(--pf-text-heading, #ffffff)",
                   fontWeight: 600,

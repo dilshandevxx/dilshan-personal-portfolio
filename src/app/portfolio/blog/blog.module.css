@@ -277,15 +277,15 @@
   font-size: 1.18rem;
   font-weight: 700;
   line-height: 1.35;
-  color: var(--color-pattern-secondary, #f472b6);
+  color: var(--color-pattern-primary, #4ade80);
   text-decoration: underline;
-  text-decoration-color: var(--color-pattern-secondary-border, rgba(244, 114, 182, 0.45));
+  text-decoration-color: var(--color-pattern-primary-border, rgba(74, 222, 128, 0.45));
   text-underline-offset: 3.5px;
   transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 
 .articleLink:hover {
-  color: var(--color-pattern-primary, #4ade80);
+  color: #ffffff;
   text-decoration-color: var(--color-pattern-primary, #4ade80);
 }
 

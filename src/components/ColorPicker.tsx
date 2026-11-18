@@ -30,7 +30,7 @@ export function ColorPicker() {
         type="button"
         className={`navbar-button ${isOpen ? "active" : ""}`}
         onClick={() => setIsOpen(!isOpen)}
-        aria-label="Theme color pattern"
+        aria-label="Accent Color"
       >
         <div
           className="circle"
@@ -54,7 +54,7 @@ export function ColorPicker() {
                     setAccent(c);
                     setIsOpen(false);
                   }}
-                  title={c.name}
+                  title={`${c.name} (${c.subtitle})`}
                 >
                   <div
                     className="circle"
@@ -70,7 +70,7 @@ export function ColorPicker() {
           </div>
         </div>
       )}
-      {!isOpen && <div className="tooltip">Color Pattern</div>}
+      {!isOpen && <div className="tooltip">Accent Color</div>}
     </div>
   );
 }
