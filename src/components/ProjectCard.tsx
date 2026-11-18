@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ArrowUpRight } from "lucide-react";
 import { Project, getProjectThumbnail, FALLBACK_THUMBNAILS } from "@/data/projects";
 import styles from "./ProjectCard.module.css";
 
@@ -20,6 +19,7 @@ interface ProjectCardProps {
 export function ProjectCard({
   project,
   index = 0,
+  showTags = true,
   className,
 }: ProjectCardProps) {
   const router = useRouter();
@@ -42,11 +42,16 @@ export function ProjectCard({
     imgSrc.startsWith("https://") ||
     imgSrc.startsWith("data:");
 
-  // Clean narrative excerpt matching the 2-3 line reference card aesthetic
+  // Clean narrative excerpt matching the reference card aesthetic
   const narrative =
     project.description?.trim() ||
     project.tagline?.trim() ||
     "";
+
+  // Top technologies cleanly capped so the stack stays compact & beautiful
+  const rawTags = project.tags || [];
+  const displayTags = rawTags.slice(0, 3);
+  const remainingCount = Math.max(0, rawTags.length - 3);
 
   return (
     <article
@@ -62,7 +67,7 @@ export function ProjectCard({
       }}
       aria-label={`View details for ${project.title}`}
     >
-      {/* 16:10 Rounded Visual Canvas */}
+      {/* 1. 16:10 Rounded Visual Canvas (Flush Top) */}
       <div className={styles.imageFrame}>
         <Image
           src={imgSrc}
@@ -80,29 +85,38 @@ export function ProjectCard({
           className={styles.cardImage}
         />
 
-        {/* Cinematic bottom gradient overlay to enhance badge contrast & photographic depth */}
+        {/* Cinematic bottom gradient overlay to enhance badge contrast */}
         <div className={styles.imageOverlay} />
 
-        {/* Bottom-Left Translucent Category Badge (Matches Reference Mock) */}
+        {/* Bottom-Left Translucent Category Badge */}
         {project.category && (
           <span className={styles.categoryBadge}>{project.category}</span>
         )}
       </div>
 
-      {/* Card Info Below Image: Bold Title + Clean Narrative Excerpt */}
+      {/* 2. Enclosed Card Body: Clean Title, Narrative Excerpt & Minimal Stack */}
       <div className={styles.cardBody}>
-        <div className={styles.titleRow}>
-          <h3 className={styles.cardTitle}>
-            <Link href={`/projects/${project.slug}`} className={styles.titleLink}>
-              {project.title}
-            </Link>
-          </h3>
-          <span className={styles.titleArrow} aria-hidden="true">
-            <ArrowUpRight size={18} />
-          </span>
-        </div>
+        <h3 className={styles.cardTitle}>
+          <Link href={`/projects/${project.slug}`} className={styles.titleLink}>
+            {project.title}
+          </Link>
+        </h3>
 
         {narrative && <p className={styles.cardDescription}>{narrative}</p>}
+
+        {/* 3. Clean, Beautiful Non-Massive Tech Stack */}
+        {showTags && displayTags.length > 0 && (
+          <div className={styles.stackWrapper} aria-label="Technologies used">
+            {displayTags.map((tech) => (
+              <span key={tech} className={styles.stackBadge}>
+                {tech}
+              </span>
+            ))}
+            {remainingCount > 0 && (
+              <span className={styles.stackMore}>+{remainingCount}</span>
+            )}
+          </div>
+        )}
       </div>
     </article>
   );

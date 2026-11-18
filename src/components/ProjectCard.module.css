@@ -1,50 +1,47 @@
-/* Project Card — Clean Editorial Exhibition Card Matching Masterthemes Reference */
+/* Project Card — Unified Enclosed Exhibition Card with Wrapped Typography & Clean Minimal Stack */
 
 .projectCard {
   display: flex;
   flex-direction: column;
   position: relative;
   box-sizing: border-box;
-  background: transparent;
-  border: none;
-  border-radius: 0;
+  background-color: var(--color-background-card, #0e1017);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  border-radius: 16px;
+  overflow: hidden;
   padding: 0;
   cursor: pointer;
   outline: none;
   text-decoration: none;
   width: 100%;
   min-width: 0;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  height: 100%;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.65);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .projectCard:hover {
   transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.9);
 }
 
 .projectCard:focus-visible {
   outline: 2px solid var(--color-primary, #8bb397);
   outline-offset: 4px;
-  border-radius: 12px;
+  border-radius: 16px;
 }
 
 /* ------------------------------------------------------------- */
-/* 1. 16:10 ROUNDED VISUAL CANVAS                                */
+/* 1. 16:10 FLUSH TOP VISUAL CANVAS                              */
 /* ------------------------------------------------------------- */
 .imageFrame {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
-  border-radius: 12px;
   overflow: hidden;
-  background-color: #0e1017;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.7);
-  transition: border-color 0.4s ease, box-shadow 0.4s ease;
-}
-
-.projectCard:hover .imageFrame {
-  border-color: rgba(255, 255, 255, 0.22);
-  box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.92);
+  background-color: #080a0e;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .cardImage {
@@ -57,7 +54,7 @@
   transform: scale(1.045);
 }
 
-/* Dark bottom vignette so badge and card have cinematic contrast */
+/* Dark bottom vignette so badge has photographic contrast */
 .imageOverlay {
   position: absolute;
   inset: 0;
@@ -69,7 +66,6 @@
   );
   pointer-events: none;
   z-index: 1;
-  border-radius: inherit;
   transition: opacity 0.35s ease;
 }
 
@@ -84,7 +80,7 @@
   position: absolute;
   bottom: 12px;
   left: 12px;
-  background: rgba(14, 16, 22, 0.82);
+  background: rgba(14, 16, 22, 0.85);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -109,35 +105,26 @@
 }
 
 /* ------------------------------------------------------------- */
-/* 3. CARD BODY & REFINED VERTICAL RHYTHM                        */
+/* 3. ENCLOSED CARD BODY & WRAPPED TEXT                          */
 /* ------------------------------------------------------------- */
 .cardBody {
   display: flex;
   flex-direction: column;
-  padding-top: 0.95rem;
-  gap: 0.42rem;
-  width: 100%;
+  padding: 1.35rem 1.4rem 1.45rem;
+  flex: 1;
   min-width: 0;
   box-sizing: border-box;
 }
 
-.titleRow {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.75rem;
-  width: 100%;
-}
-
 .cardTitle {
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: clamp(1.15rem, 1.32vw, 1.26rem);
+  font-size: clamp(1.18rem, 1.35vw, 1.28rem);
   font-weight: 700;
-  line-height: 1.28;
-  letter-spacing: -0.018em;
-  color: #ffffff;
-  margin: 0;
-  flex: 1;
+  line-height: 1.3;
+  letter-spacing: -0.016em;
+  color: var(--color-text-emphasized, #ffffff);
+  margin: 0 0 0.65rem;
+  width: 100%;
   min-width: 0;
   white-space: normal;
   word-break: normal;
@@ -155,30 +142,18 @@
   transition: color 0.25s ease;
 }
 
-.titleArrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #64748b;
-  opacity: 0.6;
-  flex-shrink: 0;
-  margin-top: 2px;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease, opacity 0.25s ease;
-}
-
-.projectCard:hover .titleArrow {
-  transform: translate(3px, -3px);
+.projectCard:hover .titleLink {
   color: #ffffff;
-  opacity: 1;
 }
 
 .cardDescription {
   font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
   font-size: 0.92rem;
   font-weight: 400;
-  line-height: 1.55;
-  color: #8e95a2;
+  line-height: 1.6;
+  color: var(--color-text-muted, #9aa1ad);
   margin: 0;
+  flex-grow: 1;
   width: 100%;
   min-width: 0;
   white-space: normal;
@@ -193,5 +168,49 @@
   box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 4.65em;
+  max-height: 4.8em;
+}
+
+/* ------------------------------------------------------------- */
+/* 4. CLEAN, BEAUTIFUL & NON-MASSIVE TECH STACK                  */
+/* ------------------------------------------------------------- */
+.stackWrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1.15rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.07));
+}
+
+.stackBadge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--color-text-muted, #8e95a5);
+  background-color: var(--color-background-tag, rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  border-radius: 4px;
+  padding: 0.22rem 0.55rem;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.projectCard:hover .stackBadge {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.18);
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+.stackMore {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  color: #64748b;
+  font-weight: 500;
+  padding-left: 0.15rem;
 }

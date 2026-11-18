@@ -49,6 +49,12 @@
   width: 100%;
 }
 
+.projectsGrid > div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 @media (min-width: 680px) {
   .projectsGrid {
     grid-template-columns: repeat(2, 1fr);

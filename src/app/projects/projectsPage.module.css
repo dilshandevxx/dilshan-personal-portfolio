@@ -310,6 +310,12 @@
   row-gap: clamp(2.75rem, 4vw, 4rem);
 }
 
+.cardsGrid > div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 @media (min-width: 680px) {
   .cardsGrid {
     grid-template-columns: repeat(2, 1fr);
