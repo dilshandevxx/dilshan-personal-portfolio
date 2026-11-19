@@ -42,15 +42,16 @@ export function ProjectCard({
     imgSrc.startsWith("https://") ||
     imgSrc.startsWith("data:");
 
-  // Subtitle matching reference card: "Greenland, Ilulissat" aesthetic
-  const subtitle = project.category && project.tagline
-    ? `${project.category} • ${project.tagline}`
-    : project.tagline?.trim() || `${project.category || "System"} • ${project.date || "2026"}`;
+  // Clean narrative excerpt matching the reference card aesthetic
+  const narrative =
+    project.description?.trim() ||
+    project.tagline?.trim() ||
+    "";
 
   // Top technologies cleanly capped so the stack stays compact & beautiful
   const rawTags = project.tags || [];
-  const displayTags = rawTags.slice(0, 4);
-  const remainingCount = Math.max(0, rawTags.length - 4);
+  const displayTags = rawTags.slice(0, 3);
+  const remainingCount = Math.max(0, rawTags.length - 3);
 
   return (
     <article
@@ -66,7 +67,7 @@ export function ProjectCard({
       }}
       aria-label={`View details for ${project.title}`}
     >
-      {/* 1. Square-Corner Visual Canvas (Strictly Square, Matching Reference) */}
+      {/* 1. 16:10 Rounded Visual Canvas (Flush Top) */}
       <div className={styles.imageFrame}>
         <Image
           src={imgSrc}
@@ -83,9 +84,17 @@ export function ProjectCard({
           }}
           className={styles.cardImage}
         />
+
+        {/* Cinematic bottom gradient overlay to enhance badge contrast */}
+        <div className={styles.imageOverlay} />
+
+        {/* Bottom-Left Translucent Category Badge */}
+        {project.category && (
+          <span className={styles.categoryBadge}>{project.category}</span>
+        )}
       </div>
 
-      {/* 2. Enclosed Card Body: Clean Title, Subtitle, & Tech Stack Wrapped on White Line */}
+      {/* 2. Enclosed Card Body: Clean Title, Narrative Excerpt & Minimal Stack */}
       <div className={styles.cardBody}>
         <h3 className={styles.cardTitle}>
           <Link href={`/projects/${project.slug}`} className={styles.titleLink}>
@@ -93,21 +102,19 @@ export function ProjectCard({
           </Link>
         </h3>
 
-        <p className={styles.cardSubtitle}>{subtitle}</p>
+        {narrative && <p className={styles.cardDescription}>{narrative}</p>}
 
-        {/* 3. Technologies Wrapped Along a Crisp White Line */}
+        {/* 3. Clean, Beautiful Non-Massive Tech Stack */}
         {showTags && displayTags.length > 0 && (
-          <div className={styles.techLineWrapper} aria-label="Technologies used">
-            <div className={styles.techStack}>
-              {displayTags.map((tech) => (
-                <span key={tech} className={styles.techBadge}>
-                  {tech}
-                </span>
-              ))}
-              {remainingCount > 0 && (
-                <span className={styles.techMore}>+{remainingCount}</span>
-              )}
-            </div>
+          <div className={styles.stackWrapper} aria-label="Technologies used">
+            {displayTags.map((tech) => (
+              <span key={tech} className={styles.stackBadge}>
+                {tech}
+              </span>
+            ))}
+            {remainingCount > 0 && (
+              <span className={styles.stackMore}>+{remainingCount}</span>
+            )}
           </div>
         )}
       </div>
