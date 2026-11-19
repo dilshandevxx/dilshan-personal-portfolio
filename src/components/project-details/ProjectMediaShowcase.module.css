@@ -1,0 +1,566 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionRoot {
+  display: flex;
+  flex-direction: column;
+  padding: 4.5rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sectionHeader {
+  margin-bottom: 2.5rem;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.sectionIndex {
+  font-family: var(--font-mono, "Google Sans Code", monospace);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #38bdf8;
+  text-transform: uppercase;
+}
+
+.metaDivider {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.metaSub {
+  font-family: var(--font-mono, "Google Sans Code", monospace);
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: #94a3b8;
+  letter-spacing: 0.06em;
+}
+
+.sectionTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", sans-serif);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0 0 0.85rem 0;
+}
+
+.sectionSubtitle {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 1.05rem;
+  color: #94a3b8;
+  margin: 0;
+  max-width: 680px;
+  line-height: 1.6;
+}
+
+/* 1. Gallery Main Canvas */
+.mainCanvas {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #0b0d11;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.8);
+}
+
+.canvasImage {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.canvasOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(11, 13, 17, 0.4) 0%,
+    transparent 40%,
+    rgba(11, 13, 17, 0.85) 100%
+  );
+  pointer-events: none;
+}
+
+.canvasToolbar {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.canvasBadge {
+  font-family: var(--font-mono, "Google Sans Code", monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #38bdf8;
+  background: rgba(11, 13, 17, 0.75);
+  backdrop-filter: blur(8px);
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.expandButton {
+  background: rgba(11, 13, 17, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.expandButton:hover {
+  background: #ffffff;
+  color: #0b0d10;
+}
+
+.canvasCaption {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.captionTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.captionText {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.92rem;
+  color: #cbd5e1;
+  margin: 0;
+  max-width: 720px;
+}
+
+/* Gallery Thumbnails Strip */
+.thumbnailsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.thumbButton {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem;
+  background: #13161c;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s ease;
+}
+
+.thumbButton:hover {
+  background: #181c24;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.thumbButtonSelected {
+  background: #19202c;
+  border-color: #38bdf8;
+}
+
+.thumbImageWrap {
+  position: relative;
+  width: 60px;
+  height: 44px;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.thumbImage {
+  object-fit: cover;
+}
+
+.thumbMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  overflow: hidden;
+}
+
+.thumbTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.thumbType {
+  font-family: var(--font-mono, "Google Sans Code", monospace);
+  font-size: 0.68rem;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+/* 2. Video Player Frame */
+.videoPlayerFrame {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.5rem;
+  background: #0f1217;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.videoCanvas {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #07090c;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+
+.videoThumb {
+  object-fit: cover;
+}
+
+.videoOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 14, 19, 0.7);
+  backdrop-filter: blur(2px);
+}
+
+.videoTopBar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.liveIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono, "Google Sans Code", monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #4ade80;
+  background: rgba(11, 14, 19, 0.8);
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #4ade80;
+}
+
+.dotStreaming {
+  animation: pulseDot 1s infinite alternate;
+}
+
+@keyframes pulseDot {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+    box-shadow: 0 0 8px #4ade80;
+  }
+}
+
+.chapterBadge {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #cbd5e1;
+  background: rgba(11, 14, 19, 0.8);
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+}
+
+.centerPlayArea {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bigPlayButton {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #0b0d10;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.bigPlayButton:hover {
+  transform: scale(1.08);
+  background: #38bdf8;
+  color: #ffffff;
+}
+
+.durationBadge {
+  font-family: var(--font-mono, "Google Sans Code", monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  background: rgba(11, 14, 19, 0.8);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+}
+
+.videoControls {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.progressBarBg {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  background: #38bdf8;
+  transition: width 0.2s linear;
+}
+
+.controlsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: #cbd5e1;
+}
+
+.timeMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono, "Google Sans Code", monospace);
+}
+
+.nowPlayingText {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+/* Chapters Sidebar */
+.chaptersSidebar {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #12151b;
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.chaptersHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono, "Google Sans Code", monospace);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #38bdf8;
+  text-transform: uppercase;
+}
+
+.chaptersList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
+}
+
+.chapterItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.85rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.chapterItem:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.chapterItemActive {
+  background: rgba(56, 189, 248, 0.1);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.chapterTime {
+  font-family: var(--font-mono, "Google Sans Code", monospace);
+  font-size: 0.72rem;
+  color: #38bdf8;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.chapterLabel {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.82rem;
+  color: #e2e8f0;
+  flex-grow: 1;
+}
+
+.chapterCheck {
+  color: #4ade80;
+  flex-shrink: 0;
+}
+
+/* Lightbox Modal */
+.lightboxBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(16px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.lightboxContent {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  background: #111419;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.closeLightbox {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.lightboxImageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.lightboxImage {
+  object-fit: contain;
+}
+
+.lightboxFooter {
+  padding: 1.5rem;
+  background: #0d0f13;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lightboxTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 0.35rem 0;
+}
+
+.lightboxDesc {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .videoPlayerFrame {
+    grid-template-columns: 1fr;
+  }
+
+  .chaptersSidebar {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .thumbnailsGrid {
+    grid-template-columns: 1fr;
+  }
+}

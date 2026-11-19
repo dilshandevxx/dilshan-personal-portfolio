@@ -1,0 +1,183 @@
+.sectionRoot {
+  display: flex;
+  flex-direction: column;
+}
+
+.storySection {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: clamp(2rem, 4vw, 4.5rem);
+  padding: 4rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.headingCol {
+  position: sticky;
+  top: 8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sectionIndex {
+  font-family: var(--font-mono, "Google Sans Code", monospace);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #38bdf8;
+  text-transform: uppercase;
+}
+
+.sectionTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", sans-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.bodyCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.leadParagraph {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", sans-serif);
+  font-size: clamp(1.1rem, 1.4vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+  color: #f1f5f9;
+  margin: 0;
+}
+
+.bodyParagraph {
+  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
+  font-size: 1.02rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* Statement Banner (Inspired by User Reference 2) */
+.statementBanner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 2.25rem;
+  background: #0f1216;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.statementBanner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.6), transparent);
+}
+
+.solutionBanner::before {
+  background: linear-gradient(90deg, transparent, rgba(74, 222, 128, 0.6), transparent);
+}
+
+.pillBadgeWrapper {
+  margin-bottom: 1.5rem;
+}
+
+.pillBadge {
+  display: inline-block;
+  background-color: #ef4444;
+  color: #ffffff;
+  font-family: var(--font-mono, "Google Sans Code", monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.9rem;
+  border-radius: 4px;
+}
+
+.solutionBadge {
+  background-color: #a3e635; /* Crisp lime green matching user reference */
+  color: #0b0d10;
+}
+
+.statementText {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", sans-serif);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  max-width: 720px;
+  margin: 0;
+}
+
+/* Context & Approach Cards */
+.contextCard,
+.approachCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.75rem;
+  background: #14171d;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.contextHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.contextIcon {
+  color: #f87171;
+  flex-shrink: 0;
+}
+
+.solutionIcon {
+  color: #4ade80;
+  flex-shrink: 0;
+}
+
+.contextTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.contextBody {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.96rem;
+  line-height: 1.7;
+  color: #94a3b8;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .storySection {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 3rem 0;
+  }
+
+  .headingCol {
+    position: static;
+  }
+}

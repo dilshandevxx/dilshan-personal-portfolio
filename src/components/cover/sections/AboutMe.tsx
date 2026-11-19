@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import styles from "./AboutMe.module.css";
@@ -11,43 +10,23 @@ export default function AboutMe() {
     <section className={styles.aboutSection} id="about-me" aria-label="About Dilshan">
       <div className={styles.container}>
         <motion.div
-          className={styles.stageGrid}
-          initial={{ opacity: 0, y: 25 }}
+          className={styles.statementWrapper}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Statement & Action Column */}
-          <div className={styles.statementCol}>
-            <h2 className={styles.statementText}>
-              <span className={styles.statementPrimary}>
-                Software engineering, system architecture and digital systems that turn
-                complex challenges into elegant products.
-              </span>
-              <span className={styles.statementSecondary}>
-                Systems which scale under load, honor clarity and quietly endure.
-              </span>
-            </h2>
+          {/* Centered Editorial Statement (Faithfully matching Reference Image) */}
+          <h2 className={styles.statementText}>
+            Branding, design and digital systems that turn businesses into brands.
+            Brands which enrich lives, nature and founders.
+          </h2>
 
-            <div className={styles.actionRow}>
-              <Link href="/portfolio/about" className={styles.whyButton}>
-                WHY DILSHAN?
-              </Link>
-            </div>
-          </div>
-
-          {/* Integrated Portrait Photo (Clean & Properly Sized) */}
-          <div className={styles.portraitCol}>
-            <div className={styles.photoFrame}>
-              <Image
-                src="/dilshan_portrait.jpg"
-                alt="Dilshan"
-                fill
-                priority
-                sizes="(max-width: 860px) 240px, 280px"
-                className={styles.portraitPhoto}
-              />
-            </div>
+          {/* Centered Neon Lime-Green Pill Button Linking to Detailed About Page */}
+          <div className={styles.actionRow}>
+            <Link href="/about" className={styles.whyButton}>
+              WHY US?
+            </Link>
           </div>
         </motion.div>
       </div>
