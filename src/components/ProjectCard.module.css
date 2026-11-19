@@ -1,13 +1,13 @@
-/* Project Card — Unified Enclosed Exhibition Card with Wrapped Typography & Clean Minimal Stack */
+/* Project Card — Unified Enclosed Exhibition Card with Square Corners, Calm Color & Minimal Stack */
 
 .projectCard {
   display: flex;
   flex-direction: column;
   position: relative;
   box-sizing: border-box;
-  background-color: var(--color-background-card, #0e1017);
-  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
-  border-radius: 16px;
+  background-color: #121316;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0;
   overflow: hidden;
   padding: 0;
   cursor: pointer;
@@ -16,42 +16,44 @@
   width: 100%;
   min-width: 0;
   height: 100%;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.65);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.7);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.3s ease;
 }
 
 .projectCard:hover {
-  transform: translateY(-5px);
-  border-color: rgba(255, 255, 255, 0.22);
-  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.9);
+  transform: translateY(-4px);
+  background-color: #17181e;
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.88);
 }
 
 .projectCard:focus-visible {
   outline: 2px solid var(--color-primary, #8bb397);
   outline-offset: 4px;
-  border-radius: 16px;
+  border-radius: 0;
 }
 
 /* ------------------------------------------------------------- */
-/* 1. 16:10 FLUSH TOP VISUAL CANVAS                              */
+/* 1. 16:10 FLUSH TOP VISUAL CANVAS (Square Corners)             */
 /* ------------------------------------------------------------- */
 .imageFrame {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  background-color: #080a0e;
+  background-color: #0a0b0e;
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 0;
 }
 
 .cardImage {
   object-fit: cover;
-  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
 
 .projectCard:hover .cardImage {
-  transform: scale(1.045);
+  transform: scale(1.035);
 }
 
 /* Dark bottom vignette so badge has photographic contrast */
@@ -74,21 +76,21 @@
 }
 
 /* ------------------------------------------------------------- */
-/* 2. TRANSLUCENT CATEGORY BADGE (Bottom-Left)                  */
+/* 2. TRANSLUCENT CATEGORY BADGE (Bottom-Left, Square Corners)   */
 /* ------------------------------------------------------------- */
 .categoryBadge {
   position: absolute;
   bottom: 12px;
   left: 12px;
-  background: rgba(14, 16, 22, 0.85);
+  background: rgba(14, 16, 22, 0.88);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 6px;
-  padding: 0.28rem 0.68rem;
+  border-radius: 0;
+  padding: 0.26rem 0.65rem;
   color: #ffffff;
   font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: 0.015em;
@@ -100,7 +102,7 @@
 }
 
 .projectCard:hover .categoryBadge {
-  background: rgba(20, 23, 30, 0.92);
+  background: rgba(20, 23, 30, 0.95);
   border-color: rgba(255, 255, 255, 0.25);
 }
 
@@ -110,7 +112,7 @@
 .cardBody {
   display: flex;
   flex-direction: column;
-  padding: 1.35rem 1.4rem 1.45rem;
+  padding: 1.25rem 1.35rem 1.35rem;
   flex: 1;
   min-width: 0;
   box-sizing: border-box;
@@ -118,18 +120,17 @@
 
 .cardTitle {
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: clamp(1.18rem, 1.35vw, 1.28rem);
-  font-weight: 700;
+  font-size: clamp(1.15rem, 1.3vw, 1.26rem);
+  font-weight: 600;
   line-height: 1.3;
   letter-spacing: -0.016em;
-  color: var(--color-text-emphasized, #ffffff);
-  margin: 0 0 0.65rem;
+  color: #ffffff;
+  margin: 0 0 0.55rem;
   width: 100%;
   min-width: 0;
   white-space: normal;
   word-break: normal;
   overflow-wrap: break-word;
-  text-wrap: balance;
 }
 
 .titleLink {
@@ -139,7 +140,7 @@
   word-break: normal;
   overflow-wrap: break-word;
   display: inline;
-  transition: color 0.25s ease;
+  transition: color 0.2s ease;
 }
 
 .projectCard:hover .titleLink {
@@ -148,10 +149,10 @@
 
 .cardDescription {
   font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 400;
-  line-height: 1.6;
-  color: var(--color-text-muted, #9aa1ad);
+  line-height: 1.55;
+  color: #8c93a0;
   margin: 0;
   flex-grow: 1;
   width: 100%;
@@ -161,27 +162,25 @@
   overflow-wrap: break-word;
   text-wrap: pretty;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  /* autoprefixer: ignore next */
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
-  box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 4.8em;
+  max-height: 3.2em;
 }
 
 /* ------------------------------------------------------------- */
-/* 4. CLEAN, BEAUTIFUL & NON-MASSIVE TECH STACK                  */
+/* 4. CLEAN, BEAUTIFUL & NON-MASSIVE TECH STACK (Square Corners) */
 /* ------------------------------------------------------------- */
 .stackWrapper {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-top: 1.15rem;
-  padding-top: 0.85rem;
-  border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.07));
+  gap: 0.4rem;
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .stackBadge {
@@ -190,11 +189,11 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.72rem;
   font-weight: 500;
-  color: var(--color-text-muted, #8e95a5);
-  background-color: var(--color-background-tag, rgba(255, 255, 255, 0.04));
-  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
-  border-radius: 4px;
-  padding: 0.22rem 0.55rem;
+  color: #8a91a0;
+  background-color: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0;
+  padding: 0.2rem 0.5rem;
   line-height: 1.25;
   letter-spacing: 0.02em;
   white-space: nowrap;
@@ -204,7 +203,7 @@
 .projectCard:hover .stackBadge {
   color: #ffffff;
   border-color: rgba(255, 255, 255, 0.18);
-  background-color: rgba(255, 255, 255, 0.07);
+  background-color: rgba(255, 255, 255, 0.06);
 }
 
 .stackMore {
