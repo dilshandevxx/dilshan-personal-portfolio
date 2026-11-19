@@ -12,34 +12,58 @@ interface FaqItem {
 
 const FAQ_ITEMS: FaqItem[] = [
   {
-    id: "tech-stack",
-    question: "What is your primary technology stack?",
+    id: "partners",
+    question: "Who do you partner with?",
     answer:
-      "My core stack centers on TypeScript, React 19, Next.js, and Node.js for frontend interfaces, paired with Go, Rust, and PostgreSQL for high-performance backends. On cloud and DevOps, I engineer on Kubernetes, Docker, and Terraform across AWS and GCP.",
+      "I partner with ambitious founders, high-growth startups, scale-ups, and established engineering teams looking to design, build, or modernize critical web applications and distributed systems.",
   },
   {
-    id: "architecture-approach",
-    question: "How do you approach a new project or architecture?",
+    id: "working-together",
+    question: "What does working with Dilshan look like?",
     answer:
-      "I start from first principles: modeling domain constraints, data flow patterns, and real user requirements before writing code. Every system is architected for mathematical clarity, observable telemetry, and long-term maintainability without unnecessary dependencies.",
+      "Direct, transparent, and high-velocity collaboration. We start with system domain modeling and architecture design, followed by iterative sprint execution with daily async updates, clear RFCs, and working weekly milestones.",
   },
   {
-    id: "remote-collaboration",
-    question: "Do you work with remote teams across different time zones?",
+    id: "project-types",
+    question: "What kind of projects do you take on?",
     answer:
-      "Yes. I work seamlessly with engineering teams, design agencies, and founders across North America, Europe, and Asia-Pacific through asynchronous documentation, clear RFCs, and focused synchronous checkpoints.",
+      "Flagship web applications, distributed backend services, high-throughput APIs, AI/ML integrations, and end-to-end full-stack architectures engineered with React 19, Next.js, Go, and PostgreSQL.",
   },
   {
-    id: "high-throughput-scale",
-    question: "How do you handle high-throughput and distributed scale?",
+    id: "timelines",
+    question: "What do your typical timelines look like?",
     answer:
-      "Through proven distributed patterns: partitioned event streaming with Apache Kafka, sub-millisecond in-memory caching with Redis, optimized connection pooling, horizontal autoscaling with Kubernetes, and end-to-end tracing with OpenTelemetry.",
+      "Timelines typically range from 2 to 6 weeks for focused architecture sprints or MVPs, and 2 to 4 months for comprehensive end-to-end product builds and distributed system deployments.",
   },
   {
-    id: "booking-consultation",
-    question: "How do I book an architectural consultation or build?",
+    id: "investment",
+    question: "What's the investment?",
     answer:
-      "Simply reach out through the contact form below or email me directly at dilshan.devxx@gmail.com. We will schedule an initial technical deep-dive to review your system roadmap, timeline, and delivery milestones.",
+      "Engagements are structured either on a project-based milestone model or a weekly sprint advisory rate. Reach out with your roadmap for a transparent, tailored scope of work.",
+  },
+  {
+    id: "international",
+    question: "Do you work with international clients?",
+    answer:
+      "Yes. I collaborate seamlessly with founders and remote teams across North America, Europe, and Asia-Pacific through asynchronous workflows and overlapping synchronous checkpoints.",
+  },
+  {
+    id: "websites-built",
+    question: "What kind of websites do you build?",
+    answer:
+      "High-performance editorial websites, modern SaaS applications, developer tooling platforms, and interactive digital experiences built for sub-second latency and 100/100 Core Web Vitals.",
+  },
+  {
+    id: "retainer",
+    question: "Can we hire on a retainer?",
+    answer:
+      "Yes. I offer ongoing advisory and engineering retainers for teams needing dedicated architecture oversight, continuous code review, and high-level technical direction.",
+  },
+  {
+    id: "next-steps",
+    question: "I'm ready to start. What's next?",
+    answer:
+      "Simply get in touch via the contact section below or email me directly at dilshan.devxx@gmail.com. We'll set up an introductory deep-dive call to align on your vision, technical requirements, and timeline.",
   },
 ];
 
@@ -53,67 +77,82 @@ export default function FaqSection() {
   return (
     <section className={styles.faqSection} id="faq" aria-label="Frequently Asked Questions">
       <div className={styles.container}>
-        {/* Header */}
-        <div className={styles.header}>
-          <h2 className={styles.title}>
-            Frequently asked questions.
-          </h2>
-        </div>
+        {/* 2-Column Minimalist Layout matching reference design */}
+        <div className={styles.layout}>
+          {/* Left Column: Uppercase Monospace Section Label */}
+          <div className={styles.leftCol}>
+            <h2 className={styles.sectionLabel}>FREQUENTLY ASKED QUESTIONS</h2>
+          </div>
 
-        {/* Accordion List */}
-        <div className={styles.accordionList}>
-          {FAQ_ITEMS.map((item) => {
-            const isOpen = openId === item.id;
-            return (
-              <div key={item.id} className={styles.accordionItem}>
-                <button
-                  type="button"
-                  onClick={() => toggleFaq(item.id)}
-                  className={styles.rowTrigger}
-                  aria-expanded={isOpen}
-                >
-                  <span className={styles.questionText}>{item.question}</span>
-                  <span
-                    className={`${styles.iconButton} ${isOpen ? styles.iconButtonOpen : ""}`}
-                    aria-hidden="true"
-                  >
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 14 14"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className={styles.svgCross}
+          {/* Right Column: Clean Accordion List with Thin Plus Toggle */}
+          <div className={styles.rightCol}>
+            <div className={styles.accordionList}>
+              {FAQ_ITEMS.map((item) => {
+                const isOpen = openId === item.id;
+                return (
+                  <div key={item.id} className={styles.accordionItem}>
+                    <button
+                      type="button"
+                      onClick={() => toggleFaq(item.id)}
+                      className={styles.rowTrigger}
+                      aria-expanded={isOpen}
                     >
-                      <path
-                        d="M7 1.5V12.5M1.5 7H12.5"
-                        stroke="currentColor"
-                        strokeWidth="1.85"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </span>
-                </button>
+                      <span className={styles.questionText}>{item.question}</span>
+                      <span
+                        className={`${styles.plusIcon} ${isOpen ? styles.plusIconOpen : ""}`}
+                        aria-hidden="true"
+                      >
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className={styles.svgPlus}
+                        >
+                          <line
+                            x1="8"
+                            y1="1.5"
+                            x2="8"
+                            y2="14.5"
+                            stroke="currentColor"
+                            strokeWidth="1.6"
+                            strokeLinecap="round"
+                          />
+                          <line
+                            x1="1.5"
+                            y1="8"
+                            x2="14.5"
+                            y2="8"
+                            stroke="currentColor"
+                            strokeWidth="1.6"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                      </span>
+                    </button>
 
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      key="answer"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-                      className={styles.answerWrapper}
-                    >
-                      <div className={styles.answerInner}>
-                        <p className={styles.answerText}>{item.answer}</p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            );
-          })}
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          key="answer"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                          className={styles.answerWrapper}
+                        >
+                          <div className={styles.answerInner}>
+                            <p className={styles.answerText}>{item.answer}</p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </section>

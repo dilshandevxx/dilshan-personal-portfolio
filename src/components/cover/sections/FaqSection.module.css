@@ -1,4 +1,4 @@
-/* Frequently Asked Questions Section (Elevated, Prominent, Proper Sizing) */
+/* Frequently Asked Questions — 2-Column Minimalist Editorial Layout matching reference */
 .faqSection {
   background-color: #000000;
   padding: clamp(6.5rem, 11vw, 10rem) clamp(1.5rem, 5vw, 4rem);
@@ -8,42 +8,65 @@
   box-sizing: border-box;
 }
 
+@media (max-width: 768px) {
+  .faqSection {
+    padding: clamp(4rem, 8vw, 5.5rem) 1.25rem;
+  }
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
 }
 
-/* Header (One-line Title matching Hero font beautifully) */
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-bottom: clamp(3.5rem, 6vw, 5rem);
+/* 2-Column Grid Layout */
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: clamp(2.5rem, 5vw, 5.5rem);
+  align-items: flex-start;
 }
 
-/* Title: Matching Hero Section Font Beautifully */
-.title {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(2.6rem, 5.8vw, 4.8rem);
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+}
+
+/* Left Column: Uppercase Monospace Section Label */
+.leftCol {
+  position: sticky;
+  top: 100px;
+}
+
+.sectionLabel {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.76rem;
   font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  color: #ffffff;
-  text-transform: none;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a1a1aa;
   margin: 0;
+  line-height: 1.5;
 }
 
-/* Accordion List */
+/* Right Column: Accordion List */
+.rightCol {
+  width: 100%;
+  min-width: 0;
+}
+
 .accordionList {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   width: 100%;
 }
 
 .accordionItem {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: background-color 0.2s ease;
 }
 
@@ -51,144 +74,89 @@
   background-color: rgba(255, 255, 255, 0.015);
 }
 
-/* Row Trigger Button - Generously Sized */
+/* Row Trigger Button */
 .rowTrigger {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: clamp(1.85rem, 3.2vw, 2.35rem) 1rem;
+  padding: clamp(1.15rem, 1.8vw, 1.45rem) 0;
   background: transparent;
   border: none;
-  color: #ffffff;
   cursor: pointer;
   text-align: left;
-  transition: all 0.2s ease;
   gap: 1.5rem;
-}
-
-@media (max-width: 640px) {
-  .rowTrigger {
-    padding: 1.4rem 0.5rem;
-    gap: 1rem;
-  }
-}
-
-.titleGroup {
-  display: flex;
-  align-items: center;
-  gap: clamp(1.25rem, 2.5vw, 2.25rem);
-  min-width: 0;
-}
-
-@media (max-width: 640px) {
-  .titleGroup {
-    align-items: flex-start;
-  }
-}
-
-.itemIndex {
-  font-family: var(--font-mono, monospace);
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  font-weight: 600;
-  color: #5c6473;
-  letter-spacing: 0.08em;
-  flex-shrink: 0;
+  color: #ffffff;
+  outline: none;
   transition: color 0.2s ease;
 }
 
-@media (max-width: 640px) {
-  .itemIndex {
-    margin-top: 0.15rem;
-  }
+.rowTrigger:focus-visible {
+  outline: 2px solid var(--color-primary, #8bb397);
+  outline-offset: 4px;
 }
 
-.rowTrigger:hover .itemIndex {
-  color: #cbd5e1;
-}
-
+/* Question Typography (Matching Reference) */
 .questionText {
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(1.25rem, 1.95vw, 1.65rem);
+  font-size: clamp(1.08rem, 1.4vw, 1.25rem);
   font-weight: 600;
+  line-height: 1.35;
   letter-spacing: -0.015em;
   color: #ffffff;
-  transition: color 0.2s ease, opacity 0.2s ease;
-  line-height: 1.35;
+  transition: color 0.2s ease;
 }
 
 .rowTrigger:hover .questionText {
-  color: #ffffff;
-  opacity: 0.95;
+  color: #f3f5f8;
 }
 
-/* Refined Circular Cross Toggle Button - Proper 44px Scale */
-.iconButton {
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+/* Clean Minimalist Plus Icon */
+.plusIcon {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #a4abb8;
   flex-shrink: 0;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  padding: 0;
-}
-
-@media (max-width: 640px) {
-  .iconButton {
-    width: 38px;
-    height: 38px;
-  }
-}
-
-.rowTrigger:hover .iconButton {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.25);
+  width: 24px;
+  height: 24px;
   color: #ffffff;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
 }
 
-.iconButtonOpen {
+.plusIconOpen {
   transform: rotate(45deg);
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.3);
   color: #ffffff;
 }
 
-.svgCross {
-  transition: transform 0.2s ease;
+.svgPlus {
+  width: 15px;
+  height: 15px;
 }
 
-/* Expanded Answer - Spacious & Legible */
+/* Answer Drawer */
 .answerWrapper {
   overflow: hidden;
 }
 
 .answerInner {
-  padding: 0.5rem 1rem 2.75rem clamp(2.5rem, 4.5vw, 4.25rem);
-}
-
-@media (max-width: 640px) {
-  .answerInner {
-    padding: 0.25rem 0.5rem 1.85rem 0;
-  }
+  padding: 0.25rem 0 clamp(1.25rem, 2vw, 1.6rem) 0;
 }
 
 .answerText {
-  color: #b4bac6;
+  color: #949ca9;
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 1.1rem;
-  line-height: 1.78;
+  font-size: 0.98rem;
+  line-height: 1.68;
   margin: 0;
-  max-width: 900px;
+  max-width: 760px;
 }
 
 @media (max-width: 640px) {
+  .questionText {
+    font-size: 1.05rem;
+  }
   .answerText {
-    font-size: 0.98rem;
-    line-height: 1.65;
+    font-size: 0.92rem;
+    line-height: 1.6;
   }
 }
