@@ -1,4 +1,4 @@
-/* Projects Section (Spacious Staggered Exhibition Layout) */
+/* Projects Section (Dual Mode: Editorial Stagger on Desktop, Minimalist Reference Cards on Mobile) */
 .projectsSection {
   background-color: #000000;
   padding: 8.5rem 3.5rem 12rem;
@@ -14,7 +14,7 @@
 
 @media (max-width: 640px) {
   .projectsSection {
-    padding: 4rem 1.15rem 4.5rem;
+    padding: 4rem 1.25rem 5rem;
   }
 }
 
@@ -33,7 +33,7 @@
 
 @media (max-width: 768px) {
   .header {
-    margin-bottom: 3rem;
+    margin-bottom: 2.75rem;
   }
 }
 
@@ -52,7 +52,13 @@
   margin: 0;
 }
 
-/* Dual Column Staggered Container matching reference */
+@media (max-width: 640px) {
+  .title {
+    font-size: clamp(2rem, 8vw, 2.75rem);
+  }
+}
+
+/* Dual Column Staggered Container matching desktop reference */
 .editorialStaggerContainer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -64,7 +70,7 @@
 .columnLeft {
   display: flex;
   flex-direction: column;
-  gap: clamp(12rem, 20vw, 22rem); /* Expansive vertical breathing room between projects */
+  gap: clamp(12rem, 20vw, 22rem); /* Expansive vertical breathing room between projects on desktop */
   width: 100%;
 }
 
@@ -72,20 +78,23 @@
 .columnRight {
   display: flex;
   flex-direction: column;
-  gap: clamp(12rem, 20vw, 22rem); /* Expansive vertical breathing room between projects */
+  gap: clamp(12rem, 20vw, 22rem);
   padding-top: clamp(14rem, 24vw, 26rem); /* Staggers right cards so top aligns near bottom of left cards */
   width: 100%;
 }
 
+/* =========================================================================
+   Mobile View: Clean Minimalist Project Cards (Matching User Reference Image)
+   ========================================================================= */
 @media (max-width: 820px) {
   .editorialStaggerContainer {
     grid-template-columns: 1fr;
-    gap: 4rem;
+    gap: 3.5rem;
   }
 
   .columnLeft,
   .columnRight {
-    gap: 4rem;
+    gap: 3.5rem;
     padding-top: 0;
   }
 }
@@ -99,43 +108,38 @@
   .columnRight {
     gap: 3rem;
   }
-
-  .header {
-    margin-bottom: 2rem;
-  }
-
-  .title {
-    font-size: clamp(2rem, 8vw, 2.75rem);
-  }
 }
 
 /* Project Card */
 .projectCard {
   display: flex;
   flex-direction: column;
-  border-radius: 0; /* Strictly SQUARE corners */
   width: 100%;
 }
 
 .cardLink {
-  display: block;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
+  outline: none;
 }
 
-/* 1:1 Square Flatlay Image Canvas (border-radius: 0) */
+/* 1:1 Square Flatlay Image Canvas on Desktop */
 .imageCanvas {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
-  border-radius: 0; /* STRICTLY SQUARE CORNERS */
+  border-radius: 0; /* Strictly square corners on desktop */
   overflow: hidden;
   background-color: #121418;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
 }
 
 .cardLink:hover .imageCanvas {
@@ -146,7 +150,6 @@
 
 .image {
   object-fit: cover;
-  border-radius: 0; /* STRICTLY SQUARE */
   transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -154,7 +157,7 @@
   transform: scale(1.035);
 }
 
-/* Clean Simple Title Overlay ON the Card (NO text underneath) */
+/* Clean Simple Title Overlay ON the Card (Desktop Only) */
 .cardOverlay {
   position: absolute;
   bottom: 0;
@@ -184,6 +187,59 @@
   color: #f3f4f6;
 }
 
+/* Mobile Info: Hidden on Desktop */
+.mobileInfo {
+  display: none;
+}
+
+/* =========================================================================
+   Mobile View Styles matching User Reference Image
+   ========================================================================= */
+@media (max-width: 820px) {
+  /* 1. Rounded Thumbnail Frame (No Overlays) */
+  .imageCanvas {
+    aspect-ratio: 16 / 10;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  }
+
+  .image {
+    border-radius: 14px;
+  }
+
+  /* 2. Hide Desktop Overlay on Mobile */
+  .cardOverlay {
+    display: none !important;
+  }
+
+  /* 3. Text Info Directly Below Image (Matching User Reference Image) */
+  .mobileInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.15rem 0.25rem 0.25rem;
+  }
+
+  .mobileTitle {
+    font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
+    font-size: clamp(1.35rem, 5.2vw, 1.65rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.25;
+  }
+
+  .mobileSubtitle {
+    font-family: var(--font-body, -apple-system, sans-serif);
+    font-size: clamp(0.92rem, 3.8vw, 1.05rem);
+    font-weight: 400;
+    color: #8b929d;
+    margin: 0;
+    line-height: 1.45;
+  }
+}
+
 /* CTA Wrapper */
 .ctaWrapper {
   margin-top: clamp(8rem, 14vw, 15rem);
@@ -191,9 +247,9 @@
   justify-content: center;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 820px) {
   .ctaWrapper {
-    margin-top: 3.5rem;
+    margin-top: 4.5rem;
   }
 }
 
