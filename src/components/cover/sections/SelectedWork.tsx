@@ -6,144 +6,93 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import styles from "./SelectedWork.module.css";
 
-interface ProjectItem {
+interface ShowcaseProject {
   id: string;
-  name: string;
-  subtitle: string;
+  title: string;
+  description: string;
   image: string;
   slug: string;
 }
 
-const PROJECTS_LEFT: ProjectItem[] = [
+const FEATURED_PROJECTS: ShowcaseProject[] = [
   {
     id: "creative-collective",
-    name: "Creative Collective",
-    subtitle: "Brand Identity, Tokyo & New York",
+    title: "Creative Collective",
+    description:
+      "Tokyo & New York brand identity and interactive web platform celebrating contemporary craft, generative typography, and spatial design.",
     image: "/images/project_collective.jpg",
     slug: "creative-collective",
   },
   {
     id: "cloudwatch-telemetry",
-    name: "CloudWatch Telemetry",
-    subtitle: "Distributed Systems, High Throughput",
+    title: "CloudWatch Telemetry",
+    description:
+      "High-throughput real-time telemetry pipeline processing over 250k events/sec with sub-50ms query latency and automated alerting.",
     image: "/images/project_analytics.jpg",
     slug: "cloudwatch",
   },
-];
-
-const PROJECTS_RIGHT: ProjectItem[] = [
   {
     id: "brutalist-manifesto",
-    name: "Brutalist Manifesto",
-    subtitle: "Editorial Design, Digital Publication",
+    title: "Brutalist Manifesto",
+    description:
+      "High-density digital publication exploring brutalist architecture, structural truth, and responsive typographic scale across devices.",
     image: "/images/project_brutalist.jpg",
     slug: "brutalist-manifesto",
-  },
-  {
-    id: "warpspeed-protocol",
-    name: "Warpspeed Protocol",
-    subtitle: "Edge Computing, Ultra Low Latency",
-    image: "/images/project_warpspeed_desk.jpg",
-    slug: "warpspeed",
   },
 ];
 
 export default function SelectedWork() {
   return (
-    <section className={styles.projectsSection} id="projects" aria-label="Projects">
+    <section className={styles.projectsSection} id="projects" aria-label="Selected Projects">
       <div className={styles.container}>
-        {/* Header */}
+        {/* Section Header: Title on Left, Text Link on Right */}
         <div className={styles.header}>
-          <div className={styles.headerLeft}>
-            <h2 className={styles.title}>Selected projects.</h2>
-          </div>
+          <h2 className={styles.title}>Selected design work</h2>
+          <Link href="/projects" className={styles.seeAllTop}>
+            <span>SEE ALL PROJECTS</span>
+            <span className={styles.arrowIcon} aria-hidden="true">→</span>
+          </Link>
         </div>
 
-        {/* Editorial Staggered Layout for Desktop / Minimalist Cards for Mobile */}
-        <div className={styles.editorialStaggerContainer}>
-          {/* Left Column (starts at y = 0) */}
-          <div className={styles.columnLeft}>
-            {PROJECTS_LEFT.map((item, idx) => (
-              <motion.div
-                key={item.id}
-                className={styles.projectCard}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.05 }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-              >
-                <Link href={`/projects#${item.slug}`} className={styles.cardLink} title={item.name}>
-                  {/* Image Frame: Square on Desktop, Rounded 12px on Mobile */}
-                  <div className={styles.imageCanvas}>
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 46vw"
-                      priority={idx === 0}
-                      className={styles.image}
-                    />
+        {/* 3-Column Square Image Card Grid */}
+        <div className={styles.grid}>
+          {FEATURED_PROJECTS.map((item, idx) => (
+            <motion.div
+              key={item.id}
+              className={styles.cardWrapper}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.55, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Link href={`/projects#${item.slug}`} className={styles.cardLink}>
+                {/* 1:1 Aspect Ratio Square Image Canvas */}
+                <div className={styles.imageCanvas}>
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    priority={idx === 0}
+                    className={styles.image}
+                  />
+                </div>
 
-                    {/* Desktop Overlay Title (Hidden on Mobile) */}
-                    <div className={styles.cardOverlay}>
-                      <h3 className={styles.cardTitle}>{item.name}</h3>
-                    </div>
-                  </div>
-
-                  {/* Mobile Text Info (Underneath Image, matching User Reference Design) */}
-                  <div className={styles.mobileInfo}>
-                    <h3 className={styles.mobileTitle}>{item.name}</h3>
-                    <p className={styles.mobileSubtitle}>{item.subtitle}</p>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Right Column (offset downwards on desktop for staggered positioning) */}
-          <div className={styles.columnRight}>
-            {PROJECTS_RIGHT.map((item, idx) => (
-              <motion.div
-                key={item.id}
-                className={styles.projectCard}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.05 }}
-                transition={{ duration: 0.6, delay: 0.1 + idx * 0.1 }}
-              >
-                <Link href={`/projects#${item.slug}`} className={styles.cardLink} title={item.name}>
-                  {/* Image Frame: Square on Desktop, Rounded 12px on Mobile */}
-                  <div className={styles.imageCanvas}>
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 46vw"
-                      priority={idx === 0}
-                      className={styles.image}
-                    />
-
-                    {/* Desktop Overlay Title (Hidden on Mobile) */}
-                    <div className={styles.cardOverlay}>
-                      <h3 className={styles.cardTitle}>{item.name}</h3>
-                    </div>
-                  </div>
-
-                  {/* Mobile Text Info (Underneath Image, matching User Reference Design) */}
-                  <div className={styles.mobileInfo}>
-                    <h3 className={styles.mobileTitle}>{item.name}</h3>
-                    <p className={styles.mobileSubtitle}>{item.subtitle}</p>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+                {/* Card Meta directly below image */}
+                <div className={styles.meta}>
+                  <h3 className={styles.cardTitle}>{item.title}</h3>
+                  <p className={styles.cardDescription}>{item.description}</p>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
         </div>
 
-        {/* Rectangular [Talk Today] Style Button */}
-        <div className={styles.ctaWrapper}>
-          <Link href="/projects" className={styles.talkButton}>
-            View All Projects
+        {/* Bottom Left Pill Button */}
+        <div className={styles.bottomCtaWrapper}>
+          <Link href="/projects" className={styles.bottomPillBtn}>
+            <span>SEE ALL PROJECTS</span>
+            <span className={styles.arrowIcon} aria-hidden="true">→</span>
           </Link>
         </div>
       </div>

@@ -1,310 +1,194 @@
-/* Projects Section (Dual Mode: Editorial Stagger on Desktop, Minimalist Reference Cards on Mobile) */
+/* Selected Design Work Showcase (Matching Reference Image) */
+
 .projectsSection {
   background-color: #000000;
-  padding: 8.5rem 3.5rem 12rem;
+  padding: clamp(5rem, 8vw, 8rem) clamp(1.5rem, 4vw, 3.5rem);
   position: relative;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-@media (max-width: 1024px) {
-  .projectsSection {
-    padding: 5rem 1.75rem 6.5rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .projectsSection {
-    padding: 3.75rem 1.25rem 4.5rem;
-  }
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .container {
-  max-width: 1360px;
+  max-width: 1240px;
   margin: 0 auto;
+  width: 100%;
 }
 
-/* Header */
+/* Header: Serif Title on Left, Minimalist Text Link on Right */
 .header {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-bottom: 5rem;
-}
-
-@media (max-width: 768px) {
-  .header {
-    margin-bottom: 2.75rem;
-  }
-}
-
-.headerLeft {
-  display: flex;
-  flex-direction: column;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  width: 100%;
 }
 
 .title {
   color: #ffffff;
-  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(2.6rem, 5.8vw, 4.8rem);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  text-transform: none;
+  font-family: var(--font-artistic, "Newsreader", "Playfair Display", Georgia, serif);
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
   margin: 0;
 }
 
-@media (max-width: 640px) {
-  .title {
-    font-size: clamp(2.2rem, 9vw, 3.2rem);
-  }
+.seeAllTop {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #9da4ae;
+  font-family: var(--font-display, "Plus Jakarta Sans", -apple-system, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
 }
 
-/* Dual Column Staggered Container matching desktop reference */
-.editorialStaggerContainer {
+.seeAllTop:hover {
+  color: #ffffff;
+}
+
+.seeAllTop:hover .arrowIcon {
+  transform: translateX(3px);
+}
+
+.arrowIcon {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+/* 3-Column Square Image Card Grid */
+.grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: clamp(3.5rem, 7vw, 7.5rem);
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.5rem, 2.5vw, 2.5rem);
   width: 100%;
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
 }
 
-/* Left Column: starts at top */
-.columnLeft {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(12rem, 20vw, 22rem); /* Expansive vertical breathing room between projects on desktop */
-  width: 100%;
-}
-
-/* Right Column: offset downwards for authentic editorial stagger */
-.columnRight {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(12rem, 20vw, 22rem);
-  padding-top: clamp(14rem, 24vw, 26rem); /* Staggers right cards so top aligns near bottom of left cards */
-  width: 100%;
-}
-
-/* =========================================================================
-   Mobile View Layout (<= 1024px)
-   Single unified column with consistent vertical spacing
-   ========================================================================= */
-@media (max-width: 1024px) {
-  .editorialStaggerContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 3.25rem;
-    width: 100%;
-  }
-
-  .columnLeft,
-  .columnRight {
-    display: flex;
-    flex-direction: column;
-    gap: 3.25rem;
-    padding-top: 0 !important;
-    width: 100%;
-  }
-}
-
-@media (max-width: 640px) {
-  .editorialStaggerContainer {
-    gap: 2.75rem;
-  }
-
-  .columnLeft,
-  .columnRight {
-    gap: 2.75rem;
-  }
-}
-
-/* Project Card */
-.projectCard {
-  display: flex;
-  flex-direction: column;
+.cardWrapper {
   width: 100%;
 }
 
 .cardLink {
   display: flex;
   flex-direction: column;
-  width: 100%;
   text-decoration: none;
   color: inherit;
-  cursor: pointer;
+  width: 100%;
   outline: none;
 }
 
-/* 1:1 Square Flatlay Image Canvas on Desktop */
+/* 1:1 Aspect Ratio Square Image Canvas */
 .imageCanvas {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
-  border-radius: 0; /* Strictly square corners on desktop */
+  border-radius: 6px;
   overflow: hidden;
   background-color: #121418;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.4s ease,
-              box-shadow 0.4s ease;
-}
-
-.cardLink:hover .imageCanvas {
-  transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.28);
-  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.85);
 }
 
 .image {
   object-fit: cover;
-  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cardLink:hover .image {
-  transform: scale(1.035);
+  transform: scale(1.03);
 }
 
-/* Clean Simple Title Overlay ON the Card (Desktop Only) */
-.cardOverlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 3.5rem 1.75rem 1.5rem;
-  background: linear-gradient(to top, rgba(9, 10, 12, 0.88) 0%, rgba(9, 10, 12, 0.45) 55%, transparent 100%);
+/* Card Metadata (Directly Below Image) */
+.meta {
+  margin-top: 1rem;
   display: flex;
-  align-items: flex-end;
-  z-index: 2;
-  pointer-events: none;
+  flex-direction: column;
+  gap: 0.45rem;
 }
 
 .cardTitle {
-  color: #ffffff;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  font-family: var(--font-display, "Plus Jakarta Sans", -apple-system, sans-serif);
+  font-size: 1.05rem;
   font-weight: 600;
+  line-height: 1.32;
+  color: #ffffff;
   letter-spacing: -0.01em;
   margin: 0;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
-  transition: transform 0.3s ease, color 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .cardLink:hover .cardTitle {
-  transform: translateY(-2px);
-  color: #f3f4f6;
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
-/* Mobile Info: Hidden on Desktop */
-.mobileInfo {
-  display: none;
+.cardDescription {
+  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #9da4ae;
+  margin: 0;
 }
 
-/* =========================================================================
-   Mobile View Styles matching User Reference Image ("Frozen Greenland" Card)
-   - Rounded 12px clean landscape photo without overlays or borders
-   - Directly underneath: Bold white title + Muted slate subtitle
-   ========================================================================= */
-@media (max-width: 1024px) {
-  /* 1. Rounded Thumbnail Frame (No Overlays, No Hairline Borders) */
-  .imageCanvas {
-    aspect-ratio: 16 / 11;
-    border-radius: 12px;
-    border: none !important;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
-    -webkit-mask-image: -webkit-radial-gradient(white, black);
-    transform: translateZ(0);
-  }
-
-  .image {
-    border-radius: 12px;
-  }
-
-  /* 2. Completely Hide Desktop Gradient & Overlay on Mobile */
-  .cardOverlay {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-  }
-
-  /* 3. Text Info Directly Below Image (Flush Left Aligned with Image) */
-  .mobileInfo {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    padding: 1.15rem 0 0;
-    text-align: left;
-  }
-
-  .mobileTitle {
-    font-family: var(--font-body, 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-    font-size: clamp(1.2rem, 4.8vw, 1.4rem);
-    font-weight: 600;
-    letter-spacing: -0.018em;
-    color: #ffffff;
-    margin: 0;
-    line-height: 1.25;
-    text-transform: none;
-  }
-
-  .mobileSubtitle {
-    font-family: var(--font-body, 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-    font-size: clamp(0.9rem, 3.4vw, 0.98rem);
-    font-weight: 400;
-    color: #7d848f; /* Exact slate gray from reference card */
-    letter-spacing: -0.005em;
-    margin: 0.35rem 0 0;
-    line-height: 1.4;
-    text-transform: none;
-  }
-}
-
-/* CTA Wrapper */
-.ctaWrapper {
-  margin-top: clamp(8rem, 14vw, 15rem);
+/* Bottom Left Pill Button */
+.bottomCtaWrapper {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 100%;
 }
 
-@media (max-width: 1024px) {
-  .ctaWrapper {
-    margin-top: 4.5rem;
-  }
-}
-
-/* Rectangular [Talk Today] Style Button */
-.talkButton {
+.bottomPillBtn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 0; /* Strictly rectangular */
-  padding: 1.15rem 2.75rem;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  gap: 8px;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: var(--font-display, "Plus Jakarta Sans", -apple-system, sans-serif);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  padding: 0.72rem 1.45rem;
+  border-radius: 9999px;
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.12);
 }
 
-@media (max-width: 640px) {
-  .talkButton {
-    width: 100%;
-    max-width: 320px;
-    padding: 1rem 1.5rem;
-    min-height: 48px;
-    touch-action: manipulation;
+.bottomPillBtn:hover {
+  background-color: #f1f3f5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.25);
+}
+
+.bottomPillBtn:hover .arrowIcon {
+  transform: translateX(3px);
+}
+
+/* Responsive Viewports */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 }
 
-.talkButton:hover {
-  background-color: #ffffff;
-  color: #090a0c;
-  border-color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(255, 255, 255, 0.08);
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
 }
