@@ -79,22 +79,22 @@ export default function FaqSection() {
       <div className={styles.container}>
         {/* 2-Column Minimalist Layout matching reference design */}
         <div className={styles.layout}>
-          {/* Left Column: Uppercase Monospace Section Label */}
+          {/* Left Column: Headline matching exact reference design */}
           <div className={styles.leftCol}>
-            <h2 className={styles.sectionLabel}>FREQUENTLY ASKED QUESTIONS</h2>
+            <h2 className={styles.headline}>Frequently asked questions</h2>
           </div>
 
-          {/* Right Column: Clean Accordion List with Thin Plus Toggle */}
+          {/* Right Column: Clean Accordion Rounded Card Capsules */}
           <div className={styles.rightCol}>
-            <div className={styles.accordionList}>
+            <div className={styles.cardsList}>
               {FAQ_ITEMS.map((item) => {
                 const isOpen = openId === item.id;
                 return (
-                  <div key={item.id} className={styles.accordionItem}>
+                  <div key={item.id} className={styles.cardItem}>
                     <button
                       type="button"
                       onClick={() => toggleFaq(item.id)}
-                      className={styles.rowTrigger}
+                      className={styles.cardTrigger}
                       aria-expanded={isOpen}
                     >
                       <span className={styles.questionText}>{item.question}</span>
@@ -139,7 +139,7 @@ export default function FaqSection() {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                           className={styles.answerWrapper}
                         >
                           <div className={styles.answerInner}>
