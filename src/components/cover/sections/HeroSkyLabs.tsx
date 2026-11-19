@@ -9,6 +9,7 @@ import styles from "./HeroSkyLabs.module.css";
 export default function HeroSkyLabs() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
+  const [activeSection, setActiveSection] = useState<string>("");
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -32,6 +33,24 @@ export default function HeroSkyLabs() {
         }
       }
       lastScrollY = currentScrollY;
+
+      // Active section spy
+      const sectionIds = ["skills", "projects", "articles", "about-me", "faq", "contact"];
+      const scrollPos = window.scrollY + 240;
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const id = sectionIds[i];
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.offsetTop;
+          if (scrollPos >= top) {
+            setActiveSection(id);
+            return;
+          }
+        }
+      }
+      if (window.scrollY < 300) {
+        setActiveSection("");
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -110,36 +129,59 @@ export default function HeroSkyLabs() {
               <a
                 href="#skills"
                 onClick={(e) => handleSlowScroll(e, "skills")}
-                className={styles.navLink}
+                className={`${styles.navLink} ${
+                  activeSection === "skills" ? styles.navLinkActive : ""
+                }`}
               >
                 Services
               </a>
-              <Link href="/projects" className={styles.navLink}>
+              <Link
+                href="/projects"
+                className={`${styles.navLink} ${
+                  activeSection === "projects" ? styles.navLinkActive : ""
+                }`}
+              >
                 Projects
               </Link>
               <a
                 href="#articles"
                 onClick={(e) => handleSlowScroll(e, "articles")}
-                className={styles.navLink}
+                className={`${styles.navLink} ${
+                  activeSection === "articles" ? styles.navLinkActive : ""
+                }`}
               >
                 Articles
               </a>
-              <Link href="/about" className={styles.navLink}>
+              <Link
+                href="/about"
+                className={`${styles.navLink} ${
+                  activeSection === "about-me" ? styles.navLinkActive : ""
+                }`}
+              >
                 About
               </Link>
               <a
                 href="#faq"
                 onClick={(e) => handleSlowScroll(e, "faq")}
-                className={styles.navLink}
+                className={`${styles.navLink} ${
+                  activeSection === "faq" ? styles.navLinkActive : ""
+                }`}
               >
                 FAQ
               </a>
+
+              {/* Architectural Vertical Hairline Divider */}
+              <span className={styles.navDivider} aria-hidden="true" />
+
+              {/* Jewel CTA Button with Live Pulse Status Dot */}
               <a
                 href="#contact"
                 onClick={(e) => handleSlowScroll(e, "contact")}
                 className={styles.navCta}
+                title="Available for projects & collaboration"
               >
-                Contact
+                <span className={styles.statusDot} aria-hidden="true" />
+                <span>Contact</span>
               </a>
             </nav>
 
@@ -172,9 +214,10 @@ export default function HeroSkyLabs() {
                   {[
                     { label: "SERVICES", href: "#skills", isAnchor: true },
                     { label: "PROJECTS", href: "/projects", isAnchor: false },
+                    { label: "ARTICLES", href: "#articles", isAnchor: true },
                     { label: "ABOUT", href: "/about", isAnchor: false },
+                    { label: "FAQ", href: "#faq", isAnchor: true },
                     { label: "CONTACT", href: "#contact", isAnchor: true },
-                    { label: "PORTFOLIO", href: "/portfolio", isAnchor: false },
                   ].map((item, idx) => (
                     <motion.div
                       key={item.label}

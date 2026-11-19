@@ -97,8 +97,18 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
             <Link href="/#faq" className={styles.navLink}>
               FAQ
             </Link>
-            <Link href="/#contact" className={styles.navCta}>
-              Contact
+
+            {/* Architectural Vertical Hairline Divider */}
+            <span className={styles.navDivider} aria-hidden="true" />
+
+            {/* Jewel CTA Button with Live Pulse Status Dot */}
+            <Link
+              href="/#contact"
+              className={styles.navCta}
+              title="Available for projects & collaboration"
+            >
+              <span className={styles.statusDot} aria-hidden="true" />
+              <span>Contact</span>
             </Link>
           </nav>
 
@@ -131,9 +141,10 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
                 {[
                   { label: "SERVICES", href: "/#skills" },
                   { label: "PROJECTS", href: "/projects" },
+                  { label: "ARTICLES", href: "/#articles" },
                   { label: "ABOUT", href: "/about" },
+                  { label: "FAQ", href: "/#faq" },
                   { label: "CONTACT", href: "/#contact" },
-                  { label: "PORTFOLIO", href: "/portfolio" },
                 ].map((item, idx) => {
                   const isActive =
                     (item.label === "SERVICES" && activeTab === "services") ||
