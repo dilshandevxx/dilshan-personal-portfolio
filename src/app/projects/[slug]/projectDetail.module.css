@@ -499,7 +499,91 @@
 .relatedGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1.5rem, 2.4vw, 2.25rem);
+  gap: 1.5rem;
+}
+
+.relatedCard {
+  background: #111317;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+}
+
+.relatedCard:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-3px);
+}
+
+.relatedImageFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #090a0d;
+}
+
+.relatedImage {
+  object-fit: cover;
+}
+
+.relatedCardBody {
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-grow: 1;
+}
+
+.relatedCardTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.relatedCardLink {
+  color: #ffffff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.relatedCardLink:hover {
+  color: #a3e635;
+}
+
+.relatedCardDesc {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #94a3b8;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.relatedTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.relatedTag {
+  font-family: var(--font-mono, "Google Sans Code", monospace);
+  font-size: 0.7rem;
+  color: #8c93a0;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
 }
 
 /* ------------------------------------------------------------- */
@@ -521,16 +605,11 @@
   }
 
   .relatedGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 640px) {
-  .relatedGrid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
   .pageRoot {
     padding-top: 4.5rem;
   }
