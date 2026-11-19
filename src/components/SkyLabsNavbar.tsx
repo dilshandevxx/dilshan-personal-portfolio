@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import styles from "./SkyLabsNavbar.module.css";
 
 interface SkyLabsNavbarProps {
@@ -12,11 +12,11 @@ interface SkyLabsNavbarProps {
 }
 
 export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
   const pathname = usePathname();
 
-  React.useEffect(() => {
+  useEffect(() => {
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
@@ -24,18 +24,14 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
 
-      // Avoid negative/rubberband scroll on iOS
       if (currentScrollY < 0) return;
 
-      // Always show at top of page
       if (currentScrollY <= 60) {
         setNavVisible(true);
       } else if (windowHeight + currentScrollY >= documentHeight - 100) {
-        // Hide when scrolled near the bottom of the page
         setNavVisible(false);
       } else if (Math.abs(currentScrollY - lastScrollY) > 6) {
-        // Scrolling down -> hide; Scrolling up -> show
-        if (currentScrollY > lastScrollY) {
+        if (currentScrollY > lastScrollY && !menuOpen) {
           setNavVisible(false);
         } else {
           setNavVisible(true);
@@ -46,129 +42,92 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [menuOpen]);
 
-  const isProjectsActive = activeTab === "projects" || pathname === "/projects" || pathname?.startsWith("/projects/");
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   return (
     <header
       className={`${styles.navHeader} ${
-        !navVisible && !mobileOpen ? styles.navHidden : ""
-      }`}
+        !navVisible && !menuOpen ? styles.navHidden : ""
+      } ${menuOpen ? styles.navOpen : ""}`}
       role="banner"
     >
       <div className={styles.navContainer}>
-        {/* Left: Pure SkyLabs Brand Wordmark & Geometric Badge */}
-        <Link href="/" className={styles.brandLink} title="SkyLabs Home">
-          <div className={styles.logoWrapper}>
-            <span className={styles.logoText}>
-              Sky<br />Labs
-            </span>
-            <div className={styles.logoBadge} aria-hidden="true">
-              <span className={styles.badgeLetter}>S</span>
-            </div>
-          </div>
+        {/* Brand Wordmark: Impress. */}
+        <Link href="/" className={styles.brandLink} title="Impress.">
+          <span className={styles.brandWordmark}>Impress.</span>
         </Link>
 
-        {/* Right: Clean Nav Links + Single Refined Rectangular Action Button */}
-        <div className={styles.navRight}>
-          <nav className={styles.navLinks} aria-label="Main Navigation">
-            <Link
-              href="/#skills"
-              className={`${styles.navLink} ${activeTab === "services" ? styles.navLinkActive : ""}`}
-            >
-              SERVICES
-            </Link>
-            <Link
-              href="/projects"
-              className={`${styles.navLink} ${isProjectsActive ? styles.navLinkActive : ""}`}
-            >
-              PROJECTS
-            </Link>
-            <Link
-              href="/#about-me"
-              className={`${styles.navLink} ${activeTab === "about" ? styles.navLinkActive : ""}`}
-            >
-              ABOUT
-            </Link>
-            <Link
-              href="/#contact"
-              className={`${styles.navLink} ${activeTab === "contact" ? styles.navLinkActive : ""}`}
-            >
-              CONTACT
-            </Link>
-          </nav>
-
-          <div className={styles.navActions}>
-            <Link href="/portfolio" className={styles.portfolioButton} title="Explore Editorial Portfolio">
-              <span>PORTFOLIO</span>
-              <ArrowUpRight size={14} className={styles.btnIcon} />
-            </Link>
-          </div>
-
-          {/* Mobile Hamburger Toggle */}
-          <button
-            type="button"
-            className={styles.mobileToggleBtn}
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-          >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
+        {/* Minimalist Two-Line Hamburger Button (=) */}
+        <button
+          type="button"
+          className={`${styles.hamburgerBtn} ${menuOpen ? styles.hamburgerActive : ""}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={menuOpen}
+        >
+          <span className={styles.barTop} />
+          <span className={styles.barBottom} />
+        </button>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Full-Screen Minimalist Editorial Navigation Overlay */}
       <AnimatePresence>
-        {mobileOpen && (
+        {menuOpen && (
           <motion.div
-            className={styles.mobileDrawer}
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
+            className={styles.menuOverlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className={styles.mobileDrawerInner}>
-              <Link
-                href="/#skills"
-                className={styles.mobileNavLink}
-                onClick={() => setMobileOpen(false)}
-              >
-                SERVICES
-              </Link>
-              <Link
-                href="/projects"
-                className={`${styles.mobileNavLink} ${isProjectsActive ? styles.mobileNavLinkActive : ""}`}
-                onClick={() => setMobileOpen(false)}
-              >
-                PROJECTS
-              </Link>
-              <Link
-                href="/#about-me"
-                className={styles.mobileNavLink}
-                onClick={() => setMobileOpen(false)}
-              >
-                ABOUT
-              </Link>
-              <Link
-                href="/#contact"
-                className={styles.mobileNavLink}
-                onClick={() => setMobileOpen(false)}
-              >
-                CONTACT
-              </Link>
+            <div className={styles.menuContainer}>
+              <nav className={styles.menuNav} aria-label="Main Navigation">
+                {[
+                  { label: "SERVICES", href: "/#skills" },
+                  { label: "PROJECTS", href: "/projects" },
+                  { label: "ABOUT", href: "/about" },
+                  { label: "CONTACT", href: "/#contact" },
+                  { label: "PORTFOLIO", href: "/portfolio" },
+                ].map((item, idx) => {
+                  const isActive =
+                    (item.label === "SERVICES" && activeTab === "services") ||
+                    (item.label === "PROJECTS" && (activeTab === "projects" || pathname.startsWith("/projects"))) ||
+                    (item.label === "ABOUT" && (activeTab === "about" || pathname === "/about")) ||
+                    (item.label === "CONTACT" && activeTab === "contact");
 
-              <div className={styles.mobileDrawerActions}>
-                <Link
-                  href="/portfolio"
-                  className={styles.mobilePortfolioButton}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  <span>EXPLORE PORTFOLIO</span>
-                  <ArrowUpRight size={14} />
-                </Link>
-              </div>
+                  return (
+                    <motion.div
+                      key={item.label}
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 12 }}
+                      transition={{ duration: 0.35, delay: 0.05 + idx * 0.06 }}
+                      className={styles.menuItemWrap}
+                    >
+                      <Link
+                        href={item.href}
+                        onClick={() => setMenuOpen(false)}
+                        className={`${styles.menuLink} ${isActive ? styles.menuLinkActive : ""}`}
+                      >
+                        <span className={styles.menuIndex}>0{idx + 1}</span>
+                        <span className={styles.menuLabel}>{item.label}</span>
+                        <ArrowUpRight size={22} className={styles.menuArrow} />
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </nav>
             </div>
           </motion.div>
         )}

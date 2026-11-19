@@ -3,12 +3,11 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import styles from "./HeroSkyLabs.module.css";
 
 export default function HeroSkyLabs() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
 
   useEffect(() => {
@@ -19,37 +18,14 @@ export default function HeroSkyLabs() {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
 
-      // Avoid rubber-banding on iOS
       if (currentScrollY < 0) return;
 
-      // ScrollSpy for landing sections
-      const sections = ["skills", "projects", "about-me", "contact"];
-      const scrollPos = currentScrollY + 220;
-
-      let foundSection = false;
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(sectionId);
-            foundSection = true;
-            break;
-          }
-        }
-      }
-      if (!foundSection && currentScrollY < 260) {
-        setActiveSection("");
-      }
-
-      // Hide navbar when scrolling down or when scrolled near bottom
       if (currentScrollY <= 60) {
         setNavVisible(true);
       } else if (windowHeight + currentScrollY >= documentHeight - 100) {
         setNavVisible(false);
       } else if (Math.abs(currentScrollY - lastScrollY) > 6) {
-        if (currentScrollY > lastScrollY) {
+        if (currentScrollY > lastScrollY && !menuOpen) {
           setNavVisible(false);
         } else {
           setNavVisible(true);
@@ -59,27 +35,37 @@ export default function HeroSkyLabs() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [menuOpen]);
 
-  // Proper slow, weighted scroll animation with custom easeInOutCubic curve
+  // Lock body scroll when full menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   const handleSlowScroll = (
     e: React.MouseEvent<HTMLAnchorElement>,
     sectionId: string
   ) => {
     e.preventDefault();
-    setMobileOpen(false);
+    setMenuOpen(false);
 
     const el = document.getElementById(sectionId);
     if (!el) return;
 
-    const navbarHeight = 75;
+    const navbarHeight = 80;
     const targetY =
       el.getBoundingClientRect().top + window.scrollY - navbarHeight;
     const startY = window.scrollY;
     const distance = targetY - startY;
-    const duration = 1200; // 1.2s slow, graceful glide
+    const duration = 1000;
     let startTime: number | null = null;
 
     const easeInOutCubic = (t: number) =>
@@ -104,167 +90,107 @@ export default function HeroSkyLabs() {
 
   return (
     <section className={styles.heroSection} aria-label="Hero">
-      {/* 1. Minimal & Beautiful SkyLabs Navbar */}
+      {/* 1. Minimalist Top Navbar (Matching Exact Reference Image) */}
       <header
         className={`${styles.navHeader} ${
-          !navVisible && !mobileOpen ? styles.navHidden : ""
-        }`}
+          !navVisible && !menuOpen ? styles.navHidden : ""
+        } ${menuOpen ? styles.navOpen : ""}`}
       >
         <div className={styles.navContainer}>
-          {/* Left: Pure SkyLabs Brand Wordmark & Geometric Badge */}
-          <Link href="/" className={styles.brandLink}>
-            <div className={styles.logoWrapper}>
-              <span className={styles.logoText}>
-                Sky<br />Labs
-              </span>
-              <div className={styles.logoBadge} aria-hidden="true">
-                <span className={styles.badgeLetter}>S</span>
-              </div>
-            </div>
+          {/* Brand Wordmark: Impress. */}
+          <Link href="/" className={styles.brandLink} title="Impress.">
+            <span className={styles.brandWordmark}>Impress.</span>
           </Link>
 
-          {/* Right: Clean Nav Links + Single Refined Rectangular Action Button */}
-          <div className={styles.navRight}>
-            <nav className={styles.navLinks} aria-label="Main Navigation">
-              <Link
-                href="#skills"
-                onClick={(e) => handleSlowScroll(e, "skills")}
-                className={`${styles.navLink} ${activeSection === "skills" ? styles.navLinkActive : ""}`}
-              >
-                SERVICES
-              </Link>
-              <Link
-                href="/projects"
-                className={styles.navLink}
-                title="View All Projects & Architecture"
-              >
-                PROJECTS
-              </Link>
-              <Link
-                href="#about-me"
-                onClick={(e) => handleSlowScroll(e, "about-me")}
-                className={`${styles.navLink} ${activeSection === "about-me" ? styles.navLinkActive : ""}`}
-              >
-                ABOUT
-              </Link>
-              <Link
-                href="#contact"
-                onClick={(e) => handleSlowScroll(e, "contact")}
-                className={`${styles.navLink} ${activeSection === "contact" ? styles.navLinkActive : ""}`}
-              >
-                CONTACT
-              </Link>
-            </nav>
-
-            <div className={styles.navActions}>
-              <Link href="/portfolio" className={styles.portfolioButton} title="Explore Lifestyle Portfolio">
-                <span>PORTFOLIO</span>
-                <ArrowUpRight size={14} className={styles.btnIcon} />
-              </Link>
-            </div>
-
-            {/* Mobile Hamburger Toggle */}
-            <button
-              type="button"
-              className={styles.mobileToggleBtn}
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileOpen}
-            >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
+          {/* Minimalist Two-Line Hamburger Button (=) */}
+          <button
+            type="button"
+            className={`${styles.hamburgerBtn} ${menuOpen ? styles.hamburgerActive : ""}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={menuOpen}
+          >
+            <span className={styles.barTop} />
+            <span className={styles.barBottom} />
+          </button>
         </div>
 
-        {/* Mobile Drawer */}
+        {/* Full-Screen Minimalist Editorial Navigation Overlay */}
         <AnimatePresence>
-          {mobileOpen && (
+          {menuOpen && (
             <motion.div
-              className={styles.mobileDrawer}
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
+              className={styles.menuOverlay}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className={styles.mobileDrawerInner}>
-                <Link
-                  href="#skills"
-                  className={styles.mobileNavLink}
-                  onClick={(e) => handleSlowScroll(e, "skills")}
-                >
-                  SERVICES
-                </Link>
-                <Link
-                  href="/projects"
-                  className={styles.mobileNavLink}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  PROJECTS
-                </Link>
-                <Link
-                  href="#about-me"
-                  className={styles.mobileNavLink}
-                  onClick={(e) => handleSlowScroll(e, "about-me")}
-                >
-                  ABOUT
-                </Link>
-                <Link
-                  href="#contact"
-                  className={styles.mobileNavLink}
-                  onClick={(e) => handleSlowScroll(e, "contact")}
-                >
-                  CONTACT
-                </Link>
-
-                <div className={styles.mobileDrawerActions}>
-                  <Link
-                    href="/portfolio"
-                    className={styles.mobilePortfolioButton}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    <span>EXPLORE PORTFOLIO</span>
-                    <ArrowUpRight size={14} />
-                  </Link>
-                </div>
+              <div className={styles.menuContainer}>
+                <nav className={styles.menuNav} aria-label="Overlay Navigation">
+                  {[
+                    { label: "SERVICES", href: "#skills", isAnchor: true },
+                    { label: "PROJECTS", href: "/projects", isAnchor: false },
+                    { label: "ABOUT", href: "/about", isAnchor: false },
+                    { label: "CONTACT", href: "#contact", isAnchor: true },
+                    { label: "PORTFOLIO", href: "/portfolio", isAnchor: false },
+                  ].map((item, idx) => (
+                    <motion.div
+                      key={item.label}
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 12 }}
+                      transition={{ duration: 0.35, delay: 0.05 + idx * 0.06 }}
+                      className={styles.menuItemWrap}
+                    >
+                      {item.isAnchor ? (
+                        <Link
+                          href={item.href}
+                          onClick={(e) => handleSlowScroll(e, item.href.replace("#", ""))}
+                          className={styles.menuLink}
+                        >
+                          <span className={styles.menuIndex}>0{idx + 1}</span>
+                          <span className={styles.menuLabel}>{item.label}</span>
+                        </Link>
+                      ) : (
+                        <Link
+                          href={item.href}
+                          onClick={() => setMenuOpen(false)}
+                          className={styles.menuLink}
+                        >
+                          <span className={styles.menuIndex}>0{idx + 1}</span>
+                          <span className={styles.menuLabel}>{item.label}</span>
+                          <ArrowUpRight size={22} className={styles.menuArrow} />
+                        </Link>
+                      )}
+                    </motion.div>
+                  ))}
+                </nav>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
       </header>
 
-      {/* 2. Main Hero Content */}
+      {/* 2. Main Hero Content — Left-Aligned Headline Matching Reference */}
       <div className={styles.heroContent}>
-        {/* Centered Pill Badge: EST. 2016 with Neon Green Dot */}
-        <motion.div
-          className={styles.badgeWrapper}
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className={styles.pillBadge}>
-            <span className={styles.greenDot} aria-hidden="true" />
-            <span className={styles.badgeLabel}>EST. 2016</span>
-          </div>
-        </motion.div>
+        <div className={styles.container}>
+          <motion.h1
+            className={styles.displayHeadline}
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <span className={styles.headlineRow}>Endless passion.</span>
+            <span className={styles.headlineRow}>Special moments in time.</span>
+          </motion.h1>
+        </div>
 
-        {/* Massive 3-Line Centered Display Headline */}
-        <motion.h1
-          className={styles.displayHeadline}
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <span className={styles.headlineRow}>CRAFTING DIGITAL</span>
-          <span className={styles.headlineRow}>LANDSCAPES. DRIVEN</span>
-          <span className={styles.headlineRow}>BY DATA &amp; DESIGN.</span>
-        </motion.h1>
-
-        {/* 3. Cinematic Looping Banner Video */}
+        {/* 3. Cinematic Looping Banner Video (Retained as Requested) */}
         <motion.div
           className={styles.bannerContainer}
           initial={{ opacity: 0, y: 35 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className={styles.bannerFrame}>
             <video
