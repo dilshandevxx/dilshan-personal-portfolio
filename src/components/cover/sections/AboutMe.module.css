@@ -1,50 +1,61 @@
-/* Centered Editorial Statement & Neon Button (Faithfully matching Reference Image) */
+/* About Section (Asymmetric Editorial Layout matching user reference design) */
 
 .aboutSection {
   background-color: #000000;
-  padding: clamp(8rem, 14vw, 13rem) clamp(1.5rem, 5vw, 4rem);
+  padding: clamp(7rem, 13vw, 12rem) clamp(1.5rem, 5vw, 4rem);
   position: relative;
   width: 100%;
   box-sizing: border-box;
-  overflow: hidden;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .container {
-  max-width: 1100px;
+  max-width: 1360px;
   margin: 0 auto;
   width: 100%;
 }
 
-.statementWrapper {
+/* 2-Column Grid: Left ~35% open space, Right ~65% content (Matching reference layout) */
+.editorialGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  column-gap: clamp(2rem, 5vw, 5rem);
+  width: 100%;
+  align-items: start;
+}
+
+.leftColumn {
+  width: 100%;
+}
+
+.rightColumn {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 980px;
-  margin: 0 auto;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 860px;
 }
 
 .statementText {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(2rem, 4.2vw, 3.35rem);
-  font-weight: 500;
-  line-height: 1.42;
-  letter-spacing: -0.025em;
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: clamp(1.25rem, 2.3vw, 1.85rem);
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: -0.018em;
   color: #ffffff;
-  margin: 0 0 clamp(2.5rem, 5vw, 4rem) 0;
-  max-width: 920px;
+  margin: 0;
 }
 
 .actionRow {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-top: clamp(2.25rem, 4.5vw, 3.5rem);
 }
 
-/* Neon Lime-Green Pill Button (Matching Reference Image) */
-.whyButton {
+/* Neon Lime-Green Button (Faithfully matching user design) */
+.greenButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -52,9 +63,9 @@
   color: #000000;
   border: 1px solid #a3e635;
   border-radius: 6px;
-  padding: 0.75rem 1.95rem;
+  padding: 0.75rem 1.85rem;
   font-family: var(--font-mono, "Google Sans Code", monospace);
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -63,29 +74,51 @@
   cursor: pointer;
   user-select: none;
   white-space: nowrap;
-  box-shadow: 0 4px 22px rgba(163, 230, 53, 0.35);
+  box-shadow: 0 4px 20px rgba(163, 230, 53, 0.35);
 }
 
-.whyButton:hover {
+.greenButton:hover {
   background-color: #bef264;
   border-color: #bef264;
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(163, 230, 53, 0.55);
 }
 
-@media (max-width: 640px) {
-  .aboutSection {
-    padding: clamp(5.5rem, 10vw, 7.5rem) 1.25rem;
+@media (max-width: 900px) {
+  .editorialGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .leftColumn {
+    display: none;
+  }
+
+  .rightColumn {
+    max-width: 100%;
   }
 
   .statementText {
-    font-size: clamp(1.45rem, 6.8vw, 1.95rem);
-    line-height: 1.38;
-    margin-bottom: 2.25rem;
+    font-size: clamp(1.2rem, 4.5vw, 1.55rem);
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 640px) {
+  .aboutSection {
+    padding: 5rem 1.25rem;
   }
 
-  .whyButton {
-    padding: 0.65rem 1.55rem;
+  .statementText {
+    font-size: clamp(1.1rem, 5.2vw, 1.35rem);
+    line-height: 1.48;
+  }
+
+  .actionRow {
+    margin-top: 2rem;
+  }
+
+  .greenButton {
+    padding: 0.7rem 1.5rem;
     font-size: 0.78rem;
   }
 }
