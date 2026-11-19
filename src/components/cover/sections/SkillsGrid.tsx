@@ -3,46 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { GeometricBadge, GeometricBadgeType } from "@/components/project-details/GeometricBadge";
 import styles from "./SkillsGrid.module.css";
-
-interface CoreServiceCard {
-  id: string;
-  badgeType: GeometricBadgeType;
-  title: string;
-  description: string;
-}
-
-const CORE_SERVICES: CoreServiceCard[] = [
-  {
-    id: "ui-ux",
-    badgeType: "design",
-    title: "UI/UX Design",
-    description:
-      "Modern design systems, user-centric interfaces, interactive wireframes, and fluid design-to-code workflows that turn products into memorable digital brands.",
-  },
-  {
-    id: "app-dev",
-    badgeType: "code",
-    title: "App Development",
-    description:
-      "High-performance web and mobile applications engineered with React 19, Next.js, and Flutter. Offline-first architectures, low-latency APIs, and 60fps tactile interfaces.",
-  },
-  {
-    id: "market-strategy",
-    badgeType: "strategy",
-    title: "Market Strategy",
-    description:
-      "Product positioning, technical roadmapping, scalable infrastructure planning, and data-driven architectures designed to accelerate time-to-market and user growth.",
-  },
-  {
-    id: "qa-testing",
-    badgeType: "qa",
-    title: "QA and Testing",
-    description:
-      "End-to-end automated testing suites, continuous integration pipelines, performance benchmarking, and strict accessibility standards ensuring zero-defect production rollouts.",
-  },
-];
 
 interface SkillItem {
   id: string;
@@ -109,9 +70,9 @@ export default function SkillsGrid() {
   };
 
   return (
-    <section className={styles.skillsSection} id="skills" aria-label="Skills & Capabilities">
+    <section className={styles.skillsSection} id="skills" aria-label="Services & Capabilities">
       <div className={styles.container}>
-        {/* Top Header matching reference */}
+        {/* Clean Editorial Header */}
         <div className={styles.header}>
           <div className={styles.badgeWrapper}>
             <span className={styles.pillBadge}>
@@ -122,45 +83,26 @@ export default function SkillsGrid() {
             <span className={styles.headlineTop}>ELEVATING BRANDS THROUGH</span>
             <span className={styles.headlineBottom}>DESIGN AND ENGINEERING</span>
           </h2>
+          <p className={styles.leadText}>
+            Specialized engineering capabilities tailored for high-scale digital products, distributed systems, and modern digital experiences.
+          </p>
         </div>
 
-        {/* 4 Core Pillars Grid (Faithfully matching Reference Design) */}
-        <div className={styles.coreGrid}>
-          {CORE_SERVICES.map((service) => (
-            <div key={service.id} className={styles.coreCard}>
-              <div className={styles.cardBadgeWrap}>
-                <GeometricBadge type={service.badgeType} size={48} />
-              </div>
-              <h3 className={styles.cardTitle}>{service.title}</h3>
-              <p className={styles.cardDesc}>{service.description}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Detailed Capabilities Header */}
-        <div className={styles.subListHeader}>
-          <span className={styles.subListPill}>• DETAILED SPECIALIZATIONS</span>
-          <h3 className={styles.subListTitle}>Deep Engineering &amp; Architectural Focus</h3>
-        </div>
-
-        {/* Accordion List with Proper Prominent Sizing */}
+        {/* Clean, Beautiful Accordion List (Without Numbers) */}
         <div className={styles.accordionList}>
-          {SKILL_ITEMS.map((item, index) => {
+          {SKILL_ITEMS.map((item) => {
             const isOpen = openId === item.id;
-            const indexStr = String(index + 1).padStart(2, "0");
             return (
               <div key={item.id} className={styles.accordionItem}>
-                {/* Accordion Row Trigger */}
+                {/* Accordion Row Trigger without numbers */}
                 <button
                   type="button"
                   onClick={() => toggleItem(item.id)}
                   className={styles.rowTrigger}
                   aria-expanded={isOpen}
                 >
-                  <div className={styles.titleGroup}>
-                    <span className={styles.itemIndex}>{indexStr}</span>
-                    <span className={styles.itemTitle}>{item.name}</span>
-                  </div>
+                  <span className={styles.itemTitle}>{item.name}</span>
+
                   <span
                     className={`${styles.iconButton} ${isOpen ? styles.iconButtonOpen : ""}`}
                     aria-hidden="true"

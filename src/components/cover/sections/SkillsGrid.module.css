@@ -1,4 +1,5 @@
-/* Accordion Skills & Services Section (Elevated, Prominent, Proper Sizing) */
+/* Accordion Services Section (Clean, Beautiful, Editorial, No Numbers) */
+
 .skillsSection {
   background-color: #000000;
   padding: clamp(6.5rem, 11vw, 10rem) clamp(1.5rem, 5vw, 4rem);
@@ -76,113 +77,30 @@
   color: #8f98a8;
 }
 
-/* =========================================================================
-   4 Core Pillars Grid (Matching Reference Design from User Image)
-   ========================================================================= */
-.coreGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  margin-bottom: clamp(4.5rem, 7vw, 6.5rem);
-  width: 100%;
-}
-
-@media (max-width: 1080px) {
-  .coreGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .coreGrid {
-    grid-template-columns: 1fr;
-    gap: 1.15rem;
-  }
-}
-
-.coreCard {
-  background-color: #131518;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
-  padding: 2.25rem 1.85rem;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.28s ease,
-              background-color 0.28s ease,
-              box-shadow 0.28s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.coreCard:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.18);
-  background-color: #17191e;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
-}
-
-.cardBadgeWrap {
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-}
-
-.cardTitle {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: 1.45rem;
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  color: #ffffff;
-  margin: 0 0 0.95rem 0;
-  line-height: 1.28;
-}
-
-.cardDesc {
+.leadText {
+  color: #9da4ae;
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.96rem;
-  line-height: 1.68;
-  color: #9aa2ad;
-  margin: 0;
+  font-size: 1.12rem;
+  line-height: 1.7;
+  max-width: 660px;
+  margin: 0.25rem auto 0;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .leadText {
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
 }
 
 /* =========================================================================
-   Detailed Capabilities Sub-header
-   ========================================================================= */
-.subListHeader {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-  padding-bottom: 1.25rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.subListPill {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #7e8796;
-}
-
-.subListTitle {
-  font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
-  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: #ffffff;
-  margin: 0;
-}
-
-/* =========================================================================
-   Accordion List - Prominent, Spacious, Proper Sizing
+   Accordion List - Clean, Beautiful, No Numbers
    ========================================================================= */
 .accordionList {
   display: flex;
   flex-direction: column;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   width: 100%;
 }
 
@@ -195,13 +113,13 @@
   background-color: rgba(255, 255, 255, 0.015);
 }
 
-/* Row Trigger Button - Generously Sized */
+/* Row Trigger Button - Clean & Elegant */
 .rowTrigger {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: clamp(1.85rem, 3.2vw, 2.35rem) 1rem;
+  padding: clamp(1.85rem, 3.2vw, 2.35rem) 0.5rem;
   background: transparent;
   border: none;
   color: #ffffff;
@@ -213,35 +131,14 @@
 
 @media (max-width: 640px) {
   .rowTrigger {
-    padding: 1.4rem 0.5rem;
+    padding: 1.4rem 0.25rem;
     gap: 1rem;
   }
 }
 
-.titleGroup {
-  display: flex;
-  align-items: center;
-  gap: clamp(1.25rem, 2.5vw, 2.25rem);
-  min-width: 0;
-}
-
-.itemIndex {
-  font-family: var(--font-mono, monospace);
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  font-weight: 600;
-  color: #5c6473;
-  letter-spacing: 0.08em;
-  flex-shrink: 0;
-  transition: color 0.2s ease;
-}
-
-.rowTrigger:hover .itemIndex {
-  color: #cbd5e1;
-}
-
 .itemTitle {
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(1.35rem, 2.3vw, 1.95rem);
+  font-size: clamp(1.4rem, 2.4vw, 2.05rem);
   font-weight: 600;
   letter-spacing: -0.015em;
   color: #ffffff;
@@ -251,7 +148,7 @@
 
 .rowTrigger:hover .itemTitle {
   color: #ffffff;
-  opacity: 0.95;
+  opacity: 0.92;
 }
 
 /* Refined Circular Cross Toggle Button - Proper 44px Scale */
@@ -303,7 +200,7 @@
   display: grid;
   grid-template-columns: 360px 1fr;
   gap: 3.5rem;
-  padding: 0.75rem 1rem 3rem;
+  padding: 0.75rem 0.5rem 3rem;
   align-items: center;
 }
 
@@ -311,7 +208,7 @@
   .expandedContent {
     grid-template-columns: 1fr;
     gap: 1.75rem;
-    padding: 0.5rem 0.5rem 2.25rem;
+    padding: 0.5rem 0.25rem 2.25rem;
   }
 }
 
@@ -327,13 +224,15 @@
   overflow: hidden;
   background-color: #121418;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
 }
 
 @media (max-width: 640px) {
   .imageFrame {
     aspect-ratio: 16 / 9;
     max-height: 220px;
+    border-radius: 12px;
   }
 }
 
