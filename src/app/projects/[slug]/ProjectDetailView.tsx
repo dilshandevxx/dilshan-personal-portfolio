@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Project, projectsList, getProjectThumbnail, FALLBACK_THUMBNAILS } from "@/data/projects";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
+import { ProjectCard } from "@/components/ProjectCard";
 import MainFooter from "@/components/MainFooter";
 import { enrichProject, EnrichedProject } from "@/lib/projectEnricher";
 import { GeometricBadge, GeometricBadgeType } from "@/components/project-details/GeometricBadge";
@@ -325,51 +326,9 @@ export function ProjectDetailView({
             </div>
 
             <div className={styles.relatedGrid}>
-              {relatedProjects.map((p, idx) => {
-                const thumb = getProjectThumbnail(p.slug, p.image, idx);
-                const isExt =
-                  thumb.startsWith("http://") ||
-                  thumb.startsWith("https://") ||
-                  thumb.startsWith("data:");
-                const excerpt = p.description || p.tagline || "";
-                const displayTags = (p.tags || []).slice(0, 3);
-
-                return (
-                  <article key={p.slug} className={styles.relatedCard}>
-                    <Link href={`/projects/${p.slug}`}>
-                      <div className={styles.relatedImageFrame}>
-                        <Image
-                          src={thumb}
-                          alt={p.title}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 360px"
-                          unoptimized={isExt}
-                          className={styles.relatedImage}
-                        />
-                      </div>
-                    </Link>
-
-                    <div className={styles.relatedCardBody}>
-                      <h3 className={styles.relatedCardTitle}>
-                        <Link href={`/projects/${p.slug}`} className={styles.relatedCardLink}>
-                          <span>{p.title}</span>
-                          <ArrowUpRight size={14} />
-                        </Link>
-                      </h3>
-
-                      <p className={styles.relatedCardDesc}>{excerpt}</p>
-
-                      <div className={styles.relatedTags}>
-                        {displayTags.map((tag) => (
-                          <span key={tag} className={styles.relatedTag}>
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
+              {relatedProjects.map((p, idx) => (
+                <ProjectCard key={p.slug} project={p} index={idx} />
+              ))}
             </div>
           </section>
         )}
