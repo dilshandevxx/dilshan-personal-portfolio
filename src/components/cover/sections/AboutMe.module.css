@@ -2,7 +2,7 @@
 
 .aboutSection {
   background-color: #000000;
-  padding: clamp(7rem, 12vw, 12rem) clamp(1.5rem, 5vw, 4rem);
+  padding: clamp(8rem, 14vw, 13rem) clamp(1.5rem, 5vw, 4rem);
   position: relative;
   width: 100%;
   box-sizing: border-box;
@@ -22,19 +22,19 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  max-width: 940px;
+  max-width: 980px;
   margin: 0 auto;
 }
 
 .statementText {
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(1.85rem, 3.8vw, 3.1rem);
+  font-size: clamp(2rem, 4.2vw, 3.35rem);
   font-weight: 500;
-  line-height: 1.45;
+  line-height: 1.42;
   letter-spacing: -0.025em;
   color: #ffffff;
-  margin: 0 0 clamp(2.5rem, 4.5vw, 3.5rem) 0;
-  max-width: 880px;
+  margin: 0 0 clamp(2.5rem, 5vw, 4rem) 0;
+  max-width: 920px;
 }
 
 .actionRow {
@@ -51,11 +51,11 @@
   background-color: #a3e635; /* Vibrant neon lime green */
   color: #000000;
   border: 1px solid #a3e635;
-  border-radius: 4px;
-  padding: 0.65rem 1.6rem;
+  border-radius: 6px;
+  padding: 0.75rem 1.95rem;
   font-family: var(--font-mono, "Google Sans Code", monospace);
-  font-size: 0.78rem;
-  font-weight: 700;
+  font-size: 0.84rem;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
@@ -63,29 +63,29 @@
   cursor: pointer;
   user-select: none;
   white-space: nowrap;
-  box-shadow: 0 4px 18px rgba(163, 230, 53, 0.3);
+  box-shadow: 0 4px 22px rgba(163, 230, 53, 0.35);
 }
 
 .whyButton:hover {
   background-color: #bef264;
   border-color: #bef264;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(163, 230, 53, 0.5);
+  box-shadow: 0 8px 30px rgba(163, 230, 53, 0.55);
 }
 
 @media (max-width: 640px) {
   .aboutSection {
-    padding: clamp(5rem, 9vw, 6.5rem) 1.25rem;
+    padding: clamp(5.5rem, 10vw, 7.5rem) 1.25rem;
   }
 
   .statementText {
-    font-size: clamp(1.4rem, 6.5vw, 1.85rem);
-    line-height: 1.4;
-    margin-bottom: 2rem;
+    font-size: clamp(1.45rem, 6.8vw, 1.95rem);
+    line-height: 1.38;
+    margin-bottom: 2.25rem;
   }
 
   .whyButton {
-    padding: 0.6rem 1.4rem;
-    font-size: 0.74rem;
+    padding: 0.65rem 1.55rem;
+    font-size: 0.78rem;
   }
 }

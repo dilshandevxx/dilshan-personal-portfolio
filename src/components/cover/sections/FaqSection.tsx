@@ -92,8 +92,8 @@ export default function FaqSection() {
                     aria-hidden="true"
                   >
                     <svg
-                      width="13"
-                      height="13"
+                      width="16"
+                      height="16"
                       viewBox="0 0 14 14"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +102,7 @@ export default function FaqSection() {
                       <path
                         d="M7 1.5V12.5M1.5 7H12.5"
                         stroke="currentColor"
-                        strokeWidth="1.75"
+                        strokeWidth="1.85"
                         strokeLinecap="round"
                       />
                     </svg>

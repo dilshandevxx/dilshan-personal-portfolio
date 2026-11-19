@@ -3,7 +3,46 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { GeometricBadge, GeometricBadgeType } from "@/components/project-details/GeometricBadge";
 import styles from "./SkillsGrid.module.css";
+
+interface CoreServiceCard {
+  id: string;
+  badgeType: GeometricBadgeType;
+  title: string;
+  description: string;
+}
+
+const CORE_SERVICES: CoreServiceCard[] = [
+  {
+    id: "ui-ux",
+    badgeType: "design",
+    title: "UI/UX Design",
+    description:
+      "Modern design systems, user-centric interfaces, interactive wireframes, and fluid design-to-code workflows that turn products into memorable digital brands.",
+  },
+  {
+    id: "app-dev",
+    badgeType: "code",
+    title: "App Development",
+    description:
+      "High-performance web and mobile applications engineered with React 19, Next.js, and Flutter. Offline-first architectures, low-latency APIs, and 60fps tactile interfaces.",
+  },
+  {
+    id: "market-strategy",
+    badgeType: "strategy",
+    title: "Market Strategy",
+    description:
+      "Product positioning, technical roadmapping, scalable infrastructure planning, and data-driven architectures designed to accelerate time-to-market and user growth.",
+  },
+  {
+    id: "qa-testing",
+    badgeType: "qa",
+    title: "QA and Testing",
+    description:
+      "End-to-end automated testing suites, continuous integration pipelines, performance benchmarking, and strict accessibility standards ensuring zero-defect production rollouts.",
+  },
+];
 
 interface SkillItem {
   id: string;
@@ -85,7 +124,26 @@ export default function SkillsGrid() {
           </h2>
         </div>
 
-        {/* Accordion List matching the user reference */}
+        {/* 4 Core Pillars Grid (Faithfully matching Reference Design) */}
+        <div className={styles.coreGrid}>
+          {CORE_SERVICES.map((service) => (
+            <div key={service.id} className={styles.coreCard}>
+              <div className={styles.cardBadgeWrap}>
+                <GeometricBadge type={service.badgeType} size={48} />
+              </div>
+              <h3 className={styles.cardTitle}>{service.title}</h3>
+              <p className={styles.cardDesc}>{service.description}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Detailed Capabilities Header */}
+        <div className={styles.subListHeader}>
+          <span className={styles.subListPill}>• DETAILED SPECIALIZATIONS</span>
+          <h3 className={styles.subListTitle}>Deep Engineering &amp; Architectural Focus</h3>
+        </div>
+
+        {/* Accordion List with Proper Prominent Sizing */}
         <div className={styles.accordionList}>
           {SKILL_ITEMS.map((item, index) => {
             const isOpen = openId === item.id;
@@ -108,8 +166,8 @@ export default function SkillsGrid() {
                     aria-hidden="true"
                   >
                     <svg
-                      width="13"
-                      height="13"
+                      width="16"
+                      height="16"
                       viewBox="0 0 14 14"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +176,7 @@ export default function SkillsGrid() {
                       <path
                         d="M7 1.5V12.5M1.5 7H12.5"
                         stroke="currentColor"
-                        strokeWidth="1.75"
+                        strokeWidth="1.85"
                         strokeLinecap="round"
                       />
                     </svg>
@@ -144,7 +202,7 @@ export default function SkillsGrid() {
                               src={item.image}
                               alt={item.name}
                               fill
-                              sizes="(max-width: 768px) 100vw, 320px"
+                              sizes="(max-width: 768px) 100vw, 360px"
                               className={styles.detailImage}
                             />
                           </div>

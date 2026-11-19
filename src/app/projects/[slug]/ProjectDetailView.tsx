@@ -1,23 +1,15 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
-import { Project, projectsList } from "@/data/projects";
+import Image from "next/image";
+import { Project, projectsList, getProjectThumbnail, FALLBACK_THUMBNAILS } from "@/data/projects";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
 import MainFooter from "@/components/MainFooter";
 import { enrichProject, EnrichedProject } from "@/lib/projectEnricher";
-
-// Modular Project Details Components
-import { ProjectHero } from "@/components/project-details/ProjectHero";
-import { ProjectNavRibbon } from "@/components/project-details/ProjectNavRibbon";
-import { ProjectProblemSolution } from "@/components/project-details/ProjectProblemSolution";
-import { ProjectPillars } from "@/components/project-details/ProjectPillars";
-import { ProjectArchitecture } from "@/components/project-details/ProjectArchitecture";
-import { ProjectMediaShowcase } from "@/components/project-details/ProjectMediaShowcase";
-import { ProjectTechDeepDive } from "@/components/project-details/ProjectTechDeepDive";
-import { ProjectRelated } from "@/components/project-details/ProjectRelated";
-
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { GeometricBadge, GeometricBadgeType } from "@/components/project-details/GeometricBadge";
+import { GithubIcon } from "@/components/SocialIcons";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import styles from "./projectDetail.module.css";
 
 interface ProjectDetailViewProps {
@@ -36,7 +28,7 @@ export function ProjectDetailView({
   const [project, setProject] = useState<Project>(initialProject);
   const [allProjects, setAllProjects] = useState<Project[]>(projectsList);
 
-  // Sync any custom additions/edits saved via Admin in production
+  // Sync custom saved projects from localStorage if any
   useEffect(() => {
     try {
       const stored = localStorage.getItem("dilshan_custom_projects");
@@ -53,59 +45,245 @@ export function ProjectDetailView({
 
   const enriched: EnrichedProject = enrichProject(project, index);
 
-  const handleScrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - 100;
-      window.scrollTo({ top, behavior: "smooth" });
-    }
-  };
+  const initialThumb = getProjectThumbnail(project.slug, project.image, index);
+  const [heroSrc, setHeroSrc] = useState<string>(initialThumb);
+
+  useEffect(() => {
+    setHeroSrc(getProjectThumbnail(project.slug, project.image, index));
+  }, [project.slug, project.image, index]);
+
+  const isExternalUrl =
+    heroSrc.startsWith("http://") ||
+    heroSrc.startsWith("https://") ||
+    heroSrc.startsWith("data:");
+
+  const isNumericYear = project.date && /^\d{4}/.test(project.date);
+  const displayYear = isNumericYear ? project.date : "2026";
+
+  // Related projects recommendation (3 clean matches)
+  const relatedProjects = useMemo(() => {
+    const candidates = allProjects.filter((p) => p.slug !== project.slug);
+    const tagsSet = new Set((project.tags || []).map((t) => t.toLowerCase()));
+
+    const scored = candidates.map((p, i) => {
+      let score = 0;
+      if (p.category === project.category) score += 3;
+      if (p.tags) {
+        for (const t of p.tags) {
+          if (tagsSet.has(t.toLowerCase())) score += 1;
+        }
+      }
+      return { project: p, score, originalIdx: i };
+    });
+
+    scored.sort((a, b) => b.score - a.score);
+    return scored.slice(0, 3).map((item) => item.project);
+  }, [project.slug, project.category, project.tags, allProjects]);
 
   return (
     <div className={styles.pageRoot}>
       {/* 1. Global Navigation Bar */}
       <SkyLabsNavbar activeTab="projects" />
 
-      {/* 2. Sticky Quick Navigation Ribbon */}
-      <ProjectNavRibbon />
-
       <main className={styles.mainContainer}>
-        {/* 3. Hero Section (Breadcrumbs, Title, Tagline, CTAs, Metrics Strip) */}
-        <ProjectHero
-          project={enriched}
-          onWatchDemoClick={() => handleScrollTo("video-demo")}
-          onArchitectureClick={() => handleScrollTo("architecture")}
-        />
+        {/* Top Breadcrumb Navigation */}
+        <div className={styles.topNav}>
+          <Link href="/projects" className={styles.backLink}>
+            <ArrowLeft size={15} />
+            <span>All Projects</span>
+          </Link>
+        </div>
 
-        {/* 4. Problem & Solution Narrative (Real-world stakes & approach) */}
-        <ProjectProblemSolution project={enriched} />
+        {/* 2. Editorial Header */}
+        <header className={styles.headerSection}>
+          <div className={styles.metaRow}>
+            <span className={styles.metaCategory}>{project.category}</span>
+            <span className={styles.metaDivider}>/</span>
+            <span className={styles.metaYear}>{displayYear}</span>
+            <span className={styles.metaDivider}>/</span>
+            <span className={styles.metaStatus}>
+              {project.status === "Existing" ? "Production Ready" : "Architecture"}
+            </span>
+          </div>
 
-        {/* 5. Core Disciplines / Delivery Pillars (Faithfully Matching the User Reference Image) */}
-        <ProjectPillars pillars={enriched.projectPillars} />
+          <h1 className={styles.title}>{project.title}</h1>
 
-        {/* 6. System Architecture & Flowchart */}
-        <ProjectArchitecture
-          architectureSummary={enriched.architecture || enriched.description}
-          steps={enriched.architectureSteps}
-        />
+          {project.tagline && (
+            <p className={styles.tagline}>{project.tagline}</p>
+          )}
 
-        {/* 7. Visual Showcase Gallery & Interactive Video Demonstration */}
-        <ProjectMediaShowcase
-          gallery={enriched.gallery}
-          videoDemo={enriched.videoDemo}
-          projectTitle={enriched.title}
-          index={index}
-        />
+          {/* Clean Action Buttons */}
+          <div className={styles.actionRow}>
+            {project.demoUrl && (
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.primaryButton}
+              >
+                <span>Live Deployment</span>
+                <ArrowUpRight size={14} />
+              </a>
+            )}
 
-        {/* 8. Technical Documentation, Schemas & Performance Benchmarks */}
-        <ProjectTechDeepDive
-          technicalDocs={enriched.technicalDocs}
-          stackLayers={enriched.stackLayers}
-          benchmarks={enriched.benchmarks}
-          fallbackTags={enriched.tags}
-        />
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.secondaryButton}
+              >
+                <GithubIcon size={15} />
+                <span>Source Code</span>
+              </a>
+            )}
 
-        {/* 9. Previous & Next Project Navigation */}
+            {project.writeupUrl && (
+              <Link href={project.writeupUrl} className={styles.secondaryButton}>
+                <span>Case Study</span>
+                <ArrowUpRight size={14} />
+              </Link>
+            )}
+          </div>
+        </header>
+
+        {/* 3. Showcase Visual Frame */}
+        <div className={styles.showcaseFrame}>
+          <Image
+            src={heroSrc}
+            alt={project.title}
+            fill
+            priority
+            unoptimized={isExternalUrl}
+            onError={() => {
+              const fallback =
+                FALLBACK_THUMBNAILS[index % FALLBACK_THUMBNAILS.length] ||
+                "/images/project_collective.jpg";
+              setHeroSrc(fallback);
+            }}
+            className={styles.showcaseImage}
+            sizes="(max-width: 1100px) 100vw, 1100px"
+          />
+        </div>
+
+        {/* 4. The 4 Core Delivery Pillars (Faithfully Matching the User Reference) */}
+        {enriched.projectPillars && enriched.projectPillars.length > 0 && (
+          <section className={styles.pillarsSection}>
+            <div className={styles.sectionHeaderSimple}>
+              <span className={styles.sectionPretitle}>EXECUTION &amp; DISCIPLINES</span>
+              <h2 className={styles.pillarsTitle}>How It Was Engineered</h2>
+            </div>
+
+            <div className={styles.pillarsGrid}>
+              {enriched.projectPillars.map((pillar, idx) => {
+                const defaultBadges: GeometricBadgeType[] = ["design", "code", "strategy", "qa"];
+                const badgeType = pillar.iconType || defaultBadges[idx % defaultBadges.length];
+
+                return (
+                  <div key={idx} className={styles.pillarCard}>
+                    <div className={styles.pillarBadgeWrap}>
+                      <GeometricBadge type={badgeType} size={42} />
+                    </div>
+
+                    <h3 className={styles.pillarTitle}>{pillar.title}</h3>
+
+                    <p className={styles.pillarDesc}>{pillar.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        {/* 5. Organized Editorial Narrative Sections */}
+        <div className={styles.narrativeContainer}>
+          {/* Overview & Problem */}
+          <section className={styles.narrativeSection}>
+            <div className={styles.labelCol}>
+              <h2 className={styles.sectionLabel}>The Overview</h2>
+            </div>
+            <div className={styles.contentCol}>
+              <p className={styles.leadText}>{enriched.description}</p>
+              {enriched.longDescription && enriched.longDescription !== enriched.description && (
+                <p className={styles.bodyText}>{enriched.longDescription}</p>
+              )}
+              {enriched.problemStatement && (
+                <p className={styles.bodyText}>{enriched.problemStatement}</p>
+              )}
+            </div>
+          </section>
+
+          {/* Architecture */}
+          {enriched.architecture && (
+            <section className={styles.narrativeSection}>
+              <div className={styles.labelCol}>
+                <h2 className={styles.sectionLabel}>Architecture</h2>
+              </div>
+              <div className={styles.contentCol}>
+                <p className={styles.bodyText}>{enriched.architecture}</p>
+                {enriched.implementationApproach && (
+                  <p className={styles.bodyText}>{enriched.implementationApproach}</p>
+                )}
+              </div>
+            </section>
+          )}
+
+          {/* Key Capabilities */}
+          {project.highlights && project.highlights.length > 0 && (
+            <section className={styles.narrativeSection}>
+              <div className={styles.labelCol}>
+                <h2 className={styles.sectionLabel}>Capabilities</h2>
+              </div>
+              <div className={styles.contentCol}>
+                <ul className={styles.highlightsList}>
+                  {project.highlights.map((item, i) => (
+                    <li key={i} className={styles.highlightItem}>
+                      <span className={styles.highlightNum}>
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className={styles.highlightText}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          )}
+
+          {/* Technology Stack */}
+          <section className={styles.narrativeSection}>
+            <div className={styles.labelCol}>
+              <h2 className={styles.sectionLabel}>Technologies</h2>
+            </div>
+            <div className={styles.contentCol}>
+              {project.stackLayers && project.stackLayers.length > 0 ? (
+                <div className={styles.techLayersList}>
+                  {project.stackLayers.map((layer, i) => (
+                    <div key={i} className={styles.techLayerBlock}>
+                      <span className={styles.techLayerName}>{layer.layer}</span>
+                      <div className={styles.techPills}>
+                        {layer.technologies.map((tech) => (
+                          <span key={tech} className={styles.techPill}>
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className={styles.techPills}>
+                  {project.tags.map((tag) => (
+                    <span key={tag} className={styles.techPill}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </section>
+        </div>
+
+        {/* 6. Previous & Next Project Navigation */}
         <nav className={styles.paginationNav} aria-label="Adjacent Projects">
           {previous ? (
             <Link href={`/projects/${previous.slug}`} className={styles.paginationLink}>
@@ -135,16 +313,69 @@ export function ProjectDetailView({
           )}
         </nav>
 
-        {/* 10. Explore More Related Projects Section */}
-        <ProjectRelated
-          currentSlug={enriched.slug}
-          category={enriched.category}
-          tags={enriched.tags || []}
-          allProjects={allProjects}
-        />
+        {/* 7. Explore More Projects */}
+        {relatedProjects.length > 0 && (
+          <section className={styles.relatedSection}>
+            <div className={styles.relatedHeader}>
+              <h2 className={styles.relatedTitle}>Explore More Projects</h2>
+              <Link href="/projects" className={styles.viewCatalogLink}>
+                <span>View All Projects</span>
+                <ArrowRight size={14} />
+              </Link>
+            </div>
+
+            <div className={styles.relatedGrid}>
+              {relatedProjects.map((p, idx) => {
+                const thumb = getProjectThumbnail(p.slug, p.image, idx);
+                const isExt =
+                  thumb.startsWith("http://") ||
+                  thumb.startsWith("https://") ||
+                  thumb.startsWith("data:");
+                const excerpt = p.description || p.tagline || "";
+                const displayTags = (p.tags || []).slice(0, 3);
+
+                return (
+                  <article key={p.slug} className={styles.relatedCard}>
+                    <Link href={`/projects/${p.slug}`}>
+                      <div className={styles.relatedImageFrame}>
+                        <Image
+                          src={thumb}
+                          alt={p.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 360px"
+                          unoptimized={isExt}
+                          className={styles.relatedImage}
+                        />
+                      </div>
+                    </Link>
+
+                    <div className={styles.relatedCardBody}>
+                      <h3 className={styles.relatedCardTitle}>
+                        <Link href={`/projects/${p.slug}`} className={styles.relatedCardLink}>
+                          <span>{p.title}</span>
+                          <ArrowUpRight size={14} />
+                        </Link>
+                      </h3>
+
+                      <p className={styles.relatedCardDesc}>{excerpt}</p>
+
+                      <div className={styles.relatedTags}>
+                        {displayTags.map((tag) => (
+                          <span key={tag} className={styles.relatedTag}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+        )}
       </main>
 
-      {/* 11. Global Footer */}
+      {/* Global Footer */}
       <MainFooter />
     </div>
   );
