@@ -53,12 +53,49 @@
   outline: none;
 }
 
+.brandLink {
+  text-decoration: none;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brandEmblem {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
+}
+
+.brandLink:hover .brandEmblem {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.emblemSvg {
+  width: 18px;
+  height: 18px;
+  color: #ffffff;
+}
+
 .brandWordmark {
   color: #ffffff;
-  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
-  font-weight: 700;
-  letter-spacing: -0.035em;
+  font-family: var(--font-artistic, "Newsreader", "Playfair Display", Georgia, serif);
+  font-size: clamp(1.35rem, 2.2vw, 1.7rem);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.015em;
   line-height: 1;
   display: inline-flex;
   align-items: baseline;
@@ -66,170 +103,133 @@
 }
 
 .brandDot {
-  color: var(--color-primary, #8bb397);
+  font-style: normal;
+  color: var(--color-primary, #4ade80);
   display: inline-block;
   margin-left: 1px;
 }
 
 .brandLink:hover .brandWordmark {
   opacity: 0.92;
-  transform: translateY(-1px);
+  transform: translateY(-0.5px);
 }
 
 /* Right Navigation Area */
 .navRight {
   display: flex;
   align-items: center;
-  gap: 1rem;
 }
 
-/* Floating Architectural Navigation Dock */
+/* Pure Text Desktop Navigation (No rounded dock wrapping) */
 .desktopNav {
   display: flex;
   align-items: center;
-  gap: 3px;
-  background: rgba(18, 20, 26, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  padding: 4px 5px;
-  border-radius: 9999px;
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  gap: clamp(1.4rem, 2.2vw, 2.4rem);
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
 }
 
-.desktopNav:hover {
-  border-color: rgba(255, 255, 255, 0.14);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
-}
-
-/* Refined Nav Links */
+/* Beautiful Editorial Text Links */
 .navLink {
   color: #9da4ae;
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: 0.82rem;
-  font-weight: 500;
+  font-size: 0.86rem;
+  font-weight: 450;
   letter-spacing: -0.01em;
   text-decoration: none;
-  padding: 0.38rem 0.92rem;
-  border-radius: 9999px;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0.35rem 0;
   white-space: nowrap;
   position: relative;
   cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Subtle, Elegant Underline Micro-interaction */
+.navLink::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0%;
+  height: 1.5px;
+  background-color: #ffffff;
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 999px;
 }
 
 .navLink:hover {
   color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.08);
-  transform: translateY(-0.5px);
+  background: transparent;
 }
 
-/* Active State: Softly Illuminated Pill */
+.navLink:hover::after {
+  width: 100%;
+}
+
+/* Active State: Clean White Text with Underline */
 .navLinkActive {
   color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.12);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
-  font-weight: 550;
+  font-weight: 500;
+  background: transparent;
 }
 
-/* Subtle Vertical Divider */
-.navDivider {
-  width: 1px;
-  height: 14px;
-  background: rgba(255, 255, 255, 0.12);
-  margin: 0 3px;
-  flex-shrink: 0;
+.navLinkActive::after {
+  width: 100%;
+  background-color: #ffffff;
 }
 
-/* Jewel Contact CTA Button with Pulse Dot */
-.navCta {
+/* Contact CTA Link */
+.navCtaLink {
+  color: #ffffff;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
+  gap: 5px;
+}
+
+.navCtaLink::after {
+  background-color: var(--color-primary, #4ade80);
+}
+
+.ctaArrow {
   font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: #000000;
-  background-color: #ffffff;
-  text-decoration: none;
-  padding: 0.38rem 1.05rem;
-  border-radius: 9999px;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.15);
+  color: var(--color-primary, #4ade80);
+  transition: transform 0.2s ease;
 }
 
-.navCta:hover {
-  background-color: #f4f4f5;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.3);
+.navCtaLink:hover .ctaArrow {
+  transform: translate(2px, -2px);
 }
 
-/* Live Status Indicator Pulse Dot inside CTA */
-.statusDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #22c55e;
-  position: relative;
-  flex-shrink: 0;
-  box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
-}
-
-.statusDot::after {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: 50%;
-  border: 1px solid rgba(34, 197, 94, 0.8);
-  animation: pulsePing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-@keyframes pulsePing {
-  0% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
-  75%, 100% {
-    transform: scale(2.4);
-    opacity: 0;
-  }
-}
-
-@media (max-width: 860px) {
-  .desktopNav {
-    display: none;
-  }
-}
-
-@media (min-width: 861px) {
-  .hamburgerBtn {
-    display: none;
-  }
-}
-
-/* Minimalist Two-Line Hamburger Button (=) */
+/* Hamburger Button: STRICTLY HIDDEN ON DESKTOP */
 .hamburgerBtn {
-  background: transparent;
-  border: none;
-  padding: 0.5rem;
-  margin: -0.5rem;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-  width: 44px;
-  height: 44px;
-  position: relative;
-  z-index: 110;
-  outline: none;
+  display: none !important;
+}
+
+@media (max-width: 899px) {
+  .desktopNav {
+    display: none !important;
+  }
+
+  .hamburgerBtn {
+    background: transparent;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    width: 44px;
+    height: 44px;
+    position: relative;
+    z-index: 110;
+    outline: none;
+  }
 }
 
 .barTop,

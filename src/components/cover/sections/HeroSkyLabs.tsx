@@ -116,14 +116,42 @@ export default function HeroSkyLabs() {
         } ${menuOpen ? styles.navOpen : ""}`}
       >
         <div className={styles.navContainer}>
-          {/* Brand Wordmark: dilshan. */}
+          {/* Brand Wordmark & Artistic Monogram Emblem */}
           <Link href="/" className={styles.brandLink} title="dilshan.">
+            <span className={styles.brandEmblem} aria-hidden="true">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className={styles.emblemSvg}
+              >
+                <rect
+                  x="2.5"
+                  y="2.5"
+                  width="19"
+                  height="19"
+                  rx="5.5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                />
+                <path
+                  d="M7 6.5H12C15 6.5 17 8.5 17 12C17 15.5 15 17.5 12 17.5H7V6.5Z"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <circle cx="12" cy="12" r="1.5" fill="var(--color-primary, #4ade80)" />
+              </svg>
+            </span>
             <span className={styles.brandWordmark}>
               dilshan<span className={styles.brandDot}>.</span>
             </span>
           </Link>
 
-          {/* Right Navigation: Desktop Nav Links & Mobile Hamburger */}
+          {/* Right Navigation: Pure Text Desktop Nav & Mobile Hamburger */}
           <div className={styles.navRight}>
             <nav className={styles.desktopNav} aria-label="Main Navigation">
               <a
@@ -169,19 +197,16 @@ export default function HeroSkyLabs() {
               >
                 FAQ
               </a>
-
-              {/* Architectural Vertical Hairline Divider */}
-              <span className={styles.navDivider} aria-hidden="true" />
-
-              {/* Jewel CTA Button with Live Pulse Status Dot */}
               <a
                 href="#contact"
                 onClick={(e) => handleSlowScroll(e, "contact")}
-                className={styles.navCta}
-                title="Available for projects & collaboration"
+                className={`${styles.navLink} ${styles.navCtaLink} ${
+                  activeSection === "contact" ? styles.navLinkActive : ""
+                }`}
+                title="Get in touch"
               >
-                <span className={styles.statusDot} aria-hidden="true" />
                 <span>Contact</span>
+                <span className={styles.ctaArrow} aria-hidden="true">↗</span>
               </a>
             </nav>
 
