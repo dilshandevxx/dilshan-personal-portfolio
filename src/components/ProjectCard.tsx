@@ -42,11 +42,10 @@ export function ProjectCard({
     imgSrc.startsWith("https://") ||
     imgSrc.startsWith("data:");
 
-  // Clean narrative excerpt matching the reference card aesthetic
-  const narrative =
-    project.description?.trim() ||
+  // Subtitle matching reference card: "Greenland, Ilulissat" aesthetic
+  const subtitle =
     project.tagline?.trim() ||
-    "";
+    `${project.category || "System"} • ${project.date || "2026"}`;
 
   // Top technologies cleanly capped so the stack stays compact & beautiful
   const rawTags = project.tags || [];
@@ -67,7 +66,7 @@ export function ProjectCard({
       }}
       aria-label={`View details for ${project.title}`}
     >
-      {/* 1. 16:10 Rounded Visual Canvas (Flush Top) */}
+      {/* 1. Square-Corner Visual Canvas (Strictly Square, Matching Reference) */}
       <div className={styles.imageFrame}>
         <Image
           src={imgSrc}
@@ -84,17 +83,9 @@ export function ProjectCard({
           }}
           className={styles.cardImage}
         />
-
-        {/* Cinematic bottom gradient overlay to enhance badge contrast */}
-        <div className={styles.imageOverlay} />
-
-        {/* Bottom-Left Translucent Category Badge */}
-        {project.category && (
-          <span className={styles.categoryBadge}>{project.category}</span>
-        )}
       </div>
 
-      {/* 2. Enclosed Card Body: Clean Title, Narrative Excerpt & Minimal Stack */}
+      {/* 2. Enclosed Card Body: Clean Title, Subtitle, & Tech Stack Wrapped on White Line */}
       <div className={styles.cardBody}>
         <h3 className={styles.cardTitle}>
           <Link href={`/projects/${project.slug}`} className={styles.titleLink}>
@@ -102,19 +93,21 @@ export function ProjectCard({
           </Link>
         </h3>
 
-        {narrative && <p className={styles.cardDescription}>{narrative}</p>}
+        <p className={styles.cardSubtitle}>{subtitle}</p>
 
-        {/* 3. Clean, Beautiful Non-Massive Tech Stack */}
+        {/* 3. Technologies Wrapped Along a Crisp White Line */}
         {showTags && displayTags.length > 0 && (
-          <div className={styles.stackWrapper} aria-label="Technologies used">
-            {displayTags.map((tech) => (
-              <span key={tech} className={styles.stackBadge}>
-                {tech}
-              </span>
-            ))}
-            {remainingCount > 0 && (
-              <span className={styles.stackMore}>+{remainingCount}</span>
-            )}
+          <div className={styles.techLineWrapper} aria-label="Technologies used">
+            <div className={styles.techStack}>
+              {displayTags.map((tech) => (
+                <span key={tech} className={styles.techBadge}>
+                  {tech}
+                </span>
+              ))}
+              {remainingCount > 0 && (
+                <span className={styles.techMore}>+{remainingCount}</span>
+              )}
+            </div>
           </div>
         )}
       </div>

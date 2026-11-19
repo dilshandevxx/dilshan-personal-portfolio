@@ -1,13 +1,14 @@
-/* Project Card — Unified Enclosed Exhibition Card with Wrapped Typography & Clean Minimal Stack */
+/* Project Card — Clean Editorial Style matching "Frozen Greenland" reference */
+/* Strictly SQUARE corners, compact proportional height, crisp white lines */
 
 .projectCard {
   display: flex;
   flex-direction: column;
   position: relative;
   box-sizing: border-box;
-  background-color: #0d0f14;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
+  background-color: #0b0c10;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0 !important; /* Strictly SQUARE corners */
   overflow: hidden;
   padding: 0;
   cursor: pointer;
@@ -15,118 +16,65 @@
   text-decoration: none;
   width: 100%;
   min-width: 0;
-  height: 100%;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease, background-color 0.35s ease;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease,
+              background-color 0.35s ease;
 }
 
 .projectCard:hover {
-  transform: translateY(-5px);
-  background-color: #12151c;
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 22px 48px -12px rgba(0, 0, 0, 0.95);
+  transform: translateY(-4px);
+  background-color: #101217;
+  border-color: rgba(255, 255, 255, 0.32);
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.85);
 }
 
 .projectCard:focus-visible {
-  outline: 2px solid var(--color-primary, #8bb397);
+  outline: 2px solid rgba(255, 255, 255, 0.6);
   outline-offset: 4px;
-  border-radius: 16px;
 }
 
-/* ------------------------------------------------------------- */
-/* 1. 16:10 FLUSH TOP VISUAL CANVAS                              */
-/* ------------------------------------------------------------- */
+/* 1. Strictly SQUARE Visual Canvas */
 .imageFrame {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
+  border-radius: 0 !important;
   overflow: hidden;
-  background-color: #07090d;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background-color: #08090d;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .cardImage {
   object-fit: cover;
+  border-radius: 0 !important;
   transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
 
 .projectCard:hover .cardImage {
-  transform: scale(1.045);
+  transform: scale(1.04);
 }
 
-/* Dark bottom vignette so badge has photographic contrast */
-.imageOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(10, 12, 16, 0.7) 0%,
-    rgba(10, 12, 16, 0.15) 30%,
-    transparent 55%
-  );
-  pointer-events: none;
-  z-index: 1;
-  transition: opacity 0.35s ease;
-}
-
-.projectCard:hover .imageOverlay {
-  opacity: 0.85;
-}
-
-/* ------------------------------------------------------------- */
-/* 2. TRANSLUCENT CATEGORY BADGE (Bottom-Left)                  */
-/* ------------------------------------------------------------- */
-.categoryBadge {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  background: rgba(13, 15, 20, 0.85);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 6px;
-  padding: 0.28rem 0.68rem;
-  color: #ffffff;
-  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: 0.75rem;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: 0.015em;
-  z-index: 2;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
-  pointer-events: none;
-  user-select: none;
-  transition: background 0.25s ease, border-color 0.25s ease;
-}
-
-.projectCard:hover .categoryBadge {
-  background: rgba(18, 21, 28, 0.95);
-  border-color: rgba(255, 255, 255, 0.25);
-}
-
-/* ------------------------------------------------------------- */
-/* 3. ENCLOSED CARD BODY & WRAPPED TEXT                          */
-/* ------------------------------------------------------------- */
+/* 2. Card Info Body */
 .cardBody {
   display: flex;
   flex-direction: column;
-  padding: 1.35rem 1.4rem 1.45rem;
-  flex: 1;
-  min-width: 0;
+  padding: 1.15rem 1.25rem 1.25rem;
+  width: 100%;
   box-sizing: border-box;
 }
 
 .cardTitle {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: clamp(1.18rem, 1.35vw, 1.28rem);
-  font-weight: 700;
+  font-family: var(--font-body, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: clamp(1.15rem, 1.3vw, 1.25rem);
+  font-weight: 600;
   line-height: 1.3;
-  letter-spacing: -0.016em;
+  letter-spacing: -0.018em;
   color: #ffffff;
-  margin: 0 0 0.65rem;
+  margin: 0;
   width: 100%;
-  min-width: 0;
   white-space: normal;
   word-break: normal;
   overflow-wrap: break-word;
@@ -136,79 +84,66 @@
 .titleLink {
   color: #ffffff;
   text-decoration: none;
-  white-space: normal;
-  word-break: normal;
-  overflow-wrap: break-word;
   display: inline;
-  transition: color 0.25s ease;
+  transition: color 0.2s ease;
 }
 
 .projectCard:hover .titleLink {
-  color: #ffffff;
+  color: #f3f4f6;
 }
 
-.cardDescription {
-  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: 0.92rem;
+/* Subtitle matching "Greenland, Ilulissat" aesthetic */
+.cardSubtitle {
+  font-family: var(--font-body, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 0.88rem;
   font-weight: 400;
-  line-height: 1.6;
-  color: #949db0;
-  margin: 0;
-  flex-grow: 1;
-  width: 100%;
-  min-width: 0;
-  white-space: normal;
-  word-break: normal;
-  overflow-wrap: break-word;
-  text-wrap: pretty;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  /* autoprefixer: ignore next */
-  -webkit-box-orient: vertical;
-  box-orient: vertical;
+  line-height: 1.4;
+  color: #7e8590; /* Exact muted slate gray */
+  margin: 0.35rem 0 0;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 4.8em;
 }
 
-/* ------------------------------------------------------------- */
-/* 4. CLEAN, BEAUTIFUL & NON-MASSIVE TECH STACK                  */
-/* ------------------------------------------------------------- */
-.stackWrapper {
+/* 3. White Beautiful Line Wrapping Technologies */
+.techLineWrapper {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12); /* Crisp white delicate line */
+  width: 100%;
+}
+
+.techStack {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-top: 1.15rem;
-  padding-top: 0.85rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  gap: 0.4rem;
 }
 
-.stackBadge {
+.techBadge {
   display: inline-flex;
   align-items: center;
   font-family: var(--font-mono, monospace);
   font-size: 0.72rem;
   font-weight: 500;
-  color: #8f98a8;
-  background-color: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 4px;
-  padding: 0.22rem 0.55rem;
-  line-height: 1.25;
+  color: #8e95a2;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0 !important; /* Strictly SQUARE */
+  padding: 0.2rem 0.55rem;
+  line-height: 1.2;
   letter-spacing: 0.02em;
   white-space: nowrap;
-  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
-.projectCard:hover .stackBadge {
+.projectCard:hover .techBadge {
   color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.18);
-  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.07);
 }
 
-.stackMore {
+.techMore {
   font-family: var(--font-mono, monospace);
   font-size: 0.7rem;
   color: #64748b;
