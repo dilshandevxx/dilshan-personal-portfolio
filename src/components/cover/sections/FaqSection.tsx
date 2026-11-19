@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./FaqSection.module.css";
 
@@ -56,17 +55,9 @@ export default function FaqSection() {
       <div className={styles.container}>
         {/* Header */}
         <div className={styles.header}>
-          <div className={styles.badgeWrapper}>
-            <span className={styles.pillBadge}>
-              <span className={styles.badgeDot}>•</span> Frequently asked questions
-            </span>
-          </div>
           <h2 className={styles.title}>
             Frequently asked questions.
           </h2>
-          <p className={styles.subtitle}>
-            Quick answers regarding engineering approach, system architecture, and technical collaboration.
-          </p>
         </div>
 
         {/* Accordion List */}
@@ -123,17 +114,6 @@ export default function FaqSection() {
               </div>
             );
           })}
-        </div>
-
-        {/* Bottom Contact Anchor matching reference */}
-        <div className={styles.bottomContact}>
-          <Link href="#contact" className={styles.contactLink}>
-            <div className={styles.contactBadge}>
-              <span className={styles.dot} aria-hidden="true" />
-              <span className={styles.contactLabel}>HAVE A DIFFERENT QUESTION?</span>
-            </div>
-            <span className={styles.contactSub}>Get in touch directly &rarr;</span>
-          </Link>
         </div>
       </div>
     </section>

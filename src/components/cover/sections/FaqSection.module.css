@@ -14,77 +14,24 @@
   width: 100%;
 }
 
-/* Header */
+/* Header (One-line Title matching Hero font beautifully) */
 .header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
+  justify-content: flex-start;
   margin-bottom: clamp(3.5rem, 6vw, 5rem);
-  gap: 1.1rem;
-}
-
-/* Pill Badge: • FAQ */
-.badgeWrapper {
-  display: flex;
-  justify-content: center;
-}
-
-.pillBadge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem;
-  padding: 0.48rem 1.35rem;
-  background-color: #121418;
-  color: #b8bec9;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 999px;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  text-transform: none;
-}
-
-.badgeDot {
-  color: #ffffff;
-  font-size: 0.85rem;
-  line-height: 1;
 }
 
 /* Title: Matching Hero Section Font Beautifully */
 .title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.25rem;
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(2.4rem, 5.2vw, 4.2rem);
+  font-size: clamp(2.6rem, 5.8vw, 4.8rem);
   font-weight: 500;
-  line-height: 1.12;
+  line-height: 1.1;
   letter-spacing: -0.03em;
   color: #ffffff;
   text-transform: none;
   margin: 0;
-}
-
-.subtitle {
-  color: #9da4ae;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 1.12rem;
-  line-height: 1.7;
-  max-width: 640px;
-  margin: 0.35rem auto 0;
-  text-align: center;
-}
-
-@media (max-width: 640px) {
-  .subtitle {
-    font-size: 0.98rem;
-    line-height: 1.6;
-  }
 }
 
 /* Accordion List */
@@ -244,63 +191,4 @@
     font-size: 0.98rem;
     line-height: 1.65;
   }
-}
-
-/* Bottom Contact Callout */
-.bottomContact {
-  display: flex;
-  justify-content: center;
-  margin-top: clamp(4rem, 6.5vw, 5.5rem);
-}
-
-.contactLink {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.55rem;
-  text-decoration: none;
-  cursor: pointer;
-  transition: transform 0.25s ease;
-}
-
-.contactLink:hover {
-  transform: translateY(-2px);
-}
-
-.contactBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-}
-
-.dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background-color: #a3e635; /* Bright neon accent matching the theme */
-  display: inline-block;
-  flex-shrink: 0;
-  box-shadow: 0 0 10px rgba(163, 230, 53, 0.6);
-}
-
-.contactLabel {
-  color: #ffffff;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.88rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.contactSub {
-  color: #9aa2ad;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 1.02rem;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  transition: color 0.2s ease;
-}
-
-.contactLink:hover .contactSub {
-  color: #ffffff;
 }

@@ -72,20 +72,9 @@ export default function SkillsGrid() {
   return (
     <section className={styles.skillsSection} id="skills" aria-label="Services & Capabilities">
       <div className={styles.container}>
-        {/* Clean Editorial Header */}
+        {/* Clean One-Line Section Header */}
         <div className={styles.header}>
-          <div className={styles.badgeWrapper}>
-            <span className={styles.pillBadge}>
-              <span className={styles.badgeDot}>•</span> Services
-            </span>
-          </div>
-          <h2 className={styles.headline}>
-            <span className={styles.headlineRow}>Elevating brands through</span>
-            <span className={styles.headlineRow}>design and engineering.</span>
-          </h2>
-          <p className={styles.leadText}>
-            Specialized engineering capabilities tailored for high-scale digital products, distributed systems, and modern digital experiences.
-          </p>
+          <h2 className={styles.headline}>Services.</h2>
         </div>
 
         {/* Clean, Beautiful Accordion List (Without Numbers) */}

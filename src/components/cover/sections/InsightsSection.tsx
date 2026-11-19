@@ -7,96 +7,90 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import styles from "./InsightsSection.module.css";
 
-interface InsightItem {
+interface ArticleItem {
   id: string;
+  badge: string;
   title: string;
-  lineBreakTitle: React.ReactNode;
+  desc: string;
   image: string;
   href: string;
 }
 
-const INSIGHTS: InsightItem[] = [
+const ARTICLES: ArticleItem[] = [
   {
-    id: "emerging-trends",
-    title: "Emerging trends that will shape the future",
-    lineBreakTitle: (
-      <>
-        Emerging trends<br />
-        that will shape the<br />
-        future
-      </>
-    ),
-    image: "/images/insights_bg_trends.jpg",
-    href: "/portfolio/blog",
+    id: "wales-creative",
+    badge: "design",
+    title: "wales creative agency",
+    desc: "Driftime® CCO, Abb-d Taiyo speaks to Civil Society Magazine for an in-depth feature on how a focused, strategic rebrand can transform engagement.",
+    image: "/images/article_wales.jpg",
+    href: "/portfolio/blog/zero-dependency-web-design",
   },
   {
-    id: "portfolio-standout",
-    title: "How to make a portfolio stands out",
-    lineBreakTitle: (
-      <>
-        How to make a<br />
-        portfolio stands<br />
-        out
-      </>
-    ),
-    image: "/images/insights_bg_portfolio.jpg",
-    href: "/portfolio/blog",
+    id: "neurogen-platform",
+    badge: "Web App",
+    title: "NeuroGen platform",
+    desc: "How strategic brand transformation enabled Instant Aid to secure UN partnerships and deliver life-saving digital infrastructure at scale.",
+    image: "/images/article_neurogen.jpg",
+    href: "/portfolio/blog/resilience-in-distributed-systems",
+  },
+  {
+    id: "ecospace-web",
+    badge: "Corporate",
+    title: "EcoSpace Web",
+    desc: "Driftime® CCO, Abb-d Taiyo speaks to Civil Society Magazine for an in-depth feature on how a focused, strategic rebrand can accelerate systemic impact.",
+    image: "/images/article_ecospace.jpg",
+    href: "/portfolio/blog/lost-art-of-readable-code",
   },
 ];
 
 export default function InsightsSection() {
   return (
-    <section className={styles.insightsSection} id="insights" aria-label="Insights">
+    <section className={styles.insightsSection} id="articles" aria-label="Articles">
       <div className={styles.container}>
-        {/* Section Header */}
+        {/* Section Header with One-line Title in Hero Font & All Articles link */}
         <div className={styles.header}>
-          <h2 className={styles.title}>Insights.</h2>
-          <Link href="/portfolio/blog" className={styles.allInsightsLink}>
+          <h2 className={styles.title}>Articles.</h2>
+          <Link href="/portfolio/blog" className={styles.allLink}>
             <span>All Articles</span>
             <ArrowUpRight size={13} aria-hidden="true" />
           </Link>
         </div>
 
-        {/* 2-Column Responsive Card Grid (Balanced Scale) */}
+        {/* 3-Column Responsive Card Grid matching user reference design */}
         <div className={styles.grid}>
-          {INSIGHTS.map((item, idx) => (
+          {ARTICLES.map((item, idx) => (
             <motion.article
               key={item.id}
-              className={styles.cardWrapper}
-              initial={{ opacity: 0, y: 25 }}
+              className={styles.card}
+              initial={{ opacity: 0, y: 22 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
               <Link
                 href={item.href}
                 className={styles.cardLink}
-                aria-label={`Read insight: ${item.title}`}
+                aria-label={`Read article: ${item.title}`}
               >
-                <div className={styles.imageCanvas}>
+                {/* Landscape Image Frame with Rounded Corners */}
+                <div className={styles.imageFrame}>
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
-                    sizes="(max-width: 768px) 100vw, 520px"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
                     priority={idx === 0}
                     className={styles.cardImage}
                   />
 
-                  {/* Dark Vignette Scrim for High Contrast */}
-                  <div className={styles.darkOverlay} />
+                  {/* Translucent Category Badge in Bottom-Left */}
+                  <span className={styles.categoryBadge}>{item.badge}</span>
+                </div>
 
-                  {/* Centered Crisp Vector Typography */}
-                  <div className={styles.contentOverlay}>
-                    <h3 className={styles.cardTitle}>
-                      {item.lineBreakTitle}
-                    </h3>
-                  </div>
-
-                  {/* Sleek Floating Arrow on Hover */}
-                  <div className={styles.actionArrow} aria-hidden="true">
-                    <ArrowUpRight size={15} />
-                  </div>
+                {/* Information below Image */}
+                <div className={styles.cardBody}>
+                  <h3 className={styles.cardTitle}>{item.title}</h3>
+                  <p className={styles.cardDesc}>{item.desc}</p>
                 </div>
               </Link>
             </motion.article>
