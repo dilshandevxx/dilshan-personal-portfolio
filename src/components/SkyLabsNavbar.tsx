@@ -63,42 +63,14 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
       role="banner"
     >
       <div className={styles.navContainer}>
-        {/* Brand Wordmark & Artistic Monogram Emblem */}
+        {/* Brand Wordmark matching reference typography */}
         <Link href="/" className={styles.brandLink} title="dilshan.">
-          <span className={styles.brandEmblem} aria-hidden="true">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className={styles.emblemSvg}
-            >
-              <rect
-                x="2.5"
-                y="2.5"
-                width="19"
-                height="19"
-                rx="5.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-              />
-              <path
-                d="M7 6.5H12C15 6.5 17 8.5 17 12C17 15.5 15 17.5 12 17.5H7V6.5Z"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <circle cx="12" cy="12" r="1.5" fill="var(--color-primary, #4ade80)" />
-            </svg>
-          </span>
           <span className={styles.brandWordmark}>
             dilshan<span className={styles.brandDot}>.</span>
           </span>
         </Link>
 
-        {/* Right Navigation: Pure Text Desktop Nav & Mobile Hamburger */}
+        {/* Right Navigation: Bold, Beautiful Clean Text Nav Links */}
         <div className={styles.navRight}>
           <nav className={styles.desktopNav} aria-label="Main Navigation">
             <Link
@@ -127,11 +99,9 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
             </Link>
             <Link
               href="/#contact"
-              className={`${styles.navLink} ${styles.navCtaLink}`}
-              title="Get in touch"
+              className={styles.navLink}
             >
-              <span>Contact</span>
-              <span className={styles.ctaArrow} aria-hidden="true">↗</span>
+              Contact
             </Link>
           </nav>
 

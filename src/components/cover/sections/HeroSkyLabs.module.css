@@ -58,44 +58,14 @@
   outline: none;
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-}
-
-.brandEmblem {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-  flex-shrink: 0;
-}
-
-.brandLink:hover .brandEmblem {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.28);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-}
-
-.emblemSvg {
-  width: 18px;
-  height: 18px;
-  color: #ffffff;
 }
 
 .brandWordmark {
   color: #ffffff;
-  font-family: var(--font-artistic, "Newsreader", "Playfair Display", Georgia, serif);
-  font-size: clamp(1.35rem, 2.2vw, 1.7rem);
-  font-style: italic;
-  font-weight: 500;
-  letter-spacing: -0.015em;
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
+  font-size: clamp(1.45rem, 2.3vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
   line-height: 1;
   display: inline-flex;
   align-items: baseline;
@@ -103,14 +73,13 @@
 }
 
 .brandDot {
-  font-style: normal;
   color: var(--color-primary, #4ade80);
   display: inline-block;
   margin-left: 1px;
 }
 
 .brandLink:hover .brandWordmark {
-  opacity: 0.92;
+  opacity: 0.9;
   transform: translateY(-0.5px);
 }
 
@@ -120,88 +89,61 @@
   align-items: center;
 }
 
-/* Pure Text Desktop Navigation (No rounded dock wrapping) */
+/* Bold, Beautiful, Clean Desktop Text Navigation (No rounded wrappers or buttons) */
 .desktopNav {
   display: flex;
   align-items: center;
-  gap: clamp(1.4rem, 2.2vw, 2.4rem);
+  gap: clamp(1.6rem, 2.6vw, 2.85rem);
   background: transparent;
   border: none;
   padding: 0;
   box-shadow: none;
 }
 
-/* Beautiful Editorial Text Links */
+/* Bold, Beautiful Clean Text Nav Links */
 .navLink {
   color: #9da4ae;
-  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: 0.86rem;
-  font-weight: 450;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
+  font-size: 0.94rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
   text-decoration: none;
-  padding: 0.35rem 0;
+  padding: 0.25rem 0;
   white-space: nowrap;
   position: relative;
   cursor: pointer;
   background: transparent;
   border: none;
-  transition: color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Subtle, Elegant Underline Micro-interaction */
-.navLink::after {
-  content: "";
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 0%;
-  height: 1.5px;
-  background-color: #ffffff;
-  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  border-radius: 999px;
+  transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.2s ease;
 }
 
 .navLink:hover {
   color: #ffffff;
-  background: transparent;
+  transform: translateY(-1px);
 }
 
-.navLink:hover::after {
-  width: 100%;
-}
-
-/* Active State: Clean White Text with Underline */
+/* Active State: Bright White Text */
 .navLinkActive {
-  color: #ffffff;
-  font-weight: 500;
-  background: transparent;
+  color: #ffffff !important;
 }
 
+/* Subtle hairline underline indicator on hover and active */
+.navLink::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #ffffff;
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 2px;
+}
+
+.navLink:hover::after,
 .navLinkActive::after {
   width: 100%;
-  background-color: #ffffff;
-}
-
-/* Contact CTA Link */
-.navCtaLink {
-  color: #ffffff;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.navCtaLink::after {
-  background-color: var(--color-primary, #4ade80);
-}
-
-.ctaArrow {
-  font-size: 0.82rem;
-  color: var(--color-primary, #4ade80);
-  transition: transform 0.2s ease;
-}
-
-.navCtaLink:hover .ctaArrow {
-  transform: translate(2px, -2px);
 }
 
 /* Hamburger Button: STRICTLY HIDDEN ON DESKTOP */
