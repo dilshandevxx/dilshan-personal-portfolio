@@ -76,12 +76,12 @@ export default function SkillsGrid() {
         <div className={styles.header}>
           <div className={styles.badgeWrapper}>
             <span className={styles.pillBadge}>
-              <span className={styles.badgeDot}>•</span> OUR SERVICES
+              <span className={styles.badgeDot}>•</span> Services
             </span>
           </div>
           <h2 className={styles.headline}>
-            <span className={styles.headlineTop}>ELEVATING BRANDS THROUGH</span>
-            <span className={styles.headlineBottom}>DESIGN AND ENGINEERING</span>
+            <span className={styles.headlineRow}>Elevating brands through</span>
+            <span className={styles.headlineRow}>design and engineering.</span>
           </h2>
           <p className={styles.leadText}>
             Specialized engineering capabilities tailored for high-scale digital products, distributed systems, and modern digital experiences.

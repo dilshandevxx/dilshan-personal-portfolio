@@ -54,16 +54,15 @@ export default function FaqSection() {
   return (
     <section className={styles.faqSection} id="faq" aria-label="Frequently Asked Questions">
       <div className={styles.container}>
-        {/* Header matching reference */}
+        {/* Header */}
         <div className={styles.header}>
           <div className={styles.badgeWrapper}>
             <span className={styles.pillBadge}>
-              <span className={styles.badgeDot}>•</span> FAQ
+              <span className={styles.badgeDot}>•</span> Frequently asked questions
             </span>
           </div>
           <h2 className={styles.title}>
-            <span className={styles.titleLine}>FREQUENTLY ASKED</span>
-            <span className={styles.titleLine}>QUESTIONS</span>
+            Frequently asked questions.
           </h2>
           <p className={styles.subtitle}>
             Quick answers regarding engineering approach, system architecture, and technical collaboration.
@@ -72,9 +71,8 @@ export default function FaqSection() {
 
         {/* Accordion List */}
         <div className={styles.accordionList}>
-          {FAQ_ITEMS.map((item, index) => {
+          {FAQ_ITEMS.map((item) => {
             const isOpen = openId === item.id;
-            const indexStr = String(index + 1).padStart(2, "0");
             return (
               <div key={item.id} className={styles.accordionItem}>
                 <button
@@ -83,10 +81,7 @@ export default function FaqSection() {
                   className={styles.rowTrigger}
                   aria-expanded={isOpen}
                 >
-                  <div className={styles.titleGroup}>
-                    <span className={styles.itemIndex}>{indexStr}</span>
-                    <span className={styles.questionText}>{item.question}</span>
-                  </div>
+                  <span className={styles.questionText}>{item.question}</span>
                   <span
                     className={`${styles.iconButton} ${isOpen ? styles.iconButtonOpen : ""}`}
                     aria-hidden="true"

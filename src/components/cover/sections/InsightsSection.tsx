@@ -50,7 +50,7 @@ export default function InsightsSection() {
       <div className={styles.container}>
         {/* Section Header */}
         <div className={styles.header}>
-          <h2 className={styles.title}>Insights</h2>
+          <h2 className={styles.title}>Insights.</h2>
           <Link href="/portfolio/blog" className={styles.allInsightsLink}>
             <span>All Articles</span>
             <ArrowUpRight size={13} aria-hidden="true" />

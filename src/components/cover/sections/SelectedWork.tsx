@@ -55,7 +55,7 @@ export default function SelectedWork() {
         {/* Header */}
         <div className={styles.header}>
           <div className={styles.headerLeft}>
-            <h2 className={styles.title}>Projects</h2>
+            <h2 className={styles.title}>Selected projects.</h2>
           </div>
         </div>
 

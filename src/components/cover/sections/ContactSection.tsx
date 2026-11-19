@@ -31,8 +31,8 @@ export default function ContactSection() {
           transition={{ duration: 0.6 }}
         >
           <h2 className={styles.heading}>
-            <span className={styles.headingWhite}>FEEL FREE TO</span>
-            <span className={styles.headingAccent}>CONTACT ME</span>
+            <span className={styles.headingWhite}>Feel free to</span>
+            <span className={styles.headingAccent}>contact me.</span>
           </h2>
 
           <p className={styles.description}>

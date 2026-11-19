@@ -40,11 +40,11 @@
   color: #b8bec9;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 999px;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 
 .badgeDot {
@@ -53,23 +53,21 @@
   line-height: 1;
 }
 
+/* Title: Matching Hero Section Font Beautifully */
 .title {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.3rem;
-  font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
-  font-size: clamp(2rem, 3.8vw, 3.2rem);
-  font-weight: 700;
-  line-height: 1.18;
-  letter-spacing: -0.015em;
-  text-transform: uppercase;
+  text-align: center;
+  gap: 0.25rem;
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
+  font-size: clamp(2.4rem, 5.2vw, 4.2rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
   color: #ffffff;
+  text-transform: none;
   margin: 0;
-}
-
-.titleLine {
-  display: block;
 }
 
 .subtitle {
