@@ -1,8 +1,8 @@
-/* Accordion Services Section (Clean, Beautiful, Editorial, No Numbers) */
+/* Services Section (Matching Exact 3-Column Reference Design) */
 
-.skillsSection {
+.servicesSection {
   background-color: #000000;
-  padding: clamp(6.5rem, 11vw, 10rem) clamp(1.5rem, 5vw, 4rem);
+  padding: clamp(5rem, 8vw, 8rem) clamp(1.5rem, 4vw, 3.5rem);
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   position: relative;
   width: 100%;
@@ -10,225 +10,196 @@
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
   width: 100%;
 }
 
-/* Header (One-line Title matching Hero font beautifully) */
-.header {
+/* 3-Column Architectural Layout: [SERVICES label] [Bold Typography List] [Visual Canvas] */
+.layout {
+  display: grid;
+  grid-template-columns: 140px 1.15fr 1.35fr;
+  gap: clamp(2rem, 4vw, 4.5rem);
+  align-items: start;
+  width: 100%;
+}
+
+/* Column 1: Left Minimalist Header Label */
+.leftCol {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-bottom: clamp(3.5rem, 6vw, 5rem);
+  align-items: flex-start;
+  padding-top: 0.6rem;
 }
 
-.headline {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(2.6rem, 5.8vw, 4.8rem);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  color: #ffffff;
-  text-transform: none;
-  margin: 0;
+.sectionLabel {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  color: #a1a1a8;
+  text-transform: uppercase;
 }
 
-/* =========================================================================
-   Accordion List - Clean, Beautiful, No Numbers
-   ========================================================================= */
-.accordionList {
+/* Column 2: Center Interactive Typography List */
+.centerCol {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  width: 100%;
 }
 
-.accordionItem {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  transition: background-color 0.2s ease;
-}
-
-.accordionItem:hover {
-  background-color: rgba(255, 255, 255, 0.015);
-}
-
-/* Row Trigger Button - Clean & Elegant */
-.rowTrigger {
-  width: 100%;
+.servicesList {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: clamp(1.85rem, 3.2vw, 2.35rem) 0.5rem;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.serviceBtn {
   background: transparent;
   border: none;
-  color: #ffffff;
-  cursor: pointer;
+  padding: 0.15rem 0;
   text-align: left;
-  transition: all 0.2s ease;
-  gap: 1.5rem;
-}
-
-@media (max-width: 640px) {
-  .rowTrigger {
-    padding: 1.4rem 0.25rem;
-    gap: 1rem;
-  }
-}
-
-.itemTitle {
+  cursor: pointer;
+  outline: none;
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(1.4rem, 2.4vw, 2.05rem);
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  color: #ffffff;
-  transition: color 0.2s ease, opacity 0.2s ease;
-  line-height: 1.25;
+  font-size: clamp(2.4rem, 4.4vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -0.03em;
+  color: rgba(255, 255, 255, 0.26);
+  transition: color 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
 }
 
-.rowTrigger:hover .itemTitle {
-  color: #ffffff;
-  opacity: 0.92;
+.serviceBtn:hover {
+  color: rgba(255, 255, 255, 0.65);
+  transform: translateX(4px);
 }
 
-/* Refined Circular Cross Toggle Button - Proper 44px Scale */
-.iconButton {
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  display: flex;
+.serviceBtnActive {
+  color: #ffffff !important;
+  transform: translateX(6px);
+}
+
+/* See More Pill Button (Matching Reference) */
+.seeMoreWrapper {
+  margin-top: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+.seeMoreBtn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #a4abb8;
-  flex-shrink: 0;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  padding: 0;
+  padding: 7px 22px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #e4e4e7;
+  font-family: var(--font-display, -apple-system, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
-@media (max-width: 640px) {
-  .iconButton {
-    width: 38px;
-    height: 38px;
-  }
+.seeMoreBtn:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.18);
 }
 
-.rowTrigger:hover .iconButton {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.25);
-  color: #ffffff;
-}
-
-.iconButtonOpen {
-  transform: rotate(45deg);
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.3);
-  color: #ffffff;
-}
-
-.svgCross {
-  transition: transform 0.2s ease;
-}
-
-/* Expanded Content - Spacious & Bold */
-.expandedContentWrapper {
-  overflow: hidden;
-}
-
-.expandedContent {
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 3.5rem;
-  padding: 0.75rem 0.5rem 3rem;
-  align-items: center;
-}
-
-@media (max-width: 900px) {
-  .expandedContent {
-    grid-template-columns: 1fr;
-    gap: 1.75rem;
-    padding: 0.5rem 0.25rem 2.25rem;
-  }
-}
-
-/* Image Column */
-.imageCol {
+/* Column 3: Right Dynamic Visual Canvas */
+.rightCol {
+  display: flex;
   width: 100%;
 }
 
-.imageFrame {
+.imageCardWrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 3.4;
+  border-radius: 16px;
   overflow: hidden;
   background-color: #121418;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 14px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
 }
 
-@media (max-width: 640px) {
-  .imageFrame {
-    aspect-ratio: 16 / 9;
-    max-height: 220px;
-    border-radius: 12px;
-  }
+.imageCard {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.detailImage {
+.cardImage {
   object-fit: cover;
+  filter: brightness(0.92);
 }
 
-/* Text Column */
-.textCol {
+/* Artistic Emblem & Description Overlay in Center */
+.overlay {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.95rem;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.32);
+  z-index: 2;
 }
 
-.detailSubtitle {
+.emblemText {
+  font-family: var(--font-artistic, "Newsreader", "Playfair Display", Georgia, serif);
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 300;
+  letter-spacing: 0.14em;
   color: #ffffff;
-  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  margin: 0;
-  line-height: 1.35;
+  line-height: 1;
+  margin-bottom: 0.85rem;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.9);
+  user-select: none;
 }
 
-.detailDescription {
-  color: #b4bac6;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 1.08rem;
-  line-height: 1.76;
+.serviceDesc {
+  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
+  font-size: 0.88rem;
+  line-height: 1.48;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 320px;
   margin: 0;
-  max-width: 720px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
 }
 
-@media (max-width: 640px) {
-  .detailDescription {
-    font-size: 0.98rem;
-    line-height: 1.65;
+/* Responsive Viewports */
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .leftCol {
+    padding-top: 0;
+  }
+
+  .imageCardWrapper {
+    aspect-ratio: 16 / 11;
+    max-height: 400px;
   }
 }
 
-/* Tag List */
-.tagList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 0.75rem;
-}
+@media (max-width: 600px) {
+  .serviceBtn {
+    font-size: 2.2rem;
+  }
 
-.tagItem {
-  color: #b8c0cc;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  padding: 0.38rem 0.85rem;
-  background: rgba(255, 255, 255, 0.045);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+  .imageCardWrapper {
+    aspect-ratio: 4 / 3;
+    max-height: 320px;
+  }
 }
