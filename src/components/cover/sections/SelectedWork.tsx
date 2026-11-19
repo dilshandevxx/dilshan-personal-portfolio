@@ -67,19 +67,19 @@ export default function SelectedWork() {
               <motion.div
                 key={item.id}
                 className={styles.projectCard}
-                initial={{ opacity: 0, y: 35 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.65, delay: idx * 0.12 }}
+                viewport={{ once: true, amount: 0.05 }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
               >
                 <Link href={`/projects#${item.slug}`} className={styles.cardLink} title={item.name}>
-                  {/* Image Frame: Square on Desktop, Rounded 14px on Mobile */}
+                  {/* Image Frame: Square on Desktop, Rounded 12px on Mobile */}
                   <div className={styles.imageCanvas}>
                     <Image
                       src={item.image}
                       alt={item.name}
                       fill
-                      sizes="(max-width: 820px) 100vw, 46vw"
+                      sizes="(max-width: 1024px) 100vw, 46vw"
                       priority={idx === 0}
                       className={styles.image}
                     />
@@ -106,19 +106,19 @@ export default function SelectedWork() {
               <motion.div
                 key={item.id}
                 className={styles.projectCard}
-                initial={{ opacity: 0, y: 35 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.65, delay: 0.12 + idx * 0.12 }}
+                viewport={{ once: true, amount: 0.05 }}
+                transition={{ duration: 0.6, delay: 0.1 + idx * 0.1 }}
               >
                 <Link href={`/projects#${item.slug}`} className={styles.cardLink} title={item.name}>
-                  {/* Image Frame: Square on Desktop, Rounded 14px on Mobile */}
+                  {/* Image Frame: Square on Desktop, Rounded 12px on Mobile */}
                   <div className={styles.imageCanvas}>
                     <Image
                       src={item.image}
                       alt={item.name}
                       fill
-                      sizes="(max-width: 820px) 100vw, 46vw"
+                      sizes="(max-width: 1024px) 100vw, 46vw"
                       priority={idx === 0}
                       className={styles.image}
                     />
