@@ -43,14 +43,14 @@ export function ProjectCard({
     imgSrc.startsWith("data:");
 
   // Subtitle matching reference card: "Greenland, Ilulissat" aesthetic
-  const subtitle =
-    project.tagline?.trim() ||
-    `${project.category || "System"} • ${project.date || "2026"}`;
+  const subtitle = project.category && project.tagline
+    ? `${project.category} • ${project.tagline}`
+    : project.tagline?.trim() || `${project.category || "System"} • ${project.date || "2026"}`;
 
   // Top technologies cleanly capped so the stack stays compact & beautiful
   const rawTags = project.tags || [];
-  const displayTags = rawTags.slice(0, 3);
-  const remainingCount = Math.max(0, rawTags.length - 3);
+  const displayTags = rawTags.slice(0, 4);
+  const remainingCount = Math.max(0, rawTags.length - 4);
 
   return (
     <article

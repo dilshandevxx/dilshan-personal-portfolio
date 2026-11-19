@@ -76,8 +76,10 @@ export default function AboutPage() {
           <h1 className={styles.title}>About Me</h1>
 
           <p className={styles.subtitle}>
-            Full-Stack Engineer &amp; Systems Architect dedicated to building resilient distributed
-            systems, applied AI pipelines, and tactile digital products with mathematical rigor.
+            I love photography because it allows me to forget about everything happening around
+            me every day. I enjoy every moment when I can travel, be outside, and discover the beauty
+            of nature or interesting places. I try to pay special attention to good composition and
+            light, which are the foundation of great photography for me.
           </p>
         </header>
 
