@@ -97,22 +97,64 @@ export default function HeroSkyLabs() {
         } ${menuOpen ? styles.navOpen : ""}`}
       >
         <div className={styles.navContainer}>
-          {/* Brand Wordmark: Impress. */}
-          <Link href="/" className={styles.brandLink} title="Impress.">
-            <span className={styles.brandWordmark}>Impress.</span>
+          {/* Brand Wordmark: dilshan. */}
+          <Link href="/" className={styles.brandLink} title="dilshan.">
+            <span className={styles.brandWordmark}>
+              dilshan<span className={styles.brandDot}>.</span>
+            </span>
           </Link>
 
-          {/* Minimalist Two-Line Hamburger Button (=) */}
-          <button
-            type="button"
-            className={`${styles.hamburgerBtn} ${menuOpen ? styles.hamburgerActive : ""}`}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-            aria-expanded={menuOpen}
-          >
-            <span className={styles.barTop} />
-            <span className={styles.barBottom} />
-          </button>
+          {/* Right Navigation: Desktop Nav Links & Mobile Hamburger */}
+          <div className={styles.navRight}>
+            <nav className={styles.desktopNav} aria-label="Main Navigation">
+              <a
+                href="#skills"
+                onClick={(e) => handleSlowScroll(e, "skills")}
+                className={styles.navLink}
+              >
+                Services
+              </a>
+              <Link href="/projects" className={styles.navLink}>
+                Projects
+              </Link>
+              <a
+                href="#articles"
+                onClick={(e) => handleSlowScroll(e, "articles")}
+                className={styles.navLink}
+              >
+                Articles
+              </a>
+              <Link href="/about" className={styles.navLink}>
+                About
+              </Link>
+              <a
+                href="#faq"
+                onClick={(e) => handleSlowScroll(e, "faq")}
+                className={styles.navLink}
+              >
+                FAQ
+              </a>
+              <a
+                href="#contact"
+                onClick={(e) => handleSlowScroll(e, "contact")}
+                className={styles.navCta}
+              >
+                Contact
+              </a>
+            </nav>
+
+            {/* Minimalist Two-Line Hamburger Button (=) on Mobile */}
+            <button
+              type="button"
+              className={`${styles.hamburgerBtn} ${menuOpen ? styles.hamburgerActive : ""}`}
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={menuOpen}
+            >
+              <span className={styles.barTop} />
+              <span className={styles.barBottom} />
+            </button>
+          </div>
         </div>
 
         {/* Full-Screen Minimalist Editorial Navigation Overlay */}

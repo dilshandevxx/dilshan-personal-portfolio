@@ -63,22 +63,57 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
       role="banner"
     >
       <div className={styles.navContainer}>
-        {/* Brand Wordmark: Impress. */}
-        <Link href="/" className={styles.brandLink} title="Impress.">
-          <span className={styles.brandWordmark}>Impress.</span>
+        {/* Brand Wordmark: dilshan. */}
+        <Link href="/" className={styles.brandLink} title="dilshan.">
+          <span className={styles.brandWordmark}>
+            dilshan<span className={styles.brandDot}>.</span>
+          </span>
         </Link>
 
-        {/* Minimalist Two-Line Hamburger Button (=) */}
-        <button
-          type="button"
-          className={`${styles.hamburgerBtn} ${menuOpen ? styles.hamburgerActive : ""}`}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-          aria-expanded={menuOpen}
-        >
-          <span className={styles.barTop} />
-          <span className={styles.barBottom} />
-        </button>
+        {/* Right Navigation: Desktop Nav Links & Mobile Hamburger */}
+        <div className={styles.navRight}>
+          <nav className={styles.desktopNav} aria-label="Main Navigation">
+            <Link
+              href="/#skills"
+              className={`${styles.navLink} ${activeTab === "services" ? styles.navLinkActive : ""}`}
+            >
+              Services
+            </Link>
+            <Link
+              href="/projects"
+              className={`${styles.navLink} ${activeTab === "projects" || pathname.startsWith("/projects") ? styles.navLinkActive : ""}`}
+            >
+              Projects
+            </Link>
+            <Link href="/#articles" className={styles.navLink}>
+              Articles
+            </Link>
+            <Link
+              href="/about"
+              className={`${styles.navLink} ${activeTab === "about" || pathname === "/about" ? styles.navLinkActive : ""}`}
+            >
+              About
+            </Link>
+            <Link href="/#faq" className={styles.navLink}>
+              FAQ
+            </Link>
+            <Link href="/#contact" className={styles.navCta}>
+              Contact
+            </Link>
+          </nav>
+
+          {/* Minimalist Two-Line Hamburger Button (=) on Mobile */}
+          <button
+            type="button"
+            className={`${styles.hamburgerBtn} ${menuOpen ? styles.hamburgerActive : ""}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={menuOpen}
+          >
+            <span className={styles.barTop} />
+            <span className={styles.barBottom} />
+          </button>
+        </div>
       </div>
 
       {/* Full-Screen Minimalist Editorial Navigation Overlay */}

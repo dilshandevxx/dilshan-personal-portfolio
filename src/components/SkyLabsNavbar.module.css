@@ -34,7 +34,7 @@
   width: 100%;
 }
 
-/* Brand Wordmark: Impress. */
+/* Brand Wordmark: dilshan. */
 .brandLink {
   text-decoration: none;
   display: inline-flex;
@@ -45,15 +45,98 @@
 .brandWordmark {
   color: #ffffff;
   font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.035em;
   line-height: 1;
-  transition: opacity 0.2s ease;
+  display: inline-flex;
+  align-items: baseline;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.brandDot {
+  color: var(--color-primary, #8bb397);
+  display: inline-block;
+  margin-left: 1px;
 }
 
 .brandLink:hover .brandWordmark {
-  opacity: 0.88;
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+/* Right Navigation Area */
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* Desktop Navigation Links */
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.navLink {
+  color: #9da4ae;
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  padding: 0.42rem 0.85rem;
+  border-radius: 999px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.navLink:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.navLinkActive {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Elegant Contact Pill CTA */
+.navCta {
+  margin-left: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #000000;
+  background-color: #ffffff;
+  text-decoration: none;
+  padding: 0.42rem 1rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.navCta:hover {
+  background-color: #f1f3f5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.18);
+}
+
+@media (max-width: 860px) {
+  .desktopNav {
+    display: none;
+  }
+}
+
+@media (min-width: 861px) {
+  .hamburgerBtn {
+    display: none;
+  }
 }
 
 /* Minimalist Two-Line Hamburger Button (=) */
