@@ -1,17 +1,16 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, Mail, ShieldCheck, Terminal, Cpu } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/SocialIcons";
+import { ArrowLeft, ArrowUpRight, Mail, Sparkles, Terminal, Code2, Database } from "lucide-react";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
 import MainFooter from "@/components/MainFooter";
 import { siteConfig } from "@/data/siteConfig";
 import styles from "./aboutPage.module.css";
 
 export const metadata = {
-  title: `About — Dilshan Seneviratne | Systems Architect`,
+  title: `About — Dilshan Seneviratne | Systems Architect & Full-Stack Engineer`,
   description:
-    "Full-Stack Engineer and Systems Architect dedicated to crafting resilient distributed infrastructure, AI inference pipelines, and clean digital systems.",
+    "Full-Stack Engineer & Systems Architect dedicated to crafting resilient distributed systems, AI inference architectures, and tactile digital products.",
 };
 
 const VALUES = [
@@ -37,17 +36,17 @@ const TIMELINE = [
   {
     period: "2024 — PRESENT",
     role: "Lead Systems Architect & Founder",
-    company: "Engineering Studio & Open Infrastructure",
+    company: "Engineering Studio & Open Distributed Infrastructure",
   },
   {
     period: "2022 — 2024",
     role: "Senior Full-Stack & Distributed Systems Engineer",
-    company: "Distributed Microservices & Cloud Platforms",
+    company: "Distributed Microservices, Vector Databases & Cloud Platforms",
   },
   {
     period: "2020 — 2022",
     role: "Software Engineer — Backend & AI Systems",
-    company: "API Gateways, Search Retargeting & Data Pipelines",
+    company: "API Gateways, High-Concurrency Services & Ingestion Pipelines",
   },
 ];
 
@@ -58,107 +57,120 @@ export default function AboutPage() {
       <SkyLabsNavbar activeTab="about" />
 
       <main className={styles.mainContainer}>
-        {/* Back Link */}
+        {/* Top Back Link */}
         <div className={styles.topNav}>
           <Link href="/" className={styles.backLink}>
-            <ArrowLeft size={16} />
+            <ArrowLeft size={15} />
             <span>Back to Home</span>
           </Link>
         </div>
 
-        {/* Header Section */}
+        {/* Hero Header Section */}
         <header className={styles.headerSection}>
           <div className={styles.metaRow}>
-            <span className={styles.metaBadge}>STUDIO &amp; METHODOLOGY</span>
+            <span className={styles.metaBadge}>STUDIO &amp; ARCHITECTURE</span>
             <span className={styles.metaDivider}>•</span>
-            <span className={styles.metaRole}>FULL-STACK &amp; SYSTEMS ARCHITECT</span>
+            <span className={styles.metaRole}>DILSHAN SENEVIRATNE</span>
           </div>
 
-          <h1 className={styles.title}>About Dilshan</h1>
+          <h1 className={styles.title}>About Me</h1>
 
           <p className={styles.subtitle}>
-            Full-Stack Engineer &amp; Systems Architect dedicated to crafting resilient
-            distributed infrastructure, high-concurrency backends, and tactile digital products.
+            Full-Stack Engineer &amp; Systems Architect dedicated to building resilient distributed
+            systems, applied AI pipelines, and tactile digital products with mathematical rigor.
           </p>
         </header>
 
-        {/* 2. Photo Showcase & Detailed Biography */}
-        <div className={styles.storyLayout}>
-          {/* ========================================================================= */}
-          {/* 📷 DEDICATED PROFILE PHOTO CARD                                           */}
-          {/* Note: You can easily update/swap your portrait photo anytime by replacing: */}
-          {/*       /public/dilshan_portrait.jpg with your own image file!               */}
-          {/* ========================================================================= */}
-          <aside className={styles.photoShowcase} aria-label="Profile Portrait">
-            <div className={styles.photoFrame}>
-              <Image
-                src="/dilshan_portrait.jpg"
-                alt="Dilshan — Systems Architect & Full-Stack Engineer"
-                fill
-                priority
-                sizes="(max-width: 900px) 100vw, 360px"
-                className={styles.portraitPhoto}
-              />
-              <div className={styles.photoOverlay} />
-              <div className={styles.photoBadge}>
-                <span className={styles.activeDot} />
+        {/* 2. Dedicated Portrait Photo Card (Naturally embedded, NO sliding panel) */}
+        {/* ========================================================================= */}
+        {/* 📷 DEDICATED PROFILE PHOTO CARD                                           */}
+        {/* You can easily update/swap your portrait photo anytime by updating:       */}
+        {/*       /public/dilshan_portrait.jpg with your new image!                   */}
+        {/* ========================================================================= */}
+        <section className={styles.photoSection} aria-label="Portrait Photo">
+          <div className={styles.photoCard}>
+            <Image
+              src="/dilshan_portrait.jpg"
+              alt="Dilshan Seneviratne — Systems Architect"
+              fill
+              priority
+              sizes="(max-width: 920px) 100vw, 920px"
+              className={styles.portraitPhoto}
+            />
+            <div className={styles.photoOverlay} />
+
+            <div className={styles.photoBottomBar}>
+              <div className={styles.photoInfo}>
+                <span className={styles.photoName}>Dilshan Seneviratne</span>
+                <span className={styles.photoRoleText}>
+                  Full-Stack Engineer &amp; Systems Architect
+                </span>
+              </div>
+
+              <div className={styles.statusIndicator}>
+                <span className={styles.pulseDot} />
                 <span>ACTIVE IN PRODUCTION</span>
               </div>
             </div>
+          </div>
 
-            <div className={styles.photoCaption}>
-              <span className={styles.captionName}>Dilshan Seneviratne</span>
-              <span className={styles.captionRole}>Systems Architect &amp; Open Creator</span>
-              <span className={styles.captionHint}>
-                [Photo Slot: To update your photo, replace <code>/public/dilshan_portrait.jpg</code>]
-              </span>
+          <div className={styles.photoHint}>
+            <span>Photo Slot: You can easily update your photo anytime in</span>
+            <code>/public/dilshan_portrait.jpg</code>
+          </div>
+        </section>
+
+        {/* 3. Biography & Narrative Flow */}
+        <section className={styles.narrativeSection}>
+          <p className={styles.leadParagraph}>
+            I design and build software that bridges the gap between mathematically rigorous
+            distributed systems and refined, minimalist human experiences.
+          </p>
+
+          <p className={styles.bodyParagraph}>
+            My engineering work is rooted in high-concurrency backends, low-latency streaming
+            retrieval-augmented generation (RAG), vector indexing with PostgreSQL and pgvector,
+            and scalable cloud infrastructure. I believe production systems should feel monolithic,
+            reliable, and quietly unyielding under load.
+          </p>
+
+          <div className={styles.statementQuote}>
+            <p className={styles.quoteText}>
+              &ldquo;Software should feel fast, deterministic, and durable. We reject visual bloat
+              and artificial complexity in favor of crisp architectural precision and understated
+              craft.&rdquo;
+            </p>
+          </div>
+
+          <p className={styles.bodyParagraph}>
+            When I am not architecting distributed engines, I curate an open digital garden of
+            verified benchmarks, system design patterns, and engineering writing without ads,
+            tracking scripts, or paywalls.
+          </p>
+
+          {/* Quick Facts / Competencies */}
+          <div className={styles.factsGrid}>
+            <div className={styles.factCard}>
+              <span className={styles.factLabel}>Core Focus</span>
+              <span className={styles.factValue}>Distributed Systems</span>
             </div>
-          </aside>
-
-          {/* Narrative Column */}
-          <div className={styles.narrativeCol}>
-            <p className={styles.leadParagraph}>
-              I build software that bridges the gap between mathematically rigorous distributed
-              systems and refined, minimalist human interfaces.
-            </p>
-
-            <p className={styles.bodyParagraph}>
-              My engineering focus centers on high-concurrency backends, low-latency streaming
-              retrieval (RAG), vector indexing with PostgreSQL/pgvector, and scalable cloud
-              architectures. I believe that production software should feel monolithic, fast,
-              and quietly unyielding under load.
-            </p>
-
-            <p className={styles.bodyParagraph}>
-              When I&apos;m not architecting services or writing code, I cultivate an open digital
-              garden of architectural blueprints, benchmarks, and technical writing without ads,
-              tracking, or paywalls.
-            </p>
-
-            {/* Quick Competency Facts */}
-            <div className={styles.factsGrid}>
-              <div className={styles.factCard}>
-                <span className={styles.factLabel}>Core Focus</span>
-                <span className={styles.factValue}>Distributed Systems &amp; Applied AI</span>
-              </div>
-              <div className={styles.factCard}>
-                <span className={styles.factLabel}>Primary Stack</span>
-                <span className={styles.factValue}>Python, TypeScript, Go, PostgreSQL</span>
-              </div>
-              <div className={styles.factCard}>
-                <span className={styles.factLabel}>Architecture</span>
-                <span className={styles.factValue}>Microservices, Event-Driven, SSE</span>
-              </div>
-              <div className={styles.factCard}>
-                <span className={styles.factLabel}>Location</span>
-                <span className={styles.factValue}>Remote / Global Availability</span>
-              </div>
+            <div className={styles.factCard}>
+              <span className={styles.factLabel}>Specialization</span>
+              <span className={styles.factValue}>Applied AI &amp; RAG</span>
+            </div>
+            <div className={styles.factCard}>
+              <span className={styles.factLabel}>Primary Stack</span>
+              <span className={styles.factValue}>Python, TS, Go, SQL</span>
+            </div>
+            <div className={styles.factCard}>
+              <span className={styles.factLabel}>Availability</span>
+              <span className={styles.factValue}>Global / Remote</span>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* 3. Core Architectural Values */}
-        <section className={styles.valuesSection}>
+        {/* 4. Core Engineering Values */}
+        <section className={styles.sectionBlock}>
           <div className={styles.sectionHeadingRow}>
             <span className={styles.sectionIndex}>01 / PRINCIPLES</span>
             <h2 className={styles.sectionTitle}>Engineering Values</h2>
@@ -174,8 +186,8 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* 4. Experience & Milestones Timeline */}
-        <section className={styles.timelineSection}>
+        {/* 5. Career & Milestones Timeline */}
+        <section className={styles.sectionBlock}>
           <div className={styles.sectionHeadingRow}>
             <span className={styles.sectionIndex}>02 / EXPERIENCE</span>
             <h2 className={styles.sectionTitle}>Career &amp; Milestones</h2>
@@ -194,7 +206,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* 5. Contact CTA Box */}
+        {/* 6. Contact CTA Box */}
         <div className={styles.ctaBox}>
           <div className={styles.ctaText}>
             <h3 className={styles.ctaTitle}>Ready to build something enduring?</h3>
@@ -220,7 +232,7 @@ export default function AboutPage() {
         </div>
       </main>
 
-      {/* 6. Global Footer */}
+      {/* Global Footer */}
       <MainFooter />
     </div>
   );
