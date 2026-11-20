@@ -6,38 +6,16 @@ import { siteConfig } from "@/data/siteConfig";
 import styles from "./MainFooter.module.css";
 
 export default function MainFooter() {
-  const currentYear = 2026;
-
   return (
     <footer className={styles.footerRoot} role="contentinfo" aria-label="Site Footer">
       <div className={styles.container}>
         {/* =========================================================================
-            LEFT ZONE: Boxed Wordmark Logo + Statement + Copyright + Crafted Badge
+            LEFT ZONE: Clean Boxed Wordmark Logo
             ========================================================================= */}
         <div className={styles.brandZone}>
-          {/* Boxed Wordmark Logo matching reference */}
           <Link href="/" className={styles.logoBox} title="Dilshan">
             <span className={styles.logoText}>DILSHAN</span>
           </Link>
-
-          {/* Mission & Engineering Statement */}
-          <p className={styles.brandDescription}>
-            Dilshan engineers high-throughput machine learning systems, optimizes low-latency
-            inference runtimes, and architects resilient cloud infrastructure.
-          </p>
-
-          {/* Copyright Line */}
-          <div className={styles.copyrightText}>
-            @{currentYear} All Rights Reserved to Dilshan.
-          </div>
-
-          {/* Crafted By Badge */}
-          <div className={styles.craftedBadge}>
-            <span>Website crafted with</span>
-            <span className={styles.heartIcon} aria-hidden="true">❤</span>
-            <span>by</span>
-            <span className={styles.craftedAuthor}>dilshan</span>
-          </div>
         </div>
 
         {/* =========================================================================
@@ -76,7 +54,7 @@ export default function MainFooter() {
             </ul>
           </div>
 
-          {/* Column 2: DOMAINS (matching INDUSTRIES in reference) */}
+          {/* Column 2: DOMAINS */}
           <div className={styles.footerColumn}>
             <h4 className={styles.columnTitle}>DOMAINS</h4>
             <ul className={styles.columnList}>

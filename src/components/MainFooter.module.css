@@ -1,13 +1,13 @@
 /* =========================================================================
-   Main Footer (Matching exact ChatLabs reference design)
+   Main Footer (Clean, Minimal & Proportional)
    Obsidian dark canvas (#111111), Boxed Wordmark Logo [ DILSHAN ],
-   mission description, copyright, crafted badge, and 3 clean link columns.
+   and 3 clean vertical link columns.
    ========================================================================= */
 
 .footerRoot {
   background-color: #111111;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding: clamp(5rem, 8vw, 7.5rem) clamp(1.5rem, 5vw, 4rem) clamp(4rem, 6vw, 6rem);
+  padding: clamp(3.5rem, 5.5vw, 5.5rem) clamp(1.5rem, 5vw, 4rem);
   width: 100%;
   box-sizing: border-box;
   color: #eceff4;
@@ -19,23 +19,21 @@
   margin: 0 auto;
   width: 100%;
   display: grid;
-  grid-template-columns: minmax(300px, 1.2fr) minmax(0, 1.8fr);
+  grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);
   column-gap: clamp(3rem, 7vw, 8rem);
-  row-gap: 3.5rem;
+  row-gap: 2.5rem;
   align-items: start;
 }
 
 /* =========================================================================
-   LEFT ZONE: Boxed Wordmark Logo + Statement + Copyright + Crafted Badge
+   LEFT ZONE: Boxed Wordmark Logo [ DILSHAN ]
    ========================================================================= */
 .brandZone {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 440px;
 }
 
-/* Boxed Wordmark Logo [ DILSHAN ] matching reference outline */
 .logoBox {
   display: inline-flex;
   align-items: center;
@@ -44,7 +42,6 @@
   padding: 0.42rem 1.15rem;
   border-radius: 2px;
   text-decoration: none;
-  margin-bottom: 1.6rem;
   background-color: transparent;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
@@ -68,53 +65,6 @@
   color: #000000;
 }
 
-/* Mission & Engineering Statement */
-.brandDescription {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(0.92rem, 1.1vw, 1rem);
-  line-height: 1.62;
-  color: #8e94a0;
-  margin: 0 0 1.85rem 0;
-}
-
-/* Copyright Line */
-.copyrightText {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.82rem;
-  color: #626773;
-  margin: 0 0 1.35rem 0;
-  letter-spacing: -0.01em;
-}
-
-/* Crafted By Badge */
-.craftedBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  background-color: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 6px;
-  padding: 0.45rem 0.95rem;
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.78rem;
-  color: #8e94a0;
-  user-select: none;
-}
-
-.heartIcon {
-  color: #ef4444;
-  font-size: 0.85rem;
-  display: inline-block;
-  line-height: 1;
-}
-
-.craftedAuthor {
-  color: #ffffff;
-  font-weight: 600;
-  font-family: var(--font-mono, monospace);
-  letter-spacing: 0.04em;
-}
-
 /* =========================================================================
    RIGHT ZONE: 3 Clean Vertical Link Columns (EXPLORE, DOMAINS, SOCIALS)
    ========================================================================= */
@@ -131,7 +81,6 @@
   align-items: flex-start;
 }
 
-/* Column Title (EXPLORE, DOMAINS, SOCIALS) */
 .columnTitle {
   font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
   font-size: 0.76rem;
@@ -166,20 +115,16 @@
 }
 
 /* =========================================================================
-   RESPONSIVE LAYOUT (Optimized for Mobile Ergonomics & Clean Hierarchy)
+   RESPONSIVE LAYOUT
    ========================================================================= */
 @media (max-width: 960px) {
   .footerRoot {
-    padding: clamp(3.5rem, 6vw, 5rem) clamp(1.25rem, 4vw, 2.5rem) clamp(3rem, 5vw, 4rem);
+    padding: clamp(3rem, 5vw, 4.5rem) clamp(1.25rem, 4vw, 2.5rem);
   }
 
   .container {
     grid-template-columns: 1fr;
-    gap: 2.75rem;
-  }
-
-  .brandZone {
-    max-width: 100%;
+    gap: 2.25rem;
   }
 
   .columnsZone {
@@ -190,32 +135,15 @@
 
 @media (max-width: 640px) {
   .footerRoot {
-    padding: 3rem 1.25rem 2.5rem;
+    padding: 2.5rem 1.25rem 2.25rem;
   }
 
   .container {
-    gap: 2.25rem;
+    gap: 1.75rem;
   }
 
   .logoBox {
-    margin-bottom: 1.15rem;
     padding: 0.38rem 0.95rem;
-  }
-
-  .brandDescription {
-    font-size: 0.88rem;
-    line-height: 1.55;
-    margin-bottom: 1.25rem;
-  }
-
-  .copyrightText {
-    font-size: 0.78rem;
-    margin-bottom: 1rem;
-  }
-
-  .craftedBadge {
-    padding: 0.35rem 0.75rem;
-    font-size: 0.74rem;
   }
 
   .columnsZone {
