@@ -347,18 +347,25 @@
 .bannerFrame {
   position: relative;
   width: 100%;
-  height: clamp(340px, 58vh, 680px);
-  border-radius: 20px;
+  height: clamp(520px, 78vh, 880px);
+  border-radius: 0;
   overflow: hidden;
   background-color: #0c0d10;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
 }
 
+@media (max-width: 899px) {
+  .bannerFrame {
+    border-radius: 0;
+    height: clamp(380px, 64vh, 580px);
+  }
+}
+
 @media (max-width: 640px) {
   .bannerFrame {
-    border-radius: 14px;
-    height: clamp(260px, 46vh, 380px);
+    border-radius: 0;
+    height: clamp(320px, 56vh, 460px);
   }
 }
 
@@ -367,6 +374,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: 0;
 }
 
 .bannerOverlay {
