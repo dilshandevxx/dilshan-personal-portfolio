@@ -91,10 +91,10 @@ export const PROJECT_THUMBNAILS: Record<string, string> = {
   "internal-developer-platform": "/images/project_mastermail.jpg",
   "kubernetes-policy-reliability-operator": "/images/biometric_scan.png",
   "distributed-observability-platform": "/images/skyline_twilight.jpg",
-  "creative-collective": "/images/project_collective.jpg",
-  "brutalist-manifesto": "/images/project_brutalist.jpg",
-  "cloudwatch-telemetry": "/images/project_analytics.jpg",
-  "warpspeed-protocol": "/images/project_warpspeed_desk.jpg",
+  "creative-collective": "/images/projects/showcase_nespresso.jpg",
+  "brutalist-manifesto": "/images/projects/showcase_trends.jpg",
+  "cloudwatch-telemetry": "/images/projects/showcase_machines.jpg",
+  "warpspeed-protocol": "/images/projects/showcase_simplify.webp",
 };
 
 export const FALLBACK_THUMBNAILS = [

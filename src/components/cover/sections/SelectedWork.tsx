@@ -16,34 +16,34 @@ interface ProjectItem {
 
 const PROJECTS_LEFT: ProjectItem[] = [
   {
-    id: "creative-collective",
-    name: "Creative Collective",
-    subtitle: "Brand Identity, Tokyo & New York",
-    image: "/images/project_collective.jpg",
+    id: "nespresso-digital",
+    name: "Nespresso Digital",
+    subtitle: "Mobile Flagship & E-Commerce Experience",
+    image: "/images/projects/showcase_nespresso.jpg",
     slug: "creative-collective",
   },
   {
-    id: "cloudwatch-telemetry",
-    name: "CloudWatch Telemetry",
-    subtitle: "Distributed Systems, High Throughput",
-    image: "/images/project_analytics.jpg",
+    id: "invisible-machines",
+    name: "Invisible Machines",
+    subtitle: "Book Architecture & Typographic System",
+    image: "/images/projects/showcase_machines.jpg",
     slug: "cloudwatch-telemetry",
   },
 ];
 
 const PROJECTS_RIGHT: ProjectItem[] = [
   {
-    id: "brutalist-manifesto",
-    name: "Brutalist Manifesto",
-    subtitle: "Editorial Design, Digital Publication",
-    image: "/images/project_brutalist.jpg",
+    id: "design-trends-2026",
+    name: "Design Trends 2026",
+    subtitle: "Editorial Design, Trend Publication",
+    image: "/images/projects/showcase_trends.jpg",
     slug: "brutalist-manifesto",
   },
   {
-    id: "warpspeed-protocol",
-    name: "Warpspeed Protocol",
-    subtitle: "Edge Computing, Ultra Low Latency",
-    image: "/images/project_warpspeed_desk.jpg",
+    id: "simplify-kollo",
+    name: "Simplify",
+    subtitle: "Visual Identity, Kollo Media",
+    image: "/images/projects/showcase_simplify.webp",
     slug: "warpspeed-protocol",
   },
 ];
