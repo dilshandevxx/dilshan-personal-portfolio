@@ -2,131 +2,119 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Check, Copy, Mail, MapPin } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 import styles from "./ContactSection.module.css";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [copied, setCopied] = useState(false);
 
   const emailAddress = "dilshan.devxx@gmail.com";
-
-  const handleCopyEmail = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(emailAddress);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2200);
-    }
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate instantaneous clean submission
     setTimeout(() => {
       setLoading(false);
       setSubmitted(true);
-    }, 650);
+    }, 600);
   };
 
   return (
-    <section className={styles.contactSection} id="contact" aria-label="Contact Me">
+    <section className={styles.contactSection} id="contact" aria-label="Contact Section">
       <div className={styles.container}>
-        {/* Left Column: Heading, Narrative & Tactile Contact Info */}
+        {/* Left Column: Quiet editorial typography & organized touchpoints */}
         <motion.div
           className={styles.leftCol}
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Subtle Live Status Indicator */}
-          <div className={styles.statusBadge}>
-            <span className={styles.statusDot} aria-hidden="true" />
-            <span className={styles.statusLabel}>AVAILABLE FOR COLLABORATION</span>
-          </div>
+          <div className={styles.sectionTag}>CONTACT</div>
 
-          <h2 className={styles.heading}>
-            <span className={styles.headingWhite}>Feel free to</span>
-            <span className={styles.headingSecondary}>contact me.</span>
+          <h2 className={styles.headline}>
+            Let&apos;s start a conversation.
           </h2>
 
-          <p className={styles.description}>
-            Feel free to contact me anytime! Whether you have a question, a project in mind,
-            or just want to connect, I&apos;m always open to new opportunities and
-            collaborations. Don&apos;t hesitate to reach out; I&apos;m here to help and
-            look forward to hearing from you.
+          <p className={styles.leadText}>
+            Interested in collaborating, discussing distributed systems and AI platforms,
+            or exploring new engineering opportunities? Drop a line through the form or
+            reach out directly.
           </p>
 
-          {/* Quick Direct Info Cards */}
-          <div className={styles.contactDetails}>
-            <div className={styles.contactCard}>
-              <div className={styles.contactCardIconWrap}>
-                <Mail size={16} className={styles.contactCardIcon} />
-              </div>
-              <div className={styles.contactCardContent}>
-                <span className={styles.contactCardLabel}>DIRECT EMAIL</span>
-                <div className={styles.emailRow}>
-                  <a href={`mailto:${emailAddress}`} className={styles.contactCardValue}>
-                    {emailAddress}
-                  </a>
-                  <button
-                    type="button"
-                    onClick={handleCopyEmail}
-                    className={styles.copyBtn}
-                    title="Copy email to clipboard"
-                    aria-label="Copy email"
-                  >
-                    {copied ? (
-                      <span className={styles.copiedText}>Copied!</span>
-                    ) : (
-                      <Copy size={13} className={styles.copyIcon} />
-                    )}
-                  </button>
-                </div>
-              </div>
+          <div className={styles.directList}>
+            <div className={styles.directItem}>
+              <span className={styles.directLabel}>Direct Email</span>
+              <a href={`mailto:${emailAddress}`} className={styles.directValueLink}>
+                <span>{emailAddress}</span>
+                <ArrowUpRight size={15} className={styles.directArrow} />
+              </a>
             </div>
 
-            <div className={styles.contactCard}>
-              <div className={styles.contactCardIconWrap}>
-                <MapPin size={16} className={styles.contactCardIcon} />
-              </div>
-              <div className={styles.contactCardContent}>
-                <span className={styles.contactCardLabel}>LOCATION & TIMEZONE</span>
-                <span className={styles.contactCardValue}>Colombo, Sri Lanka · UTC+5:30</span>
+            <div className={styles.directItem}>
+              <span className={styles.directLabel}>Location</span>
+              <span className={styles.directValue}>Colombo, Sri Lanka &middot; UTC+5:30</span>
+            </div>
+
+            <div className={styles.directItem}>
+              <span className={styles.directLabel}>Profiles</span>
+              <div className={styles.socialGroup}>
+                <a
+                  href="https://github.com/dilshandevxx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.socialLink}
+                >
+                  GitHub <ArrowUpRight size={13} className={styles.socialArrow} />
+                </a>
+                <a
+                  href="https://linkedin.com/in/heydilshan/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.socialLink}
+                >
+                  LinkedIn <ArrowUpRight size={13} className={styles.socialArrow} />
+                </a>
+                <a
+                  href="https://x.com/dilshanverse"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.socialLink}
+                >
+                  Twitter/X <ArrowUpRight size={13} className={styles.socialArrow} />
+                </a>
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* Right Column: Modern Editorial Form Card */}
+        {/* Right Column: Clean, understated form card */}
         <motion.div
           className={styles.rightCol}
-          initial={{ opacity: 0, y: 28 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.65, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className={styles.formCard}>
             <AnimatePresence mode="wait">
               {submitted ? (
                 <motion.div
                   key="success"
-                  className={styles.successMessage}
+                  className={styles.successState}
                   initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <div className={styles.successIconWrap}>
-                    <Check size={24} className={styles.successCheckIcon} />
+                  <div className={styles.successIconBox}>
+                    <Check size={22} className={styles.checkIcon} />
                   </div>
-                  <h3 className={styles.successTitle}>Message Sent Successfully</h3>
-                  <p className={styles.successText}>
-                    Thank you for reaching out! I&apos;ve received your message and will get back
-                    to you promptly.
+                  <h3 className={styles.successTitle}>Message received</h3>
+                  <p className={styles.successDesc}>
+                    Thank you for reaching out. I have received your note and will get back to you shortly.
                   </p>
                   <button
                     type="button"
@@ -134,22 +122,14 @@ export default function ContactSection() {
                       setSubmitted(false);
                       setFormData({ name: "", email: "", message: "" });
                     }}
-                    className={styles.resetButton}
+                    className={styles.resetBtn}
                   >
-                    Send Another Message
+                    Send another message
                   </button>
                 </motion.div>
               ) : (
-                <motion.form
-                  key="form"
-                  onSubmit={handleSubmit}
-                  className={styles.form}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.25 }}
-                >
-                  <div className={styles.inputGroup}>
+                <form onSubmit={handleSubmit} className={styles.form}>
+                  <div className={styles.fieldGroup}>
                     <label htmlFor="contact-name" className={styles.label}>
                       Name
                     </label>
@@ -157,15 +137,15 @@ export default function ContactSection() {
                       id="contact-name"
                       type="text"
                       name="name"
-                      placeholder="Your name"
                       required
+                      placeholder="Your name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className={styles.input}
                     />
                   </div>
 
-                  <div className={styles.inputGroup}>
+                  <div className={styles.fieldGroup}>
                     <label htmlFor="contact-email" className={styles.label}>
                       Email
                     </label>
@@ -173,24 +153,24 @@ export default function ContactSection() {
                       id="contact-email"
                       type="email"
                       name="email"
-                      placeholder="Your email address"
                       required
+                      placeholder="you@domain.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className={styles.input}
                     />
                   </div>
 
-                  <div className={styles.inputGroup}>
+                  <div className={styles.fieldGroup}>
                     <label htmlFor="contact-message" className={styles.label}>
                       Message
                     </label>
                     <textarea
                       id="contact-message"
                       name="message"
-                      placeholder="Tell me about your project, idea, or inquiry..."
-                      rows={4}
                       required
+                      rows={4}
+                      placeholder="Tell me about your project, idea, or inquiry..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       className={styles.textarea}
@@ -200,12 +180,12 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className={styles.sendButton}
+                    className={styles.submitBtn}
                   >
                     <span>{loading ? "Sending..." : "Send Message"}</span>
-                    <ArrowUpRight size={16} className={styles.sendArrow} />
+                    <ArrowUpRight size={16} className={styles.submitArrow} />
                   </button>
-                </motion.form>
+                </form>
               )}
             </AnimatePresence>
           </div>
