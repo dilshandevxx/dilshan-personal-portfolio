@@ -8,7 +8,7 @@ import { ArrowUpRight } from "lucide-react";
 import styles from "./SkyLabsNavbar.module.css";
 
 interface SkyLabsNavbarProps {
-  activeTab?: "home" | "services" | "projects" | "about" | "portfolio";
+  activeTab?: "home" | "services" | "expertise" | "projects" | "about" | "portfolio";
 }
 
 export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
@@ -75,9 +75,13 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
           <nav className={styles.desktopNav} aria-label="Main Navigation">
             <Link
               href="/#skills"
-              className={`${styles.navLink} ${activeTab === "services" ? styles.navLinkActive : ""}`}
+              className={`${styles.navLink} ${
+                activeTab === "services" || activeTab === "expertise"
+                  ? styles.navLinkActive
+                  : ""
+              }`}
             >
-              SERVICES
+              EXPERTISE
             </Link>
             <Link
               href="/projects"
@@ -138,13 +142,14 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
             <div className={styles.menuContainer}>
               <nav className={styles.menuNav} aria-label="Main Navigation">
                 {[
-                  { label: "SERVICES", href: "/#skills", key: "services" },
+                  { label: "EXPERTISE", href: "/#skills", key: "expertise" },
                   { label: "PROJECTS", href: "/projects", key: "projects" },
                   { label: "ABOUT", href: "/about", key: "about" },
                   { label: "PORTFOLIO", href: "/portfolio", key: "portfolio" },
                 ].map((item, idx) => {
                   const isActive =
-                    (item.key === "services" && activeTab === "services") ||
+                    ((item.key === "expertise" || item.key === "services") &&
+                      (activeTab === "expertise" || activeTab === "services")) ||
                     (item.key === "projects" && (activeTab === "projects" || pathname.startsWith("/projects"))) ||
                     (item.key === "about" && (activeTab === "about" || pathname === "/about")) ||
                     (item.key === "portfolio" && (activeTab === "portfolio" || pathname.startsWith("/portfolio")));

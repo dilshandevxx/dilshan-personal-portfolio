@@ -133,7 +133,7 @@ export default function HeroSkyLabs() {
                   activeSection === "skills" ? styles.navLinkActive : ""
                 }`}
               >
-                SERVICES
+                EXPERTISE
               </a>
               <Link
                 href="/projects"
@@ -186,7 +186,7 @@ export default function HeroSkyLabs() {
               <div className={styles.menuContainer}>
                 <nav className={styles.menuNav} aria-label="Overlay Navigation">
                   {[
-                    { label: "SERVICES", href: "#skills", isAnchor: true },
+                    { label: "EXPERTISE", href: "#skills", isAnchor: true },
                     { label: "PROJECTS", href: "/projects", isAnchor: false },
                     { label: "ABOUT", href: "/about", isAnchor: false },
                     { label: "PORTFOLIO", href: "/portfolio", isAnchor: false },
