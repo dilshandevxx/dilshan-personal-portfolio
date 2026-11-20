@@ -1,4 +1,8 @@
-/* Editorial About Me Page (Faithfully matching Joshua Baker reference design) */
+/* =========================================================================
+   About Me Page (Faithfully reproducing the about-6 reference design)
+   Obsidian dark surface (#111111), white badge pill, ribbed texture,
+   high-impact uppercase headline, 4 stats columns & 2 large rounded cards.
+   ========================================================================= */
 
 .pageRoot {
   background-color: #111111;
@@ -13,16 +17,16 @@
 }
 
 .mainContainer {
-  max-width: 1360px;
+  max-width: 1420px;
   margin: 0 auto;
-  padding: 1.5rem clamp(1.25rem, 3.5vw, 3rem) clamp(5rem, 8vw, 8rem);
+  padding: 1.5rem clamp(1.25rem, 4vw, 3.5rem) clamp(5rem, 8vw, 8rem);
   width: 100%;
   box-sizing: border-box;
 }
 
 /* Subtle Back Link */
 .topNav {
-  margin-bottom: clamp(1.75rem, 3vw, 2.75rem);
+  margin-bottom: clamp(2rem, 3.5vw, 3rem);
 }
 
 .backLink {
@@ -50,301 +54,413 @@
   transform: translateX(-3px);
 }
 
-/* ------------------------------------------------------------- */
-/* 3-COLUMN EDITORIAL STAGE LAYOUT                               */
-/* ------------------------------------------------------------- */
-.stageGrid {
-  display: grid;
-  grid-template-columns: 240px minmax(460px, 640px) 240px;
-  justify-content: center;
-  gap: clamp(2rem, 3.5vw, 4.5rem);
-  align-items: start;
+/* =========================================================================
+   1. HERO STAGE (Matching about-6 reference image)
+   ========================================================================= */
+.stageSection {
+  width: 100%;
+  position: relative;
+  margin-bottom: clamp(5rem, 9vw, 9rem);
+}
+
+/* Top Row: Pill Badge (Left) + Ribbed Texture (Right) */
+.badgeHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: clamp(1.8rem, 3vw, 2.75rem);
   width: 100%;
 }
 
-/* ------------------------------------------------------------- */
-/* LEFT FLANK: FLOATING POLAROID PHOTOS                          */
-/* ------------------------------------------------------------- */
-.leftFlank {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  position: sticky;
-  top: 6.5rem;
-  align-items: flex-start;
-}
-
-.polaroidCard {
+/* White Pill Badge */
+.statsBadge {
   background-color: #ffffff;
-  padding: 7px 7px 11px 7px;
-  border-radius: 2px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 4px 14px rgba(0, 0, 0, 0.45);
-  cursor: pointer;
-  width: 220px;
-  box-sizing: border-box;
-  transform-origin: center center;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.35s ease;
-}
-
-.polaroidInner {
-  overflow: hidden;
-  background-color: #181818;
-  width: 100%;
-  height: auto;
-}
-
-.polaroidImg {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  border-radius: 0;
-}
-
-/* Individual Rotation Offsets (Left Flank) */
-.leftCard1 {
-  transform: rotate(-4deg);
-}
-
-.leftCard2 {
-  transform: rotate(2.5deg) translateY(-8px);
-}
-
-.leftCard3 {
-  transform: rotate(-2.5deg) translateY(-16px);
-}
-
-/* ------------------------------------------------------------- */
-/* CENTER COLUMN: THE EDITORIAL NARRATIVE SPINE                  */
-/* ------------------------------------------------------------- */
-.centerSpine {
-  width: 100%;
-  max-width: 640px;
-}
-
-.mainTitle {
+  color: #000000;
+  border-radius: 9999px;
+  padding: 0.48rem 1.35rem;
   font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(2.6rem, 4.5vw, 3.4rem);
+  font-size: clamp(0.72rem, 0.85vw, 0.8rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.18);
+}
+
+/* Decorative Ribbed Barcode Texture matching top right of reference */
+.ribbedTexture {
+  display: flex;
+  gap: 4px;
+  height: clamp(60px, 8vw, 84px);
+  align-items: stretch;
+  opacity: 0.24;
+}
+
+.ribbedLine {
+  width: 1.5px;
+  height: 100%;
+  background-color: #ffffff;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .ribbedTexture {
+    display: none;
+  }
+}
+
+/* Large Bold Display Headline */
+.headlineWrap {
+  max-width: 1040px;
+  width: 100%;
+  margin-bottom: clamp(2.5rem, 4.5vw, 4.25rem);
+}
+
+.mainHeadline {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
+  font-size: clamp(1.85rem, 3.4vw, 3.15rem);
   font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
   color: #ffffff;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  margin: 0 0 clamp(1.5rem, 2.5vw, 2.2rem) 0;
+  margin: 0;
 }
 
-.leadPara {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(1.02rem, 1.25vw, 1.12rem);
-  line-height: 1.7;
-  color: #d1d5db;
-  margin: 0 0 clamp(2.5rem, 4vw, 3.5rem) 0;
-  letter-spacing: -0.01em;
+@media (max-width: 768px) {
+  .mainHeadline {
+    font-size: clamp(1.45rem, 5.2vw, 2.1rem);
+    line-height: 1.28;
+  }
 }
 
-/* ------------------------------------------------------------- */
-/* 2x2 BIG METRICS GRID (MATCHING JOSHUA BAKER DESIGN)           */
-/* ------------------------------------------------------------- */
-.metricsGrid {
+/* 4 Stats Metrics Columns aligned right below the headline */
+.statsRow {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: clamp(2rem, 4vw, 4rem);
-  row-gap: clamp(2rem, 3.5vw, 3rem);
-  margin-bottom: clamp(3rem, 5vw, 4.25rem);
-  padding-bottom: clamp(2.5rem, 4vw, 3.5rem);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 860px;
+  margin-left: auto;
+  margin-bottom: clamp(3rem, 5vw, 4.5rem);
+  gap: clamp(1rem, 2vw, 2.25rem);
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.metricItem {
+.statColumn {
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+  padding-left: clamp(1rem, 1.8vw, 2rem);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.metricNumber {
+.statNumber {
   font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(3rem, 5.2vw, 4.2rem);
+  font-size: clamp(2.1rem, 3.4vw, 3.25rem);
   font-weight: 700;
   color: #ffffff;
   line-height: 1;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.02em;
 }
 
-.metricLabel {
+.statLabel {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.92rem;
-  color: #9ca3af;
-  margin-top: 0.65rem;
-  line-height: 1.4;
-  letter-spacing: -0.01em;
+  font-size: clamp(0.8rem, 0.95vw, 0.92rem);
+  color: #8b92a4;
+  margin-top: 0.45rem;
+  font-weight: 400;
+  line-height: 1.3;
 }
 
-/* ------------------------------------------------------------- */
-/* DETAILED NARRATIVE STORY PARAGRAPHS                           */
-/* ------------------------------------------------------------- */
-.storyStack {
-  display: flex;
-  flex-direction: column;
-  gap: 1.65rem;
+@media (max-width: 860px) {
+  .statsRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.8rem 1.5rem;
+    margin-left: 0;
+  }
 }
 
-.storyPara {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(0.98rem, 1.15vw, 1.06rem);
-  line-height: 1.74;
-  color: #9ca3af;
-  margin: 0;
-  letter-spacing: -0.01em;
-}
-
-/* ------------------------------------------------------------- */
-/* RIGHT FLANK: WORKSHOP PHOTOS & STICKER NOTES                  */
-/* ------------------------------------------------------------- */
-.rightFlank {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  position: sticky;
-  top: 6.5rem;
-  align-items: flex-end;
-}
-
-.rightCard1 {
-  transform: rotate(3deg);
-  width: 220px;
-}
-
-/* Square Sticker Note with Signature Orange Loop (Matching Reference) */
-.stickerCard {
-  background-color: #ffffff;
-  border-radius: 2px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 4px 14px rgba(0, 0, 0, 0.45);
-  width: 155px;
-  height: 155px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transform: rotate(-4deg) translateY(-6px);
-  transform-origin: center center;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.35s ease;
-}
-
-.stickerInner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Two Large Rounded Photo Cards */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 2.8vw, 2.5rem);
   width: 100%;
-  height: 100%;
 }
 
-/* Editorial Illustration Card */
-.illustrationCard {
-  background-color: #ffffff;
-  padding: 7px 7px 11px 7px;
-  border-radius: 2px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 4px 14px rgba(0, 0, 0, 0.45);
-  cursor: pointer;
-  width: 195px;
-  transform: rotate(3.5deg) translateY(-14px);
-  transform-origin: center center;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.35s ease;
-}
-
-.illustrationInner {
+.photoCard {
+  position: relative;
+  width: 100%;
+  height: clamp(380px, 46vw, 620px);
+  border-radius: clamp(20px, 2.5vw, 32px);
   overflow: hidden;
-  background-color: #ffffff;
-  width: 100%;
-  height: auto;
+  background-color: #16181d;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
-/* ------------------------------------------------------------- */
-/* RESPONSIVENESS                                                */
-/* ------------------------------------------------------------- */
-@media (max-width: 1200px) {
-  .stageGrid {
-    grid-template-columns: 200px 1fr 200px;
+.cardImage {
+  object-fit: cover;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.photoCard:hover .cardImage {
+  transform: scale(1.025);
+}
+
+.cardOverlayGradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.35) 100%);
+  pointer-events: none;
+}
+
+/* Minimalist Photo Switcher Pill */
+.photoSwitchPill {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  background-color: rgba(17, 17, 17, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 9999px;
+  padding: 4px;
+  gap: 3px;
+}
+
+.switchBtn {
+  border: none;
+  background: transparent;
+  color: #8b92a4;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.switchBtn:hover {
+  color: #ffffff;
+}
+
+.switchActive {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 860px) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .photoCard {
+    height: clamp(320px, 60vw, 480px);
+    border-radius: 20px;
+  }
+}
+
+/* =========================================================================
+   2. DETAILED EDITORIAL BIOGRAPHY & COMPETENCIES
+   ========================================================================= */
+.narrativeSection {
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: clamp(4rem, 7vw, 6rem);
+}
+
+.narrativeGrid {
+  display: grid;
+  grid-template-columns: minmax(240px, 360px) minmax(0, 1fr);
+  gap: clamp(2.5rem, 5vw, 6rem);
+  align-items: start;
+}
+
+.narrativeLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: sticky;
+  top: 7rem;
+}
+
+.sectionPill {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a3e635; /* Neon accent */
+}
+
+.narrativeTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0;
+}
+
+.narrativeRight {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  max-width: 820px;
+}
+
+.narrativeLead {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(1.05rem, 1.4vw, 1.22rem);
+  line-height: 1.65;
+  color: #e2e8f0;
+  margin: 0;
+}
+
+.narrativeBody {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+  line-height: 1.72;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* Competencies Matrix */
+.competencyMatrix {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.competencyItem {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.25rem;
+  background-color: #16181d;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  transition: all 0.25s ease;
+}
+
+.competencyItem:hover {
+  border-color: rgba(163, 230, 53, 0.3);
+  transform: translateY(-2px);
+}
+
+.compIcon {
+  color: #a3e635;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.compTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 0.35rem 0;
+}
+
+.compDesc {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #8b92a4;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .competencyMatrix {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Action Links */
+.narrativeActions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.primaryActionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background-color: #a3e635;
+  color: #000000;
+  border: 1px solid #a3e635;
+  border-radius: 4px;
+  padding: 0.8rem 1.85rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(163, 230, 53, 0.35);
+}
+
+.primaryActionBtn:hover {
+  background-color: #bef264;
+  border-color: #bef264;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(163, 230, 53, 0.5);
+}
+
+.secondaryActionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 0.8rem 1.6rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.secondaryActionBtn:hover {
+  color: #ffffff;
+  border-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+@media (max-width: 860px) {
+  .narrativeGrid {
+    grid-template-columns: 1fr;
     gap: 2rem;
   }
 
-  .polaroidCard,
-  .rightCard1 {
-    width: 190px;
-  }
-
-  .illustrationCard {
-    width: 175px;
-  }
-
-  .stickerCard {
-    width: 140px;
-    height: 140px;
-  }
-}
-
-@media (max-width: 980px) {
-  .stageGrid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 680px;
-    margin: 0 auto;
-    gap: 3rem;
-  }
-
-  .centerSpine {
-    order: 1;
-    max-width: 100%;
-  }
-
-  .leftFlank,
-  .rightFlank {
+  .narrativeLeft {
     position: static;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    width: 100%;
-    align-items: center;
-  }
-
-  .leftFlank {
-    order: 2;
-  }
-
-  .rightFlank {
-    order: 3;
-  }
-
-  .polaroidCard,
-  .rightCard1 {
-    width: clamp(160px, 40vw, 210px);
-  }
-
-  .illustrationCard {
-    width: clamp(150px, 36vw, 190px);
-  }
-
-  .stickerCard {
-    width: 135px;
-    height: 135px;
-  }
-}
-
-@media (max-width: 580px) {
-  .metricsGrid {
-    grid-template-columns: 1fr 1fr;
-    gap: 1.75rem 1.25rem;
-  }
-
-  .metricNumber {
-    font-size: 2.75rem;
-  }
-
-  .mainTitle {
-    font-size: 2.4rem;
   }
 }
