@@ -1,26 +1,84 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { projectsList as defaultProjects, Project, ProjectCategory } from "@/data/projects";
+import {
+  projectsList as defaultProjects,
+  Project,
+  getProjectThumbnail,
+} from "@/data/projects";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
-import { ProjectCard } from "@/components/ProjectCard";
 import MainFooter from "@/components/MainFooter";
-import { ArrowRight, ArrowUpRight, Search, X } from "lucide-react";
+import { Rss, Search, X } from "lucide-react";
 import styles from "./projectsPage.module.css";
 
-const CATEGORIES: readonly ("All" | ProjectCategory)[] = [
+const FILTER_CATEGORIES = [
   "All",
-  "AI/ML",
+  "AI & ML",
+  "DevOps & Cloud",
+  "Distributed Systems",
+  "MLOps & K8s",
   "Full-Stack",
-  "Systems",
+  "Open Source",
 ] as const;
+
+type FilterCategory = (typeof FILTER_CATEGORIES)[number];
+
+function matchesCategory(project: Project, cat: FilterCategory): boolean {
+  if (cat === "All") return true;
+  const pCat = project.category?.toLowerCase() || "";
+  const pTags = project.tags?.map((t) => t.toLowerCase()) || [];
+
+  switch (cat) {
+    case "AI & ML":
+      return (
+        pCat.includes("ai") ||
+        pCat.includes("ml") ||
+        pTags.some((t) => t.includes("ai") || t.includes("rag") || t.includes("llm"))
+      );
+    case "DevOps & Cloud":
+      return (
+        pCat.includes("devops") ||
+        pCat.includes("cloud") ||
+        pCat.includes("platform") ||
+        pCat.includes("sre") ||
+        pTags.some((t) => t.includes("kubernetes") || t.includes("terraform") || t.includes("docker"))
+      );
+    case "Distributed Systems":
+      return (
+        pCat.includes("distributed") ||
+        pCat.includes("systems") ||
+        pTags.some((t) => t.includes("kafka") || t.includes("grpc") || t.includes("go"))
+      );
+    case "MLOps & K8s":
+      return (
+        pCat.includes("mlops") ||
+        pTags.some((t) => t.includes("mlops") || t.includes("kubernetes") || t.includes("inference"))
+      );
+    case "Full-Stack":
+      return (
+        pCat.includes("full-stack") ||
+        pCat.includes("landing") ||
+        pTags.some((t) => t.includes("react") || t.includes("next.js"))
+      );
+    case "Open Source":
+      return (
+        project.status === "Existing" ||
+        Boolean(project.githubUrl) ||
+        Boolean(typeof project.stars === "number" && project.stars > 0)
+      );
+    default:
+      return true;
+  }
+}
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>(defaultProjects);
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [activeCategory, setActiveCategory] = useState<FilterCategory>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [showSearch, setShowSearch] = useState<boolean>(false);
 
   // Sync any custom additions/edits saved via Admin in production
   useEffect(() => {
@@ -38,8 +96,7 @@ export default function ProjectsPage() {
   const filteredProjects = useMemo(() => {
     const q = searchQuery.toLowerCase().trim();
     return projects.filter((project) => {
-      const matchesCat =
-        selectedCategory === "All" || project.category === selectedCategory;
+      const matchesCat = matchesCategory(project, activeCategory);
       const matchesSearch =
         q === "" ||
         project.title.toLowerCase().includes(q) ||
@@ -48,184 +105,166 @@ export default function ProjectsPage() {
         (project.tags && project.tags.some((t) => t.toLowerCase().includes(q)));
       return matchesCat && matchesSearch;
     });
-  }, [projects, selectedCategory, searchQuery]);
+  }, [projects, activeCategory, searchQuery]);
 
   return (
     <div className={styles.pageRoot}>
-      {/* 1. Signature SkyLabs Top Navigation Header */}
+      {/* 1. Global Navigation Bar */}
       <SkyLabsNavbar activeTab="projects" />
 
-      {/* 2. Main Content Container */}
+      {/* 2. Main Projects Content Container */}
       <main className={styles.mainContainer}>
-        {/* Clean, Refined Editorial Hero */}
-        <section className={styles.heroSection}>
-          <div className={styles.eyebrowRow}>
-            <span className={styles.eyebrowTag}>SELECTED WORK</span>
-            <span className={styles.eyebrowDot}>•</span>
-            <span className={styles.eyebrowMeta}>{projects.length} Flagship Systems</span>
+        {/* Header Block matching Reference Design */}
+        <header className={styles.headerBlock}>
+          <div className={styles.titleRow}>
+            <h1 className={styles.pageTitle}>Projects</h1>
+            <div className={styles.headerActions}>
+              <button
+                type="button"
+                onClick={() => setShowSearch(!showSearch)}
+                className={`${styles.iconBtn} ${showSearch ? styles.iconBtnActive : ""}`}
+                aria-label="Toggle search input"
+                title="Search projects"
+              >
+                <Search size={16} />
+              </button>
+              <div className={styles.rssWrap} title="Project Feed">
+                <Rss size={16} className={styles.rssIcon} />
+              </div>
+            </div>
           </div>
 
-          <h1 className={styles.title}>Curated Systems &amp; Architecture</h1>
-          <p className={styles.subtitle}>
-            A curated selection of {projects.length} production architectures spanning intelligent AI/ML models, scalable full-stack applications, and high-throughput distributed infrastructure.
-          </p>
-        </section>
+          {/* Collapsible Search Input */}
+          <AnimatePresence>
+            {showSearch && (
+              <motion.div
+                className={styles.searchBarWrap}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className={styles.searchInputGroup}>
+                  <Search size={14} className={styles.searchFieldIcon} />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search systems by keyword, model, or technology..."
+                    className={styles.searchInput}
+                    autoFocus
+                  />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery("")}
+                      className={styles.clearSearchBtn}
+                      aria-label="Clear search"
+                    >
+                      <X size={13} />
+                    </button>
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-        {/* 3. Category Filter & Search Section */}
-        <section className={styles.filterBarSection} aria-label="Project Categories & Search">
-          <div className={styles.filterControlsRow}>
-            {/* Category Tabs */}
-            <div className={styles.filterTabs} role="tablist">
-              {CATEGORIES.map((cat) => {
-                const isActive = selectedCategory === cat;
-                const count =
-                  cat === "All"
-                    ? projects.length
-                    : projects.filter((p) => p.category === cat).length;
+          {/* Category Filter Tabs (Horizontal list matching exact reference design) */}
+          <nav className={styles.filterNav} aria-label="Project Categories">
+            {FILTER_CATEGORIES.map((cat) => {
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setActiveCategory(cat)}
+                  className={`${styles.filterTab} ${isActive ? styles.filterTabActive : ""}`}
+                >
+                  {cat}
+                </button>
+              );
+            })}
+          </nav>
+        </header>
+
+        {/* 3. 3-Column Modern Rounded Card Grid matching reference design */}
+        <section className={styles.gridSection} aria-label="Projects Showcase">
+          {filteredProjects.length === 0 ? (
+            <div className={styles.emptyState}>
+              <p className={styles.emptyTitle}>No matching projects found</p>
+              <p className={styles.emptyDesc}>Try resetting your search query or selecting &quot;All&quot;.</p>
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveCategory("All");
+                  setSearchQuery("");
+                }}
+                className={styles.resetBtn}
+              >
+                Reset Filters
+              </button>
+            </div>
+          ) : (
+            <div className={styles.projectsGrid}>
+              {filteredProjects.map((project, idx) => {
+                const thumbnail =
+                  idx === 0
+                    ? "/images/projects/blog-thumb.avif"
+                    : getProjectThumbnail(project.slug, project.image, idx);
 
                 return (
-                  <button
-                    key={cat}
-                    type="button"
-                    role="tab"
-                    aria-selected={isActive}
-                    onClick={() => setSelectedCategory(cat)}
-                    className={`${styles.categoryBtn} ${
-                      isActive ? styles.categoryBtnActive : ""
-                    }`}
+                  <motion.article
+                    key={project.slug}
+                    className={styles.card}
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-30px" }}
+                    transition={{
+                      duration: 0.45,
+                      delay: Math.min(idx * 0.05, 0.35),
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
                   >
-                    <span>{cat}</span>
-                    <span className={styles.categoryCount}>({count})</span>
-                  </button>
+                    <Link
+                      href={`/projects/${project.slug}`}
+                      className={styles.cardLink}
+                      aria-label={`View ${project.title}`}
+                    >
+                      {/* 16:10 Rounded Banner Image Canvas */}
+                      <div className={styles.imageFrame}>
+                        <Image
+                          src={thumbnail}
+                          alt={project.title}
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
+                          priority={idx < 6}
+                          className={styles.cardImage}
+                        />
+                      </div>
+
+                      {/* Card Content directly below image */}
+                      <div className={styles.cardContent}>
+                        <span className={styles.categoryBadge}>
+                          {project.category || "AI/ML & SYSTEMS"}
+                        </span>
+                        <h2 className={styles.cardTitle}>{project.title}</h2>
+                        <p className={styles.cardDescription}>
+                          {project.description || project.tagline}
+                        </p>
+                        <span className={styles.cardDate}>
+                          {project.date || "Active Production"}
+                        </span>
+                      </div>
+                    </Link>
+                  </motion.article>
                 );
               })}
             </div>
-
-            {/* Clean Search Input */}
-            <div className={styles.searchWrapper}>
-              <div className={styles.searchBox}>
-                <Search size={15} color="#788090" aria-hidden="true" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search systems, tags, keywords..."
-                  className={styles.searchInput}
-                  aria-label="Search systems"
-                />
-                {searchQuery && (
-                  <button
-                    type="button"
-                    onClick={() => setSearchQuery("")}
-                    className={styles.clearSearchBtn}
-                    aria-label="Clear search query"
-                  >
-                    <X size={14} />
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Filter Status Strip */}
-          <div className={styles.filterStatusBar}>
-            <span className={styles.resultsCount}>
-              Showing {filteredProjects.length} of {projects.length} systems
-              {selectedCategory !== "All" && ` • ${selectedCategory}`}
-              {searchQuery && ` • matching "${searchQuery}"`}
-            </span>
-
-            {(selectedCategory !== "All" || searchQuery) && (
-              <button
-                type="button"
-                onClick={() => {
-                  setSelectedCategory("All");
-                  setSearchQuery("");
-                }}
-                className={styles.resetFiltersBtn}
-              >
-                <X size={11} />
-                <span>Reset Filters</span>
-              </button>
-            )}
-          </div>
-        </section>
-
-        {/* 4. Projects Cards Grid using Unified Customized ProjectCard */}
-        <section aria-label="Projects Grid">
-          <motion.div
-            layout
-            className={styles.cardsGrid}
-          >
-            <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project, idx) => (
-                <motion.div
-                  key={project.slug}
-                  layout
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.97 }}
-                  transition={{ duration: 0.3, delay: Math.min(idx * 0.02, 0.3) }}
-                >
-                  <ProjectCard project={project} index={idx} />
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
-
-          {filteredProjects.length === 0 && (
-            <div className={styles.emptyState}>
-              <div
-                style={{
-                  width: 52,
-                  height: 52,
-                  borderRadius: "50%",
-                  background: "rgba(255, 255, 255, 0.04)",
-                  border: "1px solid rgba(255, 255, 255, 0.08)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: "0.25rem",
-                }}
-              >
-                <Search size={22} color="#788090" />
-              </div>
-              <h3 className={styles.emptyStateTitle}>No Systems Found</h3>
-              <p className={styles.emptyStateText}>
-                No engineering projects match &ldquo;{searchQuery}&rdquo; in {selectedCategory}. Try broadening your search or resetting filters.
-              </p>
-              <button
-                type="button"
-                onClick={() => {
-                  setSelectedCategory("All");
-                  setSearchQuery("");
-                }}
-                className={styles.secondaryCtaBtn}
-              >
-                Reset All Filters
-              </button>
-            </div>
           )}
         </section>
-
-        {/* 5. Bottom Architectural Callout matching SkyLabs Vibe */}
-        <section className={styles.bottomCtaSection}>
-          <h2 className={styles.ctaTitle}>Interested in Building Together?</h2>
-          <p className={styles.ctaText}>
-            Whether designing high-throughput distributed systems, deploying enterprise machine learning infrastructure, or crafting modern web experiences, let&apos;s connect.
-          </p>
-          <div className={styles.ctaActions}>
-            <Link href="/#contact" className={styles.primaryCtaBtn}>
-              <span>Get In Touch</span>
-              <ArrowRight size={14} />
-            </Link>
-            <Link href="/portfolio" className={styles.secondaryCtaBtn}>
-              <span>Explore Portfolio</span>
-              <ArrowUpRight size={14} />
-            </Link>
-          </div>
-        </section>
       </main>
+
+      {/* Global Minimalist Footer */}
       <MainFooter />
     </div>
   );
