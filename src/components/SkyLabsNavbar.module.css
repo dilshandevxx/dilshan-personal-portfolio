@@ -17,6 +17,12 @@
   transform: translateY(0);
 }
 
+@media (max-width: 768px) {
+  .navHeader {
+    padding: 1.15rem 1.25rem;
+  }
+}
+
 .navHidden {
   transform: translateY(-100%);
 }

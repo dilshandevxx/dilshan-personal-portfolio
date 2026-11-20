@@ -249,16 +249,13 @@
 }
 
 @media (max-width: 960px) {
-  .storyGrid {
-    grid-template-columns: 1fr;
-    gap: 3.5rem;
+  .mainContainer {
+    padding: 2.5rem 1.25rem 5rem;
   }
 
-  .leftCol {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-    order: 2;
+  .storyGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
   }
 
   .middleCol {
@@ -266,11 +263,17 @@
   }
 
   .rightCol {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .leftCol {
     order: 3;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: center;
+    gap: 1rem;
   }
 
   .statsBlock {
@@ -279,15 +282,49 @@
 }
 
 @media (max-width: 640px) {
-  .leftCol {
-    grid-template-columns: 1fr;
+  .mainContainer {
+    padding: 2rem 1.25rem 4rem;
   }
 
-  .rightCol {
-    grid-template-columns: 1fr;
+  .storyGrid {
+    gap: 2.5rem;
   }
 
   .headline {
-    font-size: 2.25rem;
+    font-size: clamp(1.95rem, 8vw, 2.45rem);
+    line-height: 1.16;
+    margin-bottom: 1.35rem;
+  }
+
+  .paragraph {
+    font-size: 0.92rem;
+    line-height: 1.68;
+  }
+
+  .punchline {
+    font-size: 0.96rem;
+    line-height: 1.6;
+  }
+
+  .statPrimaryNumber {
+    font-size: clamp(2.8rem, 12vw, 3.6rem);
+  }
+
+  .statSecondaryNumber {
+    font-size: clamp(1.5rem, 6.5vw, 1.85rem);
+  }
+
+  .photoCardPortrait {
+    aspect-ratio: 16 / 10;
+    border-radius: 14px;
+  }
+
+  .photoCardSmall {
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+  }
+
+  .carouselPill {
+    display: none;
   }
 }
