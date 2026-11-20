@@ -134,7 +134,7 @@ export default function SkillsGrid() {
     >
       <div className={styles.container}>
         <div className={styles.layout}>
-          {/* Left Column: Title & Description Matching Specification */}
+          {/* Left Column: Title & Description */}
           <div className={styles.leftCol}>
             <div className={styles.stickyHeader}>
               <h2 className={styles.headline}>Technical Expertise</h2>
@@ -145,23 +145,23 @@ export default function SkillsGrid() {
             </div>
           </div>
 
-          {/* Right Column: 01 to 06 Categories List Matching Specification */}
+          {/* Right Column: Clean Borderless Uppercase Accordion Rows with + Icon */}
           <div className={styles.rightCol}>
-            <div className={styles.cardsList}>
+            <div className={styles.accordionList}>
               {TECHNICAL_DOMAINS.map((item) => {
                 const isOpen = openId === item.id;
                 return (
                   <div
                     key={item.id}
-                    className={`${styles.cardItem} ${
-                      isOpen ? styles.cardItemOpen : ""
+                    className={`${styles.accordionItem} ${
+                      isOpen ? styles.accordionItemOpen : ""
                     }`}
                   >
-                    {/* Header Button with Index & Name on Left, Plus on Right */}
+                    {/* Header Button: Bold Uppercase Title on Left, Thin + Icon on Right */}
                     <button
                       type="button"
                       onClick={() => toggleItem(item.id)}
-                      className={styles.cardTrigger}
+                      className={styles.itemTrigger}
                       aria-expanded={isOpen}
                     >
                       <div className={styles.titleGroup}>
@@ -170,6 +170,7 @@ export default function SkillsGrid() {
                         </span>
                         <span className={styles.cardTitle}>{item.name}</span>
                       </div>
+
                       <span
                         className={`${styles.plusIcon} ${
                           isOpen ? styles.plusIconOpen : ""
@@ -177,17 +178,17 @@ export default function SkillsGrid() {
                         aria-hidden="true"
                       >
                         <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 14 14"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 16 16"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
                           className={styles.svgPlus}
                         >
                           <path
-                            d="M7 1.5V12.5M1.5 7H12.5"
+                            d="M8 2.5V13.5M2.5 8H13.5"
                             stroke="currentColor"
-                            strokeWidth="1.75"
+                            strokeWidth="1.5"
                             strokeLinecap="round"
                           />
                         </svg>
@@ -206,7 +207,7 @@ export default function SkillsGrid() {
                             duration: 0.3,
                             ease: [0.16, 1, 0.3, 1],
                           }}
-                          className={styles.answerWrapper}
+                          className={styles.bodyWrapper}
                         >
                           <div className={styles.expandedBody}>
                             <p className={styles.description}>
