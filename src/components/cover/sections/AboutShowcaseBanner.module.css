@@ -7,7 +7,7 @@
 .showcaseSection {
   background-color: #111111;
   width: 100%;
-  padding: 0 clamp(1.25rem, 4vw, 3.5rem) clamp(4.5rem, 7vw, 7.5rem);
+  padding: clamp(3rem, 5vw, 5.5rem) clamp(1.25rem, 4vw, 3.5rem) clamp(6.5rem, 9.5vw, 10.5rem);
   box-sizing: border-box;
   position: relative;
 }
@@ -21,7 +21,7 @@
 .bannerFrame {
   position: relative;
   width: 100%;
-  height: clamp(520px, 70vh, 820px);
+  height: clamp(680px, 86vh, 980px);
   border-radius: clamp(16px, 2vw, 24px);
   overflow: hidden;
   background-color: #161616;
@@ -72,14 +72,26 @@
 /* =========================================================================
    Responsive Breakpoints
    ========================================================================= */
+@media (max-width: 1024px) {
+  .bannerFrame {
+    height: clamp(540px, 72vh, 720px);
+  }
+}
+
 @media (max-width: 768px) {
   .showcaseSection {
-    padding: 0 1.25rem clamp(3.5rem, 6vw, 4.5rem);
+    padding: 2rem 1.25rem clamp(4.5rem, 7vw, 6rem);
   }
 
   .bannerFrame {
-    height: clamp(320px, 55vh, 460px);
+    height: clamp(440px, 68vh, 580px);
     border-radius: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bannerFrame {
+    height: clamp(380px, 62vh, 480px);
   }
 }
 

@@ -19,7 +19,7 @@
 .mainContainer {
   max-width: 1280px;
   margin: 0 auto;
-  padding: clamp(3rem, 5vw, 5.5rem) clamp(1.25rem, 4vw, 3.5rem) clamp(3.5rem, 5vw, 5.5rem);
+  padding: clamp(3rem, 5vw, 5.5rem) clamp(1.25rem, 4vw, 3.5rem) clamp(5rem, 7vw, 7.5rem);
   width: 100%;
   box-sizing: border-box;
 }
@@ -359,7 +359,8 @@
 .journeyPhotoCard {
   position: relative;
   width: 100%;
-  aspect-ratio: 1.18 / 1;
+  aspect-ratio: 4 / 4.6;
+  min-height: 420px;
   border-radius: 12px;
   overflow: hidden;
   background-color: #1a1a1a;
@@ -426,8 +427,10 @@
   }
 
   .journeyPhotoCard {
-    max-width: 480px;
+    width: 100%;
+    max-width: 540px;
     aspect-ratio: 16 / 11;
+    min-height: 320px;
   }
 
   .milestonesGrid {
