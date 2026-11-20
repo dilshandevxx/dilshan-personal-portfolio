@@ -1,4 +1,4 @@
-/* Clean, Modern Standalone About Me Page (Zero Slide Panels / Zero Asides) */
+/* Clean, Modern & Elegant Standalone About Me Page */
 
 .pageRoot {
   background-color: #000000;
@@ -13,7 +13,7 @@
 }
 
 .mainContainer {
-  max-width: 1140px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 1.5rem clamp(1.25rem, 4vw, 3rem) 7rem;
   width: 100%;
@@ -22,20 +22,20 @@
 
 /* 1. Top Navigation / Back Breadcrumb */
 .topNav {
-  margin-bottom: 3.5rem;
+  margin-bottom: 2.75rem;
 }
 
 .backLink {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.5rem;
   font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   font-weight: 500;
-  color: #a1a1aa;
+  color: #8e8e93;
   text-decoration: none;
   transition: all 0.2s ease;
-  padding: 0.45rem 0.95rem;
+  padding: 0.4rem 0.85rem;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -48,83 +48,115 @@
   transform: translateX(-3px);
 }
 
-/* 2. Hero Identity & Clean Narrative (Inspired by Reference Image 2) */
+/* 2. Hero Section: Editorial 2-Column Split */
 .heroSection {
-  margin-bottom: clamp(4.5rem, 8vw, 7rem);
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  max-width: 860px;
+  margin-bottom: clamp(4.5rem, 8vw, 6.5rem);
+  width: 100%;
 }
 
-.heroHeader {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.95fr;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  align-items: center;
+  width: 100%;
 }
 
-.roleBadge {
-  font-family: var(--font-mono, "Google Sans Code", monospace);
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: #8bb397;
-  text-transform: uppercase;
+@media (max-width: 920px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+.heroLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: #a1a1aa;
+  width: fit-content;
+  margin-bottom: 1.25rem;
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.55);
 }
 
 .heroName {
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+  font-size: clamp(2.8rem, 5.5vw, 4.4rem);
   font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.08;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
   color: #ffffff;
-  margin: 0;
+  margin: 0 0 0.5rem 0;
 }
 
-.narrativeStack {
+.heroRole {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 500;
+  color: #a1a1aa;
+  margin: 0 0 1.75rem 0;
+  letter-spacing: -0.01em;
+}
+
+.roleDivider {
+  color: rgba(255, 255, 255, 0.25);
+  margin: 0 0.25rem;
+}
+
+.narrativeWrap {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.15rem;
+  margin-bottom: 2rem;
 }
 
-.narrativeLead {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(1.15rem, 1.8vw, 1.35rem);
-  line-height: 1.55;
-  color: #f4f4f5;
-  font-weight: 500;
-  margin: 0;
-}
-
-.narrativeBody {
+.narrativePara {
   font-family: var(--font-body, "Inter", sans-serif);
   font-size: 1.02rem;
   line-height: 1.68;
-  color: #a1a1aa;
+  color: #9ca3af;
   margin: 0;
 }
 
-/* Interactive Pill Buttons Row (Reference Image 2 Match) */
+/* Minimalist Interactive Pill Buttons */
 .pillsRow {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 0.75rem;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
 }
 
 .pillBtn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.55rem 1.15rem;
+  padding: 0.5rem 0.95rem;
   border-radius: 9999px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #ffffff;
+  background-color: #111317;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f4f4f5;
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
@@ -133,40 +165,39 @@
 }
 
 .pillBtn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.24);
-  transform: translateY(-1px);
+  background-color: #1a1e24;
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  transform: translateY(-1.5px);
 }
 
 .emailPill {
-  background-color: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.18);
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.emailPill:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .pillIcon {
-  color: #8bb397;
-}
-
-.pillText {
-  color: #ffffff;
+  color: #a1a1aa;
 }
 
 .copyIcon {
   color: #71717a;
-  transition: color 0.2s ease;
-}
-
-.pillBtn:hover .copyIcon {
-  color: #ffffff;
+  margin-left: 2px;
 }
 
 .checkIcon {
   color: #4ade80;
+  margin-left: 2px;
 }
 
 .pillExternal {
   color: #71717a;
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .pillBtn:hover .pillExternal {
@@ -174,52 +205,122 @@
   transform: translate(1px, -1px);
 }
 
-/* 3. Personal Manifesto & Editorial Statement (Inspired by Reference Image 1) */
-.manifestoSection {
-  margin-bottom: clamp(5rem, 9vw, 8rem);
-  padding: clamp(2.5rem, 5vw, 4rem) 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+.locationMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #71717a;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.82rem;
 }
 
-.manifestoInner {
+.locIcon {
+  color: #71717a;
+}
+
+/* Right Column: Editorial Portrait Frame */
+.heroRight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.portraitFrame {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 4 / 5;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #0c0d10;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
+}
+
+@media (max-width: 920px) {
+  .portraitFrame {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+}
+
+.portraitImg {
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portraitFrame:hover .portraitImg {
+  transform: scale(1.03);
+}
+
+.portraitOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 65%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  pointer-events: none;
+}
+
+/* 3. Bold Editorial Manifesto Quote */
+.quoteSection {
+  margin-bottom: clamp(4.5rem, 8vw, 6.5rem);
+  width: 100%;
+}
+
+.quoteCard {
+  background: linear-gradient(180deg, #0e1014 0%, #060709 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: clamp(2.25rem, 4vw, 3.5rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.quoteIcon {
+  color: #8bb397;
+  margin-bottom: 1.25rem;
+}
+
+.quoteText {
+  margin: 0;
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", sans-serif);
+  font-size: clamp(1.25rem, 2.4vw, 1.85rem);
+  font-weight: 500;
+  line-height: 1.45;
+  color: #f4f4f5;
+  letter-spacing: -0.015em;
   max-width: 980px;
 }
 
-.manifestoText {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(1.4rem, 2.4vw, 2.1rem);
-  font-weight: 500;
-  line-height: 1.55;
-  letter-spacing: -0.015em;
-  color: #ffffff;
-  margin: 0;
-}
-
-/* 4. Dual Technical Pillars: AI/ML & DevOps */
+/* 4. Core Engineering Pillars (AI/ML & DevOps) */
 .pillarsSection {
-  margin-bottom: clamp(5.5rem, 9vw, 8.5rem);
+  margin-bottom: clamp(4.5rem, 8vw, 6.5rem);
+  width: 100%;
 }
 
 .sectionHeader {
-  margin-bottom: 2.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.35rem;
+  margin-bottom: clamp(2rem, 3.5vw, 2.75rem);
 }
 
 .sectionIndex {
   font-family: var(--font-mono, monospace);
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
-  color: #8bb397;
+  color: #71717a;
   text-transform: uppercase;
 }
 
 .sectionTitle {
   font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
   font-weight: 700;
   letter-spacing: -0.025em;
   color: #ffffff;
@@ -228,69 +329,69 @@
 
 .pillarsGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 2.5vw, 2rem);
+  width: 100%;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 768px) {
   .pillarsGrid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
   }
 }
 
 .pillarCard {
-  background-color: #111317;
+  background-color: #0c0e12;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  padding: clamp(1.8rem, 3vw, 2.4rem);
+  border-radius: 16px;
+  padding: clamp(1.75rem, 3vw, 2.5rem);
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  transition: border-color 0.25s ease, background-color 0.25s ease;
+  transition: all 0.25s ease;
 }
 
 .pillarCard:hover {
+  background-color: #101318;
   border-color: rgba(255, 255, 255, 0.16);
-  background-color: #14171d;
+  transform: translateY(-2px);
 }
 
 .pillarHeader {
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 1.15rem;
 }
 
 .pillarIconWrap {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background-color: rgba(255, 255, 255, 0.06);
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #8bb397;
+  color: #ffffff;
   flex-shrink: 0;
 }
 
-.pillarSub {
+.pillarCategory {
   font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
-  color: #71717a;
-  display: block;
+  letter-spacing: 0.08em;
+  color: #888e99;
   text-transform: uppercase;
-  margin-bottom: 0.2rem;
+  display: block;
 }
 
 .pillarTitle {
   font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: 1.35rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: #ffffff;
-  margin: 0;
+  margin: 0.15rem 0 0 0;
   letter-spacing: -0.015em;
 }
 
@@ -298,335 +399,178 @@
   font-family: var(--font-body, "Inter", sans-serif);
   font-size: 0.94rem;
   line-height: 1.6;
-  color: #a1a1aa;
-  margin: 0;
+  color: #9ca3af;
+  margin: 0 0 1.5rem 0;
 }
 
-.skillsTagList {
+.chipsWrap {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: auto;
-  padding-top: 0.5rem;
 }
 
-.skillTag {
+.skillChip {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.74rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
   background-color: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 6px;
-  padding: 0.35rem 0.7rem;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.78rem;
   color: #d4d4d8;
-  white-space: nowrap;
+  letter-spacing: 0.01em;
 }
 
-/* 5. Impact Statement & Direction (Inspired by Reference Image 4) */
-.statementSection {
-  margin-bottom: clamp(5.5rem, 9vw, 8.5rem);
-  padding-top: 3.5rem;
+/* 5. Minimalist Experience & Career Milestones */
+.timelineSection {
+  margin-bottom: clamp(4.5rem, 8vw, 6.5rem);
+  width: 100%;
+}
+
+.timelineList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.statementHeadlineWrap {
-  margin-bottom: clamp(2rem, 4vw, 3rem);
-}
-
-.statementHeadline {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  color: #ffffff;
-  margin: 0;
-  max-width: 940px;
-}
-
-.accentWord {
-  color: #8bb397;
-}
-
-.statementSplit {
+.timelineItem {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: clamp(2.5rem, 5vw, 5rem);
-  align-items: start;
+  grid-template-columns: 240px 1fr;
+  padding: clamp(1.5rem, 2.5vw, 2.25rem) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 1.5rem;
+  align-items: baseline;
 }
 
-@media (max-width: 860px) {
-  .statementSplit {
+@media (max-width: 680px) {
+  .timelineItem {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 0.5rem;
   }
 }
 
-.splitParagraph {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 1.05rem;
-  line-height: 1.7;
+.timelineYear {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  color: #71717a;
+  letter-spacing: 0.02em;
+}
+
+.timelineContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.timelineRole {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.timelineCompany {
+  font-weight: 400;
   color: #a1a1aa;
+}
+
+.timelineDetail {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #9ca3af;
   margin: 0;
 }
 
-.quickLinksNav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
+/* 6. Clean Call to Action Block */
+.ctaSection {
+  width: 100%;
 }
 
-.quickLinkItem {
+.ctaBox {
+  background: #0c0e12;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  padding: clamp(2.5rem, 5vw, 4rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.95rem 1.15rem;
-  background-color: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 10px;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.ctaTextWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 640px;
+}
+
+.ctaHeading {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: clamp(1.75rem, 3vw, 2.35rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.025em;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.ctaSub {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.ctaActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.primaryCtaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.primaryCtaBtn:hover {
+  background-color: #e4e4e7;
+  transform: translateY(-1.5px);
+}
+
+.secondaryCtaBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.8rem 1.6rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: #ffffff;
   font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: 0.94rem;
+  font-size: 0.92rem;
   font-weight: 500;
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
-.quickLinkItem:hover {
-  background-color: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.18);
-  padding-left: 1.35rem;
-}
-
-.linkArrow {
-  color: #8bb397;
-  transition: transform 0.2s ease;
-}
-
-.quickLinkItem:hover .linkArrow {
-  transform: translateX(3px);
-}
-
-/* 6. Featured Works (Inspired by Reference Image 3) */
-.featuredSection {
-  margin-bottom: clamp(5.5rem, 9vw, 8.5rem);
-}
-
-.featuredHeader {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-}
-
-.featuredTitle {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(1.8rem, 3vw, 2.4rem);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  color: #ffffff;
-  margin: 0;
-}
-
-.featuredSeeAll {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: #a1a1aa;
-  text-decoration: none;
-  transition: color 0.2s ease, gap 0.2s ease;
-}
-
-.featuredSeeAll:hover {
-  color: #ffffff;
-  gap: 0.65rem;
-}
-
-.featuredGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.75rem;
-}
-
-@media (max-width: 860px) {
-  .featuredGrid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-}
-
-.featuredCard {
-  display: flex;
-  flex-direction: column;
-  gap: 1.15rem;
-}
-
-.featuredImageWrap {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  background-color: #111317;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.featuredImage {
-  object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.featuredCard:hover .featuredImage {
-  transform: scale(1.04);
-}
-
-.featuredOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.7) 100%);
-}
-
-.featuredTag {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  padding: 0.3rem 0.65rem;
-  border-radius: 4px;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: #e4e4e7;
-}
-
-.featuredInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.featuredCardTitle {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0;
-  letter-spacing: -0.015em;
-}
-
-.featuredCardDesc {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.88rem;
-  line-height: 1.55;
-  color: #9da4ae;
-  margin: 0;
-}
-
-/* 7. Work Together CTA Capsule (Inspired by Reference Image 5) */
-.ctaSection {
-  margin-top: clamp(4rem, 7vw, 6rem);
-}
-
-.ctaCapsule {
-  background-color: #111317;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: clamp(2.2rem, 5vw, 3.5rem);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2.5rem;
-  position: relative;
-  overflow: hidden;
-}
-
-@media (max-width: 860px) {
-  .ctaCapsule {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2rem;
-    padding: 2rem 1.75rem;
-  }
-}
-
-.ctaContent {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-  max-width: 650px;
-}
-
-.ctaPre {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: #8bb397;
-  text-transform: uppercase;
-}
-
-.ctaTitle {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  color: #ffffff;
-  margin: 0;
-  line-height: 1.2;
-}
-
-.ctaDesc {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.96rem;
-  line-height: 1.6;
-  color: #9da4ae;
-  margin: 0;
-}
-
-.ctaActionWrap {
-  flex-shrink: 0;
-}
-
-/* Pill Button with Circular Arrow (Matching Reference Image 5) */
-.ctaButton {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  background-color: #f4f4f5;
-  color: #09090b;
-  padding: 0.65rem 0.85rem 0.65rem 1.4rem;
-  border-radius: 9999px;
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: 0.92rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.ctaButton:hover {
-  background-color: #ffffff;
-  transform: translateY(-2px);
-}
-
-.ctaArrowCircle {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background-color: #4f80a3;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.25s ease, background-color 0.2s ease;
-}
-
-.ctaButton:hover .ctaArrowCircle {
-  background-color: #3b6b8c;
-  transform: rotate(45deg);
+.secondaryCtaBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1.5px);
 }
