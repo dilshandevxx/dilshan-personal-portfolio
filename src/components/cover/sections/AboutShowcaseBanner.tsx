@@ -12,7 +12,7 @@ interface AboutShowcaseBannerProps {
 }
 
 export default function AboutShowcaseBanner({
-  imageSrc = "/images/about-visual-banner.jpg",
+  imageSrc = "/images/about-visual-banner.avif",
   altText = "Deep-tech autonomous hardware and satellite telemetry engineering",
   caption,
 }: AboutShowcaseBannerProps) {
