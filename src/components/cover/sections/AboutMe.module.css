@@ -1,8 +1,8 @@
-/* About Section (Asymmetric Editorial Layout matching user reference design) */
+/* About Section (Faithfully matching user reference design with "More about me —", 3-line headline, narrative, and green button) */
 
 .aboutSection {
   background-color: #111111;
-  padding: clamp(7rem, 13vw, 12rem) clamp(1.5rem, 5vw, 4rem);
+  padding: clamp(6rem, 10vw, 9.5rem) clamp(1.5rem, 5vw, 4rem);
   position: relative;
   width: 100%;
   box-sizing: border-box;
@@ -16,45 +16,101 @@
   width: 100%;
 }
 
-/* 2-Column Grid: Left ~35% open space, Right ~65% content (Matching reference layout) */
+/* 2-Column Grid: Left label column, Right content column */
 .editorialGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-  column-gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: minmax(200px, 320px) minmax(0, 1fr);
+  column-gap: clamp(2.5rem, 6vw, 6.5rem);
   width: 100%;
   align-items: start;
 }
 
+/* Left Column: Clean label */
 .leftColumn {
-  width: 100%;
+  padding-top: 0.4rem;
 }
 
+.sectionLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+}
+
+.labelDash {
+  display: inline-block;
+  color: #ffffff;
+  font-weight: 400;
+}
+
+/* Right Column: Heading, Paragraphs & Button */
 .rightColumn {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
+  max-width: 900px;
+}
+
+/* 3-Line Headline matching reference */
+.heading {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
+  font-size: clamp(2.35rem, 4.3vw, 3.8rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 0 0 clamp(2.25rem, 3.8vw, 3.25rem) 0;
+}
+
+.headingName,
+.headingRole,
+.headingLocation {
+  display: block;
+}
+
+.headingRole {
+  color: #ffffff;
+}
+
+.headingLocation {
+  color: #ffffff;
+}
+
+/* Narrative Paragraphs */
+.narrativeStack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.35rem, 2vw, 1.85rem);
   max-width: 860px;
 }
 
-.statementText {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: clamp(1.25rem, 2.3vw, 1.85rem);
+.narrativePara {
+  font-family: var(--font-body, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: clamp(1.02rem, 1.25vw, 1.15rem);
   font-weight: 400;
-  line-height: 1.55;
-  letter-spacing: -0.018em;
-  color: #ffffff;
+  line-height: 1.72;
+  letter-spacing: -0.012em;
+  color: #b3b9c5;
   margin: 0;
 }
 
+/* Green Button Action Row */
 .actionRow {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-top: clamp(2.25rem, 4.5vw, 3.5rem);
+  margin-top: clamp(2.5rem, 4vw, 3.5rem);
 }
 
-/* Neon Lime-Green Button (Faithfully matching user design) */
+/* Neon Lime-Green Button (Faithfully preserved with polished interaction) */
 .greenButton {
   display: inline-flex;
   align-items: center;
@@ -63,7 +119,7 @@
   color: #000000;
   border: 1px solid #a3e635;
   border-radius: 6px;
-  padding: 0.75rem 1.85rem;
+  padding: 0.8rem 2rem;
   font-family: var(--font-mono, "Google Sans Code", monospace);
   font-size: 0.82rem;
   font-weight: 800;
@@ -84,41 +140,27 @@
   box-shadow: 0 8px 30px rgba(163, 230, 53, 0.55);
 }
 
-@media (max-width: 900px) {
+.greenButton:focus-visible {
+  outline: 2px solid #a3e635;
+  outline-offset: 4px;
+}
+
+/* Mobile & Tablet Responsiveness */
+@media (max-width: 860px) {
   .editorialGrid {
     grid-template-columns: 1fr;
+    gap: 1.75rem;
   }
 
   .leftColumn {
-    display: none;
+    padding-top: 0;
   }
 
-  .rightColumn {
-    max-width: 100%;
-  }
-
-  .statementText {
-    font-size: clamp(1.2rem, 4.5vw, 1.55rem);
-    line-height: 1.5;
-  }
-}
-
-@media (max-width: 640px) {
-  .aboutSection {
-    padding: 5rem 1.25rem;
-  }
-
-  .statementText {
-    font-size: clamp(1.1rem, 5.2vw, 1.35rem);
-    line-height: 1.48;
+  .heading {
+    margin-bottom: 2rem;
   }
 
   .actionRow {
-    margin-top: 2rem;
-  }
-
-  .greenButton {
-    padding: 0.7rem 1.5rem;
-    font-size: 0.78rem;
+    margin-top: 2.25rem;
   }
 }
