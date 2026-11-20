@@ -6,94 +6,111 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import styles from "./SelectedWork.module.css";
 
-interface ProjectShowcaseItem {
+interface ProjectItem {
   id: string;
   title: string;
-  description: string;
+  sector: string;
   image: string;
-  slug: string;
+  href: string;
 }
 
-const FEATURED_PROJECTS: ProjectShowcaseItem[] = [
+const PROJECTS: ProjectItem[] = [
   {
-    id: "creative-collective",
-    title: "Creative Collective",
-    description:
-      "Tokyo & New York brand identity and interactive web platform celebrating contemporary craft, generative typography, and spatial design.",
-    image: "/images/project_collective.jpg",
-    slug: "creative-collective",
+    id: "the-dots",
+    title: "The Dots",
+    sector: "Technology",
+    image: "/images/projects/project_the_dots.png",
+    href: "/projects",
   },
   {
-    id: "cloudwatch-telemetry",
-    title: "CloudWatch Telemetry",
-    description:
-      "High-throughput real-time telemetry pipeline processing over 250k events/sec with sub-50ms query latency and automated alerting.",
-    image: "/images/project_analytics.jpg",
-    slug: "cloudwatch",
+    id: "pay-by-bank",
+    title: "Pay by Bank",
+    sector: "Fintech",
+    image: "/images/projects/project_pay_by_bank.png",
+    href: "/projects",
   },
   {
-    id: "brutalist-manifesto",
-    title: "Brutalist Manifesto",
-    description:
-      "High-density digital publication exploring brutalist architecture, structural truth, and responsive typographic scale across devices.",
-    image: "/images/project_brutalist.jpg",
-    slug: "brutalist-manifesto",
+    id: "not-optional",
+    title: "Not Optional",
+    sector: "Policy",
+    image: "/images/projects/project_not_optional.png",
+    href: "/projects",
+  },
+  {
+    id: "banked",
+    title: "Banked",
+    sector: "Fintech",
+    image: "/images/projects/project_banked.png",
+    href: "/projects",
+  },
+  {
+    id: "pure-sports",
+    title: "Pure Sports",
+    sector: "Healthcare",
+    image: "/images/projects/project_pure_sports.png",
+    href: "/projects",
+  },
+  {
+    id: "dandara-living",
+    title: "Dandara Living",
+    sector: "Property",
+    image: "/images/projects/project_dandara_living.png",
+    href: "/projects",
   },
 ];
 
 export default function SelectedWork() {
   return (
-    <section className={styles.projectsSection} id="projects" aria-label="Selected Projects">
+    <section className={styles.projectsSection} id="projects" aria-label="Selected Works">
       <div className={styles.container}>
-        {/* Section Header: Title on Left, Link on Right (Exact Reference Match) */}
+        {/* Section Header: Clean Minimalist Title & Top Link */}
         <div className={styles.header}>
-          <h2 className={styles.title}>Selected design work</h2>
+          <h2 className={styles.title}>Selected Works</h2>
           <Link href="/projects" className={styles.seeAllTop}>
             <span>SEE ALL PROJECTS</span>
             <span className={styles.arrowIcon} aria-hidden="true">→</span>
           </Link>
         </div>
 
-        {/* 3-Column Square Image Card Grid */}
+        {/* 3x2 Floating Dark Capsule Grid Matching Reference Design */}
         <div className={styles.grid}>
-          {FEATURED_PROJECTS.map((item, idx) => (
+          {PROJECTS.map((item, idx) => (
             <motion.div
               key={item.id}
               className={styles.cardWrapper}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 22 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.55, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.45, delay: idx * 0.07, ease: [0.16, 1, 0.3, 1] }}
             >
-              <Link href={`/projects#${item.slug}`} className={styles.cardLink}>
-                {/* 1:1 Aspect Ratio Square Image Canvas */}
-                <div className={styles.imageCanvas}>
+              <Link href={item.href} className={styles.cardLink} aria-label={`View project: ${item.title}`}>
+                {/* Centered Squircle Badge Image Canvas */}
+                <div className={styles.squircleFrame}>
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    priority={idx === 0}
-                    className={styles.image}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
+                    priority={idx < 3}
+                    className={styles.cardImage}
                   />
                 </div>
 
-                {/* Card Meta directly below image */}
-                <div className={styles.meta}>
+                {/* Bottom Row: Project Name on Left, Sector on Right */}
+                <div className={styles.cardMetaRow}>
                   <h3 className={styles.cardTitle}>{item.title}</h3>
-                  <p className={styles.cardDescription}>{item.description}</p>
+                  <span className={styles.cardSector}>{item.sector}</span>
                 </div>
               </Link>
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom Left Pill Button (Exact Reference Match) */}
-        <div className={styles.bottomCtaWrapper}>
-          <Link href="/projects" className={styles.bottomPillBtn}>
-            <span>SEE ALL PROJECTS</span>
-            <span className={styles.arrowIcon} aria-hidden="true">→</span>
-          </Link>
+        {/* Centered Bottom Metric Ticker & Action (Exact Reference Match) */}
+        <div className={styles.bottomBar}>
+          <p className={styles.statsTicker}>
+            140+ projects. 15+ sectors. Four continents.
+          </p>
         </div>
       </div>
     </section>
