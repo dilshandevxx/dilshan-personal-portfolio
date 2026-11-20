@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import styles from "./HeroSkyLabs.module.css";
 
 export default function HeroSkyLabs() {
@@ -155,19 +156,25 @@ export default function HeroSkyLabs() {
               >
                 CONTACT
               </a>
+
+              {/* Desktop Theme Toggle Button */}
+              <ThemeToggle className={styles.themeToggleBtn} />
             </nav>
 
-            {/* Minimalist Two-Line Hamburger Button (=) on Mobile */}
-            <button
-              type="button"
-              className={`${styles.hamburgerBtn} ${menuOpen ? styles.hamburgerActive : ""}`}
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-              aria-expanded={menuOpen}
-            >
-              <span className={styles.barTop} />
-              <span className={styles.barBottom} />
-            </button>
+            {/* Mobile Right Actions: Theme Toggle + Minimalist Hamburger Button */}
+            <div className={styles.mobileActions}>
+              <ThemeToggle className={styles.mobileThemeToggle} />
+              <button
+                type="button"
+                className={`${styles.hamburgerBtn} ${menuOpen ? styles.hamburgerActive : ""}`}
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-expanded={menuOpen}
+              >
+                <span className={styles.barTop} />
+                <span className={styles.barBottom} />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -220,6 +227,17 @@ export default function HeroSkyLabs() {
                     </motion.div>
                   ))}
                 </nav>
+
+                {/* Mobile Overlay Theme Toggle Switcher */}
+                <motion.div
+                  className={styles.menuFooter}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, delay: 0.32 }}
+                >
+                  <span className={styles.menuFooterText}>SWITCH APPEARANCE</span>
+                  <ThemeToggle className={styles.menuThemeToggle} />
+                </motion.div>
               </div>
             </motion.div>
           )}

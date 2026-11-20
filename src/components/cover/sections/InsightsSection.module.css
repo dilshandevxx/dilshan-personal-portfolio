@@ -190,3 +190,56 @@
   color: #616672;
   font-size: 0.75rem;
 }
+
+/* =========================================================================
+   LIGHT THEME OVERRIDES FOR INSIGHTS / ARTICLES
+   ========================================================================= */
+:global([data-theme="light"]) .insightsSection {
+  background-color: #f9f7f2;
+  border-top-color: rgba(0, 0, 0, 0.07);
+}
+
+:global([data-theme="light"]) .title {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .seeAllLink {
+  color: #5e5953;
+}
+
+:global([data-theme="light"]) .seeAllLink:hover {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .cardLink {
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+:global([data-theme="light"]) .cardLink:hover {
+  background-color: #fcfbfa;
+  border-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .imageFrame {
+  background-color: #f4f0e6;
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+:global([data-theme="light"]) .cardTitle {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .cardLink:hover .cardTitle {
+  color: #15803d;
+}
+
+:global([data-theme="light"]) .cardMeta {
+  color: #5e5953;
+}
+
+:global([data-theme="light"]) .metaDivider {
+  color: #a1a1aa;
+}

@@ -126,7 +126,7 @@ section[id] {
 /* Dark & Midnight Mode Tokens: Deep pitch-black OLED minimal canvas matching main site */
 [data-theme="dark"],
 [data-theme="midnight"],
-[data-theme="light"] {
+[data-portfolio-theme="dark"] {
   --color-primary: var(--accent-amber-dark);
   --color-primary-rgb: 254, 222, 145;
 
@@ -167,7 +167,66 @@ section[id] {
   --card-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6), 0px 2px 2px rgba(0, 0, 0, 0.6);
   --card-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.85);
 
+  --pf-card-bg: rgba(255, 255, 255, 0.05);
+  --pf-border: rgba(255, 255, 255, 0.1);
+  --pf-border-strong: rgba(255, 255, 255, 0.25);
+  --pf-text-secondary: #a6adb9;
+  --pf-text-heading: #ffffff;
+  --pf-active-pill: rgba(255, 255, 255, 0.1);
+
   color-scheme: dark;
+}
+
+/* Light Mode Tokens: Warm ivory/paper canvas with crisp cards and rich dark charcoal reading typography */
+[data-theme="light"],
+[data-portfolio-theme="light"] {
+  --color-primary: var(--accent-green, #15803d);
+  --color-primary-rgb: 21, 128, 61;
+
+  --color-background: #f9f7f2;
+  --color-background-sidebar: #f4f0e6;
+  --color-background-alternate: #f2eee3;
+  --color-background-card: #ffffff;
+  --color-background-card-hover: #fcfbfa;
+  --color-background-input: #ffffff;
+  --color-background-tag: #eee8dc;
+  --color-background-navbar-link-hover: rgba(0, 0, 0, 0.05);
+  --color-background-navbar-link-active: rgba(0, 0, 0, 0.08);
+
+  --color-text: #272421;
+  --color-text-emphasized: #111111;
+  --color-text-muted: #5e5953;
+  --color-text-heading: #111111;
+  --color-text-link: var(--color-pattern-primary, #15803d);
+  --color-link: var(--color-pattern-primary, #15803d);
+  --color-link-hover: #166534;
+
+  --color-pattern-primary: #15803d;
+  --color-pattern-secondary: #15803d;
+  --color-pattern-tertiary: #15803d;
+  --color-pattern-quaternary: #15803d;
+  --color-pattern-primary-subtle: rgba(21, 128, 61, 0.08);
+  --color-pattern-secondary-subtle: rgba(21, 128, 61, 0.08);
+  --color-pattern-tertiary-subtle: rgba(21, 128, 61, 0.08);
+  --color-pattern-primary-border: rgba(21, 128, 61, 0.25);
+  --color-pattern-secondary-border: rgba(21, 128, 61, 0.25);
+  --color-pattern-tertiary-border: rgba(21, 128, 61, 0.25);
+
+  --color-border: #e6e0d3;
+  --color-border-card: #e8e3d8;
+  --color-border-emphasized: #d3cbba;
+
+  --card-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04), 0px 1px 3px rgba(0, 0, 0, 0.02);
+  --card-shadow-hover: 0 10px 28px rgba(0, 0, 0, 0.07);
+
+  --pf-card-bg: #ffffff;
+  --pf-border: #e6e0d3;
+  --pf-border-strong: #d3cbba;
+  --pf-text-secondary: #5e5953;
+  --pf-text-heading: #111111;
+  --pf-active-pill: rgba(0, 0, 0, 0.06);
+
+  color-scheme: light;
 }
 
 
@@ -192,12 +251,13 @@ html {
 body {
   font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--color-text, #d2d5df);
-  background-color: #111111;
+  background-color: var(--color-background, #111111);
   line-height: 1.6;
   min-height: 100vh;
   max-width: 100vw;
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 ::selection {

@@ -455,3 +455,112 @@
     line-height: 1.6;
   }
 }
+
+/* =========================================================================
+   THEME ADAPTATION FOR ABOUT PAGE (DARK & LIGHT)
+   ========================================================================= */
+:global([data-theme="dark"]) .pageRoot {
+  background-color: #111111;
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .headline {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .paragraph {
+  color: #9da4ae;
+}
+
+:global([data-theme="dark"]) .punchline {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .statPrimaryNumber,
+:global([data-theme="dark"]) .statSecondaryNumber {
+  color: #ffffff;
+}
+
+:global([data-theme="dark"]) .statPrimaryLabel,
+:global([data-theme="dark"]) .statSecondaryLabel {
+  color: #71717a;
+}
+
+:global([data-theme="dark"]) .statsDivider {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+:global([data-theme="dark"]) .photoCardSmall,
+:global([data-theme="dark"]) .photoCardPortrait {
+  background-color: #181818;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+:global([data-theme="dark"]) .journeySection {
+  background-color: #161616;
+  color: #ffffff;
+}
+
+:global([data-theme="light"]) .pageRoot {
+  background-color: #f9f7f2;
+  color: #111111;
+}
+
+:global([data-theme="light"]) .headline {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .paragraph {
+  color: #52525b;
+}
+
+:global([data-theme="light"]) .punchline {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .statPrimaryNumber,
+:global([data-theme="light"]) .statSecondaryNumber {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .statPrimaryLabel,
+:global([data-theme="light"]) .statSecondaryLabel {
+  color: #71717a;
+}
+
+:global([data-theme="light"]) .statsDivider {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+:global([data-theme="light"]) .photoCardSmall,
+:global([data-theme="light"]) .photoCardPortrait {
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+:global([data-theme="light"]) .journeySection {
+  background-color: #f4f0e6;
+  color: #111111;
+  border-top: 1px solid #e6e0d3;
+}
+
+:global([data-theme="light"]) .journeyHeadline {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .journeyEyebrow {
+  color: #71717a;
+}
+
+:global([data-theme="light"]) .journeyPhotoCard {
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .milestoneYear {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .milestoneDesc {
+  color: #5e5953;
+}

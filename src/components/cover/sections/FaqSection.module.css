@@ -166,3 +166,42 @@
     font-size: 0.85rem;
   }
 }
+
+/* =========================================================================
+   LIGHT THEME OVERRIDES FOR FAQ
+   ========================================================================= */
+:global([data-theme="light"]) .faqSection {
+  background-color: #f9f7f2;
+  border-top-color: rgba(0, 0, 0, 0.07);
+}
+
+:global([data-theme="light"]) .headline {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .cardItem {
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+:global([data-theme="light"]) .cardItem:hover {
+  background-color: #fcfbfa;
+  border-color: rgba(0, 0, 0, 0.16);
+}
+
+:global([data-theme="light"]) .cardTrigger {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .questionText {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .answerText {
+  color: #5e5953;
+}
+
+:global([data-theme="light"]) .plusIcon {
+  color: #71717a;
+}

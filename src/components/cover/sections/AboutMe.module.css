@@ -164,3 +164,19 @@
     min-height: 48px;
   }
 }
+
+/* =========================================================================
+   LIGHT THEME OVERRIDES FOR ABOUT ME
+   ========================================================================= */
+:global([data-theme="light"]) .aboutSection {
+  background-color: #f9f7f2;
+  border-top-color: rgba(0, 0, 0, 0.07);
+}
+
+:global([data-theme="light"]) .statementText {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .indicatorLabel {
+  color: #71717a;
+}

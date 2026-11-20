@@ -221,3 +221,53 @@
     padding: 3px 8px;
   }
 }
+
+/* =========================================================================
+   LIGHT THEME OVERRIDES FOR TECHNICAL EXPERTISE
+   ========================================================================= */
+:global([data-theme="light"]) .servicesSection {
+  background-color: #f9f7f2;
+  border-top-color: rgba(0, 0, 0, 0.07);
+}
+
+:global([data-theme="light"]) .headline {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .accordionItem {
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+:global([data-theme="light"]) .accordionItem:first-child {
+  border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+:global([data-theme="light"]) .accordionItem:hover {
+  border-bottom-color: rgba(0, 0, 0, 0.28);
+}
+
+:global([data-theme="light"]) .itemTrigger {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .cardTitle {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .categoryIndex {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+:global([data-theme="light"]) .plusIcon {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .description {
+  color: #5e5953;
+}
+
+:global([data-theme="light"]) .tagItem {
+  color: #272421;
+  background-color: #eee8dc;
+  border-color: #ded7c8;
+}

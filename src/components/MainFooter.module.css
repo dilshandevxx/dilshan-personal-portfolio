@@ -173,3 +173,40 @@
     gap: 1.75rem 1rem;
   }
 }
+
+/* =========================================================================
+   LIGHT THEME OVERRIDES FOR MAIN FOOTER
+   ========================================================================= */
+:global([data-theme="light"]) .footerRoot {
+  background-color: #f4f0e6;
+  border-top-color: #e6e0d3;
+  color: #111111;
+}
+
+:global([data-theme="light"]) .logoBox {
+  border-color: #111111;
+}
+
+:global([data-theme="light"]) .logoText {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .logoBox:hover {
+  background-color: #111111;
+}
+
+:global([data-theme="light"]) .logoBox:hover .logoText {
+  color: #ffffff;
+}
+
+:global([data-theme="light"]) .columnTitle {
+  color: #71717a;
+}
+
+:global([data-theme="light"]) .footerLink {
+  color: #5e5953;
+}
+
+:global([data-theme="light"]) .footerLink:hover {
+  color: #111111;
+}

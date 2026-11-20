@@ -361,3 +361,88 @@
     font-size: 0.92rem;
   }
 }
+
+/* =========================================================================
+   LIGHT THEME OVERRIDES FOR CONTACT SECTION
+   ========================================================================= */
+:global([data-theme="light"]) .contactSection {
+  background-color: #f9f7f2;
+  border-top-color: rgba(0, 0, 0, 0.07);
+}
+
+:global([data-theme="light"]) .headline {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .leadText {
+  color: #5e5953;
+}
+
+:global([data-theme="light"]) .directList {
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .directLabel {
+  color: #71717a;
+}
+
+:global([data-theme="light"]) .directValueLink {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .directValueLink:hover {
+  color: #15803d;
+}
+
+:global([data-theme="light"]) .directValueText {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .socialLink {
+  color: #5e5953;
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+:global([data-theme="light"]) .socialLink:hover {
+  color: #111111;
+  border-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+:global([data-theme="light"]) .formCard {
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+:global([data-theme="light"]) .label {
+  color: #272421;
+}
+
+:global([data-theme="light"]) .input,
+:global([data-theme="light"]) .textarea {
+  background-color: #f9f7f2;
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #111111;
+}
+
+:global([data-theme="light"]) .input:focus,
+:global([data-theme="light"]) .textarea:focus {
+  background-color: #ffffff;
+  border-color: #111111;
+}
+
+:global([data-theme="light"]) .input::placeholder,
+:global([data-theme="light"]) .textarea::placeholder {
+  color: #a1a1aa;
+}
+
+:global([data-theme="light"]) .submitBtn {
+  background-color: #111111;
+  color: #ffffff;
+}
+
+:global([data-theme="light"]) .submitBtn:hover:not(:disabled) {
+  background-color: #272421;
+}

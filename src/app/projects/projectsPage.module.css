@@ -387,3 +387,105 @@
 .resetBtn:hover {
   background-color: rgba(255, 255, 255, 0.14);
 }
+
+/* =========================================================================
+   LIGHT THEME OVERRIDES FOR PROJECTS PAGE
+   ========================================================================= */
+:global([data-theme="light"]) .pageRoot {
+  background-color: #f9f7f2;
+  color: #111111;
+}
+
+:global([data-theme="light"]) .pageTitle {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .pageSubtitle {
+  color: #5e5953;
+}
+
+:global([data-theme="light"]) .searchInput {
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #111111;
+}
+
+:global([data-theme="light"]) .searchInput:focus {
+  border-color: #111111;
+}
+
+:global([data-theme="light"]) .searchIcon {
+  color: #71717a;
+}
+
+:global([data-theme="light"]) .filterPill {
+  color: #5e5953;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .filterPill:hover {
+  color: #111111;
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .filterPillActive {
+  background-color: #111111;
+  color: #ffffff !important;
+  border-color: #111111;
+}
+
+:global([data-theme="light"]) .cardCanvas {
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+}
+
+:global([data-theme="light"]) .cardCanvas:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .imageFrame {
+  background-color: #f0ebe1;
+}
+
+:global([data-theme="light"]) .cardTitle {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .cardCanvas:hover .cardTitle {
+  color: #15803d;
+}
+
+:global([data-theme="light"]) .cardDesc {
+  color: #5e5953;
+}
+
+:global([data-theme="light"]) .techBadge {
+  background-color: #eee8dc;
+  border-color: #ded7c8;
+  color: #272421;
+}
+
+:global([data-theme="light"]) .cardDate {
+  color: #71717a;
+}
+
+:global([data-theme="light"]) .emptyTitle {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .emptyDesc {
+  color: #5e5953;
+}
+
+:global([data-theme="light"]) .resetBtn {
+  background-color: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #111111;
+}
+
+:global([data-theme="light"]) .resetBtn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}

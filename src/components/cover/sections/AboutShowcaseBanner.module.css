@@ -82,3 +82,22 @@
     border-radius: 14px;
   }
 }
+
+/* =========================================================================
+   LIGHT THEME OVERRIDES FOR SHOWCASE BANNER
+   ========================================================================= */
+:global([data-theme="light"]) .showcaseSection {
+  background-color: #f9f7f2;
+}
+
+:global([data-theme="light"]) .bannerFrame {
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.1);
+  background-color: #f0ebe1;
+}
+
+:global([data-theme="light"]) .captionTag {
+  background-color: rgba(255, 255, 255, 0.85);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #272421;
+}
