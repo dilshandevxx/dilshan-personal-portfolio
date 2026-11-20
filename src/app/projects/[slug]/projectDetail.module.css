@@ -1,7 +1,7 @@
 /* Clean, Minimal & Elegant Project Details Showcase */
 
 .pageRoot {
-  background-color: #18191c;
+  background-color: #111111;
   min-height: 100vh;
   width: 100%;
   color: #ffffff;
@@ -172,7 +172,7 @@
   aspect-ratio: 16 / 9;
   border-radius: 16px;
   overflow: hidden;
-  background-color: #0f1115;
+  background-color: #181818;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.75);
   margin-bottom: 4.5rem;
@@ -220,7 +220,7 @@
 }
 
 .pillarCard {
-  background: #121418;
+  background: #181818;
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 18px;
   padding: 2.25rem 1.6rem 2.25rem;
@@ -230,7 +230,7 @@
 }
 
 .pillarCard:hover {
-  background: #16181f;
+  background: #202020;
   border-color: rgba(255, 255, 255, 0.16);
   transform: translateY(-3px);
 }
@@ -412,7 +412,7 @@
   flex-direction: column;
   gap: 0.4rem;
   padding: 1.5rem 1.75rem;
-  background: #111317;
+  background: #181818;
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 12px;
   text-decoration: none;
@@ -421,7 +421,7 @@
 }
 
 .paginationLink:hover {
-  background: #15181f;
+  background: #202020;
   border-color: rgba(255, 255, 255, 0.16);
   transform: translateY(-2px);
 }
@@ -503,7 +503,7 @@
 }
 
 .relatedCard {
-  background: #111317;
+  background: #181818;
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 14px;
   overflow: hidden;
@@ -521,7 +521,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
-  background: #090a0d;
+  background: #141414;
 }
 
 .relatedImage {

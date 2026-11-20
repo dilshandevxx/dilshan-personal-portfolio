@@ -1,7 +1,7 @@
 /* Projects Section (Dual Mode: Editorial Stagger on Desktop, Minimalist Reference Cards on Mobile) */
 
 .projectsSection {
-  background-color: #18191c;
+  background-color: #111111;
   padding: clamp(6.5rem, 9vw, 9rem) clamp(2rem, 4.5vw, 4rem) clamp(8rem, 12vw, 13rem);
   position: relative;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
@@ -135,7 +135,7 @@
   aspect-ratio: 1 / 1;
   border-radius: 0; /* Strictly square corners on desktop */
   overflow: hidden;
-  background-color: #212328;
+  background-color: #181818;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),

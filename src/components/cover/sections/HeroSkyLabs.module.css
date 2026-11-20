@@ -1,7 +1,7 @@
 /* Minimalist Hero Section Matching Reference Image (Impress. Brand & Headline) */
 
 .heroSection {
-  background-color: #18191c;
+  background-color: #111111;
   position: relative;
   width: 100%;
   box-sizing: border-box;
@@ -33,7 +33,7 @@
 }
 
 .navOpen {
-  background: rgba(24, 25, 28, 0.98);
+  background: rgba(17, 17, 17, 0.98);
 }
 
 .navContainer {
@@ -212,7 +212,7 @@
   bottom: 0;
   height: 100vh;
   width: 100vw;
-  background-color: rgba(24, 25, 28, 0.98);
+  background-color: rgba(17, 17, 17, 0.98);
   backdrop-filter: blur(28px) saturate(180%);
   -webkit-backdrop-filter: blur(28px) saturate(180%);
   z-index: 105;

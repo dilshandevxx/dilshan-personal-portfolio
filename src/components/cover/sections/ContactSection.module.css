@@ -1,6 +1,6 @@
 /* Contact Section (FEEL FREE TO CONTACT ME - strictly square corners) */
 .contactSection {
-  background-color: #18191c;
+  background-color: #111111;
   padding: 8rem 2rem 9rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   position: relative;
@@ -97,7 +97,7 @@
 .input {
   width: 100%;
   box-sizing: border-box;
-  background-color: #212328;
+  background-color: #181818;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 0; /* STRICTLY SQUARE */
   padding: 1.1rem 1.25rem;
@@ -120,7 +120,7 @@
 
 .input:focus {
   border-color: rgba(255, 255, 255, 0.35);
-  background-color: #272a31;
+  background-color: #222222;
 }
 
 /* Textarea */
@@ -131,7 +131,7 @@
 .textarea {
   width: 100%;
   box-sizing: border-box;
-  background-color: #212328;
+  background-color: #181818;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 0; /* STRICTLY SQUARE */
   padding: 1.1rem 1.25rem;
@@ -156,7 +156,7 @@
 
 .textarea:focus {
   border-color: rgba(255, 255, 255, 0.35);
-  background-color: #272a31;
+  background-color: #222222;
 }
 
 /* Solid White Send Button with SQUARE corners */
