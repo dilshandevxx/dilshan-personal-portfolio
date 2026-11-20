@@ -1,240 +1,386 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, Mail, Sparkles, Terminal, Code2, Database } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  Mail,
+  Copy,
+  Check,
+  Terminal,
+  Cpu,
+  Layers,
+  ShieldCheck,
+  ExternalLink,
+} from "lucide-react";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
 import MainFooter from "@/components/MainFooter";
 import { siteConfig } from "@/data/siteConfig";
 import styles from "./aboutPage.module.css";
 
-export const metadata = {
-  title: `About — Dilshan Seneviratne | Systems Architect & Full-Stack Engineer`,
-  description:
-    "Full-Stack Engineer & Systems Architect dedicated to crafting resilient distributed systems, AI inference architectures, and tactile digital products.",
-};
-
-const VALUES = [
-  {
-    title: "Zero Compromise on Performance",
-    desc: "Obsessive optimization of execution paths, memory boundaries, TTFT latency, and rendering threads.",
-  },
-  {
-    title: "Determinism Over Magic",
-    desc: "Explicit architectural boundaries, reproducible state machines, and transparent failure domains.",
-  },
-  {
-    title: "Aesthetic Discipline",
-    desc: "Monolithic typography, generous breathing room, rich dark surfaces, and purposeful micro-interactions.",
-  },
-  {
-    title: "Open-Source Mindset",
-    desc: "Giving back verified benchmarks, architectural playbooks, and production tools to the developer craft.",
-  },
+const SOCIAL_LINKS = [
+  { label: "GitHub", href: siteConfig.social.github },
+  { label: "LinkedIn", href: siteConfig.social.linkedin },
+  { label: "Twitter / X", href: siteConfig.social.x },
+  { label: "Facebook", href: siteConfig.social.facebook },
 ];
 
-const TIMELINE = [
+const ARCHITECTURE_HIGHLIGHTS = [
   {
-    period: "2024 — PRESENT",
-    role: "Lead Systems Architect & Founder",
-    company: "Engineering Studio & Open Distributed Infrastructure",
+    title: "Distributed Model Training & GPU Profiling",
+    tag: "INFRASTRUCTURE & COMPUTE",
+    description:
+      "Multi-node GPU orchestration, memory profiling, and distributed tensor synchronization with PyTorch and DeepSpeed.",
+    image: "/images/insight_portfolio_hd.jpg",
   },
   {
-    period: "2022 — 2024",
-    role: "Senior Full-Stack & Distributed Systems Engineer",
-    company: "Distributed Microservices, Vector Databases & Cloud Platforms",
-  },
-  {
-    period: "2020 — 2022",
-    role: "Software Engineer — Backend & AI Systems",
-    company: "API Gateways, High-Concurrency Services & Ingestion Pipelines",
+    title: "Cloud Infrastructure & Resilient Pipelines",
+    tag: "KUBERNETES & GITOPS",
+    description:
+      "Production-grade microservice orchestration, event-driven streaming with Kafka, and automated GitOps deployments.",
+    image: "/images/blog_arch.png",
   },
 ];
 
 export default function AboutPage() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(siteConfig.social.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2200);
+  };
+
   return (
     <div className={styles.pageRoot}>
-      {/* 1. Global Navigation Bar */}
+      {/* 1. Global Clean Navigation Bar (No Side Panel) */}
       <SkyLabsNavbar activeTab="about" />
 
       <main className={styles.mainContainer}>
         {/* Top Back Link */}
-        <div className={styles.topNav}>
+        <motion.div
+          className={styles.topNav}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
           <Link href="/" className={styles.backLink}>
             <ArrowLeft size={15} />
             <span>Back to Home</span>
           </Link>
-        </div>
+        </motion.div>
 
-        {/* Hero Header Section */}
-        <header className={styles.headerSection}>
-          <div className={styles.metaRow}>
-            <span className={styles.metaBadge}>STUDIO &amp; ARCHITECTURE</span>
-            <span className={styles.metaDivider}>•</span>
-            <span className={styles.metaRole}>DILSHAN SENEVIRATNE</span>
+        {/* 2. Hero Identity & Clean Narrative (Inspired by Reference Design) */}
+        <motion.section
+          className={styles.heroSection}
+          initial={{ opacity: 0, y: 22 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          aria-label="Introduction"
+        >
+          <div className={styles.heroHeader}>
+            <span className={styles.roleBadge}>AI/ML ENGINEER &amp; DEVOPS ARCHITECT</span>
+            <h1 className={styles.heroName}>Dilshan Seneviratne</h1>
           </div>
 
-          <h1 className={styles.title}>About Me</h1>
+          <div className={styles.narrativeStack}>
+            <p className={styles.narrativeLead}>
+              I&apos;m an AI/ML Engineer and DevOps Architect focused on building high-throughput machine
+              learning systems, scalable model inference runtimes, and resilient cloud infrastructure.
+            </p>
 
-          <p className={styles.subtitle}>
-            I love photography because it allows me to forget about everything happening around
-            me every day. I enjoy every moment when I can travel, be outside, and discover the beauty
-            of nature or interesting places. I try to pay special attention to good composition and
-            light, which are the foundation of great photography for me.
-          </p>
-        </header>
+            <p className={styles.narrativeBody}>
+              I specialize in end-to-end model workflows — from fine-tuning foundation models and training
+              distributed neural networks to designing low-latency inference pipelines, high-dimensional vector
+              indexing, and production RAG systems.
+            </p>
 
-        {/* 2. Dedicated Portrait Photo Card (Naturally embedded, NO sliding panel) */}
-        {/* ========================================================================= */}
-        {/* 📷 DEDICATED PROFILE PHOTO CARD                                           */}
-        {/* You can easily update/swap your portrait photo anytime by updating:       */}
-        {/*       /public/dilshan_portrait.jpg with your new image!                   */}
-        {/* ========================================================================= */}
-        <section className={styles.photoSection} aria-label="Portrait Photo">
-          <div className={styles.photoCard}>
-            <Image
-              src="/dilshan_portrait.jpg"
-              alt="Dilshan Seneviratne — Systems Architect"
-              fill
-              priority
-              sizes="(max-width: 920px) 100vw, 920px"
-              className={styles.portraitPhoto}
-            />
-            <div className={styles.photoOverlay} />
+            <p className={styles.narrativeBody}>
+              My engineering philosophy is simple — remove unnecessary complexity, optimize GPU and memory
+              boundaries, and construct automated Kubernetes-native cloud infrastructure that scales
+              deterministically under extreme production load.
+            </p>
 
-            <div className={styles.photoBottomBar}>
-              <div className={styles.photoInfo}>
-                <span className={styles.photoName}>Dilshan Seneviratne</span>
-                <span className={styles.photoRoleText}>
-                  Full-Stack Engineer &amp; Systems Architect
-                </span>
-              </div>
-
-              <div className={styles.statusIndicator}>
-                <span className={styles.pulseDot} />
-                <span>ACTIVE IN PRODUCTION</span>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.photoHint}>
-            <span>Photo Slot: You can easily update your photo anytime in</span>
-            <code>/public/dilshan_portrait.jpg</code>
-          </div>
-        </section>
-
-        {/* 3. Biography & Narrative Flow */}
-        <section className={styles.narrativeSection}>
-          <p className={styles.leadParagraph}>
-            I design and build software that bridges the gap between mathematically rigorous
-            distributed systems and refined, minimalist human experiences.
-          </p>
-
-          <p className={styles.bodyParagraph}>
-            My engineering work is rooted in high-concurrency backends, low-latency streaming
-            retrieval-augmented generation (RAG), vector indexing with PostgreSQL and pgvector,
-            and scalable cloud infrastructure. I believe production systems should feel monolithic,
-            reliable, and quietly unyielding under load.
-          </p>
-
-          <div className={styles.statementQuote}>
-            <p className={styles.quoteText}>
-              &ldquo;Software should feel fast, deterministic, and durable. We reject visual bloat
-              and artificial complexity in favor of crisp architectural precision and understated
-              craft.&rdquo;
+            <p className={styles.narrativeBody}>
+              Over the years, I have engineered mission-critical ML pipelines, distributed backends, and
+              automated cloud deployments for startups, research teams, and scale-ups globally.
             </p>
           </div>
 
-          <p className={styles.bodyParagraph}>
-            When I am not architecting distributed engines, I curate an open digital garden of
-            verified benchmarks, system design patterns, and engineering writing without ads,
-            tracking scripts, or paywalls.
-          </p>
+          {/* Clean Interactive Pill Buttons Row (Matching Reference Design) */}
+          <div className={styles.pillsRow}>
+            {/* Direct Email Pill */}
+            <button
+              type="button"
+              onClick={handleCopyEmail}
+              className={`${styles.pillBtn} ${styles.emailPill}`}
+              aria-label="Copy email address"
+              title="Click to copy email"
+            >
+              <Mail size={14} className={styles.pillIcon} />
+              <span className={styles.pillText}>{siteConfig.social.email}</span>
+              {copied ? (
+                <Check size={14} className={styles.checkIcon} />
+              ) : (
+                <Copy size={13} className={styles.copyIcon} />
+              )}
+            </button>
 
-          {/* Quick Facts / Competencies */}
-          <div className={styles.factsGrid}>
-            <div className={styles.factCard}>
-              <span className={styles.factLabel}>Core Focus</span>
-              <span className={styles.factValue}>Distributed Systems</span>
-            </div>
-            <div className={styles.factCard}>
-              <span className={styles.factLabel}>Specialization</span>
-              <span className={styles.factValue}>Applied AI &amp; RAG</span>
-            </div>
-            <div className={styles.factCard}>
-              <span className={styles.factLabel}>Primary Stack</span>
-              <span className={styles.factValue}>Python, TS, Go, SQL</span>
-            </div>
-            <div className={styles.factCard}>
-              <span className={styles.factLabel}>Availability</span>
-              <span className={styles.factValue}>Global / Remote</span>
-            </div>
-          </div>
-        </section>
-
-        {/* 4. Core Engineering Values */}
-        <section className={styles.sectionBlock}>
-          <div className={styles.sectionHeadingRow}>
-            <span className={styles.sectionIndex}>01 / PRINCIPLES</span>
-            <h2 className={styles.sectionTitle}>Engineering Values</h2>
-          </div>
-
-          <div className={styles.valuesGrid}>
-            {VALUES.map((val) => (
-              <div key={val.title} className={styles.valueCard}>
-                <h3 className={styles.valueTitle}>{val.title}</h3>
-                <p className={styles.valueDesc}>{val.desc}</p>
-              </div>
+            {/* Social Profile Pills */}
+            {SOCIAL_LINKS.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.pillBtn}
+              >
+                <span>{link.label}</span>
+                <ExternalLink size={12} className={styles.pillExternal} />
+              </a>
             ))}
           </div>
-        </section>
+        </motion.section>
 
-        {/* 5. Career & Milestones Timeline */}
-        <section className={styles.sectionBlock}>
-          <div className={styles.sectionHeadingRow}>
-            <span className={styles.sectionIndex}>02 / EXPERIENCE</span>
-            <h2 className={styles.sectionTitle}>Career &amp; Milestones</h2>
+        {/* 3. Personal Manifesto & Editorial Statement (Inspired by Reference Typography) */}
+        <motion.section
+          className={styles.manifestoSection}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          aria-label="Philosophy"
+        >
+          <div className={styles.manifestoInner}>
+            <p className={styles.manifestoText}>
+              I build machine learning and distributed systems because true engineering lives at the
+              intersection of mathematical rigor and operational discipline. I enjoy every moment spent
+              optimizing tensor execution, designing deterministic pipelines, and stripping away
+              unnecessary runtime bloat. Focusing on clean composition, bounded queues, and fault-tolerant
+              resilience is the foundation of great engineering for me.
+            </p>
+          </div>
+        </motion.section>
+
+        {/* 4. Dual Technical Pillars: AI/ML Engineering & DevOps / Cloud Infrastructure */}
+        <motion.section
+          className={styles.pillarsSection}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          aria-label="Core Competencies"
+        >
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionIndex}>01 / DOMAIN MASTERY</span>
+            <h2 className={styles.sectionTitle}>Dual Engineering Superpowers</h2>
           </div>
 
-          <div className={styles.timelineList}>
-            {TIMELINE.map((item, idx) => (
-              <div key={idx} className={styles.timelineItem}>
-                <span className={styles.timelinePeriod}>{item.period}</span>
-                <div className={styles.timelineDetails}>
-                  <h3 className={styles.timelineRole}>{item.role}</h3>
-                  <span className={styles.timelineCompany}>{item.company}</span>
+          <div className={styles.pillarsGrid}>
+            {/* Pillar 1: AI/ML Engineering */}
+            <div className={styles.pillarCard}>
+              <div className={styles.pillarHeader}>
+                <div className={styles.pillarIconWrap}>
+                  <Cpu size={22} />
+                </div>
+                <div>
+                  <span className={styles.pillarSub}>SPECIALIZATION</span>
+                  <h3 className={styles.pillarTitle}>AI &amp; Machine Learning</h3>
+                </div>
+              </div>
+
+              <p className={styles.pillarDesc}>
+                Architecting deep learning models, fine-tuning large language models (LLMs), and designing
+                low-latency production inference runtimes.
+              </p>
+
+              <div className={styles.skillsTagList}>
+                {[
+                  "PyTorch & TorchScript",
+                  "Hugging Face & Transformers",
+                  "vLLM & TensorRT-LLM",
+                  "LoRA & QLoRA Fine-Tuning",
+                  "DeepSpeed & FSDP",
+                  "RAG & Agentic Workflows",
+                  "pgvector, Qdrant & Milvus",
+                  "Distributed GPU Training",
+                  "Model Quantization (INT4/FP8)",
+                ].map((skill) => (
+                  <span key={skill} className={styles.skillTag}>
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Pillar 2: DevOps & Cloud Architecture */}
+            <div className={styles.pillarCard}>
+              <div className={styles.pillarHeader}>
+                <div className={styles.pillarIconWrap}>
+                  <Terminal size={22} />
+                </div>
+                <div>
+                  <span className={styles.pillarSub}>INFRASTRUCTURE</span>
+                  <h3 className={styles.pillarTitle}>DevOps &amp; MLOps Systems</h3>
+                </div>
+              </div>
+
+              <p className={styles.pillarDesc}>
+                Automating multi-cloud infrastructure, orchestrating GPU-accelerated Kubernetes clusters,
+                and maintaining zero-downtime CI/CD delivery.
+              </p>
+
+              <div className={styles.skillsTagList}>
+                {[
+                  "Kubernetes (K8s) & Helm",
+                  "Docker & Container Runtimes",
+                  "Terraform (IaC)",
+                  "GitHub Actions & CI/CD",
+                  "ArgoCD & GitOps",
+                  "Prometheus, Grafana & OTel",
+                  "AWS (EKS, EC2, S3) & GCP",
+                  "Apache Kafka & Event Streams",
+                  "Ray Clusters & Slurm",
+                ].map((skill) => (
+                  <span key={skill} className={styles.skillTag}>
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* 5. Impact Statement & Direction (Inspired by Reference Design) */}
+        <motion.section
+          className={styles.statementSection}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          aria-label="Engineering Stance"
+        >
+          <div className={styles.statementHeadlineWrap}>
+            <h2 className={styles.statementHeadline}>
+              Building scalable intelligence with <span className={styles.accentWord}>operational rigor.</span>
+            </h2>
+          </div>
+
+          <div className={styles.statementSplit}>
+            <div className={styles.splitLeft}>
+              <p className={styles.splitParagraph}>
+                Anyone can prompt an API endpoint. Engineering fault-tolerant distributed training,
+                sub-16ms inference runtimes, and self-healing Kubernetes clusters is where real technical
+                depth lies. It demands rigorous systems profiling, deep kernel understanding, and disciplined execution.
+              </p>
+            </div>
+
+            <div className={styles.splitRight}>
+              <nav className={styles.quickLinksNav} aria-label="Quick Links">
+                <Link href="/projects" className={styles.quickLinkItem}>
+                  <span>Explore Machine Learning Projects</span>
+                  <span className={styles.linkArrow}>→</span>
+                </Link>
+                <Link href="/#articles" className={styles.quickLinkItem}>
+                  <span>Read Technical Architecture Essays</span>
+                  <span className={styles.linkArrow}>→</span>
+                </Link>
+                <Link href="/#skills" className={styles.quickLinkItem}>
+                  <span>Review Engineering Services &amp; Advisory</span>
+                  <span className={styles.linkArrow}>→</span>
+                </Link>
+                <Link href="/#faq" className={styles.quickLinkItem}>
+                  <span>Frequently Asked Questions</span>
+                  <span className={styles.linkArrow}>→</span>
+                </Link>
+                <Link href="/#contact" className={styles.quickLinkItem}>
+                  <span>Start an Architecture Discussion</span>
+                  <span className={styles.linkArrow}>→</span>
+                </Link>
+              </nav>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* 6. Architectural Highlights (Featured Works Inspired by Reference Image) */}
+        <motion.section
+          className={styles.featuredSection}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          aria-label="Featured Works"
+        >
+          <div className={styles.featuredHeader}>
+            <h2 className={styles.featuredTitle}>Featured Works</h2>
+            <Link href="/projects" className={styles.featuredSeeAll}>
+              <span>ALL PROJECTS</span>
+              <span>→</span>
+            </Link>
+          </div>
+
+          <div className={styles.featuredGrid}>
+            {ARCHITECTURE_HIGHLIGHTS.map((item, idx) => (
+              <div key={idx} className={styles.featuredCard}>
+                <div className={styles.featuredImageWrap}>
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 550px"
+                    className={styles.featuredImage}
+                  />
+                  <div className={styles.featuredOverlay} />
+                  <span className={styles.featuredTag}>{item.tag}</span>
+                </div>
+
+                <div className={styles.featuredInfo}>
+                  <h3 className={styles.featuredCardTitle}>{item.title}</h3>
+                  <p className={styles.featuredCardDesc}>{item.description}</p>
                 </div>
               </div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
-        {/* 6. Contact CTA Box */}
-        <div className={styles.ctaBox}>
-          <div className={styles.ctaText}>
-            <h3 className={styles.ctaTitle}>Ready to build something enduring?</h3>
-            <p className={styles.ctaSub}>
-              Available for high-impact system architecture, distributed engineering, and technical advisory.
-            </p>
+        {/* 7. Work Together CTA Capsule (Inspired by Reference Design) */}
+        <motion.section
+          className={styles.ctaSection}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          aria-label="Contact and Advisory"
+        >
+          <div className={styles.ctaCapsule}>
+            <div className={styles.ctaContent}>
+              <span className={styles.ctaPre}>COLLABORATION &amp; ADVISORY</span>
+              <h2 className={styles.ctaTitle}>Let&apos;s build intelligent, resilient systems.</h2>
+              <p className={styles.ctaDesc}>
+                Open for high-impact AI/ML engineering, GPU cluster infrastructure architecture, and
+                cloud-native DevOps consulting with teams building for scale.
+              </p>
+            </div>
+
+            <div className={styles.ctaActionWrap}>
+              <a
+                href={`mailto:${siteConfig.social.email}`}
+                className={styles.ctaButton}
+              >
+                <span>Work together</span>
+                <span className={styles.ctaArrowCircle}>
+                  <ArrowUpRight size={16} />
+                </span>
+              </a>
+            </div>
           </div>
-
-          <div className={styles.ctaButtons}>
-            <a
-              href={`mailto:${siteConfig.social.email}`}
-              className={styles.primaryCta}
-            >
-              <Mail size={15} />
-              <span>Get in Touch</span>
-            </a>
-
-            <Link href="/projects" className={styles.secondaryCta}>
-              <span>Explore Projects</span>
-              <ArrowUpRight size={15} />
-            </Link>
-          </div>
-        </div>
+        </motion.section>
       </main>
 
-      {/* Global Footer */}
+      {/* Global Minimalist Footer */}
       <MainFooter />
     </div>
   );
