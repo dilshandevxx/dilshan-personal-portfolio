@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowUpRight, Terminal, Cpu, Layers, Sparkles } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
 import PreFooterBanner from "@/components/cover/sections/PreFooterBanner";
 import MainFooter from "@/components/MainFooter";
@@ -147,93 +147,6 @@ export default function AboutPage() {
               <div className={styles.cardOverlayGradient} />
             </div>
           </motion.div>
-        </section>
-
-        {/* =========================================================================
-            DETAILED EDITORIAL BIOGRAPHY & ARCHITECTURE CAPABILITIES
-            ========================================================================= */}
-        <section className={styles.narrativeSection} aria-label="Biography & Background">
-          <div className={styles.narrativeGrid}>
-            {/* Left Sub-Header */}
-            <div className={styles.narrativeLeft}>
-              <span className={styles.sectionPill}>ENGINEERING IDENTITY</span>
-              <h2 className={styles.narrativeTitle}>
-                High-throughput machine learning systems with operational rigor.
-              </h2>
-            </div>
-
-            {/* Right Story & Competencies */}
-            <div className={styles.narrativeRight}>
-              <p className={styles.narrativeLead}>
-                I&apos;m Dilshan — an AI/ML engineer and DevOps architect specializing in building
-                distributed machine learning platforms, optimizing low-latency GPU inference runtimes,
-                and orchestrating resilient Kubernetes infrastructure. Dedicated to stripping away
-                unnecessary complexity to deliver scalable, production-grade intelligence.
-              </p>
-
-              <p className={styles.narrativeBody}>
-                Over the past 6+ years, I&apos;ve engineered systems handling millions of daily inferences,
-                architected retrieval-augmented generation (RAG) engines, and managed zero-downtime
-                cloud platforms. My methodology balances mathematical precision with software craftsmanship:
-                optimizing latency boundaries, enforcing deterministic state management, and designing
-                fault-tolerant distributed topologies.
-              </p>
-
-              {/* Core Competencies Matrix */}
-              <div className={styles.competencyMatrix}>
-                <div className={styles.competencyItem}>
-                  <Cpu size={18} className={styles.compIcon} />
-                  <div>
-                    <h3 className={styles.compTitle}>Model Inference &amp; RAG</h3>
-                    <p className={styles.compDesc}>
-                      vLLM, TensorRT-LLM, cross-encoder rerankers, semantic vector indexes, and sub-15ms TTFT.
-                    </p>
-                  </div>
-                </div>
-
-                <div className={styles.competencyItem}>
-                  <Layers size={18} className={styles.compIcon} />
-                  <div>
-                    <h3 className={styles.compTitle}>DevOps &amp; Kubernetes</h3>
-                    <p className={styles.compDesc}>
-                      Multi-cluster K8s orchestration, GitOps, zero-trust cloud topologies, and CI/CD automation.
-                    </p>
-                  </div>
-                </div>
-
-                <div className={styles.competencyItem}>
-                  <Terminal size={18} className={styles.compIcon} />
-                  <div>
-                    <h3 className={styles.compTitle}>Distributed Cloud Systems</h3>
-                    <p className={styles.compDesc}>
-                      High-concurrency microservices in Go, Python, and TypeScript built for 99.99% reliability.
-                    </p>
-                  </div>
-                </div>
-
-                <div className={styles.competencyItem}>
-                  <Sparkles size={18} className={styles.compIcon} />
-                  <div>
-                    <h3 className={styles.compTitle}>Agentic &amp; Full-Stack AI</h3>
-                    <p className={styles.compDesc}>
-                      Autonomous multi-agent workflows, Next.js experiences, and real-time streaming architectures.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Action Links */}
-              <div className={styles.narrativeActions}>
-                <Link href="/projects" className={styles.primaryActionBtn}>
-                  <span>Explore Featured Projects</span>
-                  <ArrowUpRight size={15} />
-                </Link>
-                <Link href="/#contact" className={styles.secondaryActionBtn}>
-                  <span>Get in Touch</span>
-                </Link>
-              </div>
-            </div>
-          </div>
         </section>
       </main>
 
