@@ -1,389 +1,196 @@
-/* Editorial Architectural Footer (Strictly Square Corners & Rich System Details) */
+/* =========================================================================
+   Main Footer (Matching exact ChatLabs reference design)
+   Obsidian dark canvas (#111111), Boxed Wordmark Logo [ DILSHAN ],
+   mission description, copyright, crafted badge, and 3 clean link columns.
+   ========================================================================= */
 
 .footerRoot {
-  width: 100%;
-  position: relative;
   background-color: #111111;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  color: #eceff4;
+  padding: clamp(5rem, 8vw, 7.5rem) clamp(1.5rem, 5vw, 4rem) clamp(4rem, 6vw, 6rem);
+  width: 100%;
   box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
+  color: #eceff4;
+  position: relative;
 }
 
 .container {
-  max-width: 1240px;
+  max-width: 1360px;
   margin: 0 auto;
-  padding: clamp(4.5rem, 7vw, 6.5rem) clamp(1.25rem, 4vw, 2.5rem) 3.5rem;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ------------------------------------------------------------- */
-/* 1. TOP BANNER: BRAND SUMMARY & AVAILABILITY STATUS            */
-/* ------------------------------------------------------------- */
-.topBanner {
+  width: 100%;
   display: grid;
-  grid-template-columns: 1.25fr 1fr;
-  gap: clamp(2rem, 4vw, 4rem);
+  grid-template-columns: minmax(300px, 1.2fr) minmax(0, 1.8fr);
+  column-gap: clamp(3rem, 7vw, 8rem);
+  row-gap: 3.5rem;
   align-items: start;
-  padding-bottom: clamp(3rem, 5vw, 4.25rem);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  margin-bottom: clamp(3rem, 5vw, 4.5rem);
 }
 
-.brandSummary {
+/* =========================================================================
+   LEFT ZONE: Boxed Wordmark Logo + Statement + Copyright + Crafted Badge
+   ========================================================================= */
+.brandZone {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1.15rem;
+  max-width: 440px;
 }
 
-.brandLogo {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(1.5rem, 2.4vw, 1.95rem);
+/* Boxed Wordmark Logo [ DILSHAN ] matching reference outline */
+.logoBox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #ffffff;
+  padding: 0.42rem 1.15rem;
+  border-radius: 2px;
+  text-decoration: none;
+  margin-bottom: 1.6rem;
+  background-color: transparent;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.logoText {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", sans-serif);
+  font-size: 0.92rem;
   font-weight: 800;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #ffffff;
-  text-decoration: none;
-  line-height: 1;
-  display: inline-block;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: color 0.2s ease;
 }
 
-.brandLogo:hover {
-  opacity: 0.85;
-  transform: translateY(-1px);
+.logoBox:hover {
+  background-color: #ffffff;
 }
 
-.tagline {
+.logoBox:hover .logoText {
+  color: #000000;
+}
+
+/* Mission & Engineering Statement */
+.brandDescription {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.95rem;
-  line-height: 1.65;
-  color: #9ca3af;
-  margin: 0;
-  max-width: 520px;
+  font-size: clamp(0.92rem, 1.1vw, 1rem);
+  line-height: 1.62;
+  color: #8e94a0;
+  margin: 0 0 1.85rem 0;
 }
 
-/* Availability Card with Strictly Square Corners */
-.availabilityCard {
-  background-color: #181818;
+/* Copyright Line */
+.copyrightText {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.82rem;
+  color: #626773;
+  margin: 0 0 1.35rem 0;
+  letter-spacing: -0.01em;
+}
+
+/* Crafted By Badge */
+.craftedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background-color: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0; /* STRICTLY SQUARE */
-  padding: 1.65rem 1.85rem;
+  border-radius: 6px;
+  padding: 0.45rem 0.95rem;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.78rem;
+  color: #8e94a0;
+  user-select: none;
+}
+
+.heartIcon {
+  color: #ef4444;
+  font-size: 0.85rem;
+  display: inline-block;
+  line-height: 1;
+}
+
+.craftedAuthor {
+  color: #ffffff;
+  font-weight: 600;
+  font-family: var(--font-mono, monospace);
+  letter-spacing: 0.04em;
+}
+
+/* =========================================================================
+   RIGHT ZONE: 3 Clean Vertical Link Columns (EXPLORE, DOMAINS, SOCIALS)
+   ========================================================================= */
+.columnsZone {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(2rem, 4vw, 4.5rem);
+  width: 100%;
+}
+
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Column Title (EXPLORE, DOMAINS, SOCIALS) */
+.columnTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #cbd5e1;
+  margin: 0 0 1.65rem 0;
+}
+
+.columnList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 0.95rem;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
-  box-sizing: border-box;
 }
 
-.statusRow {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-}
-
-.pulsingDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 0; /* STRICTLY SQUARE PIXEL */
-  background-color: #a3e635; /* Neon lime */
-  box-shadow: 0 0 10px #a3e635;
-  display: inline-block;
-  animation: pulseGlow 2s infinite ease-in-out;
-}
-
-@keyframes pulseGlow {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.45;
-    transform: scale(0.85);
-  }
-}
-
-.statusLabel {
-  font-family: var(--font-mono, "Google Sans Code", monospace);
-  font-size: 0.74rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #a3e635;
-}
-
-.statusText {
+.footerLink {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.88rem;
-  line-height: 1.6;
-  color: #d1d5db;
-  margin: 0;
-}
-
-.contactCta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono, "Google Sans Code", monospace);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #ffffff;
-  background-color: #141414;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 0; /* STRICTLY SQUARE */
-  padding: 0.65rem 1.25rem;
+  font-size: 0.92rem;
+  color: #8e94a0;
   text-decoration: none;
-  width: fit-content;
-  margin-top: 0.25rem;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.contactCta:hover {
-  background-color: #a3e635;
-  color: #000000;
-  border-color: #a3e635;
-  transform: translateY(-1.5px);
-  box-shadow: 0 4px 16px rgba(163, 230, 53, 0.35);
-}
-
-/* ------------------------------------------------------------- */
-/* 2. DIRECTORY 4-COLUMN GRID                                    */
-/* ------------------------------------------------------------- */
-.directoryGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(2rem, 3.5vw, 3.5rem);
-  padding-bottom: clamp(3rem, 5vw, 4.25rem);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  margin-bottom: 2.25rem;
-}
-
-.directoryCol {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.colHeader {
-  font-family: var(--font-mono, "Google Sans Code", monospace);
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #a3e635;
-  display: block;
-}
-
-.linkList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-}
-
-.dirLink {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.9rem;
-  color: #9ca3af;
-  text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease;
   display: inline-block;
 }
 
-.dirLink:hover {
+.footerLink:hover {
   color: #ffffff;
   transform: translateX(2px);
 }
 
-.dirLinkWithIcon {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.9rem;
-  color: #9ca3af;
-  text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.linkArrow {
-  opacity: 0.45;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.dirLinkWithIcon:hover {
-  color: #ffffff;
-}
-
-.dirLinkWithIcon:hover .linkArrow {
-  opacity: 1;
-  transform: translate(2px, -2px);
-}
-
-.plainItem {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.88rem;
-  color: #71717a;
-  line-height: 1.4;
-  display: block;
-}
-
-/* ------------------------------------------------------------- */
-/* 3. LIVE TELEMETRY STRIP                                       */
-/* ------------------------------------------------------------- */
-.telemetryStrip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  margin-bottom: 1.75rem;
-}
-
-.telemetryGroup {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.telemetryItem {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.78rem;
-  color: #8b909c;
-  white-space: nowrap;
-}
-
-.telemetryIcon {
-  color: #a3e635;
-  flex-shrink: 0;
-}
-
-.telemetryDivider {
-  color: rgba(255, 255, 255, 0.2);
-  font-size: 0.75rem;
-}
-
-/* Back to Top Button */
-.backToTopBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 0; /* STRICTLY SQUARE */
-  color: #d1d5db;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 0.55rem 1rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  outline: none;
-}
-
-.backToTopBtn:hover {
-  background-color: #181818;
-  border-color: rgba(255, 255, 255, 0.25);
-  color: #ffffff;
-  transform: translateY(-2px);
-}
-
-/* ------------------------------------------------------------- */
-/* 4. BOTTOM COPYRIGHT & PRIVACY ATTRIBUTION                     */
-/* ------------------------------------------------------------- */
-.bottomBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.copyrightText {
-  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: 0.82rem;
-  color: #64748b;
-  margin: 0;
-  line-height: 1.5;
-}
-
-.bottomMetaLinks {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.privacyNote {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
-  color: #52525b;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-/* ------------------------------------------------------------- */
-/* RESPONSIVENESS                                                */
-/* ------------------------------------------------------------- */
+/* =========================================================================
+   RESPONSIVE LAYOUT
+   ========================================================================= */
 @media (max-width: 960px) {
-  .topBanner {
+  .container {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 3.5rem;
   }
 
-  .directoryGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
+  .brandZone {
+    max-width: 100%;
+  }
+
+  .columnsZone {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem 2rem;
   }
 }
 
-@media (max-width: 600px) {
-  .container {
-    padding: 3.5rem 1.15rem 2.5rem;
+@media (max-width: 640px) {
+  .footerRoot {
+    padding: 4rem 1.5rem 3.5rem;
   }
 
-  .directoryGrid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .availabilityCard {
-    padding: 1.35rem 1.4rem;
-  }
-
-  .telemetryStrip {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.25rem;
-  }
-
-  .telemetryGroup {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .telemetryDivider {
-    display: none;
-  }
-
-  .bottomBar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
+  .columnsZone {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.25rem 1.5rem;
   }
 }
