@@ -67,13 +67,13 @@ section[id] {
   --color-primary: var(--accent-amber-dark);
   --color-primary-rgb: 254, 222, 145;
 
-  --color-background: #202025;
-  --color-background-sidebar: #202025;
-  --color-background-alternate: #202025;
-  --color-background-card: #282830;
-  --color-background-card-hover: #31313a;
-  --color-background-input: #19191e;
-  --color-background-tag: #282830;
+  --color-background: #18191c;
+  --color-background-sidebar: #18191c;
+  --color-background-alternate: #18191c;
+  --color-background-card: #212328;
+  --color-background-card-hover: #292c33;
+  --color-background-input: #212328;
+  --color-background-tag: #212328;
   --color-background-navbar-link-hover: #12141a;
   --color-background-navbar-link-active: #161820;
 
@@ -128,13 +128,13 @@ section[id] {
   --color-primary: var(--accent-amber-dark);
   --color-primary-rgb: 254, 222, 145;
 
-  --color-background: #202025;
-  --color-background-sidebar: #202025;
-  --color-background-alternate: #202025;
-  --color-background-card: #282830;
-  --color-background-card-hover: #31313a;
-  --color-background-input: #19191e;
-  --color-background-tag: #282830;
+  --color-background: #18191c;
+  --color-background-sidebar: #18191c;
+  --color-background-alternate: #18191c;
+  --color-background-card: #212328;
+  --color-background-card-hover: #292c33;
+  --color-background-input: #212328;
+  --color-background-tag: #212328;
   --color-background-navbar-link-hover: #12141a;
   --color-background-navbar-link-active: #161820;
 
@@ -190,7 +190,7 @@ html {
 body {
   font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--color-text, #d2d5df);
-  background-color: var(--color-background, #202025);
+  background-color: #18191c;
   line-height: 1.6;
   min-height: 100vh;
   max-width: 100vw;

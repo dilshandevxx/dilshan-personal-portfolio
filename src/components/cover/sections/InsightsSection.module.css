@@ -1,6 +1,6 @@
 /* Articles Section — 2x2 Horizontal Grid Matching Reference Design */
 .insightsSection {
-  background-color: #000000;
+  background-color: #18191c;
   padding: clamp(5.5rem, 9vw, 8.5rem) clamp(1.5rem, 5vw, 4rem);
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   position: relative;
