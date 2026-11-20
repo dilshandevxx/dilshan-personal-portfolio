@@ -1,8 +1,8 @@
-/* About Section (Faithfully matching user reference design with "More about me —", 3-line headline, narrative, and green button) */
+/* About Section (Asymmetric Minimalist Editorial Layout matching reference design) */
 
 .aboutSection {
   background-color: #111111;
-  padding: clamp(6rem, 10vw, 9.5rem) clamp(1.5rem, 5vw, 4rem);
+  padding: clamp(6.5rem, 11vw, 10.5rem) clamp(1.5rem, 5vw, 4rem);
   position: relative;
   width: 100%;
   box-sizing: border-box;
@@ -16,101 +16,47 @@
   width: 100%;
 }
 
-/* 2-Column Grid: Left label column, Right content column */
+/* 2-Column Grid: Left ~36% open breathing room, Right ~64% statement (Exact 35.7% ratio from reference image) */
 .editorialGrid {
   display: grid;
-  grid-template-columns: minmax(200px, 320px) minmax(0, 1fr);
-  column-gap: clamp(2.5rem, 6vw, 6.5rem);
+  grid-template-columns: minmax(0, 36%) minmax(0, 64%);
+  column-gap: clamp(2rem, 4vw, 4.5rem);
   width: 100%;
   align-items: start;
 }
 
-/* Left Column: Clean label */
 .leftColumn {
-  padding-top: 0.4rem;
+  width: 100%;
 }
 
-.sectionLabel {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
-  font-weight: 500;
-  color: #ffffff;
-  letter-spacing: -0.015em;
-  white-space: nowrap;
-}
-
-.labelDash {
-  display: inline-block;
-  color: #ffffff;
-  font-weight: 400;
-}
-
-/* Right Column: Heading, Paragraphs & Button */
 .rightColumn {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  max-width: 900px;
-}
-
-/* 3-Line Headline matching reference */
-.heading {
-  display: flex;
-  flex-direction: column;
-  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(2.35rem, 4.3vw, 3.8rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-  color: #ffffff;
-  margin: 0 0 clamp(2.25rem, 3.8vw, 3.25rem) 0;
-}
-
-.headingName,
-.headingRole,
-.headingLocation {
-  display: block;
-}
-
-.headingRole {
-  color: #ffffff;
-}
-
-.headingLocation {
-  color: #ffffff;
-}
-
-/* Narrative Paragraphs */
-.narrativeStack {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1.35rem, 2vw, 1.85rem);
   max-width: 860px;
 }
 
-.narrativePara {
-  font-family: var(--font-body, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: clamp(1.02rem, 1.25vw, 1.15rem);
+/* Statement Typography Matching Exact Reference Design */
+.statementText {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: clamp(1.22rem, 2.25vw, 1.82rem);
   font-weight: 400;
-  line-height: 1.72;
-  letter-spacing: -0.012em;
-  color: #b3b9c5;
+  line-height: 1.58;
+  letter-spacing: -0.018em;
+  color: #ffffff;
   margin: 0;
 }
 
-/* Green Button Action Row */
+/* Green Action Button Row */
 .actionRow {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-top: clamp(2.5rem, 4vw, 3.5rem);
+  margin-top: clamp(2.5rem, 4.5vw, 3.5rem);
 }
 
-/* Neon Lime-Green Button (Faithfully preserved with polished interaction) */
+/* Neon Lime-Green Button (Preserved per user instruction) */
 .greenButton {
   display: inline-flex;
   align-items: center;
@@ -146,18 +92,22 @@
 }
 
 /* Mobile & Tablet Responsiveness */
-@media (max-width: 860px) {
+@media (max-width: 900px) {
   .editorialGrid {
     grid-template-columns: 1fr;
-    gap: 1.75rem;
   }
 
   .leftColumn {
-    padding-top: 0;
+    display: none;
   }
 
-  .heading {
-    margin-bottom: 2rem;
+  .rightColumn {
+    max-width: 100%;
+  }
+
+  .statementText {
+    font-size: clamp(1.15rem, 3.8vw, 1.45rem);
+    line-height: 1.6;
   }
 
   .actionRow {
