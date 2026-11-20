@@ -240,8 +240,8 @@ export default function HeroSkyLabs() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span className={styles.headlineRow}>Endless passion.</span>
-            <span className={styles.headlineRow}>Special moments in time.</span>
+            <span className={styles.headlineRow}>Endless passion</span>
+            <span className={styles.headlineRow}>Special moments in time</span>
           </motion.h1>
         </div>
 
