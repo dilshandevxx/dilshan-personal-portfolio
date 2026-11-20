@@ -5,6 +5,7 @@ import SkillsGrid from "@/components/cover/sections/SkillsGrid";
 import InsightsSection from "@/components/cover/sections/InsightsSection";
 import FaqSection from "@/components/cover/sections/FaqSection";
 import ContactSection from "@/components/cover/sections/ContactSection";
+import PreFooterBanner from "@/components/cover/sections/PreFooterBanner";
 import MainFooter from "@/components/MainFooter";
 import { Metadata } from "next";
 
@@ -29,6 +30,7 @@ export default function Home() {
       <InsightsSection />
       <FaqSection />
       <ContactSection />
+      <PreFooterBanner />
       <MainFooter />
     </>
   );

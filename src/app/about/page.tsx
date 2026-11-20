@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowUpRight, Terminal, Cpu, Layers, Sparkles } from "lucide-react";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
+import PreFooterBanner from "@/components/cover/sections/PreFooterBanner";
 import MainFooter from "@/components/MainFooter";
 import styles from "./aboutPage.module.css";
 
@@ -236,6 +237,7 @@ export default function AboutPage() {
         </section>
       </main>
 
+      <PreFooterBanner />
       <MainFooter />
     </div>
   );

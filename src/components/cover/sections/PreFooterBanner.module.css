@@ -1,0 +1,101 @@
+/* =========================================================================
+   Pre-Footer Banner (Matching exact lilac statement reference design)
+   Soft periwinkle lilac background (#c4b2fe), pitch-black condensed headline,
+   editorial serif narrative paragraph, and philosophy action in parentheses.
+   ========================================================================= */
+
+.bannerSection {
+  background-color: #c4b2fe;
+  color: #000000;
+  width: 100%;
+  padding: clamp(6rem, 12vw, 11rem) clamp(1.5rem, 5vw, 4rem);
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1360px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contentWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+/* Massive 2-Line Condensed Display Headline */
+.headline {
+  font-family: var(--font-hero, "Bebas Neue", "Anton", "Barlow Condensed", "Impact", sans-serif);
+  font-size: clamp(3.4rem, 9.2vw, 8.8rem);
+  font-weight: 400; /* Bebas Neue is bold display by default */
+  line-height: 0.92;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+  color: #111111;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+}
+
+.headlineRow {
+  display: block;
+}
+
+/* Centered Editorial Narrative Paragraph */
+.description {
+  font-family: var(--font-artistic, "Newsreader", "Playfair Display", Georgia, serif);
+  font-size: clamp(1.05rem, 1.4vw, 1.32rem);
+  line-height: 1.62;
+  color: #1a1a1a;
+  max-width: 740px;
+  margin: clamp(2.25rem, 4vw, 3.5rem) auto 0;
+  text-align: center;
+}
+
+/* Centered Philosophy Link in Parentheses */
+.actionWrap {
+  margin-top: clamp(1.6rem, 2.8vw, 2.5rem);
+}
+
+.actionLink {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", sans-serif);
+  font-size: clamp(0.78rem, 0.9vw, 0.86rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #111111;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.4rem 0.6rem;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.2s ease;
+}
+
+.actionLink:hover {
+  transform: translateY(-2px);
+  opacity: 0.75;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .headline {
+    font-size: clamp(2.6rem, 13vw, 4.4rem);
+    line-height: 0.95;
+  }
+
+  .description {
+    font-size: 1rem;
+    line-height: 1.55;
+    margin-top: 2rem;
+  }
+}
