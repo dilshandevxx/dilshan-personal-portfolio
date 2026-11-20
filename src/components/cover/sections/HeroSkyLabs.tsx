@@ -151,12 +151,15 @@ export default function HeroSkyLabs() {
               >
                 ABOUT
               </Link>
-              <Link
-                href="/portfolio"
-                className={styles.navLink}
+              <a
+                href="#contact"
+                onClick={(e) => handleSlowScroll(e, "contact")}
+                className={`${styles.navLink} ${
+                  activeSection === "contact" ? styles.navLinkActive : ""
+                }`}
               >
-                PORTFOLIO
-              </Link>
+                CONTACT
+              </a>
             </nav>
 
             {/* Minimalist Two-Line Hamburger Button (=) on Mobile */}
@@ -189,7 +192,7 @@ export default function HeroSkyLabs() {
                     { label: "EXPERTISE", href: "#skills", isAnchor: true },
                     { label: "PROJECTS", href: "/projects", isAnchor: false },
                     { label: "ABOUT", href: "/about", isAnchor: false },
-                    { label: "PORTFOLIO", href: "/portfolio", isAnchor: false },
+                    { label: "CONTACT", href: "#contact", isAnchor: true },
                   ].map((item, idx) => (
                     <motion.div
                       key={item.label}

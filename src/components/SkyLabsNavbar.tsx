@@ -8,7 +8,7 @@ import { ArrowUpRight } from "lucide-react";
 import styles from "./SkyLabsNavbar.module.css";
 
 interface SkyLabsNavbarProps {
-  activeTab?: "home" | "services" | "expertise" | "projects" | "about" | "portfolio";
+  activeTab?: "home" | "services" | "expertise" | "projects" | "about" | "contact";
 }
 
 export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
@@ -104,14 +104,12 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
               ABOUT
             </Link>
             <Link
-              href="/portfolio"
+              href="/#contact"
               className={`${styles.navLink} ${
-                activeTab === "portfolio" || pathname.startsWith("/portfolio")
-                  ? styles.navLinkActive
-                  : ""
+                activeTab === "contact" ? styles.navLinkActive : ""
               }`}
             >
-              PORTFOLIO
+              CONTACT
             </Link>
           </nav>
 
@@ -145,14 +143,14 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
                   { label: "EXPERTISE", href: "/#skills", key: "expertise" },
                   { label: "PROJECTS", href: "/projects", key: "projects" },
                   { label: "ABOUT", href: "/about", key: "about" },
-                  { label: "PORTFOLIO", href: "/portfolio", key: "portfolio" },
+                  { label: "CONTACT", href: "/#contact", key: "contact" },
                 ].map((item, idx) => {
                   const isActive =
                     ((item.key === "expertise" || item.key === "services") &&
                       (activeTab === "expertise" || activeTab === "services")) ||
                     (item.key === "projects" && (activeTab === "projects" || pathname.startsWith("/projects"))) ||
                     (item.key === "about" && (activeTab === "about" || pathname === "/about")) ||
-                    (item.key === "portfolio" && (activeTab === "portfolio" || pathname.startsWith("/portfolio")));
+                    (item.key === "contact" && activeTab === "contact");
 
                   return (
                     <motion.div
