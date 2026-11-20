@@ -1,116 +1,183 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import styles from "./SelectedWork.module.css";
 
-interface ProjectItem {
+export interface WorkCardItem {
   id: string;
+  slug: string;
+  badge: string;
   title: string;
-  sector: string;
+  description: string;
   image: string;
-  href: string;
+  hasBuiltinText?: boolean;
 }
 
-const PROJECTS: ProjectItem[] = [
+const WORK_CAROUSEL_ITEMS: WorkCardItem[] = [
   {
-    id: "the-dots",
-    title: "The Dots",
-    sector: "Technology",
-    image: "/images/projects/project_the_dots.png",
-    href: "/projects",
+    id: "karhu",
+    slug: "karhu-streetwear",
+    badge: "Shopify Plus",
+    title: "Karhu",
+    description: "Nordic running brand turned streetwear stylistics.",
+    image: "/images/work/work_karhu.png",
+    hasBuiltinText: true,
   },
   {
-    id: "pay-by-bank",
-    title: "Pay by Bank",
-    sector: "Fintech",
-    image: "/images/projects/project_pay_by_bank.png",
-    href: "/projects",
+    id: "patta",
+    slug: "patta-amsterdam",
+    badge: "Shopify Plus",
+    title: "Patta",
+    description: "Footwear and lifestyle brand from the streets of Amsterdam.",
+    image: "/images/work/work_patta.png",
+    hasBuiltinText: true,
   },
   {
-    id: "not-optional",
-    title: "Not Optional",
-    sector: "Policy",
-    image: "/images/projects/project_not_optional.png",
-    href: "/projects",
+    id: "haute",
+    slug: "haute-horlogerie",
+    badge: "Headless",
+    title: "Haute Horlogerie",
+    description: "Bespoke digital flagship for luxury horology & editorial craft.",
+    image: "/images/work/work_haute.png",
+    hasBuiltinText: false,
   },
   {
-    id: "banked",
-    title: "Banked",
-    sector: "Fintech",
-    image: "/images/projects/project_banked.png",
-    href: "/projects",
+    id: "krea-ai",
+    slug: "krea-foundation-models",
+    badge: "AI / ML Platform",
+    title: "Krea Foundation",
+    description: "Foundation model training, style transfer & creative canvas suite.",
+    image: "/images/work/work_krea.png",
+    hasBuiltinText: false,
   },
   {
-    id: "pure-sports",
-    title: "Pure Sports",
-    sector: "Healthcare",
-    image: "/images/projects/project_pure_sports.png",
-    href: "/projects",
-  },
-  {
-    id: "dandara-living",
-    title: "Dandara Living",
-    sector: "Property",
-    image: "/images/projects/project_dandara_living.png",
-    href: "/projects",
+    id: "speed-architecture",
+    slug: "speed-cluster-architecture",
+    badge: "Kubernetes & GPU",
+    title: "Speed Architecture",
+    description: "Distributed GPU inference platform with sub-16ms tensor serving.",
+    image: "/images/work/work_speed.png",
+    hasBuiltinText: false,
   },
 ];
 
 export default function SelectedWork() {
-  return (
-    <section className={styles.projectsSection} id="projects" aria-label="Selected Works">
-      <div className={styles.container}>
-        {/* Section Header: Clean Minimalist Title & Top Link */}
-        <div className={styles.header}>
-          <h2 className={styles.title}>Selected Works</h2>
-          <Link href="/projects" className={styles.seeAllTop}>
-            <span>SEE ALL PROJECTS</span>
-            <span className={styles.arrowIcon} aria-hidden="true">→</span>
-          </Link>
-        </div>
+  const carouselRef = useRef<HTMLDivElement>(null);
 
-        {/* 3x2 Floating Dark Capsule Grid Matching Reference Design */}
-        <div className={styles.grid}>
-          {PROJECTS.map((item, idx) => (
+  const scrollByDirection = (direction: "left" | "right") => {
+    if (!carouselRef.current) return;
+    const scrollAmount = direction === "left" ? -380 : 380;
+    carouselRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  };
+
+  return (
+    <section className={styles.workSection} id="projects" aria-label="Our Work">
+      {/* 1. Centered Section Header Matching Reference Design */}
+      <div className={styles.headerWrap}>
+        <motion.h2
+          className={styles.sectionTitle}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        >
+          Our work
+        </motion.h2>
+      </div>
+
+      {/* 2. Full-Bleed Horizontal Carousel with Overflow */}
+      <div className={styles.carouselContainer}>
+        <div ref={carouselRef} className={styles.carouselTrack}>
+          {WORK_CAROUSEL_ITEMS.map((item, idx) => (
             <motion.div
               key={item.id}
-              className={styles.cardWrapper}
-              initial={{ opacity: 0, y: 22 }}
+              className={styles.cardItem}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.45, delay: idx * 0.07, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                duration: 0.5,
+                delay: idx * 0.08,
+                ease: [0.16, 1, 0.3, 1],
+              }}
             >
-              <Link href={item.href} className={styles.cardLink} aria-label={`View project: ${item.title}`}>
-                {/* Centered Squircle Badge Image Canvas */}
-                <div className={styles.squircleFrame}>
+              <Link
+                href="/projects"
+                className={styles.cardLink}
+                aria-label={`View ${item.title}`}
+              >
+                {/* Background Poster Image */}
+                <div className={styles.imageFrame}>
                   <Image
                     src={item.image}
                     alt={item.title}
                     fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
-                    priority={idx < 3}
-                    className={styles.cardImage}
+                    sizes="(max-width: 640px) 85vw, (max-width: 1024px) 45vw, 380px"
+                    priority={idx < 2}
+                    className={styles.posterImg}
                   />
-                </div>
 
-                {/* Bottom Row: Project Name on Left, Sector on Right */}
-                <div className={styles.cardMetaRow}>
-                  <h3 className={styles.cardTitle}>{item.title}</h3>
-                  <span className={styles.cardSector}>{item.sector}</span>
+                  {/* Dark Vignette Overlay for Crisp Readability */}
+                  <div className={styles.posterOverlay} />
+
+                  {/* Top-Left Frosted Glass Category Pill */}
+                  {!item.hasBuiltinText && (
+                    <div className={styles.topPillWrap}>
+                      <span className={styles.categoryPill}>{item.badge}</span>
+                    </div>
+                  )}
+
+                  {/* Floating Action Arrow Circle (Appears on Hover or active) */}
+                  <div className={styles.hoverCursor}>
+                    <ArrowRight size={18} className={styles.cursorArrow} />
+                  </div>
+
+                  {/* Bottom Content Block */}
+                  {!item.hasBuiltinText ? (
+                    <div className={styles.bottomContent}>
+                      <h3 className={styles.cardTitle}>{item.title}</h3>
+                      <p className={styles.cardDesc}>{item.description}</p>
+                    </div>
+                  ) : (
+                    <span className="sr-only">
+                      {item.title} — {item.description}
+                    </span>
+                  )}
                 </div>
               </Link>
             </motion.div>
           ))}
         </div>
 
-        {/* Centered Bottom Metric Ticker & Action (Exact Reference Match) */}
-        <div className={styles.bottomBar}>
-          <p className={styles.statsTicker}>
-            140+ projects. 15+ sectors. Four continents.
-          </p>
+        {/* Carousel Navigation Arrows & Explore Action */}
+        <div className={styles.carouselControls}>
+          <div className={styles.arrowControls}>
+            <button
+              type="button"
+              onClick={() => scrollByDirection("left")}
+              className={styles.navArrowBtn}
+              aria-label="Scroll left"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollByDirection("right")}
+              className={styles.navArrowBtn}
+              aria-label="Scroll right"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+
+          <Link href="/projects" className={styles.seeAllLink}>
+            <span>SEE ALL PROJECTS</span>
+            <span className={styles.actionArrow} aria-hidden="true">&rarr;</span>
+          </Link>
         </div>
       </div>
     </section>
