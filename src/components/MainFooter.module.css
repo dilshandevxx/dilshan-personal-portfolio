@@ -3,9 +3,9 @@
 .footerRoot {
   width: 100%;
   position: relative;
-  background-color: #000000;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  color: #ffffff;
+  background-color: #0d0e12;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  color: #eceff4;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
 }

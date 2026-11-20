@@ -1,7 +1,10 @@
 /* Our Work Section — Horizontal Editorial Carousel Matching Reference Design */
 
 .workSection {
-  background-color: #000000;
+  background-color: #0f1014;
+  background-image:
+    radial-gradient(ellipse 70% 40% at 50% 0%, rgba(55, 65, 81, 0.12) 0%, transparent 70%),
+    linear-gradient(180deg, #111317 0%, #0d0e12 100%);
   padding: clamp(5rem, 8vw, 8rem) 0 clamp(4.5rem, 7vw, 7rem);
   position: relative;
   border-top: 1px solid rgba(255, 255, 255, 0.06);

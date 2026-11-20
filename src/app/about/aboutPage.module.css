@@ -1,10 +1,14 @@
 /* Clean, Modern & Elegant Standalone About Me Page */
 
 .pageRoot {
-  background-color: #000000;
+  background-color: #101115;
+  background-image:
+    radial-gradient(ellipse 75% 50% at 50% -10%, rgba(55, 65, 81, 0.14) 0%, transparent 70%),
+    linear-gradient(180deg, #121418 0%, #0e0f13 100%);
+  background-attachment: fixed;
   min-height: 100vh;
   width: 100%;
-  color: #ffffff;
+  color: #eceff4;
   position: relative;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -32,7 +36,7 @@
   font-family: var(--font-body, "Inter", sans-serif);
   font-size: 0.85rem;
   font-weight: 500;
-  color: #71717a;
+  color: #8b909c;
   text-decoration: none;
   transition: all 0.2s ease;
   width: fit-content;
@@ -67,7 +71,7 @@
   font-weight: 600;
   letter-spacing: -0.025em;
   line-height: 1.1;
-  color: #ffffff;
+  color: #f4f5f7;
   margin: 0 0 clamp(1.85rem, 3.2vw, 2.4rem) 0;
 }
 
@@ -82,7 +86,7 @@
   font-family: var(--font-body, "Inter", sans-serif);
   font-size: clamp(1.02rem, 1.22vw, 1.12rem);
   line-height: 1.68;
-  color: #a1a1aa;
+  color: #a8afbd;
   margin: 0;
   font-weight: 400;
   letter-spacing: -0.01em;
@@ -108,9 +112,9 @@
   justify-content: center;
   padding: 0.58rem 1.32rem;
   border-radius: 9999px;
-  background-color: #121214;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #eff1f5;
   font-family: var(--font-body, "Inter", sans-serif);
   font-size: 0.92rem;
   font-weight: 500;
@@ -122,8 +126,8 @@
 }
 
 .pillBtn:hover {
-  background-color: #1d1e22;
-  border-color: rgba(255, 255, 255, 0.28);
+  background-color: rgba(255, 255, 255, 0.11);
+  border-color: rgba(255, 255, 255, 0.24);
   color: #ffffff;
   transform: translateY(-1.5px);
 }
@@ -141,7 +145,7 @@
 .sketchbookSection {
   margin-bottom: clamp(5rem, 8vw, 7rem);
   padding-top: clamp(3.5rem, 6vw, 5rem);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   width: 100%;
 }
 
@@ -255,7 +259,7 @@
 .whatIDoSection {
   margin-bottom: clamp(4rem, 7vw, 6rem);
   padding-top: clamp(3.5rem, 6vw, 5rem);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   width: 100%;
 }
 
