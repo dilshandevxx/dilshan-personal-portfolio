@@ -50,188 +50,98 @@
   transform: translateX(-3px);
 }
 
-/* 2. Hero Section: Editorial 2-Column Split Inspired by Reference */
-.heroSection {
-  margin-bottom: clamp(4.5rem, 8vw, 6.5rem);
+/* 2. Hero Section: Clean, Minimalist Editorial Typography Layout Matching Reference Design */
+.cleanAboutSection {
+  margin-bottom: clamp(5.5rem, 9.5vw, 8rem);
   width: 100%;
 }
 
-.heroGrid {
-  display: grid;
-  grid-template-columns: 1.25fr 0.95fr;
-  gap: clamp(2.5rem, 5.5vw, 5rem);
-  align-items: center;
+.cleanAboutContent {
+  max-width: 630px;
   width: 100%;
 }
 
-@media (max-width: 920px) {
-  .heroGrid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-}
-
-.heroLeft {
-  display: flex;
-  flex-direction: column;
-}
-
-.heroName {
+.cleanName {
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(2.8rem, 5.5vw, 4.4rem);
+  font-size: clamp(2.6rem, 5.2vw, 3.8rem);
   font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.08;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
   color: #ffffff;
-  margin: 0 0 1.75rem 0;
+  margin: 0 0 clamp(1.85rem, 3.2vw, 2.4rem) 0;
 }
 
 .narrativeStack {
   display: flex;
   flex-direction: column;
-  gap: 1.35rem;
-  margin-bottom: 2.25rem;
+  gap: 1.55rem;
+  margin-bottom: clamp(2.25rem, 3.8vw, 3rem);
 }
 
 .narrativePara {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(0.98rem, 1.2vw, 1.05rem);
+  font-size: clamp(1.02rem, 1.22vw, 1.12rem);
   line-height: 1.68;
-  color: #c4c9d4;
+  color: #a1a1aa;
   margin: 0;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
-/* Two-Row Contact & Profile Capsules (Exact Reference Aesthetic) */
-.contactCapsulesGroup {
+/* Two-Row Capsule Pills Matching Exact Reference Design */
+.pillsContainer {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.capsulesRow {
+.pillsRow {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.75rem;
 }
 
-.capsuleBtn {
+.pillBtn {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  padding: 0.55rem 1.15rem;
+  justify-content: center;
+  padding: 0.58rem 1.32rem;
   border-radius: 9999px;
-  background-color: #121418;
+  background-color: #121214;
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: #ffffff;
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   outline: none;
+  white-space: nowrap;
 }
 
-.capsuleBtn:hover {
-  background-color: #1b1e24;
+.pillBtn:hover {
+  background-color: #1d1e22;
   border-color: rgba(255, 255, 255, 0.28);
   color: #ffffff;
   transform: translateY(-1.5px);
 }
 
-.emailCapsule {
-  background-color: #121418;
+.pillBtn:active {
+  transform: translateY(0);
 }
 
-.capsuleBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.55rem 1.15rem;
-  border-radius: 9999px;
-  background-color: #121418;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.88rem;
-  font-weight: 500;
-}
-
-.capsuleIcon {
-  color: #ffffff;
-}
-
-.copyIcon {
-  color: #888e99;
-  margin-left: 2px;
-}
-
-.checkIcon {
-  color: #4ade80;
-  margin-left: 2px;
-}
-
-.externalIcon {
-  color: #888e99;
-  transition: transform 0.2s ease;
-}
-
-.capsuleBtn:hover .externalIcon {
-  color: #ffffff;
-  transform: translate(1px, -1px);
-}
-
-/* Right Column: Editorial Portrait Frame */
-.heroRight {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.portraitFrame {
-  position: relative;
-  width: 100%;
-  max-width: 440px;
-  aspect-ratio: 4 / 5;
-  border-radius: 16px;
-  overflow: hidden;
-  background-color: #0c0d10;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
-}
-
-@media (max-width: 920px) {
-  .portraitFrame {
-    max-width: 380px;
-    margin: 0 auto;
-  }
-}
-
-.portraitImg {
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.portraitFrame:hover .portraitImg {
-  transform: scale(1.03);
-}
-
-.portraitOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0) 65%,
-    rgba(0, 0, 0, 0.55) 100%
-  );
-  pointer-events: none;
+.pillBtn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
 }
 
 /* 3. "From the sketchbook" Section (Matching Reference Design) */
 .sketchbookSection {
-  margin-bottom: clamp(4.5rem, 8vw, 6.5rem);
+  margin-bottom: clamp(5rem, 8vw, 7rem);
+  padding-top: clamp(3.5rem, 6vw, 5rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   width: 100%;
 }
 
@@ -344,6 +254,8 @@
 /* 4. "WHAT I DO" Bento Grid Section Matching Exact Reference Design */
 .whatIDoSection {
   margin-bottom: clamp(4rem, 7vw, 6rem);
+  padding-top: clamp(3.5rem, 6vw, 5rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   width: 100%;
 }
 

@@ -6,11 +6,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
-  Mail,
-  Copy,
-  Check,
-  ExternalLink,
-  MapPin,
   Camera,
   Video,
   Scissors,
@@ -20,12 +15,6 @@ import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
 import MainFooter from "@/components/MainFooter";
 import { siteConfig } from "@/data/siteConfig";
 import styles from "./aboutPage.module.css";
-
-const SOCIAL_LINKS = [
-  { label: "GitHub", href: siteConfig.social.github },
-  { label: "LinkedIn", href: siteConfig.social.linkedin },
-  { label: "X / Twitter", href: siteConfig.social.x },
-];
 
 const SKETCHBOOK_ITEMS = [
   {
@@ -90,12 +79,13 @@ const WHAT_I_DO_CARDS = [
 ];
 
 export default function AboutPage() {
-  const [copied, setCopied] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
 
-  const handleCopyEmail = () => {
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    // Copy to clipboard while preserving default mailto behavior if desired
     navigator.clipboard.writeText(siteConfig.social.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2200);
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2400);
   };
 
   return (
@@ -117,96 +107,89 @@ export default function AboutPage() {
           </Link>
         </motion.div>
 
-        {/* 2. Hero Section: Editorial 2-Column Split Inspired by Reference */}
+        {/* 2. Hero Section: Clean, Minimalist Typography Layout Matching Reference Design */}
         <motion.section
-          className={styles.heroSection}
+          className={styles.cleanAboutSection}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-          aria-label="Introduction"
+          aria-label="About Dilshan"
         >
-          <div className={styles.heroGrid}>
-            {/* Left Column: Clean Editorial Narrative & Contact Capsules */}
-            <div className={styles.heroLeft}>
-              <h1 className={styles.heroName}>Dilshan</h1>
+          <div className={styles.cleanAboutContent}>
+            <h1 className={styles.cleanName}>Dilshan</h1>
 
-              <div className={styles.narrativeStack}>
-                <p className={styles.narrativePara}>
-                  I&apos;m an AI/ML engineer and DevOps architect focused on creating clean,
-                  high-throughput machine learning systems and resilient cloud infrastructure.
-                </p>
+            <div className={styles.narrativeStack}>
+              <p className={styles.narrativePara}>
+                I&apos;m an AI/ML engineer and DevOps architect focused on creating clean,
+                high-throughput machine learning systems and resilient cloud infrastructure.
+              </p>
 
-                <p className={styles.narrativePara}>
-                  I specialize in building end-to-end model workflows, distributed GPU training
-                  runtimes, and low-latency inference pipelines that not only scale but perform deterministically.
-                </p>
+              <p className={styles.narrativePara}>
+                I specialize in building deep learning models, low-latency GPU inference runtimes,
+                and distributed platforms that not only scale but also perform.
+              </p>
 
-                <p className={styles.narrativePara}>
-                  My approach is simple &mdash; remove distractions, focus on clarity, and design with purpose.
-                </p>
+              <p className={styles.narrativePara}>
+                My approach is simple &mdash; remove distractions, focus on clarity, and design with purpose.
+              </p>
 
-                <p className={styles.narrativePara}>
-                  Over the years, I have worked with startups, creators, and businesses worldwide,
-                  helping teams turn complex machine learning research into production-ready digital systems.
-                </p>
-              </div>
-
-              {/* Clean Two-Row Contact & Profile Capsules Matching Reference Layout */}
-              <div className={styles.contactCapsulesGroup}>
-                {/* Row 1: Direct Contact & Location */}
-                <div className={styles.capsulesRow}>
-                  <button
-                    type="button"
-                    onClick={handleCopyEmail}
-                    className={`${styles.capsuleBtn} ${styles.emailCapsule}`}
-                    aria-label="Copy email address"
-                    title="Click to copy email"
-                  >
-                    <Mail size={14} className={styles.capsuleIcon} />
-                    <span>{siteConfig.social.email}</span>
-                    {copied ? (
-                      <Check size={13} className={styles.checkIcon} />
-                    ) : (
-                      <Copy size={12} className={styles.copyIcon} />
-                    )}
-                  </button>
-
-                  <div className={styles.capsuleBadge}>
-                    <MapPin size={13} className={styles.capsuleIcon} />
-                    <span>Colombo, Sri Lanka &bull; Worldwide</span>
-                  </div>
-                </div>
-
-                {/* Row 2: Verified Profiles */}
-                <div className={styles.capsulesRow}>
-                  {SOCIAL_LINKS.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.capsuleBtn}
-                    >
-                      <span>{link.label}</span>
-                      <ExternalLink size={12} className={styles.externalIcon} />
-                    </a>
-                  ))}
-                </div>
-              </div>
+              <p className={styles.narrativePara}>
+                Over the years, I have worked with teams and founders worldwide, helping startups,
+                creators, and businesses turn complex AI ideas into production-ready digital products.
+              </p>
             </div>
 
-            {/* Right Column: High-End Editorial Portrait */}
-            <div className={styles.heroRight}>
-              <div className={styles.portraitFrame}>
-                <Image
-                  src="/images/about_portrait.jpg"
-                  alt="Dilshan"
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 440px"
-                  className={styles.portraitImg}
-                />
-                <div className={styles.portraitOverlay} />
+            {/* Two-Row Capsule Pills Matching Reference Layout */}
+            <div className={styles.pillsContainer}>
+              {/* Row 1: Direct Contact & Email */}
+              <div className={styles.pillsRow}>
+                <a
+                  href="tel:+94771234567"
+                  className={styles.pillBtn}
+                  aria-label="Call Dilshan"
+                >
+                  +94 77 123 4567
+                </a>
+
+                <a
+                  href={`mailto:${siteConfig.social.email}`}
+                  onClick={handleCopyEmail}
+                  className={styles.pillBtn}
+                  aria-label="Email Dilshan"
+                  title="Click to email or copy"
+                >
+                  {copiedEmail ? "Copied to clipboard!" : siteConfig.social.email}
+                </a>
+              </div>
+
+              {/* Row 2: Verified Social Profiles */}
+              <div className={styles.pillsRow}>
+                <a
+                  href={siteConfig.social.x}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.pillBtn}
+                >
+                  Twitter
+                </a>
+
+                <a
+                  href={siteConfig.social.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.pillBtn}
+                >
+                  GitHub
+                </a>
+
+                <a
+                  href={siteConfig.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.pillBtn}
+                >
+                  LinkedIn
+                </a>
               </div>
             </div>
           </div>
