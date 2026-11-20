@@ -21,12 +21,12 @@
 .bannerFrame {
   position: relative;
   width: 100%;
-  height: clamp(340px, 48vh, 580px);
-  border-radius: clamp(14px, 1.8vw, 20px);
+  height: clamp(520px, 70vh, 820px);
+  border-radius: clamp(16px, 2vw, 24px);
   overflow: hidden;
   background-color: #161616;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.75);
 }
 
 .bannerImage {
@@ -78,7 +78,7 @@
   }
 
   .bannerFrame {
-    height: clamp(210px, 38vh, 320px);
-    border-radius: 12px;
+    height: clamp(320px, 55vh, 460px);
+    border-radius: 14px;
   }
 }
