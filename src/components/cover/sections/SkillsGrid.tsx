@@ -133,102 +133,92 @@ export default function SkillsGrid() {
       aria-label="Technical Expertise"
     >
       <div className={styles.container}>
-        <div className={styles.layout}>
-          {/* Left Column: Title & Description */}
-          <div className={styles.leftCol}>
-            <div className={styles.stickyHeader}>
-              <h2 className={styles.headline}>Technical Expertise</h2>
-              <p className={styles.subheadline}>
-                Technologies, disciplines, and practices I use to design, build,
-                and deliver modern digital solutions.
-              </p>
-            </div>
-          </div>
+        {/* Title on the Top */}
+        <div className={styles.headerBlock}>
+          <h2 className={styles.headline}>Technical Expertise</h2>
+        </div>
 
-          {/* Right Column: Clean Borderless Uppercase Accordion Rows with + Icon */}
-          <div className={styles.rightCol}>
-            <div className={styles.accordionList}>
-              {TECHNICAL_DOMAINS.map((item) => {
-                const isOpen = openId === item.id;
-                return (
-                  <div
-                    key={item.id}
-                    className={`${styles.accordionItem} ${
-                      isOpen ? styles.accordionItemOpen : ""
-                    }`}
-                  >
-                    {/* Header Button: Bold Uppercase Title on Left, Thin + Icon on Right */}
-                    <button
-                      type="button"
-                      onClick={() => toggleItem(item.id)}
-                      className={styles.itemTrigger}
-                      aria-expanded={isOpen}
-                    >
-                      <div className={styles.titleGroup}>
-                        <span className={styles.categoryIndex}>
-                          {item.index}
-                        </span>
-                        <span className={styles.cardTitle}>{item.name}</span>
-                      </div>
-
-                      <span
-                        className={`${styles.plusIcon} ${
-                          isOpen ? styles.plusIconOpen : ""
-                        }`}
-                        aria-hidden="true"
-                      >
-                        <svg
-                          width="18"
-                          height="18"
-                          viewBox="0 0 16 16"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className={styles.svgPlus}
-                        >
-                          <path
-                            d="M8 2.5V13.5M2.5 8H13.5"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                          />
-                        </svg>
-                      </span>
-                    </button>
-
-                    {/* Animated Accordion Body */}
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          key="content"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{
-                            duration: 0.3,
-                            ease: [0.16, 1, 0.3, 1],
-                          }}
-                          className={styles.bodyWrapper}
-                        >
-                          <div className={styles.expandedBody}>
-                            <p className={styles.description}>
-                              {item.description}
-                            </p>
-                            <div className={styles.tagList}>
-                              {item.tags.map((tag) => (
-                                <span key={tag} className={styles.tagItem}>
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+        {/* Technical List Below */}
+        <div className={styles.accordionList}>
+          {TECHNICAL_DOMAINS.map((item) => {
+            const isOpen = openId === item.id;
+            return (
+              <div
+                key={item.id}
+                className={`${styles.accordionItem} ${
+                  isOpen ? styles.accordionItemOpen : ""
+                }`}
+              >
+                {/* Header Button: Bold Uppercase Title on Left, Thin + Icon on Right */}
+                <button
+                  type="button"
+                  onClick={() => toggleItem(item.id)}
+                  className={styles.itemTrigger}
+                  aria-expanded={isOpen}
+                >
+                  <div className={styles.titleGroup}>
+                    <span className={styles.categoryIndex}>
+                      {item.index}
+                    </span>
+                    <span className={styles.cardTitle}>{item.name}</span>
                   </div>
-                );
-              })}
-            </div>
-          </div>
+
+                  <span
+                    className={`${styles.plusIcon} ${
+                      isOpen ? styles.plusIconOpen : ""
+                    }`}
+                    aria-hidden="true"
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={styles.svgPlus}
+                    >
+                      <path
+                        d="M8 2.5V13.5M2.5 8H13.5"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
+                </button>
+
+                {/* Animated Accordion Body */}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="content"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{
+                        duration: 0.3,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                      className={styles.bodyWrapper}
+                    >
+                      <div className={styles.expandedBody}>
+                        <p className={styles.description}>
+                          {item.description}
+                        </p>
+                        <div className={styles.tagList}>
+                          {item.tags.map((tag) => (
+                            <span key={tag} className={styles.tagItem}>
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

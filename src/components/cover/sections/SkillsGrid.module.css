@@ -1,4 +1,4 @@
-/* Technical Expertise Section — Clean Minimalist Accordion System (Matching Reference Image) */
+/* Technical Expertise Section — Top Title & Clean Accordion List Below */
 
 .servicesSection {
   background-color: #111111;
@@ -15,60 +15,30 @@
   width: 100%;
 }
 
-/* 2-Column Layout */
-.layout {
-  display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: clamp(2.5rem, 5vw, 6rem);
-  align-items: start;
+/* Header Block on Top */
+.headerBlock {
+  margin-bottom: clamp(2.5rem, 4.5vw, 4rem);
   width: 100%;
-}
-
-/* Left Column: Clean Bold Headline + Subtitle */
-.leftCol {
-  position: relative;
-}
-
-.stickyHeader {
-  position: sticky;
-  top: 110px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.15rem;
 }
 
 .headline {
   color: #ffffff;
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  font-size: clamp(2.4rem, 4.2vw, 3.6rem);
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.025em;
   margin: 0;
 }
 
-.subheadline {
-  color: rgba(255, 255, 255, 0.62);
-  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
-  font-size: 0.96rem;
-  line-height: 1.6;
-  margin: 0;
-  max-width: 320px;
-}
-
-/* Right Column: Clean Borderless Accordion Rows */
-.rightCol {
-  width: 100%;
-  min-width: 0;
-}
-
+/* Accordion List Directly Below */
 .accordionList {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-/* Individual Accordion Row matching reference */
+/* Individual Accordion Row */
 .accordionItem {
   width: 100%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
@@ -137,7 +107,7 @@
   line-height: 1.3;
 }
 
-/* Minimalist Thin Plus Icon on the right matching reference */
+/* Minimalist Thin Plus Icon on the right */
 .plusIcon {
   display: flex;
   align-items: center;
@@ -174,7 +144,7 @@
   line-height: 1.7;
   color: #a1a1aa;
   margin: 0 0 1.25rem 0;
-  max-width: 680px;
+  max-width: 780px;
 }
 
 /* Tag Pills */
@@ -201,20 +171,17 @@
 /* =========================================================================
    Responsive Breakpoints
    ========================================================================= */
-@media (max-width: 900px) {
-  .layout {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
-  .stickyHeader {
-    position: static;
-  }
-}
-
 @media (max-width: 640px) {
   .servicesSection {
     padding: 4rem 1.25rem 4.5rem;
+  }
+
+  .headerBlock {
+    margin-bottom: 2rem;
+  }
+
+  .headline {
+    font-size: clamp(2rem, 8.5vw, 2.6rem);
   }
 
   .itemTrigger {
