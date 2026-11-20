@@ -1,0 +1,191 @@
+/* Journey & Career Milestones Section (Faithfully reproducing Reference Image 4) */
+.journeySection {
+  width: 100%;
+  background-color: #111111;
+  color: #ffffff;
+  padding: clamp(6.5rem, 11vw, 10rem) clamp(1.5rem, 5vw, 4rem);
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+@media (max-width: 768px) {
+  .journeySection {
+    padding: clamp(4.5rem, 8vw, 6rem) 1.25rem;
+  }
+}
+
+.journeyContainer {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.journeyHeader {
+  margin-bottom: clamp(3rem, 5vw, 4.5rem);
+}
+
+.indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.indicatorDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-primary, #8bb397);
+}
+
+.indicatorLabel {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted, #888888);
+}
+
+.journeyHeadline {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* 3-Column / Photo + 2-Column Milestones Grid */
+.journeyGrid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: clamp(2.5rem, 5vw, 5.5rem);
+  align-items: start;
+  width: 100%;
+}
+
+.journeyPhotoCard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 4.6;
+  min-height: 420px;
+  border-radius: 14px;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.journeyImage {
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journeyPhotoCard:hover .journeyImage {
+  transform: scale(1.04);
+}
+
+/* Right 2-column Milestones Grid */
+.milestonesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2.5rem, 4vw, 3.5rem) clamp(2.5rem, 4vw, 4.5rem);
+  align-items: start;
+}
+
+.milestoneItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.milestoneYear {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
+  font-size: clamp(1.15rem, 1.4vw, 1.3rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin: 0 0 0.75rem 0;
+}
+
+.milestoneDesc {
+  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
+  font-size: clamp(0.92rem, 1.1vw, 0.98rem);
+  line-height: 1.68;
+  color: #9da4ae;
+  margin: 0;
+  max-width: 440px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .journeyGrid {
+    grid-template-columns: 300px 1fr;
+    gap: 2.5rem;
+  }
+
+  .milestonesGrid {
+    gap: 2.25rem 2.5rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .journeyGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .journeyPhotoCard {
+    width: 100%;
+    max-width: 540px;
+    aspect-ratio: 16 / 11;
+    min-height: 320px;
+  }
+
+  .milestonesGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .milestonesGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* =========================================================================
+   LIGHT THEME OVERRIDES FOR JOURNEY (Matching Image 4 in Light Mode)
+   ========================================================================= */
+:global([data-theme="light"]) .journeySection {
+  background-color: #f9f7f2;
+  color: #111111;
+  border-top-color: rgba(0, 0, 0, 0.07);
+}
+
+:global([data-theme="light"]) .indicatorDot {
+  background-color: var(--color-primary, #3b6048);
+}
+
+:global([data-theme="light"]) .indicatorLabel {
+  color: #6b7280;
+}
+
+:global([data-theme="light"]) .journeyHeadline {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .journeyPhotoCard {
+  background-color: #e5e5e5;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .milestoneYear {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .milestoneDesc {
+  color: #555555;
+}

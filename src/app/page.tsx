@@ -3,6 +3,7 @@ import AboutMe from "@/components/cover/sections/AboutMe";
 import AboutShowcaseBanner from "@/components/cover/sections/AboutShowcaseBanner";
 import SelectedWork from "@/components/cover/sections/SelectedWork";
 import SkillsGrid from "@/components/cover/sections/SkillsGrid";
+import JourneySection from "@/components/cover/sections/JourneySection";
 import InsightsSection from "@/components/cover/sections/InsightsSection";
 import FaqSection from "@/components/cover/sections/FaqSection";
 import ContactSection from "@/components/cover/sections/ContactSection";
@@ -29,6 +30,7 @@ export default function Home() {
       <AboutShowcaseBanner />
       <SelectedWork />
       <SkillsGrid />
+      <JourneySection />
       <InsightsSection />
       <FaqSection />
       <ContactSection />

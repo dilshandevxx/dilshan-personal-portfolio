@@ -1,4 +1,4 @@
-/* Frequently Asked Questions — 2-Column Minimalist Editorial Layout matching reference */
+/* Frequently Asked Questions — Minimalist Editorial Line Accordion (Matching Reference Image 3) */
 .faqSection {
   background-color: #111111;
   padding: clamp(6.5rem, 11vw, 10rem) clamp(1.5rem, 5vw, 4rem);
@@ -10,125 +10,128 @@
 
 @media (max-width: 768px) {
   .faqSection {
-    padding: clamp(4rem, 8vw, 5.5rem) 1.25rem;
+    padding: clamp(4.5rem, 8vw, 6rem) 1.25rem;
   }
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1120px;
   margin: 0 auto;
   width: 100%;
 }
 
-/* 2-Column Grid Layout matching reference design */
-.layout {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: clamp(2.5rem, 5vw, 6rem);
-  align-items: flex-start;
+/* Minimalist Editorial Section Header */
+.header {
+  margin-bottom: clamp(3rem, 5vw, 4.5rem);
 }
 
-@media (max-width: 860px) {
-  .layout {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+.indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
 }
 
-/* Left Column: Bold Clean Headline */
-.leftCol {
-  position: sticky;
-  top: 100px;
+.indicatorDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-primary, #8bb397);
+}
+
+.indicatorLabel {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted, #888888);
 }
 
 .headline {
   color: #ffffff;
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.025em;
   margin: 0;
 }
 
-/* Right Column: Stacked Rounded Card Capsules */
-.rightCol {
-  width: 100%;
-  min-width: 0;
-}
-
-.cardsList {
+/* Minimalist Accordion List — Line-separated (Faithfully matching Image 3) */
+.accordionList {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
 
-/* Individual Rounded Dark Card */
-.cardItem {
-  background-color: #181818;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  overflow: hidden;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+.accordionItem {
   width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  transition: border-color 0.25s ease;
 }
 
-.cardItem:hover {
-  background-color: #202020;
-  border-color: rgba(255, 255, 255, 0.14);
+.accordionItem:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.35);
 }
 
-/* Card Trigger Button */
-.cardTrigger {
+/* Trigger Button — Full width with clean horizontal breathing room */
+.triggerButton {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.15rem 1.4rem;
+  padding: clamp(1.6rem, 2.6vw, 2.3rem) 0;
   background: transparent;
   border: none;
   cursor: pointer;
   text-align: left;
-  gap: 1.25rem;
+  gap: 1.5rem;
   color: #ffffff;
   outline: none;
 }
 
-.cardTrigger:focus-visible {
+.triggerButton:focus-visible {
   outline: 2px solid var(--color-primary, #8bb397);
-  outline-offset: -2px;
+  outline-offset: 4px;
 }
 
-/* Question Typography (Matching Reference) */
+/* Question Typography (Exact Match to Image 3: Bold, Uppercase Sans) */
 .questionText {
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: 1.05rem;
-  font-weight: 500;
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  font-weight: 700;
   color: #ffffff;
+  text-transform: uppercase;
   letter-spacing: -0.01em;
+  line-height: 1.35;
+  transition: color 0.2s ease;
 }
 
-/* Clean Minimalist Plus Icon */
+.triggerButton:hover .questionText {
+  color: #f0f0f0;
+}
+
+/* Minimalist Plus Icon (+) on far right matching Image 3 */
 .plusIcon {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 22px;
-  height: 22px;
-  color: rgba(255, 255, 255, 0.85);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+  width: 32px;
+  height: 32px;
+  color: #ffffff;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
 }
 
 .plusIconOpen {
   transform: rotate(45deg);
-  color: #ffffff;
+  color: var(--color-primary, #8bb397);
 }
 
 .svgPlus {
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
 }
 
 /* Answer Drawer */
@@ -137,38 +140,20 @@
 }
 
 .answerInner {
-  padding: 0 1.4rem 1.35rem 1.4rem;
+  padding: 0 0 clamp(1.8rem, 2.5vw, 2.4rem) 0;
+  max-width: 860px;
 }
 
 .answerText {
   font-family: var(--font-body, "Inter", -apple-system, sans-serif);
-  font-size: 0.88rem;
-  line-height: 1.55;
+  font-size: clamp(0.95rem, 1.25vw, 1.05rem);
+  line-height: 1.7;
   color: #9da4ae;
   margin: 0;
-  max-width: 680px;
-}
-
-@media (max-width: 640px) {
-  .headline {
-    font-size: 2.1rem;
-  }
-  .cardTrigger {
-    padding: 1rem 1.15rem;
-  }
-  .questionText {
-    font-size: 0.98rem;
-  }
-  .answerInner {
-    padding: 0 1.15rem 1.15rem 1.15rem;
-  }
-  .answerText {
-    font-size: 0.85rem;
-  }
 }
 
 /* =========================================================================
-   LIGHT THEME OVERRIDES FOR FAQ
+   LIGHT THEME OVERRIDES FOR FAQ (Matching Image 3 in Light Mode)
    ========================================================================= */
 :global([data-theme="light"]) .faqSection {
   background-color: #f9f7f2;
@@ -179,18 +164,27 @@
   color: #111111;
 }
 
-:global([data-theme="light"]) .cardItem {
-  background-color: #ffffff;
-  border-color: rgba(0, 0, 0, 0.08);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+:global([data-theme="light"]) .indicatorDot {
+  background-color: var(--color-primary, #3b6048);
 }
 
-:global([data-theme="light"]) .cardItem:hover {
-  background-color: #fcfbfa;
-  border-color: rgba(0, 0, 0, 0.16);
+:global([data-theme="light"]) .indicatorLabel {
+  color: #6b7280;
 }
 
-:global([data-theme="light"]) .cardTrigger {
+:global([data-theme="light"]) .accordionList {
+  border-top-color: rgba(0, 0, 0, 0.12);
+}
+
+:global([data-theme="light"]) .accordionItem {
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+}
+
+:global([data-theme="light"]) .accordionItem:hover {
+  border-bottom-color: rgba(0, 0, 0, 0.32);
+}
+
+:global([data-theme="light"]) .triggerButton {
   color: #111111;
 }
 
@@ -198,10 +192,18 @@
   color: #111111;
 }
 
-:global([data-theme="light"]) .answerText {
-  color: #5e5953;
+:global([data-theme="light"]) .triggerButton:hover .questionText {
+  color: #000000;
 }
 
 :global([data-theme="light"]) .plusIcon {
-  color: #71717a;
+  color: #111111;
+}
+
+:global([data-theme="light"]) .plusIconOpen {
+  color: var(--color-primary, #3b6048);
+}
+
+:global([data-theme="light"]) .answerText {
+  color: #555555;
 }
