@@ -10,11 +10,11 @@ import {
   Copy,
   Check,
   ExternalLink,
-  Cpu,
-  Terminal,
   MapPin,
-  Sparkles,
-  ArrowUpRight,
+  Camera,
+  Video,
+  Scissors,
+  Globe,
 } from "lucide-react";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
 import MainFooter from "@/components/MainFooter";
@@ -62,62 +62,30 @@ const SKETCHBOOK_ITEMS = [
   },
 ];
 
-const SKILL_DOMAINS = [
+const WHAT_I_DO_CARDS = [
   {
-    icon: Cpu,
-    category: "AI & MACHINE LEARNING",
-    title: "Intelligence & Inference",
-    description:
-      "Architecting deep learning models, fine-tuning foundation LLMs, and engineering sub-16ms inference runtimes under high concurrency.",
-    skills: [
-      "PyTorch & TorchScript",
-      "vLLM & TensorRT-LLM",
-      "LoRA & QLoRA Fine-Tuning",
-      "Distributed DeepSpeed",
-      "RAG & Agentic Workflows",
-      "pgvector & Qdrant",
-      "Model Quantization (INT4/FP8)",
-    ],
+    id: "ai-ml",
+    title: "AI & MACHINE LEARNING",
+    icon: Camera,
+    image: "/images/what-i-do/what_i_do_1.png",
   },
   {
-    icon: Terminal,
-    category: "DEVOPS & CLOUD INFRASTRUCTURE",
-    title: "Platforms & GitOps",
-    description:
-      "Automating multi-cloud infrastructure, orchestrating GPU-accelerated Kubernetes clusters, and maintaining zero-downtime CI/CD delivery.",
-    skills: [
-      "Kubernetes & Helm",
-      "Docker & Containerd",
-      "Terraform (IaC)",
-      "GitHub Actions & GitOps",
-      "AWS (EKS, EC2, S3) & GCP",
-      "Kafka Streaming",
-      "Prometheus & Grafana",
-    ],
-  },
-];
-
-const MILESTONES = [
-  {
-    year: "2024 — Present",
-    role: "Senior AI/ML & DevOps Engineer",
-    company: "Autonomous Scale & Systems",
-    detail:
-      "Leading inference optimization, vLLM multi-GPU serving, and Kubernetes cloud infrastructure for generative AI workloads.",
+    id: "devops-k8s",
+    title: "DEVOPS & KUBERNETES",
+    icon: Video,
+    image: "/images/what-i-do/what_i_do_2.png",
   },
   {
-    year: "2022 — 2024",
-    role: "MLOps & Cloud Infrastructure Lead",
-    company: "Distributed Systems Lab",
-    detail:
-      "Designed automated CI/CD pipelines, containerized training pipelines, and managed Kafka event streaming with 99.99% uptime.",
+    id: "inference-rag",
+    title: "MODEL INFERENCE & RAG",
+    icon: Scissors,
+    image: "/images/what-i-do/what_i_do_3.png",
   },
   {
-    year: "2020 — 2022",
-    role: "Full-Stack Software Engineer",
-    company: "Cloud & Web Platforms",
-    detail:
-      "Engineered high-throughput REST/gRPC backend services, event-driven data ingestion, and modern accessible web interfaces.",
+    id: "cloud-architecture",
+    title: "DISTRIBUTED CLOUD",
+    icon: Globe,
+    image: "/images/what-i-do/what_i_do_4.png",
   },
 ];
 
@@ -281,123 +249,58 @@ export default function AboutPage() {
           </div>
         </motion.section>
 
-        {/* 3. Bold Editorial Manifesto Quote */}
+        {/* 4. "WHAT I DO" Bento Grid Section Matching Exact Reference Design */}
         <motion.section
-          className={styles.quoteSection}
+          className={styles.whatIDoSection}
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          aria-label="Philosophy Quote"
+          aria-label="What I Do"
         >
-          <div className={styles.quoteCard}>
-            <Sparkles size={20} className={styles.quoteIcon} />
-            <blockquote className={styles.quoteText}>
-              &ldquo;Engineering resilient intelligence requires disciplined systems thinking — stripping away
-              runtime bloat, bounding latency, and letting clean architecture do the heavy lifting.&rdquo;
-            </blockquote>
-          </div>
-        </motion.section>
-
-        {/* 4. Core Engineering Pillars (AI/ML & DevOps) */}
-        <motion.section
-          className={styles.pillarsSection}
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          aria-label="Core Competencies"
-        >
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionIndex}>01 / CORE COMPETENCIES</span>
-            <h2 className={styles.sectionTitle}>Dual Engineering Superpowers</h2>
+          {/* Section Header with Accent and "WHAT I DO" */}
+          <div className={styles.whatIDoHeader}>
+            <div className={styles.whatIDoAccent}>
+              <span className={styles.accentCircle} />
+              <span className={styles.accentLine} />
+            </div>
+            <h2 className={styles.whatIDoTitle}>WHAT I DO</h2>
           </div>
 
-          <div className={styles.pillarsGrid}>
-            {SKILL_DOMAINS.map((domain) => {
-              const Icon = domain.icon;
-              return (
-                <div key={domain.category} className={styles.pillarCard}>
-                  <div className={styles.pillarHeader}>
-                    <div className={styles.pillarIconWrap}>
-                      <Icon size={20} />
-                    </div>
-                    <div>
-                      <span className={styles.pillarCategory}>{domain.category}</span>
-                      <h3 className={styles.pillarTitle}>{domain.title}</h3>
-                    </div>
-                  </div>
-
-                  <p className={styles.pillarDesc}>{domain.description}</p>
-
-                  <div className={styles.chipsWrap}>
-                    {domain.skills.map((skill) => (
-                      <span key={skill} className={styles.skillChip}>
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </motion.section>
-
-        {/* 5. Minimalist Experience & Career Milestones */}
-        <motion.section
-          className={styles.timelineSection}
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          aria-label="Experience & Milestones"
-        >
-          <div className={styles.sectionHeader}>
-            <span className={styles.sectionIndex}>02 / TRACK RECORD</span>
-            <h2 className={styles.sectionTitle}>Experience &amp; Leadership</h2>
-          </div>
-
-          <div className={styles.timelineList}>
-            {MILESTONES.map((m, idx) => (
-              <div key={idx} className={styles.timelineItem}>
-                <div className={styles.timelineYear}>{m.year}</div>
-                <div className={styles.timelineContent}>
-                  <h3 className={styles.timelineRole}>
-                    {m.role} <span className={styles.timelineCompany}>&mdash; {m.company}</span>
-                  </h3>
-                  <p className={styles.timelineDetail}>{m.detail}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* 6. Clean Call to Action Block */}
-        <motion.section
-          className={styles.ctaSection}
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          aria-label="Get In Touch"
-        >
-          <div className={styles.ctaBox}>
-            <div className={styles.ctaTextWrap}>
-              <h2 className={styles.ctaHeading}>Let&apos;s build something exceptional.</h2>
-              <p className={styles.ctaSub}>
-                Have a project, machine learning architecture, or infrastructure challenge in mind?
-                I&apos;m always open to discussing new opportunities and technical advisory.
+          {/* Bento Grid: Left Tall Card + Right 2x2 Grid */}
+          <div className={styles.whatIDoGrid}>
+            {/* Left Tall Card: Solid Deep Navy with ABOUT ME + Bio */}
+            <div className={styles.aboutMeCard}>
+              <h3 className={styles.aboutMeCardHeading}>ABOUT ME</h3>
+              <p className={styles.aboutMeCardBio}>
+                Meet Dilshan: an AI/ML engineer and DevOps architect building high-throughput
+                machine learning systems, optimizing GPU inference runtimes, and engineering
+                resilient Kubernetes cloud infrastructure. Dedicated to stripping away unnecessary
+                complexity to deliver scalable, production-grade intelligence with operational rigor.
               </p>
             </div>
 
-            <div className={styles.ctaActions}>
-              <a href={`mailto:${siteConfig.social.email}`} className={styles.primaryCtaBtn}>
-                <span>Get in Touch</span>
-                <ArrowUpRight size={16} />
-              </a>
-              <Link href="/projects" className={styles.secondaryCtaBtn}>
-                <span>Explore Projects</span>
-              </Link>
+            {/* Right 2x2 Grid of Visual Cards with Icons & Labels */}
+            <div className={styles.cardsGrid}>
+              {WHAT_I_DO_CARDS.map((card) => {
+                const IconComponent = card.icon;
+                return (
+                  <div key={card.id} className={styles.bentoCard}>
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
+                      className={styles.bentoCardImg}
+                    />
+                    <div className={styles.bentoCardOverlay} />
+                    <div className={styles.bentoCardContent}>
+                      <IconComponent size={24} className={styles.bentoCardIcon} />
+                      <h4 className={styles.bentoCardTitle}>{card.title}</h4>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </motion.section>

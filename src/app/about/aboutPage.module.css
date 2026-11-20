@@ -377,312 +377,178 @@
   transform: translateX(4px);
 }
 
-/* 4. Bold Editorial Manifesto Quote */
-.quoteSection {
-  margin-bottom: clamp(4.5rem, 8vw, 6.5rem);
+/* 4. "WHAT I DO" Bento Grid Section Matching Exact Reference Design */
+.whatIDoSection {
+  margin-bottom: clamp(4rem, 7vw, 6rem);
   width: 100%;
 }
 
-.quoteCard {
-  background: linear-gradient(180deg, #0e1014 0%, #060709 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: clamp(2.25rem, 4vw, 3.5rem);
-  position: relative;
-  overflow: hidden;
-}
-
-.quoteIcon {
-  color: #8bb397;
-  margin-bottom: 1.25rem;
-}
-
-.quoteText {
-  margin: 0;
-  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", sans-serif);
-  font-size: clamp(1.25rem, 2.4vw, 1.85rem);
-  font-weight: 500;
-  line-height: 1.45;
-  color: #f4f4f5;
-  letter-spacing: -0.015em;
-  max-width: 980px;
-}
-
-/* 4. Core Engineering Pillars (AI/ML & DevOps) */
-.pillarsSection {
-  margin-bottom: clamp(4.5rem, 8vw, 6.5rem);
-  width: 100%;
-}
-
-.sectionHeader {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  margin-bottom: clamp(2rem, 3.5vw, 2.75rem);
-}
-
-.sectionIndex {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: #71717a;
-  text-transform: uppercase;
-}
-
-.sectionTitle {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  color: #ffffff;
-  margin: 0;
-}
-
-.pillarsGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(1.5rem, 2.5vw, 2rem);
-  width: 100%;
-}
-
-@media (max-width: 768px) {
-  .pillarsGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.pillarCard {
-  background-color: #0c0e12;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: clamp(1.75rem, 3vw, 2.5rem);
-  display: flex;
-  flex-direction: column;
-  transition: all 0.25s ease;
-}
-
-.pillarCard:hover {
-  background-color: #101318;
-  border-color: rgba(255, 255, 255, 0.16);
-  transform: translateY(-2px);
-}
-
-.pillarHeader {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.15rem;
-}
-
-.pillarIconWrap {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  flex-shrink: 0;
-}
-
-.pillarCategory {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: #888e99;
-  text-transform: uppercase;
-  display: block;
-}
-
-.pillarTitle {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #ffffff;
-  margin: 0.15rem 0 0 0;
-  letter-spacing: -0.015em;
-}
-
-.pillarDesc {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.94rem;
-  line-height: 1.6;
-  color: #9ca3af;
-  margin: 0 0 1.5rem 0;
-}
-
-.chipsWrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: auto;
-}
-
-.skillChip {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.74rem;
-  padding: 0.35rem 0.75rem;
-  border-radius: 6px;
-  background-color: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #d4d4d8;
-  letter-spacing: 0.01em;
-}
-
-/* 5. Minimalist Experience & Career Milestones */
-.timelineSection {
-  margin-bottom: clamp(4.5rem, 8vw, 6.5rem);
-  width: 100%;
-}
-
-.timelineList {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.timelineItem {
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  padding: clamp(1.5rem, 2.5vw, 2.25rem) 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  gap: 1.5rem;
-  align-items: baseline;
-}
-
-@media (max-width: 680px) {
-  .timelineItem {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-}
-
-.timelineYear {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.85rem;
-  color: #71717a;
-  letter-spacing: 0.02em;
-}
-
-.timelineContent {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.timelineRole {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: #ffffff;
-  margin: 0;
-  letter-spacing: -0.01em;
-}
-
-.timelineCompany {
-  font-weight: 400;
-  color: #a1a1aa;
-}
-
-.timelineDetail {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.92rem;
-  line-height: 1.55;
-  color: #9ca3af;
-  margin: 0;
-}
-
-/* 6. Clean Call to Action Block */
-.ctaSection {
-  width: 100%;
-}
-
-.ctaBox {
-  background: #0c0e12;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 16px;
-  padding: clamp(2.5rem, 5vw, 4rem);
+.whatIDoHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2.5rem;
-  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
 }
 
-.ctaTextWrap {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  max-width: 640px;
-}
-
-.ctaHeading {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(1.75rem, 3vw, 2.35rem);
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: -0.025em;
-  margin: 0;
-  line-height: 1.2;
-}
-
-.ctaSub {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.98rem;
-  line-height: 1.6;
-  color: #9ca3af;
-  margin: 0;
-}
-
-.ctaActions {
+.whatIDoAccent {
   display: flex;
   align-items: center;
   gap: 1rem;
-  flex-wrap: wrap;
 }
 
-.primaryCtaBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.8rem 1.6rem;
-  border-radius: 9999px;
+.accentCircle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: block;
+}
+
+.accentLine {
+  width: 48px;
+  height: 4px;
+  border-radius: 2px;
   background-color: #ffffff;
-  color: #000000;
+  display: block;
+}
+
+.whatIDoTitle {
   font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: 0.92rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.primaryCtaBtn:hover {
-  background-color: #e4e4e7;
-  transform: translateY(-1.5px);
-}
-
-.secondaryCtaBtn {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.8rem 1.6rem;
-  border-radius: 9999px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: clamp(1.6rem, 3.2vw, 2.35rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
   color: #ffffff;
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: 0.92rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all 0.2s ease;
+  margin: 0;
 }
 
-.secondaryCtaBtn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.whatIDoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.65fr;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  align-items: stretch;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .whatIDoGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Left Tall Card: Deep Navy with ABOUT ME */
+.aboutMeCard {
+  background-color: #152238;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: clamp(2rem, 3.5vw, 2.85rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3rem;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+.aboutMeCardHeading {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+}
+
+.aboutMeCardBio {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(0.92rem, 1.15vw, 1.02rem);
+  line-height: 1.65;
+  color: #c0cbe0;
+  margin: 0;
+}
+
+/* Right 2x2 Grid of Visual Cards */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+  width: 100%;
+}
+
+@media (max-width: 560px) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bentoCard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #0c0d10;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease;
+}
+
+.bentoCard:hover {
+  transform: translateY(-4px);
   border-color: rgba(255, 255, 255, 0.22);
-  transform: translateY(-1.5px);
+}
+
+.bentoCardImg {
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bentoCard:hover .bentoCardImg {
+  transform: scale(1.04);
+}
+
+.bentoCardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.35) 45%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+  pointer-events: none;
+}
+
+.bentoCardContent {
+  position: absolute;
+  inset: 0;
+  padding: clamp(1.2rem, 2vw, 1.65rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.bentoCardIcon {
+  color: #ffffff;
+  opacity: 0.95;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+.bentoCardTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.25;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
