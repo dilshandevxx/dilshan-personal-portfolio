@@ -1,183 +1,197 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  projectsList as defaultProjects,
-  Project,
-  getProjectThumbnail,
-} from "@/data/projects";
+import { motion } from "framer-motion";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
 import MainFooter from "@/components/MainFooter";
-import { Rss, Search, X } from "lucide-react";
+import { Rss } from "lucide-react";
 import styles from "./projectsPage.module.css";
 
-const FILTER_CATEGORIES = [
-  "All",
-  "AI & ML",
-  "DevOps & Cloud",
-  "Distributed Systems",
-  "MLOps & K8s",
-  "Full-Stack",
-  "Open Source",
-] as const;
-
-type FilterCategory = (typeof FILTER_CATEGORIES)[number];
-
-function matchesCategory(project: Project, cat: FilterCategory): boolean {
-  if (cat === "All") return true;
-  const pCat = project.category?.toLowerCase() || "";
-  const pTags = project.tags?.map((t) => t.toLowerCase()) || [];
-
-  switch (cat) {
-    case "AI & ML":
-      return (
-        pCat.includes("ai") ||
-        pCat.includes("ml") ||
-        pTags.some((t) => t.includes("ai") || t.includes("rag") || t.includes("llm"))
-      );
-    case "DevOps & Cloud":
-      return (
-        pCat.includes("devops") ||
-        pCat.includes("cloud") ||
-        pCat.includes("platform") ||
-        pCat.includes("sre") ||
-        pTags.some((t) => t.includes("kubernetes") || t.includes("terraform") || t.includes("docker"))
-      );
-    case "Distributed Systems":
-      return (
-        pCat.includes("distributed") ||
-        pCat.includes("systems") ||
-        pTags.some((t) => t.includes("kafka") || t.includes("grpc") || t.includes("go"))
-      );
-    case "MLOps & K8s":
-      return (
-        pCat.includes("mlops") ||
-        pTags.some((t) => t.includes("mlops") || t.includes("kubernetes") || t.includes("inference"))
-      );
-    case "Full-Stack":
-      return (
-        pCat.includes("full-stack") ||
-        pCat.includes("landing") ||
-        pTags.some((t) => t.includes("react") || t.includes("next.js"))
-      );
-    case "Open Source":
-      return (
-        project.status === "Existing" ||
-        Boolean(project.githubUrl) ||
-        Boolean(typeof project.stars === "number" && project.stars > 0)
-      );
-    default:
-      return true;
-  }
+export interface ProjectArticle {
+  id: string;
+  slug: string;
+  category: "Company" | "Product" | "Research" | "Open Source" | "Release Notes" | "Articles" | "Use Cases" | "Customer Stories";
+  tags?: string[];
+  title: string;
+  description: string;
+  date: string;
+  image: string;
 }
 
-export default function ProjectsPage() {
-  const [projects, setProjects] = useState<Project[]>(defaultProjects);
-  const [activeCategory, setActiveCategory] = useState<FilterCategory>("All");
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [showSearch, setShowSearch] = useState<boolean>(false);
+const PROJECTS_DATA: ProjectArticle[] = [
+  {
+    id: "henning-larsen",
+    slug: "partnering-henning-larsen",
+    category: "Company",
+    tags: ["Company", "Customer Stories", "Use Cases"],
+    title: "We are partnering with Henning Larsen",
+    description: "We are partnering with Henning Larsen Architects to bring the best AI creative tools for architecture.",
+    date: "May 29, 2026",
+    image: "/images/projects/krea_partner_henning.png",
+  },
+  {
+    id: "moodboard-gallery",
+    slug: "moodboard-gallery-krea-2",
+    category: "Product",
+    tags: ["Product", "Release Notes"],
+    title: "Moodboard Gallery in Krea 2 + Preview of Random and Auto",
+    description: "Moodboard Gallery now includes thousands of moodboards in Krea 2, with new Random and Auto moodboard selection.",
+    date: "May 28, 2026",
+    image: "/images/projects/krea_moodboard_gallery.png",
+  },
+  {
+    id: "krea-2-api",
+    slug: "krea-2-api",
+    category: "Product",
+    tags: ["Product", "Open Source", "Articles"],
+    title: "Krea 2 API",
+    description: "Krea 2 is our first foundation image model, trained completely from scratch to give users full control over the look, feel, and style.",
+    date: "May 27, 2026",
+    image: "/images/projects/krea_api_platform.png",
+  },
+  {
+    id: "krea-2-deep-dive",
+    slug: "krea-2-deep-dive",
+    category: "Product",
+    tags: ["Product", "Articles", "Use Cases"],
+    title: "Krea 2 deep dive: exploration, style references, and moodboards",
+    description: "Krea 2 is our first foundation model, built completely from scratch and focused on aesthetics and creative control.",
+    date: "May 21, 2026",
+    image: "/images/projects/krea_deep_dive_horse.png",
+  },
+  {
+    id: "krea-2-lora-training",
+    slug: "krea-2-lora-training",
+    category: "Product",
+    tags: ["Product", "Use Cases", "Release Notes"],
+    title: "Krea 2 LoRA training is now available",
+    description: "Train custom Krea 2 LoRAs — styles, characters, or objects — and use them in the Image tool. In beta for Max and Business.",
+    date: "May 21, 2026",
+    image: "/images/projects/krea_lora_training.png",
+  },
+  {
+    id: "mood-boards-krea-2",
+    slug: "mood-boards-krea-2",
+    category: "Product",
+    tags: ["Product", "Articles", "Use Cases"],
+    title: "Mood boards in Krea 2",
+    description: "Mood boards are one of the new tools in Krea 2 — more than four references, deeper style + concept capture, and presets.",
+    date: "May 15, 2026",
+    image: "/images/projects/krea_moodboards_frog.png",
+  },
+  {
+    id: "introducing-krea-2",
+    slug: "introducing-krea-2",
+    category: "Product",
+    tags: ["Product", "Release Notes", "Articles"],
+    title: "Introducing Krea 2",
+    description: "Krea 2 is our first foundation image model built completely from scratch, focused on aesthetics, style transfer, and speed.",
+    date: "May 12, 2026",
+    image: "/images/projects/krea_introducing_collage.png",
+  },
+  {
+    id: "krea-2-large-fidelity",
+    slug: "krea-2-large-fidelity",
+    category: "Research",
+    tags: ["Research", "Articles"],
+    title: "Krea 2 Large shines in style fidelity",
+    description: "Contra Labs found Krea 2 Large within 0.14 points of GPT Image 2 on Style Fidelity in a four-model style-transfer benchmark.",
+    date: "May 12, 2026",
+    image: "/images/projects/krea_large_fidelity.png",
+  },
+  {
+    id: "seedance-2-on-krea",
+    slug: "seedance-2-on-krea",
+    category: "Product",
+    tags: ["Product", "Release Notes"],
+    title: "Seedance 2.0: now on Krea",
+    description: "Seedance 2.0 is available on Krea on all paid plans. Best-in-class motion coherence and cinematic camera control.",
+    date: "April 2, 2026",
+    image: "/images/projects/krea_seedance_motion.png",
+  },
+  {
+    id: "annotations-krea-edit",
+    slug: "annotations-krea-edit",
+    category: "Product",
+    tags: ["Product", "Release Notes"],
+    title: "Annotations in Krea Edit",
+    description: "Interactive canvas annotations and spatial bounding-box prompts for precise localized inpainting and structural edits.",
+    date: "March 28, 2026",
+    image: "/images/projects/krea_annotations_edit.png",
+  },
+  {
+    id: "krea-node-agent",
+    slug: "krea-node-agent",
+    category: "Product",
+    tags: ["Product", "Open Source", "Research"],
+    title: "Announcing the Krea Node Agent",
+    description: "Visual graph execution engine for composing modular diffusion nodes, conditioning masks, and autonomous agents.",
+    date: "March 20, 2026",
+    image: "/images/projects/krea_node_agent.png",
+  },
+  {
+    id: "powerful-krea-edit",
+    slug: "powerful-krea-edit",
+    category: "Product",
+    tags: ["Product", "Release Notes"],
+    title: "A New, More Powerful Krea Edit",
+    description: "Expanded layer controls, non-destructive vector adjustments, and sub-second generation response directly on canvas.",
+    date: "March 14, 2026",
+    image: "/images/projects/krea_powerful_edit.png",
+  },
+];
 
-  // Sync any custom additions/edits saved via Admin in production
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem("dilshan_custom_projects");
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          setProjects(parsed);
-        }
-      }
-    } catch {}
-  }, []);
+const CATEGORIES = [
+  "All",
+  "Company",
+  "Product",
+  "Open Source",
+  "Research",
+  "Release Notes",
+  "Articles",
+  "Use Cases",
+  "Customer Stories",
+] as const;
+
+type Category = (typeof CATEGORIES)[number];
+
+export default function ProjectsPage() {
+  const [selectedCategory, setSelectedCategory] = useState<Category>("All");
 
   const filteredProjects = useMemo(() => {
-    const q = searchQuery.toLowerCase().trim();
-    return projects.filter((project) => {
-      const matchesCat = matchesCategory(project, activeCategory);
-      const matchesSearch =
-        q === "" ||
-        project.title.toLowerCase().includes(q) ||
-        project.tagline.toLowerCase().includes(q) ||
-        project.description.toLowerCase().includes(q) ||
-        (project.tags && project.tags.some((t) => t.toLowerCase().includes(q)));
-      return matchesCat && matchesSearch;
-    });
-  }, [projects, activeCategory, searchQuery]);
+    if (selectedCategory === "All") return PROJECTS_DATA;
+    return PROJECTS_DATA.filter(
+      (p) => p.category === selectedCategory || p.tags?.includes(selectedCategory)
+    );
+  }, [selectedCategory]);
 
   return (
     <div className={styles.pageRoot}>
       {/* 1. Global Navigation Bar */}
       <SkyLabsNavbar activeTab="projects" />
 
-      {/* 2. Main Projects Content Container */}
+      {/* 2. Main Content Container */}
       <main className={styles.mainContainer}>
-        {/* Header Block matching Reference Design */}
+        {/* Header Block matching exact reference design */}
         <header className={styles.headerBlock}>
           <div className={styles.titleRow}>
             <h1 className={styles.pageTitle}>Projects</h1>
-            <div className={styles.headerActions}>
-              <button
-                type="button"
-                onClick={() => setShowSearch(!showSearch)}
-                className={`${styles.iconBtn} ${showSearch ? styles.iconBtnActive : ""}`}
-                aria-label="Toggle search input"
-                title="Search projects"
-              >
-                <Search size={16} />
-              </button>
-              <div className={styles.rssWrap} title="Project Feed">
-                <Rss size={16} className={styles.rssIcon} />
-              </div>
+            <div className={styles.rssWrap} title="RSS Feed" aria-label="RSS Feed">
+              <Rss size={16} className={styles.rssIcon} />
             </div>
           </div>
 
-          {/* Collapsible Search Input */}
-          <AnimatePresence>
-            {showSearch && (
-              <motion.div
-                className={styles.searchBarWrap}
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className={styles.searchInputGroup}>
-                  <Search size={14} className={styles.searchFieldIcon} />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search systems by keyword, model, or technology..."
-                    className={styles.searchInput}
-                    autoFocus
-                  />
-                  {searchQuery && (
-                    <button
-                      type="button"
-                      onClick={() => setSearchQuery("")}
-                      className={styles.clearSearchBtn}
-                      aria-label="Clear search"
-                    >
-                      <X size={13} />
-                    </button>
-                  )}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Category Filter Tabs (Horizontal list matching exact reference design) */}
-          <nav className={styles.filterNav} aria-label="Project Categories">
-            {FILTER_CATEGORIES.map((cat) => {
-              const isActive = activeCategory === cat;
+          {/* Clean Text Navigation Tabs directly under title */}
+          <nav className={styles.filterNav} aria-label="Categories">
+            {CATEGORIES.map((cat) => {
+              const isActive = selectedCategory === cat;
               return (
                 <button
                   key={cat}
                   type="button"
-                  onClick={() => setActiveCategory(cat)}
+                  onClick={() => setSelectedCategory(cat)}
                   className={`${styles.filterTab} ${isActive ? styles.filterTabActive : ""}`}
                 >
                   {cat}
@@ -191,74 +205,57 @@ export default function ProjectsPage() {
         <section className={styles.gridSection} aria-label="Projects Showcase">
           {filteredProjects.length === 0 ? (
             <div className={styles.emptyState}>
-              <p className={styles.emptyTitle}>No matching projects found</p>
-              <p className={styles.emptyDesc}>Try resetting your search query or selecting &quot;All&quot;.</p>
+              <p className={styles.emptyTitle}>No projects in &ldquo;{selectedCategory}&rdquo;</p>
+              <p className={styles.emptyDesc}>Explore recent releases, product foundation models, and company announcements in All.</p>
               <button
                 type="button"
-                onClick={() => {
-                  setActiveCategory("All");
-                  setSearchQuery("");
-                }}
+                onClick={() => setSelectedCategory("All")}
                 className={styles.resetBtn}
               >
-                Reset Filters
+                View All
               </button>
             </div>
           ) : (
             <div className={styles.projectsGrid}>
-              {filteredProjects.map((project, idx) => {
-                const thumbnail =
-                  idx === 0
-                    ? "/images/projects/blog-thumb.avif"
-                    : getProjectThumbnail(project.slug, project.image, idx);
-
-                return (
-                  <motion.article
-                    key={project.slug}
-                    className={styles.card}
-                    initial={{ opacity: 0, y: 18 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-30px" }}
-                    transition={{
-                      duration: 0.45,
-                      delay: Math.min(idx * 0.05, 0.35),
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
+              {filteredProjects.map((project, idx) => (
+                <motion.article
+                  key={project.id}
+                  className={styles.card}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.4,
+                    delay: Math.min(idx * 0.04, 0.3),
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                >
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    className={styles.cardLink}
+                    aria-label={`View ${project.title}`}
                   >
-                    <Link
-                      href={`/projects/${project.slug}`}
-                      className={styles.cardLink}
-                      aria-label={`View ${project.title}`}
-                    >
-                      {/* 16:10 Rounded Banner Image Canvas */}
-                      <div className={styles.imageFrame}>
-                        <Image
-                          src={thumbnail}
-                          alt={project.title}
-                          fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
-                          priority={idx < 6}
-                          className={styles.cardImage}
-                        />
-                      </div>
+                    {/* 4:3 Rounded Banner Image Frame */}
+                    <div className={styles.imageFrame}>
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+                        priority={idx < 6}
+                        className={styles.cardImage}
+                      />
+                    </div>
 
-                      {/* Card Content directly below image */}
-                      <div className={styles.cardContent}>
-                        <span className={styles.categoryBadge}>
-                          {project.category || "AI/ML & SYSTEMS"}
-                        </span>
-                        <h2 className={styles.cardTitle}>{project.title}</h2>
-                        <p className={styles.cardDescription}>
-                          {project.description || project.tagline}
-                        </p>
-                        <span className={styles.cardDate}>
-                          {project.date || "Active Production"}
-                        </span>
-                      </div>
-                    </Link>
-                  </motion.article>
-                );
-              })}
+                    {/* Card Content directly below image */}
+                    <div className={styles.cardContent}>
+                      <span className={styles.categoryBadge}>{project.category}</span>
+                      <h2 className={styles.cardTitle}>{project.title}</h2>
+                      <p className={styles.cardDescription}>{project.description}</p>
+                      <span className={styles.cardDate}>{project.date}</span>
+                    </div>
+                  </Link>
+                </motion.article>
+              ))}
             </div>
           )}
         </section>
