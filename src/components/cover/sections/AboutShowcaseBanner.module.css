@@ -1,0 +1,84 @@
+/* =========================================================================
+   Visual Engineering Showcase Banner
+   Cinematic wide frame directly beneath About Me section.
+   Rounded container, subtle obsidian border, hardware-accelerated zoom hover.
+   ========================================================================= */
+
+.showcaseSection {
+  background-color: #111111;
+  width: 100%;
+  padding: 0 clamp(1.25rem, 4vw, 3.5rem) clamp(4.5rem, 7vw, 7.5rem);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.bannerFrame {
+  position: relative;
+  width: 100%;
+  height: clamp(340px, 48vh, 580px);
+  border-radius: clamp(14px, 1.8vw, 20px);
+  overflow: hidden;
+  background-color: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.7);
+}
+
+.bannerImage {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bannerFrame:hover .bannerImage {
+  transform: scale(1.025);
+}
+
+/* Subtle ambient vignette around edges */
+.vignetteOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    transparent 55%,
+    rgba(17, 17, 17, 0.4) 100%
+  );
+  pointer-events: none;
+}
+
+/* Optional editorial caption */
+.captionTag {
+  position: absolute;
+  bottom: clamp(1rem, 2vw, 1.5rem);
+  right: clamp(1rem, 2vw, 1.5rem);
+  background-color: rgba(17, 17, 17, 0.75);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: #d4d4d8;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* =========================================================================
+   Responsive Breakpoints
+   ========================================================================= */
+@media (max-width: 768px) {
+  .showcaseSection {
+    padding: 0 1.25rem clamp(3.5rem, 6vw, 4.5rem);
+  }
+
+  .bannerFrame {
+    height: clamp(210px, 38vh, 320px);
+    border-radius: 12px;
+  }
+}

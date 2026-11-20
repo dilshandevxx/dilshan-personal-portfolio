@@ -1,5 +1,6 @@
 import HeroSkyLabs from "@/components/cover/sections/HeroSkyLabs";
 import AboutMe from "@/components/cover/sections/AboutMe";
+import AboutShowcaseBanner from "@/components/cover/sections/AboutShowcaseBanner";
 import SelectedWork from "@/components/cover/sections/SelectedWork";
 import SkillsGrid from "@/components/cover/sections/SkillsGrid";
 import InsightsSection from "@/components/cover/sections/InsightsSection";
@@ -25,6 +26,7 @@ export default function Home() {
     <>
       <HeroSkyLabs />
       <AboutMe />
+      <AboutShowcaseBanner />
       <SelectedWork />
       <SkillsGrid />
       <InsightsSection />

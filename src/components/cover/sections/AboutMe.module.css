@@ -2,12 +2,11 @@
 
 .aboutSection {
   background-color: #111111;
-  padding: clamp(6.5rem, 11vw, 10.5rem) clamp(1.5rem, 5vw, 4rem);
+  padding: clamp(5.5rem, 9vw, 8.5rem) clamp(1.5rem, 5vw, 4rem) clamp(3.5rem, 5.5vw, 5.5rem);
   position: relative;
   width: 100%;
   box-sizing: border-box;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .container {
