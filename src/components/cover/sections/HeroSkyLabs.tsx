@@ -116,9 +116,9 @@ export default function HeroSkyLabs() {
       >
         <div className={styles.navContainer}>
           {/* Brand Wordmark matching reference typography */}
-          <Link href="/" className={styles.brandLink} title="dilshan.">
+          <Link href="/" className={styles.brandLink} title="DILSHAN.">
             <span className={styles.brandWordmark}>
-              dilshan<span className={styles.brandDot}>.</span>
+              DILSHAN<span className={styles.brandDot}>.</span>
             </span>
           </Link>
 
