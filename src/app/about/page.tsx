@@ -104,94 +104,94 @@ export default function AboutPage() {
       <SkyLabsNavbar activeTab="about" />
 
       <main className={styles.mainContainer}>
-        {/* Top Back Link */}
+        {/* Top Back Link — Minimalist and Understated */}
         <motion.div
           className={styles.topNav}
-          initial={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
           <Link href="/" className={styles.backLink}>
-            <ArrowLeft size={14} />
+            <ArrowLeft size={14} className={styles.backArrow} />
             <span>Back to Home</span>
           </Link>
         </motion.div>
 
-        {/* 2. Hero Section: Editorial 2-Column Split (Text & Portrait) */}
+        {/* 2. Hero Section: Editorial 2-Column Split Inspired by Reference */}
         <motion.section
           className={styles.heroSection}
-          initial={{ opacity: 0, y: 22 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           aria-label="Introduction"
         >
           <div className={styles.heroGrid}>
-            {/* Left Column: Title, Identity & Concise Narrative */}
+            {/* Left Column: Clean Editorial Narrative & Contact Capsules */}
             <div className={styles.heroLeft}>
-              <div className={styles.statusPill}>
-                <span className={styles.statusDot} />
-                <span>Available for AI/ML &amp; DevOps Engineering</span>
-              </div>
-
               <h1 className={styles.heroName}>Dilshan</h1>
-              <p className={styles.heroRole}>
-                AI/ML Engineer <span className={styles.roleDivider}>/</span> DevOps Architect
-              </p>
 
-              <div className={styles.narrativeWrap}>
+              <div className={styles.narrativeStack}>
                 <p className={styles.narrativePara}>
-                  I engineer high-throughput machine learning systems, low-latency model inference
-                  runtimes, and resilient cloud infrastructure built to perform deterministically under
-                  demanding production scale.
+                  I&apos;m an AI/ML engineer and DevOps architect focused on creating clean,
+                  high-throughput machine learning systems and resilient cloud infrastructure.
                 </p>
 
                 <p className={styles.narrativePara}>
-                  My work bridges both sides of modern engineering: training and fine-tuning neural
-                  models, optimizing GPU tensor execution, and automating Kubernetes-native cloud
-                  environments with GitOps and Terraform.
+                  I specialize in building end-to-end model workflows, distributed GPU training
+                  runtimes, and low-latency inference pipelines that not only scale but perform deterministically.
                 </p>
 
                 <p className={styles.narrativePara}>
-                  My approach is simple — remove unnecessary complexity, optimize memory and latency
-                  boundaries, and build dependable systems with mathematical rigor.
+                  My approach is simple &mdash; remove distractions, focus on clarity, and design with purpose.
+                </p>
+
+                <p className={styles.narrativePara}>
+                  Over the years, I have worked with startups, creators, and businesses worldwide,
+                  helping teams turn complex machine learning research into production-ready digital systems.
                 </p>
               </div>
 
-              {/* Minimalist Contact & Social Pills */}
-              <div className={styles.pillsRow}>
-                <button
-                  type="button"
-                  onClick={handleCopyEmail}
-                  className={`${styles.pillBtn} ${styles.emailPill}`}
-                  aria-label="Copy email address"
-                  title="Click to copy email"
-                >
-                  <Mail size={14} className={styles.pillIcon} />
-                  <span>{siteConfig.social.email}</span>
-                  {copied ? (
-                    <Check size={14} className={styles.checkIcon} />
-                  ) : (
-                    <Copy size={12} className={styles.copyIcon} />
-                  )}
-                </button>
-
-                {SOCIAL_LINKS.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.pillBtn}
+              {/* Clean Two-Row Contact & Profile Capsules Matching Reference Layout */}
+              <div className={styles.contactCapsulesGroup}>
+                {/* Row 1: Direct Contact & Location */}
+                <div className={styles.capsulesRow}>
+                  <button
+                    type="button"
+                    onClick={handleCopyEmail}
+                    className={`${styles.capsuleBtn} ${styles.emailCapsule}`}
+                    aria-label="Copy email address"
+                    title="Click to copy email"
                   >
-                    <span>{link.label}</span>
-                    <ExternalLink size={12} className={styles.pillExternal} />
-                  </a>
-                ))}
-              </div>
+                    <Mail size={14} className={styles.capsuleIcon} />
+                    <span>{siteConfig.social.email}</span>
+                    {copied ? (
+                      <Check size={13} className={styles.checkIcon} />
+                    ) : (
+                      <Copy size={12} className={styles.copyIcon} />
+                    )}
+                  </button>
 
-              <div className={styles.locationMeta}>
-                <MapPin size={13} className={styles.locIcon} />
-                <span>Colombo, Sri Lanka &bull; Working Worldwide</span>
+                  <div className={styles.capsuleBadge}>
+                    <MapPin size={13} className={styles.capsuleIcon} />
+                    <span>Colombo, Sri Lanka &bull; Worldwide</span>
+                  </div>
+                </div>
+
+                {/* Row 2: Verified Profiles */}
+                <div className={styles.capsulesRow}>
+                  {SOCIAL_LINKS.map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.capsuleBtn}
+                    >
+                      <span>{link.label}</span>
+                      <ExternalLink size={12} className={styles.externalIcon} />
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -203,7 +203,7 @@ export default function AboutPage() {
                   alt="Dilshan"
                   fill
                   priority
-                  sizes="(max-width: 768px) 100vw, 460px"
+                  sizes="(max-width: 768px) 100vw, 440px"
                   className={styles.portraitImg}
                 />
                 <div className={styles.portraitOverlay} />

@@ -22,33 +22,35 @@
 
 /* 1. Top Navigation / Back Breadcrumb */
 .topNav {
-  margin-bottom: 2.75rem;
+  margin-bottom: clamp(2rem, 3.5vw, 3rem);
 }
 
 .backLink {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: 0.84rem;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.85rem;
   font-weight: 500;
-  color: #8e8e93;
+  color: #71717a;
   text-decoration: none;
   transition: all 0.2s ease;
-  padding: 0.4rem 0.85rem;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  width: fit-content;
+}
+
+.backArrow {
+  transition: transform 0.2s ease;
 }
 
 .backLink:hover {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.backLink:hover .backArrow {
   transform: translateX(-3px);
 }
 
-/* 2. Hero Section: Editorial 2-Column Split */
+/* 2. Hero Section: Editorial 2-Column Split Inspired by Reference */
 .heroSection {
   margin-bottom: clamp(4.5rem, 8vw, 6.5rem);
   width: 100%;
@@ -56,8 +58,8 @@
 
 .heroGrid {
   display: grid;
-  grid-template-columns: 1.35fr 0.95fr;
-  gap: clamp(2.5rem, 5vw, 4.5rem);
+  grid-template-columns: 1.25fr 0.95fr;
+  gap: clamp(2.5rem, 5.5vw, 5rem);
   align-items: center;
   width: 100%;
 }
@@ -74,89 +76,56 @@
   flex-direction: column;
 }
 
-.statusPill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.35rem 0.85rem;
-  border-radius: 9999px;
-  background-color: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
-  color: #a1a1aa;
-  width: fit-content;
-  margin-bottom: 1.25rem;
-}
-
-.statusDot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background-color: #22c55e;
-  box-shadow: 0 0 10px rgba(34, 197, 94, 0.55);
-}
-
 .heroName {
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
   font-size: clamp(2.8rem, 5.5vw, 4.4rem);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
   color: #ffffff;
-  margin: 0 0 0.5rem 0;
-}
-
-.heroRole {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
-  font-weight: 500;
-  color: #a1a1aa;
   margin: 0 0 1.75rem 0;
-  letter-spacing: -0.01em;
 }
 
-.roleDivider {
-  color: rgba(255, 255, 255, 0.25);
-  margin: 0 0.25rem;
-}
-
-.narrativeWrap {
+.narrativeStack {
   display: flex;
   flex-direction: column;
-  gap: 1.15rem;
-  margin-bottom: 2rem;
+  gap: 1.35rem;
+  margin-bottom: 2.25rem;
 }
 
 .narrativePara {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 1.02rem;
+  font-size: clamp(0.98rem, 1.2vw, 1.05rem);
   line-height: 1.68;
-  color: #9ca3af;
+  color: #c4c9d4;
   margin: 0;
 }
 
-/* Minimalist Interactive Pill Buttons */
-.pillsRow {
+/* Two-Row Contact & Profile Capsules (Exact Reference Aesthetic) */
+.contactCapsulesGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.capsulesRow {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.65rem;
-  margin-bottom: 1.5rem;
+  gap: 0.75rem;
 }
 
-.pillBtn {
+.capsuleBtn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.95rem;
+  gap: 0.55rem;
+  padding: 0.55rem 1.15rem;
   border-radius: 9999px;
-  background-color: #111317;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #f4f4f5;
+  background-color: #121418;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
@@ -164,29 +133,37 @@
   outline: none;
 }
 
-.pillBtn:hover {
-  background-color: #1a1e24;
-  border-color: rgba(255, 255, 255, 0.25);
+.capsuleBtn:hover {
+  background-color: #1b1e24;
+  border-color: rgba(255, 255, 255, 0.28);
   color: #ffffff;
   transform: translateY(-1.5px);
 }
 
-.emailPill {
-  background-color: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.14);
+.emailCapsule {
+  background-color: #121418;
 }
 
-.emailPill:hover {
-  background-color: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.3);
+.capsuleBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 9999px;
+  background-color: #121418;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.88rem;
+  font-weight: 500;
 }
 
-.pillIcon {
-  color: #a1a1aa;
+.capsuleIcon {
+  color: #ffffff;
 }
 
 .copyIcon {
-  color: #71717a;
+  color: #888e99;
   margin-left: 2px;
 }
 
@@ -195,27 +172,14 @@
   margin-left: 2px;
 }
 
-.pillExternal {
-  color: #71717a;
+.externalIcon {
+  color: #888e99;
   transition: transform 0.2s ease;
 }
 
-.pillBtn:hover .pillExternal {
+.capsuleBtn:hover .externalIcon {
   color: #ffffff;
   transform: translate(1px, -1px);
-}
-
-.locationMeta {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  color: #71717a;
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.82rem;
-}
-
-.locIcon {
-  color: #71717a;
 }
 
 /* Right Column: Editorial Portrait Frame */
