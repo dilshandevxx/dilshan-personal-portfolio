@@ -306,28 +306,28 @@
   box-sizing: border-box;
 }
 
-/* Left-Aligned Massive Display Headline with Condensed Display Typography (Matching reference) */
+/* Left-Aligned Massive Display Headline with Condensed Display Typography (Sentence case / simple letters) */
 .displayHeadline {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
   color: #ffffff;
-  font-family: var(--font-hero, 'Bebas Neue', 'Anton', 'Barlow Condensed', 'Impact', sans-serif);
-  font-size: clamp(3.8rem, 8.6vw, 7.8rem);
-  font-weight: 400;
-  line-height: 0.96;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  font-family: var(--font-hero, 'Barlow Condensed', 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: clamp(3.2rem, 7.5vw, 6.6rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  text-transform: none;
   margin: 0 0 clamp(3.5rem, 6vw, 5.5rem) 0;
-  max-width: 1300px;
+  max-width: 1250px;
 }
 
 @media (max-width: 640px) {
   .displayHeadline {
-    font-size: clamp(2.8rem, 13vw, 4.4rem);
-    line-height: 0.98;
-    letter-spacing: 0.015em;
+    font-size: clamp(2.4rem, 10.5vw, 3.6rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
     margin-bottom: 2.5rem;
   }
 }
