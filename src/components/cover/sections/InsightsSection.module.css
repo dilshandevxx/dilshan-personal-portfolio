@@ -1,16 +1,21 @@
-/* Articles Section — Clean 3-Column Editorial Grid matching Reference Design */
-
+/* Articles Section — 2x2 Horizontal Grid Matching Reference Design */
 .insightsSection {
   background-color: #000000;
-  padding: clamp(5rem, 8vw, 8rem) clamp(1.5rem, 4vw, 3.5rem);
+  padding: clamp(5.5rem, 9vw, 8.5rem) clamp(1.5rem, 5vw, 4rem);
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   position: relative;
   width: 100%;
   box-sizing: border-box;
 }
 
+@media (max-width: 768px) {
+  .insightsSection {
+    padding: clamp(3.5rem, 7vw, 5rem) 1.25rem;
+  }
+}
+
 .container {
-  max-width: 1240px;
+  max-width: 1200px;
   margin: 0 auto;
   width: 100%;
 }
@@ -20,41 +25,37 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: clamp(2rem, 4vw, 3rem);
-  width: 100%;
+  margin-bottom: clamp(3rem, 5.5vw, 4.5rem);
+  gap: 1.5rem;
 }
 
 .title {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
+  font-size: clamp(2.4rem, 4.2vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
   color: #ffffff;
-  font-family: var(--font-artistic, "Newsreader", "Playfair Display", Georgia, serif);
-  font-size: clamp(2rem, 3.8vw, 3rem);
-  font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: -0.015em;
   margin: 0;
+  line-height: 1.1;
 }
 
 .seeAllLink {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: #a1a1aa;
+  text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: #9da4ae;
-  font-family: var(--font-display, "Plus Jakarta Sans", -apple-system, sans-serif);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease;
+  gap: 0.4rem;
+  transition: color 0.2s ease, gap 0.2s ease;
   white-space: nowrap;
 }
 
 .seeAllLink:hover {
   color: #ffffff;
-}
-
-.seeAllLink:hover .arrowIcon {
-  transform: translateX(3px);
+  gap: 0.65rem;
 }
 
 .arrowIcon {
@@ -62,127 +63,154 @@
   transition: transform 0.2s ease;
 }
 
-/* 3-Column Responsive Grid */
+.seeAllLink:hover .arrowIcon {
+  transform: translateX(2px);
+}
+
+/* 2-Column Grid (2x2 Horizontal Layout Matching Reference) */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1.5rem, 2.5vw, 2.5rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(2.5rem, 5vw, 5rem);
+  row-gap: clamp(2.75rem, 5vw, 4.25rem);
   width: 100%;
 }
 
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    row-gap: 2.5rem;
+  }
+}
+
+/* Article Card Link */
 .card {
+  position: relative;
   width: 100%;
-  min-width: 0;
 }
 
 .cardLink {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: clamp(1.2rem, 2vw, 1.85rem);
   text-decoration: none;
+  color: inherit;
+  width: 100%;
   outline: none;
-  width: 100%;
 }
 
-/* 1:1 Aspect Ratio Square Image Canvas with 14px Rounded Corners */
+.cardLink:focus-visible {
+  outline: 2px solid var(--color-primary, #8bb397);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+/* Left Square Thumbnail with Subtle Rounded Corners */
 .imageFrame {
+  width: clamp(130px, 14vw, 175px);
+  height: clamp(130px, 14vw, 175px);
+  flex-shrink: 0;
   position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 14px;
+  border-radius: 4px;
   overflow: hidden;
-  background-color: #121418;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.cardLink:hover .imageFrame {
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  background-color: #14171d;
 }
 
 .cardImage {
   object-fit: cover;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cardLink:hover .cardImage {
-  transform: scale(1.03);
+  transform: scale(1.05);
 }
 
-/* Frosted Category Pill in Top-Right Corner (Exact Reference Match) */
-.categoryBadge {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  z-index: 2;
-  background: rgba(18, 20, 24, 0.68);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: 9999px;
-  padding: 4px 12px;
-  font-family: var(--font-display, "Plus Jakarta Sans", -apple-system, sans-serif);
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: #ffffff;
-  letter-spacing: 0.02em;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-}
-
-/* Card Body directly below Image */
+/* Right Content Column */
 .cardBody {
-  margin-top: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  justify-content: flex-start;
+  min-height: clamp(130px, 14vw, 175px);
+  gap: 0.55rem;
+  width: 100%;
 }
 
-/* Bold Sans-Serif Title */
 .cardTitle {
-  color: #ffffff;
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: 1.12rem;
+  font-size: clamp(1.2rem, 1.6vw, 1.45rem);
   font-weight: 700;
-  line-height: 1.32;
-  letter-spacing: -0.015em;
+  line-height: 1.25;
+  letter-spacing: -0.018em;
+  color: #ffffff;
   margin: 0;
   transition: color 0.2s ease;
 }
 
 .cardLink:hover .cardTitle {
-  color: #ffffff;
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  color: #f4f4f5;
 }
 
-/* Delicate Literary Serif Subtitle (Exact Reference Match) */
-.cardSubtitle {
-  font-family: var(--font-artistic, "Newsreader", "Playfair Display", Georgia, serif);
-  font-size: 0.94rem;
+.cardDescription {
+  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
+  font-size: 0.9rem;
+  line-height: 1.55;
   color: #9da4ae;
   margin: 0;
-  line-height: 1.42;
-  font-weight: 400;
 }
 
-/* Responsive Viewports */
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
+.readLinkWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: auto;
+  padding-top: 0.35rem;
+  color: #d4d4d8;
+  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: color 0.2s ease, gap 0.2s ease;
 }
 
-@media (max-width: 600px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
+.readLinkText {
+  display: inline-block;
+}
 
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+.readLinkArrow {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cardLink:hover .readLinkWrap {
+  color: #ffffff;
+  gap: 0.65rem;
+}
+
+.cardLink:hover .readLinkArrow {
+  transform: translateX(3px);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 580px) {
+  .cardLink {
+    gap: 1.15rem;
+  }
+  .imageFrame {
+    width: 115px;
+    height: 115px;
+  }
+  .cardBody {
+    min-height: 115px;
+    gap: 0.4rem;
+  }
+  .cardTitle {
+    font-size: 1.1rem;
+  }
+  .cardDescription {
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+  .readLinkWrap {
+    font-size: 0.82rem;
   }
 }
