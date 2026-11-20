@@ -19,7 +19,7 @@
 .mainContainer {
   max-width: 1420px;
   margin: 0 auto;
-  padding: 1.5rem clamp(1.25rem, 4vw, 3.5rem) clamp(5rem, 8vw, 8rem);
+  padding: clamp(2rem, 3.5vw, 3.5rem) clamp(1.25rem, 4vw, 3.5rem) clamp(5rem, 8vw, 8rem);
   width: 100%;
   box-sizing: border-box;
 }
@@ -66,7 +66,7 @@
 /* Top Row: Pill Badge (Left) + Ribbed Texture (Right) */
 .badgeHeaderRow {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: flex-start;
   margin-bottom: clamp(1.8rem, 3vw, 2.75rem);
   width: 100%;

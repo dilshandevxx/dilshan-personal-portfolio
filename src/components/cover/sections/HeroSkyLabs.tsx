@@ -111,9 +111,8 @@ export default function HeroSkyLabs() {
     <section className={styles.heroSection} aria-label="Hero">
       {/* 1. Minimalist Top Navbar (Matching Exact Reference Image) */}
       <header
-        className={`${styles.navHeader} ${
-          !navVisible && !menuOpen ? styles.navHidden : ""
-        } ${menuOpen ? styles.navOpen : ""}`}
+        className={`${styles.navHeader} ${!navVisible && !menuOpen ? styles.navHidden : ""
+          } ${menuOpen ? styles.navOpen : ""}`}
       >
         <div className={styles.navContainer}>
           {/* Brand Wordmark matching reference typography */}
@@ -129,34 +128,30 @@ export default function HeroSkyLabs() {
               <a
                 href="#skills"
                 onClick={(e) => handleSlowScroll(e, "skills")}
-                className={`${styles.navLink} ${
-                  activeSection === "skills" ? styles.navLinkActive : ""
-                }`}
+                className={`${styles.navLink} ${activeSection === "skills" ? styles.navLinkActive : ""
+                  }`}
               >
                 EXPERTISE
               </a>
               <Link
                 href="/projects"
-                className={`${styles.navLink} ${
-                  activeSection === "projects" ? styles.navLinkActive : ""
-                }`}
+                className={`${styles.navLink} ${activeSection === "projects" ? styles.navLinkActive : ""
+                  }`}
               >
                 PROJECTS
               </Link>
               <Link
                 href="/about"
-                className={`${styles.navLink} ${
-                  activeSection === "about-me" ? styles.navLinkActive : ""
-                }`}
+                className={`${styles.navLink} ${activeSection === "about-me" ? styles.navLinkActive : ""
+                  }`}
               >
                 ABOUT
               </Link>
               <a
                 href="#contact"
                 onClick={(e) => handleSlowScroll(e, "contact")}
-                className={`${styles.navLink} ${
-                  activeSection === "contact" ? styles.navLinkActive : ""
-                }`}
+                className={`${styles.navLink} ${activeSection === "contact" ? styles.navLinkActive : ""
+                  }`}
               >
                 CONTACT
               </a>

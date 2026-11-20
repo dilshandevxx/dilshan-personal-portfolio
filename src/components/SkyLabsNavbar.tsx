@@ -57,9 +57,8 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
 
   return (
     <header
-      className={`${styles.navHeader} ${
-        !navVisible && !menuOpen ? styles.navHidden : ""
-      } ${menuOpen ? styles.navOpen : ""}`}
+      className={`${styles.navHeader} ${!navVisible && !menuOpen ? styles.navHidden : ""
+        } ${menuOpen ? styles.navOpen : ""}`}
       role="banner"
     >
       <div className={styles.navContainer}>
@@ -75,39 +74,35 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
           <nav className={styles.desktopNav} aria-label="Main Navigation">
             <Link
               href="/#skills"
-              className={`${styles.navLink} ${
-                activeTab === "services" || activeTab === "expertise"
+              className={`${styles.navLink} ${activeTab === "services" || activeTab === "expertise"
                   ? styles.navLinkActive
                   : ""
-              }`}
+                }`}
             >
               EXPERTISE
             </Link>
             <Link
               href="/projects"
-              className={`${styles.navLink} ${
-                activeTab === "projects" || pathname.startsWith("/projects")
+              className={`${styles.navLink} ${activeTab === "projects" || pathname.startsWith("/projects")
                   ? styles.navLinkActive
                   : ""
-              }`}
+                }`}
             >
               PROJECTS
             </Link>
             <Link
               href="/about"
-              className={`${styles.navLink} ${
-                activeTab === "about" || pathname === "/about"
+              className={`${styles.navLink} ${activeTab === "about" || pathname === "/about"
                   ? styles.navLinkActive
                   : ""
-              }`}
+                }`}
             >
               ABOUT
             </Link>
             <Link
               href="/#contact"
-              className={`${styles.navLink} ${
-                activeTab === "contact" ? styles.navLinkActive : ""
-              }`}
+              className={`${styles.navLink} ${activeTab === "contact" ? styles.navLinkActive : ""
+                }`}
             >
               CONTACT
             </Link>

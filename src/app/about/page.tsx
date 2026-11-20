@@ -2,9 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft } from "lucide-react";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
 import PreFooterBanner from "@/components/cover/sections/PreFooterBanner";
 import MainFooter from "@/components/MainFooter";
@@ -19,34 +17,12 @@ export default function AboutPage() {
       <SkyLabsNavbar activeTab="about" />
 
       <main className={styles.mainContainer}>
-        {/* Subtle Back Link */}
-        <motion.div
-          className={styles.topNav}
-          initial={{ opacity: 0, y: -6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Link href="/" className={styles.backLink}>
-            <ArrowLeft size={14} className={styles.backArrow} />
-            <span>Home</span>
-          </Link>
-        </motion.div>
-
         {/* =========================================================================
             HERO STAGE: FAITHFULLY REPRODUCING THE ABOUT-6 REFERENCE DESIGN
             ========================================================================= */}
         <section className={styles.stageSection} aria-label="About & Statistics">
-          {/* Top Bar Row: Award Winning Stats Badge (Left) + Ribbed Lines Texture (Right) */}
+          {/* Top Bar Row: Ribbed Texture (Right) */}
           <div className={styles.badgeHeaderRow}>
-            <motion.div
-              className={styles.statsBadge}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <span>AWARD WINNING STATS</span>
-            </motion.div>
-
             {/* Decorative Ribbed Barcode Texture matching top right of reference */}
             <div className={styles.ribbedTexture} aria-hidden="true">
               {Array.from({ length: 26 }).map((_, i) => (
