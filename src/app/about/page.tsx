@@ -6,15 +6,45 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
-  Camera,
-  Video,
-  Scissors,
+  Brain,
+  Terminal,
+  Cpu,
   Globe,
+  MapPin,
+  Mail,
+  Phone,
 } from "lucide-react";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
 import MainFooter from "@/components/MainFooter";
 import { siteConfig } from "@/data/siteConfig";
 import styles from "./aboutPage.module.css";
+
+const WHAT_I_DO_CARDS = [
+  {
+    id: "ai-ml",
+    title: "AI & MACHINE LEARNING",
+    icon: Brain,
+    image: "/images/what-i-do/what_i_do_1.png",
+  },
+  {
+    id: "devops-k8s",
+    title: "DEVOPS & KUBERNETES",
+    icon: Terminal,
+    image: "/images/what-i-do/what_i_do_2.png",
+  },
+  {
+    id: "inference-rag",
+    title: "MODEL INFERENCE & RAG",
+    icon: Cpu,
+    image: "/images/what-i-do/what_i_do_3.png",
+  },
+  {
+    id: "cloud-architecture",
+    title: "DISTRIBUTED CLOUD",
+    icon: Globe,
+    image: "/images/what-i-do/what_i_do_4.png",
+  },
+];
 
 const SKETCHBOOK_ITEMS = [
   {
@@ -51,38 +81,11 @@ const SKETCHBOOK_ITEMS = [
   },
 ];
 
-const WHAT_I_DO_CARDS = [
-  {
-    id: "ai-ml",
-    title: "AI & MACHINE LEARNING",
-    icon: Camera,
-    image: "/images/what-i-do/what_i_do_1.png",
-  },
-  {
-    id: "devops-k8s",
-    title: "DEVOPS & KUBERNETES",
-    icon: Video,
-    image: "/images/what-i-do/what_i_do_2.png",
-  },
-  {
-    id: "inference-rag",
-    title: "MODEL INFERENCE & RAG",
-    icon: Scissors,
-    image: "/images/what-i-do/what_i_do_3.png",
-  },
-  {
-    id: "cloud-architecture",
-    title: "DISTRIBUTED CLOUD",
-    icon: Globe,
-    image: "/images/what-i-do/what_i_do_4.png",
-  },
-];
-
 export default function AboutPage() {
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   const handleCopyEmail = (e: React.MouseEvent) => {
-    // Copy to clipboard while preserving default mailto behavior if desired
+    e.preventDefault();
     navigator.clipboard.writeText(siteConfig.social.email);
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2400);
@@ -107,77 +110,81 @@ export default function AboutPage() {
           </Link>
         </motion.div>
 
-        {/* 2. Hero Section: Clean, Minimalist Typography Layout Matching Reference Design */}
+        {/* 2. Top Hero Section: Dilshan Portrait + ABOUT ME + 4 Domain Cards with Square Corners */}
         <motion.section
-          className={styles.cleanAboutSection}
+          className={styles.topAboutHero}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           aria-label="About Dilshan"
         >
-          <div className={styles.cleanAboutContent}>
-            <h1 className={styles.cleanName}>Dilshan</h1>
-
-            <div className={styles.narrativeStack}>
-              <p className={styles.narrativePara}>
-                I&apos;m an AI/ML engineer and DevOps architect focused on creating clean,
-                high-throughput machine learning systems and resilient cloud infrastructure.
-              </p>
-
-              <p className={styles.narrativePara}>
-                I specialize in building deep learning models, low-latency GPU inference runtimes,
-                and distributed platforms that not only scale but also perform.
-              </p>
-
-              <p className={styles.narrativePara}>
-                My approach is simple &mdash; remove distractions, focus on clarity, and design with purpose.
-              </p>
-
-              <p className={styles.narrativePara}>
-                Over the years, I have worked with teams and founders worldwide, helping startups,
-                creators, and businesses turn complex AI ideas into production-ready digital products.
-              </p>
+          {/* Left Column: Dilshan Portrait (Clean, Minimal, Strictly Square Corners) */}
+          <div className={styles.portraitColumn}>
+            <div className={styles.portraitCard}>
+              <div className={styles.portraitImageWrap}>
+                <Image
+                  src="/dilshan_portrait.jpg"
+                  alt="Dilshan"
+                  fill
+                  priority
+                  sizes="(max-width: 900px) 100vw, 420px"
+                  className={styles.portraitImg}
+                />
+                <div className={styles.portraitGradientOverlay} />
+              </div>
+              <div className={styles.portraitMetaBar}>
+                <div className={styles.metaIdentity}>
+                  <span className={styles.metaName}>Dilshan</span>
+                  <span className={styles.metaRole}>AI/ML Engineer &amp; DevOps Architect</span>
+                </div>
+                <div className={styles.metaLocation}>
+                  <MapPin size={12} className={styles.locationPin} />
+                  <span>Colombo, Sri Lanka &bull; Worldwide</span>
+                </div>
+              </div>
             </div>
+          </div>
 
-            {/* Two-Row Capsule Pills Matching Reference Layout */}
-            <div className={styles.pillsContainer}>
-              {/* Row 1: Direct Contact & Email */}
+          {/* Right Column: ABOUT ME statement card + 2x2 Focus Cards */}
+          <div className={styles.contentColumn}>
+            {/* Upper: ABOUT ME Card (Strictly Square Corners) */}
+            <div className={styles.aboutMeCard}>
+              <div className={styles.aboutMeCardHeader}>
+                <span className={styles.aboutMeBadge}>ABOUT ME</span>
+              </div>
+              <p className={styles.aboutMeCardBio}>
+                Meet Dilshan: an AI/ML engineer and DevOps architect building high-throughput
+                machine learning systems, optimizing GPU inference runtimes, and engineering
+                resilient Kubernetes cloud infrastructure. Dedicated to stripping away unnecessary
+                complexity to deliver scalable, production-grade intelligence with operational rigor.
+              </p>
+
+              {/* Square Action / Contact Pills */}
               <div className={styles.pillsRow}>
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  className={styles.squarePill}
+                  title="Click to copy email address"
+                >
+                  <Mail size={13} />
+                  <span>{copiedEmail ? "Copied to clipboard!" : siteConfig.social.email}</span>
+                </button>
+
                 <a
                   href="tel:+94771234567"
-                  className={styles.pillBtn}
+                  className={styles.squarePill}
                   aria-label="Call Dilshan"
                 >
-                  +94 77 123 4567
-                </a>
-
-                <a
-                  href={`mailto:${siteConfig.social.email}`}
-                  onClick={handleCopyEmail}
-                  className={styles.pillBtn}
-                  aria-label="Email Dilshan"
-                  title="Click to email or copy"
-                >
-                  {copiedEmail ? "Copied to clipboard!" : siteConfig.social.email}
-                </a>
-              </div>
-
-              {/* Row 2: Verified Social Profiles */}
-              <div className={styles.pillsRow}>
-                <a
-                  href={siteConfig.social.x}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.pillBtn}
-                >
-                  Twitter
+                  <Phone size={13} />
+                  <span>+94 77 123 4567</span>
                 </a>
 
                 <a
                   href={siteConfig.social.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={styles.pillBtn}
+                  className={styles.squarePill}
                 >
                   GitHub
                 </a>
@@ -186,16 +193,48 @@ export default function AboutPage() {
                   href={siteConfig.social.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={styles.pillBtn}
+                  className={styles.squarePill}
                 >
                   LinkedIn
                 </a>
+
+                <a
+                  href={siteConfig.social.x}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.squarePill}
+                >
+                  Twitter
+                </a>
               </div>
+            </div>
+
+            {/* Lower: 2x2 Domain Cards (Strictly Square Corners) */}
+            <div className={styles.cardsGrid}>
+              {WHAT_I_DO_CARDS.map((card) => {
+                const IconComponent = card.icon;
+                return (
+                  <div key={card.id} className={styles.bentoCard}>
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
+                      className={styles.bentoCardImg}
+                    />
+                    <div className={styles.bentoCardOverlay} />
+                    <div className={styles.bentoCardContent}>
+                      <IconComponent size={22} className={styles.bentoCardIcon} />
+                      <h4 className={styles.bentoCardTitle}>{card.title}</h4>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </motion.section>
 
-        {/* 3. "From the sketchbook" Section Matching Reference Design */}
+        {/* 3. "From the sketchbook" Section (Clean Editorial Showcase) */}
         <motion.section
           className={styles.sketchbookSection}
           initial={{ opacity: 0, y: 24 }}
@@ -225,66 +264,10 @@ export default function AboutPage() {
           </div>
 
           <div className={styles.sketchbookFooter}>
-            <Link href="#contact" className={styles.seeMoreLink}>
+            <Link href="/#contact" className={styles.seeMoreLink}>
               <span>SEE MORE DRAWINGS</span>
               <span className={styles.seeMoreArrow} aria-hidden="true">&rarr;</span>
             </Link>
-          </div>
-        </motion.section>
-
-        {/* 4. "WHAT I DO" Bento Grid Section Matching Exact Reference Design */}
-        <motion.section
-          className={styles.whatIDoSection}
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          aria-label="What I Do"
-        >
-          {/* Section Header with Accent and "WHAT I DO" */}
-          <div className={styles.whatIDoHeader}>
-            <div className={styles.whatIDoAccent}>
-              <span className={styles.accentCircle} />
-              <span className={styles.accentLine} />
-            </div>
-            <h2 className={styles.whatIDoTitle}>WHAT I DO</h2>
-          </div>
-
-          {/* Bento Grid: Left Tall Card + Right 2x2 Grid */}
-          <div className={styles.whatIDoGrid}>
-            {/* Left Tall Card: Solid Deep Navy with ABOUT ME + Bio */}
-            <div className={styles.aboutMeCard}>
-              <h3 className={styles.aboutMeCardHeading}>ABOUT ME</h3>
-              <p className={styles.aboutMeCardBio}>
-                Meet Dilshan: an AI/ML engineer and DevOps architect building high-throughput
-                machine learning systems, optimizing GPU inference runtimes, and engineering
-                resilient Kubernetes cloud infrastructure. Dedicated to stripping away unnecessary
-                complexity to deliver scalable, production-grade intelligence with operational rigor.
-              </p>
-            </div>
-
-            {/* Right 2x2 Grid of Visual Cards with Icons & Labels */}
-            <div className={styles.cardsGrid}>
-              {WHAT_I_DO_CARDS.map((card) => {
-                const IconComponent = card.icon;
-                return (
-                  <div key={card.id} className={styles.bentoCard}>
-                    <Image
-                      src={card.image}
-                      alt={card.title}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
-                      className={styles.bentoCardImg}
-                    />
-                    <div className={styles.bentoCardOverlay} />
-                    <div className={styles.bentoCardContent}>
-                      <IconComponent size={24} className={styles.bentoCardIcon} />
-                      <h4 className={styles.bentoCardTitle}>{card.title}</h4>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
           </div>
         </motion.section>
       </main>

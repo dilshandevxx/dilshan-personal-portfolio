@@ -1,4 +1,4 @@
-/* Clean, Modern & Elegant Standalone About Me Page */
+/* Clean, Modern & Minimal Standalone About Me Page (Strictly Square Corners) */
 
 .pageRoot {
   background-color: #111111;
@@ -13,7 +13,7 @@
 }
 
 .mainContainer {
-  max-width: 1180px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: 1.5rem clamp(1.25rem, 4vw, 3rem) 7rem;
   width: 100%;
@@ -22,7 +22,7 @@
 
 /* 1. Top Navigation / Back Breadcrumb */
 .topNav {
-  margin-bottom: clamp(2rem, 3.5vw, 3rem);
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
 }
 
 .backLink {
@@ -50,69 +50,180 @@
   transform: translateX(-3px);
 }
 
-/* 2. Hero Section: Clean, Minimalist Editorial Typography Layout Matching Reference Design */
-.cleanAboutSection {
-  margin-bottom: clamp(5.5rem, 9.5vw, 8rem);
+/* ------------------------------------------------------------- */
+/* 2. TOP HERO ABOUT SECTION (SQUARE CORNERS BENTO GRID)         */
+/* ------------------------------------------------------------- */
+.topAboutHero {
+  display: grid;
+  grid-template-columns: minmax(320px, 400px) minmax(0, 1fr);
+  gap: clamp(1.25rem, 2vw, 1.85rem);
+  align-items: stretch;
   width: 100%;
+  margin-bottom: clamp(4.5rem, 7vw, 6.5rem);
 }
 
-.cleanAboutContent {
-  max-width: 630px;
-  width: 100%;
-}
-
-.cleanName {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(2.6rem, 5.2vw, 3.8rem);
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
-  color: #f4f5f7;
-  margin: 0 0 clamp(1.85rem, 3.2vw, 2.4rem) 0;
-}
-
-.narrativeStack {
+/* Left Column: Portrait Card */
+.portraitColumn {
   display: flex;
   flex-direction: column;
-  gap: 1.55rem;
-  margin-bottom: clamp(2.25rem, 3.8vw, 3rem);
+  height: 100%;
 }
 
-.narrativePara {
+.portraitCard {
+  background-color: #181818;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0; /* STRICTLY SQUARE */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+  box-sizing: border-box;
+}
+
+.portraitImageWrap {
+  position: relative;
+  width: 100%;
+  flex-grow: 1;
+  min-height: 400px;
+  overflow: hidden;
+  background-color: #141414;
+  border-radius: 0; /* STRICTLY SQUARE */
+}
+
+.portraitImg {
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 0; /* STRICTLY SQUARE */
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portraitCard:hover .portraitImg {
+  transform: scale(1.025);
+}
+
+.portraitGradientOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(0, 0, 0, 0.15) 60%,
+    rgba(17, 17, 17, 0.65) 100%
+  );
+  pointer-events: none;
+}
+
+.portraitMetaBar {
+  padding: 1.25rem 1.4rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #181818;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.metaIdentity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.metaName {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.metaRole {
   font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(1.02rem, 1.22vw, 1.12rem);
-  line-height: 1.68;
-  color: #a8afbd;
-  margin: 0;
-  font-weight: 400;
+  font-size: 0.82rem;
+  color: #a3e635; /* Neon lime accent */
+  font-weight: 500;
   letter-spacing: -0.01em;
 }
 
-/* Two-Row Capsule Pills Matching Exact Reference Design */
-.pillsContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+.metaLocation {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.74rem;
+  color: #8b909c;
+  margin-top: 0.25rem;
 }
 
+.locationPin {
+  color: #a3e635;
+  flex-shrink: 0;
+}
+
+/* Right Column: ABOUT ME Card + 2x2 Focus Cards */
+.contentColumn {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 1.8vw, 1.5rem);
+  height: 100%;
+}
+
+/* Upper ABOUT ME Card */
+.aboutMeCard {
+  background-color: #181818;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0; /* STRICTLY SQUARE */
+  padding: clamp(1.75rem, 2.5vw, 2.35rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+  box-sizing: border-box;
+}
+
+.aboutMeCardHeader {
+  display: flex;
+  align-items: center;
+}
+
+.aboutMeBadge {
+  font-family: var(--font-mono, "Google Sans Code", monospace);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a3e635; /* Neon lime accent */
+}
+
+.aboutMeCardBio {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(0.98rem, 1.15vw, 1.08rem);
+  line-height: 1.72;
+  color: #d1d5db;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Square Contact / Social Pills */
 .pillsRow {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.65rem;
 }
 
-.pillBtn {
+.squarePill {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 0.58rem 1.32rem;
-  border-radius: 9999px;
-  background-color: #181818;
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  gap: 0.45rem;
+  padding: 0.58rem 1.05rem;
+  border-radius: 0; /* STRICTLY SQUARE */
+  background-color: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: #eff1f5;
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.92rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
@@ -121,23 +232,105 @@
   white-space: nowrap;
 }
 
-.pillBtn:hover {
+.squarePill:hover {
   background-color: #222222;
-  border-color: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.25);
   color: #ffffff;
   transform: translateY(-1.5px);
 }
 
-.pillBtn:active {
+.squarePill:active {
   transform: translateY(0);
 }
 
-.pillBtn:focus-visible {
-  outline: 2px solid #ffffff;
+.squarePill:focus-visible {
+  outline: 2px solid #a3e635;
   outline-offset: 3px;
 }
 
-/* 3. "From the sketchbook" Section (Matching Reference Design) */
+/* Lower 2x2 Focus Cards Grid */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.9rem, 1.5vw, 1.25rem);
+  width: 100%;
+}
+
+.bentoCard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 0; /* STRICTLY SQUARE */
+  overflow: hidden;
+  background-color: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
+  box-sizing: border-box;
+}
+
+.bentoCard:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+}
+
+.bentoCardImg {
+  object-fit: cover;
+  border-radius: 0; /* STRICTLY SQUARE */
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bentoCard:hover .bentoCardImg {
+  transform: scale(1.04);
+}
+
+.bentoCardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0.45) 50%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  pointer-events: none;
+}
+
+.bentoCardContent {
+  position: absolute;
+  inset: 0;
+  padding: clamp(1rem, 1.8vw, 1.4rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.bentoCardIcon {
+  color: #a3e635; /* Neon lime accent */
+  opacity: 0.95;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+.bentoCardTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: clamp(0.9rem, 1.3vw, 1.08rem);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.25;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* ------------------------------------------------------------- */
+/* 3. SKETCHBOOK SECTION (SQUARE CORNERS)                        */
+/* ------------------------------------------------------------- */
 .sketchbookSection {
   margin-bottom: clamp(5rem, 8vw, 7rem);
   padding-top: clamp(3.5rem, 6vw, 5rem);
@@ -196,7 +389,7 @@
 .sketchImageWrap {
   position: relative;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 0; /* STRICTLY SQUARE */
   overflow: hidden;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
   display: flex;
@@ -211,6 +404,7 @@
   height: auto;
   display: block;
   object-fit: contain;
+  border-radius: 0; /* STRICTLY SQUARE */
   transition: transform 0.45s ease;
 }
 
@@ -251,180 +445,32 @@
   transform: translateX(4px);
 }
 
-/* 4. "WHAT I DO" Bento Grid Section Matching Exact Reference Design */
-.whatIDoSection {
-  margin-bottom: clamp(4rem, 7vw, 6rem);
-  padding-top: clamp(3.5rem, 6vw, 5rem);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  width: 100%;
-}
-
-.whatIDoHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
-}
-
-.whatIDoAccent {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.accentCircle {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  display: block;
-}
-
-.accentLine {
-  width: 48px;
-  height: 4px;
-  border-radius: 2px;
-  background-color: #ffffff;
-  display: block;
-}
-
-.whatIDoTitle {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(1.6rem, 3.2vw, 2.35rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  color: #ffffff;
-  margin: 0;
-}
-
-.whatIDoGrid {
-  display: grid;
-  grid-template-columns: 1fr 1.65fr;
-  gap: clamp(1rem, 2vw, 1.5rem);
-  align-items: stretch;
-  width: 100%;
-}
-
+/* ------------------------------------------------------------- */
+/* RESPONSIVENESS                                                */
+/* ------------------------------------------------------------- */
 @media (max-width: 900px) {
-  .whatIDoGrid {
+  .topAboutHero {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-}
 
-/* Left Tall Card: Deep Navy with ABOUT ME */
-.aboutMeCard {
-  background-color: #152238;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: clamp(2rem, 3.5vw, 2.85rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 3rem;
-  min-height: 100%;
-  box-sizing: border-box;
-}
-
-.aboutMeCardHeading {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: 1.25rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #ffffff;
-  margin: 0;
-}
-
-.aboutMeCardBio {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(0.92rem, 1.15vw, 1.02rem);
-  line-height: 1.65;
-  color: #c0cbe0;
-  margin: 0;
-}
-
-/* Right 2x2 Grid of Visual Cards */
-.cardsGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(1rem, 2vw, 1.5rem);
-  width: 100%;
+  .portraitImageWrap {
+    min-height: unset;
+    aspect-ratio: 4 / 5;
+    height: clamp(340px, 60vw, 440px);
+  }
 }
 
 @media (max-width: 560px) {
   .cardsGrid {
     grid-template-columns: 1fr;
   }
-}
 
-.bentoCard {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  border-radius: 16px;
-  overflow: hidden;
-  background-color: #0c0d10;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.25s ease;
-}
+  .portraitMetaBar {
+    padding: 1rem 1.15rem;
+  }
 
-.bentoCard:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.22);
-}
-
-.bentoCardImg {
-  object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.bentoCard:hover .bentoCardImg {
-  transform: scale(1.04);
-}
-
-.bentoCardOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.2) 0%,
-    rgba(0, 0, 0, 0.35) 45%,
-    rgba(0, 0, 0, 0.78) 100%
-  );
-  pointer-events: none;
-}
-
-.bentoCardContent {
-  position: absolute;
-  inset: 0;
-  padding: clamp(1.2rem, 2vw, 1.65rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.bentoCardIcon {
-  color: #ffffff;
-  opacity: 0.95;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
-}
-
-.bentoCardTitle {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(0.95rem, 1.5vw, 1.2rem);
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: #ffffff;
-  margin: 0;
-  line-height: 1.25;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  .aboutMeCard {
+    padding: 1.5rem 1.25rem;
+  }
 }
