@@ -19,7 +19,7 @@
 .mainContainer {
   max-width: 1280px;
   margin: 0 auto;
-  padding: clamp(3.5rem, 5.5vw, 6rem) clamp(1.25rem, 4vw, 3.5rem) clamp(5rem, 8vw, 8rem);
+  padding: clamp(3rem, 5vw, 5.5rem) clamp(1.25rem, 4vw, 3.5rem) clamp(3.5rem, 5vw, 5.5rem);
   width: 100%;
   box-sizing: border-box;
 }
@@ -298,5 +298,160 @@
 
   .statsSecondaryRow {
     gap: 1.25rem;
+  }
+}
+
+/* =========================================================================
+   JOURNEY & MILESTONES SECTION
+   High-contrast matte dark background (#111111), architectural photo card,
+   and 2-column milestone grid matching reference design.
+   ========================================================================= */
+
+.journeySection {
+  width: 100%;
+  background-color: #111111;
+  color: #ffffff;
+  padding: clamp(4.5rem, 6.5vw, 6.5rem) clamp(1.25rem, 4vw, 3.5rem);
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.journeyContainer {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.journeyHeader {
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.journeyEyebrow {
+  display: block;
+  font-family: var(--font-interface, "Inter", -apple-system, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #71717a;
+  margin-bottom: 0.5rem;
+}
+
+.journeyHeadline {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
+  font-size: clamp(1.85rem, 2.8vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* 3-Column / Photo + 2-Column Milestones Grid */
+.journeyGrid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: clamp(2.5rem, 4.5vw, 5rem);
+  align-items: start;
+  width: 100%;
+}
+
+.journeyPhotoCard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.18 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.journeyImage {
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journeyPhotoCard:hover .journeyImage {
+  transform: scale(1.04);
+}
+
+/* Right 2-column Milestones Grid */
+.milestonesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2.25rem, 3.5vw, 3.25rem) clamp(2.5rem, 4vw, 4.5rem);
+  align-items: start;
+}
+
+.milestoneItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.milestoneYear {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
+  font-size: clamp(1.1rem, 1.35vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin: 0 0 0.65rem 0;
+}
+
+.milestoneDesc {
+  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
+  font-size: clamp(0.9rem, 1vw, 0.95rem);
+  line-height: 1.65;
+  color: #9da4ae;
+  margin: 0;
+  max-width: 400px;
+}
+
+/* Responsive adjustments for Journey section */
+@media (max-width: 1024px) {
+  .journeyGrid {
+    grid-template-columns: 280px 1fr;
+    gap: 2.5rem;
+  }
+
+  .milestonesGrid {
+    gap: 2rem 2.5rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .journeyGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .journeyPhotoCard {
+    max-width: 480px;
+    aspect-ratio: 16 / 11;
+  }
+
+  .milestonesGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .journeySection {
+    padding: 3.5rem 1.25rem;
+  }
+
+  .milestonesGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .milestoneYear {
+    font-size: 1.1rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .milestoneDesc {
+    font-size: 0.92rem;
+    line-height: 1.6;
   }
 }
