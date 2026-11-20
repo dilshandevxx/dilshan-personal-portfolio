@@ -1,7 +1,6 @@
 /* =========================================================================
-   About Me Page (Faithfully reproducing the about-6 reference design)
-   Obsidian dark surface (#111111), white badge pill, ribbed texture,
-   high-impact uppercase headline, 4 stats columns & 2 large rounded cards.
+   About Me Page — 3-Column Asymmetric Editorial Layout
+   (Faithfully reproducing the reference design with obsidian dark aesthetics)
    ========================================================================= */
 
 .pageRoot {
@@ -17,189 +16,50 @@
 }
 
 .mainContainer {
-  max-width: 1420px;
+  max-width: 1380px;
   margin: 0 auto;
-  padding: clamp(2rem, 3.5vw, 3.5rem) clamp(1.25rem, 4vw, 3.5rem) clamp(5rem, 8vw, 8rem);
+  padding: clamp(3rem, 5vw, 5.5rem) clamp(1.25rem, 4vw, 3.5rem) clamp(5rem, 8vw, 8.5rem);
   width: 100%;
   box-sizing: border-box;
 }
 
-/* Subtle Back Link */
-.topNav {
-  margin-bottom: clamp(2rem, 3.5vw, 3rem);
-}
-
-.backLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #8b909c;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  width: fit-content;
-}
-
-.backArrow {
-  transition: transform 0.2s ease;
-}
-
-.backLink:hover {
-  color: #ffffff;
-}
-
-.backLink:hover .backArrow {
-  transform: translateX(-3px);
+.storySection {
+  width: 100%;
 }
 
 /* =========================================================================
-   1. HERO STAGE (Matching about-6 reference image)
+   3-Column Grid Layout (Matching Reference Image)
+   Left: 2 Stacked Photo Cards (~260px)
+   Middle: Headline & Body Narrative (1fr)
+   Right: Giant Stats Block & Portrait Card (~280px)
    ========================================================================= */
-.stageSection {
-  width: 100%;
-  position: relative;
-  margin-bottom: 0;
-}
-
-/* Top Row: Pill Badge (Left) + Ribbed Texture (Right) */
-.badgeHeaderRow {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  margin-bottom: clamp(1.8rem, 3vw, 2.75rem);
-  width: 100%;
-}
-
-/* White Pill Badge */
-.statsBadge {
-  background-color: #ffffff;
-  color: #000000;
-  border-radius: 9999px;
-  padding: 0.48rem 1.35rem;
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(0.72rem, 0.85vw, 0.8rem);
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  user-select: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.18);
-}
-
-/* Decorative Ribbed Barcode Texture matching top right of reference */
-.ribbedTexture {
-  display: flex;
-  gap: 4px;
-  height: clamp(60px, 8vw, 84px);
-  align-items: stretch;
-  opacity: 0.24;
-}
-
-.ribbedLine {
-  width: 1.5px;
-  height: 100%;
-  background-color: #ffffff;
-  display: block;
-}
-
-@media (max-width: 640px) {
-  .ribbedTexture {
-    display: none;
-  }
-}
-
-/* Large Bold Display Headline */
-.headlineWrap {
-  max-width: 1040px;
-  width: 100%;
-  margin-bottom: clamp(2.5rem, 4.5vw, 4.25rem);
-}
-
-.mainHeadline {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(1.85rem, 3.4vw, 3.15rem);
-  font-weight: 700;
-  line-height: 1.22;
-  letter-spacing: -0.015em;
-  text-transform: uppercase;
-  color: #ffffff;
-  margin: 0;
-}
-
-@media (max-width: 768px) {
-  .mainHeadline {
-    font-size: clamp(1.45rem, 5.2vw, 2.1rem);
-    line-height: 1.28;
-  }
-}
-
-/* 4 Stats Metrics Columns aligned right below the headline */
-.statsRow {
+.storyGrid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  max-width: 860px;
-  margin-left: auto;
-  margin-bottom: clamp(3rem, 5vw, 4.5rem);
-  gap: clamp(1rem, 2vw, 2.25rem);
+  grid-template-columns: 260px 1fr 280px;
+  gap: clamp(2rem, 3.8vw, 4.5rem);
+  align-items: start;
   width: 100%;
-  box-sizing: border-box;
 }
 
-.statColumn {
-  border-left: 1px solid rgba(255, 255, 255, 0.14);
-  padding-left: clamp(1rem, 1.8vw, 2rem);
+/* -------------------------------------------------------------
+   LEFT COLUMN: 2 Vertically Stacked Rounded Cards
+   ------------------------------------------------------------- */
+.leftCol {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-}
-
-.statNumber {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(2.1rem, 3.4vw, 3.25rem);
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
-.statLabel {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(0.8rem, 0.95vw, 0.92rem);
-  color: #8b92a4;
-  margin-top: 0.45rem;
-  font-weight: 400;
-  line-height: 1.3;
-}
-
-@media (max-width: 860px) {
-  .statsRow {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.8rem 1.5rem;
-    margin-left: 0;
-  }
-}
-
-/* Two Large Rounded Photo Cards */
-.cardsGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(1.5rem, 2.8vw, 2.5rem);
+  gap: 1.5rem;
   width: 100%;
 }
 
-.photoCard {
+.photoCardSmall {
   position: relative;
   width: 100%;
-  height: clamp(380px, 46vw, 620px);
-  border-radius: clamp(20px, 2.5vw, 32px);
+  aspect-ratio: 1 / 1.05;
+  border-radius: 18px;
   overflow: hidden;
-  background-color: #16181d;
+  background-color: #161616;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.6);
 }
 
 .cardImage {
@@ -207,72 +67,227 @@
   transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.photoCard:hover .cardImage {
-  transform: scale(1.025);
+.photoCardSmall:hover .cardImage,
+.photoCardPortrait:hover .cardImage {
+  transform: scale(1.04);
 }
 
 .cardOverlayGradient {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.35) 100%);
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(17, 17, 17, 0) 65%,
+    rgba(17, 17, 17, 0.45) 100%
+  );
   pointer-events: none;
 }
 
-/* Minimalist Photo Switcher Pill */
-.photoSwitchPill {
+/* Subtle Left Carousel Pill on top card matching reference */
+.carouselPill {
   position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  z-index: 10;
-  display: inline-flex;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 36px;
+  background-color: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  display: flex;
   align-items: center;
-  background-color: rgba(17, 17, 17, 0.78);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 9999px;
-  padding: 4px;
-  gap: 3px;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-.switchBtn {
-  border: none;
-  background: transparent;
-  color: #8b92a4;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 0.35rem 0.85rem;
-  border-radius: 9999px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.switchBtn:hover {
+.chevronIcon {
   color: #ffffff;
 }
 
-.switchActive {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+/* -------------------------------------------------------------
+   MIDDLE COLUMN: Bold Display Headline & Rich Typography
+   ------------------------------------------------------------- */
+.middleCol {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
 }
 
-@media (max-width: 860px) {
-  .cardsGrid {
+.headline {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
+  font-size: clamp(2.35rem, 3.6vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  margin: 0 0 clamp(1.75rem, 3vw, 2.5rem) 0;
+}
+
+.narrativeBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.paragraph {
+  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
+  font-size: 0.98rem;
+  line-height: 1.74;
+  color: #9da4ae;
+  margin: 0;
+}
+
+.punchline {
+  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  font-weight: 500;
+  color: #eceff4;
+  margin: 0.5rem 0 0 0;
+}
+
+/* -------------------------------------------------------------
+   RIGHT COLUMN: Giant Stats & Portrait Photo Card
+   ------------------------------------------------------------- */
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.statsBlock {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.statPrimary {
+  display: flex;
+  flex-direction: column;
+}
+
+.statPrimaryNumber {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: clamp(3.4rem, 5.2vw, 4.8rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+}
+
+.statPrimaryLabel {
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.92rem;
+  color: #8f96a3;
+  margin-top: 0.5rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.statsDivider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 1.75rem 0 1.5rem 0;
+  width: 100%;
+}
+
+.statsSecondaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.statSecondary {
+  display: flex;
+  flex-direction: column;
+}
+
+.statSecondaryNumber {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: clamp(1.75rem, 2.4vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #ffffff;
+  letter-spacing: -0.025em;
+}
+
+.statSecondaryLabel {
+  font-family: var(--font-body, -apple-system, sans-serif);
+  font-size: 0.85rem;
+  color: #8f96a3;
+  margin-top: 0.35rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Portrait Photo Card directly below the stats block */
+.photoCardPortrait {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.15;
+  border-radius: 18px;
+  overflow: hidden;
+  background-color: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.6);
+}
+
+/* =========================================================================
+   Responsive Breakpoints
+   ========================================================================= */
+@media (max-width: 1100px) {
+  .storyGrid {
+    grid-template-columns: 220px 1fr 240px;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 960px) {
+  .storyGrid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 3.5rem;
   }
 
-  .photoCard {
-    height: clamp(320px, 60vw, 480px);
-    border-radius: 20px;
+  .leftCol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    order: 2;
+  }
+
+  .middleCol {
+    order: 1;
+  }
+
+  .rightCol {
+    order: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .statsBlock {
+    margin-bottom: 0;
   }
 }
 
+@media (max-width: 640px) {
+  .leftCol {
+    grid-template-columns: 1fr;
+  }
 
+  .rightCol {
+    grid-template-columns: 1fr;
+  }
+
+  .headline {
+    font-size: 2.25rem;
+  }
+}
