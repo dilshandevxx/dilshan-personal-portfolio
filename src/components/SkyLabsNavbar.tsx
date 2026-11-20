@@ -8,7 +8,7 @@ import { ArrowUpRight } from "lucide-react";
 import styles from "./SkyLabsNavbar.module.css";
 
 interface SkyLabsNavbarProps {
-  activeTab?: "home" | "services" | "projects" | "about" | "contact";
+  activeTab?: "home" | "services" | "projects" | "about" | "portfolio";
 }
 
 export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
@@ -100,10 +100,14 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
               ABOUT
             </Link>
             <Link
-              href="/#contact"
-              className={`${styles.navLink} ${activeTab === "contact" ? styles.navLinkActive : ""}`}
+              href="/portfolio"
+              className={`${styles.navLink} ${
+                activeTab === "portfolio" || pathname.startsWith("/portfolio")
+                  ? styles.navLinkActive
+                  : ""
+              }`}
             >
-              CONTACT
+              PORTFOLIO
             </Link>
           </nav>
 
@@ -137,13 +141,13 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
                   { label: "SERVICES", href: "/#skills", key: "services" },
                   { label: "PROJECTS", href: "/projects", key: "projects" },
                   { label: "ABOUT", href: "/about", key: "about" },
-                  { label: "CONTACT", href: "/#contact", key: "contact" },
+                  { label: "PORTFOLIO", href: "/portfolio", key: "portfolio" },
                 ].map((item, idx) => {
                   const isActive =
                     (item.key === "services" && activeTab === "services") ||
                     (item.key === "projects" && (activeTab === "projects" || pathname.startsWith("/projects"))) ||
                     (item.key === "about" && (activeTab === "about" || pathname === "/about")) ||
-                    (item.key === "contact" && activeTab === "contact");
+                    (item.key === "portfolio" && (activeTab === "portfolio" || pathname.startsWith("/portfolio")));
 
                   return (
                     <motion.div
