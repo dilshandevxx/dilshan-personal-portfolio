@@ -1,234 +1,411 @@
-/* Contact Section (FEEL FREE TO CONTACT ME - strictly square corners) */
+/* Contact Section — Editorial & Tactile Clean System */
+
 .contactSection {
   background-color: #111111;
-  padding: 8rem 2rem 9rem;
+  padding: clamp(5.5rem, 8vw, 8.5rem) clamp(1.5rem, 4vw, 3.5rem);
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   position: relative;
-}
-
-@media (max-width: 768px) {
-  .contactSection {
-    padding: 4.5rem 1.25rem 5.5rem;
-  }
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  align-items: center;
+  grid-template-columns: 1fr 1.05fr;
+  gap: clamp(3rem, 5.5vw, 6rem);
+  align-items: start;
+  width: 100%;
 }
 
-@media (max-width: 900px) {
-  .container {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-}
-
-/* Left Column */
+/* =========================================================================
+   Left Column: Heading, Narrative & Quick Direct Details
+   ========================================================================= */
 .leftCol {
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
+  max-width: 520px;
+}
+
+/* Subtle Live Status Indicator Badge */
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(52, 211, 153, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  width: fit-content;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
+  animation: pulseDot 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+}
+
+.statusLabel {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #34d399;
 }
 
 .heading {
   margin: 0;
   display: flex;
   flex-direction: column;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-weight: 500;
-  text-transform: none;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
+  font-weight: 600;
 }
 
 .headingWhite {
   color: #ffffff;
-  font-size: clamp(2.4rem, 4.8vw, 4.2rem);
-  font-weight: 500;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.4rem, 4.2vw, 3.8rem);
 }
 
-.headingAccent {
-  color: #a3e635; /* Vibrant neon accent */
-  font-size: clamp(2.4rem, 4.8vw, 4.2rem);
-  font-weight: 500;
-  letter-spacing: -0.03em;
+.headingSecondary {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: clamp(2.4rem, 4.2vw, 3.8rem);
 }
 
 .description {
-  color: #8f96a3;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.9375rem;
-  line-height: 1.75;
+  color: #9da4ae;
+  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
+  font-size: 0.98rem;
+  line-height: 1.7;
   margin: 0;
-  max-width: 500px;
 }
 
-/* Right Column / Form */
+/* Quick Direct Info Cards */
+.contactDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.contactCard {
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+  padding: 0.85rem 1.15rem;
+  background: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.contactCard:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background-color: #191919;
+}
+
+.contactCardIconWrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
+  flex-shrink: 0;
+}
+
+.contactCardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.contactCardLabel {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.emailRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.contactCardValue {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.88rem;
+  color: #ffffff;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.contactCardValue:hover {
+  color: #34d399;
+}
+
+.copyBtn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 3px 8px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.copyBtn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.copiedText {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #34d399;
+  letter-spacing: 0.03em;
+}
+
+.copyIcon {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* =========================================================================
+   Right Column / Form Card
+   ========================================================================= */
 .rightCol {
   width: 100%;
+}
+
+.formCard {
+  background-color: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: clamp(1.75rem, 3.5vw, 2.5rem);
+  box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.65);
+  position: relative;
+  overflow: hidden;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.2rem;
   width: 100%;
 }
 
-/* Two-column Input Row */
-.inputRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  width: 100%;
 }
 
-@media (max-width: 540px) {
-  .inputRow {
-    grid-template-columns: 1fr;
-  }
+.label {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: -0.01em;
 }
 
 .input {
   width: 100%;
   box-sizing: border-box;
-  background-color: #181818;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0; /* STRICTLY SQUARE */
-  padding: 1.1rem 1.25rem;
+  background-color: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 10px;
+  padding: 0.85rem 1.1rem;
   color: #ffffff;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 16px;
+  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
+  font-size: 0.92rem;
   outline: none;
-  transition: border-color 0.25s ease, background-color 0.25s ease;
-}
-
-@media (min-width: 768px) {
-  .input {
-    font-size: 0.875rem;
-  }
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .input::placeholder {
-  color: #6a717c;
+  color: #52525b;
 }
 
 .input:focus {
-  border-color: rgba(255, 255, 255, 0.35);
-  background-color: #222222;
-}
-
-/* Textarea */
-.textareaWrapper {
-  width: 100%;
+  border-color: rgba(255, 255, 255, 0.32);
+  background-color: #141414;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
 }
 
 .textarea {
   width: 100%;
   box-sizing: border-box;
-  background-color: #181818;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0; /* STRICTLY SQUARE */
-  padding: 1.1rem 1.25rem;
+  background-color: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 10px;
+  padding: 0.85rem 1.1rem;
   color: #ffffff;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 16px;
+  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
+  font-size: 0.92rem;
   resize: vertical;
-  min-height: 140px;
+  min-height: 120px;
   outline: none;
-  transition: border-color 0.25s ease, background-color 0.25s ease;
-}
-
-@media (min-width: 768px) {
-  .textarea {
-    font-size: 0.875rem;
-  }
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .textarea::placeholder {
-  color: #6a717c;
+  color: #52525b;
 }
 
 .textarea:focus {
-  border-color: rgba(255, 255, 255, 0.35);
-  background-color: #222222;
+  border-color: rgba(255, 255, 255, 0.32);
+  background-color: #141414;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
 }
 
-/* Solid White Send Button with SQUARE corners */
+/* Modern Pill Button */
 .sendButton {
   width: 100%;
   background-color: #ffffff;
   color: #000000;
-  border: 1px solid #ffffff;
-  border-radius: 0; /* STRICTLY SQUARE */
-  padding: 1.15rem;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  border: none;
+  border-radius: 10px;
+  padding: 0.95rem 1.5rem;
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.92rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 0.4rem;
 }
 
 .sendButton:hover:not(:disabled) {
-  background-color: transparent;
-  color: #ffffff;
+  background-color: #eaeaea;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.12);
+}
+
+.sendArrow {
+  transition: transform 0.2s ease;
+}
+
+.sendButton:hover:not(:disabled) .sendArrow {
+  transform: translate(2px, -2px);
 }
 
 .sendButton:disabled {
-  opacity: 0.7;
+  opacity: 0.65;
   cursor: not-allowed;
+  transform: none;
 }
 
-/* Submission Feedback */
+/* =========================================================================
+   Submission Feedback State
+   ========================================================================= */
 .successMessage {
-  background-color: #1a1d22;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0; /* STRICTLY SQUARE */
-  padding: 3rem 2rem;
-  text-align: center;
+  padding: 2.25rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   gap: 1rem;
+}
+
+.successIconWrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #34d399;
+  margin-bottom: 0.25rem;
 }
 
 .successTitle {
   color: #ffffff;
-  font-family: var(--font-display, "Outfit", -apple-system, sans-serif);
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
   margin: 0;
+  letter-spacing: -0.01em;
 }
 
 .successText {
   color: #9da4ae;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.9375rem;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.92rem;
+  line-height: 1.6;
   margin: 0;
+  max-width: 360px;
 }
 
 .resetButton {
-  background: transparent;
-  color: #e2d5b5;
-  border: 1px solid #e2d5b5;
-  border-radius: 0; /* STRICTLY SQUARE */
-  padding: 0.6rem 1.4rem;
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  cursor: pointer;
   margin-top: 0.75rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 0.65rem 1.25rem;
+  color: #ffffff;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .resetButton:hover {
-  background: #e2d5b5;
-  color: #000000;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* =========================================================================
+   Responsive Breakpoints
+   ========================================================================= */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .leftCol {
+    max-width: 100%;
+  }
 }
