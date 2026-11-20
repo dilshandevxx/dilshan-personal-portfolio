@@ -70,38 +70,40 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
           </span>
         </Link>
 
-        {/* Right Navigation: Bold, Beautiful Clean Text Nav Links */}
+        {/* Right Navigation: 4 Essential, Beautiful Capital Letter Nav Links */}
         <div className={styles.navRight}>
           <nav className={styles.desktopNav} aria-label="Main Navigation">
             <Link
               href="/#skills"
               className={`${styles.navLink} ${activeTab === "services" ? styles.navLinkActive : ""}`}
             >
-              Services
+              SERVICES
             </Link>
             <Link
               href="/projects"
-              className={`${styles.navLink} ${activeTab === "projects" || pathname.startsWith("/projects") ? styles.navLinkActive : ""}`}
+              className={`${styles.navLink} ${
+                activeTab === "projects" || pathname.startsWith("/projects")
+                  ? styles.navLinkActive
+                  : ""
+              }`}
             >
-              Projects
-            </Link>
-            <Link href="/#articles" className={styles.navLink}>
-              Articles
+              PROJECTS
             </Link>
             <Link
               href="/about"
-              className={`${styles.navLink} ${activeTab === "about" || pathname === "/about" ? styles.navLinkActive : ""}`}
+              className={`${styles.navLink} ${
+                activeTab === "about" || pathname === "/about"
+                  ? styles.navLinkActive
+                  : ""
+              }`}
             >
-              About
-            </Link>
-            <Link href="/#faq" className={styles.navLink}>
-              FAQ
+              ABOUT
             </Link>
             <Link
               href="/#contact"
-              className={styles.navLink}
+              className={`${styles.navLink} ${activeTab === "contact" ? styles.navLinkActive : ""}`}
             >
-              Contact
+              CONTACT
             </Link>
           </nav>
 
@@ -132,18 +134,16 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
             <div className={styles.menuContainer}>
               <nav className={styles.menuNav} aria-label="Main Navigation">
                 {[
-                  { label: "SERVICES", href: "/#skills" },
-                  { label: "PROJECTS", href: "/projects" },
-                  { label: "ARTICLES", href: "/#articles" },
-                  { label: "ABOUT", href: "/about" },
-                  { label: "FAQ", href: "/#faq" },
-                  { label: "CONTACT", href: "/#contact" },
+                  { label: "SERVICES", href: "/#skills", key: "services" },
+                  { label: "PROJECTS", href: "/projects", key: "projects" },
+                  { label: "ABOUT", href: "/about", key: "about" },
+                  { label: "CONTACT", href: "/#contact", key: "contact" },
                 ].map((item, idx) => {
                   const isActive =
-                    (item.label === "SERVICES" && activeTab === "services") ||
-                    (item.label === "PROJECTS" && (activeTab === "projects" || pathname.startsWith("/projects"))) ||
-                    (item.label === "ABOUT" && (activeTab === "about" || pathname === "/about")) ||
-                    (item.label === "CONTACT" && activeTab === "contact");
+                    (item.key === "services" && activeTab === "services") ||
+                    (item.key === "projects" && (activeTab === "projects" || pathname.startsWith("/projects"))) ||
+                    (item.key === "about" && (activeTab === "about" || pathname === "/about")) ||
+                    (item.key === "contact" && activeTab === "contact");
 
                   return (
                     <motion.div

@@ -82,28 +82,29 @@
 .desktopNav {
   display: flex;
   align-items: center;
-  gap: clamp(1.6rem, 2.6vw, 2.85rem);
+  gap: clamp(1.8rem, 2.8vw, 3.25rem);
   background: transparent;
   border: none;
   padding: 0;
   box-shadow: none;
 }
 
-/* Bold, Beautiful Clean Text Nav Links */
+/* Bold, Beautiful Capital Letter Nav Links */
 .navLink {
-  color: #9da4ae;
+  color: #a1a7b5;
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: 0.94rem;
+  font-size: clamp(0.78rem, 0.9vw, 0.84rem);
   font-weight: 700;
-  letter-spacing: -0.015em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   text-decoration: none;
-  padding: 0.25rem 0;
+  padding: 0.35rem 0;
   white-space: nowrap;
   position: relative;
   cursor: pointer;
   background: transparent;
   border: none;
-  transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+  transition: color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.2s ease;
 }
 
@@ -121,7 +122,7 @@
 .navLink::after {
   content: "";
   position: absolute;
-  bottom: -4px;
+  bottom: -6px;
   left: 0;
   width: 0%;
   height: 2px;

@@ -123,7 +123,7 @@ export default function HeroSkyLabs() {
             </span>
           </Link>
 
-          {/* Right Navigation: Bold, Beautiful Clean Text Nav Links */}
+          {/* Right Navigation: 4 Essential, Beautiful Capital Letter Nav Links */}
           <div className={styles.navRight}>
             <nav className={styles.desktopNav} aria-label="Main Navigation">
               <a
@@ -133,7 +133,7 @@ export default function HeroSkyLabs() {
                   activeSection === "skills" ? styles.navLinkActive : ""
                 }`}
               >
-                Services
+                SERVICES
               </a>
               <Link
                 href="/projects"
@@ -141,34 +141,16 @@ export default function HeroSkyLabs() {
                   activeSection === "projects" ? styles.navLinkActive : ""
                 }`}
               >
-                Projects
+                PROJECTS
               </Link>
-              <a
-                href="#articles"
-                onClick={(e) => handleSlowScroll(e, "articles")}
-                className={`${styles.navLink} ${
-                  activeSection === "articles" ? styles.navLinkActive : ""
-                }`}
-              >
-                Articles
-              </a>
               <Link
                 href="/about"
                 className={`${styles.navLink} ${
                   activeSection === "about-me" ? styles.navLinkActive : ""
                 }`}
               >
-                About
+                ABOUT
               </Link>
-              <a
-                href="#faq"
-                onClick={(e) => handleSlowScroll(e, "faq")}
-                className={`${styles.navLink} ${
-                  activeSection === "faq" ? styles.navLinkActive : ""
-                }`}
-              >
-                FAQ
-              </a>
               <a
                 href="#contact"
                 onClick={(e) => handleSlowScroll(e, "contact")}
@@ -176,7 +158,7 @@ export default function HeroSkyLabs() {
                   activeSection === "contact" ? styles.navLinkActive : ""
                 }`}
               >
-                Contact
+                CONTACT
               </a>
             </nav>
 
@@ -209,9 +191,7 @@ export default function HeroSkyLabs() {
                   {[
                     { label: "SERVICES", href: "#skills", isAnchor: true },
                     { label: "PROJECTS", href: "/projects", isAnchor: false },
-                    { label: "ARTICLES", href: "#articles", isAnchor: true },
                     { label: "ABOUT", href: "/about", isAnchor: false },
-                    { label: "FAQ", href: "#faq", isAnchor: true },
                     { label: "CONTACT", href: "#contact", isAnchor: true },
                   ].map((item, idx) => (
                     <motion.div
