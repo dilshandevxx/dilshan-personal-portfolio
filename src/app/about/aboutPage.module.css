@@ -1,4 +1,4 @@
-/* Clean, Modern & Minimal Standalone About Me Page (Strictly Square Corners) */
+/* Editorial About Me Page (Faithfully matching Joshua Baker reference design) */
 
 .pageRoot {
   background-color: #111111;
@@ -13,16 +13,16 @@
 }
 
 .mainContainer {
-  max-width: 1240px;
+  max-width: 1360px;
   margin: 0 auto;
-  padding: 1.5rem clamp(1.25rem, 4vw, 3rem) 7rem;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 3rem) clamp(5rem, 8vw, 8rem);
   width: 100%;
   box-sizing: border-box;
 }
 
-/* 1. Top Navigation / Back Breadcrumb */
+/* Subtle Back Link */
 .topNav {
-  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+  margin-bottom: clamp(1.75rem, 3vw, 2.75rem);
 }
 
 .backLink {
@@ -51,426 +51,300 @@
 }
 
 /* ------------------------------------------------------------- */
-/* 2. TOP HERO ABOUT SECTION (SQUARE CORNERS BENTO GRID)         */
+/* 3-COLUMN EDITORIAL STAGE LAYOUT                               */
 /* ------------------------------------------------------------- */
-.topAboutHero {
+.stageGrid {
   display: grid;
-  grid-template-columns: minmax(320px, 400px) minmax(0, 1fr);
-  gap: clamp(1.25rem, 2vw, 1.85rem);
-  align-items: stretch;
+  grid-template-columns: 240px minmax(460px, 640px) 240px;
+  justify-content: center;
+  gap: clamp(2rem, 3.5vw, 4.5rem);
+  align-items: start;
   width: 100%;
-  margin-bottom: clamp(4.5rem, 7vw, 6.5rem);
 }
 
-/* Left Column: Portrait Card */
-.portraitColumn {
+/* ------------------------------------------------------------- */
+/* LEFT FLANK: FLOATING POLAROID PHOTOS                          */
+/* ------------------------------------------------------------- */
+.leftFlank {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  gap: 2rem;
+  position: sticky;
+  top: 6.5rem;
+  align-items: flex-start;
 }
 
-.portraitCard {
-  background-color: #181818;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0; /* STRICTLY SQUARE */
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: hidden;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
-  box-sizing: border-box;
-}
-
-.portraitImageWrap {
-  position: relative;
-  width: 100%;
-  flex-grow: 1;
-  min-height: 400px;
-  overflow: hidden;
-  background-color: #141414;
-  border-radius: 0; /* STRICTLY SQUARE */
-}
-
-.portraitImg {
-  object-fit: cover;
-  object-position: top center;
-  border-radius: 0; /* STRICTLY SQUARE */
-  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.portraitCard:hover .portraitImg {
-  transform: scale(1.025);
-}
-
-.portraitGradientOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.05) 0%,
-    rgba(0, 0, 0, 0.15) 60%,
-    rgba(17, 17, 17, 0.65) 100%
-  );
-  pointer-events: none;
-}
-
-.portraitMetaBar {
-  padding: 1.25rem 1.4rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  background-color: #181818;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.metaIdentity {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-}
-
-.metaName {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #ffffff;
-}
-
-.metaRole {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.82rem;
-  color: #a3e635; /* Neon lime accent */
-  font-weight: 500;
-  letter-spacing: -0.01em;
-}
-
-.metaLocation {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.74rem;
-  color: #8b909c;
-  margin-top: 0.25rem;
-}
-
-.locationPin {
-  color: #a3e635;
-  flex-shrink: 0;
-}
-
-/* Right Column: ABOUT ME Card + 2x2 Focus Cards */
-.contentColumn {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1rem, 1.8vw, 1.5rem);
-  height: 100%;
-}
-
-/* Upper ABOUT ME Card */
-.aboutMeCard {
-  background-color: #181818;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0; /* STRICTLY SQUARE */
-  padding: clamp(1.75rem, 2.5vw, 2.35rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.5rem;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
-  box-sizing: border-box;
-}
-
-.aboutMeCardHeader {
-  display: flex;
-  align-items: center;
-}
-
-.aboutMeBadge {
-  font-family: var(--font-mono, "Google Sans Code", monospace);
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #a3e635; /* Neon lime accent */
-}
-
-.aboutMeCardBio {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: clamp(0.98rem, 1.15vw, 1.08rem);
-  line-height: 1.72;
-  color: #d1d5db;
-  margin: 0;
-  letter-spacing: -0.01em;
-}
-
-/* Square Contact / Social Pills */
-.pillsRow {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.65rem;
-}
-
-.squarePill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.58rem 1.05rem;
-  border-radius: 0; /* STRICTLY SQUARE */
-  background-color: #141414;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #eff1f5;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-decoration: none;
+.polaroidCard {
+  background-color: #ffffff;
+  padding: 7px 7px 11px 7px;
+  border-radius: 2px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 4px 14px rgba(0, 0, 0, 0.45);
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  outline: none;
-  white-space: nowrap;
-}
-
-.squarePill:hover {
-  background-color: #222222;
-  border-color: rgba(255, 255, 255, 0.25);
-  color: #ffffff;
-  transform: translateY(-1.5px);
-}
-
-.squarePill:active {
-  transform: translateY(0);
-}
-
-.squarePill:focus-visible {
-  outline: 2px solid #a3e635;
-  outline-offset: 3px;
-}
-
-/* Lower 2x2 Focus Cards Grid */
-.cardsGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(0.9rem, 1.5vw, 1.25rem);
-  width: 100%;
-}
-
-.bentoCard {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  border-radius: 0; /* STRICTLY SQUARE */
-  overflow: hidden;
-  background-color: #141414;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.25s ease,
-              box-shadow 0.25s ease;
+  width: 220px;
   box-sizing: border-box;
+  transform-origin: center center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s ease;
 }
 
-.bentoCard:hover {
-  transform: translateY(-3px);
-  border-color: rgba(255, 255, 255, 0.22);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
-}
-
-.bentoCardImg {
-  object-fit: cover;
-  border-radius: 0; /* STRICTLY SQUARE */
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.bentoCard:hover .bentoCardImg {
-  transform: scale(1.04);
-}
-
-.bentoCardOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.25) 0%,
-    rgba(0, 0, 0, 0.45) 50%,
-    rgba(0, 0, 0, 0.85) 100%
-  );
-  pointer-events: none;
-}
-
-.bentoCardContent {
-  position: absolute;
-  inset: 0;
-  padding: clamp(1rem, 1.8vw, 1.4rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.bentoCardIcon {
-  color: #a3e635; /* Neon lime accent */
-  opacity: 0.95;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
-}
-
-.bentoCardTitle {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(0.9rem, 1.3vw, 1.08rem);
-  font-weight: 800;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: #ffffff;
-  margin: 0;
-  line-height: 1.25;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-}
-
-/* ------------------------------------------------------------- */
-/* 3. SKETCHBOOK SECTION (SQUARE CORNERS)                        */
-/* ------------------------------------------------------------- */
-.sketchbookSection {
-  margin-bottom: clamp(5rem, 8vw, 7rem);
-  padding-top: clamp(3.5rem, 6vw, 5rem);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  width: 100%;
-}
-
-.sketchbookHeader {
-  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
-}
-
-.sketchbookTitle {
-  font-family: var(--font-artistic, "Newsreader", "Playfair Display", Georgia, serif);
-  font-size: clamp(2rem, 3.8vw, 2.75rem);
-  font-weight: 400;
-  color: #ffffff;
-  letter-spacing: -0.015em;
-  margin: 0;
-}
-
-.sketchbookGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(1.25rem, 2.5vw, 2.25rem);
-  align-items: center;
-  width: 100%;
-  margin-bottom: 2rem;
-}
-
-@media (max-width: 860px) {
-  .sketchbookGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .sketchbookGrid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-}
-
-.sketchCard {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.sketchCard:hover {
-  transform: translateY(-5px);
-}
-
-.sketchImageWrap {
-  position: relative;
-  width: 100%;
-  border-radius: 0; /* STRICTLY SQUARE */
+.polaroidInner {
   overflow: hidden;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #181818;
+  width: 100%;
+  height: auto;
 }
 
-.sketchImg {
+.polaroidImg {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: contain;
-  border-radius: 0; /* STRICTLY SQUARE */
-  transition: transform 0.45s ease;
+  object-fit: cover;
+  border-radius: 0;
 }
 
-.sketchCard:hover .sketchImg {
-  transform: scale(1.025);
+/* Individual Rotation Offsets (Left Flank) */
+.leftCard1 {
+  transform: rotate(-4deg);
 }
 
-.sketchbookFooter {
+.leftCard2 {
+  transform: rotate(2.5deg) translateY(-8px);
+}
+
+.leftCard3 {
+  transform: rotate(-2.5deg) translateY(-16px);
+}
+
+/* ------------------------------------------------------------- */
+/* CENTER COLUMN: THE EDITORIAL NARRATIVE SPINE                  */
+/* ------------------------------------------------------------- */
+.centerSpine {
+  width: 100%;
+  max-width: 640px;
+}
+
+.mainTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: clamp(2.6rem, 4.5vw, 3.4rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0 0 clamp(1.5rem, 2.5vw, 2.2rem) 0;
+}
+
+.leadPara {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(1.02rem, 1.25vw, 1.12rem);
+  line-height: 1.7;
+  color: #d1d5db;
+  margin: 0 0 clamp(2.5rem, 4vw, 3.5rem) 0;
+  letter-spacing: -0.01em;
+}
+
+/* ------------------------------------------------------------- */
+/* 2x2 BIG METRICS GRID (MATCHING JOSHUA BAKER DESIGN)           */
+/* ------------------------------------------------------------- */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: clamp(2rem, 4vw, 4rem);
+  row-gap: clamp(2rem, 3.5vw, 3rem);
+  margin-bottom: clamp(3rem, 5vw, 4.25rem);
+  padding-bottom: clamp(2.5rem, 4vw, 3.5rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.metricItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.metricNumber {
+  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
+  font-size: clamp(3rem, 5.2vw, 4.2rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.metricLabel {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.92rem;
+  color: #9ca3af;
+  margin-top: 0.65rem;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+/* ------------------------------------------------------------- */
+/* DETAILED NARRATIVE STORY PARAGRAPHS                           */
+/* ------------------------------------------------------------- */
+.storyStack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.65rem;
+}
+
+.storyPara {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: clamp(0.98rem, 1.15vw, 1.06rem);
+  line-height: 1.74;
+  color: #9ca3af;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* ------------------------------------------------------------- */
+/* RIGHT FLANK: WORKSHOP PHOTOS & STICKER NOTES                  */
+/* ------------------------------------------------------------- */
+.rightFlank {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: sticky;
+  top: 6.5rem;
+  align-items: flex-end;
+}
+
+.rightCard1 {
+  transform: rotate(3deg);
+  width: 220px;
+}
+
+/* Square Sticker Note with Signature Orange Loop (Matching Reference) */
+.stickerCard {
+  background-color: #ffffff;
+  border-radius: 2px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 4px 14px rgba(0, 0, 0, 0.45);
+  width: 155px;
+  height: 155px;
   display: flex;
   align-items: center;
-  margin-top: 0.75rem;
+  justify-content: center;
+  cursor: pointer;
+  transform: rotate(-4deg) translateY(-6px);
+  transform-origin: center center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s ease;
 }
 
-.seeMoreLink {
-  display: inline-flex;
+.stickerInner {
+  display: flex;
   align-items: center;
-  gap: 0.55rem;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #8e8e93;
-  text-decoration: none;
-  transition: all 0.2s ease;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
-.seeMoreLink:hover {
-  color: #ffffff;
+/* Editorial Illustration Card */
+.illustrationCard {
+  background-color: #ffffff;
+  padding: 7px 7px 11px 7px;
+  border-radius: 2px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 4px 14px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  width: 195px;
+  transform: rotate(3.5deg) translateY(-14px);
+  transform-origin: center center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s ease;
 }
 
-.seeMoreArrow {
-  transition: transform 0.2s ease;
-  display: inline-block;
-}
-
-.seeMoreLink:hover .seeMoreArrow {
-  transform: translateX(4px);
+.illustrationInner {
+  overflow: hidden;
+  background-color: #ffffff;
+  width: 100%;
+  height: auto;
 }
 
 /* ------------------------------------------------------------- */
 /* RESPONSIVENESS                                                */
 /* ------------------------------------------------------------- */
-@media (max-width: 900px) {
-  .topAboutHero {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+@media (max-width: 1200px) {
+  .stageGrid {
+    grid-template-columns: 200px 1fr 200px;
+    gap: 2rem;
   }
 
-  .portraitImageWrap {
-    min-height: unset;
-    aspect-ratio: 4 / 5;
-    height: clamp(340px, 60vw, 440px);
+  .polaroidCard,
+  .rightCard1 {
+    width: 190px;
+  }
+
+  .illustrationCard {
+    width: 175px;
+  }
+
+  .stickerCard {
+    width: 140px;
+    height: 140px;
   }
 }
 
-@media (max-width: 560px) {
-  .cardsGrid {
-    grid-template-columns: 1fr;
+@media (max-width: 980px) {
+  .stageGrid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 680px;
+    margin: 0 auto;
+    gap: 3rem;
   }
 
-  .portraitMetaBar {
-    padding: 1rem 1.15rem;
+  .centerSpine {
+    order: 1;
+    max-width: 100%;
   }
 
-  .aboutMeCard {
-    padding: 1.5rem 1.25rem;
+  .leftFlank,
+  .rightFlank {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    width: 100%;
+    align-items: center;
+  }
+
+  .leftFlank {
+    order: 2;
+  }
+
+  .rightFlank {
+    order: 3;
+  }
+
+  .polaroidCard,
+  .rightCard1 {
+    width: clamp(160px, 40vw, 210px);
+  }
+
+  .illustrationCard {
+    width: clamp(150px, 36vw, 190px);
+  }
+
+  .stickerCard {
+    width: 135px;
+    height: 135px;
+  }
+}
+
+@media (max-width: 580px) {
+  .metricsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem 1.25rem;
+  }
+
+  .metricNumber {
+    font-size: 2.75rem;
+  }
+
+  .mainTitle {
+    font-size: 2.4rem;
   }
 }
