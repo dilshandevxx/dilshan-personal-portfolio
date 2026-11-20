@@ -265,7 +265,119 @@
   pointer-events: none;
 }
 
-/* 3. Bold Editorial Manifesto Quote */
+/* 3. "From the sketchbook" Section (Matching Reference Design) */
+.sketchbookSection {
+  margin-bottom: clamp(4.5rem, 8vw, 6.5rem);
+  width: 100%;
+}
+
+.sketchbookHeader {
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.sketchbookTitle {
+  font-family: var(--font-artistic, "Newsreader", "Playfair Display", Georgia, serif);
+  font-size: clamp(2rem, 3.8vw, 2.75rem);
+  font-weight: 400;
+  color: #ffffff;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.sketchbookGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2.25rem);
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 860px) {
+  .sketchbookGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sketchbookGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.sketchCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sketchCard:hover {
+  transform: translateY(-5px);
+}
+
+.sketchImageWrap {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sketchImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transition: transform 0.45s ease;
+}
+
+.sketchCard:hover .sketchImg {
+  transform: scale(1.025);
+}
+
+.sketchbookFooter {
+  display: flex;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.seeMoreLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8e8e93;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.seeMoreLink:hover {
+  color: #ffffff;
+}
+
+.seeMoreArrow {
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.seeMoreLink:hover .seeMoreArrow {
+  transform: translateX(4px);
+}
+
+/* 4. Bold Editorial Manifesto Quote */
 .quoteSection {
   margin-bottom: clamp(4.5rem, 8vw, 6.5rem);
   width: 100%;

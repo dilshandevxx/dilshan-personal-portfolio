@@ -27,6 +27,41 @@ const SOCIAL_LINKS = [
   { label: "X / Twitter", href: siteConfig.social.x },
 ];
 
+const SKETCHBOOK_ITEMS = [
+  {
+    id: "akropolis",
+    title: "Akropolis & Architectural Studies",
+    subtitle: "Observation, perspective, and classical geometry",
+    src: "/images/sketchbook/sketchbook_akropolis.png",
+    width: 525,
+    height: 483,
+  },
+  {
+    id: "sunbather",
+    title: "Summer Heat & Stillness",
+    subtitle: "Figure, posture, and warm color wash",
+    src: "/images/sketchbook/sketchbook_sunbather.png",
+    width: 516,
+    height: 585,
+  },
+  {
+    id: "blanket",
+    title: "The Warmth of Solitude",
+    subtitle: "Fabric drapery, folds, and cloistered focus",
+    src: "/images/sketchbook/sketchbook_blanket.png",
+    width: 516,
+    height: 684,
+  },
+  {
+    id: "night-phone",
+    title: "Midnight Screen Luminance",
+    subtitle: "Ambient light, ritual, and quiet contemplation",
+    src: "/images/sketchbook/sketchbook_night_phone.png",
+    width: 516,
+    height: 387,
+  },
+];
+
 const SKILL_DOMAINS = [
   {
     icon: Cpu,
@@ -130,7 +165,7 @@ export default function AboutPage() {
                 <span>Available for AI/ML &amp; DevOps Engineering</span>
               </div>
 
-              <h1 className={styles.heroName}>Dilshan Seneviratne</h1>
+              <h1 className={styles.heroName}>Dilshan</h1>
               <p className={styles.heroRole}>
                 AI/ML Engineer <span className={styles.roleDivider}>/</span> DevOps Architect
               </p>
@@ -197,7 +232,7 @@ export default function AboutPage() {
               <div className={styles.portraitFrame}>
                 <Image
                   src="/images/about_portrait.jpg"
-                  alt="Dilshan Seneviratne"
+                  alt="Dilshan"
                   fill
                   priority
                   sizes="(max-width: 768px) 100vw, 460px"
@@ -206,6 +241,43 @@ export default function AboutPage() {
                 <div className={styles.portraitOverlay} />
               </div>
             </div>
+          </div>
+        </motion.section>
+
+        {/* 3. "From the sketchbook" Section Matching Reference Design */}
+        <motion.section
+          className={styles.sketchbookSection}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          aria-label="From the sketchbook"
+        >
+          <div className={styles.sketchbookHeader}>
+            <h2 className={styles.sketchbookTitle}>From the sketchbook</h2>
+          </div>
+
+          <div className={styles.sketchbookGrid}>
+            {SKETCHBOOK_ITEMS.map((item) => (
+              <div key={item.id} className={styles.sketchCard}>
+                <div className={styles.sketchImageWrap}>
+                  <Image
+                    src={item.src}
+                    alt={item.title}
+                    width={item.width}
+                    height={item.height}
+                    className={styles.sketchImg}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className={styles.sketchbookFooter}>
+            <Link href="#contact" className={styles.seeMoreLink}>
+              <span>SEE MORE DRAWINGS</span>
+              <span className={styles.seeMoreArrow} aria-hidden="true">&rarr;</span>
+            </Link>
           </div>
         </motion.section>
 
