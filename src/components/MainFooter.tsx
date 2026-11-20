@@ -28,7 +28,7 @@ export default function MainFooter() {
           <Link href="/" className={styles.navLink}>
             Home
           </Link>
-          <Link href="/#about-me" className={styles.navLink}>
+          <Link href="/about" className={styles.navLink}>
             About
           </Link>
           <Link href="/projects" className={styles.navLink}>

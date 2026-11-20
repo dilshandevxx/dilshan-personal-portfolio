@@ -10,6 +10,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   // Full-width modern pages (matching main page vibe, without the old 270px sidebar)
   const isFullWidthPage =
     pathname === "/" ||
+    pathname === "/about" ||
+    pathname?.startsWith("/about") ||
     pathname === "/projects" ||
     pathname?.startsWith("/projects/") ||
     pathname?.startsWith("/portfolio") ||

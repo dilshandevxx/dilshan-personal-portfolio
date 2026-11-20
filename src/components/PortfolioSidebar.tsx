@@ -18,7 +18,7 @@ export interface NavigationItem {
 }
 
 export const NAVIGATION_ITEMS: NavigationItem[] = [
-  { id: "about", label: "About me", href: "/portfolio/about", emoji: "💾" },
+  { id: "about", label: "About me", href: "/about", emoji: "💾" },
   { id: "projects", label: "Projects", href: "/portfolio", emoji: "💻" },
   { id: "blog", label: "Blog", href: "/portfolio/blog", emoji: "📝" },
   { id: "shelves", label: "Shelves", href: "/portfolio/shelves", emoji: "🔍" },
@@ -35,10 +35,8 @@ export function PortfolioSidebar() {
       label: "About me",
       iconSrc: "/nav-floppy.png",
       icon: null as React.ElementType | null,
-      path: "/portfolio/about",
-      isActive:
-        pathname === "/portfolio/about" ||
-        pathname.startsWith("/portfolio/about"),
+      path: "/about",
+      isActive: pathname === "/about" || pathname.startsWith("/about"),
     },
     {
       id: "projects",
@@ -145,7 +143,7 @@ export function PortfolioSidebar() {
             <p>
               I&apos;m{" "}
               <Link
-                href="/portfolio/about"
+                href="/about"
                 className="sidebar-bio-highlight"
                 onClick={() => setMobileOpen(false)}
                 style={{

@@ -114,7 +114,7 @@ export function PortfolioMobileHeader({ activeSection = 'about' }: PortfolioMobi
                 <p>
                   I&apos;m{' '}
                   <Link
-                    href="/portfolio/about"
+                    href="/about"
                     onClick={() => setIsOpen(false)}
                     className="text-[var(--accent-color)] font-medium hover:underline underline-offset-4"
                   >
