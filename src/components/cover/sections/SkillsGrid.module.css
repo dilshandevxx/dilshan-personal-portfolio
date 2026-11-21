@@ -1,16 +1,20 @@
-/* Technical Expertise Section — Top Title & Clean Accordion List Below */
+/* =========================================================================
+   Technical Expertise Section — 2-Column Split Expanded Card Layout
+   (Faithfully matching Reference Design)
+   ========================================================================= */
 
 .servicesSection {
   background-color: #111111;
-  padding: clamp(5.5rem, 9vw, 9rem) clamp(1.5rem, 4vw, 3.5rem);
+  padding: clamp(5.5rem, 9vw, 9rem) clamp(1.5rem, 5vw, 4rem);
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   position: relative;
   width: 100%;
   box-sizing: border-box;
+  transition: background-color 0.3s ease;
 }
 
 .container {
-  max-width: 1240px;
+  max-width: 1280px;
   margin: 0 auto;
   width: 100%;
 }
@@ -21,11 +25,33 @@
   width: 100%;
 }
 
+.indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.indicatorDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-primary, #8bb397);
+}
+
+.indicatorLabel {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted, #888888);
+}
+
 .headline {
   color: #ffffff;
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(2.4rem, 4.2vw, 3.6rem);
-  font-weight: 700;
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.025em;
   margin: 0;
@@ -42,7 +68,7 @@
 .accordionItem {
   width: 100%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  transition: border-color 0.2s ease;
+  transition: border-color 0.25s ease;
 }
 
 .accordionItem:first-child {
@@ -50,7 +76,11 @@
 }
 
 .accordionItem:hover {
-  border-bottom-color: rgba(255, 255, 255, 0.28);
+  border-bottom-color: rgba(255, 255, 255, 0.32);
+}
+
+.accordionItemOpen {
+  border-bottom-color: rgba(255, 255, 255, 0.24);
 }
 
 /* Row Trigger Button */
@@ -71,11 +101,11 @@
 }
 
 .itemTrigger:hover {
-  opacity: 0.88;
+  opacity: 0.92;
 }
 
 .itemTrigger:focus-visible {
-  outline: 2px solid #ffffff;
+  outline: 2px solid var(--color-primary, #8bb397);
   outline-offset: 4px;
 }
 
@@ -93,18 +123,23 @@
   font-size: 0.82rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.4);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   flex-shrink: 0;
 }
 
 .cardTitle {
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(1.1rem, 1.75vw, 1.45rem);
+  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
   font-weight: 700;
   color: #ffffff;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
   line-height: 1.3;
+  transition: color 0.2s ease;
+}
+
+.itemTrigger:hover .cardTitle {
+  color: #f0f0f0;
 }
 
 /* Minimalist Thin Plus Icon on the right */
@@ -113,14 +148,15 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   color: #ffffff;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
 }
 
 .plusIconOpen {
   transform: rotate(45deg);
+  color: var(--color-primary, #8bb397);
 }
 
 .svgPlus {
@@ -128,49 +164,180 @@
   height: 18px;
 }
 
-/* Animated Body Content */
+/* =========================================================================
+   ANIMATED 2-COLUMN SPLIT EXPANDED BODY (Matching Reference Image)
+   ========================================================================= */
 .bodyWrapper {
   overflow: hidden;
   width: 100%;
 }
 
-.expandedBody {
-  padding: 0 0 clamp(1.5rem, 2.5vw, 2.25rem) 0;
+.splitExpandedContainer {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: clamp(2.5rem, 5vw, 5.5rem);
+  align-items: center;
+  padding: clamp(1.5rem, 2.5vw, 2.2rem) 0 clamp(2.5rem, 4vw, 3.8rem) 0;
+  width: 100%;
 }
 
-.description {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.95rem;
-  line-height: 1.7;
+/* -------------------------------------------------------------
+   LEFT COLUMN: Display Title, Narrative, Rounded Tag Pills
+   ------------------------------------------------------------- */
+.leftContentCol {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.expandedDomainTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
+  font-size: clamp(1.85rem, 3vw, 2.55rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin: 0 0 clamp(1rem, 1.8vw, 1.4rem) 0;
+}
+
+.expandedDescription {
+  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
+  font-size: clamp(0.96rem, 1.15vw, 1.05rem);
+  line-height: 1.68;
   color: #a1a1aa;
-  margin: 0 0 1.25rem 0;
-  max-width: 780px;
+  margin: 0 0 clamp(1.75rem, 2.5vw, 2.25rem) 0;
+  max-width: 520px;
 }
 
-/* Tag Pills */
-.tagList {
+/* Rounded Pill Tags (Exact match to reference pill styling) */
+.pillTagGrid {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px 12px;
+  width: 100%;
 }
 
-.tagItem {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #d4d4d8;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 4px 10px;
-  border-radius: 6px;
+.pillTag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
+  font-size: clamp(0.82rem, 0.95vw, 0.88rem);
+  font-weight: 500;
+  color: #e4e4e7;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.5rem 1.15rem;
+  border-radius: 9999px;
   user-select: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pillTag:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* -------------------------------------------------------------
+   RIGHT COLUMN: Rounded Visual Showcase Card with Overlay Badge
+   ------------------------------------------------------------- */
+.rightVisualCol {
+  width: 100%;
+}
+
+.visualCardFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10.5;
+  min-height: 290px;
+  border-radius: clamp(16px, 2vw, 22px);
+  overflow: hidden;
+  background-color: #181818;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.6);
+}
+
+.visualCardImage {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.visualCardFrame:hover .visualCardImage {
+  transform: scale(1.035);
+}
+
+/* Subtle Vignette Gradient */
+.visualOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+  pointer-events: none;
+}
+
+/* Central Floating Watermark Badge (matching reference logo mark) */
+.floatingCenterBadge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(17, 17, 17, 0.68);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+  padding: 0.65rem 1.4rem;
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.visualCardFrame:hover .floatingCenterBadge {
+  transform: translate(-50%, -50%) scale(1.04);
+}
+
+.badgeIcon {
+  color: var(--color-primary, #8bb397);
+  flex-shrink: 0;
+}
+
+.badgeText {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* =========================================================================
    Responsive Breakpoints
    ========================================================================= */
+@media (max-width: 960px) {
+  .splitExpandedContainer {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .visualCardFrame {
+    aspect-ratio: 16 / 10;
+    min-height: 260px;
+  }
+
+  .expandedDescription {
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 640px) {
   .servicesSection {
     padding: 4rem 1.25rem 4.5rem;
@@ -180,13 +347,8 @@
     margin-bottom: 2rem;
   }
 
-  .headline {
-    font-size: clamp(2rem, 8.5vw, 2.6rem);
-  }
-
   .itemTrigger {
     padding: 1.25rem 0;
-    min-height: 52px;
   }
 
   .titleGroup {
@@ -199,35 +361,38 @@
 
   .cardTitle {
     font-size: 1.05rem;
-    line-height: 1.35;
   }
 
-  .expandedBody {
-    padding-bottom: 1.5rem;
+  .expandedDomainTitle {
+    font-size: 1.65rem;
   }
 
-  .description {
-    font-size: 0.88rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
+  .visualCardFrame {
+    aspect-ratio: 16 / 11;
+    min-height: 220px;
+    border-radius: 14px;
   }
 
-  .tagList {
-    gap: 6px;
-  }
-
-  .tagItem {
-    font-size: 0.68rem;
-    padding: 3px 8px;
+  .pillTag {
+    font-size: 0.78rem;
+    padding: 0.42rem 0.95rem;
   }
 }
 
 /* =========================================================================
-   LIGHT THEME OVERRIDES FOR TECHNICAL EXPERTISE
+   LIGHT THEME OVERRIDES (Full Cohesion with Site Theme)
    ========================================================================= */
 :global([data-theme="light"]) .servicesSection {
   background-color: #f9f7f2;
   border-top-color: rgba(0, 0, 0, 0.07);
+}
+
+:global([data-theme="light"]) .indicatorDot {
+  background-color: var(--color-primary, #3b6048);
+}
+
+:global([data-theme="light"]) .indicatorLabel {
+  color: #6b7280;
 }
 
 :global([data-theme="light"]) .headline {
@@ -243,31 +408,63 @@
 }
 
 :global([data-theme="light"]) .accordionItem:hover {
-  border-bottom-color: rgba(0, 0, 0, 0.28);
+  border-bottom-color: rgba(0, 0, 0, 0.3);
 }
 
-:global([data-theme="light"]) .itemTrigger {
-  color: #111111;
+:global([data-theme="light"]) .categoryIndex {
+  color: #71717a;
 }
 
 :global([data-theme="light"]) .cardTitle {
   color: #111111;
 }
 
-:global([data-theme="light"]) .categoryIndex {
-  color: rgba(0, 0, 0, 0.4);
+:global([data-theme="light"]) .itemTrigger:hover .cardTitle {
+  color: #000000;
 }
 
 :global([data-theme="light"]) .plusIcon {
   color: #111111;
 }
 
-:global([data-theme="light"]) .description {
-  color: #5e5953;
+:global([data-theme="light"]) .plusIconOpen {
+  color: var(--color-primary, #3b6048);
 }
 
-:global([data-theme="light"]) .tagItem {
+:global([data-theme="light"]) .expandedDomainTitle {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .expandedDescription {
+  color: #555555;
+}
+
+:global([data-theme="light"]) .pillTag {
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
   color: #272421;
-  background-color: #eee8dc;
-  border-color: #ded7c8;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+:global([data-theme="light"]) .pillTag:hover {
+  background-color: #f5f2eb;
+  border-color: rgba(0, 0, 0, 0.18);
+  color: #000000;
+}
+
+:global([data-theme="light"]) .visualCardFrame {
+  background-color: #e5e5e5;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .floatingCenterBadge {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #111111;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .badgeIcon {
+  color: var(--color-primary, #3b6048);
 }
