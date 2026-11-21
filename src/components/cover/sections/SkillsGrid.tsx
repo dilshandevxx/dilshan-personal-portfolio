@@ -147,9 +147,8 @@ export default function SkillsGrid() {
             return (
               <div
                 key={item.id}
-                className={`${styles.accordionItem} ${
-                  isOpen ? styles.accordionItemOpen : ""
-                }`}
+                className={`${styles.accordionItem} ${isOpen ? styles.accordionItemOpen : ""
+                  }`}
               >
                 {/* Header Button: Index + Bold Title on Left, Plus Icon on Right */}
                 <button
@@ -166,9 +165,8 @@ export default function SkillsGrid() {
                   </div>
 
                   <span
-                    className={`${styles.plusIcon} ${
-                      isOpen ? styles.plusIconOpen : ""
-                    }`}
+                    className={`${styles.plusIcon} ${isOpen ? styles.plusIconOpen : ""
+                      }`}
                     aria-hidden="true"
                   >
                     <svg

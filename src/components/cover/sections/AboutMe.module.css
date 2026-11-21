@@ -77,7 +77,8 @@
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  background-color: #a3e635; /* Vibrant neon lime green */
+  background-color: #a3e635;
+  /* Vibrant neon lime green */
   color: #000000;
   border: 1px solid #a3e635;
   border-radius: 4px;

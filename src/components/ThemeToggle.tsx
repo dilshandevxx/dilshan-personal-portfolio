@@ -4,7 +4,12 @@ import React, { useEffect, useState } from "react";
 import { useTheme } from "./ThemeContext";
 import { Sun, Moon } from "lucide-react";
 
-export function ThemeToggle({ className = "" }: { className?: string }) {
+interface ThemeToggleProps {
+  className?: string;
+  variant?: "icon" | "navLink" | "text";
+}
+
+export function ThemeToggle({ className = "", variant = "icon" }: ThemeToggleProps) {
   const { theme, toggleTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -13,6 +18,20 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   }, []);
 
   const isLight = mounted && theme === "light";
+
+  if (variant === "navLink" || variant === "text") {
+    return (
+      <button
+        type="button"
+        className={className}
+        onClick={toggleTheme}
+        aria-label={isLight ? "Switch to Night appearance" : "Switch to Light appearance"}
+        title={isLight ? "Switch to Night appearance" : "Switch to Light appearance"}
+      >
+        {isLight ? "NIGHT" : "LIGHT"}
+      </button>
+    );
+  }
 
   return (
     <button

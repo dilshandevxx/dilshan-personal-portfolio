@@ -63,15 +63,17 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
       role="banner"
     >
       <div className={styles.navContainer}>
-        {/* Brand Wordmark matching reference typography */}
-        <Link href="/" className={styles.brandLink} title="DILSHAN.">
-          <span className={styles.brandWordmark}>
-            DILSHAN<span className={styles.brandDot}>.</span>
-          </span>
-        </Link>
+        {/* Left: Brand Wordmark matching reference typography */}
+        <div className={styles.navLeft}>
+          <Link href="/" className={styles.brandLink} title="DILSHAN.">
+            <span className={styles.brandWordmark}>
+              DILSHAN<span className={styles.brandDot}>.</span>
+            </span>
+          </Link>
+        </div>
 
-        {/* Right Navigation: 4 Essential, Beautiful Capital Letter Nav Links */}
-        <div className={styles.navRight}>
+        {/* Center: Nav links positioned in the middle of the navbar + Text Theme Toggle */}
+        <div className={styles.navCenter}>
           <nav className={styles.desktopNav} aria-label="Main Navigation">
             <Link
               href="/#skills"
@@ -108,13 +110,26 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
               CONTACT
             </Link>
 
-            {/* Desktop Theme Toggle Button */}
-            <ThemeToggle className={styles.themeToggleBtn} />
+            {/* Theme Toggle styled like a nav link: Text only (NIGHT / LIGHT), no icon */}
+            <ThemeToggle
+              variant="navLink"
+              className={`${styles.navLink} ${styles.themeNavLink}`}
+            />
           </nav>
+        </div>
 
-          {/* Mobile Right Actions: Theme Toggle + Minimalist Hamburger Button */}
+        {/* Right Corner: Rectangular Pink Button (matching reference image) + Mobile Hamburger */}
+        <div className={styles.navRight}>
+          <Link
+            href="/portfolio/blog"
+            className={styles.pinkCtaBtn}
+            title="Join 70K+ Readers"
+          >
+            Join 70K+ Readers
+          </Link>
+
+          {/* Mobile Hamburger Button */}
           <div className={styles.mobileActions}>
-            <ThemeToggle className={styles.mobileThemeToggle} />
             <button
               type="button"
               className={`${styles.hamburgerBtn} ${menuOpen ? styles.hamburgerActive : ""}`}
@@ -175,17 +190,37 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
                     </motion.div>
                   );
                 })}
+
+                {/* Pink CTA Button in Mobile Menu Drawer */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.35, delay: 0.28 }}
+                  className={styles.menuCtaWrap}
+                >
+                  <Link
+                    href="/portfolio/blog"
+                    onClick={() => setMenuOpen(false)}
+                    className={styles.pinkCtaBtnMobile}
+                  >
+                    Join 70K+ Readers
+                  </Link>
+                </motion.div>
               </nav>
 
-              {/* Mobile Overlay Theme Toggle Switcher */}
+              {/* Mobile Overlay Theme Toggle Switcher: Text only */}
               <motion.div
                 className={styles.menuFooter}
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, delay: 0.32 }}
+                transition={{ duration: 0.35, delay: 0.35 }}
               >
-                <span className={styles.menuFooterText}>SWITCH APPEARANCE</span>
-                <ThemeToggle className={styles.menuThemeToggle} />
+                <span className={styles.menuFooterText}>APPEARANCE</span>
+                <ThemeToggle
+                  variant="navLink"
+                  className={styles.menuThemeTextToggle}
+                />
               </motion.div>
             </div>
           </motion.div>
