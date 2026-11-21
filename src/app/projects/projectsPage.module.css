@@ -277,12 +277,22 @@
   transform: scale(1.035);
 }
 
-/* Card Content directly below image */
+/* Card Content directly below image: Structured 5-Block Vertical System */
 .cardContent {
   display: flex;
   flex-direction: column;
   width: 100%;
   flex: 1;
+  padding-top: 0.85rem;
+}
+
+/* 1. Line 1: Category Badge (Strictly 1 line, fixed 20px height) */
+.categoryLine {
+  height: 20px;
+  line-height: 20px;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
 }
 
 .categoryBadge {
@@ -292,25 +302,84 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #71717a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   display: inline-block;
-  margin-top: 0.85rem;
-  margin-bottom: 0.4rem;
+  line-height: 1;
 }
 
-/* Card Footer: Tech Stack and Date in their proper bottom position */
-.cardFooter {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  margin-top: auto;
-  padding-top: 0.75rem;
+/* 2. Lines 2-3: Main Title (Strictly 2 lines budget, clamped & fixed height) */
+.cardTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #ffffff;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.45rem 0;
+  height: calc(1.35em * 2);
+  min-height: calc(1.35em * 2);
+  max-height: calc(1.35em * 2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.2s ease;
 }
 
-.techStackRow {
+@media (max-width: 620px) {
+  .cardTitle {
+    font-size: 1.1rem;
+    line-height: 1.35;
+    height: calc(1.35em * 2);
+    min-height: calc(1.35em * 2);
+    max-height: calc(1.35em * 2);
+    margin-bottom: 0.4rem;
+  }
+}
+
+.cardLink:hover .cardTitle {
+  color: #f4f4f5;
+}
+
+/* 3. Lines 4-5: Small Description (Strictly 2 lines budget, clamped & fixed height) */
+.cardDescription {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: #888e99;
+  margin: 0 0 0.65rem 0;
+  height: calc(1.45em * 2);
+  min-height: calc(1.45em * 2);
+  max-height: calc(1.45em * 2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 620px) {
+  .cardDescription {
+    font-size: 0.86rem;
+    line-height: 1.45;
+    height: calc(1.45em * 2);
+    min-height: calc(1.45em * 2);
+    max-height: calc(1.45em * 2);
+  }
+}
+
+/* 4. Lines 6-7: Tech Stack Slot (Strictly 2 lines budget, pills match category style) */
+.techStackSlot {
+  height: 48px;
+  min-height: 48px;
+  max-height: 48px;
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
   gap: 0.35rem;
+  align-content: flex-start;
+  overflow: hidden;
+  margin-bottom: 0.65rem;
 }
 
 .techBadge {
@@ -323,8 +392,9 @@
   background-color: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 4px;
-  padding: 0.14rem 0.45rem;
+  padding: 0.15rem 0.45rem;
   line-height: 1.25;
+  white-space: nowrap;
   transition: color 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
 }
 
@@ -339,6 +409,8 @@
   font-size: 0.68rem;
   font-weight: 500;
   color: #52525b;
+  align-self: center;
+  padding: 0.15rem 0.3rem;
 }
 
 [data-theme="paper"] .categoryBadge,
@@ -360,54 +432,26 @@
   background-color: rgba(0, 0, 0, 0.07);
 }
 
-.cardTitle {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: 1.08rem;
-  font-weight: 600;
-  line-height: 1.35;
-  color: #ffffff;
-  letter-spacing: -0.015em;
-  margin: 0 0 0.35rem 0;
-  transition: color 0.2s ease;
+/* 5. Line 8: Date (Pinned to bottom row) */
+.dateRow {
+  margin-top: auto;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  height: 20px;
+  line-height: 20px;
 }
 
-@media (max-width: 620px) {
-  .cardTitle {
-    font-size: 1.15rem;
-    line-height: 1.35;
-    margin-bottom: 0.4rem;
-  }
-}
-
-.cardLink:hover .cardTitle {
-  color: #f4f4f5;
-}
-
-.cardDescription {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.86rem;
-  line-height: 1.5;
-  color: #888e99;
-  margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-@media (max-width: 620px) {
-  .cardDescription {
-    font-size: 0.88rem;
-    line-height: 1.55;
-    color: #9da4ae;
-  }
+[data-theme="paper"] .dateRow,
+:global([data-theme="paper"]) .dateRow {
+  border-top-color: rgba(0, 0, 0, 0.08);
 }
 
 .cardDate {
-  font-family: var(--font-body, "Inter", sans-serif);
-  font-size: 0.76rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
   color: #52525b;
-  margin-top: 0.45rem;
   display: block;
 }
 

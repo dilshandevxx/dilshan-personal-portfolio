@@ -12,6 +12,13 @@ import { GithubIcon } from "@/components/SocialIcons";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import styles from "./projectDetail.module.css";
 import { cmsDataStore } from "@/services/cmsDataStore";
+import { PROJECTS_DATA, convertArticleToProject } from "@/data/projectsData";
+
+const defaultAllProjects: Project[] = (() => {
+  const existingSlugs = new Set(projectsList.map((p) => p.slug));
+  const converted = PROJECTS_DATA.filter((a) => !existingSlugs.has(a.slug)).map(convertArticleToProject);
+  return [...projectsList, ...converted];
+})();
 
 interface ProjectDetailViewProps {
   initialProject: Project;
@@ -27,7 +34,7 @@ export function ProjectDetailView({
   index,
 }: ProjectDetailViewProps) {
   const [project, setProject] = useState<Project>(initialProject);
-  const [allProjects, setAllProjects] = useState<Project[]>(projectsList);
+  const [allProjects, setAllProjects] = useState<Project[]>(defaultAllProjects);
 
   // Sync custom saved projects from CMS / Sanity
   useEffect(() => {
@@ -35,8 +42,11 @@ export function ProjectDetailView({
       try {
         const freshList = await cmsDataStore.getProjects();
         if (freshList && freshList.length > 0) {
-          setAllProjects(freshList);
-          const match = freshList.find((p) => p.slug === initialProject.slug);
+          const cmsSlugs = new Set(freshList.map((p) => p.slug));
+          const remainder = defaultAllProjects.filter((p) => !cmsSlugs.has(p.slug));
+          const combined = [...freshList, ...remainder];
+          setAllProjects(combined);
+          const match = combined.find((p) => p.slug === initialProject.slug);
           if (match) setProject(match);
         }
       } catch {}
