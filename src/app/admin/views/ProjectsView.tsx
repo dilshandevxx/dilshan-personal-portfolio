@@ -14,7 +14,7 @@ import {
   Filter,
 } from "lucide-react";
 import styles from "../admin.module.css";
-import { Project, ProjectCategory } from "@/data/projects";
+import { Project, ProjectCategory, getProjectThumbnail } from "@/data/projects";
 
 interface ProjectsViewProps {
   projects: Project[];
@@ -192,122 +192,183 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
                GRID VIEW
                ============================================================= */
             <div className={styles.projectsGrid}>
-              {filteredProjects.map((project) => (
-                <div key={project.slug} className={styles.projectCard}>
-                  {/* Clean Thumbnail - Strictly NO text on image */}
-                  <div className={styles.projectCardThumb}>
-                    {project.image ? (
+              {filteredProjects.map((project, idx) => {
+                const thumbSrc = getProjectThumbnail(project.slug, project.image, idx);
+                const galleryList = project.gallery || [];
+                const hasVideoPoster = Boolean(project.videoDemo?.thumbnail);
+                const insideCount = galleryList.length + (hasVideoPoster ? 1 : 0);
+
+                return (
+                  <div key={project.slug} className={styles.projectCard}>
+                    {/* Clean Thumbnail - Strictly NO text on image */}
+                    <div className={styles.projectCardThumb}>
                       <Image
-                        src={project.image}
+                        src={thumbSrc}
                         alt={project.title}
                         fill
                         sizes="(max-width: 768px) 100vw, 360px"
                         className={styles.projectCardThumbImg}
+                        unoptimized
                       />
-                    ) : (
-                      <div
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          color: "#65676e",
-                          fontSize: "0.82rem",
-                        }}
-                      >
-                        No Cover Image
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Body */}
-                  <div className={styles.projectCardBody}>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.5rem" }}>
-                      <span style={{ fontSize: "0.72rem", color: "#92949d", fontWeight: 500 }}>
-                        {project.category}
-                      </span>
-                      <span
-                        className={`${styles.statusBadge} ${
-                          project.status === "Existing" ? styles.statusPublished : styles.statusDraft
-                        }`}
-                      >
-                        {project.status === "Existing" ? "Published" : "Draft"}
-                      </span>
                     </div>
 
-                    <h3 className={styles.projectCardTitle}>{project.title}</h3>
-                    <p className={styles.projectCardTagline}>{project.tagline}</p>
-
-                    {/* Tag list */}
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem", marginTop: "auto", paddingTop: "0.5rem" }}>
-                      {project.tags.slice(0, 4).map((tag) => (
+                    {/* Body */}
+                    <div className={styles.projectCardBody}>
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.5rem" }}>
+                        <span style={{ fontSize: "0.72rem", color: "#92949d", fontWeight: 500 }}>
+                          {project.category}
+                        </span>
                         <span
-                          key={tag}
-                          style={{
-                            fontSize: "0.68rem",
-                            fontFamily: "monospace",
-                            padding: "0.15rem 0.45rem",
-                            backgroundColor: "#101113",
-                            border: "1px solid #292b31",
-                            borderRadius: "4px",
-                            color: "#92949d",
-                          }}
+                          className={`${styles.statusBadge} ${
+                            project.status === "Existing" ? styles.statusPublished : styles.statusDraft
+                          }`}
                         >
-                          {tag}
+                          {project.status === "Existing" ? "Published" : "Draft"}
                         </span>
-                      ))}
-                      {project.tags.length > 4 && (
-                        <span style={{ fontSize: "0.68rem", color: "#65676e", alignSelf: "center" }}>
-                          +{project.tags.length - 4}
+                      </div>
+
+                      <h3 className={styles.projectCardTitle}>{project.title}</h3>
+                      <p className={styles.projectCardTagline}>{project.tagline}</p>
+
+                      {/* Visual Attached Images Strip: Cover + Inside Project Details Images */}
+                      <div className={styles.insideImagesStrip}>
+                        <span className={styles.insideImagesLabel}>Images:</span>
+                        <div className={styles.insideThumbsRow}>
+                          {/* 1. Main Cover Thumbnail Mini */}
+                          <div
+                            className={styles.insideThumbMini}
+                            title={`Main Cover Thumbnail: ${thumbSrc}`}
+                            onClick={() => onEdit(project)}
+                          >
+                            <Image
+                              src={thumbSrc}
+                              alt="Cover thumbnail"
+                              fill
+                              sizes="32px"
+                              style={{ objectFit: "cover" }}
+                              unoptimized
+                            />
+                          </div>
+
+                          {/* 2. Attached Gallery Inside Images */}
+                          {galleryList.slice(0, 3).map((item, gIdx) => (
+                            <div
+                              key={gIdx}
+                              className={styles.insideThumbMini}
+                              title={`Inside Visual #${gIdx + 1}: ${item.title || item.caption || item.type || "Diagram"}`}
+                              onClick={() => onEdit(project)}
+                            >
+                              <Image
+                                src={item.url}
+                                alt={item.title || `Inside slide ${gIdx + 1}`}
+                                fill
+                                sizes="32px"
+                                style={{ objectFit: "cover" }}
+                                unoptimized
+                              />
+                            </div>
+                          ))}
+
+                          {/* 3. Video Poster if available */}
+                          {hasVideoPoster && (
+                            <div
+                              className={styles.insideThumbMini}
+                              title="Inside Video Demo Poster Frame"
+                              onClick={() => onEdit(project)}
+                            >
+                              <Image
+                                src={project.videoDemo!.thumbnail!}
+                                alt="Video poster"
+                                fill
+                                sizes="32px"
+                                style={{ objectFit: "cover" }}
+                                unoptimized
+                              />
+                            </div>
+                          )}
+
+                          {/* More badge if > 3 gallery items */}
+                          {galleryList.length > 3 && (
+                            <span className={styles.insideCountBadge}>+{galleryList.length - 3}</span>
+                          )}
+                        </div>
+
+                        {/* Badge summary */}
+                        <span className={styles.insideCountBadge}>
+                          {insideCount > 0 ? `1 + ${insideCount} inside` : "1 cover"}
                         </span>
-                      )}
+                      </div>
+
+                      {/* Tag list */}
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem", marginTop: "auto", paddingTop: "0.5rem" }}>
+                        {project.tags.slice(0, 4).map((tag) => (
+                          <span
+                            key={tag}
+                            style={{
+                              fontSize: "0.68rem",
+                              fontFamily: "monospace",
+                              padding: "0.15rem 0.45rem",
+                              backgroundColor: "#101113",
+                              border: "1px solid #292b31",
+                              borderRadius: "4px",
+                              color: "#92949d",
+                            }}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                        {project.tags.length > 4 && (
+                          <span style={{ fontSize: "0.68rem", color: "#65676e", alignSelf: "center" }}>
+                            +{project.tags.length - 4}
+                          </span>
+                        )}
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Footer Actions */}
-                  <div className={styles.projectCardFooter}>
-                    <button
-                      type="button"
-                      className={`${styles.btn} ${styles.btnGhost} ${styles.btnSm}`}
-                      onClick={() => onToggleFeatured(project.slug)}
-                      title={project.featured ? "Featured on homepage (Click to unfeature)" : "Click to feature"}
-                    >
-                      <Star
-                        size={14}
-                        style={{
-                          color: project.featured ? "#f59e0b" : "#65676e",
-                          fill: project.featured ? "#f59e0b" : "none",
-                        }}
-                      />
-                    </button>
-
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                    {/* Footer Actions */}
+                    <div className={styles.projectCardFooter}>
                       <button
                         type="button"
-                        className={`${styles.btn} ${styles.btnSecondary} ${styles.btnSm}`}
-                        onClick={() => onEdit(project)}
+                        className={`${styles.btn} ${styles.btnGhost} ${styles.btnSm}`}
+                        onClick={() => onToggleFeatured(project.slug)}
+                        title={project.featured ? "Featured on homepage (Click to unfeature)" : "Click to feature"}
                       >
-                        <Edit size={13} />
-                        <span>Edit</span>
+                        <Star
+                          size={14}
+                          style={{
+                            color: project.featured ? "#f59e0b" : "#65676e",
+                            fill: project.featured ? "#f59e0b" : "none",
+                          }}
+                        />
                       </button>
 
-                      <button
-                        type="button"
-                        className={`${styles.btn} ${styles.btnDanger} ${styles.btnSm}`}
-                        onClick={() => {
-                          if (confirm(`Are you sure you want to delete "${project.title}"?`)) {
-                            onDelete(project.slug);
-                          }
-                        }}
-                        title="Delete project"
-                      >
-                        <Trash2 size={13} />
-                      </button>
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                        <button
+                          type="button"
+                          className={`${styles.btn} ${styles.btnSecondary} ${styles.btnSm}`}
+                          onClick={() => onEdit(project)}
+                        >
+                          <Edit size={13} />
+                          <span>Edit</span>
+                        </button>
+
+                        <button
+                          type="button"
+                          className={`${styles.btn} ${styles.btnDanger} ${styles.btnSm}`}
+                          onClick={() => {
+                            if (confirm(`Are you sure you want to delete "${project.title}"?`)) {
+                              onDelete(project.slug);
+                            }
+                          }}
+                          title="Delete project"
+                        >
+                          <Trash2 size={13} />
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             /* =============================================================
@@ -319,6 +380,7 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
                   <thead>
                     <tr className={styles.tableHeaderRow}>
                       <th className={styles.tableHeaderCell}>Project</th>
+                      <th className={styles.tableHeaderCell}>Media Assets</th>
                       <th className={styles.tableHeaderCell}>Category</th>
                       <th className={styles.tableHeaderCell}>Featured</th>
                       <th className={styles.tableHeaderCell}>Status</th>
@@ -329,97 +391,143 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredProjects.map((project) => (
-                      <tr key={project.slug} className={styles.tableRow}>
-                        <td className={styles.tableCell}>
-                          <div className={styles.projectCellThumb}>
-                            <div className={styles.thumbFrame}>
-                              {project.image ? (
+                    {filteredProjects.map((project, idx) => {
+                      const thumbSrc = getProjectThumbnail(project.slug, project.image, idx);
+                      const galleryList = project.gallery || [];
+                      const hasVideoPoster = Boolean(project.videoDemo?.thumbnail);
+                      const insideCount = galleryList.length + (hasVideoPoster ? 1 : 0);
+
+                      return (
+                        <tr key={project.slug} className={styles.tableRow}>
+                          <td className={styles.tableCell}>
+                            <div className={styles.projectCellThumb}>
+                              <div className={styles.thumbFrame}>
                                 <Image
-                                  src={project.image}
+                                  src={thumbSrc}
                                   alt={project.title}
                                   fill
                                   sizes="44px"
                                   style={{ objectFit: "cover" }}
+                                  unoptimized
                                 />
-                              ) : (
+                              </div>
+                              <div className={styles.projectCellInfo}>
+                                <span className={styles.projectCellTitle}>{project.title}</span>
+                                <span className={styles.projectCellSlug}>/{project.slug}</span>
+                              </div>
+                            </div>
+                          </td>
+                          <td className={styles.tableCell}>
+                            <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
+                              <div
+                                className={styles.insideThumbMini}
+                                title={`Cover: ${thumbSrc}`}
+                                onClick={() => onEdit(project)}
+                              >
+                                <Image
+                                  src={thumbSrc}
+                                  alt="Cover thumbnail"
+                                  fill
+                                  sizes="32px"
+                                  style={{ objectFit: "cover" }}
+                                  unoptimized
+                                />
+                              </div>
+                              {galleryList.slice(0, 2).map((item, gIdx) => (
                                 <div
-                                  style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    color: "#65676e",
-                                    fontSize: "0.75rem",
-                                  }}
+                                  key={gIdx}
+                                  className={styles.insideThumbMini}
+                                  title={`Inside Visual: ${item.title || item.caption || "Diagram"}`}
+                                  onClick={() => onEdit(project)}
                                 >
-                                  IMG
+                                  <Image
+                                    src={item.url}
+                                    alt={item.title || "Inside slide"}
+                                    fill
+                                    sizes="32px"
+                                    style={{ objectFit: "cover" }}
+                                    unoptimized
+                                  />
+                                </div>
+                              ))}
+                              {hasVideoPoster && (
+                                <div
+                                  className={styles.insideThumbMini}
+                                  title="Video Poster"
+                                  onClick={() => onEdit(project)}
+                                >
+                                  <Image
+                                    src={project.videoDemo!.thumbnail!}
+                                    alt="Video poster"
+                                    fill
+                                    sizes="32px"
+                                    style={{ objectFit: "cover" }}
+                                    unoptimized
+                                  />
                                 </div>
                               )}
+                              <span className={styles.insideCountBadge}>
+                                {insideCount > 0 ? `1 + ${insideCount}` : "1"}
+                              </span>
                             </div>
-                            <div className={styles.projectCellInfo}>
-                              <span className={styles.projectCellTitle}>{project.title}</span>
-                              <span className={styles.projectCellSlug}>/{project.slug}</span>
-                            </div>
-                          </div>
-                        </td>
-                        <td className={styles.tableCell} style={{ color: "#92949d" }}>
-                          {project.category}
-                        </td>
-                        <td className={styles.tableCell}>
-                          <button
-                            type="button"
-                            onClick={() => onToggleFeatured(project.slug)}
-                            style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
-                            title="Toggle featured status"
-                          >
-                            <Star
-                              size={15}
-                              style={{
-                                color: project.featured ? "#f59e0b" : "#4b4e58",
-                                fill: project.featured ? "#f59e0b" : "none",
-                              }}
-                            />
-                          </button>
-                        </td>
-                        <td className={styles.tableCell}>
-                          <span
-                            className={`${styles.statusBadge} ${
-                              project.status === "Existing" ? styles.statusPublished : styles.statusDraft
-                            }`}
-                          >
-                            {project.status === "Existing" ? "Published" : "Draft"}
-                          </span>
-                        </td>
-                        <td className={styles.tableCell} style={{ color: "#92949d", fontSize: "0.78rem" }}>
-                          {project.date}
-                        </td>
-                        <td className={styles.tableCell} style={{ textAlign: "right" }}>
-                          <div style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}>
+                          </td>
+                          <td className={styles.tableCell} style={{ color: "#92949d" }}>
+                            {project.category}
+                          </td>
+                          <td className={styles.tableCell}>
                             <button
                               type="button"
-                              className={`${styles.btn} ${styles.btnSecondary} ${styles.btnSm}`}
-                              onClick={() => onEdit(project)}
+                              onClick={() => onToggleFeatured(project.slug)}
+                              style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
+                              title="Toggle featured status"
                             >
-                              <Edit size={13} />
-                              <span>Edit</span>
+                              <Star
+                                size={15}
+                                style={{
+                                  color: project.featured ? "#f59e0b" : "#4b4e58",
+                                  fill: project.featured ? "#f59e0b" : "none",
+                                }}
+                              />
                             </button>
-                            <button
-                              type="button"
-                              className={`${styles.btn} ${styles.btnDanger} ${styles.btnSm}`}
-                              onClick={() => {
-                                if (confirm(`Are you sure you want to delete "${project.title}"?`)) {
-                                  onDelete(project.slug);
-                                }
-                              }}
+                          </td>
+                          <td className={styles.tableCell}>
+                            <span
+                              className={`${styles.statusBadge} ${
+                                project.status === "Existing" ? styles.statusPublished : styles.statusDraft
+                              }`}
                             >
-                              <Trash2 size={13} />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
+                              {project.status === "Existing" ? "Published" : "Draft"}
+                            </span>
+                          </td>
+                          <td className={styles.tableCell} style={{ color: "#92949d", fontSize: "0.78rem" }}>
+                            {project.date}
+                          </td>
+                          <td className={styles.tableCell} style={{ textAlign: "right" }}>
+                            <div style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}>
+                              <button
+                                type="button"
+                                className={`${styles.btn} ${styles.btnSecondary} ${styles.btnSm}`}
+                                onClick={() => onEdit(project)}
+                              >
+                                <Edit size={13} />
+                                <span>Edit</span>
+                              </button>
+                              <button
+                                type="button"
+                                className={`${styles.btn} ${styles.btnDanger} ${styles.btnSm}`}
+                                onClick={() => {
+                                  if (confirm(`Are you sure you want to delete "${project.title}"?`)) {
+                                    onDelete(project.slug);
+                                  }
+                                }}
+                              >
+                                <Trash2 size={13} />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>

@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import styles from "../admin.module.css";
 import { HomepageCMSData, FeaturedProjectItem } from "@/services/cmsDataStore";
-import { Project } from "@/data/projects";
+import { Project, getProjectThumbnail } from "@/data/projects";
 
 interface HomepageViewProps {
   initialSubTab?: "hero" | "intro" | "featured" | "services" | "about" | "contact";
@@ -371,7 +371,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
               formData.featuredProjects.map((item, index) => {
                 const project = allProjects.find((p) => p.slug === item.slug);
                 const displayTitle = project ? project.title : item.slug;
-                const defaultImage = project?.image || "/images/project_collective.jpg";
+                const defaultImage = getProjectThumbnail(item.slug, project?.image, index);
 
                 return (
                   <div

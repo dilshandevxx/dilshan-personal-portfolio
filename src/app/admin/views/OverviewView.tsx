@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import styles from "../admin.module.css";
 import { AdminViewType } from "../components/AdminSidebar";
-import { Project } from "@/data/projects";
+import { Project, getProjectThumbnail } from "@/data/projects";
 import { CMSActivityLog } from "@/services/cmsDataStore";
 
 interface OverviewViewProps {
@@ -178,41 +178,37 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
                 </tr>
               </thead>
               <tbody>
-                {metrics.recentProjects.slice(0, 5).map((project) => (
-                  <tr key={project.slug} className={styles.tableRow}>
-                    <td className={styles.tableCell}>
-                      <div className={styles.projectCellThumb}>
-                        <div className={styles.thumbFrame}>
-                          {project.image ? (
+                {metrics.recentProjects.slice(0, 5).map((project, idx) => {
+                  const thumbSrc = getProjectThumbnail(project.slug, project.image, idx);
+                  const galleryCount = (project.gallery || []).length;
+                  const hasPoster = Boolean(project.videoDemo?.thumbnail);
+                  const insideTotal = galleryCount + (hasPoster ? 1 : 0);
+
+                  return (
+                    <tr key={project.slug} className={styles.tableRow}>
+                      <td className={styles.tableCell}>
+                        <div className={styles.projectCellThumb}>
+                          <div className={styles.thumbFrame}>
                             <Image
-                              src={project.image}
+                              src={thumbSrc}
                               alt={project.title}
                               fill
                               sizes="44px"
                               style={{ objectFit: "cover" }}
+                              unoptimized
                             />
-                          ) : (
-                            <div
-                              style={{
-                                width: "100%",
-                                height: "100%",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                color: "#65676e",
-                                fontSize: "0.75rem",
-                              }}
-                            >
-                              IMG
+                          </div>
+                          <div className={styles.projectCellInfo}>
+                            <span className={styles.projectCellTitle}>{project.title}</span>
+                            <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                              <span className={styles.projectCellSlug}>/{project.slug}</span>
+                              <span className={styles.insideCountBadge} style={{ fontSize: "0.62rem" }}>
+                                {insideTotal > 0 ? `1 + ${insideTotal} inside` : "1 cover"}
+                              </span>
                             </div>
-                          )}
+                          </div>
                         </div>
-                        <div className={styles.projectCellInfo}>
-                          <span className={styles.projectCellTitle}>{project.title}</span>
-                          <span className={styles.projectCellSlug}>/{project.slug}</span>
-                        </div>
-                      </div>
-                    </td>
+                      </td>
                     <td className={styles.tableCell} style={{ color: "#92949d" }}>
                       {project.category}
                     </td>
@@ -235,8 +231,9 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
                       </button>
                     </td>
                   </tr>
-                ))}
-              </tbody>
+                );
+              })}
+            </tbody>
             </table>
           </div>
         </div>

@@ -179,7 +179,27 @@ export const projectsList: Project[] = [
     "stars": 0,
     "highlight": true,
     "metricsDetail": [],
-    "image": "",
+    "image": "/images/project_collective.jpg",
+    "gallery": [
+      {
+        "title": "Ingestion & Embedding Pipeline",
+        "caption": "FastAPI document chunking and pgvector semantic embeddings",
+        "url": "/images/project_analytics.jpg",
+        "type": "diagram"
+      },
+      {
+        "title": "Streamed Retrieval Interface",
+        "caption": "Server-sent event streaming with cited source attribution",
+        "url": "/images/project_cloudwatch.jpg",
+        "type": "ui"
+      }
+    ],
+    "videoDemo": {
+      "videoUrl": "/images/skyline_banner.mp4",
+      "thumbnail": "/images/skyline_twilight.jpg",
+      "title": "Low-Latency Semantic Query Benchmark",
+      "description": "Sub-100ms vector search across 50,000 embedded documents"
+    },
     "aliases": [],
     "writeupUrl": "",
     "status": "Existing"
@@ -242,7 +262,26 @@ export const projectsList: Project[] = [
     "stars": 0,
     "highlight": true,
     "metricsDetail": [],
-    "image": "",
+    "image": "/images/project_brutalist.jpg",
+    "gallery": [
+      {
+        "title": "Asynchronous Matching Engine",
+        "caption": "Tokenization, exact matching, and fuzzy allergen resolution pipeline",
+        "url": "/images/project_boltshift.jpg",
+        "type": "diagram"
+      },
+      {
+        "title": "Allergen Telemetry Monitor",
+        "caption": "Confidence scoring and family profile evaluation dashboard",
+        "url": "/images/project_powersurge.jpg",
+        "type": "ui"
+      }
+    ],
+    "videoDemo": {
+      "videoUrl": "",
+      "thumbnail": "/images/biometric_scan.png",
+      "title": "OCR Parsing & Tokenization Flow"
+    },
     "aliases": [],
     "writeupUrl": "",
     "status": "Existing"
@@ -303,7 +342,21 @@ export const projectsList: Project[] = [
     "stars": 0,
     "highlight": true,
     "metricsDetail": [],
-    "image": "",
+    "image": "/images/project_analytics.jpg",
+    "gallery": [
+      {
+        "title": "Interactive Model Workspace",
+        "caption": "Dynamic streaming markdown canvas with real-time token rendering",
+        "url": "/images/projects/showcase_trends.jpg",
+        "type": "ui"
+      },
+      {
+        "title": "SSE Reverse-Proxy Topology",
+        "caption": "FastAPI SSE stream pipeline and client SSE consumer architecture",
+        "url": "/images/project_collective.jpg",
+        "type": "diagram"
+      }
+    ],
     "aliases": [],
     "writeupUrl": "",
     "status": "Existing"
@@ -358,7 +411,21 @@ export const projectsList: Project[] = [
         ]
       }
     ],
-    "image": "",
+    "image": "/images/project_warpspeed_desk.jpg",
+    "gallery": [
+      {
+        "title": "Family Health Dashboard",
+        "caption": "Caregiver measurement summary and real-time vital alerts",
+        "url": "/images/biometric_scan.png",
+        "type": "ui"
+      },
+      {
+        "title": "Caregiver Dispatch Architecture",
+        "caption": "Protected JWT authentication and role-based data isolation",
+        "url": "/images/project_warpspeed.jpg",
+        "type": "diagram"
+      }
+    ],
     "aliases": [],
     "status": "Existing"
   },
@@ -389,6 +456,21 @@ export const projectsList: Project[] = [
       "Prometheus"
     ],
     "stars": 0,
+    "image": "/images/project_powersurge.jpg",
+    "gallery": [
+      {
+        "title": "PagedAttention Memory Allocation",
+        "caption": "Dynamic KV-cache management across multi-GPU tensor parallel workers",
+        "url": "/images/project_euphoria.jpg",
+        "type": "diagram"
+      },
+      {
+        "title": "vLLM TTFT Latency Dashboard",
+        "caption": "Sub-50ms Time-to-First-Token monitoring telemetry",
+        "url": "/images/skyline_twilight.jpg",
+        "type": "ui"
+      }
+    ],
     "featured": false,
     "highlight": false,
     "githubUrl": "https://github.com/dilshandevxx/dilshan-personal-portfolio/blob/main/project-proposals/distributed-llm-inference-platform/README.md",
@@ -406,7 +488,6 @@ export const projectsList: Project[] = [
         ]
       }
     ],
-    "image": "",
     "aliases": [],
     "status": "Planned"
   }
@@ -1694,7 +1775,6 @@ export const archivedProjectsList: Project[] = [
         ]
       }
     ],
-    "image": "",
     "aliases": [],
     "status": "Planned"
   }

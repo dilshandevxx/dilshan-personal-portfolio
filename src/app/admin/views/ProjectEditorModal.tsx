@@ -16,7 +16,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import styles from "../admin.module.css";
-import { Project, ProjectCategory, ProjectStatus } from "@/data/projects";
+import { Project, ProjectCategory, ProjectStatus, getProjectThumbnail } from "@/data/projects";
 
 interface ProjectEditorModalProps {
   isOpen: boolean;
@@ -92,6 +92,11 @@ export const ProjectEditorModal: React.FC<ProjectEditorModalProps> = ({
   }, [project, isOpen]);
 
   if (!isOpen) return null;
+
+  const resolvedCover = getProjectThumbnail(formData.slug || "", formData.image);
+  const galleryItems = formData.gallery || [];
+  const videoPoster = formData.videoDemo?.thumbnail;
+  const totalVisualAssetsCount = (resolvedCover ? 1 : 0) + galleryItems.length + (videoPoster ? 1 : 0);
 
   const handleChange = (field: keyof Project, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -251,6 +256,104 @@ export const ProjectEditorModal: React.FC<ProjectEditorModalProps> = ({
 
         {/* Modal Body / Active Section Forms */}
         <div className={styles.modalBody}>
+          {/* Always-Visible Visual Summary Strip of All Currently Attached Media */}
+          <div className={styles.attachedMediaBar}>
+            <div className={styles.attachedMediaBarHeader}>
+              <div className={styles.attachedMediaBarTitle}>
+                <ImageIcon size={15} style={{ color: "#6366f1" }} />
+                <span>Currently Attached Media ({totalVisualAssetsCount})</span>
+              </div>
+
+              <button
+                type="button"
+                className={`${styles.btn} ${styles.btnSecondary} ${styles.btnSm}`}
+                style={{ fontSize: "0.72rem", padding: "0.25rem 0.6rem" }}
+                onClick={() => {
+                  handleAddGalleryItem();
+                  setActiveSection("gallery");
+                }}
+              >
+                <Plus size={12} />
+                <span>Add Inside Image</span>
+              </button>
+            </div>
+
+            <div className={styles.attachedMediaGrid}>
+              {/* Cover Thumbnail */}
+              <div
+                className={styles.attachedMediaItem}
+                onClick={() => setActiveSection("cover")}
+                title="Click to edit Cover Image"
+              >
+                <div className={styles.attachedMediaItemThumb}>
+                  <Image
+                    src={resolvedCover}
+                    alt="Cover Thumbnail"
+                    fill
+                    sizes="140px"
+                    style={{ objectFit: "cover" }}
+                    unoptimized
+                  />
+                </div>
+                <span className={styles.attachedMediaItemType}>Cover Thumbnail</span>
+                <span className={styles.attachedMediaItemCaption}>
+                  {formData.image ? "Custom Cover" : "Default Fallback"}
+                </span>
+              </div>
+
+              {/* Inside Gallery Slides */}
+              {galleryItems.map((item, idx) => (
+                <div
+                  key={idx}
+                  className={styles.attachedMediaItem}
+                  onClick={() => setActiveSection("gallery")}
+                  title={`Click to edit Inside Slide #${idx + 1}`}
+                >
+                  <div className={styles.attachedMediaItemThumb}>
+                    <Image
+                      src={item.url || "/images/project_collective.jpg"}
+                      alt={item.title || `Slide ${idx + 1}`}
+                      fill
+                      sizes="140px"
+                      style={{ objectFit: "cover" }}
+                      unoptimized
+                    />
+                  </div>
+                  <span className={styles.attachedMediaItemType}>
+                    Inside Slide #{idx + 1}
+                  </span>
+                  <span className={styles.attachedMediaItemCaption}>
+                    {item.title || item.type || "Diagram"}
+                  </span>
+                </div>
+              ))}
+
+              {/* Video Poster if any */}
+              {videoPoster && (
+                <div
+                  className={styles.attachedMediaItem}
+                  onClick={() => setActiveSection("video")}
+                  title="Click to edit Video Poster"
+                >
+                  <div className={styles.attachedMediaItemThumb}>
+                    <Image
+                      src={videoPoster}
+                      alt="Video Poster"
+                      fill
+                      sizes="140px"
+                      style={{ objectFit: "cover" }}
+                      unoptimized
+                    />
+                  </div>
+                  <span className={styles.attachedMediaItemType}>Video Poster</span>
+                  <span className={styles.attachedMediaItemCaption}>
+                    {formData.videoDemo?.title || "Demo Poster"}
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+
           {/* 1. Basic Information */}
           {activeSection === "basic" && (
             <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
@@ -386,35 +489,41 @@ export const ProjectEditorModal: React.FC<ProjectEditorModalProps> = ({
                   placeholder="/images/project_collective.jpg or https://res.cloudinary.com/..."
                 />
                 <span style={{ fontSize: "0.72rem", color: "#92949d" }}>
-                  Images must remain clean with no floating watermarks or overlays.
+                  Used as the main thumbnail on catalog cards, homepage showcase, and social share cards.
                 </span>
               </div>
 
-              {formData.image && (
-                <div>
-                  <label className={styles.formLabel}>Live Cover Image Preview</label>
-                  <div className={styles.mediaPreviewContainer}>
-                    <Image
-                      src={formData.image}
-                      alt="Project Cover Preview"
-                      fill
-                      sizes="520px"
-                      style={{ objectFit: "cover" }}
-                    />
-                  </div>
+              <div>
+                <label className={styles.formLabel}>
+                  {formData.image ? "Live Cover Image Preview (Custom URL)" : "System Default Thumbnail (Active Fallback)"}
+                </label>
+                <div className={styles.mediaPreviewContainer}>
+                  <Image
+                    src={resolvedCover}
+                    alt="Project Cover Preview"
+                    fill
+                    sizes="520px"
+                    style={{ objectFit: "cover" }}
+                    unoptimized
+                  />
                 </div>
-              )}
+                {!formData.image && (
+                  <span style={{ fontSize: "0.72rem", color: "#65676e", marginTop: "0.4rem", display: "block" }}>
+                    Currently rendering default system thumbnail ({resolvedCover}). Enter a custom URL above to override.
+                  </span>
+                )}
+              </div>
             </div>
           )}
 
-          {/* 3. Project Gallery */}
+          {/* 3. Project Gallery (Project Details Inside Images) */}
           {activeSection === "gallery" && (
             <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.75rem" }}>
                 <div>
-                  <h4 style={{ margin: 0, fontSize: "0.95rem", color: "#f2f2f0" }}>Visual Architecture Gallery</h4>
+                  <h4 style={{ margin: 0, fontSize: "0.95rem", color: "#f2f2f0" }}>Project Details Page Inside Images</h4>
                   <p style={{ margin: "0.25rem 0 0 0", fontSize: "0.78rem", color: "#92949d" }}>
-                    Add high-resolution screenshots, topology diagrams, or telemetry dashboards.
+                    Add high-resolution screenshots, architecture diagrams, telemetry dashboards, and UI workflows shown inside the project details page.
                   </p>
                 </div>
                 <button
@@ -423,61 +532,141 @@ export const ProjectEditorModal: React.FC<ProjectEditorModalProps> = ({
                   onClick={handleAddGalleryItem}
                 >
                   <Plus size={14} />
-                  <span>Add Slide</span>
+                  <span>Add Inside Image</span>
                 </button>
               </div>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                 {(!formData.gallery || formData.gallery.length === 0) ? (
                   <div className={styles.emptyState}>
-                    <p className={styles.emptyStateText}>No gallery slides configured. Click &ldquo;Add Slide&rdquo; above.</p>
+                    <p className={styles.emptyStateText}>No inside images configured. Click &ldquo;Add Inside Image&rdquo; above to attach architecture diagrams or UI screenshots.</p>
                   </div>
                 ) : (
                   formData.gallery.map((item, idx) => (
-                    <div
-                      key={idx}
-                      style={{
-                        padding: "1rem",
-                        backgroundColor: "#101113",
-                        border: "1px solid #292b31",
-                        borderRadius: "6px",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.75rem",
-                      }}
-                    >
-                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                        <span style={{ fontSize: "0.75rem", fontFamily: "monospace", color: "#92949d" }}>
-                          Slide #{idx + 1}
-                        </span>
+                    <div key={idx} className={styles.gallerySlideCard}>
+                      <div className={styles.gallerySlideHeader}>
+                        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                          <span style={{ fontSize: "0.78rem", fontFamily: "monospace", color: "#f2f2f0", fontWeight: 600 }}>
+                            Inside Image #{idx + 1}
+                          </span>
+                          <span style={{ fontSize: "0.68rem", padding: "0.15rem 0.45rem", borderRadius: "4px", backgroundColor: "#141518", border: "1px solid #292b31", color: "#92949d", textTransform: "uppercase" }}>
+                            {item.type || "diagram"}
+                          </span>
+                        </div>
                         <button
                           type="button"
                           className={`${styles.btn} ${styles.btnDanger} ${styles.btnSm}`}
                           onClick={() => handleRemoveGalleryItem(idx)}
+                          title="Remove this inside image"
                         >
                           <Trash2 size={13} />
                         </button>
                       </div>
 
-                      <div className={styles.fieldGrid}>
-                        <div className={styles.formGroup}>
-                          <label className={styles.formLabel}>Image URL</label>
-                          <input
-                            type="text"
-                            className={styles.inputField}
-                            value={item.url}
-                            onChange={(e) => handleUpdateGalleryItem(idx, "url", e.target.value)}
-                          />
+                      <div className={styles.gallerySlideBody}>
+                        {/* Live Image Preview Frame */}
+                        <div>
+                          <div className={styles.galleryPreviewFrame}>
+                            {item.url ? (
+                              <Image
+                                src={item.url}
+                                alt={item.title || `Inside Slide ${idx + 1}`}
+                                fill
+                                sizes="200px"
+                                style={{ objectFit: "cover" }}
+                                unoptimized
+                              />
+                            ) : (
+                              <div className={styles.galleryPlaceholder}>
+                                <ImageIcon size={20} />
+                                <span>No image URL</span>
+                              </div>
+                            )}
+                          </div>
+                          <span style={{ fontSize: "0.68rem", color: "#65676e", marginTop: "0.35rem", display: "block" }}>
+                            Live preview of inside image
+                          </span>
                         </div>
 
-                        <div className={styles.formGroup}>
-                          <label className={styles.formLabel}>Caption</label>
-                          <input
-                            type="text"
-                            className={styles.inputField}
-                            value={item.caption || ""}
-                            onChange={(e) => handleUpdateGalleryItem(idx, "caption", e.target.value)}
-                          />
+                        {/* Slide Configuration Fields */}
+                        <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                          <div className={styles.fieldGrid}>
+                            <div className={styles.formGroup}>
+                              <label className={styles.formLabel}>Image Title / Label</label>
+                              <input
+                                type="text"
+                                className={styles.inputField}
+                                value={item.title || ""}
+                                placeholder="e.g. Ingestion Pipeline Architecture"
+                                onChange={(e) => handleUpdateGalleryItem(idx, "title", e.target.value)}
+                              />
+                            </div>
+
+                            <div className={styles.formGroup}>
+                              <label className={styles.formLabel}>Visual Type</label>
+                              <select
+                                className={styles.selectField}
+                                value={item.type || "diagram"}
+                                onChange={(e) => handleUpdateGalleryItem(idx, "type", e.target.value)}
+                              >
+                                <option value="diagram">Architecture Diagram</option>
+                                <option value="ui">UI Flow / Screenshot</option>
+                                <option value="image">Telemetry / Overview Image</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div className={styles.formGroup}>
+                            <label className={styles.formLabel}>Image URL (Local Path or Cloudinary)</label>
+                            <input
+                              type="text"
+                              className={styles.inputField}
+                              value={item.url || ""}
+                              placeholder="/images/project_analytics.jpg or https://res.cloudinary.com/..."
+                              onChange={(e) => handleUpdateGalleryItem(idx, "url", e.target.value)}
+                            />
+                            {/* Fast Presets */}
+                            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem", marginTop: "0.35rem" }}>
+                              <span style={{ fontSize: "0.68rem", color: "#65676e", alignSelf: "center" }}>Quick pick:</span>
+                              {[
+                                "/images/project_analytics.jpg",
+                                "/images/project_cloudwatch.jpg",
+                                "/images/project_boltshift.jpg",
+                                "/images/project_powersurge.jpg",
+                                "/images/biometric_scan.png",
+                                "/images/projects/showcase_trends.jpg",
+                              ].map((preset) => (
+                                <button
+                                  key={preset}
+                                  type="button"
+                                  onClick={() => handleUpdateGalleryItem(idx, "url", preset)}
+                                  style={{
+                                    fontSize: "0.65rem",
+                                    fontFamily: "monospace",
+                                    padding: "0.15rem 0.35rem",
+                                    backgroundColor: "#141518",
+                                    border: "1px solid #292b31",
+                                    borderRadius: "3px",
+                                    color: "#92949d",
+                                    cursor: "pointer",
+                                  }}
+                                >
+                                  {preset.split("/").pop()}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className={styles.formGroup}>
+                            <label className={styles.formLabel}>Caption / Explanation</label>
+                            <input
+                              type="text"
+                              className={styles.inputField}
+                              value={item.caption || ""}
+                              placeholder="e.g. Asynchronous tokenization and vector embedding pipeline"
+                              onChange={(e) => handleUpdateGalleryItem(idx, "caption", e.target.value)}
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -513,6 +702,22 @@ export const ProjectEditorModal: React.FC<ProjectEditorModalProps> = ({
                   />
                 </div>
               </div>
+
+              {formData.videoDemo?.thumbnail && (
+                <div>
+                  <label className={styles.formLabel}>Live Poster Frame Preview</label>
+                  <div className={styles.mediaPreviewContainer}>
+                    <Image
+                      src={formData.videoDemo.thumbnail}
+                      alt="Video Poster Preview"
+                      fill
+                      sizes="520px"
+                      style={{ objectFit: "cover" }}
+                      unoptimized
+                    />
+                  </div>
+                </div>
+              )}
 
               <div className={styles.formGroup}>
                 <label className={styles.formLabel}>Video Description</label>

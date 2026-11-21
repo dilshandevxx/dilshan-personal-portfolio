@@ -228,6 +228,68 @@ export function ProjectDetailView({
             </section>
           )}
 
+          {/* Visual Architecture & Inside Interface Gallery */}
+          {project.gallery && project.gallery.length > 0 && (
+            <section className={styles.narrativeSection}>
+              <div className={styles.labelCol}>
+                <h2 className={styles.sectionLabel}>System Visuals</h2>
+              </div>
+              <div className={styles.contentCol}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+                  {project.gallery.map((item, idx) => (
+                    <div
+                      key={idx}
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "0.5rem",
+                        backgroundColor: "var(--surface, #151816)",
+                        border: "1px solid var(--border-subtle, rgba(255, 255, 255, 0.08))",
+                        borderRadius: "8px",
+                        overflow: "hidden",
+                        padding: "1rem",
+                      }}
+                    >
+                      <div
+                        style={{
+                          position: "relative",
+                          width: "100%",
+                          aspectRatio: "16 / 9",
+                          borderRadius: "6px",
+                          overflow: "hidden",
+                          backgroundColor: "#0c0d10",
+                        }}
+                      >
+                        <Image
+                          src={item.url}
+                          alt={item.title || `Visual ${idx + 1}`}
+                          fill
+                          sizes="(max-width: 900px) 100vw, 800px"
+                          style={{ objectFit: "cover" }}
+                          unoptimized
+                        />
+                      </div>
+                      {(item.title || item.caption) && (
+                        <div style={{ display: "flex", flexDirection: "column", gap: "0.2rem", paddingTop: "0.25rem" }}>
+                          {item.title && (
+                            <span style={{ fontSize: "0.88rem", fontWeight: 600, color: "var(--text-primary, #f2eee8)" }}>
+                              {item.title}
+                            </span>
+                          )}
+                          {item.caption && (
+                            <span style={{ fontSize: "0.78rem", color: "var(--text-muted, #8b928c)", lineHeight: 1.45 }}>
+                              {item.caption}
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
           {/* Key Capabilities */}
           {project.highlights && project.highlights.length > 0 && (
             <section className={styles.narrativeSection}>

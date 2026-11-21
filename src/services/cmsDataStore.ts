@@ -314,7 +314,17 @@ class CMSDataStore {
       try {
         const parsed = JSON.parse(local);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          return parsed;
+          // Merge with initial data so rich gallery and thumbnail images are preserved
+          return parsed.map((item: Project) => {
+            const base = initialProjectsList.find((p) => p.slug === item.slug);
+            return {
+              ...base,
+              ...item,
+              image: item.image || base?.image || "",
+              gallery: item.gallery && item.gallery.length > 0 ? item.gallery : base?.gallery || [],
+              videoDemo: item.videoDemo || base?.videoDemo,
+            };
+          });
         }
       } catch (e) {
         console.error("Failed to parse local projects", e);
