@@ -1707,3 +1707,125 @@
   padding: 0.75rem;
 }
 
+/* =========================================================================
+   Media Upload & Asset Manager Enhancements
+   ========================================================================= */
+
+.assetModalTabs {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0 1.5rem;
+  border-bottom: 1px solid #23252b;
+  background-color: #14161a;
+}
+
+.assetTabBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #8b8e98;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.85rem 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.assetTabBtn:hover {
+  color: #f2f2f0;
+}
+
+.assetTabBtnActive {
+  color: #a3e635;
+  border-bottom-color: #a3e635;
+}
+
+.uploadDropzone {
+  border: 2px dashed #2e313b;
+  border-radius: 8px;
+  padding: 2.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background-color: #111216;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.uploadDropzone:hover,
+.uploadDropzoneActive {
+  border-color: #a3e635;
+  background-color: rgba(163, 230, 53, 0.04);
+}
+
+.uploadDropzoneIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #1c1e24;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a3e635;
+}
+
+.uploadDropzoneTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #f2f2f0;
+  margin: 0;
+}
+
+.uploadDropzoneSubtitle {
+  font-size: 0.75rem;
+  color: #7d808b;
+  margin: 0;
+}
+
+.uploadPreviewCard {
+  background-color: #111216;
+  border: 1px solid #282a32;
+  border-radius: 8px;
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.uploadPreviewHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.uploadPreviewBadge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background-color: rgba(163, 230, 53, 0.12);
+  color: #a3e635;
+  border: 1px solid rgba(163, 230, 53, 0.25);
+  font-weight: 600;
+}
+
+.uploadPreviewMediaFrame {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  position: relative;
+  background-color: #0c0d10;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #23252c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+

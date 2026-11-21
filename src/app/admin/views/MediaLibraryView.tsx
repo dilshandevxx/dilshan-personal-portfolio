@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import {
   Search,
@@ -12,7 +12,12 @@ import {
   Video,
   Image as ImageIcon,
   X,
-  Layers,
+  Upload,
+  Link as LinkIcon,
+  Film,
+  Loader2,
+  AlertCircle,
+  FileText,
 } from "lucide-react";
 import styles from "../admin.module.css";
 import { CMSMediaAsset } from "@/services/cmsDataStore";
@@ -35,48 +40,193 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
 
   // Add Asset Modal State
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [newAsset, setNewAsset] = useState({
+  const [modalTab, setModalTab] = useState<"upload" | "image-url" | "video-url">("upload");
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [isDragOver, setIsDragOver] = useState(false);
+
+  // Form State
+  const [assetForm, setAssetForm] = useState({
     name: "",
     url: "",
     type: "image" as "image" | "video",
     format: "JPG",
-    width: 1920,
-    height: 1080,
-    size: "450 KB",
+    width: 0,
+    height: 0,
+    size: "",
     usedIn: [] as string[],
+    usedInInput: "",
     cloudinaryPublicId: "",
   });
 
+  // URL Live Preview Verification
+  const [urlPreviewStatus, setUrlPreviewStatus] = useState<"idle" | "loading" | "valid" | "error">("idle");
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Filtered Assets
   const filteredAssets = assets.filter((asset) => {
     const matchesFilter = filterType === "all" || asset.type === filterType;
     const matchesSearch =
       asset.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      asset.url.toLowerCase().includes(searchQuery.toLowerCase());
+      asset.url.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (asset.format && asset.format.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesFilter && matchesSearch;
   });
 
+  // Copy URL with visual check
   const handleCopyUrl = (url: string, id: string) => {
     navigator.clipboard.writeText(url);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2500);
   };
 
-  const handleCreateAsset = async (e: React.FormEvent) => {
+  // Helper to extract clean human-readable name from URL
+  const extractNameFromUrl = (url: string): string => {
+    try {
+      const parts = url.split("?")[0].split("/");
+      const filename = parts[parts.length - 1];
+      const nameWithoutExt = filename.substring(0, filename.lastIndexOf(".")) || filename;
+      return nameWithoutExt
+        .replace(/[-_]/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+    } catch {
+      return "Untitled Asset";
+    }
+  };
+
+  // Live URL validation & metadata extraction for Image URL
+  useEffect(() => {
+    if (modalTab !== "image-url" || !assetForm.url) {
+      if (!assetForm.url) setUrlPreviewStatus("idle");
+      return;
+    }
+
+    setUrlPreviewStatus("loading");
+    const img = new window.Image();
+    img.onload = () => {
+      setUrlPreviewStatus("valid");
+      setAssetForm((prev) => ({
+        ...prev,
+        width: img.naturalWidth,
+        height: img.naturalHeight,
+        name: prev.name || extractNameFromUrl(prev.url),
+        format: prev.url.endsWith(".png")
+          ? "PNG"
+          : prev.url.endsWith(".webp")
+          ? "WEBP"
+          : prev.url.endsWith(".avif")
+          ? "AVIF"
+          : "JPG",
+      }));
+    };
+    img.onerror = () => {
+      setUrlPreviewStatus("error");
+    };
+    img.src = assetForm.url;
+  }, [assetForm.url, modalTab]);
+
+  // Video URL verification
+  const handleVideoUrlChange = (url: string) => {
+    const ext = url.split(".").pop()?.toUpperCase() || "MP4";
+    setAssetForm((prev) => ({
+      ...prev,
+      url,
+      type: "video",
+      format: ext.includes("WEBM") ? "WEBM" : "MP4",
+      name: prev.name || extractNameFromUrl(url),
+    }));
+  };
+
+  // Handle Direct File Upload (via API route)
+  const handleFileUpload = async (file: File) => {
+    setIsUploading(true);
+    setUploadError(null);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch("/api/admin/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const errJson = await res.json().catch(() => ({}));
+        throw new Error(errJson.error || "File upload failed");
+      }
+
+      const data = await res.json();
+      if (data.success && data.asset) {
+        setAssetForm({
+          name: data.asset.name,
+          url: data.asset.url,
+          type: data.asset.type,
+          format: data.asset.format,
+          width: data.asset.width || 0,
+          height: data.asset.height || 0,
+          size: data.asset.size,
+          usedIn: [],
+          usedInInput: "",
+          cloudinaryPublicId: "",
+        });
+      }
+    } catch (err: any) {
+      console.error("[Upload error]:", err);
+      setUploadError(err.message || "Failed to upload file");
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
-    if (!newAsset.name || !newAsset.url) return;
-    await onAddAsset(newAsset);
+    setIsDragOver(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleFileUpload(e.dataTransfer.files[0]);
+    }
+  };
+
+  // Submit asset to CMS Data Store
+  const handleSaveAsset = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!assetForm.name || !assetForm.url) return;
+
+    const usedInArray = assetForm.usedInInput
+      ? assetForm.usedInInput.split(",").map((s) => s.trim()).filter(Boolean)
+      : assetForm.usedIn;
+
+    await onAddAsset({
+      name: assetForm.name,
+      url: assetForm.url,
+      type: assetForm.type,
+      format: assetForm.format,
+      width: assetForm.width || undefined,
+      height: assetForm.height || undefined,
+      size: assetForm.size || undefined,
+      usedIn: usedInArray,
+      cloudinaryPublicId: assetForm.cloudinaryPublicId || undefined,
+    });
+
     setIsAddModalOpen(false);
-    setNewAsset({
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setAssetForm({
       name: "",
       url: "",
       type: "image",
       format: "JPG",
-      width: 1920,
-      height: 1080,
-      size: "450 KB",
+      width: 0,
+      height: 0,
+      size: "",
       usedIn: [],
+      usedInInput: "",
       cloudinaryPublicId: "",
     });
+    setUploadError(null);
+    setUrlPreviewStatus("idle");
   };
 
   return (
@@ -84,9 +234,9 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
       {/* View Header */}
       <div className={styles.viewHeader}>
         <div className={styles.viewTitleGroup}>
-          <h1 className={styles.viewTitle}>Media Library</h1>
+          <h1 className={styles.viewTitle}>Media Assets Library</h1>
           <p className={styles.viewSubtitle}>
-            Centralized Cloudinary media store, video demonstrations, posters, and architectural diagrams.
+            Centralized media storage: upload images & videos, register external URLs, and copy links for cards, banners, and project case studies.
           </p>
         </div>
 
@@ -94,10 +244,13 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
           <button
             type="button"
             className={`${styles.btn} ${styles.btnPrimary}`}
-            onClick={() => setIsAddModalOpen(true)}
+            onClick={() => {
+              resetForm();
+              setIsAddModalOpen(true);
+            }}
           >
             <Plus size={15} />
-            <span>Add Media Asset</span>
+            <span>Add Asset (Upload / URL)</span>
           </button>
         </div>
       </div>
@@ -109,7 +262,7 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
           <input
             type="text"
             className={styles.searchInput}
-            placeholder="Search assets by filename or URL..."
+            placeholder="Search assets by name, URL, format (e.g. WebP, MP4)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -146,7 +299,7 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: selectedAsset ? "1fr 340px" : "1fr",
+          gridTemplateColumns: selectedAsset ? "1fr 360px" : "1fr",
           gap: "1.5rem",
           alignItems: "start",
         }}
@@ -155,11 +308,11 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
         {filteredAssets.length === 0 ? (
           <div className={styles.emptyState}>
             <div className={styles.emptyStateIcon}>
-              <ImageIcon size={22} />
+              <ImageIcon size={24} />
             </div>
             <h3 className={styles.emptyStateTitle}>No media assets found</h3>
             <p className={styles.emptyStateText}>
-              No items match your search. Click &ldquo;Add Media Asset&rdquo; above to register new Cloudinary or local assets.
+              No media items match your search. Click &ldquo;Add Asset&rdquo; above to upload a file or register an image/video URL.
             </p>
           </div>
         ) : (
@@ -186,30 +339,34 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
                         src={asset.url}
                         alt={asset.name}
                         fill
-                        sizes="240px"
+                        sizes="260px"
                         className={styles.mediaThumbImg}
+                        unoptimized={asset.url.startsWith("http")}
                       />
                     )}
                   </div>
 
                   {/* Metadata underneath thumbnail */}
                   <div className={styles.mediaMeta}>
-                    <p className={styles.mediaTitle}>{asset.name}</p>
+                    <p className={styles.mediaTitle} title={asset.name}>
+                      {asset.name}
+                    </p>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                       <span className={styles.mediaDimensions}>
                         {asset.format || (asset.type === "video" ? "MP4" : "IMG")}
+                        {asset.width && asset.height ? ` • ${asset.width}×${asset.height}` : ""}
                         {asset.size ? ` • ${asset.size}` : ""}
                       </span>
 
                       <button
                         type="button"
                         className={`${styles.btn} ${styles.btnGhost} ${styles.btnSm}`}
-                        style={{ padding: "0.2rem 0.4rem" }}
+                        style={{ padding: "0.25rem 0.5rem" }}
                         onClick={(e) => {
                           e.stopPropagation();
                           handleCopyUrl(asset.url, asset.id);
                         }}
-                        title="Copy URL"
+                        title="Copy Asset URL"
                       >
                         {copiedId === asset.id ? (
                           <Check size={12} style={{ color: "#22c55e" }} />
@@ -229,8 +386,8 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
         {selectedAsset && (
           <div
             style={{
-              backgroundColor: "#191b20",
-              border: "1px solid #292b31",
+              backgroundColor: "#16171b",
+              border: "1px solid #282a32",
               borderRadius: "8px",
               padding: "1.25rem",
               display: "flex",
@@ -253,7 +410,7 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
               </button>
             </div>
 
-            {/* Large Preview */}
+            {/* Large Live Preview */}
             <div
               style={{
                 width: "100%",
@@ -262,7 +419,7 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
                 borderRadius: "6px",
                 overflow: "hidden",
                 position: "relative",
-                border: "1px solid #292b31",
+                border: "1px solid #282a32",
               }}
             >
               {selectedAsset.type === "video" ? (
@@ -276,10 +433,33 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
                   src={selectedAsset.url}
                   alt={selectedAsset.name}
                   fill
-                  sizes="320px"
+                  sizes="360px"
                   style={{ objectFit: "contain" }}
+                  unoptimized={selectedAsset.url.startsWith("http")}
                 />
               )}
+            </div>
+
+            {/* URL Box with One-Click Copy */}
+            <div className={styles.formGroup} style={{ gap: "0.35rem" }}>
+              <label className={styles.formLabel}>Asset URL</label>
+              <div style={{ display: "flex", gap: "0.5rem" }}>
+                <input
+                  type="text"
+                  readOnly
+                  value={selectedAsset.url}
+                  className={styles.inputField}
+                  style={{ fontSize: "0.75rem", fontFamily: "var(--font-mono, monospace)" }}
+                />
+                <button
+                  type="button"
+                  className={`${styles.btn} ${styles.btnPrimary}`}
+                  style={{ padding: "0 0.85rem", whiteSpace: "nowrap" }}
+                  onClick={() => handleCopyUrl(selectedAsset.url, selectedAsset.id)}
+                >
+                  {copiedId === selectedAsset.id ? <Check size={14} /> : <Copy size={14} />}
+                </button>
+              </div>
             </div>
 
             {/* Details */}
@@ -291,6 +471,10 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
               <div>
                 <span style={{ color: "#92949d" }}>Type: </span>
                 <span style={{ color: "#f2f2f0", textTransform: "capitalize" }}>{selectedAsset.type}</span>
+              </div>
+              <div>
+                <span style={{ color: "#92949d" }}>Format: </span>
+                <span style={{ color: "#a3e635", fontWeight: 600 }}>{selectedAsset.format || "N/A"}</span>
               </div>
               {selectedAsset.width && selectedAsset.height && (
                 <div>
@@ -308,8 +492,8 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
               )}
               {selectedAsset.usedIn && selectedAsset.usedIn.length > 0 && (
                 <div>
-                  <span style={{ color: "#92949d" }}>Used in: </span>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.25rem", marginTop: "0.25rem" }}>
+                  <span style={{ color: "#92949d" }}>Referenced in: </span>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.25rem", marginTop: "0.35rem" }}>
                     {selectedAsset.usedIn.map((place) => (
                       <span
                         key={place}
@@ -332,15 +516,6 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
 
             {/* Actions */}
             <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", paddingTop: "0.5rem" }}>
-              <button
-                type="button"
-                className={`${styles.btn} ${styles.btnPrimary}`}
-                onClick={() => handleCopyUrl(selectedAsset.url, selectedAsset.id)}
-              >
-                {copiedId === selectedAsset.id ? <Check size={14} /> : <Copy size={14} />}
-                <span>{copiedId === selectedAsset.id ? "URL Copied to Clipboard" : "Copy Asset URL"}</span>
-              </button>
-
               <a
                 href={selectedAsset.url}
                 target="_blank"
@@ -355,7 +530,7 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
                 type="button"
                 className={`${styles.btn} ${styles.btnDanger}`}
                 onClick={async () => {
-                  if (confirm(`Remove asset "${selectedAsset.name}"?`)) {
+                  if (confirm(`Remove asset "${selectedAsset.name}" from library?`)) {
                     await onDeleteAsset(selectedAsset.id);
                     setSelectedAsset(null);
                   }
@@ -375,8 +550,9 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
           <div
             className={styles.modalDialog}
             onClick={(e) => e.stopPropagation()}
-            style={{ maxWidth: "520px" }}
+            style={{ maxWidth: "560px" }}
           >
+            {/* Modal Header */}
             <div className={styles.modalHeader}>
               <h3 className={styles.modalTitle}>Add Media Asset</h3>
               <button
@@ -388,75 +564,277 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
               </button>
             </div>
 
-            <form onSubmit={handleCreateAsset}>
+            {/* Modal Navigation Tabs */}
+            <div className={styles.assetModalTabs}>
+              <button
+                type="button"
+                className={`${styles.assetTabBtn} ${modalTab === "upload" ? styles.assetTabBtnActive : ""}`}
+                onClick={() => {
+                  setModalTab("upload");
+                  resetForm();
+                }}
+              >
+                <Upload size={14} />
+                <span>Direct File Upload</span>
+              </button>
+
+              <button
+                type="button"
+                className={`${styles.assetTabBtn} ${modalTab === "image-url" ? styles.assetTabBtnActive : ""}`}
+                onClick={() => {
+                  setModalTab("image-url");
+                  resetForm();
+                  setAssetForm((prev) => ({ ...prev, type: "image" }));
+                }}
+              >
+                <ImageIcon size={14} />
+                <span>Image from URL</span>
+              </button>
+
+              <button
+                type="button"
+                className={`${styles.assetTabBtn} ${modalTab === "video-url" ? styles.assetTabBtnActive : ""}`}
+                onClick={() => {
+                  setModalTab("video-url");
+                  resetForm();
+                  setAssetForm((prev) => ({ ...prev, type: "video" }));
+                }}
+              >
+                <Film size={14} />
+                <span>Video from URL</span>
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveAsset}>
               <div className={styles.modalBody}>
-                <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                  <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>Asset Name *</label>
-                    <input
-                      type="text"
-                      className={styles.inputField}
-                      value={newAsset.name}
-                      onChange={(e) => setNewAsset({ ...newAsset, name: e.target.value })}
-                      placeholder="e.g. Distributed Consensus Diagram"
-                      required
-                    />
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>Asset URL (Cloudinary / Local Path) *</label>
-                    <input
-                      type="text"
-                      className={styles.inputField}
-                      value={newAsset.url}
-                      onChange={(e) => setNewAsset({ ...newAsset, url: e.target.value })}
-                      placeholder="https://res.cloudinary.com/... or /images/..."
-                      required
-                    />
-                  </div>
-
-                  <div className={styles.fieldGrid}>
-                    <div className={styles.formGroup}>
-                      <label className={styles.formLabel}>Type</label>
-                      <select
-                        className={styles.selectField}
-                        value={newAsset.type}
-                        onChange={(e) =>
-                          setNewAsset({ ...newAsset, type: e.target.value as "image" | "video" })
-                        }
+                {/* 1. Direct File Upload Tab */}
+                {modalTab === "upload" && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                    {!assetForm.url ? (
+                      <div
+                        className={`${styles.uploadDropzone} ${isDragOver ? styles.uploadDropzoneActive : ""}`}
+                        onDragOver={(e) => {
+                          e.preventDefault();
+                          setIsDragOver(true);
+                        }}
+                        onDragLeave={() => setIsDragOver(false)}
+                        onDrop={handleDrop}
+                        onClick={() => fileInputRef.current?.click()}
                       >
-                        <option value="image">Image (JPG, PNG, WebP)</option>
-                        <option value="video">Video (MP4, WebM)</option>
-                      </select>
-                    </div>
+                        <input
+                          ref={fileInputRef}
+                          type="file"
+                          accept="image/*,video/*"
+                          style={{ display: "none" }}
+                          onChange={(e) => {
+                            if (e.target.files && e.target.files[0]) {
+                              handleFileUpload(e.target.files[0]);
+                            }
+                          }}
+                        />
 
+                        {isUploading ? (
+                          <>
+                            <div className={styles.uploadDropzoneIcon}>
+                              <Loader2 size={24} className="animate-spin" />
+                            </div>
+                            <p className={styles.uploadDropzoneTitle}>Uploading & Optimizing Media...</p>
+                            <p className={styles.uploadDropzoneSubtitle}>
+                              Generating responsive WebP / downscaling oversized dimensions
+                            </p>
+                          </>
+                        ) : (
+                          <>
+                            <div className={styles.uploadDropzoneIcon}>
+                              <Upload size={22} />
+                            </div>
+                            <p className={styles.uploadDropzoneTitle}>
+                              Drop images or videos here, or click to browse
+                            </p>
+                            <p className={styles.uploadDropzoneSubtitle}>
+                              Supports JPG, PNG, WebP, AVIF, MP4 & WebM (Auto-compressed & resized)
+                            </p>
+                          </>
+                        )}
+                      </div>
+                    ) : (
+                      /* Uploaded Media Live Preview Card */
+                      <div className={styles.uploadPreviewCard}>
+                        <div className={styles.uploadPreviewHeader}>
+                          <span className={styles.uploadPreviewBadge}>
+                            Uploaded & Ready • {assetForm.format} • {assetForm.size}
+                          </span>
+                          <button
+                            type="button"
+                            className={`${styles.btn} ${styles.btnGhost} ${styles.btnSm}`}
+                            onClick={() => fileInputRef.current?.click()}
+                          >
+                            Replace File
+                          </button>
+                        </div>
+
+                        <div className={styles.uploadPreviewMediaFrame}>
+                          {assetForm.type === "video" ? (
+                            <video
+                              src={assetForm.url}
+                              controls
+                              style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                            />
+                          ) : (
+                            <Image
+                              src={assetForm.url}
+                              alt={assetForm.name}
+                              fill
+                              style={{ objectFit: "contain" }}
+                              unoptimized
+                            />
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {uploadError && (
+                      <div style={{ color: "#ef4444", fontSize: "0.8rem", display: "flex", alignItems: "center", gap: "0.35rem" }}>
+                        <AlertCircle size={14} />
+                        <span>{uploadError}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* 2. Image from URL Tab */}
+                {modalTab === "image-url" && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                     <div className={styles.formGroup}>
-                      <label className={styles.formLabel}>Approximate Size</label>
+                      <label className={styles.formLabel}>Image URL *</label>
                       <input
                         type="text"
                         className={styles.inputField}
-                        value={newAsset.size}
-                        onChange={(e) => setNewAsset({ ...newAsset, size: e.target.value })}
-                        placeholder="e.g. 520 KB"
+                        value={assetForm.url}
+                        onChange={(e) => setAssetForm({ ...assetForm, url: e.target.value })}
+                        placeholder="https://res.cloudinary.com/... or /images/..."
+                        required
                       />
                     </div>
-                  </div>
 
-                  <div className={styles.formGroup}>
-                    <label className={styles.formLabel}>Cloudinary Public ID (Optional)</label>
-                    <input
-                      type="text"
-                      className={styles.inputField}
-                      value={newAsset.cloudinaryPublicId}
-                      onChange={(e) =>
-                        setNewAsset({ ...newAsset, cloudinaryPublicId: e.target.value })
-                      }
-                      placeholder="e.g. portfolio/skyline_twilight"
-                    />
+                    {/* Live Image URL Verification Preview */}
+                    {assetForm.url && (
+                      <div className={styles.uploadPreviewCard}>
+                        <div className={styles.uploadPreviewHeader}>
+                          {urlPreviewStatus === "loading" && (
+                            <span style={{ fontSize: "0.75rem", color: "#92949d" }}>
+                              Testing URL connection...
+                            </span>
+                          )}
+                          {urlPreviewStatus === "valid" && (
+                            <span className={styles.uploadPreviewBadge}>
+                              Valid Image • {assetForm.width} × {assetForm.height} px ({assetForm.format})
+                            </span>
+                          )}
+                          {urlPreviewStatus === "error" && (
+                            <span style={{ fontSize: "0.75rem", color: "#ef4444" }}>
+                              Unable to load image from URL.
+                            </span>
+                          )}
+                        </div>
+
+                        <div className={styles.uploadPreviewMediaFrame}>
+                          {urlPreviewStatus === "valid" ? (
+                            <Image
+                              src={assetForm.url}
+                              alt="URL Preview"
+                              fill
+                              style={{ objectFit: "contain" }}
+                              unoptimized
+                            />
+                          ) : (
+                            <ImageIcon size={32} style={{ color: "#3a3c44" }} />
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </div>
-                </div>
+                )}
+
+                {/* 3. Video from URL Tab */}
+                {modalTab === "video-url" && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>Video URL (MP4 / WebM / Cloudinary Stream) *</label>
+                      <input
+                        type="text"
+                        className={styles.inputField}
+                        value={assetForm.url}
+                        onChange={(e) => handleVideoUrlChange(e.target.value)}
+                        placeholder="https://res.cloudinary.com/.../video.mp4 or /images/skyline_banner.mp4"
+                        required
+                      />
+                    </div>
+
+                    {/* Live Video Player Preview */}
+                    {assetForm.url && (
+                      <div className={styles.uploadPreviewCard}>
+                        <div className={styles.uploadPreviewHeader}>
+                          <span className={styles.uploadPreviewBadge}>
+                            Video Stream Preview ({assetForm.format})
+                          </span>
+                        </div>
+
+                        <div className={styles.uploadPreviewMediaFrame}>
+                          <video
+                            src={assetForm.url}
+                            controls
+                            style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Common Metadata Fields (Shown when URL or File is present) */}
+                {assetForm.url && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid #24262d" }}>
+                    <div className={styles.formGroup}>
+                      <label className={styles.formLabel}>Asset Name / Title *</label>
+                      <input
+                        type="text"
+                        className={styles.inputField}
+                        value={assetForm.name}
+                        onChange={(e) => setAssetForm({ ...assetForm, name: e.target.value })}
+                        placeholder="e.g. Skyline Architecture Monograph"
+                        required
+                      />
+                    </div>
+
+                    <div className={styles.fieldGrid}>
+                      <div className={styles.formGroup}>
+                        <label className={styles.formLabel}>Referenced / Used in (Optional)</label>
+                        <input
+                          type="text"
+                          className={styles.inputField}
+                          value={assetForm.usedInInput}
+                          onChange={(e) => setAssetForm({ ...assetForm, usedInInput: e.target.value })}
+                          placeholder="e.g. Hero, Project RAG, About"
+                        />
+                      </div>
+
+                      <div className={styles.formGroup}>
+                        <label className={styles.formLabel}>Cloudinary ID (Optional)</label>
+                        <input
+                          type="text"
+                          className={styles.inputField}
+                          value={assetForm.cloudinaryPublicId}
+                          onChange={(e) => setAssetForm({ ...assetForm, cloudinaryPublicId: e.target.value })}
+                          placeholder="e.g. portfolio/hero_banner"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
+              {/* Modal Footer */}
               <div className={styles.modalFooter}>
                 <button
                   type="button"
@@ -465,8 +843,12 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
                 >
                   Cancel
                 </button>
-                <button type="submit" className={`${styles.btn} ${styles.btnPrimary}`}>
-                  Save Asset
+                <button
+                  type="submit"
+                  className={`${styles.btn} ${styles.btnPrimary}`}
+                  disabled={!assetForm.url || !assetForm.name || isUploading}
+                >
+                  Save to Media Library
                 </button>
               </div>
             </form>
