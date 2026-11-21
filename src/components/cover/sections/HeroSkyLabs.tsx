@@ -123,47 +123,56 @@ export default function HeroSkyLabs() {
             </span>
           </Link>
 
-          {/* Right Navigation: 4 Essential, Beautiful Capital Letter Nav Links */}
-          <div className={styles.navRight}>
-            <nav className={styles.desktopNav} aria-label="Main Navigation">
-              <a
-                href="#skills"
-                onClick={(e) => handleSlowScroll(e, "skills")}
-                className={`${styles.navLink} ${activeSection === "skills" ? styles.navLinkActive : ""
-                  }`}
-              >
-                EXPERTISE
-              </a>
-              <Link
-                href="/projects"
-                className={`${styles.navLink} ${activeSection === "projects" ? styles.navLinkActive : ""
-                  }`}
-              >
-                PROJECTS
-              </Link>
-              <Link
-                href="/about"
-                className={`${styles.navLink} ${activeSection === "about-me" ? styles.navLinkActive : ""
-                  }`}
-              >
-                ABOUT
-              </Link>
-              <a
-                href="#contact"
-                onClick={(e) => handleSlowScroll(e, "contact")}
-                className={`${styles.navLink} ${activeSection === "contact" ? styles.navLinkActive : ""
-                  }`}
-              >
-                CONTACT
-              </a>
+          {/* Center Navigation: Links positioned in the middle of the navbar */}
+          <nav className={styles.desktopNav} aria-label="Main Navigation">
+            <a
+              href="#skills"
+              onClick={(e) => handleSlowScroll(e, "skills")}
+              className={`${styles.navLink} ${activeSection === "skills" ? styles.navLinkActive : ""
+                }`}
+            >
+              EXPERTISE
+            </a>
+            <Link
+              href="/projects"
+              className={`${styles.navLink} ${activeSection === "projects" ? styles.navLinkActive : ""
+                }`}
+            >
+              PROJECTS
+            </Link>
+            <Link
+              href="/about"
+              className={`${styles.navLink} ${activeSection === "about-me" ? styles.navLinkActive : ""
+                }`}
+            >
+              ABOUT
+            </Link>
+            <a
+              href="#contact"
+              onClick={(e) => handleSlowScroll(e, "contact")}
+              className={`${styles.navLink} ${activeSection === "contact" ? styles.navLinkActive : ""
+                }`}
+            >
+              CONTACT
+            </a>
 
-              {/* Desktop Theme Toggle Button */}
-              <ThemeToggle className={styles.themeToggleBtn} />
-            </nav>
+            {/* Desktop Theme Toggle: Nav Link style, toggles between NIGHT and LIGHT, no icon */}
+            <ThemeToggle variant="nav-link" className={styles.themeNavLink} />
+          </nav>
+
+          {/* Right Navigation: Pink Rectangular Button ("Join 70K+ Readers") */}
+          <div className={styles.navRight}>
+            <a
+              href="#contact"
+              onClick={(e) => handleSlowScroll(e, "contact")}
+              className={styles.ctaButton}
+            >
+              Join 70K+ Readers
+            </a>
 
             {/* Mobile Right Actions: Theme Toggle + Minimalist Hamburger Button */}
             <div className={styles.mobileActions}>
-              <ThemeToggle className={styles.mobileThemeToggle} />
+              <ThemeToggle variant="nav-link" className={styles.mobileThemeToggle} />
               <button
                 type="button"
                 className={`${styles.hamburgerBtn} ${menuOpen ? styles.hamburgerActive : ""}`}
@@ -226,6 +235,23 @@ export default function HeroSkyLabs() {
                       )}
                     </motion.div>
                   ))}
+
+                  {/* Mobile CTA Button in Menu */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.35, delay: 0.3 }}
+                    className={styles.menuCtaWrap}
+                  >
+                    <a
+                      href="#contact"
+                      onClick={(e) => handleSlowScroll(e, "contact")}
+                      className={styles.menuCtaButton}
+                    >
+                      Join 70K+ Readers
+                    </a>
+                  </motion.div>
                 </nav>
 
                 {/* Mobile Overlay Theme Toggle Switcher */}
@@ -233,10 +259,10 @@ export default function HeroSkyLabs() {
                   className={styles.menuFooter}
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.35, delay: 0.32 }}
+                  transition={{ duration: 0.35, delay: 0.34 }}
                 >
-                  <span className={styles.menuFooterText}>SWITCH APPEARANCE</span>
-                  <ThemeToggle className={styles.menuThemeToggle} />
+                  <span className={styles.menuFooterText}>APPEARANCE</span>
+                  <ThemeToggle variant="nav-link" className={styles.menuThemeToggle} />
                 </motion.div>
               </div>
             </motion.div>

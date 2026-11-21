@@ -6,7 +6,7 @@ import { Sun, Moon } from "lucide-react";
 
 interface ThemeToggleProps {
   className?: string;
-  variant?: "icon" | "navLink" | "text";
+  variant?: "nav-link" | "icon";
 }
 
 export function ThemeToggle({ className = "", variant = "icon" }: ThemeToggleProps) {
@@ -19,33 +19,34 @@ export function ThemeToggle({ className = "", variant = "icon" }: ThemeTogglePro
 
   const isLight = mounted && theme === "light";
 
-  if (variant === "navLink" || variant === "text") {
+  if (variant === "icon") {
     return (
       <button
         type="button"
-        className={className}
+        className={`theme-toggle-btn ${className}`}
         onClick={toggleTheme}
-        aria-label={isLight ? "Switch to Night appearance" : "Switch to Light appearance"}
-        title={isLight ? "Switch to Night appearance" : "Switch to Light appearance"}
+        aria-label={isLight ? "Switch to Night mode" : "Switch to Light mode"}
+        title={isLight ? "Switch to Night mode" : "Switch to Light mode"}
       >
-        {isLight ? "NIGHT" : "LIGHT"}
+        {isLight ? (
+          <Moon size={16} strokeWidth={2} className="theme-toggle-icon" />
+        ) : (
+          <Sun size={16} strokeWidth={2} className="theme-toggle-icon" />
+        )}
       </button>
     );
   }
 
+  // "nav-link" text variant — toggles between NIGHT and LIGHT with zero icons
   return (
     <button
       type="button"
-      className={`theme-toggle-btn ${className}`}
+      className={className}
       onClick={toggleTheme}
-      aria-label={isLight ? "Switch to Dark theme" : "Switch to Light theme"}
-      title={isLight ? "Switch to Dark theme" : "Switch to Light theme"}
+      aria-label={isLight ? "Switch to Night mode" : "Switch to Light mode"}
+      title={isLight ? "Switch to Night mode" : "Switch to Light mode"}
     >
-      {isLight ? (
-        <Moon size={16} strokeWidth={2} className="theme-toggle-icon" />
-      ) : (
-        <Sun size={16} strokeWidth={2} className="theme-toggle-icon" />
-      )}
+      {isLight ? "NIGHT" : "LIGHT"}
     </button>
   );
 }

@@ -63,73 +63,63 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
       role="banner"
     >
       <div className={styles.navContainer}>
-        {/* Left: Brand Wordmark matching reference typography */}
-        <div className={styles.navLeft}>
-          <Link href="/" className={styles.brandLink} title="DILSHAN.">
-            <span className={styles.brandWordmark}>
-              DILSHAN<span className={styles.brandDot}>.</span>
-            </span>
-          </Link>
-        </div>
+        {/* Left Column: Brand Wordmark */}
+        <Link href="/" className={styles.brandLink} title="DILSHAN.">
+          <span className={styles.brandWordmark}>
+            DILSHAN<span className={styles.brandDot}>.</span>
+          </span>
+        </Link>
 
-        {/* Center: Nav links positioned in the middle of the navbar + Text Theme Toggle */}
-        <div className={styles.navCenter}>
-          <nav className={styles.desktopNav} aria-label="Main Navigation">
-            <Link
-              href="/#skills"
-              className={`${styles.navLink} ${activeTab === "services" || activeTab === "expertise"
-                  ? styles.navLinkActive
-                  : ""
-                }`}
-            >
-              EXPERTISE
-            </Link>
-            <Link
-              href="/projects"
-              className={`${styles.navLink} ${activeTab === "projects" || pathname.startsWith("/projects")
-                  ? styles.navLinkActive
-                  : ""
-                }`}
-            >
-              PROJECTS
-            </Link>
-            <Link
-              href="/about"
-              className={`${styles.navLink} ${activeTab === "about" || pathname === "/about"
-                  ? styles.navLinkActive
-                  : ""
-                }`}
-            >
-              ABOUT
-            </Link>
-            <Link
-              href="/#contact"
-              className={`${styles.navLink} ${activeTab === "contact" ? styles.navLinkActive : ""
-                }`}
-            >
-              CONTACT
-            </Link>
-
-            {/* Theme Toggle styled like a nav link: Text only (NIGHT / LIGHT), no icon */}
-            <ThemeToggle
-              variant="navLink"
-              className={`${styles.navLink} ${styles.themeNavLink}`}
-            />
-          </nav>
-        </div>
-
-        {/* Right Corner: Rectangular Pink Button (matching reference image) + Mobile Hamburger */}
-        <div className={styles.navRight}>
+        {/* Center Column: Navigation links positioned in the middle of the navbar */}
+        <nav className={styles.desktopNav} aria-label="Main Navigation">
           <Link
-            href="/portfolio/blog"
-            className={styles.pinkCtaBtn}
-            title="Join 70K+ Readers"
+            href="/#skills"
+            className={`${styles.navLink} ${activeTab === "services" || activeTab === "expertise"
+                ? styles.navLinkActive
+                : ""
+              }`}
           >
+            EXPERTISE
+          </Link>
+          <Link
+            href="/projects"
+            className={`${styles.navLink} ${activeTab === "projects" || pathname.startsWith("/projects")
+                ? styles.navLinkActive
+                : ""
+              }`}
+          >
+            PROJECTS
+          </Link>
+          <Link
+            href="/about"
+            className={`${styles.navLink} ${activeTab === "about" || pathname === "/about"
+                ? styles.navLinkActive
+                : ""
+              }`}
+          >
+            ABOUT
+          </Link>
+          <Link
+            href="/#contact"
+            className={`${styles.navLink} ${activeTab === "contact" ? styles.navLinkActive : ""
+              }`}
+          >
+            CONTACT
+          </Link>
+
+          {/* Theme Toggle styled like a Nav Link: changes text between NIGHT and LIGHT, no icon */}
+          <ThemeToggle variant="nav-link" className={styles.themeNavLink} />
+        </nav>
+
+        {/* Right Column: Sharp Pink Rectangular Button ("Join 70K+ Readers") */}
+        <div className={styles.navRight}>
+          <Link href="/#contact" className={styles.ctaButton}>
             Join 70K+ Readers
           </Link>
 
-          {/* Mobile Hamburger Button */}
+          {/* Mobile Right Actions: Theme Toggle + Minimalist Hamburger Button */}
           <div className={styles.mobileActions}>
+            <ThemeToggle variant="nav-link" className={styles.mobileThemeToggle} />
             <button
               type="button"
               className={`${styles.hamburgerBtn} ${menuOpen ? styles.hamburgerActive : ""}`}
@@ -191,36 +181,33 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
                   );
                 })}
 
-                {/* Pink CTA Button in Mobile Menu Drawer */}
+                {/* Mobile CTA Button */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.35, delay: 0.28 }}
+                  transition={{ duration: 0.35, delay: 0.3 }}
                   className={styles.menuCtaWrap}
                 >
                   <Link
-                    href="/portfolio/blog"
+                    href="/#contact"
                     onClick={() => setMenuOpen(false)}
-                    className={styles.pinkCtaBtnMobile}
+                    className={styles.menuCtaButton}
                   >
                     Join 70K+ Readers
                   </Link>
                 </motion.div>
               </nav>
 
-              {/* Mobile Overlay Theme Toggle Switcher: Text only */}
+              {/* Mobile Overlay Theme Toggle Switcher */}
               <motion.div
                 className={styles.menuFooter}
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, delay: 0.35 }}
+                transition={{ duration: 0.35, delay: 0.34 }}
               >
                 <span className={styles.menuFooterText}>APPEARANCE</span>
-                <ThemeToggle
-                  variant="navLink"
-                  className={styles.menuThemeTextToggle}
-                />
+                <ThemeToggle variant="nav-link" className={styles.menuThemeToggle} />
               </motion.div>
             </div>
           </motion.div>
