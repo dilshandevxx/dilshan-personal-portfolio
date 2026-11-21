@@ -1,19 +1,20 @@
 /* =========================================================================
    Visual Engineering Showcase Banner
-   Cinematic wide frame directly beneath About Me section.
+   Cinematic wide frame aligned with site layout grid.
    Rounded container, subtle obsidian border, hardware-accelerated zoom hover.
    ========================================================================= */
 
 .showcaseSection {
   background-color: #111111;
   width: 100%;
-  padding: clamp(3rem, 5vw, 5.5rem) clamp(1.25rem, 4vw, 3.5rem) clamp(6.5rem, 9.5vw, 10.5rem);
+  padding: clamp(2rem, 3.5vw, 3.5rem) clamp(1.5rem, 5vw, 4rem) clamp(4.5rem, 7vw, 6.5rem);
   box-sizing: border-box;
   position: relative;
+  transition: background-color 0.3s ease;
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1280px;
   margin: 0 auto;
   width: 100%;
 }
@@ -21,8 +22,8 @@
 .bannerFrame {
   position: relative;
   width: 100%;
-  height: clamp(680px, 86vh, 980px);
-  border-radius: clamp(16px, 2vw, 24px);
+  height: clamp(580px, 76vh, 860px);
+  border-radius: clamp(16px, 2vw, 22px);
   overflow: hidden;
   background-color: #161616;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -74,24 +75,24 @@
    ========================================================================= */
 @media (max-width: 1024px) {
   .bannerFrame {
-    height: clamp(540px, 72vh, 720px);
+    height: clamp(500px, 68vh, 680px);
   }
 }
 
 @media (max-width: 768px) {
   .showcaseSection {
-    padding: 2rem 1.25rem clamp(4.5rem, 7vw, 6rem);
+    padding: 1.5rem 1.25rem clamp(3.5rem, 6vw, 5rem);
   }
 
   .bannerFrame {
-    height: clamp(440px, 68vh, 580px);
+    height: clamp(420px, 60vh, 540px);
     border-radius: 14px;
   }
 }
 
 @media (max-width: 480px) {
   .bannerFrame {
-    height: clamp(380px, 62vh, 480px);
+    height: clamp(360px, 54vh, 440px);
   }
 }
 

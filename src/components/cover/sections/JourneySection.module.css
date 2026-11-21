@@ -3,16 +3,17 @@
   width: 100%;
   background-color: #111111;
   color: #ffffff;
-  padding: clamp(6.5rem, 11vw, 10rem) clamp(1.5rem, 5vw, 4rem);
+  padding: clamp(4.5rem, 7vw, 6.5rem) clamp(1.5rem, 5vw, 4rem);
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @media (max-width: 768px) {
   .journeySection {
-    padding: clamp(4.5rem, 8vw, 6rem) 1.25rem;
+    padding: clamp(3.5rem, 6vw, 5rem) 1.25rem;
   }
 }
 
@@ -23,7 +24,7 @@
 }
 
 .journeyHeader {
-  margin-bottom: clamp(3rem, 5vw, 4.5rem);
+  margin-bottom: clamp(2.5rem, 4.5vw, 3.8rem);
 }
 
 .indicator {
@@ -50,7 +51,7 @@
 
 .journeyHeadline {
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.025em;
@@ -74,7 +75,8 @@
   min-height: 420px;
   border-radius: 14px;
   overflow: hidden;
-  background-color: #1a1a1a;
+  background-color: #181818;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
@@ -91,7 +93,7 @@
 .milestonesGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(2.5rem, 4vw, 3.5rem) clamp(2.5rem, 4vw, 4.5rem);
+  gap: clamp(2.25rem, 3.5vw, 3.25rem) clamp(2.5rem, 4vw, 4.5rem);
   align-items: start;
 }
 
@@ -126,7 +128,7 @@
   }
 
   .milestonesGrid {
-    gap: 2.25rem 2.5rem;
+    gap: 2rem 2.5rem;
   }
 }
 
@@ -178,7 +180,8 @@
 }
 
 :global([data-theme="light"]) .journeyPhotoCard {
-  background-color: #e5e5e5;
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 

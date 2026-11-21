@@ -1,25 +1,26 @@
 /* =========================================================================
-   About Me Page — Faithful Reproduction of Reference Webflow Editorial Stage
-   Pure white canvas (#ffffff), black headline, charcoal narrative paragraphs,
-   giant black stats, and exact 3-stage photo layout with carousel indicator.
+   About Me Page — Cohesive Editorial Layout & Polish
+   Dark canvas (#111111) / Light canvas (#f9f7f2), perfectly aligned grids,
+   proportional vertical rhythm, and exact 3-stage photo + stats story layout.
    ========================================================================= */
 
 .pageRoot {
-  background-color: #ffffff;
+  background-color: #111111;
   min-height: 100vh;
   width: 100%;
-  color: #111111;
+  color: #ffffff;
   position: relative;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  padding-top: 5.5rem;
+  padding-top: 5rem;
   box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .mainContainer {
   max-width: 1280px;
   margin: 0 auto;
-  padding: clamp(3rem, 5vw, 5.5rem) clamp(1.25rem, 4vw, 3.5rem) clamp(5rem, 7vw, 7.5rem);
+  padding: clamp(3.5rem, 6vw, 5.5rem) clamp(1.5rem, 5vw, 4rem) clamp(3rem, 4.5vw, 4rem);
   width: 100%;
   box-sizing: border-box;
 }
@@ -29,15 +30,15 @@
 }
 
 /* =========================================================================
-   3-Column Grid Layout (Matching Exact Reference Image)
-   Left: 2 Stacked Photo Cards (~200px)
-   Middle: Headline & Body Narrative (1fr)
-   Right: Giant Stats Block & Portrait Card (~240px)
+   3-Column Grid Layout (Faithfully Matching Webflow Reference)
+   Left: 2 Vertically Stacked Photo Cards (200px - 220px)
+   Middle: Headline & Thoughtful Narrative (1fr)
+   Right: Giant Stats Block & Portrait Photo Card (240px - 270px)
    ========================================================================= */
 .storyGrid {
   display: grid;
-  grid-template-columns: 200px 1fr 240px;
-  gap: clamp(2rem, 3.8vw, 4.5rem);
+  grid-template-columns: 210px 1fr 260px;
+  gap: clamp(2.5rem, 4.5vw, 5rem);
   align-items: start;
   width: 100%;
 }
@@ -53,21 +54,21 @@
   position: relative;
 }
 
-/* Left Carousel Tab matching reference */
+/* Left Carousel Tab matching reference left edge */
 .carouselTab {
   position: absolute;
-  left: -24px;
+  left: -20px;
   top: 50%;
   transform: translateY(-50%);
   width: 22px;
   height: 38px;
-  background-color: #3f3f46;
+  background-color: #27272a;
   border-radius: 6px 0 0 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   z-index: 5;
   pointer-events: none;
 }
@@ -79,11 +80,12 @@
 .photoCardSmall {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1 / 1.05;
   border-radius: 14px;
   overflow: hidden;
-  background-color: #f4f4f5;
-  box-shadow: 0 6px 20px -6px rgba(0, 0, 0, 0.12);
+  background-color: #181818;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
 .cardImage {
@@ -97,7 +99,7 @@
 }
 
 /* -------------------------------------------------------------
-   MIDDLE COLUMN: Bold Display Headline & Rich Typography
+   MIDDLE COLUMN: Bold Display Headline & Rich Narrative
    ------------------------------------------------------------- */
 .middleCol {
   display: flex;
@@ -108,34 +110,34 @@
 
 .headline {
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(2.4rem, 3.8vw, 3.6rem);
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.03em;
-  color: #000000;
-  margin: 0 0 clamp(1.75rem, 3vw, 2.5rem) 0;
+  color: #ffffff;
+  margin: 0 0 clamp(1.75rem, 2.8vw, 2.4rem) 0;
 }
 
 .narrativeBody {
   display: flex;
   flex-direction: column;
-  gap: 1.35rem;
+  gap: 1.45rem;
 }
 
 .paragraph {
   font-family: var(--font-body, "Inter", -apple-system, sans-serif);
-  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
-  line-height: 1.7;
-  color: #52525b;
+  font-size: clamp(0.96rem, 1.15vw, 1.06rem);
+  line-height: 1.72;
+  color: #a1a1aa;
   margin: 0;
 }
 
 .punchline {
   font-family: var(--font-body, "Inter", -apple-system, sans-serif);
-  font-size: 1.05rem;
+  font-size: clamp(1.02rem, 1.2vw, 1.12rem);
   line-height: 1.65;
-  font-weight: 500;
-  color: #111111;
+  font-weight: 600;
+  color: #ffffff;
   margin: 0.5rem 0 0 0;
 }
 
@@ -151,7 +153,7 @@
 .statsBlock {
   display: flex;
   flex-direction: column;
-  margin-bottom: 2rem;
+  margin-bottom: 1.85rem;
 }
 
 .statPrimary {
@@ -161,26 +163,26 @@
 
 .statPrimaryNumber {
   font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(4rem, 6vw, 5.2rem);
+  font-size: clamp(4.2rem, 5.8vw, 5.4rem);
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.04em;
-  color: #000000;
+  color: #ffffff;
 }
 
 .statPrimaryLabel {
   font-family: var(--font-body, -apple-system, sans-serif);
   font-size: 0.92rem;
   color: #71717a;
-  margin-top: 0.45rem;
+  margin-top: 0.5rem;
   font-weight: 400;
   letter-spacing: -0.01em;
 }
 
 .statsDivider {
   height: 1px;
-  background-color: rgba(0, 0, 0, 0.12);
-  margin: 1.65rem 0 1.5rem 0;
+  background-color: rgba(255, 255, 255, 0.12);
+  margin: 1.6rem 0 1.45rem 0;
   width: 100%;
 }
 
@@ -198,10 +200,10 @@
 
 .statSecondaryNumber {
   font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(1.85rem, 2.6vw, 2.35rem);
+  font-size: clamp(1.85rem, 2.5vw, 2.35rem);
   font-weight: 800;
   line-height: 1.1;
-  color: #000000;
+  color: #ffffff;
   letter-spacing: -0.03em;
 }
 
@@ -218,11 +220,12 @@
 .photoCardPortrait {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1.05;
+  aspect-ratio: 1 / 1.15;
   border-radius: 14px;
   overflow: hidden;
-  background-color: #f4f4f5;
-  box-shadow: 0 6px 20px -6px rgba(0, 0, 0, 0.12);
+  background-color: #181818;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
 /* =========================================================================
@@ -237,7 +240,7 @@
 
 @media (max-width: 960px) {
   .mainContainer {
-    padding: 2.5rem 1.25rem 5rem;
+    padding: 2.5rem 1.25rem 4rem;
   }
 
   .storyGrid {
@@ -302,208 +305,8 @@
 }
 
 /* =========================================================================
-   JOURNEY & MILESTONES SECTION
-   High-contrast matte dark background (#111111), architectural photo card,
-   and 2-column milestone grid matching reference design.
+   LIGHT THEME OVERRIDES (Ensuring 100% Cohesive Light Theme)
    ========================================================================= */
-
-.journeySection {
-  width: 100%;
-  background-color: #111111;
-  color: #ffffff;
-  padding: clamp(4.5rem, 6.5vw, 6.5rem) clamp(1.25rem, 4vw, 3.5rem);
-  box-sizing: border-box;
-  position: relative;
-  overflow: hidden;
-}
-
-.journeyContainer {
-  max-width: 1280px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.journeyHeader {
-  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
-}
-
-.journeyEyebrow {
-  display: block;
-  font-family: var(--font-interface, "Inter", -apple-system, sans-serif);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #71717a;
-  margin-bottom: 0.5rem;
-}
-
-.journeyHeadline {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(1.85rem, 2.8vw, 2.5rem);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  color: #ffffff;
-  margin: 0;
-}
-
-/* 3-Column / Photo + 2-Column Milestones Grid */
-.journeyGrid {
-  display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: clamp(2.5rem, 4.5vw, 5rem);
-  align-items: start;
-  width: 100%;
-}
-
-.journeyPhotoCard {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 4.6;
-  min-height: 420px;
-  border-radius: 12px;
-  overflow: hidden;
-  background-color: #1a1a1a;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
-
-.journeyImage {
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.journeyPhotoCard:hover .journeyImage {
-  transform: scale(1.04);
-}
-
-/* Right 2-column Milestones Grid */
-.milestonesGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2.25rem, 3.5vw, 3.25rem) clamp(2.5rem, 4vw, 4.5rem);
-  align-items: start;
-}
-
-.milestoneItem {
-  display: flex;
-  flex-direction: column;
-}
-
-.milestoneYear {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(1.1rem, 1.35vw, 1.25rem);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: #ffffff;
-  margin: 0 0 0.65rem 0;
-}
-
-.milestoneDesc {
-  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
-  font-size: clamp(0.9rem, 1vw, 0.95rem);
-  line-height: 1.65;
-  color: #9da4ae;
-  margin: 0;
-  max-width: 400px;
-}
-
-/* Responsive adjustments for Journey section */
-@media (max-width: 1024px) {
-  .journeyGrid {
-    grid-template-columns: 280px 1fr;
-    gap: 2.5rem;
-  }
-
-  .milestonesGrid {
-    gap: 2rem 2.5rem;
-  }
-}
-
-@media (max-width: 860px) {
-  .journeyGrid {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-  }
-
-  .journeyPhotoCard {
-    width: 100%;
-    max-width: 540px;
-    aspect-ratio: 16 / 11;
-    min-height: 320px;
-  }
-
-  .milestonesGrid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 600px) {
-  .journeySection {
-    padding: 3.5rem 1.25rem;
-  }
-
-  .milestonesGrid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .milestoneYear {
-    font-size: 1.1rem;
-    margin-bottom: 0.45rem;
-  }
-
-  .milestoneDesc {
-    font-size: 0.92rem;
-    line-height: 1.6;
-  }
-}
-
-/* =========================================================================
-   THEME ADAPTATION FOR ABOUT PAGE (DARK & LIGHT)
-   ========================================================================= */
-:global([data-theme="dark"]) .pageRoot {
-  background-color: #111111;
-  color: #ffffff;
-}
-
-:global([data-theme="dark"]) .headline {
-  color: #ffffff;
-}
-
-:global([data-theme="dark"]) .paragraph {
-  color: #9da4ae;
-}
-
-:global([data-theme="dark"]) .punchline {
-  color: #ffffff;
-}
-
-:global([data-theme="dark"]) .statPrimaryNumber,
-:global([data-theme="dark"]) .statSecondaryNumber {
-  color: #ffffff;
-}
-
-:global([data-theme="dark"]) .statPrimaryLabel,
-:global([data-theme="dark"]) .statSecondaryLabel {
-  color: #71717a;
-}
-
-:global([data-theme="dark"]) .statsDivider {
-  background-color: rgba(255, 255, 255, 0.12);
-}
-
-:global([data-theme="dark"]) .photoCardSmall,
-:global([data-theme="dark"]) .photoCardPortrait {
-  background-color: #181818;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
-
-:global([data-theme="dark"]) .journeySection {
-  background-color: #161616;
-  color: #ffffff;
-}
-
 :global([data-theme="light"]) .pageRoot {
   background-color: #f9f7f2;
   color: #111111;
@@ -535,35 +338,19 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+:global([data-theme="light"]) .carouselTab {
+  background-color: #e4e4e7;
+  color: #111111;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .chevronIcon {
+  color: #111111;
+}
+
 :global([data-theme="light"]) .photoCardSmall,
 :global([data-theme="light"]) .photoCardPortrait {
   background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-}
-
-:global([data-theme="light"]) .journeySection {
-  background-color: #f4f0e6;
-  color: #111111;
-  border-top: 1px solid #e6e0d3;
-}
-
-:global([data-theme="light"]) .journeyHeadline {
-  color: #111111;
-}
-
-:global([data-theme="light"]) .journeyEyebrow {
-  color: #71717a;
-}
-
-:global([data-theme="light"]) .journeyPhotoCard {
-  background-color: #ffffff;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-}
-
-:global([data-theme="light"]) .milestoneYear {
-  color: #111111;
-}
-
-:global([data-theme="light"]) .milestoneDesc {
-  color: #5e5953;
 }
