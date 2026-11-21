@@ -112,6 +112,8 @@ export const HOMEPAGE_SECTIONS_QUERY = `
     aboutHeading,
     aboutButtonText,
     aboutStatement,
+    aboutBannerUrl,
+    aboutBannerAlt,
     contactHeadline,
     contactEmail,
     contactAvailability,

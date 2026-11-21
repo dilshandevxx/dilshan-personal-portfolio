@@ -31,6 +31,8 @@ export interface HomepageCMSData {
   aboutHeading: string;
   aboutButtonText: string;
   aboutStatement: string;
+  aboutBannerUrl?: string;
+  aboutBannerAlt?: string;
   contactHeadline: string;
   contactEmail: string;
   contactAvailability: string;
@@ -226,6 +228,8 @@ export const DEFAULT_HOMEPAGE_DATA: HomepageCMSData = {
   aboutHeading: "ABOUT ME",
   aboutButtonText: "ABOUT ME",
   aboutStatement: "I engineer high-throughput machine learning systems, low-latency model inference runtimes, and resilient cloud infrastructure built to perform deterministically under demanding production scale. My approach is simple — remove unnecessary complexity, optimize memory and latency boundaries, and build dependable systems with mathematical rigor.",
+  aboutBannerUrl: "/images/about-visual-banner.webp",
+  aboutBannerAlt: "Deep-tech autonomous hardware and satellite telemetry engineering",
   contactHeadline: "Let's architect something dependable.",
   contactEmail: "dilshan.devxx@gmail.com",
   contactAvailability: "Available for engineering roles & technical advisory",
@@ -583,6 +587,8 @@ class CMSDataStore {
               aboutHeading: updated.aboutHeading || "",
               aboutButtonText: updated.aboutButtonText || "",
               aboutStatement: updated.aboutStatement || "",
+              aboutBannerUrl: updated.aboutBannerUrl || DEFAULT_HOMEPAGE_DATA.aboutBannerUrl,
+              aboutBannerAlt: updated.aboutBannerAlt || DEFAULT_HOMEPAGE_DATA.aboutBannerAlt,
               contactHeadline: updated.contactHeadline || "",
               contactEmail: updated.contactEmail || "",
               contactAvailability: updated.contactAvailability || "",
@@ -856,6 +862,8 @@ class CMSDataStore {
         aboutHeading: homepage.aboutHeading || "",
         aboutButtonText: homepage.aboutButtonText || "",
         aboutStatement: homepage.aboutStatement || "",
+        aboutBannerUrl: homepage.aboutBannerUrl || DEFAULT_HOMEPAGE_DATA.aboutBannerUrl,
+        aboutBannerAlt: homepage.aboutBannerAlt || DEFAULT_HOMEPAGE_DATA.aboutBannerAlt,
         contactHeadline: homepage.contactHeadline || "",
         contactEmail: homepage.contactEmail || "",
         contactAvailability: homepage.contactAvailability || "",

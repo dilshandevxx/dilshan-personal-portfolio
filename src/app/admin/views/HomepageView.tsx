@@ -586,6 +586,29 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
               onChange={(e) => handleChange("aboutStatement", e.target.value)}
             />
           </div>
+
+          <div className={styles.formGroup}>
+            <label className={styles.formLabel}>About Showcase Banner Image URL</label>
+            <input
+              type="text"
+              className={styles.inputField}
+              value={formData.aboutBannerUrl || ""}
+              onChange={(e) => handleChange("aboutBannerUrl", e.target.value)}
+              placeholder="/images/about-visual-banner.webp or https://..."
+            />
+            {formData.aboutBannerUrl && (
+              <div className={styles.mediaPreviewContainer} style={{ height: "240px", marginTop: "0.75rem" }}>
+                <Image
+                  src={formData.aboutBannerUrl}
+                  alt="About Showcase Banner Preview"
+                  fill
+                  sizes="520px"
+                  style={{ objectFit: "cover" }}
+                  unoptimized
+                />
+              </div>
+            )}
+          </div>
         </div>
       )}
 

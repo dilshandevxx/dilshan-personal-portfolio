@@ -137,7 +137,22 @@ export const homepageSchema = {
       title: "About Button Text",
       type: "string",
       fieldset: "about",
-      initialValue: "EXPLORE MY STORY",
+      initialValue: "ABOUT ME",
+    },
+    {
+      name: "aboutBannerUrl",
+      title: "About Showcase Banner Image URL",
+      type: "string",
+      fieldset: "about",
+      initialValue: "/images/about-visual-banner.webp",
+      description: "Cinematic panoramic visual banner displayed directly under the About Me action button",
+    },
+    {
+      name: "aboutBannerAlt",
+      title: "About Showcase Banner Alt Text",
+      type: "string",
+      fieldset: "about",
+      initialValue: "Deep-tech autonomous hardware and satellite telemetry engineering",
     },
 
     // 6. Contact Section

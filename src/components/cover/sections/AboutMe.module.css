@@ -2,7 +2,7 @@
 
 .aboutSection {
   background-color: #111111;
-  padding: clamp(5.5rem, 9vw, 8.5rem) clamp(1.5rem, 5vw, 4rem) clamp(4.5rem, 7vw, 6.5rem);
+  padding: clamp(5.5rem, 9vw, 8.5rem) clamp(1.5rem, 5vw, 4rem) clamp(1.75rem, 3vw, 2.75rem);
   position: relative;
   width: 100%;
   box-sizing: border-box;
