@@ -298,9 +298,17 @@ export default function ProjectsPage() {
 
                       {/* Card Content directly below image */}
                       <div className={styles.cardContent}>
-                        {/* Category & Tech Stack in same clean monospace category style */}
-                        <div className={styles.cardMetaRow}>
-                          <span className={styles.categoryBadge}>{project.category}</span>
+                        {/* Clean Monospace Category alone at the top */}
+                        <span className={styles.categoryBadge}>{project.category}</span>
+
+                        {/* Project Title */}
+                        <h2 className={styles.cardTitle}>{project.title}</h2>
+
+                        {/* Project Summary Description */}
+                        <p className={styles.cardDescription}>{project.description}</p>
+
+                        {/* Card Footer: Tech Stack in proper place followed by Date */}
+                        <div className={styles.cardFooter}>
                           {stack.length > 0 && (
                             <div className={styles.techStackRow}>
                               {stack.slice(0, 4).map((tech) => (
@@ -315,11 +323,8 @@ export default function ProjectsPage() {
                               )}
                             </div>
                           )}
+                          <span className={styles.cardDate}>{project.date}</span>
                         </div>
-
-                        <h2 className={styles.cardTitle}>{project.title}</h2>
-                        <p className={styles.cardDescription}>{project.description}</p>
-                        <span className={styles.cardDate}>{project.date}</span>
                       </div>
                     </Link>
                   </motion.article>

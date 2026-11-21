@@ -282,15 +282,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-}
-
-.cardMetaRow {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.85rem;
-  margin-bottom: 0.35rem;
+  flex: 1;
 }
 
 .categoryBadge {
@@ -301,11 +293,21 @@
   text-transform: uppercase;
   color: #71717a;
   display: inline-block;
-  margin: 0;
+  margin-top: 0.85rem;
+  margin-bottom: 0.4rem;
+}
+
+/* Card Footer: Tech Stack and Date in their proper bottom position */
+.cardFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
 }
 
 .techStackRow {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 0.35rem;
@@ -313,15 +315,15 @@
 
 .techBadge {
   font-family: var(--font-mono, monospace);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #8c93a0;
   background-color: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 4px;
-  padding: 0.12rem 0.45rem;
+  padding: 0.14rem 0.45rem;
   line-height: 1.25;
   transition: color 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
 }
