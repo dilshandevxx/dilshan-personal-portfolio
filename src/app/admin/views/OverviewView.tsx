@@ -24,6 +24,7 @@ interface OverviewViewProps {
   onSelectView: (view: AdminViewType) => void;
   onEditProject: (project: Project) => void;
   onAddNewProject: () => void;
+  onSyncToSanity?: () => Promise<void>;
   metrics: {
     totalProjects: number;
     publishedProjects: number;
@@ -42,8 +43,25 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
   onSelectView,
   onEditProject,
   onAddNewProject,
+  onSyncToSanity,
   metrics,
 }) => {
+  const [syncing, setSyncing] = React.useState(false);
+  const [synced, setSynced] = React.useState(false);
+
+  const handleSync = async () => {
+    if (!onSyncToSanity) return;
+    setSyncing(true);
+    setSynced(false);
+    try {
+      await onSyncToSanity();
+      setSynced(true);
+      setTimeout(() => setSynced(false), 3500);
+    } finally {
+      setSyncing(false);
+    }
+  };
+
   // Determine greeting by time of day
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -287,11 +305,40 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
                   alignItems: "center",
                   justifyContent: "space-between",
                   fontSize: "0.82rem",
+                  paddingBottom: "0.65rem",
+                  borderBottom: "1px solid #292b31",
                 }}
               >
                 <span style={{ color: "#92949d" }}>Production Cache</span>
                 <span style={{ fontWeight: 600, color: "#22c55e" }}>Turbopack Validated</span>
               </div>
+
+              {onSyncToSanity && (
+                <div style={{ paddingTop: "0.4rem" }}>
+                  <button
+                    type="button"
+                    className={`${styles.btn} ${styles.btnPrimary} ${styles.btnSm}`}
+                    style={{ width: "100%", justifyContent: "center" }}
+                    onClick={handleSync}
+                    disabled={syncing}
+                  >
+                    {syncing ? (
+                      <span className={styles.spinner} style={{ width: 13, height: 13 }} />
+                    ) : synced ? (
+                      <CheckCircle size={13} style={{ color: "#22c55e" }} />
+                    ) : (
+                      <Sparkles size={13} />
+                    )}
+                    <span>
+                      {syncing
+                        ? "Pushing Data to Sanity Cloud..."
+                        : synced
+                        ? "All Portfolio Data Synced!"
+                        : "Push All Data to Sanity Cloud"}
+                    </span>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

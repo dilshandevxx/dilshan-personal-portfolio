@@ -660,6 +660,89 @@ class CMSDataStore {
     } catch (e) {}
   }
 
+  public async syncAllToSanity(): Promise<{ success: boolean; projectCount: number }> {
+    const projects = await this.getProjects();
+    const homepage = await this.getHomepageData();
+    const settings = await this.getGlobalSettings();
+
+    const mutations: any[] = [];
+
+    // Projects
+    for (const project of projects) {
+      mutations.push({
+        createOrReplace: {
+          _id: `project-${project.slug}`,
+          _type: "project",
+          title: project.title,
+          slug: { current: project.slug },
+          category: project.category,
+          status: project.status,
+          featured: project.featured,
+          date: project.date,
+          tagline: project.tagline,
+          description: project.description,
+          longDescription: project.longDescription,
+          coverImage: project.image,
+          videoUrl: project.videoDemo?.videoUrl,
+          tags: project.tags,
+          githubUrl: project.githubUrl,
+          demoUrl: project.demoUrl,
+          writeupUrl: project.writeupUrl,
+          architecture: project.architecture,
+          challenges: project.challenges,
+        },
+      });
+    }
+
+    // Homepage
+    mutations.push({
+      createOrReplace: {
+        _id: "homepage",
+        _type: "homepage",
+        heroHeadline: homepage.heroHeadline,
+        heroSubheadline: homepage.heroSubheadline,
+        heroVideoUrl: homepage.heroVideoUrl,
+        heroPosterUrl: homepage.heroPosterUrl,
+        introStatement: homepage.introStatement,
+        servicesTitle: homepage.servicesTitle,
+        aboutHeading: homepage.aboutHeading,
+        contactHeadline: homepage.contactHeadline,
+        contactEmail: homepage.contactEmail,
+        contactAvailability: homepage.contactAvailability,
+      },
+    });
+
+    // Site settings
+    mutations.push({
+      createOrReplace: {
+        _id: "siteSettings",
+        _type: "siteSettings",
+        brandName: settings.brandName,
+        wordmark: settings.wordmark,
+        editionText: settings.editionText,
+        initials: settings.initials,
+        accentColor: settings.accentColor,
+        ctaButtonText: settings.ctaButtonText,
+        ctaButtonUrl: settings.ctaButtonUrl,
+        copyrightStatement: settings.copyrightStatement,
+        footerTagline: settings.footerTagline,
+        defaultTitle: settings.defaultTitle,
+        defaultDescription: settings.defaultDescription,
+        ogImageUrl: settings.ogImageUrl,
+        twitterHandle: settings.twitterHandle,
+      },
+    });
+
+    const res = await sanityMutate(mutations);
+    this.addActivityLog({
+      action: "Synced Entire Portfolio to Sanity Cloud",
+      target: `${projects.length} projects & homepage sections`,
+      type: "settings",
+    });
+
+    return { success: true, projectCount: projects.length };
+  }
+
   private getActivityLogsSync(): CMSActivityLog[] {
     try {
       const local = localStorage.getItem(STORAGE_KEYS.ACTIVITY);

@@ -152,6 +152,13 @@ export default function AdminDashboardPage() {
     triggerToast("Global branding, navigation & SEO settings saved.");
   };
 
+  // Handle Sync All Data to Sanity Cloud
+  const handleSyncToSanity = async () => {
+    const res = await cmsDataStore.syncAllToSanity();
+    await refreshData();
+    triggerToast(`Successfully synced ${res.projectCount} projects & homepage to Sanity Cloud!`);
+  };
+
   // Switch view handler
   const handleSelectView = (view: AdminViewType) => {
     if (view === "projects-add") {
@@ -227,6 +234,7 @@ export default function AdminDashboardPage() {
                   onSelectView={handleSelectView}
                   onEditProject={handleEditProject}
                   onAddNewProject={handleOpenAddProject}
+                  onSyncToSanity={handleSyncToSanity}
                   metrics={metricsData}
                 />
               )}

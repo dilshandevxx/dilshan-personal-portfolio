@@ -13,9 +13,9 @@ export interface SanityConfig {
 }
 
 export const sanityConfig: SanityConfig = {
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "",
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "p8xc6qyp",
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
-  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2026-02-01",
+  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2024-01-01",
   token: process.env.SANITY_API_TOKEN || "",
   useCdn: process.env.NODE_ENV === "production",
 };
@@ -40,6 +40,24 @@ export async function sanityFetch<T = any>(
     return null;
   }
 
+  // Client-side browser request via secure internal API
+  if (typeof window !== "undefined") {
+    try {
+      const res = await fetch("/api/admin/sanity", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "query", query, params }),
+      });
+      if (!res.ok) return null;
+      const data = await res.json();
+      return (data.result ?? null) as T;
+    } catch (err) {
+      console.warn("[Sanity] Client query error:", err);
+      return null;
+    }
+  }
+
+  // Server-side direct request
   try {
     const encodedQuery = encodeURIComponent(query);
     const url = `https://${sanityConfig.projectId}.api.sanity.io/v${sanityConfig.apiVersion}/data/query/${sanityConfig.dataset}?query=${encodedQuery}`;
@@ -64,7 +82,7 @@ export async function sanityFetch<T = any>(
     }
 
     const data = await res.json();
-    return data.result as T;
+    return (data.result ?? null) as T;
   } catch (err) {
     console.error("[Sanity] Network error querying Sanity API:", err);
     return null;
@@ -75,8 +93,28 @@ export async function sanityFetch<T = any>(
  * Execute mutations on Sanity (Create, Patch, Delete)
  */
 export async function sanityMutate(mutations: any[]): Promise<any> {
-  if (!isSanityConfigured() || !sanityConfig.token) {
-    return { success: false, reason: "Sanity credentials or API token missing in environment." };
+  if (!isSanityConfigured()) {
+    return { success: false, reason: "Sanity project ID missing." };
+  }
+
+  // Client-side browser request via secure internal API
+  if (typeof window !== "undefined") {
+    try {
+      const res = await fetch("/api/admin/sanity", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "mutate", mutations }),
+      });
+      return await res.json();
+    } catch (err) {
+      console.error("[Sanity] Mutation failed:", err);
+      return { success: false, error: err };
+    }
+  }
+
+  // Server-side direct mutation
+  if (!sanityConfig.token) {
+    return { success: false, reason: "Sanity API token missing." };
   }
 
   try {
