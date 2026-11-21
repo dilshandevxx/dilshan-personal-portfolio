@@ -1,7 +1,10 @@
 /* =========================================================================
-   About Me Page — Cohesive Editorial Layout & Polish
-   Dark canvas (#111111) / Light canvas (#f9f7f2), perfectly aligned grids,
-   proportional vertical rhythm, and exact 3-stage photo + stats story layout.
+   About Me Page — Faithful Stepped Waterfall Editorial Layout
+   Matching the reference Webflow design with pixel-level precision:
+   - Left Column: Starts at Y=0 (top edge of stage) with 2 stacked photos
+   - Middle Column: Stepped down (~170px) with 2-line headline & body story
+   - Right Column: Stepped down (~310px) with massive 800+ stats, divider,
+     side-by-side 1.4M/300k, and keynote photo card at the bottom right.
    ========================================================================= */
 
 .pageRoot {
@@ -18,9 +21,9 @@
 }
 
 .mainContainer {
-  max-width: 1280px;
+  max-width: 1360px;
   margin: 0 auto;
-  padding: clamp(3.5rem, 6vw, 5.5rem) clamp(1.5rem, 5vw, 4rem) clamp(3rem, 4.5vw, 4rem);
+  padding: clamp(3.5rem, 5.5vw, 5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(4rem, 6.5vw, 6rem);
   width: 100%;
   box-sizing: border-box;
 }
@@ -30,28 +33,26 @@
 }
 
 /* =========================================================================
-   3-Column Grid Layout (Faithfully Matching Webflow Reference)
-   Left: 2 Vertically Stacked Photo Cards (200px - 220px)
-   Middle: Headline & Thoughtful Narrative (1fr)
-   Right: Giant Stats Block & Portrait Photo Card (240px - 270px)
+   3-Column Grid Layout (Exact Stepped Cascade Alignment)
    ========================================================================= */
 .storyGrid {
   display: grid;
-  grid-template-columns: 210px 1fr 260px;
-  gap: clamp(2.5rem, 4.5vw, 5rem);
+  grid-template-columns: minmax(200px, 240px) minmax(420px, 1.35fr) minmax(280px, 340px);
+  column-gap: clamp(3rem, 5.5vw, 6.5rem);
   align-items: start;
   width: 100%;
 }
 
 /* -------------------------------------------------------------
-   LEFT COLUMN: 2 Vertically Stacked Rounded Cards
+   LEFT COLUMN: Starts at the very top (Y offset: 0)
    ------------------------------------------------------------- */
 .leftCol {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: clamp(1.25rem, 2vw, 1.85rem);
   width: 100%;
   position: relative;
+  padding-top: 0;
 }
 
 /* Left Carousel Tab matching reference left edge */
@@ -80,17 +81,17 @@
 .photoCardSmall {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1.05;
+  aspect-ratio: 1 / 1.02;
   border-radius: 14px;
   overflow: hidden;
   background-color: #181818;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.45);
 }
 
 .cardImage {
   object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .photoCardSmall:hover .cardImage,
@@ -99,34 +100,37 @@
 }
 
 /* -------------------------------------------------------------
-   MIDDLE COLUMN: Bold Display Headline & Rich Narrative
+   MIDDLE COLUMN: Stepped down to align with midpoint of first photo
    ------------------------------------------------------------- */
 .middleCol {
   display: flex;
   flex-direction: column;
   width: 100%;
   min-width: 0;
+  padding-top: clamp(4.5rem, 7.5vw, 8.5rem);
 }
 
 .headline {
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  font-size: clamp(2.5rem, 4.2vw, 4rem);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.1;
   letter-spacing: -0.03em;
   color: #ffffff;
-  margin: 0 0 clamp(1.75rem, 2.8vw, 2.4rem) 0;
+  margin: 0 0 clamp(1.8rem, 3vw, 2.5rem) 0;
+  max-width: 580px;
 }
 
 .narrativeBody {
   display: flex;
   flex-direction: column;
-  gap: 1.45rem;
+  gap: clamp(1.35rem, 2vw, 1.75rem);
+  max-width: 540px;
 }
 
 .paragraph {
   font-family: var(--font-body, "Inter", -apple-system, sans-serif);
-  font-size: clamp(0.96rem, 1.15vw, 1.06rem);
+  font-size: clamp(0.96rem, 1.12vw, 1.06rem);
   line-height: 1.72;
   color: #a1a1aa;
   margin: 0;
@@ -138,22 +142,23 @@
   line-height: 1.65;
   font-weight: 600;
   color: #ffffff;
-  margin: 0.5rem 0 0 0;
+  margin: 0.6rem 0 0 0;
 }
 
 /* -------------------------------------------------------------
-   RIGHT COLUMN: Giant Stats & Portrait Photo Card
+   RIGHT COLUMN: Stepped down further to align with bottom of first photo
    ------------------------------------------------------------- */
 .rightCol {
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding-top: clamp(8rem, 13vw, 14.5rem);
 }
 
 .statsBlock {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1.85rem;
+  width: 100%;
 }
 
 .statPrimary {
@@ -163,26 +168,26 @@
 
 .statPrimaryNumber {
   font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(4.2rem, 5.8vw, 5.4rem);
+  font-size: clamp(5rem, 7.5vw, 7rem);
   font-weight: 800;
-  line-height: 0.95;
+  line-height: 0.9;
   letter-spacing: -0.04em;
   color: #ffffff;
 }
 
 .statPrimaryLabel {
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.92rem;
+  font-size: clamp(0.96rem, 1.15vw, 1.1rem);
   color: #71717a;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   font-weight: 400;
   letter-spacing: -0.01em;
 }
 
 .statsDivider {
   height: 1px;
-  background-color: rgba(255, 255, 255, 0.12);
-  margin: 1.6rem 0 1.45rem 0;
+  background-color: rgba(255, 255, 255, 0.14);
+  margin: clamp(2rem, 3.2vw, 2.8rem) 0 clamp(1.8rem, 3vw, 2.4rem) 0;
   width: 100%;
 }
 
@@ -191,6 +196,7 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 1.5rem;
+  width: 100%;
 }
 
 .statSecondary {
@@ -200,45 +206,54 @@
 
 .statSecondaryNumber {
   font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(1.85rem, 2.5vw, 2.35rem);
+  font-size: clamp(2.2rem, 3.2vw, 2.9rem);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1;
   color: #ffffff;
   letter-spacing: -0.03em;
 }
 
 .statSecondaryLabel {
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.85rem;
+  font-size: 0.92rem;
   color: #71717a;
-  margin-top: 0.35rem;
+  margin-top: 0.5rem;
   font-weight: 400;
   letter-spacing: -0.01em;
 }
 
-/* Portrait Photo Card directly below the stats block */
+/* Portrait Photo Card directly below stats with generous spacing */
 .photoCardPortrait {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1.15;
-  border-radius: 14px;
+  aspect-ratio: 1 / 1.05;
+  border-radius: clamp(14px, 1.5vw, 18px);
   overflow: hidden;
   background-color: #181818;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.45);
+  margin-top: clamp(3.5rem, 5.5vw, 5.5rem);
 }
 
 /* =========================================================================
    Responsive Breakpoints
    ========================================================================= */
-@media (max-width: 1100px) {
+@media (max-width: 1180px) {
   .storyGrid {
-    grid-template-columns: 180px 1fr 220px;
-    gap: 2rem;
+    grid-template-columns: 180px 1fr 260px;
+    column-gap: 2.5rem;
+  }
+
+  .middleCol {
+    padding-top: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .rightCol {
+    padding-top: clamp(4.5rem, 8vw, 7.5rem);
   }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 860px) {
   .mainContainer {
     padding: 2.5rem 1.25rem 4rem;
   }
@@ -253,20 +268,23 @@
     display: none;
   }
 
-  /* Reading flow on mobile: Narrative -> Stats -> Photos */
+  /* Natural editorial reading order on tablet/mobile */
   .middleCol {
     order: 1;
-  }
-
-  .rightCol {
-    order: 2;
+    padding-top: 0;
   }
 
   .leftCol {
-    order: 3;
+    order: 2;
+    padding-top: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
+  }
+
+  .rightCol {
+    order: 3;
+    padding-top: 0;
   }
 
   .photoCardSmall {
@@ -275,14 +293,15 @@
   }
 
   .photoCardPortrait {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 11;
     border-radius: 14px;
+    margin-top: 2rem;
   }
 }
 
 @media (max-width: 640px) {
   .headline {
-    font-size: clamp(2rem, 8.5vw, 2.6rem);
+    font-size: clamp(2.1rem, 8vw, 2.6rem);
     margin-bottom: 1.5rem;
   }
 
@@ -292,11 +311,11 @@
   }
 
   .statPrimaryNumber {
-    font-size: 3.8rem;
+    font-size: 4rem;
   }
 
   .statSecondaryNumber {
-    font-size: 1.85rem;
+    font-size: 2rem;
   }
 
   .statsSecondaryRow {
@@ -305,7 +324,7 @@
 }
 
 /* =========================================================================
-   LIGHT THEME OVERRIDES (Ensuring 100% Cohesive Light Theme)
+   LIGHT THEME OVERRIDES (100% Cohesive Light Theme)
    ========================================================================= */
 :global([data-theme="light"]) .pageRoot {
   background-color: #f9f7f2;
@@ -335,7 +354,7 @@
 }
 
 :global([data-theme="light"]) .statsDivider {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.12);
 }
 
 :global([data-theme="light"]) .carouselTab {
@@ -352,5 +371,5 @@
 :global([data-theme="light"]) .photoCardPortrait {
   background-color: #ffffff;
   border-color: rgba(0, 0, 0, 0.08);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.1);
 }
