@@ -17,10 +17,9 @@ export default function AboutMe() {
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Left Column: Clean ● ABOUT ME indicator matching reference design */}
+          {/* Left Column: ABOUT ME label */}
           <div className={styles.leftColumn}>
             <div className={styles.missionIndicator}>
-              <span className={styles.indicatorDot} aria-hidden="true" />
               <span className={styles.indicatorLabel}>ABOUT ME</span>
             </div>
           </div>

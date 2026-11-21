@@ -62,3 +62,10 @@ All personal information, projects, essays, skills, and links reside in:
 `src/data/content.ts` (strongly typed by `src/types/content.ts`).
 Whenever the user wants to update their bio, add new projects, or publish new essays, modify `src/data/content.ts`.
 
+## 5. Strict Design & Component Rules
+- **NO DOTS OR EYEBROWS**: NEVER add small indicator dots (`.indicatorDot`) or small uppercase mono eyebrow labels (e.g., `DOMAINS & CAPABILITIES`, `FAQ`, `CHRONOLOGY & EVOLUTION`) anywhere in this application. Section headers must be clean, direct, and unencumbered.
+- **NO TEXT ON IMAGES**: NEVER place text, badges, floating watermarks, or pill labels over images. Images must remain completely clean, uncluttered, and pristine.
+- **NO DEFAULT OPEN ACCORDIONS**: Never set accordions/cards to be expanded by default (`useState<string | null>(null)`). They must start collapsed so the user has a clean overview.
+- **COMPACT & REFINED EXPANDED SIZES**: Expanded content must be properly sized, balanced, and elegant—never oversized or dominating the screen.
+
+

@@ -21,31 +21,9 @@
   width: 100%;
 }
 
-/* Minimalist Editorial Section Header */
+/* Minimalist Editorial Section Header — Direct & Clean */
 .header {
-  margin-bottom: clamp(2.5rem, 4.5vw, 3.8rem);
-}
-
-.indicator {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.85rem;
-}
-
-.indicatorDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--color-primary, #8bb397);
-}
-
-.indicatorLabel {
-  font-family: var(--font-mono, "JetBrains Mono", monospace);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-text-muted, #888888);
+  margin-bottom: clamp(2rem, 3.5vw, 3rem);
 }
 
 .headline {
@@ -163,14 +141,6 @@
 
 :global([data-theme="light"]) .headline {
   color: #111111;
-}
-
-:global([data-theme="light"]) .indicatorDot {
-  background-color: var(--color-primary, #3b6048);
-}
-
-:global([data-theme="light"]) .indicatorLabel {
-  color: #6b7280;
 }
 
 :global([data-theme="light"]) .accordionList {

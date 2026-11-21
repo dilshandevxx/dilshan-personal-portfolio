@@ -1,11 +1,11 @@
 /* =========================================================================
-   Technical Expertise Section — 2-Column Split Expanded Card Layout
-   (Faithfully matching Reference Design)
+   Technical Expertise Section — Clean 2-Column Split Expanded Card Layout
+   (Faithfully matching Reference Design with Compact, Refined Proportions)
    ========================================================================= */
 
 .servicesSection {
   background-color: #111111;
-  padding: clamp(5.5rem, 9vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+  padding: clamp(5rem, 8vw, 8rem) clamp(1.5rem, 5vw, 4rem);
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   position: relative;
   width: 100%;
@@ -19,32 +19,10 @@
   width: 100%;
 }
 
-/* Header Block on Top */
+/* Header Block on Top — Pure Clean Title */
 .headerBlock {
-  margin-bottom: clamp(2.5rem, 4.5vw, 4rem);
+  margin-bottom: clamp(2rem, 3.5vw, 3rem);
   width: 100%;
-}
-
-.indicator {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.85rem;
-}
-
-.indicatorDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--color-primary, #8bb397);
-}
-
-.indicatorLabel {
-  font-family: var(--font-mono, "JetBrains Mono", monospace);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-text-muted, #888888);
 }
 
 .headline {
@@ -80,7 +58,7 @@
 }
 
 .accordionItemOpen {
-  border-bottom-color: rgba(255, 255, 255, 0.24);
+  border-bottom-color: rgba(255, 255, 255, 0.22);
 }
 
 /* Row Trigger Button */
@@ -89,7 +67,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: clamp(1.4rem, 2.3vw, 2.1rem) 0;
+  padding: clamp(1.35rem, 2.2vw, 1.95rem) 0;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -165,7 +143,7 @@
 }
 
 /* =========================================================================
-   ANIMATED 2-COLUMN SPLIT EXPANDED BODY (Matching Reference Image)
+   ANIMATED 2-COLUMN SPLIT EXPANDED BODY (Compact, Refined & Clean)
    ========================================================================= */
 .bodyWrapper {
   overflow: hidden;
@@ -174,10 +152,10 @@
 
 .splitExpandedContainer {
   display: grid;
-  grid-template-columns: 1fr 1.05fr;
-  gap: clamp(2.5rem, 5vw, 5.5rem);
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
   align-items: center;
-  padding: clamp(1.5rem, 2.5vw, 2.2rem) 0 clamp(2.5rem, 4vw, 3.8rem) 0;
+  padding: 0.75rem 0 clamp(1.75rem, 2.8vw, 2.5rem) 0;
   width: 100%;
 }
 
@@ -192,28 +170,28 @@
 
 .expandedDomainTitle {
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(1.85rem, 3vw, 2.55rem);
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
   font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
   color: #ffffff;
-  margin: 0 0 clamp(1rem, 1.8vw, 1.4rem) 0;
+  margin: 0 0 0.85rem 0;
 }
 
 .expandedDescription {
   font-family: var(--font-body, "Inter", -apple-system, sans-serif);
-  font-size: clamp(0.96rem, 1.15vw, 1.05rem);
-  line-height: 1.68;
+  font-size: 0.92rem;
+  line-height: 1.62;
   color: #a1a1aa;
-  margin: 0 0 clamp(1.75rem, 2.5vw, 2.25rem) 0;
-  max-width: 520px;
+  margin: 0 0 1.25rem 0;
+  max-width: 480px;
 }
 
 /* Rounded Pill Tags (Exact match to reference pill styling) */
 .pillTagGrid {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 12px;
+  gap: 8px 10px;
   width: 100%;
 }
 
@@ -221,12 +199,12 @@
   display: inline-flex;
   align-items: center;
   font-family: var(--font-body, "Inter", -apple-system, sans-serif);
-  font-size: clamp(0.82rem, 0.95vw, 0.88rem);
+  font-size: 0.8rem;
   font-weight: 500;
   color: #e4e4e7;
   background-color: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 0.5rem 1.15rem;
+  padding: 0.38rem 0.95rem;
   border-radius: 9999px;
   user-select: none;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -236,26 +214,28 @@
   background-color: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.25);
   color: #ffffff;
-  transform: translateY(-1px);
 }
 
 /* -------------------------------------------------------------
-   RIGHT COLUMN: Rounded Visual Showcase Card with Overlay Badge
+   RIGHT COLUMN: Clean Rounded Photo Card — NO text on image
    ------------------------------------------------------------- */
 .rightVisualCol {
   width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .visualCardFrame {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10.5;
-  min-height: 290px;
-  border-radius: clamp(16px, 2vw, 22px);
+  max-width: 460px;
+  aspect-ratio: 16 / 10;
+  max-height: 270px;
+  border-radius: clamp(14px, 1.5vw, 18px);
   overflow: hidden;
   background-color: #181818;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.55);
 }
 
 .visualCardImage {
@@ -268,69 +248,22 @@
   transform: scale(1.035);
 }
 
-/* Subtle Vignette Gradient */
-.visualOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.15) 0%,
-    rgba(0, 0, 0, 0.45) 100%
-  );
-  pointer-events: none;
-}
-
-/* Central Floating Watermark Badge (matching reference logo mark) */
-.floatingCenterBadge {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  background: rgba(17, 17, 17, 0.68);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 9999px;
-  padding: 0.65rem 1.4rem;
-  color: #ffffff;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  pointer-events: none;
-  z-index: 2;
-  transition: transform 0.3s ease;
-}
-
-.visualCardFrame:hover .floatingCenterBadge {
-  transform: translate(-50%, -50%) scale(1.04);
-}
-
-.badgeIcon {
-  color: var(--color-primary, #8bb397);
-  flex-shrink: 0;
-}
-
-.badgeText {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
 /* =========================================================================
    Responsive Breakpoints
    ========================================================================= */
-@media (max-width: 960px) {
+@media (max-width: 860px) {
   .splitExpandedContainer {
     grid-template-columns: 1fr;
-    gap: 2.25rem;
+    gap: 1.75rem;
+  }
+
+  .rightVisualCol {
+    justify-content: flex-start;
   }
 
   .visualCardFrame {
+    max-width: 100%;
     aspect-ratio: 16 / 10;
-    min-height: 260px;
   }
 
   .expandedDescription {
@@ -340,15 +273,15 @@
 
 @media (max-width: 640px) {
   .servicesSection {
-    padding: 4rem 1.25rem 4.5rem;
+    padding: 3.5rem 1.25rem 4rem;
   }
 
   .headerBlock {
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
   }
 
   .itemTrigger {
-    padding: 1.25rem 0;
+    padding: 1.15rem 0;
   }
 
   .titleGroup {
@@ -364,18 +297,18 @@
   }
 
   .expandedDomainTitle {
-    font-size: 1.65rem;
+    font-size: 1.35rem;
   }
 
   .visualCardFrame {
-    aspect-ratio: 16 / 11;
-    min-height: 220px;
-    border-radius: 14px;
+    aspect-ratio: 16 / 10;
+    max-height: 220px;
+    border-radius: 12px;
   }
 
   .pillTag {
-    font-size: 0.78rem;
-    padding: 0.42rem 0.95rem;
+    font-size: 0.76rem;
+    padding: 0.32rem 0.8rem;
   }
 }
 
@@ -385,14 +318,6 @@
 :global([data-theme="light"]) .servicesSection {
   background-color: #f9f7f2;
   border-top-color: rgba(0, 0, 0, 0.07);
-}
-
-:global([data-theme="light"]) .indicatorDot {
-  background-color: var(--color-primary, #3b6048);
-}
-
-:global([data-theme="light"]) .indicatorLabel {
-  color: #6b7280;
 }
 
 :global([data-theme="light"]) .headline {
@@ -443,7 +368,7 @@
   background-color: #ffffff;
   border-color: rgba(0, 0, 0, 0.08);
   color: #272421;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
 }
 
 :global([data-theme="light"]) .pillTag:hover {
@@ -456,15 +381,4 @@
   background-color: #e5e5e5;
   border-color: rgba(0, 0, 0, 0.08);
   box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.08);
-}
-
-:global([data-theme="light"]) .floatingCenterBadge {
-  background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(0, 0, 0, 0.1);
-  color: #111111;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-}
-
-:global([data-theme="light"]) .badgeIcon {
-  color: var(--color-primary, #3b6048);
 }

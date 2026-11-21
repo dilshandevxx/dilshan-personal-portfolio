@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Code2, Brain, Cloud, Database, ShieldCheck, Compass } from "lucide-react";
 import styles from "./SkillsGrid.module.css";
 
 interface TechnicalDomain {
@@ -11,8 +10,6 @@ interface TechnicalDomain {
   index: string;
   name: string;
   description: string;
-  badge: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
   image: string;
   tags: string[];
 }
@@ -24,8 +21,6 @@ const TECHNICAL_DOMAINS: TechnicalDomain[] = [
     name: "Full-Stack Development",
     description:
       "Architecting end-to-end web applications with performant server components, typed API contracts, reactive state systems, and responsive, accessible user interfaces built for sub-second execution.",
-    badge: "01 / FULL-STACK",
-    icon: Code2,
     image: "/images/what-i-do/what_i_do_1.png",
     tags: [
       "React 19",
@@ -45,8 +40,6 @@ const TECHNICAL_DOMAINS: TechnicalDomain[] = [
     name: "Artificial Intelligence & Machine Learning",
     description:
       "Engineering autonomous multi-agent systems, low-latency LLM inference runtimes, hybrid RAG retrieval pipelines, and production machine learning solutions with deterministic reliability.",
-    badge: "02 / AI & ML",
-    icon: Brain,
     image: "/images/what-i-do/what_i_do_2.png",
     tags: [
       "PyTorch",
@@ -65,8 +58,6 @@ const TECHNICAL_DOMAINS: TechnicalDomain[] = [
     name: "Cloud Infrastructure & Automation",
     description:
       "Provisioning reproducible infrastructure as code, containerized microservices orchestration with Kubernetes, automated CI/CD deployment pipelines, and zero-downtime release workflows.",
-    badge: "03 / CLOUD INFRA",
-    icon: Cloud,
     image: "/images/what-i-do/what_i_do_3.png",
     tags: [
       "AWS & GCP",
@@ -84,8 +75,6 @@ const TECHNICAL_DOMAINS: TechnicalDomain[] = [
     name: "Data Engineering & Business Intelligence",
     description:
       "Designing resilient analytical data pipelines, multi-dimensional relational schemas, automated data transformation models, and executive business intelligence dashboards with sub-second queries.",
-    badge: "04 / DATA PIPELINES",
-    icon: Database,
     image: "/images/what-i-do/what_i_do_4.png",
     tags: [
       "SQL & BigQuery",
@@ -103,8 +92,6 @@ const TECHNICAL_DOMAINS: TechnicalDomain[] = [
     name: "Application Security & Engineering Practices",
     description:
       "Implementing secure identity verification, robust cryptographic authentication, automated static and dependency vulnerability scanning, and strict runtime schema validation across boundaries.",
-    badge: "05 / SECURITY",
-    icon: ShieldCheck,
     image: "/images/articles/article_design_systems.jpg",
     tags: [
       "OWASP Standards",
@@ -121,8 +108,6 @@ const TECHNICAL_DOMAINS: TechnicalDomain[] = [
     name: "Business Strategy & Project Management",
     description:
       "Leading cross-functional engineering sprints, proactive technical risk assessment, data-driven product roadmap execution, and digital reach optimization with clear RFC decision documentation.",
-    badge: "06 / STRATEGY",
-    icon: Compass,
     image: "/images/articles/article_design_workflows.jpg",
     tags: [
       "Agile & Scrum Sprints",
@@ -136,7 +121,8 @@ const TECHNICAL_DOMAINS: TechnicalDomain[] = [
 ];
 
 export default function SkillsGrid() {
-  const [openId, setOpenId] = useState<string | null>("full-stack");
+  // Never default expand any card — starts completely collapsed
+  const [openId, setOpenId] = useState<string | null>(null);
 
   const toggleItem = (id: string) => {
     setOpenId((prev) => (prev === id ? null : id));
@@ -149,12 +135,8 @@ export default function SkillsGrid() {
       aria-label="Technical Expertise"
     >
       <div className={styles.container}>
-        {/* Title on the Top */}
+        {/* Title on the Top - Direct, Clean, No Dots, No Eyebrows */}
         <div className={styles.headerBlock}>
-          <div className={styles.indicator}>
-            <span className={styles.indicatorDot} aria-hidden="true" />
-            <span className={styles.indicatorLabel}>DOMAINS & CAPABILITIES</span>
-          </div>
           <h2 className={styles.headline}>Technical Expertise</h2>
         </div>
 
@@ -207,7 +189,7 @@ export default function SkillsGrid() {
                   </span>
                 </button>
 
-                {/* Animated Accordion Body — 2-Column Split Layout matching Reference Image */}
+                {/* Animated Accordion Body — 2-Column Split, Compact & Clean, No text on image */}
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
@@ -216,7 +198,7 @@ export default function SkillsGrid() {
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{
-                        duration: 0.35,
+                        duration: 0.3,
                         ease: [0.16, 1, 0.3, 1],
                       }}
                       className={styles.bodyWrapper}
@@ -238,24 +220,16 @@ export default function SkillsGrid() {
                           </div>
                         </div>
 
-                        {/* Right Column: Visual Showcase Card with Overlay Badge */}
+                        {/* Right Column: Clean Rounded Photo Card — NO text on image */}
                         <div className={styles.rightVisualCol}>
                           <div className={styles.visualCardFrame}>
                             <Image
                               src={item.image}
                               alt={item.name}
                               fill
-                              sizes="(max-width: 900px) 100vw, 560px"
+                              sizes="(max-width: 900px) 100vw, 420px"
                               className={styles.visualCardImage}
                             />
-                            {/* Subtle Ambient Vignette Overlay */}
-                            <div className={styles.visualOverlay} />
-
-                            {/* Central Floating Watermark Badge (matching reference logo/mark) */}
-                            <div className={styles.floatingCenterBadge}>
-                              <item.icon size={18} className={styles.badgeIcon} />
-                              <span className={styles.badgeText}>{item.badge}</span>
-                            </div>
                           </div>
                         </div>
                       </div>

@@ -1,4 +1,4 @@
-/* Journey & Career Milestones Section (Faithfully reproducing Reference Image 4) */
+/* Journey & Career Milestones Section (Faithfully reproducing Reference Image 1) */
 .journeySection {
   width: 100%;
   background-color: #111111;
@@ -24,34 +24,12 @@
 }
 
 .journeyHeader {
-  margin-bottom: clamp(2.5rem, 4.5vw, 3.8rem);
-}
-
-.indicator {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.85rem;
-}
-
-.indicatorDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--color-primary, #8bb397);
-}
-
-.indicatorLabel {
-  font-family: var(--font-mono, "JetBrains Mono", monospace);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-text-muted, #888888);
+  margin-bottom: clamp(2.25rem, 4vw, 3.25rem);
 }
 
 .journeyHeadline {
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  font-size: clamp(2rem, 3.5vw, 3rem);
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.025em;
@@ -59,25 +37,24 @@
   margin: 0;
 }
 
-/* 3-Column / Photo + 2-Column Milestones Grid */
+/* 3-Part Architecture Layout: Photo (left) + 2-Column Milestones with Dividers (right) */
 .journeyGrid {
   display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: clamp(2.5rem, 5vw, 5.5rem);
-  align-items: start;
+  grid-template-columns: minmax(260px, 320px) 1fr;
+  gap: clamp(2rem, 3.5vw, 3.5rem);
+  align-items: stretch;
   width: 100%;
 }
 
 .journeyPhotoCard {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 4.6;
-  min-height: 420px;
-  border-radius: 14px;
+  height: 100%;
+  min-height: 280px;
+  border-radius: 4px;
   overflow: hidden;
   background-color: #181818;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .journeyImage {
@@ -86,93 +63,96 @@
 }
 
 .journeyPhotoCard:hover .journeyImage {
-  transform: scale(1.04);
+  transform: scale(1.035);
 }
 
-/* Right 2-column Milestones Grid */
+/* 2-Column Milestones Grid with Continuous Vertical Dividers */
 .milestonesGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(2.25rem, 3.5vw, 3.25rem) clamp(2.5rem, 4vw, 4.5rem);
+  row-gap: clamp(2rem, 3vw, 2.75rem);
+  column-gap: 0;
   align-items: start;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  padding-left: 0;
 }
 
 .milestoneItem {
   display: flex;
   flex-direction: column;
+  padding: 0 clamp(1.5rem, 2.8vw, 3rem);
+  box-sizing: border-box;
+}
+
+/* Vertical divider between column 1 and column 2 */
+.milestoneItem:nth-child(2n) {
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .milestoneYear {
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(1.15rem, 1.4vw, 1.3rem);
-  font-weight: 700;
+  font-size: clamp(1.1rem, 1.35vw, 1.25rem);
+  font-weight: 600;
   letter-spacing: -0.01em;
   color: #ffffff;
-  margin: 0 0 0.75rem 0;
+  margin: 0 0 0.55rem 0;
 }
 
 .milestoneDesc {
   font-family: var(--font-body, "Inter", -apple-system, sans-serif);
-  font-size: clamp(0.92rem, 1.1vw, 0.98rem);
-  line-height: 1.68;
+  font-size: clamp(0.9rem, 1.05vw, 0.95rem);
+  line-height: 1.62;
   color: #9da4ae;
   margin: 0;
   max-width: 440px;
 }
 
 /* Responsive adjustments */
-@media (max-width: 1024px) {
+@media (max-width: 960px) {
   .journeyGrid {
-    grid-template-columns: 300px 1fr;
-    gap: 2.5rem;
-  }
-
-  .milestonesGrid {
-    gap: 2rem 2.5rem;
-  }
-}
-
-@media (max-width: 860px) {
-  .journeyGrid {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 2.5rem;
   }
 
   .journeyPhotoCard {
     width: 100%;
-    max-width: 540px;
-    aspect-ratio: 16 / 11;
-    min-height: 320px;
+    max-width: 500px;
+    height: 280px;
+    aspect-ratio: 16 / 10;
   }
 
   .milestonesGrid {
-    grid-template-columns: 1fr 1fr;
+    border-left: none;
+  }
+
+  .milestoneItem:nth-child(2n+1) {
+    padding-left: 0;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .milestonesGrid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    row-gap: 2rem;
+  }
+
+  .milestoneItem {
+    padding: 0;
+    border-left: none !important;
+  }
+
+  .journeyPhotoCard {
+    height: 240px;
   }
 }
 
 /* =========================================================================
-   LIGHT THEME OVERRIDES FOR JOURNEY (Matching Image 4 in Light Mode)
+   LIGHT THEME OVERRIDES FOR JOURNEY (Matching Reference in Light Mode)
    ========================================================================= */
 :global([data-theme="light"]) .journeySection {
   background-color: #f9f7f2;
   color: #111111;
   border-top-color: rgba(0, 0, 0, 0.07);
-}
-
-:global([data-theme="light"]) .indicatorDot {
-  background-color: var(--color-primary, #3b6048);
-}
-
-:global([data-theme="light"]) .indicatorLabel {
-  color: #6b7280;
 }
 
 :global([data-theme="light"]) .journeyHeadline {
@@ -182,7 +162,14 @@
 :global([data-theme="light"]) .journeyPhotoCard {
   background-color: #ffffff;
   border-color: rgba(0, 0, 0, 0.08);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .milestonesGrid {
+  border-left-color: rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .milestoneItem:nth-child(2n) {
+  border-left-color: rgba(0, 0, 0, 0.08);
 }
 
 :global([data-theme="light"]) .milestoneYear {

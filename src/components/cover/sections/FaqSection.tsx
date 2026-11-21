@@ -77,12 +77,8 @@ export default function FaqSection() {
   return (
     <section className={styles.faqSection} id="faq" aria-label="Frequently Asked Questions">
       <div className={styles.container}>
-        {/* Minimalist Editorial Section Header */}
+        {/* Minimalist Editorial Section Header — Direct & Clean */}
         <div className={styles.header}>
-          <div className={styles.indicator}>
-            <span className={styles.indicatorDot} aria-hidden="true" />
-            <span className={styles.indicatorLabel}>FAQ</span>
-          </div>
           <h2 className={styles.headline}>Frequently Asked Questions</h2>
         </div>
 

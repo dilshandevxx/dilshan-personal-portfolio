@@ -32,17 +32,7 @@
 .missionIndicator {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
   padding-top: 0.45rem;
-}
-
-.indicatorDot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background-color: #a3e635; /* Neon lime / sage dot */
-  display: inline-block;
-  box-shadow: 0 0 10px rgba(163, 230, 53, 0.55);
 }
 
 .indicatorLabel {
