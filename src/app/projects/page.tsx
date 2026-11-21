@@ -29,12 +29,27 @@ type Category = (typeof CATEGORIES)[number] | string;
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState<Category>("All");
   const [projectArticles, setProjectArticles] = useState<ProjectArticle[]>(PROJECTS_DATA);
+  const [cardConfig, setCardConfig] = useState({
+    titleLines: 2,
+    descriptionLines: 2,
+    techStackLines: 2,
+    showCategory: true,
+    showDate: true,
+  });
 
   // Sync with live CMS / Sanity data if available
   useEffect(() => {
     async function loadCMSData() {
       try {
-        const cmsProjects = await cmsDataStore.getProjects();
+        const [cmsProjects, settings] = await Promise.all([
+          cmsDataStore.getProjects(),
+          cmsDataStore.getGlobalSettings(),
+        ]);
+
+        if (settings?.projectCardConfig) {
+          setCardConfig(settings.projectCardConfig);
+        }
+
         if (cmsProjects && cmsProjects.length > 0) {
           const cmsMapped: ProjectArticle[] = cmsProjects.map((p, idx) => ({
             id: p.slug,
@@ -63,9 +78,13 @@ export default function ProjectsPage() {
       loadCMSData();
     };
     window.addEventListener("cms_projects_updated", handleCMSUpdate);
+    window.addEventListener("cms_card_config_updated", handleCMSUpdate);
+    window.addEventListener("cms_settings_updated", handleCMSUpdate);
     window.addEventListener("storage", handleCMSUpdate);
     return () => {
       window.removeEventListener("cms_projects_updated", handleCMSUpdate);
+      window.removeEventListener("cms_card_config_updated", handleCMSUpdate);
+      window.removeEventListener("cms_settings_updated", handleCMSUpdate);
       window.removeEventListener("storage", handleCMSUpdate);
     };
   }, []);
@@ -164,35 +183,66 @@ export default function ProjectsPage() {
 
                       {/* Card Content directly below image */}
                       <div className={styles.cardContent}>
-                        {/* 1. First line: Category badge (Product, Research, Company, etc.) */}
-                        <div className={styles.categoryLine}>
-                          <span className={styles.categoryBadge}>{project.category}</span>
-                        </div>
+                        {/* 1. Category badge (if enabled) */}
+                        {cardConfig.showCategory && (
+                          <div className={styles.categoryLine}>
+                            <span className={styles.categoryBadge}>{project.category}</span>
+                          </div>
+                        )}
 
-                        {/* 2. Next 2 lines: Main Title */}
-                        <h2 className={styles.cardTitle}>{project.title}</h2>
+                        {/* 2. Main Title (Dynamically clamped to titleLines) */}
+                        <h2
+                          className={styles.cardTitle}
+                          style={{
+                            WebkitLineClamp: cardConfig.titleLines,
+                            height: `calc(1.35em * ${cardConfig.titleLines})`,
+                            minHeight: `calc(1.35em * ${cardConfig.titleLines})`,
+                            maxHeight: `calc(1.35em * ${cardConfig.titleLines})`,
+                          }}
+                        >
+                          {project.title}
+                        </h2>
 
-                        {/* 3. Next 2 lines: Small Description / Intro detail */}
-                        <p className={styles.cardDescription}>{project.description}</p>
+                        {/* 3. Small Description (Dynamically clamped to descriptionLines) */}
+                        <p
+                          className={styles.cardDescription}
+                          style={{
+                            WebkitLineClamp: cardConfig.descriptionLines,
+                            height: `calc(1.45em * ${cardConfig.descriptionLines})`,
+                            minHeight: `calc(1.45em * ${cardConfig.descriptionLines})`,
+                            maxHeight: `calc(1.45em * ${cardConfig.descriptionLines})`,
+                          }}
+                        >
+                          {project.description}
+                        </p>
 
-                        {/* 4. Next 2 lines: Tech Stack */}
-                        <div className={styles.techStackSlot}>
-                          {stack.slice(0, 5).map((tech) => (
+                        {/* 4. Tech Stack (Dynamically budgeted to techStackLines rows) */}
+                        <div
+                          className={styles.techStackSlot}
+                          style={{
+                            height: `${cardConfig.techStackLines * 24}px`,
+                            minHeight: `${cardConfig.techStackLines * 24}px`,
+                            maxHeight: `${cardConfig.techStackLines * 24}px`,
+                          }}
+                        >
+                          {stack.slice(0, 6).map((tech) => (
                             <span key={tech} className={styles.techBadge}>
                               {tech}
                             </span>
                           ))}
-                          {stack.length > 5 && (
+                          {stack.length > 6 && (
                             <span className={styles.techBadgeMore}>
-                              +{stack.length - 5}
+                              +{stack.length - 6}
                             </span>
                           )}
                         </div>
 
-                        {/* 5. Final line: Date */}
-                        <div className={styles.dateRow}>
-                          <span className={styles.cardDate}>{project.date}</span>
-                        </div>
+                        {/* 5. Date Row (if enabled) */}
+                        {cardConfig.showDate && (
+                          <div className={styles.dateRow}>
+                            <span className={styles.cardDate}>{project.date}</span>
+                          </div>
+                        )}
                       </div>
                     </Link>
                   </motion.article>

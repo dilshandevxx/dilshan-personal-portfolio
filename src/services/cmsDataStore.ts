@@ -53,6 +53,14 @@ export interface CMSMediaAsset {
   createdAt: string;
 }
 
+export interface ProjectCardLayoutConfig {
+  titleLines: number;
+  descriptionLines: number;
+  techStackLines: number;
+  showCategory: boolean;
+  showDate: boolean;
+}
+
 export interface CMSGlobalSettings {
   brandName: string;
   wordmark: string;
@@ -69,6 +77,7 @@ export interface CMSGlobalSettings {
   defaultDescription: string;
   ogImageUrl: string;
   twitterHandle: string;
+  projectCardConfig?: ProjectCardLayoutConfig;
 }
 
 export interface CMSActivityLog {
@@ -262,6 +271,13 @@ export const DEFAULT_GLOBAL_SETTINGS: CMSGlobalSettings = {
   defaultDescription: "Full-stack engineer and system architect focusing on distributed systems, modern web experiences & scalable architectures.",
   ogImageUrl: "/images/skyline_twilight.jpg",
   twitterHandle: "@dilshan",
+  projectCardConfig: {
+    titleLines: 2,
+    descriptionLines: 2,
+    techStackLines: 2,
+    showCategory: true,
+    showDate: true,
+  },
 };
 
 const DEFAULT_ACTIVITY_LOGS: CMSActivityLog[] = [
@@ -695,6 +711,28 @@ class CMSDataStore {
               Array.isArray(sanitySettings.socials) && sanitySettings.socials.length > 0
                 ? sanitySettings.socials
                 : DEFAULT_GLOBAL_SETTINGS.socials,
+            projectCardConfig: {
+              titleLines:
+                sanitySettings.projectCardTitleLines ??
+                sanitySettings.projectCardConfig?.titleLines ??
+                DEFAULT_GLOBAL_SETTINGS.projectCardConfig!.titleLines,
+              descriptionLines:
+                sanitySettings.projectCardDescLines ??
+                sanitySettings.projectCardConfig?.descriptionLines ??
+                DEFAULT_GLOBAL_SETTINGS.projectCardConfig!.descriptionLines,
+              techStackLines:
+                sanitySettings.projectCardTechLines ??
+                sanitySettings.projectCardConfig?.techStackLines ??
+                DEFAULT_GLOBAL_SETTINGS.projectCardConfig!.techStackLines,
+              showCategory:
+                sanitySettings.projectCardShowCategory !== undefined
+                  ? Boolean(sanitySettings.projectCardShowCategory)
+                  : sanitySettings.projectCardConfig?.showCategory !== false,
+              showDate:
+                sanitySettings.projectCardShowDate !== undefined
+                  ? Boolean(sanitySettings.projectCardShowDate)
+                  : sanitySettings.projectCardConfig?.showDate !== false,
+            },
           };
         }
       } catch (err) {
@@ -717,6 +755,10 @@ class CMSDataStore {
             Array.isArray(parsed.socials) && parsed.socials.length > 0
               ? parsed.socials
               : DEFAULT_GLOBAL_SETTINGS.socials,
+          projectCardConfig: {
+            ...DEFAULT_GLOBAL_SETTINGS.projectCardConfig!,
+            ...(parsed.projectCardConfig || {}),
+          },
         };
       } catch (e) {}
     }
@@ -726,15 +768,46 @@ class CMSDataStore {
 
   public async saveGlobalSettings(settings: Partial<CMSGlobalSettings>): Promise<CMSGlobalSettings> {
     const current = await this.getGlobalSettings();
-    const updated = { ...current, ...settings };
+    const updated = {
+      ...current,
+      ...settings,
+      projectCardConfig: {
+        ...(current.projectCardConfig || DEFAULT_GLOBAL_SETTINGS.projectCardConfig!),
+        ...(settings.projectCardConfig || {}),
+      },
+    };
 
     if (typeof window !== "undefined") {
       localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(updated));
+      window.dispatchEvent(new Event("cms_card_config_updated"));
+      window.dispatchEvent(new Event("cms_settings_updated"));
       this.addActivityLog({
-        action: "Updated Global Settings",
-        target: "Branding, Navigation & SEO",
+        action: "Updated Global Settings & Card Layout",
+        target: "Branding, Navigation, SEO & Card Line Limits",
         type: "settings",
       });
+    }
+
+    // Direct Sanity sync if configured
+    if (isSanityConfigured()) {
+      try {
+        await sanityMutate([
+          {
+            patch: {
+              id: "siteSettings",
+              set: {
+                projectCardTitleLines: updated.projectCardConfig.titleLines,
+                projectCardDescLines: updated.projectCardConfig.descriptionLines,
+                projectCardTechLines: updated.projectCardConfig.techStackLines,
+                projectCardShowCategory: updated.projectCardConfig.showCategory,
+                projectCardShowDate: updated.projectCardConfig.showDate,
+              },
+            },
+          },
+        ]);
+      } catch (err) {
+        console.warn("[CMS] Sanity siteSettings patch error:", err);
+      }
     }
 
     return updated;
@@ -889,6 +962,11 @@ class CMSDataStore {
         defaultDescription: settings.defaultDescription,
         ogImageUrl: settings.ogImageUrl,
         twitterHandle: settings.twitterHandle,
+        projectCardTitleLines: settings.projectCardConfig?.titleLines ?? 2,
+        projectCardDescLines: settings.projectCardConfig?.descriptionLines ?? 2,
+        projectCardTechLines: settings.projectCardConfig?.techStackLines ?? 2,
+        projectCardShowCategory: settings.projectCardConfig?.showCategory !== false,
+        projectCardShowDate: settings.projectCardConfig?.showDate !== false,
       },
     });
 

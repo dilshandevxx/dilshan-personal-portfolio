@@ -11,6 +11,7 @@ export const siteSettingsSchema = {
     { name: "socials", title: "3. Social Media Links" },
     { name: "footer", title: "4. Footer Content" },
     { name: "seo", title: "5. Default SEO Metadata" },
+    { name: "cardLayout", title: "6. Project Card Layout & Line Density" },
   ],
   fields: [
     // Branding
@@ -124,6 +125,48 @@ export const siteSettingsSchema = {
       type: "string",
       fieldset: "seo",
       initialValue: "/images/og_banner.jpg",
+    },
+
+    // 6. Project Card Layout & Line Density
+    {
+      name: "projectCardTitleLines",
+      title: "Project Card Title Lines",
+      type: "number",
+      fieldset: "cardLayout",
+      initialValue: 2,
+      description: "Lines allocated for the project card title (e.g. 1, 2, 3)",
+    },
+    {
+      name: "projectCardDescLines",
+      title: "Project Card Description Lines",
+      type: "number",
+      fieldset: "cardLayout",
+      initialValue: 2,
+      description: "Lines allocated for small intro description detail (e.g. 1, 2, 3)",
+    },
+    {
+      name: "projectCardTechLines",
+      title: "Project Card Tech Stack Rows",
+      type: "number",
+      fieldset: "cardLayout",
+      initialValue: 2,
+      description: "Number of rows budgeted for tech stack badges (e.g. 1, 2, 3)",
+    },
+    {
+      name: "projectCardShowCategory",
+      title: "Show Category Eyebrow Line",
+      type: "boolean",
+      fieldset: "cardLayout",
+      initialValue: true,
+      description: "Display the category badge on the first line (e.g. Product, Research, Company)",
+    },
+    {
+      name: "projectCardShowDate",
+      title: "Show Date Line",
+      type: "boolean",
+      fieldset: "cardLayout",
+      initialValue: true,
+      description: "Display the publication year / date on the bottom line",
     },
   ],
 };

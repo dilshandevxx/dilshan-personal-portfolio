@@ -18,7 +18,7 @@ import styles from "../admin.module.css";
 import { CMSGlobalSettings, DEFAULT_GLOBAL_SETTINGS } from "@/services/cmsDataStore";
 
 interface GlobalSettingsViewProps {
-  initialSubTab?: "nav" | "branding" | "social" | "footer" | "seo";
+  initialSubTab?: "nav" | "branding" | "social" | "footer" | "seo" | "cards";
   settings: CMSGlobalSettings;
   onSave: (settings: Partial<CMSGlobalSettings>) => Promise<void>;
 }
@@ -34,6 +34,10 @@ const safeSettings = (input?: Partial<CMSGlobalSettings>): CMSGlobalSettings => 
     Array.isArray(input?.socials) && input.socials.length > 0
       ? input.socials
       : DEFAULT_GLOBAL_SETTINGS.socials,
+  projectCardConfig: {
+    ...DEFAULT_GLOBAL_SETTINGS.projectCardConfig!,
+    ...(input?.projectCardConfig || {}),
+  },
 });
 
 export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
@@ -41,7 +45,7 @@ export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
   settings,
   onSave,
 }) => {
-  const [activeTab, setActiveTab] = useState<"nav" | "branding" | "social" | "footer" | "seo">(initialSubTab);
+  const [activeTab, setActiveTab] = useState<"nav" | "branding" | "social" | "footer" | "seo" | "cards">(initialSubTab);
   const [formData, setFormData] = useState<CMSGlobalSettings>(() => safeSettings(settings));
   const [saving, setSaving] = useState(false);
   const [savedSuccess, setSavedSuccess] = useState(false);
@@ -188,6 +192,13 @@ export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
           onClick={() => setActiveTab("seo")}
         >
           SEO Settings
+        </button>
+        <button
+          type="button"
+          className={`${styles.tabBtn} ${activeTab === "cards" ? styles.tabBtnActive : ""}`}
+          onClick={() => setActiveTab("cards")}
+        >
+          Card Line Limits
         </button>
       </div>
 
@@ -525,6 +536,290 @@ export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
                 value={formData.twitterHandle}
                 onChange={(e) => handleChange("twitterHandle", e.target.value)}
               />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Tab 6: Project Card Layout & Line Density */}
+      {activeTab === "cards" && (
+        <div className={styles.formSection}>
+          <div className={styles.sectionHeader}>
+            <h3 className={styles.sectionTitle}>Project Card Layout & Line Limits</h3>
+            <p className={styles.sectionDescription}>
+              Customize the exact line allocation for titles, small description summaries, and tech stack badge rows on all project cards. Every card on the page dynamically maintains equal height and perfect visual balance.
+            </p>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: "2rem", alignItems: "start" }}>
+            {/* Control Sliders & Steppers */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+              {/* Title Lines */}
+              <div className={styles.formGroup}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <label className={styles.formLabel}>Main Title Line Limit</label>
+                  <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: "0.82rem", color: "#a3e635", fontWeight: 700 }}>
+                    {formData.projectCardConfig?.titleLines || 2} {formData.projectCardConfig?.titleLines === 1 ? "Line" : "Lines"}
+                  </span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                  <input
+                    type="range"
+                    min={1}
+                    max={4}
+                    step={1}
+                    value={formData.projectCardConfig?.titleLines || 2}
+                    onChange={(e) =>
+                      handleChange("projectCardConfig", {
+                        ...(formData.projectCardConfig || DEFAULT_GLOBAL_SETTINGS.projectCardConfig!),
+                        titleLines: parseInt(e.target.value, 10),
+                      })
+                    }
+                    style={{ flex: 1, accentColor: "#a3e635", cursor: "pointer" }}
+                  />
+                  <span style={{ fontSize: "0.75rem", color: "#8c909c", minWidth: "40px" }}>
+                    1 - 4 lines
+                  </span>
+                </div>
+                <span style={{ fontSize: "0.72rem", color: "#71717a" }}>
+                  Number of lines reserved for the project title before clamping with ellipsis.
+                </span>
+              </div>
+
+              {/* Description Lines */}
+              <div className={styles.formGroup}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <label className={styles.formLabel}>Small Description Line Limit</label>
+                  <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: "0.82rem", color: "#a3e635", fontWeight: 700 }}>
+                    {formData.projectCardConfig?.descriptionLines || 2} {formData.projectCardConfig?.descriptionLines === 1 ? "Line" : "Lines"}
+                  </span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                  <input
+                    type="range"
+                    min={1}
+                    max={5}
+                    step={1}
+                    value={formData.projectCardConfig?.descriptionLines || 2}
+                    onChange={(e) =>
+                      handleChange("projectCardConfig", {
+                        ...(formData.projectCardConfig || DEFAULT_GLOBAL_SETTINGS.projectCardConfig!),
+                        descriptionLines: parseInt(e.target.value, 10),
+                      })
+                    }
+                    style={{ flex: 1, accentColor: "#a3e635", cursor: "pointer" }}
+                  />
+                  <span style={{ fontSize: "0.75rem", color: "#8c909c", minWidth: "40px" }}>
+                    1 - 5 lines
+                  </span>
+                </div>
+                <span style={{ fontSize: "0.72rem", color: "#71717a" }}>
+                  Lines reserved for the overview synopsis. Automatically ensures all cards align vertically.
+                </span>
+              </div>
+
+              {/* Tech Stack Lines */}
+              <div className={styles.formGroup}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <label className={styles.formLabel}>Tech Stack Badge Rows</label>
+                  <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: "0.82rem", color: "#a3e635", fontWeight: 700 }}>
+                    {formData.projectCardConfig?.techStackLines || 2} {formData.projectCardConfig?.techStackLines === 1 ? "Row" : "Rows"}
+                  </span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                  <input
+                    type="range"
+                    min={1}
+                    max={3}
+                    step={1}
+                    value={formData.projectCardConfig?.techStackLines || 2}
+                    onChange={(e) =>
+                      handleChange("projectCardConfig", {
+                        ...(formData.projectCardConfig || DEFAULT_GLOBAL_SETTINGS.projectCardConfig!),
+                        techStackLines: parseInt(e.target.value, 10),
+                      })
+                    }
+                    style={{ flex: 1, accentColor: "#a3e635", cursor: "pointer" }}
+                  />
+                  <span style={{ fontSize: "0.75rem", color: "#8c909c", minWidth: "40px" }}>
+                    1 - 3 rows
+                  </span>
+                </div>
+                <span style={{ fontSize: "0.72rem", color: "#71717a" }}>
+                  Rows allocated for technology pills (e.g. Python, FastAPI, PyTorch, React, Go).
+                </span>
+              </div>
+
+              {/* Toggles */}
+              <div className={styles.fieldGrid}>
+                <div style={{ padding: "0.85rem", backgroundColor: "#141518", border: "1px solid #292b31", borderRadius: "6px" }}>
+                  <label style={{ display: "flex", alignItems: "center", gap: "0.6rem", cursor: "pointer", color: "#f2f2f0", fontSize: "0.84rem", fontWeight: 500 }}>
+                    <input
+                      type="checkbox"
+                      checked={formData.projectCardConfig?.showCategory !== false}
+                      onChange={(e) =>
+                        handleChange("projectCardConfig", {
+                          ...(formData.projectCardConfig || DEFAULT_GLOBAL_SETTINGS.projectCardConfig!),
+                          showCategory: e.target.checked,
+                        })
+                      }
+                      style={{ accentColor: "#a3e635", width: "16px", height: "16px" }}
+                    />
+                    <span>Show Category Line (Product, Research, etc.)</span>
+                  </label>
+                </div>
+
+                <div style={{ padding: "0.85rem", backgroundColor: "#141518", border: "1px solid #292b31", borderRadius: "6px" }}>
+                  <label style={{ display: "flex", alignItems: "center", gap: "0.6rem", cursor: "pointer", color: "#f2f2f0", fontSize: "0.84rem", fontWeight: 500 }}>
+                    <input
+                      type="checkbox"
+                      checked={formData.projectCardConfig?.showDate !== false}
+                      onChange={(e) =>
+                        handleChange("projectCardConfig", {
+                          ...(formData.projectCardConfig || DEFAULT_GLOBAL_SETTINGS.projectCardConfig!),
+                          showDate: e.target.checked,
+                        })
+                      }
+                      style={{ accentColor: "#a3e635", width: "16px", height: "16px" }}
+                    />
+                    <span>Show Date Line (Year / Release Date)</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            {/* Live Interactive Card Preview */}
+            <div style={{ position: "sticky", top: "80px", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+              <span style={{ fontSize: "0.75rem", fontFamily: "var(--font-mono, monospace)", color: "#92949d", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                Interactive Live Preview
+              </span>
+
+              <div
+                style={{
+                  backgroundColor: "#16171b",
+                  border: "1px solid #292b31",
+                  borderRadius: "14px",
+                  overflow: "hidden",
+                  padding: "0.85rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.85rem",
+                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
+                }}
+              >
+                {/* Image Placeholder */}
+                <div
+                  style={{
+                    width: "100%",
+                    aspectRatio: "4 / 3",
+                    backgroundColor: "#0d0f12",
+                    borderRadius: "8px",
+                    border: "1px solid #24262d",
+                    position: "relative",
+                    overflow: "hidden",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Image
+                    src="/images/project_collective.jpg"
+                    alt="Sample Preview"
+                    fill
+                    style={{ objectFit: "cover" }}
+                    unoptimized
+                  />
+                </div>
+
+                {/* Card Content Details */}
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  {/* Line 1: Category */}
+                  {formData.projectCardConfig?.showCategory !== false && (
+                    <div style={{ height: "20px", display: "flex", alignItems: "center", marginBottom: "0.35rem" }}>
+                      <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: "0.68rem", color: "#8c909c", fontWeight: 700, textTransform: "uppercase" }}>
+                        PRODUCT
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Line 2: Title */}
+                  <h4
+                    style={{
+                      margin: "0 0 0.4rem 0",
+                      fontSize: "0.98rem",
+                      fontWeight: 600,
+                      color: "#ffffff",
+                      lineHeight: 1.35,
+                      WebkitLineClamp: formData.projectCardConfig?.titleLines || 2,
+                      WebkitBoxOrient: "vertical",
+                      display: "-webkit-box",
+                      overflow: "hidden",
+                      height: `calc(1.35em * ${formData.projectCardConfig?.titleLines || 2})`,
+                      maxHeight: `calc(1.35em * ${formData.projectCardConfig?.titleLines || 2})`,
+                    }}
+                  >
+                    Enterprise Hybrid RAG Platform with Semantic Cache & Model Inference
+                  </h4>
+
+                  {/* Line 3: Small Description */}
+                  <p
+                    style={{
+                      margin: "0 0 0.55rem 0",
+                      fontSize: "0.8rem",
+                      color: "#888e99",
+                      lineHeight: 1.45,
+                      WebkitLineClamp: formData.projectCardConfig?.descriptionLines || 2,
+                      WebkitBoxOrient: "vertical",
+                      display: "-webkit-box",
+                      overflow: "hidden",
+                      height: `calc(1.45em * ${formData.projectCardConfig?.descriptionLines || 2})`,
+                      maxHeight: `calc(1.45em * ${formData.projectCardConfig?.descriptionLines || 2})`,
+                    }}
+                  >
+                    Engineered an enterprise retrieval-augmented generation engine with sub-50ms hybrid lexical and dense vector search, reciprocal rank fusion, and Redis semantic caching.
+                  </p>
+
+                  {/* Line 4: Tech Stack */}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: "0.3rem",
+                      overflow: "hidden",
+                      height: `${(formData.projectCardConfig?.techStackLines || 2) * 24}px`,
+                      maxHeight: `${(formData.projectCardConfig?.techStackLines || 2) * 24}px`,
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    {["Python", "FastAPI", "vLLM", "Qdrant", "Redis", "TypeScript", "React"].map((t) => (
+                      <span
+                        key={t}
+                        style={{
+                          fontSize: "0.64rem",
+                          fontFamily: "var(--font-mono, monospace)",
+                          padding: "0.15rem 0.4rem",
+                          backgroundColor: "rgba(255, 255, 255, 0.05)",
+                          border: "1px solid rgba(255, 255, 255, 0.1)",
+                          borderRadius: "4px",
+                          color: "#a1a5b0",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Line 5: Date */}
+                  {formData.projectCardConfig?.showDate !== false && (
+                    <div style={{ height: "18px", display: "flex", alignItems: "center" }}>
+                      <span style={{ fontSize: "0.72rem", color: "#606470", fontFamily: "var(--font-mono, monospace)" }}>
+                        OCTOBER 2026
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>

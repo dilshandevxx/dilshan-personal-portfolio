@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import {
   Search,
@@ -12,9 +12,13 @@ import {
   Trash2,
   ExternalLink,
   Filter,
+  Save,
+  Check,
+  Sliders,
 } from "lucide-react";
 import styles from "../admin.module.css";
 import { Project, ProjectCategory, getProjectThumbnail } from "@/data/projects";
+import { cmsDataStore, DEFAULT_GLOBAL_SETTINGS, ProjectCardLayoutConfig } from "@/services/cmsDataStore";
 
 interface ProjectsViewProps {
   projects: Project[];
@@ -22,7 +26,7 @@ interface ProjectsViewProps {
   onEdit: (project: Project) => void;
   onDelete: (slug: string) => void;
   onToggleFeatured: (slug: string) => void;
-  initialTab?: "all" | "categories";
+  initialTab?: "all" | "categories" | "card-layout";
 }
 
 export const ProjectsView: React.FC<ProjectsViewProps> = ({
@@ -36,7 +40,39 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [activeTab, setActiveTab] = useState<"all" | "categories">(initialTab);
+  const [activeTab, setActiveTab] = useState<"all" | "categories" | "card-layout">(initialTab);
+
+  // Card Layout Configuration
+  const [cardConfig, setCardConfig] = useState<ProjectCardLayoutConfig>(
+    DEFAULT_GLOBAL_SETTINGS.projectCardConfig!
+  );
+  const [savingCardConfig, setSavingCardConfig] = useState(false);
+  const [cardConfigSaved, setCardConfigSaved] = useState(false);
+
+  useEffect(() => {
+    async function loadSettings() {
+      try {
+        const settings = await cmsDataStore.getGlobalSettings();
+        if (settings?.projectCardConfig) {
+          setCardConfig(settings.projectCardConfig);
+        }
+      } catch (err) {}
+    }
+    loadSettings();
+  }, []);
+
+  const handleSaveCardConfig = async () => {
+    setSavingCardConfig(true);
+    try {
+      await cmsDataStore.saveGlobalSettings({ projectCardConfig: cardConfig });
+      setCardConfigSaved(true);
+      setTimeout(() => setCardConfigSaved(false), 2500);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSavingCardConfig(false);
+    }
+  };
 
   const categories: string[] = [
     "All",
@@ -104,6 +140,13 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
           onClick={() => setActiveTab("categories")}
         >
           Categories & Taxonomy
+        </button>
+        <button
+          type="button"
+          className={`${styles.tabBtn} ${activeTab === "card-layout" ? styles.tabBtnActive : ""}`}
+          onClick={() => setActiveTab("card-layout")}
+        >
+          Card Layout & Line Limits
         </button>
       </div>
 
@@ -544,7 +587,7 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
             </div>
           )}
         </>
-      ) : (
+      ) : activeTab === "categories" ? (
         /* Categories Tab */
         <div className={styles.formSection}>
           <div className={styles.sectionHeader}>
@@ -594,6 +637,266 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
                   </div>
                 );
               })}
+          </div>
+        </div>
+      ) : (
+        /* Card Layout & Line Limits Tab */
+        <div className={styles.formSection}>
+          <div className={styles.sectionHeader}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div>
+                <h3 className={styles.sectionTitle}>Project Card Layout & Line Limits</h3>
+                <p className={styles.sectionDescription}>
+                  Control how many lines are budgeted for titles, intro descriptions, and tech stack badge rows on all project cards. Every card automatically balances its height to prevent visual unevenness.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                className={`${styles.btn} ${styles.btnPrimary}`}
+                onClick={handleSaveCardConfig}
+                disabled={savingCardConfig}
+              >
+                {cardConfigSaved ? <Check size={14} /> : <Save size={14} />}
+                <span>{savingCardConfig ? "Saving..." : cardConfigSaved ? "Layout Saved!" : "Save Card Layout"}</span>
+              </button>
+            </div>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: "2rem", alignItems: "start" }}>
+            {/* Controls */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+              {/* Title lines slider */}
+              <div className={styles.formGroup}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <label className={styles.formLabel}>Main Title Line Limit</label>
+                  <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: "0.82rem", color: "#a3e635", fontWeight: 700 }}>
+                    {cardConfig.titleLines} {cardConfig.titleLines === 1 ? "Line" : "Lines"}
+                  </span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                  <input
+                    type="range"
+                    min={1}
+                    max={4}
+                    step={1}
+                    value={cardConfig.titleLines}
+                    onChange={(e) => setCardConfig({ ...cardConfig, titleLines: parseInt(e.target.value, 10) })}
+                    style={{ flex: 1, accentColor: "#a3e635", cursor: "pointer" }}
+                  />
+                  <span style={{ fontSize: "0.75rem", color: "#8c909c", minWidth: "40px" }}>1 - 4 lines</span>
+                </div>
+                <span style={{ fontSize: "0.72rem", color: "#71717a" }}>
+                  Maximum lines allowed for project title before truncating with an ellipsis.
+                </span>
+              </div>
+
+              {/* Description lines slider */}
+              <div className={styles.formGroup}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <label className={styles.formLabel}>Small Description Line Limit</label>
+                  <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: "0.82rem", color: "#a3e635", fontWeight: 700 }}>
+                    {cardConfig.descriptionLines} {cardConfig.descriptionLines === 1 ? "Line" : "Lines"}
+                  </span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                  <input
+                    type="range"
+                    min={1}
+                    max={5}
+                    step={1}
+                    value={cardConfig.descriptionLines}
+                    onChange={(e) => setCardConfig({ ...cardConfig, descriptionLines: parseInt(e.target.value, 10) })}
+                    style={{ flex: 1, accentColor: "#a3e635", cursor: "pointer" }}
+                  />
+                  <span style={{ fontSize: "0.75rem", color: "#8c909c", minWidth: "40px" }}>1 - 5 lines</span>
+                </div>
+                <span style={{ fontSize: "0.72rem", color: "#71717a" }}>
+                  Height reserved for the introductory synopsis. Equalizes height across all cards.
+                </span>
+              </div>
+
+              {/* Tech stack rows slider */}
+              <div className={styles.formGroup}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <label className={styles.formLabel}>Tech Stack Badge Rows</label>
+                  <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: "0.82rem", color: "#a3e635", fontWeight: 700 }}>
+                    {cardConfig.techStackLines} {cardConfig.techStackLines === 1 ? "Row" : "Rows"}
+                  </span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                  <input
+                    type="range"
+                    min={1}
+                    max={3}
+                    step={1}
+                    value={cardConfig.techStackLines}
+                    onChange={(e) => setCardConfig({ ...cardConfig, techStackLines: parseInt(e.target.value, 10) })}
+                    style={{ flex: 1, accentColor: "#a3e635", cursor: "pointer" }}
+                  />
+                  <span style={{ fontSize: "0.75rem", color: "#8c909c", minWidth: "40px" }}>1 - 3 rows</span>
+                </div>
+                <span style={{ fontSize: "0.72rem", color: "#71717a" }}>
+                  Row budget for tech stack pills (Python, FastAPI, PyTorch, React, etc.).
+                </span>
+              </div>
+
+              {/* Toggles */}
+              <div className={styles.fieldGrid}>
+                <div style={{ padding: "0.85rem", backgroundColor: "#141518", border: "1px solid #292b31", borderRadius: "6px" }}>
+                  <label style={{ display: "flex", alignItems: "center", gap: "0.6rem", cursor: "pointer", color: "#f2f2f0", fontSize: "0.84rem", fontWeight: 500 }}>
+                    <input
+                      type="checkbox"
+                      checked={cardConfig.showCategory !== false}
+                      onChange={(e) => setCardConfig({ ...cardConfig, showCategory: e.target.checked })}
+                      style={{ accentColor: "#a3e635", width: "16px", height: "16px" }}
+                    />
+                    <span>Show Category Line (Product, Research, Company)</span>
+                  </label>
+                </div>
+
+                <div style={{ padding: "0.85rem", backgroundColor: "#141518", border: "1px solid #292b31", borderRadius: "6px" }}>
+                  <label style={{ display: "flex", alignItems: "center", gap: "0.6rem", cursor: "pointer", color: "#f2f2f0", fontSize: "0.84rem", fontWeight: 500 }}>
+                    <input
+                      type="checkbox"
+                      checked={cardConfig.showDate !== false}
+                      onChange={(e) => setCardConfig({ ...cardConfig, showDate: e.target.checked })}
+                      style={{ accentColor: "#a3e635", width: "16px", height: "16px" }}
+                    />
+                    <span>Show Date Line (Year / Release Date)</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            {/* Live Interactive Card Preview */}
+            <div style={{ position: "sticky", top: "80px", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+              <span style={{ fontSize: "0.75rem", fontFamily: "var(--font-mono, monospace)", color: "#92949d", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                Interactive Live Preview
+              </span>
+
+              <div
+                style={{
+                  backgroundColor: "#16171b",
+                  border: "1px solid #292b31",
+                  borderRadius: "14px",
+                  overflow: "hidden",
+                  padding: "0.85rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.85rem",
+                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
+                }}
+              >
+                {/* Image Placeholder */}
+                <div
+                  style={{
+                    width: "100%",
+                    aspectRatio: "4 / 3",
+                    backgroundColor: "#0d0f12",
+                    borderRadius: "8px",
+                    border: "1px solid #24262d",
+                    position: "relative",
+                    overflow: "hidden",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Image
+                    src="/images/project_collective.jpg"
+                    alt="Sample Preview"
+                    fill
+                    style={{ objectFit: "cover" }}
+                    unoptimized
+                  />
+                </div>
+
+                {/* Card Content Details */}
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  {cardConfig.showCategory !== false && (
+                    <div style={{ height: "20px", display: "flex", alignItems: "center", marginBottom: "0.35rem" }}>
+                      <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: "0.68rem", color: "#8c909c", fontWeight: 700, textTransform: "uppercase" }}>
+                        PRODUCT
+                      </span>
+                    </div>
+                  )}
+
+                  <h4
+                    style={{
+                      margin: "0 0 0.4rem 0",
+                      fontSize: "0.98rem",
+                      fontWeight: 600,
+                      color: "#ffffff",
+                      lineHeight: 1.35,
+                      WebkitLineClamp: cardConfig.titleLines,
+                      WebkitBoxOrient: "vertical",
+                      display: "-webkit-box",
+                      overflow: "hidden",
+                      height: `calc(1.35em * ${cardConfig.titleLines})`,
+                      maxHeight: `calc(1.35em * ${cardConfig.titleLines})`,
+                    }}
+                  >
+                    Enterprise Hybrid RAG Platform with Semantic Cache & Model Inference
+                  </h4>
+
+                  <p
+                    style={{
+                      margin: "0 0 0.55rem 0",
+                      fontSize: "0.8rem",
+                      color: "#888e99",
+                      lineHeight: 1.45,
+                      WebkitLineClamp: cardConfig.descriptionLines,
+                      WebkitBoxOrient: "vertical",
+                      display: "-webkit-box",
+                      overflow: "hidden",
+                      height: `calc(1.45em * ${cardConfig.descriptionLines})`,
+                      maxHeight: `calc(1.45em * ${cardConfig.descriptionLines})`,
+                    }}
+                  >
+                    Engineered an enterprise retrieval-augmented generation engine with sub-50ms hybrid lexical and dense vector search, reciprocal rank fusion, and Redis semantic caching.
+                  </p>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: "0.3rem",
+                      overflow: "hidden",
+                      height: `${cardConfig.techStackLines * 24}px`,
+                      maxHeight: `${cardConfig.techStackLines * 24}px`,
+                      marginBottom: "0.5rem",
+                    }}
+                  >
+                    {["Python", "FastAPI", "vLLM", "Qdrant", "Redis", "TypeScript", "React"].map((t) => (
+                      <span
+                        key={t}
+                        style={{
+                          fontSize: "0.64rem",
+                          fontFamily: "var(--font-mono, monospace)",
+                          padding: "0.15rem 0.4rem",
+                          backgroundColor: "rgba(255, 255, 255, 0.05)",
+                          border: "1px solid rgba(255, 255, 255, 0.1)",
+                          borderRadius: "4px",
+                          color: "#a1a5b0",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  {cardConfig.showDate !== false && (
+                    <div style={{ height: "18px", display: "flex", alignItems: "center" }}>
+                      <span style={{ fontSize: "0.72rem", color: "#606470", fontFamily: "var(--font-mono, monospace)" }}>
+                        OCTOBER 2026
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}

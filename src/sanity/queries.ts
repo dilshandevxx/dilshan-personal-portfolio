@@ -151,6 +151,11 @@ export const SITE_SETTINGS_QUERY = `
     footerTagline,
     defaultTitle,
     defaultDescription,
-    ogImageUrl
+    ogImageUrl,
+    projectCardTitleLines,
+    projectCardDescLines,
+    projectCardTechLines,
+    projectCardShowCategory,
+    projectCardShowDate
   }
 `;

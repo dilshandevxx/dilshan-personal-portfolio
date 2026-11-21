@@ -36,7 +36,8 @@ export type AdminViewType =
   | "settings-branding"
   | "settings-social"
   | "settings-footer"
-  | "settings-seo";
+  | "settings-seo"
+  | "settings-cards";
 
 interface AdminSidebarProps {
   currentView: AdminViewType;
@@ -377,6 +378,14 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
                   title="SEO Settings"
                 >
                   <span>SEO Settings</span>
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.navItemBtn} ${currentView === "settings-cards" ? styles.navItemBtnActive : ""}`}
+                  onClick={() => handleItemClick("settings-cards")}
+                  title="Project Card Line Limits"
+                >
+                  <span>Card Line Limits</span>
                 </button>
               </div>
             ) : null}

@@ -300,6 +300,7 @@ export default function AdminDashboardPage() {
                       | "social"
                       | "footer"
                       | "seo"
+                      | "cards"
                   }
                   settings={globalSettings || DEFAULT_GLOBAL_SETTINGS}
                   onSave={handleSaveSettings}

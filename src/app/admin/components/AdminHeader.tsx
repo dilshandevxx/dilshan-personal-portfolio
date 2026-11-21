@@ -69,6 +69,8 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
         return { parent: "Global Settings", current: "Footer" };
       case "settings-seo":
         return { parent: "Global Settings", current: "SEO Settings" };
+      case "settings-cards":
+        return { parent: "Global Settings", current: "Project Card Line Limits" };
       default:
         return { current: "Dashboard" };
     }
