@@ -304,7 +304,18 @@ class CMSDataStore {
     if (isSanityConfigured()) {
       const sanityProjects = await sanityFetch<Project[]>(ALL_PROJECTS_QUERY);
       if (sanityProjects && sanityProjects.length > 0) {
-        return sanityProjects;
+        return sanityProjects.map((p) => {
+          const base = initialProjectsList.find((b) => b.slug === p.slug);
+          const img = (p.image || (p as any).coverImage || base?.image || "").trim();
+          return {
+            ...base,
+            ...p,
+            image: img,
+            coverImage: img,
+            gallery: p.gallery && p.gallery.length > 0 ? p.gallery : base?.gallery || [],
+            videoDemo: p.videoDemo || base?.videoDemo,
+          };
+        });
       }
     }
 
@@ -317,10 +328,12 @@ class CMSDataStore {
           // Merge with initial data so rich gallery and thumbnail images are preserved
           return parsed.map((item: Project) => {
             const base = initialProjectsList.find((p) => p.slug === item.slug);
+            const resolvedImg = item.image || (item as any).coverImage || base?.image || "";
             return {
               ...base,
               ...item,
-              image: item.image || base?.image || "",
+              image: resolvedImg,
+              coverImage: resolvedImg,
               gallery: item.gallery && item.gallery.length > 0 ? item.gallery : base?.gallery || [],
               videoDemo: item.videoDemo || base?.videoDemo,
             };
@@ -338,12 +351,19 @@ class CMSDataStore {
     const list = await this.getProjects();
     const existingIndex = list.findIndex((p) => p.slug === project.slug);
 
+    const resolvedImage = (project.image || (project as any).coverImage || "").trim();
+    const normalizedProject: Project = {
+      ...project,
+      image: resolvedImage,
+      coverImage: resolvedImage,
+    };
+
     let updatedList: Project[];
     if (existingIndex >= 0) {
       updatedList = [...list];
-      updatedList[existingIndex] = { ...updatedList[existingIndex], ...project };
+      updatedList[existingIndex] = { ...updatedList[existingIndex], ...normalizedProject };
     } else {
-      updatedList = [project, ...list];
+      updatedList = [normalizedProject, ...list];
     }
 
     // Persist to LocalStorage
@@ -351,9 +371,14 @@ class CMSDataStore {
       localStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify(updatedList));
       this.addActivityLog({
         action: existingIndex >= 0 ? "Edited Project" : "Created Project",
-        target: project.title,
+        target: normalizedProject.title,
         type: "project",
       });
+
+      // Broadcast update across all open components/pages
+      window.dispatchEvent(
+        new CustomEvent("cms_projects_updated", { detail: normalizedProject })
+      );
     }
 
     // Sync via Next.js internal API
@@ -361,7 +386,7 @@ class CMSDataStore {
       await fetch("/api/admin/projects", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "save", project }),
+        body: JSON.stringify({ action: "save", project: normalizedProject }),
       });
     } catch (e) {
       // Ignored if offline
@@ -369,34 +394,39 @@ class CMSDataStore {
 
     // Sync to Sanity if configured
     if (isSanityConfigured()) {
-      await sanityMutate([
-        {
-          createOrReplace: {
-            _id: `project-${project.slug}`,
-            _type: "project",
-            title: project.title,
-            slug: { current: project.slug },
-            category: project.category,
-            status: project.status,
-            featured: project.featured,
-            date: project.date,
-            tagline: project.tagline,
-            description: project.description,
-            longDescription: project.longDescription,
-            coverImage: project.image,
-            videoUrl: project.videoDemo?.videoUrl,
-            tags: project.tags,
-            githubUrl: project.githubUrl,
-            demoUrl: project.demoUrl,
-            writeupUrl: project.writeupUrl,
-            architecture: project.architecture,
-            challenges: project.challenges,
+      try {
+        await sanityMutate([
+          {
+            createOrReplace: {
+              _id: `project-${normalizedProject.slug}`,
+              _type: "project",
+              title: normalizedProject.title,
+              slug: { current: normalizedProject.slug },
+              category: normalizedProject.category,
+              status: normalizedProject.status,
+              featured: normalizedProject.featured,
+              date: normalizedProject.date,
+              tagline: normalizedProject.tagline,
+              description: normalizedProject.description,
+              longDescription: normalizedProject.longDescription,
+              coverImage: resolvedImage,
+              image: resolvedImage,
+              videoUrl: normalizedProject.videoDemo?.videoUrl,
+              tags: normalizedProject.tags,
+              githubUrl: normalizedProject.githubUrl,
+              demoUrl: normalizedProject.demoUrl,
+              writeupUrl: normalizedProject.writeupUrl,
+              architecture: normalizedProject.architecture,
+              challenges: normalizedProject.challenges,
+            },
           },
-        },
-      ]);
+        ]);
+      } catch (sanityErr) {
+        console.error("Sanity project sync error:", sanityErr);
+      }
     }
 
-    return { success: true, project };
+    return { success: true, project: normalizedProject };
   }
 
   public async deleteProject(slug: string): Promise<boolean> {
@@ -679,6 +709,7 @@ class CMSDataStore {
 
     // Projects
     for (const project of projects) {
+      const img = (project.image || (project as any).coverImage || "").trim();
       mutations.push({
         createOrReplace: {
           _id: `project-${project.slug}`,
@@ -692,7 +723,8 @@ class CMSDataStore {
           tagline: project.tagline,
           description: project.description,
           longDescription: project.longDescription,
-          coverImage: project.image,
+          coverImage: img,
+          image: img,
           videoUrl: project.videoDemo?.videoUrl,
           tags: project.tags,
           githubUrl: project.githubUrl,

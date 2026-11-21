@@ -193,7 +193,12 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
                ============================================================= */
             <div className={styles.projectsGrid}>
               {filteredProjects.map((project, idx) => {
-                const thumbSrc = getProjectThumbnail(project.slug, project.image, idx);
+                const thumbSrc = getProjectThumbnail(
+                  project.slug,
+                  project.image || (project as any).coverImage,
+                  idx,
+                  (project as any).coverImage
+                );
                 const galleryList = project.gallery || [];
                 const hasVideoPoster = Boolean(project.videoDemo?.thumbnail);
                 const insideCount = galleryList.length + (hasVideoPoster ? 1 : 0);
@@ -392,7 +397,12 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
                   </thead>
                   <tbody>
                     {filteredProjects.map((project, idx) => {
-                      const thumbSrc = getProjectThumbnail(project.slug, project.image, idx);
+                      const thumbSrc = getProjectThumbnail(
+                        project.slug,
+                        project.image || (project as any).coverImage,
+                        idx,
+                        (project as any).coverImage
+                      );
                       const galleryList = project.gallery || [];
                       const hasVideoPoster = Boolean(project.videoDemo?.thumbnail);
                       const insideCount = galleryList.length + (hasVideoPoster ? 1 : 0);

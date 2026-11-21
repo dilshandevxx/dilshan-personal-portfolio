@@ -179,7 +179,12 @@ export const OverviewView: React.FC<OverviewViewProps> = ({
               </thead>
               <tbody>
                 {metrics.recentProjects.slice(0, 5).map((project, idx) => {
-                  const thumbSrc = getProjectThumbnail(project.slug, project.image, idx);
+                  const thumbSrc = getProjectThumbnail(
+                    project.slug,
+                    project.image || (project as any).coverImage,
+                    idx,
+                    (project as any).coverImage
+                  );
                   const galleryCount = (project.gallery || []).length;
                   const hasPoster = Boolean(project.videoDemo?.thumbnail);
                   const insideTotal = galleryCount + (hasPoster ? 1 : 0);

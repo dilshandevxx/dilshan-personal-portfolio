@@ -58,6 +58,7 @@ export interface Project {
   challenges: string; tags: string[]; stars: number; highlight?: boolean; featured?: boolean;
   githubUrl: string; demoUrl?: string; writeupUrl?: string; metrics?: string;
   metricsDetail: ProjectMetric[]; stackLayers: ProjectStackLayer[]; image?: string;
+  coverImage?: string;
   aliases?: string[]; status: ProjectStatus;
 
   // Next-generation visual storytelling & engineering details
@@ -112,8 +113,14 @@ export const FALLBACK_THUMBNAILS = [
   "/images/skyline_twilight.jpg",
 ];
 
-export function getProjectThumbnail(slug: string, image?: string, index: number = 0): string {
-  if (image && image.trim() !== "") return image;
+export function getProjectThumbnail(
+  slug: string,
+  image?: string,
+  index: number = 0,
+  coverImage?: string
+): string {
+  if (image && typeof image === "string" && image.trim() !== "") return image;
+  if (coverImage && typeof coverImage === "string" && coverImage.trim() !== "") return coverImage;
   if (PROJECT_THUMBNAILS[slug]) return PROJECT_THUMBNAILS[slug];
   return FALLBACK_THUMBNAILS[index % FALLBACK_THUMBNAILS.length];
 }

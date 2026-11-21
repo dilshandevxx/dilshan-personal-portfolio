@@ -9,6 +9,7 @@ import MainFooter from "@/components/MainFooter";
 import { Rss } from "lucide-react";
 import styles from "./projectsPage.module.css";
 import { cmsDataStore } from "@/services/cmsDataStore";
+import { getProjectThumbnail } from "@/data/projects";
 
 export interface ProjectArticle {
   id: string;
@@ -181,7 +182,7 @@ export default function ProjectsPage() {
       try {
         const cmsProjects = await cmsDataStore.getProjects();
         if (cmsProjects && cmsProjects.length > 0) {
-          const cmsMapped: ProjectArticle[] = cmsProjects.map((p) => ({
+          const cmsMapped: ProjectArticle[] = cmsProjects.map((p, idx) => ({
             id: p.slug,
             slug: p.slug,
             category: p.category || "Product",
@@ -190,7 +191,7 @@ export default function ProjectsPage() {
             title: p.title,
             description: p.tagline || p.description,
             date: p.date || "2026",
-            image: p.image || "/images/project_collective.jpg",
+            image: getProjectThumbnail(p.slug, p.image || (p as any).coverImage, idx, (p as any).coverImage),
           }));
 
           const cmsSlugs = new Set(cmsMapped.map((c) => c.slug));
@@ -202,6 +203,17 @@ export default function ProjectsPage() {
       }
     }
     loadCMSData();
+
+    // Listen for live updates from CMS admin
+    const handleCMSUpdate = () => {
+      loadCMSData();
+    };
+    window.addEventListener("cms_projects_updated", handleCMSUpdate);
+    window.addEventListener("storage", handleCMSUpdate);
+    return () => {
+      window.removeEventListener("cms_projects_updated", handleCMSUpdate);
+      window.removeEventListener("storage", handleCMSUpdate);
+    };
   }, []);
 
   const filteredProjects = useMemo(() => {

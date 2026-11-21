@@ -50,7 +50,12 @@ export const ProjectEditorModal: React.FC<ProjectEditorModalProps> = ({
   // Initialize or reset form
   useEffect(() => {
     if (project) {
-      setFormData({ ...project });
+      const initialImg = (project.image || (project as any).coverImage || "").trim();
+      setFormData({
+        ...project,
+        image: initialImg,
+        coverImage: initialImg,
+      });
     } else {
       // Default new project template
       setFormData({
@@ -64,6 +69,7 @@ export const ProjectEditorModal: React.FC<ProjectEditorModalProps> = ({
         description: "",
         longDescription: "",
         image: "/images/project_collective.jpg",
+        coverImage: "/images/project_collective.jpg",
         tags: ["Go", "Distributed Systems", "Kubernetes"],
         githubUrl: "https://github.com/dilshandevxx",
         demoUrl: "",
@@ -93,13 +99,21 @@ export const ProjectEditorModal: React.FC<ProjectEditorModalProps> = ({
 
   if (!isOpen) return null;
 
-  const resolvedCover = getProjectThumbnail(formData.slug || "", formData.image);
+  const resolvedCover = getProjectThumbnail(formData.slug || "", formData.image || (formData as any).coverImage);
   const galleryItems = formData.gallery || [];
   const videoPoster = formData.videoDemo?.thumbnail;
   const totalVisualAssetsCount = (resolvedCover ? 1 : 0) + galleryItems.length + (videoPoster ? 1 : 0);
 
   const handleChange = (field: keyof Project, value: any) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    setFormData((prev) => {
+      const next: Partial<Project> = { ...prev, [field]: value };
+      if (field === "image") {
+        next.coverImage = value;
+      } else if (field === "coverImage") {
+        next.image = value;
+      }
+      return next;
+    });
   };
 
   const handleNestedChange = (parent: "videoDemo", field: string, value: any) => {
@@ -167,7 +181,13 @@ export const ProjectEditorModal: React.FC<ProjectEditorModalProps> = ({
     setSaving(true);
     setErrorMsg(null);
     try {
-      await onSave(formData as Project);
+      const resolvedImg = (formData.image || (formData as any).coverImage || "").trim();
+      const payload: Project = {
+        ...(formData as Project),
+        image: resolvedImg,
+        coverImage: resolvedImg,
+      };
+      await onSave(payload);
       onClose();
     } catch (err: any) {
       setErrorMsg(err.message || "Failed to save project.");
@@ -461,6 +481,53 @@ export const ProjectEditorModal: React.FC<ProjectEditorModalProps> = ({
                 />
               </div>
 
+              {/* Project Card Thumbnail directly in Tab 1 for immediate access */}
+              <div className={styles.formGroup}>
+                <label className={styles.formLabel}>
+                  Project Card Thumbnail URL (Cover Image)
+                </label>
+                <div style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+                  <div style={{ flex: 1 }}>
+                    <input
+                      type="text"
+                      className={styles.inputField}
+                      value={formData.image || (formData as any).coverImage || ""}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        handleChange("image", val);
+                        handleChange("coverImage", val);
+                      }}
+                      placeholder="/images/project_collective.jpg or https://res.cloudinary.com/..."
+                    />
+                    <span style={{ fontSize: "0.72rem", color: "#92949d", marginTop: "0.35rem", display: "block" }}>
+                      Main thumbnail displayed on project catalog cards, homepage showcase, and social cards.
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      width: 76,
+                      height: 56,
+                      position: "relative",
+                      borderRadius: 6,
+                      overflow: "hidden",
+                      backgroundColor: "#191b20",
+                      border: "1px solid #292b31",
+                      flexShrink: 0,
+                    }}
+                    title="Live card thumbnail preview"
+                  >
+                    <Image
+                      src={resolvedCover}
+                      alt="Thumbnail preview"
+                      fill
+                      sizes="76px"
+                      style={{ objectFit: "cover" }}
+                      unoptimized
+                    />
+                  </div>
+                </div>
+              </div>
+
               <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", paddingTop: "0.5rem" }}>
                 <input
                   type="checkbox"
@@ -484,8 +551,12 @@ export const ProjectEditorModal: React.FC<ProjectEditorModalProps> = ({
                 <input
                   type="text"
                   className={styles.inputField}
-                  value={formData.image || ""}
-                  onChange={(e) => handleChange("image", e.target.value)}
+                  value={formData.image || (formData as any).coverImage || ""}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    handleChange("image", val);
+                    handleChange("coverImage", val);
+                  }}
                   placeholder="/images/project_collective.jpg or https://res.cloudinary.com/..."
                 />
                 <span style={{ fontSize: "0.72rem", color: "#92949d" }}>
@@ -495,7 +566,9 @@ export const ProjectEditorModal: React.FC<ProjectEditorModalProps> = ({
 
               <div>
                 <label className={styles.formLabel}>
-                  {formData.image ? "Live Cover Image Preview (Custom URL)" : "System Default Thumbnail (Active Fallback)"}
+                  {formData.image || (formData as any).coverImage
+                    ? "Live Cover Image Preview (Custom URL)"
+                    : "System Default Thumbnail (Active Fallback)"}
                 </label>
                 <div className={styles.mediaPreviewContainer}>
                   <Image

@@ -85,21 +85,21 @@ export const projectSchema = {
     {
       name: "coverImage",
       title: "Cover Image URL (Cloudinary / Local)",
-      type: "url",
+      type: "string",
       fieldset: "cover",
       description: "Direct URL to Cloudinary or project asset",
     },
     {
       name: "videoUrl",
       title: "Demo Video URL (Cloudinary / MP4)",
-      type: "url",
+      type: "string",
       fieldset: "cover",
       description: "Interactive video demonstration",
     },
     {
       name: "videoThumbnail",
       title: "Video Poster Thumbnail URL",
-      type: "url",
+      type: "string",
       fieldset: "cover",
     },
     // Gallery

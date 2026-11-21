@@ -14,7 +14,10 @@ export interface Project {
   challenges: string; tags: string[]; stars: number; highlight?: boolean; featured?: boolean;
   githubUrl: string; demoUrl?: string; writeupUrl?: string; metrics?: string;
   metricsDetail: ProjectMetric[]; stackLayers: ProjectStackLayer[]; image?: string;
+  coverImage?: string;
   aliases?: string[]; status: ProjectStatus;
+  gallery?: any[];
+  videoDemo?: any;
 }
 
 export const PROJECT_THUMBNAILS: Record<string, string> = {
@@ -54,8 +57,14 @@ export const FALLBACK_THUMBNAILS = [
   "/images/skyline_twilight.jpg",
 ];
 
-export function getProjectThumbnail(slug: string, image?: string, index: number = 0): string {
-  if (image && image.trim() !== "") return image;
+export function getProjectThumbnail(
+  slug: string,
+  image?: string,
+  index: number = 0,
+  coverImage?: string
+): string {
+  if (image && typeof image === "string" && image.trim() !== "") return image;
+  if (coverImage && typeof coverImage === "string" && coverImage.trim() !== "") return coverImage;
   if (PROJECT_THUMBNAILS[slug]) return PROJECT_THUMBNAILS[slug];
   return FALLBACK_THUMBNAILS[index % FALLBACK_THUMBNAILS.length];
 }
@@ -79,11 +88,17 @@ export async function POST(request: Request) {
       updatedList = projects;
     } else if (action === "save" && project) {
       const existingIndex = updatedList.findIndex((p) => p.slug === project.slug);
+      const img = (project.image || project.coverImage || "").trim();
+      const normalized = {
+        ...project,
+        image: img || (existingIndex >= 0 ? updatedList[existingIndex].image : ""),
+        coverImage: img || (existingIndex >= 0 ? updatedList[existingIndex].coverImage : ""),
+      };
       if (existingIndex >= 0) {
-        updatedList[existingIndex] = { ...updatedList[existingIndex], ...project };
+        updatedList[existingIndex] = { ...updatedList[existingIndex], ...normalized };
       } else {
         // Prepend new project
-        updatedList.unshift(project);
+        updatedList.unshift(normalized);
       }
     } else if (action === "toggle_status" && slug) {
       const target = updatedList.find((p) => p.slug === slug);

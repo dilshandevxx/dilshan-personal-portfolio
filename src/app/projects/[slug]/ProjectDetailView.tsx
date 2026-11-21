@@ -11,6 +11,7 @@ import { GeometricBadge, GeometricBadgeType } from "@/components/project-details
 import { GithubIcon } from "@/components/SocialIcons";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import styles from "./projectDetail.module.css";
+import { cmsDataStore } from "@/services/cmsDataStore";
 
 interface ProjectDetailViewProps {
   initialProject: Project;
@@ -28,29 +29,49 @@ export function ProjectDetailView({
   const [project, setProject] = useState<Project>(initialProject);
   const [allProjects, setAllProjects] = useState<Project[]>(projectsList);
 
-  // Sync custom saved projects from localStorage if any
+  // Sync custom saved projects from CMS / Sanity
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("dilshan_custom_projects");
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          setAllProjects(parsed);
-          const match = parsed.find((p: Project) => p.slug === initialProject.slug);
+    async function loadFresh() {
+      try {
+        const freshList = await cmsDataStore.getProjects();
+        if (freshList && freshList.length > 0) {
+          setAllProjects(freshList);
+          const match = freshList.find((p) => p.slug === initialProject.slug);
           if (match) setProject(match);
         }
-      }
-    } catch {}
+      } catch {}
+    }
+    loadFresh();
+
+    const handleUpdate = () => loadFresh();
+    window.addEventListener("cms_projects_updated", handleUpdate);
+    window.addEventListener("storage", handleUpdate);
+    return () => {
+      window.removeEventListener("cms_projects_updated", handleUpdate);
+      window.removeEventListener("storage", handleUpdate);
+    };
   }, [initialProject.slug]);
 
   const enriched: EnrichedProject = enrichProject(project, index);
 
-  const initialThumb = getProjectThumbnail(project.slug, project.image, index);
+  const initialThumb = getProjectThumbnail(
+    project.slug,
+    project.image || (project as any).coverImage,
+    index,
+    (project as any).coverImage
+  );
   const [heroSrc, setHeroSrc] = useState<string>(initialThumb);
 
   useEffect(() => {
-    setHeroSrc(getProjectThumbnail(project.slug, project.image, index));
-  }, [project.slug, project.image, index]);
+    setHeroSrc(
+      getProjectThumbnail(
+        project.slug,
+        project.image || (project as any).coverImage,
+        index,
+        (project as any).coverImage
+      )
+    );
+  }, [project.slug, project.image, (project as any).coverImage, index]);
 
   const isExternalUrl =
     heroSrc.startsWith("http://") ||
