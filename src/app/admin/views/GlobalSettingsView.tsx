@@ -15,7 +15,7 @@ import {
   ArrowDown,
 } from "lucide-react";
 import styles from "../admin.module.css";
-import { CMSGlobalSettings } from "@/services/cmsDataStore";
+import { CMSGlobalSettings, DEFAULT_GLOBAL_SETTINGS } from "@/services/cmsDataStore";
 
 interface GlobalSettingsViewProps {
   initialSubTab?: "nav" | "branding" | "social" | "footer" | "seo";
@@ -23,18 +23,31 @@ interface GlobalSettingsViewProps {
   onSave: (settings: Partial<CMSGlobalSettings>) => Promise<void>;
 }
 
+const safeSettings = (input?: Partial<CMSGlobalSettings>): CMSGlobalSettings => ({
+  ...DEFAULT_GLOBAL_SETTINGS,
+  ...(input || {}),
+  navLinks:
+    Array.isArray(input?.navLinks) && input.navLinks.length > 0
+      ? input.navLinks
+      : DEFAULT_GLOBAL_SETTINGS.navLinks,
+  socials:
+    Array.isArray(input?.socials) && input.socials.length > 0
+      ? input.socials
+      : DEFAULT_GLOBAL_SETTINGS.socials,
+});
+
 export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
   initialSubTab = "nav",
   settings,
   onSave,
 }) => {
   const [activeTab, setActiveTab] = useState<"nav" | "branding" | "social" | "footer" | "seo">(initialSubTab);
-  const [formData, setFormData] = useState<CMSGlobalSettings>(settings);
+  const [formData, setFormData] = useState<CMSGlobalSettings>(() => safeSettings(settings));
   const [saving, setSaving] = useState(false);
   const [savedSuccess, setSavedSuccess] = useState(false);
 
   useEffect(() => {
-    setFormData(settings);
+    setFormData(safeSettings(settings));
   }, [settings]);
 
   useEffect(() => {
@@ -42,6 +55,9 @@ export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
       setActiveTab(initialSubTab);
     }
   }, [initialSubTab]);
+
+  const navLinksList = Array.isArray(formData.navLinks) ? formData.navLinks : [];
+  const socialsList = Array.isArray(formData.socials) ? formData.socials : [];
 
   const handleChange = (field: keyof CMSGlobalSettings, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -62,7 +78,8 @@ export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
 
   // Nav link helpers
   const handleUpdateNavLink = (index: number, field: string, value: any) => {
-    const list = [...formData.navLinks];
+    const list = [...navLinksList];
+    if (!list[index]) return;
     list[index] = { ...list[index], [field]: value };
     handleChange("navLinks", list);
   };
@@ -72,19 +89,20 @@ export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
       id: `nav-${Date.now()}`,
       label: "NEW LINK",
       url: "/#",
-      order: formData.navLinks.length + 1,
+      order: navLinksList.length + 1,
     };
-    handleChange("navLinks", [...formData.navLinks, newLink]);
+    handleChange("navLinks", [...navLinksList, newLink]);
   };
 
   const handleRemoveNavLink = (index: number) => {
-    const list = formData.navLinks.filter((_, idx) => idx !== index);
+    const list = navLinksList.filter((_, idx) => idx !== index);
     handleChange("navLinks", list);
   };
 
   // Social link helpers
   const handleUpdateSocial = (index: number, field: string, value: any) => {
-    const list = [...formData.socials];
+    const list = [...socialsList];
+    if (!list[index]) return;
     list[index] = { ...list[index], [field]: value };
     handleChange("socials", list);
   };
@@ -96,11 +114,11 @@ export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
       url: "https://x.com",
       handle: "@handle",
     };
-    handleChange("socials", [...formData.socials, newSocial]);
+    handleChange("socials", [...socialsList, newSocial]);
   };
 
   const handleRemoveSocial = (index: number) => {
-    const list = formData.socials.filter((_, idx) => idx !== index);
+    const list = socialsList.filter((_, idx) => idx !== index);
     handleChange("socials", list);
   };
 

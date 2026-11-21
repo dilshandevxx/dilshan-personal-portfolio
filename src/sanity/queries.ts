@@ -96,6 +96,7 @@ export const HOMEPAGE_SECTIONS_QUERY = `
       customImage,
       customVideoUrl,
       customTagline,
+      "slug": coalesce(project->slug.current, slug, ""),
       "project": project-> {
         _id,
         title,
@@ -110,9 +111,11 @@ export const HOMEPAGE_SECTIONS_QUERY = `
     servicesTitle,
     aboutHeading,
     aboutButtonText,
+    aboutStatement,
     contactHeadline,
     contactEmail,
-    contactAvailability
+    contactAvailability,
+    contactLocation
   }
 `;
 

@@ -15,7 +15,7 @@ import {
   EyeOff,
 } from "lucide-react";
 import styles from "../admin.module.css";
-import { HomepageCMSData, FeaturedProjectItem } from "@/services/cmsDataStore";
+import { HomepageCMSData, FeaturedProjectItem, DEFAULT_HOMEPAGE_DATA } from "@/services/cmsDataStore";
 import { Project, getProjectThumbnail } from "@/data/projects";
 
 interface HomepageViewProps {
@@ -25,6 +25,19 @@ interface HomepageViewProps {
   onSave: (data: Partial<HomepageCMSData>) => Promise<void>;
 }
 
+const safeData = (input?: Partial<HomepageCMSData>): HomepageCMSData => ({
+  ...DEFAULT_HOMEPAGE_DATA,
+  ...(input || {}),
+  introBioParagraphs:
+    Array.isArray(input?.introBioParagraphs) && input.introBioParagraphs.length > 0
+      ? input.introBioParagraphs
+      : DEFAULT_HOMEPAGE_DATA.introBioParagraphs,
+  featuredProjects:
+    Array.isArray(input?.featuredProjects) && input.featuredProjects.length > 0
+      ? input.featuredProjects
+      : DEFAULT_HOMEPAGE_DATA.featuredProjects,
+});
+
 export const HomepageView: React.FC<HomepageViewProps> = ({
   initialSubTab = "hero",
   data,
@@ -32,13 +45,13 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
   onSave,
 }) => {
   const [activeTab, setActiveTab] = useState<"hero" | "intro" | "featured" | "services" | "about" | "contact">(initialSubTab);
-  const [formData, setFormData] = useState<HomepageCMSData>(data);
+  const [formData, setFormData] = useState<HomepageCMSData>(() => safeData(data));
   const [saving, setSaving] = useState(false);
   const [savedSuccess, setSavedSuccess] = useState(false);
 
   // Sync when prop updates or subTab changes
   useEffect(() => {
-    setFormData(data);
+    setFormData(safeData(data));
   }, [data]);
 
   useEffect(() => {
@@ -46,6 +59,10 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
       setActiveTab(initialSubTab);
     }
   }, [initialSubTab]);
+
+  const featuredProjectsList = Array.isArray(formData.featuredProjects)
+    ? formData.featuredProjects
+    : [];
 
   const handleChange = (field: keyof HomepageCMSData, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -66,7 +83,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
 
   // Featured Projects Reordering and Configuration
   const moveFeaturedItem = (index: number, direction: "up" | "down") => {
-    const list = [...formData.featuredProjects];
+    const list = [...featuredProjectsList];
     const targetIndex = direction === "up" ? index - 1 : index + 1;
     if (targetIndex < 0 || targetIndex >= list.length) return;
 
@@ -80,36 +97,38 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
   };
 
   const toggleFeaturedVisibility = (index: number) => {
-    const list = [...formData.featuredProjects];
+    const list = [...featuredProjectsList];
+    if (!list[index]) return;
     list[index] = { ...list[index], isVisible: !list[index].isVisible };
     handleChange("featuredProjects", list);
   };
 
   const removeFeaturedItem = (index: number) => {
-    const list = formData.featuredProjects.filter((_, idx) => idx !== index);
+    const list = featuredProjectsList.filter((_, idx) => idx !== index);
     const updated = list.map((item, idx) => ({ ...item, displayOrder: idx + 1 }));
     handleChange("featuredProjects", updated);
   };
 
   const updateFeaturedField = (index: number, field: keyof FeaturedProjectItem, value: any) => {
-    const list = [...formData.featuredProjects];
+    const list = [...featuredProjectsList];
+    if (!list[index]) return;
     list[index] = { ...list[index], [field]: value };
     handleChange("featuredProjects", list);
   };
 
   const addFeaturedProject = (slug: string) => {
     if (!slug) return;
-    const exists = formData.featuredProjects.some((p) => p.slug === slug);
+    const exists = featuredProjectsList.some((p) => p.slug === slug);
     if (exists) return;
 
     const newItem: FeaturedProjectItem = {
       slug,
-      displayOrder: formData.featuredProjects.length + 1,
+      displayOrder: featuredProjectsList.length + 1,
       isVisible: true,
       customTagline: allProjects.find((p) => p.slug === slug)?.tagline || "",
     };
 
-    handleChange("featuredProjects", [...formData.featuredProjects, newItem]);
+    handleChange("featuredProjects", [...featuredProjectsList, newItem]);
   };
 
   return (
@@ -163,7 +182,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
           className={`${styles.tabBtn} ${activeTab === "featured" ? styles.tabBtnActive : ""}`}
           onClick={() => setActiveTab("featured")}
         >
-          Featured Projects ({formData.featuredProjects.length})
+          Featured Projects ({featuredProjectsList.length})
         </button>
         <button
           type="button"
@@ -203,7 +222,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
             <textarea
               className={styles.textareaField}
               rows={2}
-              value={formData.heroHeadline}
+              value={formData.heroHeadline || ""}
               onChange={(e) => handleChange("heroHeadline", e.target.value)}
               placeholder="Primary hero headline..."
             />
@@ -214,7 +233,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
             <textarea
               className={styles.textareaField}
               rows={3}
-              value={formData.heroSubheadline}
+              value={formData.heroSubheadline || ""}
               onChange={(e) => handleChange("heroSubheadline", e.target.value)}
               placeholder="Supporting summary statement..."
             />
@@ -226,7 +245,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
               <input
                 type="text"
                 className={styles.inputField}
-                value={formData.heroVideoUrl}
+                value={formData.heroVideoUrl || ""}
                 onChange={(e) => handleChange("heroVideoUrl", e.target.value)}
                 placeholder="/images/skyline_banner.mp4 or https://res.cloudinary.com/..."
               />
@@ -249,7 +268,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
               <input
                 type="text"
                 className={styles.inputField}
-                value={formData.heroPosterUrl}
+                value={formData.heroPosterUrl || ""}
                 onChange={(e) => handleChange("heroPosterUrl", e.target.value)}
                 placeholder="/images/skyline_twilight.jpg or https://res.cloudinary.com/..."
               />
@@ -261,6 +280,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
                     fill
                     sizes="520px"
                     style={{ objectFit: "cover" }}
+                    unoptimized
                   />
                 </div>
               )}
@@ -284,7 +304,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
             <textarea
               className={styles.textareaField}
               rows={3}
-              value={formData.introStatement}
+              value={formData.introStatement || ""}
               onChange={(e) => handleChange("introStatement", e.target.value)}
               placeholder="High-level engineering philosophy..."
             />
@@ -351,7 +371,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
                     + Add Project to Showcase
                   </option>
                   {allProjects
-                    .filter((p) => !formData.featuredProjects.some((fp) => fp.slug === p.slug))
+                    .filter((p) => !featuredProjectsList.some((fp) => fp.slug === p.slug))
                     .map((p) => (
                       <option key={p.slug} value={p.slug}>
                         {p.title} ({p.category})
@@ -363,12 +383,12 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-            {formData.featuredProjects.length === 0 ? (
+            {featuredProjectsList.length === 0 ? (
               <div className={styles.emptyState}>
                 <p className={styles.emptyStateText}>No featured projects selected. Use the dropdown above to add projects.</p>
               </div>
             ) : (
-              formData.featuredProjects.map((item, index) => {
+              featuredProjectsList.map((item, index) => {
                 const project = allProjects.find((p) => p.slug === item.slug);
                 const displayTitle = project ? project.title : item.slug;
                 const defaultImage = getProjectThumbnail(item.slug, project?.image, index);
@@ -431,7 +451,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
                           type="button"
                           className={`${styles.btn} ${styles.btnGhost} ${styles.btnSm}`}
                           onClick={() => moveFeaturedItem(index, "down")}
-                          disabled={index === formData.featuredProjects.length - 1}
+                          disabled={index === featuredProjectsList.length - 1}
                           title="Move down"
                         >
                           <ArrowDown size={14} />
@@ -517,7 +537,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
             <input
               type="text"
               className={styles.inputField}
-              value={formData.servicesTitle}
+              value={formData.servicesTitle || ""}
               onChange={(e) => handleChange("servicesTitle", e.target.value)}
               placeholder="e.g. Technical Expertise"
             />
@@ -541,7 +561,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
               <input
                 type="text"
                 className={styles.inputField}
-                value={formData.aboutHeading}
+                value={formData.aboutHeading || ""}
                 onChange={(e) => handleChange("aboutHeading", e.target.value)}
               />
             </div>
@@ -551,7 +571,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
               <input
                 type="text"
                 className={styles.inputField}
-                value={formData.aboutButtonText}
+                value={formData.aboutButtonText || ""}
                 onChange={(e) => handleChange("aboutButtonText", e.target.value)}
               />
             </div>
@@ -562,7 +582,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
             <textarea
               className={styles.textareaField}
               rows={4}
-              value={formData.aboutStatement}
+              value={formData.aboutStatement || ""}
               onChange={(e) => handleChange("aboutStatement", e.target.value)}
             />
           </div>
@@ -585,7 +605,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
               <input
                 type="text"
                 className={styles.inputField}
-                value={formData.contactHeadline}
+                value={formData.contactHeadline || ""}
                 onChange={(e) => handleChange("contactHeadline", e.target.value)}
               />
             </div>
@@ -595,7 +615,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
               <input
                 type="email"
                 className={styles.inputField}
-                value={formData.contactEmail}
+                value={formData.contactEmail || ""}
                 onChange={(e) => handleChange("contactEmail", e.target.value)}
               />
             </div>
@@ -605,7 +625,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
               <input
                 type="text"
                 className={styles.inputField}
-                value={formData.contactAvailability}
+                value={formData.contactAvailability || ""}
                 onChange={(e) => handleChange("contactAvailability", e.target.value)}
               />
             </div>
@@ -615,7 +635,7 @@ export const HomepageView: React.FC<HomepageViewProps> = ({
               <input
                 type="text"
                 className={styles.inputField}
-                value={formData.contactLocation}
+                value={formData.contactLocation || ""}
                 onChange={(e) => handleChange("contactLocation", e.target.value)}
               />
             </div>

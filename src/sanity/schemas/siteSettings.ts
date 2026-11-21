@@ -79,7 +79,7 @@ export const siteSettingsSchema = {
           type: "object",
           fields: [
             { name: "platform", title: "Platform Name", type: "string" },
-            { name: "url", title: "Profile URL", type: "url" },
+            { name: "url", title: "Profile URL", type: "string" },
             { name: "handle", title: "Display Handle", type: "string" },
           ],
         },
@@ -121,7 +121,7 @@ export const siteSettingsSchema = {
     {
       name: "ogImageUrl",
       title: "Default Open Graph Image URL",
-      type: "url",
+      type: "string",
       fieldset: "seo",
       initialValue: "/images/og_banner.jpg",
     },

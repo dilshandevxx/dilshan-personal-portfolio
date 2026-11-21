@@ -15,7 +15,7 @@ export const mediaAssetSchema = {
     {
       name: "url",
       title: "Cloudinary or Static Asset URL",
-      type: "url",
+      type: "string",
       validation: (Rule: any) => Rule.required(),
     },
     {

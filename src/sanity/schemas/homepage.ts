@@ -34,7 +34,7 @@ export const homepageSchema = {
     {
       name: "heroVideoUrl",
       title: "Hero Background Video URL (Cloudinary / MP4)",
-      type: "url",
+      type: "string",
       fieldset: "hero",
       initialValue: "/images/skyline_banner.mp4",
       description: "Direct video stream for the looping cinematic hero banner",
@@ -42,7 +42,7 @@ export const homepageSchema = {
     {
       name: "heroPosterUrl",
       title: "Hero Poster Fallback Image URL",
-      type: "url",
+      type: "string",
       fieldset: "hero",
       initialValue: "/images/skyline_twilight.jpg",
     },
@@ -84,13 +84,13 @@ export const homepageSchema = {
             {
               name: "customImage",
               title: "Independent Homepage Showcase Image URL",
-              type: "url",
+              type: "string",
               description: "Optional override image used only on the homepage card",
             },
             {
               name: "customVideoUrl",
               title: "Independent Homepage Showcase Video URL",
-              type: "url",
+              type: "string",
               description: "Optional looping preview video for the homepage card",
             },
             {

@@ -12,6 +12,7 @@ import { ProjectEditorModal } from "./views/ProjectEditorModal";
 import { MediaLibraryView } from "./views/MediaLibraryView";
 import { GlobalSettingsView } from "./views/GlobalSettingsView";
 import { PagesView } from "./views/PagesView";
+import { AdminErrorBoundary } from "./components/AdminErrorBoundary";
 import styles from "./admin.module.css";
 import {
   cmsDataStore,
@@ -19,6 +20,8 @@ import {
   CMSMediaAsset,
   CMSGlobalSettings,
   CMSActivityLog,
+  DEFAULT_HOMEPAGE_DATA,
+  DEFAULT_GLOBAL_SETTINGS,
 } from "@/services/cmsDataStore";
 import { Project } from "@/data/projects";
 import { isSanityConfigured } from "@/sanity/client";
@@ -227,7 +230,7 @@ export default function AdminDashboardPage() {
               </p>
             </div>
           ) : (
-            <>
+            <AdminErrorBoundary onReset={refreshData}>
               {/* Overview View */}
               {currentView === "overview" && (
                 <OverviewView
@@ -240,7 +243,7 @@ export default function AdminDashboardPage() {
               )}
 
               {/* Homepage Sections */}
-              {currentView.startsWith("homepage-") && homepageData && (
+              {currentView.startsWith("homepage-") && (
                 <HomepageView
                   initialSubTab={
                     currentView.replace("homepage-", "") as
@@ -251,7 +254,7 @@ export default function AdminDashboardPage() {
                       | "about"
                       | "contact"
                   }
-                  data={homepageData}
+                  data={homepageData || DEFAULT_HOMEPAGE_DATA}
                   allProjects={projects}
                   onSave={handleSaveHomepage}
                 />
@@ -288,7 +291,7 @@ export default function AdminDashboardPage() {
               )}
 
               {/* Global Settings */}
-              {currentView.startsWith("settings-") && globalSettings && (
+              {currentView.startsWith("settings-") && (
                 <GlobalSettingsView
                   initialSubTab={
                     currentView.replace("settings-", "") as
@@ -298,11 +301,11 @@ export default function AdminDashboardPage() {
                       | "footer"
                       | "seo"
                   }
-                  settings={globalSettings}
+                  settings={globalSettings || DEFAULT_GLOBAL_SETTINGS}
                   onSave={handleSaveSettings}
                 />
               )}
-            </>
+            </AdminErrorBoundary>
           )}
         </main>
       </div>

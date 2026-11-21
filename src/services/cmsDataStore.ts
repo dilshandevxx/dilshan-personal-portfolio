@@ -186,7 +186,7 @@ const DEFAULT_MEDIA_ASSETS: CMSMediaAsset[] = [
 ];
 
 // Initial Homepage CMS State
-const DEFAULT_HOMEPAGE_DATA: HomepageCMSData = {
+export const DEFAULT_HOMEPAGE_DATA: HomepageCMSData = {
   heroHeadline: "Designing high-throughput systems, resilient platforms & modern digital software.",
   heroSubheadline: "Full-Stack Engineer & Systems Architect focusing on distributed systems, AI/ML inference runtimes, and sub-second web applications.",
   heroVideoUrl: "/images/skyline_banner.mp4",
@@ -232,7 +232,7 @@ const DEFAULT_HOMEPAGE_DATA: HomepageCMSData = {
   contactLocation: "Colombo, Sri Lanka (Available Worldwide)",
 };
 
-const DEFAULT_GLOBAL_SETTINGS: CMSGlobalSettings = {
+export const DEFAULT_GLOBAL_SETTINGS: CMSGlobalSettings = {
   brandName: "DILSHAN.",
   wordmark: "DILSHAN.",
   editionText: "First Folio — Vol. 2026",
@@ -479,16 +479,50 @@ class CMSDataStore {
     }
 
     if (isSanityConfigured()) {
-      const sanityData = await sanityFetch<HomepageCMSData>(HOMEPAGE_SECTIONS_QUERY);
-      if (sanityData) {
-        return sanityData;
+      try {
+        const sanityData = await sanityFetch<any>(HOMEPAGE_SECTIONS_QUERY);
+        if (sanityData && typeof sanityData === "object") {
+          return {
+            ...DEFAULT_HOMEPAGE_DATA,
+            ...sanityData,
+            introBioParagraphs:
+              Array.isArray(sanityData.introBioParagraphs) && sanityData.introBioParagraphs.length > 0
+                ? sanityData.introBioParagraphs
+                : DEFAULT_HOMEPAGE_DATA.introBioParagraphs,
+            featuredProjects:
+              Array.isArray(sanityData.featuredProjects) && sanityData.featuredProjects.length > 0
+                ? sanityData.featuredProjects.map((fp: any, idx: number) => ({
+                    slug: fp.slug || fp.project?.slug || `project-${idx}`,
+                    displayOrder: fp.displayOrder ?? idx + 1,
+                    isVisible: fp.isVisible !== false,
+                    customImage: fp.customImage || "",
+                    customVideoUrl: fp.customVideoUrl || "",
+                    customTagline: fp.customTagline || "",
+                  }))
+                : DEFAULT_HOMEPAGE_DATA.featuredProjects,
+          };
+        }
+      } catch (err) {
+        console.warn("[CMS] Failed to fetch homepage from Sanity:", err);
       }
     }
 
     const local = localStorage.getItem(STORAGE_KEYS.HOMEPAGE);
     if (local) {
       try {
-        return { ...DEFAULT_HOMEPAGE_DATA, ...JSON.parse(local) };
+        const parsed = JSON.parse(local);
+        return {
+          ...DEFAULT_HOMEPAGE_DATA,
+          ...parsed,
+          introBioParagraphs:
+            Array.isArray(parsed.introBioParagraphs) && parsed.introBioParagraphs.length > 0
+              ? parsed.introBioParagraphs
+              : DEFAULT_HOMEPAGE_DATA.introBioParagraphs,
+          featuredProjects:
+            Array.isArray(parsed.featuredProjects) && parsed.featuredProjects.length > 0
+              ? parsed.featuredProjects
+              : DEFAULT_HOMEPAGE_DATA.featuredProjects,
+        };
       } catch (e) {}
     }
 
@@ -497,7 +531,18 @@ class CMSDataStore {
 
   public async saveHomepageData(data: Partial<HomepageCMSData>): Promise<HomepageCMSData> {
     const current = await this.getHomepageData();
-    const updated = { ...current, ...data };
+    const updated: HomepageCMSData = {
+      ...current,
+      ...data,
+      introBioParagraphs:
+        Array.isArray(data.introBioParagraphs) && data.introBioParagraphs.length > 0
+          ? data.introBioParagraphs
+          : current.introBioParagraphs,
+      featuredProjects:
+        Array.isArray(data.featuredProjects) && data.featuredProjects.length > 0
+          ? data.featuredProjects
+          : current.featuredProjects,
+    };
 
     if (typeof window !== "undefined") {
       localStorage.setItem(STORAGE_KEYS.HOMEPAGE, JSON.stringify(updated));
@@ -506,27 +551,48 @@ class CMSDataStore {
         target: "Hero & Showcase Sections",
         type: "homepage",
       });
+      window.dispatchEvent(new CustomEvent("cms_homepage_updated", { detail: updated }));
     }
 
     if (isSanityConfigured()) {
-      await sanityMutate([
-        {
-          createOrReplace: {
-            _id: "homepage",
-            _type: "homepage",
-            heroHeadline: updated.heroHeadline,
-            heroSubheadline: updated.heroSubheadline,
-            heroVideoUrl: updated.heroVideoUrl,
-            heroPosterUrl: updated.heroPosterUrl,
-            introStatement: updated.introStatement,
-            servicesTitle: updated.servicesTitle,
-            aboutHeading: updated.aboutHeading,
-            contactHeadline: updated.contactHeadline,
-            contactEmail: updated.contactEmail,
-            contactAvailability: updated.contactAvailability,
+      try {
+        await sanityMutate([
+          {
+            createOrReplace: {
+              _id: "homepage",
+              _type: "homepage",
+              heroHeadline: updated.heroHeadline || "",
+              heroSubheadline: updated.heroSubheadline || "",
+              heroVideoUrl: updated.heroVideoUrl || "",
+              heroPosterUrl: updated.heroPosterUrl || "",
+              introStatement: updated.introStatement || "",
+              introBioParagraphs: updated.introBioParagraphs || [],
+              featuredProjects: (updated.featuredProjects || []).map((fp, idx) => ({
+                _key: `fp-${idx}-${fp.slug}`,
+                project: {
+                  _type: "reference",
+                  _ref: `project-${fp.slug}`,
+                },
+                displayOrder: fp.displayOrder ?? idx + 1,
+                isVisible: fp.isVisible !== false,
+                customImage: fp.customImage || "",
+                customVideoUrl: fp.customVideoUrl || "",
+                customTagline: fp.customTagline || "",
+              })),
+              servicesTitle: updated.servicesTitle || "",
+              aboutHeading: updated.aboutHeading || "",
+              aboutButtonText: updated.aboutButtonText || "",
+              aboutStatement: updated.aboutStatement || "",
+              contactHeadline: updated.contactHeadline || "",
+              contactEmail: updated.contactEmail || "",
+              contactAvailability: updated.contactAvailability || "",
+              contactLocation: updated.contactLocation || "",
+            },
           },
-        },
-      ]);
+        ]);
+      } catch (err) {
+        console.warn("[CMS] Sanity homepage save error:", err);
+      }
     }
 
     return updated;
@@ -609,16 +675,43 @@ class CMSDataStore {
     }
 
     if (isSanityConfigured()) {
-      const sanitySettings = await sanityFetch<CMSGlobalSettings>(SITE_SETTINGS_QUERY);
-      if (sanitySettings) {
-        return sanitySettings;
+      try {
+        const sanitySettings = await sanityFetch<any>(SITE_SETTINGS_QUERY);
+        if (sanitySettings && typeof sanitySettings === "object") {
+          return {
+            ...DEFAULT_GLOBAL_SETTINGS,
+            ...sanitySettings,
+            navLinks:
+              Array.isArray(sanitySettings.navLinks) && sanitySettings.navLinks.length > 0
+                ? sanitySettings.navLinks
+                : DEFAULT_GLOBAL_SETTINGS.navLinks,
+            socials:
+              Array.isArray(sanitySettings.socials) && sanitySettings.socials.length > 0
+                ? sanitySettings.socials
+                : DEFAULT_GLOBAL_SETTINGS.socials,
+          };
+        }
+      } catch (err) {
+        console.warn("[CMS] Failed to fetch settings from Sanity:", err);
       }
     }
 
     const local = localStorage.getItem(STORAGE_KEYS.SETTINGS);
     if (local) {
       try {
-        return { ...DEFAULT_GLOBAL_SETTINGS, ...JSON.parse(local) };
+        const parsed = JSON.parse(local);
+        return {
+          ...DEFAULT_GLOBAL_SETTINGS,
+          ...parsed,
+          navLinks:
+            Array.isArray(parsed.navLinks) && parsed.navLinks.length > 0
+              ? parsed.navLinks
+              : DEFAULT_GLOBAL_SETTINGS.navLinks,
+          socials:
+            Array.isArray(parsed.socials) && parsed.socials.length > 0
+              ? parsed.socials
+              : DEFAULT_GLOBAL_SETTINGS.socials,
+        };
       } catch (e) {}
     }
 
@@ -741,16 +834,32 @@ class CMSDataStore {
       createOrReplace: {
         _id: "homepage",
         _type: "homepage",
-        heroHeadline: homepage.heroHeadline,
-        heroSubheadline: homepage.heroSubheadline,
-        heroVideoUrl: homepage.heroVideoUrl,
-        heroPosterUrl: homepage.heroPosterUrl,
-        introStatement: homepage.introStatement,
-        servicesTitle: homepage.servicesTitle,
-        aboutHeading: homepage.aboutHeading,
-        contactHeadline: homepage.contactHeadline,
-        contactEmail: homepage.contactEmail,
-        contactAvailability: homepage.contactAvailability,
+        heroHeadline: homepage.heroHeadline || "",
+        heroSubheadline: homepage.heroSubheadline || "",
+        heroVideoUrl: homepage.heroVideoUrl || "",
+        heroPosterUrl: homepage.heroPosterUrl || "",
+        introStatement: homepage.introStatement || "",
+        introBioParagraphs: homepage.introBioParagraphs || [],
+        featuredProjects: (homepage.featuredProjects || []).map((fp, idx) => ({
+          _key: `fp-${idx}-${fp.slug}`,
+          project: {
+            _type: "reference",
+            _ref: `project-${fp.slug}`,
+          },
+          displayOrder: fp.displayOrder ?? idx + 1,
+          isVisible: fp.isVisible !== false,
+          customImage: fp.customImage || "",
+          customVideoUrl: fp.customVideoUrl || "",
+          customTagline: fp.customTagline || "",
+        })),
+        servicesTitle: homepage.servicesTitle || "",
+        aboutHeading: homepage.aboutHeading || "",
+        aboutButtonText: homepage.aboutButtonText || "",
+        aboutStatement: homepage.aboutStatement || "",
+        contactHeadline: homepage.contactHeadline || "",
+        contactEmail: homepage.contactEmail || "",
+        contactAvailability: homepage.contactAvailability || "",
+        contactLocation: homepage.contactLocation || "",
       },
     });
 
