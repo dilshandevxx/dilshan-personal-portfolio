@@ -293,17 +293,22 @@ export const ProjectEditorModal: React.FC<ProjectEditorModalProps> = ({
                   <label className={styles.formLabel}>Category</label>
                   <select
                     className={styles.selectField}
-                    value={formData.category || "Distributed Systems"}
+                    value={formData.category || "Product"}
                     onChange={(e) => handleChange("category", e.target.value as ProjectCategory)}
                   >
-                    <option value="Distributed Systems">Distributed Systems</option>
+                    <option value="Product">Product</option>
+                    <option value="Company">Company</option>
+                    <option value="Research">Research</option>
+                    <option value="Open Source">Open Source</option>
                     <option value="AI/ML">AI/ML</option>
-                    <option value="AI Infrastructure">AI Infrastructure</option>
-                    <option value="Platform Engineering">Platform Engineering</option>
+                    <option value="Distributed Systems">Distributed Systems</option>
                     <option value="Full-Stack">Full-Stack</option>
                     <option value="Systems">Systems</option>
+                    <option value="Platform Engineering">Platform Engineering</option>
                     <option value="MLOps">MLOps</option>
                     <option value="Data Engineering">Data Engineering</option>
+                    <option value="DevOps">DevOps</option>
+                    <option value="Security">Security</option>
                   </select>
                 </div>
 
@@ -591,12 +596,15 @@ export const ProjectEditorModal: React.FC<ProjectEditorModalProps> = ({
           {activeSection === "tech" && (
             <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
               <div className={styles.formGroup}>
-                <label className={styles.formLabel}>Technology Tags</label>
+                <label className={styles.formLabel}>Tech Stack (Displayed on Project Card)</label>
+                <span style={{ fontSize: "0.75rem", color: "#92949d", marginBottom: "0.5rem" }}>
+                  These tags appear directly on the project card on <code>/projects</code> in the clean monospace badge style.
+                </span>
                 <div style={{ display: "flex", gap: "0.5rem" }}>
                   <input
                     type="text"
                     className={styles.inputField}
-                    placeholder="e.g. Go, Rust, vLLM, Kafka..."
+                    placeholder="e.g. Python, FastAPI, LangChain, React..."
                     value={tagInput}
                     onChange={(e) => setTagInput(e.target.value)}
                     onKeyDown={(e) => {
@@ -615,7 +623,61 @@ export const ProjectEditorModal: React.FC<ProjectEditorModalProps> = ({
                   </button>
                 </div>
 
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem", marginTop: "0.5rem" }}>
+                {/* Quick Add Suggestions */}
+                <div style={{ marginTop: "0.75rem" }}>
+                  <span style={{ fontSize: "0.72rem", color: "#65676e", display: "block", marginBottom: "0.35rem" }}>
+                    Quick Add Technologies:
+                  </span>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
+                    {[
+                      "Python",
+                      "FastAPI",
+                      "LangChain",
+                      "React",
+                      "Next.js",
+                      "TypeScript",
+                      "Node.js",
+                      "Go",
+                      "Docker",
+                      "Kubernetes",
+                      "PostgreSQL",
+                      "Tailwind CSS",
+                      "PyTorch",
+                      "Redis",
+                    ].map((tech) => {
+                      const isAdded = (formData.tags || []).includes(tech);
+                      return (
+                        <button
+                          key={tech}
+                          type="button"
+                          disabled={isAdded}
+                          onClick={() => {
+                            if (!isAdded) {
+                              handleChange("tags", [...(formData.tags || []), tech]);
+                            }
+                          }}
+                          style={{
+                            fontSize: "0.7rem",
+                            fontFamily: "var(--font-mono, monospace)",
+                            padding: "0.2rem 0.5rem",
+                            borderRadius: "4px",
+                            backgroundColor: isAdded ? "#141518" : "#191b20",
+                            border: isAdded ? "1px solid #292b31" : "1px solid #3f424b",
+                            color: isAdded ? "#65676e" : "#f2f2f0",
+                            cursor: isAdded ? "default" : "pointer",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.04em",
+                          }}
+                        >
+                          {isAdded ? `✓ ${tech}` : `+ ${tech}`}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Active Tags */}
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem", marginTop: "1rem" }}>
                   {(formData.tags || []).map((tag) => (
                     <span
                       key={tag}

@@ -40,14 +40,17 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
 
   const categories: string[] = [
     "All",
+    "Product",
+    "Company",
+    "Research",
+    "Open Source",
     "Distributed Systems",
     "AI/ML",
-    "AI Infrastructure",
-    "Platform Engineering",
     "Full-Stack",
     "Systems",
-    "MLOps",
+    "Platform Engineering",
     "Data Engineering",
+    "DevOps",
   ];
 
   // Filtering

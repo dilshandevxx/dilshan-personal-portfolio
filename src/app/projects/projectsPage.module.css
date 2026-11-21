@@ -284,6 +284,15 @@
   width: 100%;
 }
 
+.cardMetaRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  margin-bottom: 0.35rem;
+}
+
 .categoryBadge {
   font-family: var(--font-mono, monospace);
   font-size: 0.72rem;
@@ -291,9 +300,62 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #71717a;
-  margin-top: 0.85rem;
-  margin-bottom: 0.35rem;
-  display: block;
+  display: inline-block;
+  margin: 0;
+}
+
+.techStackRow {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.techBadge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8c93a0;
+  background-color: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 0.12rem 0.45rem;
+  line-height: 1.25;
+  transition: color 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.cardLink:hover .techBadge {
+  color: #d4d4d8;
+  border-color: rgba(255, 255, 255, 0.16);
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.techBadgeMore {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #52525b;
+}
+
+[data-theme="paper"] .categoryBadge,
+:global([data-theme="paper"]) .categoryBadge {
+  color: #71717a;
+}
+
+[data-theme="paper"] .techBadge,
+:global([data-theme="paper"]) .techBadge {
+  color: #52525b;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.09);
+}
+
+[data-theme="paper"] .cardLink:hover .techBadge,
+:global([data-theme="paper"]) .cardLink:hover .techBadge {
+  color: #27272a;
+  border-color: rgba(0, 0, 0, 0.18);
+  background-color: rgba(0, 0, 0, 0.07);
 }
 
 .cardTitle {
