@@ -10,8 +10,6 @@ export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const emailAddress = "dilshan.devxx@gmail.com";
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -24,7 +22,7 @@ export default function ContactSection() {
   return (
     <section className={styles.contactSection} id="contact" aria-label="Contact Section">
       <div className={styles.container}>
-        {/* Left Column: Quiet editorial typography & organized touchpoints */}
+        {/* Left Column: Quiet editorial typography */}
         <motion.div
           className={styles.leftCol}
           initial={{ opacity: 0, y: 20 }}
@@ -32,62 +30,14 @@ export default function ContactSection() {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className={styles.sectionTag}>CONTACT</div>
-
           <h2 className={styles.headline}>
             Let&apos;s start a conversation.
           </h2>
 
           <p className={styles.leadText}>
             Interested in collaborating, discussing distributed systems and AI platforms,
-            or exploring new engineering opportunities? Drop a line through the form or
-            reach out directly.
+            or exploring new engineering opportunities? Drop a line through the form.
           </p>
-
-          <div className={styles.directList}>
-            <div className={styles.directItem}>
-              <span className={styles.directLabel}>Direct Email</span>
-              <a href={`mailto:${emailAddress}`} className={styles.directValueLink}>
-                <span>{emailAddress}</span>
-                <ArrowUpRight size={15} className={styles.directArrow} />
-              </a>
-            </div>
-
-            <div className={styles.directItem}>
-              <span className={styles.directLabel}>Location</span>
-              <span className={styles.directValue}>Colombo, Sri Lanka &middot; UTC+5:30</span>
-            </div>
-
-            <div className={styles.directItem}>
-              <span className={styles.directLabel}>Profiles</span>
-              <div className={styles.socialGroup}>
-                <a
-                  href="https://github.com/dilshandevxx"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.socialLink}
-                >
-                  GitHub <ArrowUpRight size={13} className={styles.socialArrow} />
-                </a>
-                <a
-                  href="https://linkedin.com/in/heydilshan/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.socialLink}
-                >
-                  LinkedIn <ArrowUpRight size={13} className={styles.socialArrow} />
-                </a>
-                <a
-                  href="https://x.com/dilshanverse"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.socialLink}
-                >
-                  Twitter/X <ArrowUpRight size={13} className={styles.socialArrow} />
-                </a>
-              </div>
-            </div>
-          </div>
         </motion.div>
 
         {/* Right Column: Clean, understated form card */}
