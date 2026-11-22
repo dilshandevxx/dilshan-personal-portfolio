@@ -142,6 +142,12 @@ export default function AdminDashboardPage() {
     triggerToast(`Asset "${asset.name}" added to media library.`);
   };
 
+  const handleAddMultipleMedia = async (assets: Omit<CMSMediaAsset, "id" | "createdAt">[]) => {
+    await cmsDataStore.addMediaAssets(assets);
+    await refreshData();
+    triggerToast(`Added ${assets.length} media assets to library.`);
+  };
+
   const handleDeleteMedia = async (id: string) => {
     await cmsDataStore.deleteMediaAsset(id);
     await refreshData();
@@ -294,6 +300,7 @@ export default function AdminDashboardPage() {
                 <MediaLibraryView
                   assets={mediaAssets}
                   onAddAsset={handleAddMedia}
+                  onAddAssets={handleAddMultipleMedia}
                   onDeleteAsset={handleDeleteMedia}
                   initialTab={currentView === "media-add" ? "add" : "library"}
                 />

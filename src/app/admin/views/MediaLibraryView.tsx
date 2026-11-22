@@ -28,6 +28,7 @@ import { CMSMediaAsset } from "@/services/cmsDataStore";
 interface MediaLibraryViewProps {
   assets: CMSMediaAsset[];
   onAddAsset: (asset: Omit<CMSMediaAsset, "id" | "createdAt">) => Promise<void>;
+  onAddAssets?: (assets: Omit<CMSMediaAsset, "id" | "createdAt">[]) => Promise<void>;
   onDeleteAsset: (id: string) => Promise<void>;
   initialTab?: "library" | "add";
 }
@@ -35,6 +36,7 @@ interface MediaLibraryViewProps {
 export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
   assets,
   onAddAsset,
+  onAddAssets,
   onDeleteAsset,
   initialTab = "library",
 }) => {
@@ -50,6 +52,15 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [uploadSuccess, setUploadSuccess] = useState<string | null>(null);
   const [isDragOver, setIsDragOver] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<{
+    total: number;
+    current: number;
+    currentFileName: string;
+    percent: number;
+  } | null>(null);
+  const [lastUploadedBatch, setLastUploadedBatch] = useState<
+    { name: string; url: string; type: string; format?: string }[]
+  >([]);
 
   // Form State for URL adding
   const [assetForm, setAssetForm] = useState({
@@ -130,61 +141,120 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
     }));
   };
 
-  // Handle Direct File Upload (via API route)
-  const handleFileUpload = async (file: File) => {
+  // Handle Direct Multi-File Upload (Images & Videos)
+  const handleMultipleFilesUpload = async (files: FileList | File[]) => {
+    const fileList = Array.from(files).filter(
+      (f) =>
+        f.size > 0 &&
+        (f.type.startsWith("image/") ||
+          f.type.startsWith("video/") ||
+          /\.(png|jpe?g|webp|avif|gif|svg|mp4|webm|mov|mkv)$/i.test(f.name))
+    );
+
+    if (fileList.length === 0) {
+      setUploadError("Please select valid image or video files.");
+      return;
+    }
+
     setIsUploading(true);
     setUploadError(null);
     setUploadSuccess(null);
+    setLastUploadedBatch([]);
 
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
+    const uploadedAssets: Omit<CMSMediaAsset, "id" | "createdAt">[] = [];
+    const errors: string[] = [];
 
-      const res = await fetch("/api/admin/upload", {
-        method: "POST",
-        body: formData,
+    // Upload each file sequentially with live progress feedback
+    for (let i = 0; i < fileList.length; i++) {
+      const file = fileList[i];
+      const percent = Math.round(((i) / fileList.length) * 100);
+      setUploadProgress({
+        total: fileList.length,
+        current: i + 1,
+        currentFileName: file.name,
+        percent,
       });
 
-      if (!res.ok) {
-        const errJson = await res.json().catch(() => ({}));
-        throw new Error(errJson.error || "File upload failed");
-      }
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
 
-      const data = await res.json();
-      if (data.success && data.asset) {
-        // Automatically register to CMS Media Store
-        await onAddAsset({
-          name: data.asset.name,
-          url: data.asset.url,
-          type: data.asset.type,
-          format: data.asset.format,
-          width: data.asset.width || undefined,
-          height: data.asset.height || undefined,
-          size: data.asset.size,
-          cloudinaryPublicId: "",
+        const res = await fetch("/api/admin/upload", {
+          method: "POST",
+          body: formData,
         });
 
-        // Copy new asset URL directly to clipboard for immediate convenience
-        if (typeof navigator !== "undefined" && navigator.clipboard) {
-          navigator.clipboard.writeText(data.asset.url);
+        if (!res.ok) {
+          const errJson = await res.json().catch(() => ({}));
+          throw new Error(errJson.error || `Upload failed for ${file.name}`);
         }
 
-        setUploadSuccess(`Successfully uploaded "${data.asset.name}"! URL copied to clipboard.`);
-        resetForm();
+        const data = await res.json();
+        if (data.success && data.asset) {
+          uploadedAssets.push({
+            name: data.asset.name,
+            url: data.asset.url,
+            type: data.asset.type,
+            format: data.asset.format,
+            width: data.asset.width || undefined,
+            height: data.asset.height || undefined,
+            size: data.asset.size,
+            cloudinaryPublicId: "",
+          });
+        }
+      } catch (err: any) {
+        console.error(`[Upload error on ${file.name}]:`, err);
+        errors.push(`${file.name}: ${err.message || "Upload failed"}`);
       }
-    } catch (err: any) {
-      console.error("[Upload error]:", err);
-      setUploadError(err.message || "Failed to upload file");
-    } finally {
-      setIsUploading(false);
     }
+
+    // Register all successfully uploaded assets in one atomic batch
+    if (uploadedAssets.length > 0) {
+      if (onAddAssets) {
+        await onAddAssets(uploadedAssets);
+      } else {
+        for (const asset of uploadedAssets) {
+          await onAddAsset(asset);
+        }
+      }
+
+      setLastUploadedBatch(
+        uploadedAssets.map((a) => ({
+          name: a.name,
+          url: a.url,
+          type: a.type,
+          format: a.format,
+        }))
+      );
+
+      if (uploadedAssets.length === 1) {
+        if (typeof navigator !== "undefined" && navigator.clipboard) {
+          navigator.clipboard.writeText(uploadedAssets[0].url);
+        }
+        setUploadSuccess(
+          `Successfully uploaded "${uploadedAssets[0].name}"! URL copied to clipboard.`
+        );
+      } else {
+        setUploadSuccess(
+          `Successfully uploaded and optimized all ${uploadedAssets.length} media files! Registered in your Media Vault.`
+        );
+      }
+      resetForm();
+    }
+
+    if (errors.length > 0) {
+      setUploadError(`${errors.length} file(s) failed: ${errors.join("; ")}`);
+    }
+
+    setIsUploading(false);
+    setUploadProgress(null);
   };
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragOver(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      handleFileUpload(e.dataTransfer.files[0]);
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      handleMultipleFilesUpload(e.dataTransfer.files);
     }
   };
 
@@ -678,18 +748,18 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
             >
               <div>
                 <h3 style={{ fontSize: "1.05rem", fontWeight: 600, color: "#f2f2f0", margin: "0 0 0.35rem 0" }}>
-                  Upload Images or Videos
+                  Upload Multiple Images & Videos
                 </h3>
                 <p style={{ fontSize: "0.84rem", color: "#8a909a", margin: 0 }}>
-                  Upload local files directly to your portfolio. Files are automatically processed, WebP-compressed, and saved in your public directory.
+                  Upload multiple local images and videos simultaneously. Files are processed concurrently, images are auto-converted to WebP, and all URLs are immediately registered to your portfolio.
                 </p>
               </div>
 
-              {/* Upload Dropzone */}
+              {/* Multi-File Upload Dropzone */}
               <div
                 className={`${styles.uploadDropzone} ${isDragOver ? styles.uploadDropzoneActive : ""}`}
                 style={{
-                  minHeight: "220px",
+                  minHeight: "230px",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
@@ -697,46 +767,72 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
                   border: isDragOver ? "2px dashed #6366f1" : "2px dashed #343742",
                   borderRadius: "8px",
                   padding: "2.5rem 1.5rem",
-                  cursor: "pointer",
+                  cursor: isUploading ? "not-allowed" : "pointer",
                   backgroundColor: isDragOver ? "rgba(99, 102, 241, 0.08)" : "#101114",
                   transition: "all 0.2s ease",
+                  opacity: isUploading ? 0.9 : 1,
                 }}
                 onDragOver={(e) => {
                   e.preventDefault();
-                  setIsDragOver(true);
+                  if (!isUploading) setIsDragOver(true);
                 }}
                 onDragLeave={() => setIsDragOver(false)}
                 onDrop={handleDrop}
-                onClick={() => fileInputRef.current?.click()}
+                onClick={() => {
+                  if (!isUploading) fileInputRef.current?.click();
+                }}
               >
                 <input
                   ref={fileInputRef}
                   type="file"
+                  multiple
                   style={{ display: "none" }}
-                  accept="image/png,image/jpeg,image/webp,image/avif,image/gif,video/mp4,video/webm"
+                  accept="image/png,image/jpeg,image/webp,image/avif,image/gif,image/svg+xml,video/mp4,video/webm,video/quicktime"
                   onChange={(e) => {
-                    if (e.target.files && e.target.files[0]) {
-                      handleFileUpload(e.target.files[0]);
+                    if (e.target.files && e.target.files.length > 0) {
+                      handleMultipleFilesUpload(e.target.files);
+                      e.target.value = "";
                     }
                   }}
                 />
 
                 {isUploading ? (
-                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.75rem" }}>
-                    <Loader2 size={32} className={styles.spinner} style={{ color: "#6366f1" }} />
-                    <p style={{ fontSize: "0.88rem", color: "#f2f2f0", fontWeight: 500, margin: 0 }}>
-                      Processing and optimizing media file...
-                    </p>
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.85rem", width: "100%", maxWidth: "340px", textAlign: "center" }}>
+                    <Loader2 size={34} className={styles.spinner} style={{ color: "#6366f1" }} />
+                    <div>
+                      <p style={{ fontSize: "0.92rem", color: "#f2f2f0", fontWeight: 600, margin: "0 0 0.25rem 0" }}>
+                        {uploadProgress
+                          ? `Uploading file ${uploadProgress.current} of ${uploadProgress.total}...`
+                          : "Processing media files..."}
+                      </p>
+                      <p style={{ fontSize: "0.78rem", color: "#9ca3af", margin: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "300px" }}>
+                        {uploadProgress?.currentFileName || "Optimizing and converting format..."}
+                      </p>
+                    </div>
+
+                    {/* Dynamic Progress Bar */}
+                    <div style={{ width: "100%", height: "6px", backgroundColor: "#282a32", borderRadius: "999px", overflow: "hidden" }}>
+                      <div
+                        style={{
+                          width: `${uploadProgress ? Math.max(12, Math.round((uploadProgress.current / uploadProgress.total) * 100)) : 25}%`,
+                          height: "100%",
+                          backgroundColor: "#6366f1",
+                          borderRadius: "999px",
+                          transition: "width 0.3s ease",
+                        }}
+                      />
+                    </div>
+
                     <span style={{ fontSize: "0.75rem", color: "#8a909a" }}>
-                      Auto-converting format and generating web preview
+                      Auto-converting images to WebP & saving to /public/uploads
                     </span>
                   </div>
                 ) : (
                   <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.75rem", textAlign: "center" }}>
                     <div
                       style={{
-                        width: 54,
-                        height: 54,
+                        width: 56,
+                        height: 56,
                         borderRadius: "50%",
                         backgroundColor: "#191a20",
                         display: "flex",
@@ -746,27 +842,148 @@ export const MediaLibraryView: React.FC<MediaLibraryViewProps> = ({
                         border: "1px solid #282a32",
                       }}
                     >
-                      <Upload size={22} />
+                      <Upload size={24} />
                     </div>
 
                     <div>
-                      <p style={{ fontSize: "0.95rem", fontWeight: 600, color: "#f2f2f0", margin: "0 0 0.25rem 0" }}>
-                        Click to browse or drag and drop files here
+                      <p style={{ fontSize: "0.98rem", fontWeight: 600, color: "#f2f2f0", margin: "0 0 0.35rem 0" }}>
+                        Click to browse or drag & drop multiple files here
                       </p>
-                      <p style={{ fontSize: "0.8rem", color: "#8a909a", margin: 0 }}>
-                        Supports JPG, PNG, WebP, AVIF, GIF, MP4, and WebM (up to 50MB)
+                      <p style={{ fontSize: "0.82rem", color: "#8a909a", margin: 0 }}>
+                        Select multiple images or videos at once (JPG, PNG, WebP, AVIF, GIF, MP4, WebM)
                       </p>
                     </div>
 
-                    <span
-                      className={`${styles.btn} ${styles.btnSecondary} ${styles.btnSm}`}
-                      style={{ marginTop: "0.5rem" }}
-                    >
-                      Browse Files
-                    </span>
+                    <div style={{ display: "flex", gap: "0.5rem", alignItems: "center", marginTop: "0.4rem" }}>
+                      <span
+                        className={`${styles.btn} ${styles.btnSecondary} ${styles.btnSm}`}
+                        style={{ padding: "0.45rem 1rem", fontSize: "0.82rem" }}
+                      >
+                        Select Multiple Files
+                      </span>
+                    </div>
                   </div>
                 )}
               </div>
+
+              {/* Batch Upload Summary & Quick Copy Card */}
+              {lastUploadedBatch.length > 0 && (
+                <div
+                  style={{
+                    backgroundColor: "rgba(16, 185, 129, 0.08)",
+                    border: "1px solid rgba(16, 185, 129, 0.25)",
+                    borderRadius: "8px",
+                    padding: "1rem 1.25rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.75rem",
+                  }}
+                >
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.5rem" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                      <Check size={18} style={{ color: "#34d399" }} />
+                      <span style={{ fontSize: "0.88rem", fontWeight: 600, color: "#34d399" }}>
+                        Batch Upload Complete ({lastUploadedBatch.length} file{lastUploadedBatch.length > 1 ? "s" : ""})
+                      </span>
+                    </div>
+
+                    <div style={{ display: "flex", gap: "0.5rem" }}>
+                      <button
+                        type="button"
+                        className={`${styles.btn} ${styles.btnSecondary} ${styles.btnSm}`}
+                        style={{ fontSize: "0.78rem", padding: "0.3rem 0.65rem", display: "flex", alignItems: "center", gap: "0.35rem" }}
+                        onClick={() => {
+                          const urls = lastUploadedBatch.map((a) => a.url).join("\n");
+                          if (navigator.clipboard) {
+                            navigator.clipboard.writeText(urls);
+                            setUploadSuccess(`Copied ${lastUploadedBatch.length} URLs to clipboard!`);
+                          }
+                        }}
+                      >
+                        <Copy size={13} />
+                        <span>Copy All URLs</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        className={`${styles.btn} ${styles.btnPrimary} ${styles.btnSm}`}
+                        style={{ fontSize: "0.78rem", padding: "0.3rem 0.65rem", display: "flex", alignItems: "center", gap: "0.35rem" }}
+                        onClick={() => setActiveTab("library")}
+                      >
+                        <Eye size={13} />
+                        <span>View in Vault</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Quick-list of uploaded items */}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "0.35rem",
+                      maxHeight: "160px",
+                      overflowY: "auto",
+                      paddingRight: "0.25rem",
+                    }}
+                  >
+                    {lastUploadedBatch.map((item, idx) => (
+                      <div
+                        key={idx}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          padding: "0.4rem 0.6rem",
+                          backgroundColor: "#12141a",
+                          borderRadius: "6px",
+                          border: "1px solid #232733",
+                          fontSize: "0.8rem",
+                        }}
+                      >
+                        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", overflow: "hidden" }}>
+                          {item.type === "video" ? (
+                            <Video size={14} style={{ color: "#818cf8", flexShrink: 0 }} />
+                          ) : (
+                            <ImageIcon size={14} style={{ color: "#34d399", flexShrink: 0 }} />
+                          )}
+                          <span style={{ color: "#e5e7eb", fontWeight: 500, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                            {item.name}
+                          </span>
+                          <span style={{ color: "#6b7280", fontSize: "0.72rem" }}>({item.format || item.type.toUpperCase()})</span>
+                        </div>
+
+                        <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", flexShrink: 0 }}>
+                          <span style={{ color: "#9ca3af", fontFamily: "monospace", fontSize: "0.75rem" }}>
+                            {item.url}
+                          </span>
+                          <button
+                            type="button"
+                            title="Copy URL"
+                            style={{
+                              background: "transparent",
+                              border: "none",
+                              color: "#a1a7b5",
+                              cursor: "pointer",
+                              padding: "2px",
+                              display: "flex",
+                              alignItems: "center",
+                            }}
+                            onClick={() => {
+                              if (navigator.clipboard) {
+                                navigator.clipboard.writeText(item.url);
+                                setUploadSuccess(`Copied "${item.url}" to clipboard!`);
+                              }
+                            }}
+                          >
+                            <Copy size={13} />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {uploadError && (
                 <div

@@ -622,7 +622,7 @@ class CMSDataStore {
     const list = await this.getMediaAssets();
     const newAsset: CMSMediaAsset = {
       ...asset,
-      id: `media-${Date.now()}`,
+      id: `media-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
       createdAt: new Date().toISOString(),
     };
 
@@ -637,6 +637,29 @@ class CMSDataStore {
     }
 
     return newAsset;
+  }
+
+  public async addMediaAssets(assets: Omit<CMSMediaAsset, "id" | "createdAt">[]): Promise<CMSMediaAsset[]> {
+    if (!assets || assets.length === 0) return [];
+    const list = await this.getMediaAssets();
+    const now = Date.now();
+    const newAssets: CMSMediaAsset[] = assets.map((asset, index) => ({
+      ...asset,
+      id: `media-${now}-${index}-${Math.random().toString(36).slice(2, 7)}`,
+      createdAt: new Date().toISOString(),
+    }));
+
+    const updated = [...newAssets, ...list];
+    if (typeof window !== "undefined") {
+      localStorage.setItem(STORAGE_KEYS.MEDIA, JSON.stringify(updated));
+      this.addActivityLog({
+        action: `Uploaded ${newAssets.length} Media Assets`,
+        target: newAssets.map((a) => a.name).join(", ").slice(0, 80),
+        type: "media",
+      });
+    }
+
+    return newAssets;
   }
 
   public async deleteMediaAsset(id: string): Promise<boolean> {
