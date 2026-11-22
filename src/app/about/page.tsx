@@ -26,32 +26,40 @@ export default function AboutPage() {
         <AboutEditorialBio />
 
         {/* =========================================================================
-            ABOUT HERO STAGE: 3-COLUMN ASYMMETRIC EDITORIAL LAYOUT
-            (Faithfully reproducing the reference Webflow design)
+            ABOUT HERO STAGE: 3-COLUMN EDITORIAL STORY & ENGINEERING ETHOS
             ========================================================================= */}
-        <section className={styles.storySection} aria-label="About Dilshan">
+        <section className={styles.storySection} aria-label="Engineering Ethos">
+          <motion.div
+            className={styles.headerBlock}
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className={styles.headerIcon} aria-hidden="true">
+              <div className={styles.headerIconInner} />
+            </div>
+            <h2 className={styles.mainTitle}>Engineering Ethos</h2>
+          </motion.div>
+
           <div className={styles.storyGrid}>
             {/* -------------------------------------------------------------
                 LEFT COLUMN: 2 Vertically Stacked Rounded Photo Cards
                 ------------------------------------------------------------- */}
             <motion.div
               className={styles.leftCol}
-              initial={{ opacity: 0, x: -25 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
-              {/* Carousel Tab matching reference left edge */}
-              <div className={styles.carouselTab} aria-hidden="true">
-                <ChevronLeft size={16} className={styles.chevronIcon} />
-              </div>
-
               {/* Top Photo Card */}
               <div className={styles.photoCardSmall}>
                 <Image
                   src="/images/about/about_stage_1.jpg"
                   alt="Speaker presenting on stage"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 240px"
+                  sizes="(max-width: 960px) 100vw, 220px"
                   className={styles.cardImage}
                   priority
                 />
@@ -63,7 +71,7 @@ export default function AboutPage() {
                   src="/images/about/about_stage_2.jpg"
                   alt="Collaborative discussion"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 240px"
+                  sizes="(max-width: 960px) 100vw, 220px"
                   className={styles.cardImage}
                 />
               </div>
@@ -74,59 +82,58 @@ export default function AboutPage() {
                 ------------------------------------------------------------- */}
             <motion.div
               className={styles.middleCol}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h1 className={styles.headline}>
-                Built for the teams<br />
-                building the future
-              </h1>
+              <h3 className={styles.headline}>
+                Architecting resilient systems<br />
+                for deterministic scale
+              </h3>
 
               <div className={styles.narrativeBody}>
                 <p className={styles.paragraph}>
-                  Webflow started in 2013 with one belief: building for the web shouldn&apos;t require an engineering degree. Today, 3.5M people — solo freelancers, scrappy startups, Fortune 100 marketing teams — use Webflow to do exactly that.
+                  I view computer science not merely as a modern trade, but as an intellectual craft that bridges mechanical discipline with editorial clarity. Over the past several years, I have worked across the stack—from designing event-driven distributed ingestion pipelines to architecting accessible, zero-bloat web clients.
                 </p>
 
                 <p className={styles.paragraph}>
-                  The web looks different now than it did then. AI is changing how experiences get built, how they get found, and what people expect when they arrive. We think that&apos;s an opportunity, not a threat. Our mission is to build for the teams shaping what&apos;s next, and our vision is a world where every digital experience comes alive.
+                  My engineering philosophy is shaped by durable principles: favor explicit architectures over magic abstractions, prioritize deterministic latency over brute computing power, and craft user experiences that respect human attention rather than exploit it.
                 </p>
 
                 <p className={styles.punchline}>
-                  Harder problems. Higher stakes. That&apos;s not a challenge. That&apos;s the job.
+                  Harder problems. Higher performance stakes. That&apos;s where dependable systems get built.
                 </p>
               </div>
             </motion.div>
 
             {/* -------------------------------------------------------------
-                RIGHT COLUMN: Giant Stats Metrics & Portrait Photo Card
+                RIGHT COLUMN: Real Engineering Distinctions & Photo Card
                 ------------------------------------------------------------- */}
             <motion.div
               className={styles.rightCol}
-              initial={{ opacity: 0, x: 25 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             >
               {/* Stats Block */}
               <div className={styles.statsBlock}>
-                {/* Primary Large Metric */}
                 <div className={styles.statPrimary}>
-                  <div className={styles.statPrimaryNumber}>800+</div>
-                  <div className={styles.statPrimaryLabel}>employees</div>
+                  <div className={styles.statPrimaryNumber}>10+</div>
+                  <div className={styles.statPrimaryLabel}>years of curiosity &amp; software craft</div>
                 </div>
 
-                {/* Thin Divider Line */}
                 <div className={styles.statsDivider} />
 
-                {/* Two Secondary Metrics Side by Side */}
                 <div className={styles.statsSecondaryRow}>
                   <div className={styles.statSecondary}>
-                    <div className={styles.statSecondaryNumber}>1.4M</div>
-                    <div className={styles.statSecondaryLabel}>websites</div>
+                    <div className={styles.statSecondaryNumber}>&lt;14ms</div>
+                    <div className={styles.statSecondaryLabel}>p99 inference latency</div>
                   </div>
                   <div className={styles.statSecondary}>
-                    <div className={styles.statSecondaryNumber}>300k</div>
-                    <div className={styles.statSecondaryLabel}>customers</div>
+                    <div className={styles.statSecondaryNumber}>100%</div>
+                    <div className={styles.statSecondaryLabel}>ad-free, zero tracking</div>
                   </div>
                 </div>
               </div>
@@ -137,9 +144,8 @@ export default function AboutPage() {
                   src="/images/about/about_stage_3.jpg"
                   alt="Keynote presentation"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 260px"
+                  sizes="(max-width: 960px) 100vw, 280px"
                   className={styles.cardImage}
-                  priority
                 />
               </div>
             </motion.div>

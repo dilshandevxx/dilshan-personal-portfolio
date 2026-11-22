@@ -168,6 +168,7 @@ export function getProjectThumbnail(
 }
 
 export const projectsList: Project[] = ${JSON.stringify(projects, null, 2)};
+export const archivedProjectsList: Project[] = [];
 `;
 }
 

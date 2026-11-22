@@ -8,14 +8,14 @@
 .showcaseSection {
   background-color: #111111;
   width: 100%;
-  padding: clamp(0.75rem, 1.5vw, 1.5rem) clamp(1.5rem, 5vw, 4rem) clamp(4.5rem, 7vw, 6.5rem);
+  padding: clamp(0.75rem, 1.5vw, 1.5rem) clamp(1.25rem, 4vw, 3rem) clamp(4rem, 6vw, 5.5rem);
   box-sizing: border-box;
   position: relative;
   transition: background-color 0.3s ease;
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   width: 100%;
 }

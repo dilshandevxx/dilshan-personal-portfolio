@@ -1,10 +1,7 @@
 /* =========================================================================
-   About Me Page — Faithful Stepped Waterfall Editorial Layout
-   Matching the reference Webflow design with pixel-level precision:
-   - Left Column: Starts at Y=0 (top edge of stage) with 2 stacked photos
-   - Middle Column: Stepped down (~170px) with 2-line headline & body story
-   - Right Column: Stepped down (~310px) with massive 800+ stats, divider,
-     side-by-side 1.4M/300k, and keynote photo card at the bottom right.
+   About Me Page — Cohesive Editorial Layout
+   Aligned to 1200px container matching the top editorial section.
+   Clean typography, generous whitespace, matte charcoal surfaces.
    ========================================================================= */
 
 .pageRoot {
@@ -21,67 +18,77 @@
 }
 
 .mainContainer {
-  max-width: 1360px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: clamp(3.5rem, 5.5vw, 5rem) clamp(1.5rem, 5vw, 4.5rem) clamp(4rem, 6.5vw, 6rem);
+  padding: clamp(2.5rem, 4.5vw, 4rem) clamp(1.25rem, 4vw, 3rem) clamp(3.5rem, 5.5vw, 5rem);
   width: 100%;
   box-sizing: border-box;
 }
 
 .storySection {
   width: 100%;
+  margin-top: clamp(2.5rem, 4vw, 3.75rem);
+  padding-top: clamp(2.5rem, 4vw, 3.75rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* =========================================================================
-   3-Column Grid Layout (Exact Stepped Cascade Alignment)
-   ========================================================================= */
+/* Header matching the top editorial section style */
+.headerBlock {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.headerIcon {
+  width: 32px;
+  height: 32px;
+  background-color: #1a1c23;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.headerIconInner {
+  width: 14px;
+  height: 14px;
+  background-color: #2e323f;
+  border-radius: 2px;
+}
+
+.mainTitle {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: clamp(1.85rem, 3.2vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.15;
+}
+
+/* 3-Column Grid Layout */
 .storyGrid {
   display: grid;
-  grid-template-columns: minmax(200px, 240px) minmax(420px, 1.35fr) minmax(280px, 340px);
-  column-gap: clamp(3rem, 5.5vw, 6.5rem);
+  grid-template-columns: minmax(180px, 220px) minmax(360px, 1.4fr) minmax(240px, 280px);
+  column-gap: clamp(2rem, 3.5vw, 3.5rem);
   align-items: start;
   width: 100%;
 }
 
-/* -------------------------------------------------------------
-   LEFT COLUMN: Starts at the very top (Y offset: 0)
-   ------------------------------------------------------------- */
 .leftCol {
   display: flex;
   flex-direction: column;
-  gap: clamp(1.25rem, 2vw, 1.85rem);
+  gap: 1.25rem;
   width: 100%;
-  position: relative;
-  padding-top: 0;
-}
-
-/* Left Carousel Tab matching reference left edge */
-.carouselTab {
-  position: absolute;
-  left: -20px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 22px;
-  height: 38px;
-  background-color: #27272a;
-  border-radius: 6px 0 0 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  z-index: 5;
-  pointer-events: none;
-}
-
-.chevronIcon {
-  color: #ffffff;
 }
 
 .photoCardSmall {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1.02;
+  aspect-ratio: 1 / 1;
   border-radius: 14px;
   overflow: hidden;
   background-color: #181818;
@@ -96,69 +103,64 @@
 
 .photoCardSmall:hover .cardImage,
 .photoCardPortrait:hover .cardImage {
-  transform: scale(1.035);
+  transform: scale(1.03);
 }
 
-/* -------------------------------------------------------------
-   MIDDLE COLUMN: Stepped down to align with midpoint of first photo
-   ------------------------------------------------------------- */
 .middleCol {
   display: flex;
   flex-direction: column;
   width: 100%;
   min-width: 0;
-  padding-top: clamp(4.5rem, 7.5vw, 8.5rem);
 }
 
 .headline {
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(2.5rem, 4.2vw, 4rem);
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
   color: #ffffff;
-  margin: 0 0 clamp(1.8rem, 3vw, 2.5rem) 0;
-  max-width: 580px;
+  margin: 0 0 1.5rem 0;
 }
 
 .narrativeBody {
   display: flex;
   flex-direction: column;
-  gap: clamp(1.35rem, 2vw, 1.75rem);
-  max-width: 540px;
+  gap: 1.25rem;
 }
 
 .paragraph {
   font-family: var(--font-body, "Inter", -apple-system, sans-serif);
-  font-size: clamp(0.96rem, 1.12vw, 1.06rem);
-  line-height: 1.72;
-  color: #a1a1aa;
+  font-size: clamp(0.98rem, 1.12vw, 1.05rem);
+  line-height: 1.78;
+  color: #c9ced6;
   margin: 0;
 }
 
 .punchline {
   font-family: var(--font-body, "Inter", -apple-system, sans-serif);
-  font-size: clamp(1.02rem, 1.2vw, 1.12rem);
+  font-size: 1.05rem;
   line-height: 1.65;
   font-weight: 600;
-  color: #ffffff;
-  margin: 0.6rem 0 0 0;
+  color: #f3f4f6;
+  margin: 0.5rem 0 0 0;
 }
 
-/* -------------------------------------------------------------
-   RIGHT COLUMN: Stepped down further to align with bottom of first photo
-   ------------------------------------------------------------- */
 .rightCol {
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding-top: clamp(8rem, 13vw, 14.5rem);
 }
 
 .statsBlock {
   display: flex;
   flex-direction: column;
   width: 100%;
+  background: #151816;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-sizing: border-box;
 }
 
 .statPrimary {
@@ -168,26 +170,25 @@
 
 .statPrimaryNumber {
   font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(5rem, 7.5vw, 7rem);
+  font-size: clamp(3.2rem, 4.5vw, 4.2rem);
   font-weight: 800;
-  line-height: 0.9;
+  line-height: 0.95;
   letter-spacing: -0.04em;
   color: #ffffff;
 }
 
 .statPrimaryLabel {
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: clamp(0.96rem, 1.15vw, 1.1rem);
-  color: #71717a;
-  margin-top: 0.75rem;
-  font-weight: 400;
-  letter-spacing: -0.01em;
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin-top: 0.5rem;
+  font-weight: 500;
 }
 
 .statsDivider {
   height: 1px;
-  background-color: rgba(255, 255, 255, 0.14);
-  margin: clamp(2rem, 3.2vw, 2.8rem) 0 clamp(1.8rem, 3vw, 2.4rem) 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 1.25rem 0;
   width: 100%;
 }
 
@@ -195,7 +196,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 1.5rem;
+  gap: 1rem;
   width: 100%;
 }
 
@@ -206,146 +207,85 @@
 
 .statSecondaryNumber {
   font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(2.2rem, 3.2vw, 2.9rem);
-  font-weight: 800;
-  line-height: 1;
+  font-size: clamp(1.6rem, 2.2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.1;
   color: #ffffff;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 
 .statSecondaryLabel {
   font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.92rem;
-  color: #71717a;
-  margin-top: 0.5rem;
-  font-weight: 400;
-  letter-spacing: -0.01em;
+  font-size: 0.78rem;
+  color: #9ca3af;
+  margin-top: 0.35rem;
 }
 
-/* Portrait Photo Card directly below stats with generous spacing */
 .photoCardPortrait {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1.05;
-  border-radius: clamp(14px, 1.5vw, 18px);
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
   overflow: hidden;
   background-color: #181818;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.45);
-  margin-top: clamp(3.5rem, 5.5vw, 5.5rem);
+  margin-top: 1.25rem;
 }
 
 /* =========================================================================
    Responsive Breakpoints
    ========================================================================= */
-@media (max-width: 1180px) {
+@media (max-width: 960px) {
   .storyGrid {
-    grid-template-columns: 180px 1fr 260px;
-    column-gap: 2.5rem;
-  }
-
-  .middleCol {
-    padding-top: clamp(2.5rem, 5vw, 4.5rem);
-  }
-
-  .rightCol {
-    padding-top: clamp(4.5rem, 8vw, 7.5rem);
-  }
-}
-
-@media (max-width: 860px) {
-  .mainContainer {
-    padding: 2.5rem 1.25rem 4rem;
-  }
-
-  .storyGrid {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-  }
-
-  .carouselTab {
-    display: none;
-  }
-
-  /* Natural editorial reading order on tablet/mobile */
-  .middleCol {
-    order: 1;
-    padding-top: 0;
+    grid-template-columns: 1fr;
+    row-gap: 2.25rem;
   }
 
   .leftCol {
-    order: 2;
-    padding-top: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
   }
 
-  .rightCol {
-    order: 3;
-    padding-top: 0;
-  }
-
-  .photoCardSmall {
-    aspect-ratio: 1 / 1;
-    border-radius: 14px;
-  }
-
-  .photoCardPortrait {
-    aspect-ratio: 16 / 11;
-    border-radius: 14px;
-    margin-top: 2rem;
+  .statsSecondaryRow {
+    gap: 1.5rem;
   }
 }
 
 @media (max-width: 640px) {
+  .mainContainer {
+    padding: 2rem 1.25rem 3.5rem;
+  }
+
   .headline {
-    font-size: clamp(2.1rem, 8vw, 2.6rem);
-    margin-bottom: 1.5rem;
+    font-size: clamp(1.85rem, 6vw, 2.2rem);
+    margin-bottom: 1.25rem;
   }
 
-  .paragraph {
-    font-size: 0.94rem;
-    line-height: 1.65;
-  }
-
-  .statPrimaryNumber {
-    font-size: 4rem;
-  }
-
-  .statSecondaryNumber {
-    font-size: 2rem;
-  }
-
-  .statsSecondaryRow {
-    gap: 1.25rem;
+  .leftCol {
+    grid-template-columns: 1fr;
   }
 }
 
 /* =========================================================================
-   LIGHT THEME OVERRIDES (100% Cohesive Light Theme)
+   LIGHT THEME OVERRIDES
    ========================================================================= */
 :global([data-theme="light"]) .pageRoot {
-  background-color: #f9f7f2;
-  color: #111111;
+  background-color: #fbf8f3;
+  color: #24211e;
 }
 
-:global([data-theme="light"]) .headline {
-  color: #111111;
+:global([data-theme="light"]) .mainTitle,
+:global([data-theme="light"]) .headline,
+:global([data-theme="light"]) .punchline,
+:global([data-theme="light"]) .statPrimaryNumber,
+:global([data-theme="light"]) .statSecondaryNumber {
+  color: #18181b;
 }
 
 :global([data-theme="light"]) .paragraph {
-  color: #52525b;
-}
-
-:global([data-theme="light"]) .punchline {
-  color: #111111;
-}
-
-:global([data-theme="light"]) .statPrimaryNumber,
-:global([data-theme="light"]) .statSecondaryNumber {
-  color: #111111;
+  color: #3f3f46;
 }
 
 :global([data-theme="light"]) .statPrimaryLabel,
@@ -353,23 +293,27 @@
   color: #71717a;
 }
 
-:global([data-theme="light"]) .statsDivider {
-  background-color: rgba(0, 0, 0, 0.12);
-}
-
-:global([data-theme="light"]) .carouselTab {
-  background-color: #e4e4e7;
-  color: #111111;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-:global([data-theme="light"]) .chevronIcon {
-  color: #111111;
-}
-
+:global([data-theme="light"]) .statsBlock,
 :global([data-theme="light"]) .photoCardSmall,
 :global([data-theme="light"]) .photoCardPortrait {
   background-color: #ffffff;
   border-color: rgba(0, 0, 0, 0.08);
-  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16px 35px -10px rgba(0, 0, 0, 0.1);
+}
+
+:global([data-theme="light"]) .storySection {
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .statsDivider {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .headerIcon {
+  background-color: #f4f4f5;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+:global([data-theme="light"]) .headerIconInner {
+  background-color: #d4d4d8;
 }

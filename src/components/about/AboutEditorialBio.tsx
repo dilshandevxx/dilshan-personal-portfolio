@@ -12,7 +12,7 @@ interface AboutEditorialBioProps {
 }
 
 export default function AboutEditorialBio({
-  portraitSrc = "/images/about/about_tania_reference.webp",
+  portraitSrc = "/dilshan_portrait.jpg",
   updatedDate = "Updated November 2026",
 }: AboutEditorialBioProps) {
   return (
