@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
+import AboutEditorialBio from "@/components/about/AboutEditorialBio";
 import AboutShowcaseBanner from "@/components/cover/sections/AboutShowcaseBanner";
 import JourneySection from "@/components/cover/sections/JourneySection";
 import FaqSection from "@/components/cover/sections/FaqSection";
@@ -19,6 +20,11 @@ export default function AboutPage() {
       <SkyLabsNavbar activeTab="about" />
 
       <main className={styles.mainContainer}>
+        {/* =========================================================================
+            EDITORIAL BIO & SETUP: TANIA RASCIA INSPIRED (About Me, Contact, Now, Tools)
+            ========================================================================= */}
+        <AboutEditorialBio />
+
         {/* =========================================================================
             ABOUT HERO STAGE: 3-COLUMN ASYMMETRIC EDITORIAL LAYOUT
             (Faithfully reproducing the reference Webflow design)
