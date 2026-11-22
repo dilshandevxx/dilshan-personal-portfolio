@@ -28,9 +28,25 @@ export async function generateMetadata({
   const all = getAllAvailableProjects();
   const project = all.find((p) => p.slug === slug);
   if (!project) return { title: "Project Not Found" };
+  const metaTitle = project.seoTitle || `${project.title} — ${siteConfig.siteName}`;
+  const metaDesc = project.seoDescription || project.tagline || project.description;
+  const keywords = project.seoKeywords?.length ? project.seoKeywords : project.tags;
+
   return {
-    title: `${project.title} — ${siteConfig.siteName}`,
-    description: project.description || project.tagline,
+    title: metaTitle,
+    description: metaDesc,
+    keywords,
+    openGraph: {
+      title: metaTitle,
+      description: metaDesc,
+      images: [project.image || (project as any).coverImage || "/images/project_collective.jpg"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: metaTitle,
+      description: metaDesc,
+      images: [project.image || (project as any).coverImage || "/images/project_collective.jpg"],
+    },
   };
 }
 

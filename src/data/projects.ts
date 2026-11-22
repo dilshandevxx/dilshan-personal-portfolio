@@ -52,6 +52,17 @@ export interface ProjectBenchmark {
   note?: string;
 }
 
+export interface ProjectSectionConfig {
+  overview?: boolean;
+  problem?: boolean;
+  solution?: boolean;
+  architecture?: boolean;
+  gallery?: boolean;
+  techStack?: boolean;
+  keySkills?: boolean;
+  links?: boolean;
+}
+
 export interface Project {
   slug: string; title: string; date: string; category: ProjectCategory; tagline: string;
   description: string; longDescription: string; highlights: string[]; architecture: string;
@@ -62,6 +73,7 @@ export interface Project {
   aliases?: string[]; status: ProjectStatus;
 
   // Next-generation visual storytelling & engineering details
+  overview?: string;
   problemStatement?: string;
   realWorldSignificance?: string;
   proposedSolution?: string;
@@ -72,6 +84,19 @@ export interface Project {
   videoDemo?: VideoDemonstration;
   technicalDocs?: TechnicalDocSection[];
   benchmarks?: ProjectBenchmark[];
+
+  // Architecture visual & key skills learned
+  architectureImage?: string;
+  architectureCaption?: string;
+  keySkillsLearned?: string[];
+
+  // SEO metadata
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string[];
+
+  // Visible sections toggle
+  sectionConfig?: ProjectSectionConfig;
 }
 
 export const PROJECT_THUMBNAILS: Record<string, string> = {

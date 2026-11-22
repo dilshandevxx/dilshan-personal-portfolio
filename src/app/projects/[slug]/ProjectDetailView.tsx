@@ -139,43 +139,45 @@ export function ProjectDetailView({
 
           <h1 className={styles.title}>{project.title}</h1>
 
-          {project.tagline && (
-            <p className={styles.tagline}>{project.tagline}</p>
+          {(project.tagline || project.description) && (
+            <p className={styles.tagline}>{project.tagline || project.description}</p>
           )}
 
           {/* Clean Action Buttons */}
-          <div className={styles.actionRow}>
-            {project.demoUrl && (
-              <a
-                href={project.demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.primaryButton}
-              >
-                <span>Live Deployment</span>
-                <ArrowUpRight size={14} />
-              </a>
-            )}
+          {(project.sectionConfig?.links ?? true) && (
+            <div className={styles.actionRow}>
+              {project.demoUrl && (
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.primaryButton}
+                >
+                  <span>Live Deployment</span>
+                  <ArrowUpRight size={14} />
+                </a>
+              )}
 
-            {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.secondaryButton}
-              >
-                <GithubIcon size={15} />
-                <span>Source Code</span>
-              </a>
-            )}
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.secondaryButton}
+                >
+                  <GithubIcon size={15} />
+                  <span>Source Code</span>
+                </a>
+              )}
 
-            {project.writeupUrl && (
-              <Link href={project.writeupUrl} className={styles.secondaryButton}>
-                <span>Case Study</span>
-                <ArrowUpRight size={14} />
-              </Link>
-            )}
-          </div>
+              {project.writeupUrl && (
+                <Link href={project.writeupUrl} className={styles.secondaryButton}>
+                  <span>Case Study</span>
+                  <ArrowUpRight size={14} />
+                </Link>
+              )}
+            </div>
+          )}
         </header>
 
         {/* 3. Showcase Visual Frame */}
@@ -197,183 +199,193 @@ export function ProjectDetailView({
           />
         </div>
 
-        {/* 4. The 4 Core Delivery Pillars (Faithfully Matching the User Reference) */}
-        {enriched.projectPillars && enriched.projectPillars.length > 0 && (
-          <section className={styles.pillarsSection}>
-            <div className={styles.sectionHeaderSimple}>
-              <span className={styles.sectionPretitle}>EXECUTION &amp; DISCIPLINES</span>
-              <h2 className={styles.pillarsTitle}>How It Was Engineered</h2>
-            </div>
-
-            <div className={styles.pillarsGrid}>
-              {enriched.projectPillars.map((pillar, idx) => {
-                const defaultBadges: GeometricBadgeType[] = ["design", "code", "strategy", "qa"];
-                const badgeType = pillar.iconType || defaultBadges[idx % defaultBadges.length];
-
-                return (
-                  <div key={idx} className={styles.pillarCard}>
-                    <div className={styles.pillarBadgeWrap}>
-                      <GeometricBadge type={badgeType} size={42} />
-                    </div>
-
-                    <h3 className={styles.pillarTitle}>{pillar.title}</h3>
-
-                    <p className={styles.pillarDesc}>{pillar.description}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-        )}
-
-        {/* 5. Organized Editorial Narrative Sections */}
+        {/* 4. Organized Editorial Narrative Sections */}
         <div className={styles.narrativeContainer}>
-          {/* Overview & Problem */}
-          <section className={styles.narrativeSection}>
-            <div className={styles.labelCol}>
-              <h2 className={styles.sectionLabel}>The Overview</h2>
-            </div>
-            <div className={styles.contentCol}>
-              <p className={styles.leadText}>{enriched.description}</p>
-              {enriched.longDescription && enriched.longDescription !== enriched.description && (
-                <p className={styles.bodyText}>{enriched.longDescription}</p>
-              )}
-              {enriched.problemStatement && (
-                <p className={styles.bodyText}>{enriched.problemStatement}</p>
-              )}
-            </div>
-          </section>
-
-          {/* Architecture */}
-          {enriched.architecture && (
+          {/* Overview Section */}
+          {(project.sectionConfig?.overview ?? true) && (project.overview || project.longDescription || project.description) && (
             <section className={styles.narrativeSection}>
               <div className={styles.labelCol}>
-                <h2 className={styles.sectionLabel}>Architecture</h2>
+                <h2 className={styles.sectionLabel}>The Overview</h2>
               </div>
               <div className={styles.contentCol}>
-                <p className={styles.bodyText}>{enriched.architecture}</p>
-                {enriched.implementationApproach && (
-                  <p className={styles.bodyText}>{enriched.implementationApproach}</p>
-                )}
+                <p className={styles.leadText}>
+                  {project.overview || project.longDescription || project.description}
+                </p>
               </div>
             </section>
           )}
 
-          {/* Visual Architecture & Inside Interface Gallery */}
-          {project.gallery && project.gallery.length > 0 && (
+          {/* Problem Statement Section */}
+          {(project.sectionConfig?.problem ?? Boolean(project.problemStatement)) && project.problemStatement && (
             <section className={styles.narrativeSection}>
               <div className={styles.labelCol}>
-                <h2 className={styles.sectionLabel}>System Visuals</h2>
+                <h2 className={styles.sectionLabel}>The Problem</h2>
               </div>
               <div className={styles.contentCol}>
-                <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-                  {project.gallery.map((item, idx) => (
-                    <div
-                      key={idx}
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.5rem",
-                        backgroundColor: "var(--surface, #151816)",
-                        border: "1px solid var(--border-subtle, rgba(255, 255, 255, 0.08))",
-                        borderRadius: "8px",
-                        overflow: "hidden",
-                        padding: "1rem",
-                      }}
-                    >
-                      <div
-                        style={{
-                          position: "relative",
-                          width: "100%",
-                          aspectRatio: "16 / 9",
-                          borderRadius: "6px",
-                          overflow: "hidden",
-                          backgroundColor: "#0c0d10",
-                        }}
-                      >
+                <p className={styles.bodyText}>{project.problemStatement}</p>
+              </div>
+            </section>
+          )}
+
+          {/* Proposed Solution Section */}
+          {(project.sectionConfig?.solution ?? Boolean(project.proposedSolution)) && project.proposedSolution && (
+            <section className={styles.narrativeSection}>
+              <div className={styles.labelCol}>
+                <h2 className={styles.sectionLabel}>The Solution</h2>
+              </div>
+              <div className={styles.contentCol}>
+                <p className={styles.bodyText}>{project.proposedSolution}</p>
+              </div>
+            </section>
+          )}
+
+          {/* Architecture & Diagram Section */}
+          {(project.sectionConfig?.architecture ?? Boolean(project.architecture || project.architectureImage)) &&
+            (project.architecture || project.architectureImage || project.gallery?.find((g) => g.type === "diagram")) && (
+              <section className={styles.narrativeSection}>
+                <div className={styles.labelCol}>
+                  <h2 className={styles.sectionLabel}>Architecture</h2>
+                </div>
+                <div className={styles.contentCol}>
+                  {project.architecture && (
+                    <p className={styles.bodyText}>{project.architecture}</p>
+                  )}
+
+                  {/* Architecture Diagram Image Card */}
+                  {(project.architectureImage || project.gallery?.find((g) => g.type === "diagram")?.url) && (
+                    <div className={styles.diagramCard}>
+                      <div className={styles.diagramFrame}>
                         <Image
-                          src={item.url}
-                          alt={item.title || `Visual ${idx + 1}`}
+                          src={
+                            project.architectureImage ||
+                            project.gallery?.find((g) => g.type === "diagram")?.url ||
+                            "/images/project_collective.jpg"
+                          }
+                          alt={
+                            project.architectureCaption ||
+                            project.gallery?.find((g) => g.type === "diagram")?.title ||
+                            `${project.title} Architecture Diagram`
+                          }
                           fill
                           sizes="(max-width: 900px) 100vw, 800px"
-                          style={{ objectFit: "cover" }}
+                          className={styles.diagramImage}
                           unoptimized
                         />
                       </div>
-                      {(item.title || item.caption) && (
-                        <div style={{ display: "flex", flexDirection: "column", gap: "0.2rem", paddingTop: "0.25rem" }}>
-                          {item.title && (
-                            <span style={{ fontSize: "0.88rem", fontWeight: 600, color: "var(--text-primary, #f2eee8)" }}>
-                              {item.title}
-                            </span>
-                          )}
-                          {item.caption && (
-                            <span style={{ fontSize: "0.78rem", color: "var(--text-muted, #8b928c)", lineHeight: 1.45 }}>
-                              {item.caption}
-                            </span>
-                          )}
-                        </div>
+                      {(project.architectureCaption ||
+                        project.gallery?.find((g) => g.type === "diagram")?.caption) && (
+                        <p className={styles.diagramCaption}>
+                          {project.architectureCaption ||
+                            project.gallery?.find((g) => g.type === "diagram")?.caption}
+                        </p>
                       )}
                     </div>
-                  ))}
+                  )}
+
+                  {project.implementationApproach && (
+                    <p className={styles.bodyText}>{project.implementationApproach}</p>
+                  )}
                 </div>
-              </div>
-            </section>
-          )}
+              </section>
+            )}
 
-          {/* Key Capabilities */}
-          {project.highlights && project.highlights.length > 0 && (
-            <section className={styles.narrativeSection}>
-              <div className={styles.labelCol}>
-                <h2 className={styles.sectionLabel}>Capabilities</h2>
-              </div>
-              <div className={styles.contentCol}>
-                <ul className={styles.highlightsList}>
-                  {project.highlights.map((item, i) => (
-                    <li key={i} className={styles.highlightItem}>
-                      <span className={styles.highlightNum}>
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className={styles.highlightText}>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </section>
-          )}
+          {/* Key Skills Learned Section */}
+          {(project.sectionConfig?.keySkills ?? Boolean((project.keySkillsLearned && project.keySkillsLearned.length > 0) || (project.highlights && project.highlights.length > 0))) &&
+            ((project.keySkillsLearned && project.keySkillsLearned.length > 0) || (project.highlights && project.highlights.length > 0)) && (
+              <section className={styles.narrativeSection}>
+                <div className={styles.labelCol}>
+                  <h2 className={styles.sectionLabel}>Key Skills Learned</h2>
+                </div>
+                <div className={styles.contentCol}>
+                  <ul className={styles.skillsList}>
+                    {(project.keySkillsLearned && project.keySkillsLearned.length > 0
+                      ? project.keySkillsLearned
+                      : project.highlights || []
+                    ).map((skill, i) => (
+                      <li key={i} className={styles.skillItem}>
+                        <span className={styles.skillBullet}>—</span>
+                        <span className={styles.skillText}>{skill}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </section>
+            )}
 
-          {/* Technology Stack */}
-          <section className={styles.narrativeSection}>
-            <div className={styles.labelCol}>
-              <h2 className={styles.sectionLabel}>Technologies</h2>
-            </div>
-            <div className={styles.contentCol}>
-              {project.stackLayers && project.stackLayers.length > 0 ? (
-                <div className={styles.techLayersList}>
-                  {project.stackLayers.map((layer, i) => (
-                    <div key={i} className={styles.techLayerBlock}>
-                      <span className={styles.techLayerName}>{layer.layer}</span>
-                      <div className={styles.techPills}>
-                        {layer.technologies.map((tech) => (
-                          <span key={tech} className={styles.techPill}>
-                            {tech}
-                          </span>
-                        ))}
+          {/* Project Images Gallery Section */}
+          {(project.sectionConfig?.gallery ?? Boolean(project.gallery && project.gallery.length > 0)) &&
+            project.gallery &&
+            project.gallery.length > 0 && (
+              <section className={styles.narrativeSection}>
+                <div className={styles.labelCol}>
+                  <h2 className={styles.sectionLabel}>Project Images</h2>
+                </div>
+                <div className={styles.contentCol}>
+                  <div className={styles.galleryList}>
+                    {project.gallery.map((item, idx) => (
+                      <div key={idx} className={styles.galleryItemCard}>
+                        <div className={styles.galleryItemFrame}>
+                          <Image
+                            src={item.url}
+                            alt={item.title || `Interface visual ${idx + 1}`}
+                            fill
+                            sizes="(max-width: 900px) 100vw, 800px"
+                            className={styles.galleryItemImage}
+                            unoptimized
+                          />
+                        </div>
+                        {(item.title || item.caption) && (
+                          <div className={styles.galleryItemMeta}>
+                            {item.title && (
+                              <span className={styles.galleryItemTitle}>{item.title}</span>
+                            )}
+                            {item.caption && (
+                              <span className={styles.galleryItemCaption}>{item.caption}</span>
+                            )}
+                          </div>
+                        )}
                       </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            )}
+
+          {/* Technology Stack Section */}
+          {(project.sectionConfig?.techStack ?? true) &&
+            ((project.tags && project.tags.length > 0) || (project.stackLayers && project.stackLayers.length > 0)) && (
+              <section className={styles.narrativeSection}>
+                <div className={styles.labelCol}>
+                  <h2 className={styles.sectionLabel}>Technologies</h2>
+                </div>
+                <div className={styles.contentCol}>
+                  {project.stackLayers && project.stackLayers.length > 0 ? (
+                    <div className={styles.techLayersList}>
+                      {project.stackLayers.map((layer, i) => (
+                        <div key={i} className={styles.techLayerBlock}>
+                          <span className={styles.techLayerName}>{layer.layer}</span>
+                          <div className={styles.techPills}>
+                            {layer.technologies.map((tech) => (
+                              <span key={tech} className={styles.techPill}>
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  ) : (
+                    <div className={styles.techPills}>
+                      {(project.tags || []).map((tag) => (
+                        <span key={tag} className={styles.techPill}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              ) : (
-                <div className={styles.techPills}>
-                  {project.tags.map((tag) => (
-                    <span key={tag} className={styles.techPill}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-          </section>
+              </section>
+            )}
         </div>
 
         {/* 6. Previous & Next Project Navigation */}

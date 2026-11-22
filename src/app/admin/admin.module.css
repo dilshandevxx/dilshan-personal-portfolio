@@ -1828,4 +1828,106 @@
   justify-content: center;
 }
 
+/* =========================================================================
+   PROJECT PAGE SECTIONS CHECKLIST & TOGGLES
+   ========================================================================= */
+.sectionChecklistBar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding: 0.65rem 1.5rem;
+  background-color: #0c0d0f;
+  border-bottom: 1px solid #23252b;
+}
+
+.sectionChecklistTitle {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #7e828d;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: 0.4rem;
+}
+
+.sectionPillToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.22rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-family: var(--font-display, sans-serif);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid;
+  user-select: none;
+  background: none;
+}
+
+.sectionPillActive {
+  background-color: rgba(99, 102, 241, 0.12);
+  border-color: rgba(99, 102, 241, 0.3);
+  color: #a5b4fc;
+}
+
+.sectionPillInactive {
+  background-color: #141518;
+  border-color: #292b31;
+  color: #65676e;
+}
+
+.sectionToggleBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  background-color: #101113;
+  border: 1px solid #292b31;
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+}
+
+.sectionToggleLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.sectionToggleTitle {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #f2f2f0;
+}
+
+.sectionToggleDesc {
+  font-size: 0.74rem;
+  color: #92949d;
+}
+
+.skillsManagerList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.skillsManagerItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.85rem;
+  background-color: #101113;
+  border: 1px solid #292b31;
+  border-radius: 6px;
+  gap: 0.75rem;
+}
+
+.skillsManagerText {
+  font-size: 0.84rem;
+  color: #f2f2f0;
+  flex: 1;
+}
+
+
 

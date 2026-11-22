@@ -642,3 +642,189 @@
     align-items: flex-start;
   }
 }
+
+/* ------------------------------------------------------------- */
+/* 8. ARCHITECTURE DIAGRAM & VISUAL CARDS                        */
+/* ------------------------------------------------------------- */
+.diagramCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: #151816;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 1.25rem;
+  margin-top: 1rem;
+}
+
+.diagramFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #0c0d10;
+}
+
+.diagramImage {
+  object-fit: contain;
+}
+
+.diagramCaption {
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.85rem;
+  color: #8b928c;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ------------------------------------------------------------- */
+/* 9. KEY SKILLS LEARNED                                         */
+/* ------------------------------------------------------------- */
+.skillsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.skillItem {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #d1d5db;
+}
+
+.skillBullet {
+  color: #94a3b8;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.skillText {
+  color: #e2e8f0;
+}
+
+/* ------------------------------------------------------------- */
+/* 10. GALLERY SHOWCASE LIST                                     */
+/* ------------------------------------------------------------- */
+.galleryList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.galleryItemCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  background: #151816;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 1.25rem;
+}
+
+.galleryItemFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #0c0d10;
+}
+
+.galleryItemImage {
+  object-fit: cover;
+}
+
+.galleryItemMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-top: 0.25rem;
+}
+
+.galleryItemTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f2eee8;
+}
+
+.galleryItemCaption {
+  font-size: 0.84rem;
+  color: #8b928c;
+  line-height: 1.5;
+}
+
+/* ------------------------------------------------------------- */
+/* 11. LIGHT THEME OVERRIDES                                     */
+/* ------------------------------------------------------------- */
+:global([data-theme="light"]) .pageRoot {
+  background-color: #fbf8f3;
+  color: #24211e;
+}
+
+:global([data-theme="light"]) .title,
+:global([data-theme="light"]) .sectionLabel,
+:global([data-theme="light"]) .pillarsTitle,
+:global([data-theme="light"]) .paginationTitle,
+:global([data-theme="light"]) .relatedTitle,
+:global([data-theme="light"]) .relatedCardLink {
+  color: #19271e;
+}
+
+:global([data-theme="light"]) .tagline,
+:global([data-theme="light"]) .bodyText,
+:global([data-theme="light"]) .pillarDesc,
+:global([data-theme="light"]) .diagramCaption,
+:global([data-theme="light"]) .galleryItemCaption,
+:global([data-theme="light"]) .relatedCardDesc {
+  color: #576159;
+}
+
+:global([data-theme="light"]) .leadText,
+:global([data-theme="light"]) .skillText,
+:global([data-theme="light"]) .galleryItemTitle,
+:global([data-theme="light"]) .highlightText {
+  color: #24211e;
+}
+
+:global([data-theme="light"]) .diagramCard,
+:global([data-theme="light"]) .galleryItemCard,
+:global([data-theme="light"]) .pillarCard,
+:global([data-theme="light"]) .paginationLink,
+:global([data-theme="light"]) .relatedCard {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .primaryButton {
+  background-color: #19271e;
+  color: #ffffff;
+  border-color: #19271e;
+}
+
+:global([data-theme="light"]) .secondaryButton {
+  background-color: #edf2ee;
+  color: #19271e;
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+:global([data-theme="light"]) .techPill {
+  background: #edf2ee;
+  color: #24211e;
+  border-color: rgba(0, 0, 0, 0.09);
+}
+
+:global([data-theme="light"]) .backLink {
+  background: #ffffff;
+  color: #576159;
+  border-color: rgba(0, 0, 0, 0.08);
+}

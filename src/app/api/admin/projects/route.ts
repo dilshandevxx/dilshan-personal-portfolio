@@ -8,6 +8,67 @@ function formatProjectsTs(projects: Project[]): string {
 export interface ProjectStackLayer { layer: string; technologies: string[]; }
 export type ProjectStatus = "Existing" | "Planned";
 export type ProjectCategory = "AI/ML" | "AI Infrastructure" | "MLOps" | "Platform Engineering" | "SRE" | "Systems" | "Security" | "Distributed Systems" | "Data Engineering" | "DevOps" | "Full-Stack" | "Landing" | "Product" | "Company" | "Research" | "Open Source" | "Others";
+
+export interface ArchitectureStep {
+  step: string;
+  title: string;
+  description: string;
+  technologies?: string[];
+}
+
+export interface KeyFeatureItem {
+  title: string;
+  description: string;
+  iconType?: "design" | "code" | "strategy" | "qa" | "performance" | "security" | "database" | "network";
+  tag?: string;
+}
+
+export interface MediaGalleryItem {
+  title: string;
+  caption?: string;
+  url: string;
+  type?: "image" | "diagram" | "ui";
+}
+
+export interface TechnicalDocSection {
+  id: string;
+  title: string;
+  subtitle?: string;
+  content: string;
+  codeSnippet?: {
+    language: string;
+    code: string;
+    title?: string;
+  };
+}
+
+export interface VideoDemonstration {
+  videoUrl?: string;
+  thumbnail?: string;
+  title?: string;
+  description?: string;
+  duration?: string;
+  timestamps?: { time: string; label: string }[];
+}
+
+export interface ProjectBenchmark {
+  metric: string;
+  value: string;
+  comparison?: string;
+  note?: string;
+}
+
+export interface ProjectSectionConfig {
+  overview?: boolean;
+  problem?: boolean;
+  solution?: boolean;
+  architecture?: boolean;
+  gallery?: boolean;
+  techStack?: boolean;
+  keySkills?: boolean;
+  links?: boolean;
+}
+
 export interface Project {
   slug: string; title: string; date: string; category: ProjectCategory; tagline: string;
   description: string; longDescription: string; highlights: string[]; architecture: string;
@@ -16,8 +77,32 @@ export interface Project {
   metricsDetail: ProjectMetric[]; stackLayers: ProjectStackLayer[]; image?: string;
   coverImage?: string;
   aliases?: string[]; status: ProjectStatus;
-  gallery?: any[];
-  videoDemo?: any;
+
+  // Next-generation visual storytelling & engineering details
+  overview?: string;
+  problemStatement?: string;
+  realWorldSignificance?: string;
+  proposedSolution?: string;
+  implementationApproach?: string;
+  architectureSteps?: ArchitectureStep[];
+  keyFeaturesList?: KeyFeatureItem[];
+  gallery?: MediaGalleryItem[];
+  videoDemo?: VideoDemonstration;
+  technicalDocs?: TechnicalDocSection[];
+  benchmarks?: ProjectBenchmark[];
+
+  // Architecture visual & key skills learned
+  architectureImage?: string;
+  architectureCaption?: string;
+  keySkillsLearned?: string[];
+
+  // SEO metadata
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string[];
+
+  // Visible sections toggle
+  sectionConfig?: ProjectSectionConfig;
 }
 
 export const PROJECT_THUMBNAILS: Record<string, string> = {
