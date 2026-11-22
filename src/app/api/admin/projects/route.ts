@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
-import { projectsList, Project } from "@/data/projects";
+import { projectsList, Project, getProjectThumbnail } from "@/data/projects";
 
 function formatProjectsTs(projects: Project[]): string {
   return `export interface ProjectMetric { label: string; value: string; }
@@ -40,6 +40,19 @@ export const PROJECT_THUMBNAILS: Record<string, string> = {
   "brutalist-manifesto": "/images/project_brutalist.jpg",
   "cloudwatch-telemetry": "/images/project_analytics.jpg",
   "warpspeed-protocol": "/images/project_warpspeed_desk.jpg",
+  // Project Page Articles
+  "partnering-henning-larsen": "/images/projects/krea_partner_henning.png",
+  "moodboard-gallery-krea-2": "/images/projects/krea_moodboard_gallery.png",
+  "krea-2-api": "/images/projects/krea_api_platform.png",
+  "krea-2-deep-dive": "/images/projects/krea_deep_dive_horse.png",
+  "introducing-krea-lora-training": "/images/projects/krea_lora_training.png",
+  "moodboards-krea-2": "/images/projects/krea_moodboards_frog.png",
+  "introducing-krea-2": "/images/projects/krea_introducing_collage.png",
+  "generating-images-high-prompt-fidelity": "/images/projects/krea_large_fidelity.png",
+  "seedance-krea-2-motion": "/images/projects/krea_seedance_motion.png",
+  "annotations-krea-2-editor": "/images/projects/krea_annotations_edit.png",
+  "run-agents-in-nodes": "/images/projects/krea_node_agent.png",
+  "fast-powerful-editor": "/images/projects/krea_powerful_edit.png",
 };
 
 export const FALLBACK_THUMBNAILS = [
@@ -74,7 +87,15 @@ export const projectsList: Project[] = ${JSON.stringify(projects, null, 2)};
 }
 
 export async function GET() {
-  return NextResponse.json({ success: true, projects: projectsList });
+  const resolved = projectsList.map((p, idx) => {
+    const thumb = getProjectThumbnail(p.slug, p.image, idx, p.coverImage);
+    return {
+      ...p,
+      image: thumb,
+      coverImage: thumb,
+    };
+  });
+  return NextResponse.json({ success: true, projects: resolved });
 }
 
 export async function POST(request: Request) {

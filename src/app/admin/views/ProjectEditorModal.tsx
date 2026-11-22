@@ -50,7 +50,12 @@ export const ProjectEditorModal: React.FC<ProjectEditorModalProps> = ({
   // Initialize or reset form
   useEffect(() => {
     if (project) {
-      const initialImg = (project.image || (project as any).coverImage || "").trim();
+      const initialImg = (
+        project.image ||
+        (project as any).coverImage ||
+        getProjectThumbnail(project.slug, project.image, 0, (project as any).coverImage) ||
+        ""
+      ).trim();
       setFormData({
         ...project,
         image: initialImg,

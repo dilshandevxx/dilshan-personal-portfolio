@@ -5,10 +5,47 @@
  * persistent client & API synchronization.
  */
 
-import { projectsList as initialProjectsList, Project } from "@/data/projects";
+import { projectsList as initialProjectsList, Project, getProjectThumbnail } from "@/data/projects";
+import { PROJECTS_DATA } from "@/data/projectsData";
 import { siteConfig } from "@/data/content";
 import { isSanityConfigured, sanityFetch, sanityMutate } from "@/sanity/client";
 import { ALL_PROJECTS_QUERY, HOMEPAGE_SECTIONS_QUERY, MEDIA_ASSETS_QUERY, SITE_SETTINGS_QUERY } from "@/sanity/queries";
+
+// Convert ProjectArticle items from /projects to full Project instances
+const projectArticlesAsProjects: Project[] = PROJECTS_DATA.map((article, idx) => ({
+  slug: article.slug,
+  title: article.title,
+  date: article.date || "2026",
+  category: (article.category as any) || "Product",
+  tagline: article.description,
+  description: article.description,
+  longDescription: article.description,
+  highlights: [],
+  architecture: "",
+  challenges: "",
+  tags: article.tags || article.techStack || [],
+  stars: 0,
+  githubUrl: "",
+  status: "Existing",
+  image: article.image || getProjectThumbnail(article.slug, undefined, idx),
+  coverImage: article.image || getProjectThumbnail(article.slug, undefined, idx),
+  metricsDetail: [],
+  stackLayers: [],
+}));
+
+// Comprehensive seed projects: flagship projects + /projects articles with thumbnail images
+const existingSeedSlugs = new Set(initialProjectsList.map((p) => p.slug));
+const allSeedProjects: Project[] = [
+  ...initialProjectsList.map((p, idx) => {
+    const thumb = getProjectThumbnail(p.slug, p.image, idx, p.coverImage);
+    return {
+      ...p,
+      image: thumb,
+      coverImage: thumb,
+    };
+  }),
+  ...projectArticlesAsProjects.filter((p) => !existingSeedSlugs.has(p.slug)),
+];
 
 export interface FeaturedProjectItem {
   slug: string;
@@ -276,16 +313,22 @@ class CMSDataStore {
   // -------------------------------------------------------------
   public async getProjects(): Promise<Project[]> {
     if (typeof window === "undefined") {
-      return initialProjectsList;
+      return allSeedProjects;
     }
 
     // Try Sanity if configured
     if (isSanityConfigured()) {
       const sanityProjects = await sanityFetch<Project[]>(ALL_PROJECTS_QUERY);
       if (sanityProjects && sanityProjects.length > 0) {
-        return sanityProjects.map((p) => {
-          const base = initialProjectsList.find((b) => b.slug === p.slug);
-          const img = (p.image || (p as any).coverImage || base?.image || "").trim();
+        return sanityProjects.map((p, idx) => {
+          const base = allSeedProjects.find((b) => b.slug === p.slug);
+          const img = (
+            p.image ||
+            (p as any).coverImage ||
+            base?.image ||
+            (base as any)?.coverImage ||
+            getProjectThumbnail(p.slug, undefined, idx)
+          ).trim();
           return {
             ...base,
             ...p,
@@ -304,10 +347,17 @@ class CMSDataStore {
       try {
         const parsed = JSON.parse(local);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          // Merge with initial data so rich gallery and thumbnail images are preserved
-          return parsed.map((item: Project) => {
-            const base = initialProjectsList.find((p) => p.slug === item.slug);
-            const resolvedImg = item.image || (item as any).coverImage || base?.image || "";
+          const parsedSlugs = new Set(parsed.map((item: Project) => item.slug));
+          // Merge with initial seed data so rich gallery and thumbnail images are preserved
+          const mergedList = parsed.map((item: Project, idx: number) => {
+            const base = allSeedProjects.find((p) => p.slug === item.slug);
+            const resolvedImg = (
+              item.image ||
+              (item as any).coverImage ||
+              base?.image ||
+              (base as any)?.coverImage ||
+              getProjectThumbnail(item.slug, undefined, idx)
+            ).trim();
             return {
               ...base,
               ...item,
@@ -317,13 +367,17 @@ class CMSDataStore {
               videoDemo: item.videoDemo || base?.videoDemo,
             };
           });
+
+          // Include any newly added seed projects (e.g. from /projects articles) not yet in localStorage
+          const missingSeeds = allSeedProjects.filter((s) => !parsedSlugs.has(s.slug));
+          return [...mergedList, ...missingSeeds];
         }
       } catch (e) {
         console.error("Failed to parse local projects", e);
       }
     }
 
-    return initialProjectsList;
+    return allSeedProjects;
   }
 
   public async saveProject(project: Project): Promise<{ success: boolean; project: Project }> {
@@ -873,30 +927,36 @@ class CMSDataStore {
     const mutations: any[] = [];
 
     // Projects
-    for (const project of projects) {
-      const img = (project.image || (project as any).coverImage || "").trim();
+    for (let idx = 0; idx < projects.length; idx++) {
+      const project = projects[idx];
+      const img = (
+        project.image ||
+        (project as any).coverImage ||
+        getProjectThumbnail(project.slug, undefined, idx)
+      ).trim();
+
       mutations.push({
         createOrReplace: {
           _id: `project-${project.slug}`,
           _type: "project",
           title: project.title,
           slug: { current: project.slug },
-          category: project.category,
-          status: project.status,
-          featured: project.featured,
-          date: project.date,
-          tagline: project.tagline,
-          description: project.description,
-          longDescription: project.longDescription,
+          category: project.category || "Product",
+          status: project.status || "Published",
+          featured: Boolean(project.featured || project.highlight),
+          date: project.date || "2026",
+          tagline: project.tagline || project.description || "",
+          description: project.description || "",
+          longDescription: project.longDescription || project.description || "",
           coverImage: img,
           image: img,
-          videoUrl: project.videoDemo?.videoUrl,
-          tags: project.tags,
-          githubUrl: project.githubUrl,
-          demoUrl: project.demoUrl,
-          writeupUrl: project.writeupUrl,
-          architecture: project.architecture,
-          challenges: project.challenges,
+          videoUrl: project.videoDemo?.videoUrl || "",
+          tags: project.tags || [],
+          githubUrl: project.githubUrl || "",
+          demoUrl: project.demoUrl || "",
+          writeupUrl: project.writeupUrl || "",
+          architecture: project.architecture || "",
+          challenges: project.challenges || "",
         },
       });
     }

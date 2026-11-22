@@ -90,6 +90,13 @@ export const projectSchema = {
       description: "Direct URL to Cloudinary or project asset",
     },
     {
+      name: "image",
+      title: "Project Thumbnail Image URL",
+      type: "string",
+      fieldset: "cover",
+      description: "Main project thumbnail image displayed on project cards and folio grid",
+    },
+    {
       name: "videoUrl",
       title: "Demo Video URL (Cloudinary / MP4)",
       type: "string",
