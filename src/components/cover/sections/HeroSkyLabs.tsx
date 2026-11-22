@@ -123,45 +123,44 @@ export default function HeroSkyLabs() {
             </span>
           </Link>
 
-          {/* Center Navigation: Links positioned in the middle of the navbar */}
-          <nav className={styles.desktopNav} aria-label="Main Navigation">
-            <a
-              href="#skills"
-              onClick={(e) => handleSlowScroll(e, "skills")}
-              className={`${styles.navLink} ${activeSection === "skills" ? styles.navLinkActive : ""
-                }`}
-            >
-              EXPERTISE
-            </a>
-            <Link
-              href="/projects"
-              className={`${styles.navLink} ${activeSection === "projects" ? styles.navLinkActive : ""
-                }`}
-            >
-              PROJECTS
-            </Link>
-            <Link
-              href="/about"
-              className={`${styles.navLink} ${activeSection === "about-me" ? styles.navLinkActive : ""
-                }`}
-            >
-              ABOUT
-            </Link>
-            <a
-              href="#contact"
-              onClick={(e) => handleSlowScroll(e, "contact")}
-              className={`${styles.navLink} ${activeSection === "contact" ? styles.navLinkActive : ""
-                }`}
-            >
-              CONTACT
-            </a>
-
-            {/* Desktop Theme Toggle: Nav Link style, toggles between NIGHT and LIGHT, no icon */}
-            <ThemeToggle variant="nav-link" className={styles.themeNavLink} />
-          </nav>
-
-          {/* Right Navigation: Pink Rectangular Button ("Join 70K+ Readers") */}
+          {/* Right Navigation: Desktop Nav Links + Pink Rectangular Button ("Join 70K+ Readers") */}
           <div className={styles.navRight}>
+            <nav className={styles.desktopNav} aria-label="Main Navigation">
+              <a
+                href="#skills"
+                onClick={(e) => handleSlowScroll(e, "skills")}
+                className={`${styles.navLink} ${activeSection === "skills" ? styles.navLinkActive : ""
+                  }`}
+              >
+                EXPERTISE
+              </a>
+              <Link
+                href="/projects"
+                className={`${styles.navLink} ${activeSection === "projects" ? styles.navLinkActive : ""
+                  }`}
+              >
+                PROJECTS
+              </Link>
+              <Link
+                href="/about"
+                className={`${styles.navLink} ${activeSection === "about-me" ? styles.navLinkActive : ""
+                  }`}
+              >
+                ABOUT
+              </Link>
+              <a
+                href="#contact"
+                onClick={(e) => handleSlowScroll(e, "contact")}
+                className={`${styles.navLink} ${activeSection === "contact" ? styles.navLinkActive : ""
+                  }`}
+              >
+                CONTACT
+              </a>
+
+              {/* Desktop Theme Toggle: Nav Link style, toggles between NIGHT and LIGHT, no icon */}
+              <ThemeToggle variant="nav-link" className={styles.themeNavLink} />
+            </nav>
+
             <a
               href="#contact"
               onClick={(e) => handleSlowScroll(e, "contact")}

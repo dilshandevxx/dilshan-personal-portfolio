@@ -70,49 +70,48 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
           </span>
         </Link>
 
-        {/* Center Column: Navigation links positioned in the middle of the navbar */}
-        <nav className={styles.desktopNav} aria-label="Main Navigation">
-          <Link
-            href="/#skills"
-            className={`${styles.navLink} ${activeTab === "services" || activeTab === "expertise"
-                ? styles.navLinkActive
-                : ""
-              }`}
-          >
-            EXPERTISE
-          </Link>
-          <Link
-            href="/projects"
-            className={`${styles.navLink} ${activeTab === "projects" || pathname.startsWith("/projects")
-                ? styles.navLinkActive
-                : ""
-              }`}
-          >
-            PROJECTS
-          </Link>
-          <Link
-            href="/about"
-            className={`${styles.navLink} ${activeTab === "about" || pathname === "/about"
-                ? styles.navLinkActive
-                : ""
-              }`}
-          >
-            ABOUT
-          </Link>
-          <Link
-            href="/#contact"
-            className={`${styles.navLink} ${activeTab === "contact" ? styles.navLinkActive : ""
-              }`}
-          >
-            CONTACT
-          </Link>
-
-          {/* Theme Toggle styled like a Nav Link: changes text between NIGHT and LIGHT, no icon */}
-          <ThemeToggle variant="nav-link" className={styles.themeNavLink} />
-        </nav>
-
-        {/* Right Column: Sharp Pink Rectangular Button ("Join 70K+ Readers") */}
+        {/* Right Column: Desktop Nav Links + Sharp Pink Rectangular Button ("Join 70K+ Readers") */}
         <div className={styles.navRight}>
+          <nav className={styles.desktopNav} aria-label="Main Navigation">
+            <Link
+              href="/#skills"
+              className={`${styles.navLink} ${activeTab === "services" || activeTab === "expertise"
+                  ? styles.navLinkActive
+                  : ""
+                }`}
+            >
+              EXPERTISE
+            </Link>
+            <Link
+              href="/projects"
+              className={`${styles.navLink} ${activeTab === "projects" || pathname.startsWith("/projects")
+                  ? styles.navLinkActive
+                  : ""
+                }`}
+            >
+              PROJECTS
+            </Link>
+            <Link
+              href="/about"
+              className={`${styles.navLink} ${activeTab === "about" || pathname === "/about"
+                  ? styles.navLinkActive
+                  : ""
+                }`}
+            >
+              ABOUT
+            </Link>
+            <Link
+              href="/#contact"
+              className={`${styles.navLink} ${activeTab === "contact" ? styles.navLinkActive : ""
+                }`}
+            >
+              CONTACT
+            </Link>
+
+            {/* Theme Toggle styled like a Nav Link: changes text between NIGHT and LIGHT, no icon */}
+            <ThemeToggle variant="nav-link" className={styles.themeNavLink} />
+          </nav>
+
           <Link href="/#contact" className={styles.ctaButton}>
             Join 70K+ Readers
           </Link>
