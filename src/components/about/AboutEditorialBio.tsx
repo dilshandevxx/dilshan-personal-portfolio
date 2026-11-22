@@ -13,36 +13,36 @@ interface AboutEditorialBioProps {
 
 export default function AboutEditorialBio({
   portraitSrc = "/dilshan_portrait.jpg",
-  updatedDate = "Updated November 2026",
+  updatedDate = "Updated August 16th, 2026",
 }: AboutEditorialBioProps) {
   return (
-    <section className={styles.sectionRoot} aria-label="Editorial About Me">
+    <section className={styles.sectionRoot} aria-label="About Me & Setup">
       {/* -------------------------------------------------------------
           1. Header Block: Dark square emblem + About Me title
           ------------------------------------------------------------- */}
       <motion.div
         className={styles.headerBlock}
-        initial={{ opacity: 0, y: 18 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className={styles.headerIcon} aria-hidden="true">
-          <div className={styles.headerIconInner} />
-        </div>
+        <span className={styles.headerSquare} aria-hidden="true" />
         <h1 className={styles.mainTitle}>About Me</h1>
       </motion.div>
 
       {/* -------------------------------------------------------------
-          2. Two-Column Hero: Left Narrative + Right Portrait
+          2. Two-Column Hero Grid:
+             - Left: Bio paragraphs + Contact section
+             - Right: Dilshan's Portrait Photo
           ------------------------------------------------------------- */}
-      <motion.div
-        className={styles.heroGrid}
-        initial={{ opacity: 0, y: 22 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-      >
-        {/* Left Column: Personal Narrative */}
-        <div className={styles.bioColumn}>
+      <div className={styles.heroGrid}>
+        {/* Left Column: Personal Narrative + Contact */}
+        <motion.div
+          className={styles.bioColumn}
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+        >
           <p className={styles.paragraph}>
             Hey, I&apos;m Dilshan! Welcome to my spot on the web for{" "}
             <Link href="/portfolio/blog" className={styles.link}>
@@ -52,219 +52,292 @@ export default function AboutEditorialBio({
             <Link href="/projects" className={styles.link}>
               projects
             </Link>
-            , and distributed systems architecture. I&apos;m currently working as a full-stack engineer and systems architect, and in my free time I like exploring high-throughput runtimes, reading technical treatises, biking, and specialty coffee. I spend most of my time architecting deterministic, low-latency software.
+            , and systems architecture! I&apos;m currently working as a full-stack engineer and distributed systems architect, and in my free time I like working out, biking, playing video games, and reading. I spend most of my time architecting deterministic, low-latency software.
           </p>
 
           <p className={styles.paragraph}>
-            This site is a space for self-expression, engineering craft, and to share what I&apos;ve learned with the world. It has always had no ads, no affiliate links, no tracking or analytics, no sponsored posts, and no paywall.
+            This site is a space for self-expression and to share what I&apos;ve learned with the world, and has always had{" "}
+            <strong className={styles.strongText}>
+              no ads, no affiliate links, no tracking or analytics, no sponsored posts, and no paywall
+            </strong>
+            .
           </p>
 
           <p className={styles.paragraph}>
-            I hope I can inspire others to build their own independent, high-performance corners on the web against the tsunami of bloat and artificial fluff.
+            I hope I can inspire others to make their own creative corner on the web even against the tsunami of{" "}
+            <a
+              href="https://en.wikipedia.org/wiki/Enshittification"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.link}
+            >
+              enshittification
+            </a>{" "}
+            on the internet.
           </p>
 
           <p className={styles.paragraph}>
-            If you want to stay up to date with my technical essays, explore my{" "}
-            <Link href="/portfolio/blog" className={styles.link}>
-              writing
-            </Link>
-            , check out my{" "}
-            <Link href="/projects" className={styles.link}>
-              open-source code
-            </Link>
-            , or subscribe to the{" "}
+            If you want to stay up to date with my posts, sign up for the{" "}
+            <a href="#contact" className={styles.link}>
+              newsletter
+            </a>{" "}
+            or subscribe to the{" "}
             <Link href="/rss.xml" className={styles.link}>
               RSS feed
             </Link>
-            . There&apos;s over a decade of curiosity, distributed architectures, and technical notes to peruse, so please enjoy!
+            . There&apos;s over a decade of articles and open-source code to peruse through, so please enjoy!
           </p>
-        </div>
 
-        {/* Right Column: Clean Portrait Photo */}
-        <div className={styles.portraitWrap}>
+          {/* Contact Section directly inside the left column beside the photo */}
+          <div className={styles.contactSubSection}>
+            <h2 className={styles.sectionHeading}>Contact</h2>
+            <p className={styles.leadText}>
+              Send me an email to say hi, or connect via the socials.
+            </p>
+
+            <ul className={styles.bulletList}>
+              <li className={styles.bulletItem}>
+                <span className={styles.bulletLabel}>Email:</span>
+                <a href="mailto:dilshan.devxx@gmail.com" className={styles.link}>
+                  dilshan.devxx@gmail.com
+                </a>
+              </li>
+              <li className={styles.bulletItem}>
+                <a href="#contact" className={styles.link}>
+                  Email Newsletter
+                </a>
+              </li>
+              <li className={styles.bulletItem}>
+                <a
+                  href="https://github.com/dilshandevxx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.link}
+                >
+                  GitHub
+                </a>
+              </li>
+              <li className={styles.bulletItem}>
+                <a
+                  href="https://x.com/dilshan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.link}
+                >
+                  Bluesky
+                </a>
+              </li>
+            </ul>
+          </div>
+        </motion.div>
+
+        {/* Right Column: Dilshan Portrait Card */}
+        <motion.div
+          className={styles.portraitWrap}
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.65, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div className={styles.portraitFrame}>
             <Image
               src={portraitSrc}
               alt="Dilshan portrait"
               fill
-              sizes="(max-width: 860px) 100vw, 340px"
+              sizes="(max-width: 860px) 100vw, 360px"
               className={styles.portraitImg}
               priority
             />
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
 
       {/* -------------------------------------------------------------
-          3. Contact Section
+          3. What I'm Doing Now (Spans naturally below the grid)
           ------------------------------------------------------------- */}
       <motion.div
         className={styles.sectionBlock}
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <h2 className={styles.sectionHeading}>Contact</h2>
-        <p className={styles.leadText}>
-          Send me an email to say hi, or connect via the socials.
-        </p>
-
-        <ul className={styles.bulletList}>
-          <li className={styles.bulletItem}>
-            <span className={styles.bulletLabel}>Email:</span>
-            <a href="mailto:dilshan.devxx@gmail.com" className={styles.link}>
-              dilshan.devxx@gmail.com
-            </a>
-          </li>
-          <li className={styles.bulletItem}>
-            <a href="#contact" className={styles.link}>
-              Email Newsletter
-            </a>
-          </li>
-          <li className={styles.bulletItem}>
-            <a
-              href="https://github.com/dilshandevxx"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.link}
-            >
-              GitHub
-            </a>
-          </li>
-          <li className={styles.bulletItem}>
-            <a
-              href="https://linkedin.com/in/dilshan"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.link}
-            >
-              LinkedIn
-            </a>
-          </li>
-          <li className={styles.bulletItem}>
-            <a
-              href="https://x.com/dilshan"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.link}
-            >
-              Bluesky / Twitter
-            </a>
-          </li>
-        </ul>
-      </motion.div>
-
-      {/* -------------------------------------------------------------
-          4. What I'm Doing Now (Derek Sivers / Tania Rascia style)
-          ------------------------------------------------------------- */}
-      <motion.div
-        className={styles.sectionBlock}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
       >
         <h2 className={styles.sectionHeading}>What I&apos;m Doing Now</h2>
         <p className={styles.nowDate}>{updatedDate}</p>
 
         <ul className={styles.bulletList}>
-          <li className={styles.bulletItem}>
-            Working full-time on high-throughput distributed systems & low-latency inference runtimes
-          </li>
-          <li className={styles.bulletItem}>
-            Profiling and optimizing this website for sub-second deterministic performance
-          </li>
-          <li className={styles.bulletItem}>
-            Architecting resilient event-driven data pipelines & caching topologies
-          </li>
-          <li className={styles.bulletItem}>
-            Deepening research into autonomous telemetry & mathematical systems modeling
-          </li>
-          <li className={styles.bulletItem}>
-            Reading classic distributed systems papers and software craftsmanship treatises
-          </li>
-          <li className={styles.bulletItem}>
-            Exploring specialty pour-overs & single-origin coffee brewing
-          </li>
+          <li className={styles.bulletItem}>Working full-time</li>
+          <li className={styles.bulletItem}>Tweaking this website</li>
+          <li className={styles.bulletItem}>Working on other websites</li>
+          <li className={styles.bulletItem}>Playing Marvel Rivals</li>
+          <li className={styles.bulletItem}>Playing Clair Obscur</li>
         </ul>
       </motion.div>
 
       {/* -------------------------------------------------------------
-          5. Tools: Software & Hardware
+          4. Tools: Software & Hardware
           ------------------------------------------------------------- */}
       <motion.div
-        className={styles.sectionBlock}
-        initial={{ opacity: 0, y: 20 }}
+        className={styles.toolsSection}
+        initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className={styles.toolsHeadingWrap}>
-          <h2 className={styles.sectionHeading} style={{ margin: 0 }}>
-            Tools
-          </h2>
-        </div>
+        <h2 className={styles.sectionHeading}>Tools</h2>
+        <div className={styles.toolsDivider} aria-hidden="true" />
 
         {/* Software Subheading */}
-        <div style={{ marginBottom: "2.25rem" }}>
+        <div className={styles.subCategoryBlock}>
           <h3 className={styles.subHeading}>Software</h3>
           <p className={styles.leadText}>
-            This website is hosted with edge performance, built with Next.js 16, React 19, and TypeScript, backed by Sanity CMS.
+            This website is hosted on{" "}
+            <a
+              href="https://netlify.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.link}
+            >
+              Netlify
+            </a>{" "}
+            and uses the{" "}
+            <a
+              href="https://www.gatsbyjs.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.link}
+            >
+              Gatsby
+            </a>{" "}
+            SSG framework.
           </p>
 
           <ul className={styles.bulletList}>
             <li className={styles.bulletItem}>
-              <span className={styles.boldTerm}>Coding:</span> Visual Studio Code / Neovim
+              <span className={styles.boldTerm}>Coding:</span>{" "}
+              <a
+                href="https://code.visualstudio.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.link}
+              >
+                Visual Studio Code
+              </a>
               <ul className={styles.nestedList}>
                 <li className={styles.nestedItem}>
-                  Theme: <span className={styles.link}>Obsidian Minimal Dark</span>, custom syntax palette
+                  Theme:{" "}
+                  <a
+                    href="https://github.com/taniarascia/new-moon"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.link}
+                  >
+                    New Moon Theme
+                  </a>
+                  , my custom syntax theme!
                 </li>
               </ul>
             </li>
             <li className={styles.bulletItem}>
-              <span className={styles.boldTerm}>Terminal:</span> Windows Terminal / PowerShell Core / zsh
+              <span className={styles.boldTerm}>Terminal:</span>{" "}
+              <a
+                href="https://iterm2.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.link}
+              >
+                iTerm2
+              </a>
             </li>
             <li className={styles.bulletItem}>
               <span className={styles.boldTerm}>Notes:</span>{" "}
-              <span className={styles.link}>Obsidian</span> (Markdown second brain)
-            </li>
-            <li className={styles.bulletItem}>
-              <span className={styles.boldTerm}>Browser:</span> Brave / Chrome DevTools
+              <a
+                href="https://obsidian.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.link}
+              >
+                Obsidian
+              </a>
             </li>
           </ul>
         </div>
 
         {/* Hardware Subheading */}
-        <div>
+        <div className={styles.subCategoryBlock}>
           <h3 className={styles.subHeading}>Hardware</h3>
+
           <ul className={styles.bulletList}>
             <li className={styles.bulletItem}>
-              <span className={styles.boldTerm}>Primary Workstation:</span> Apple MacBook Pro 16&quot; (M-Series), 32GB Unified RAM
+              <span className={styles.boldTerm}>Coding PC:</span> M1 MacBook Pro 16&quot; 2021, 32GB RAM
             </li>
             <li className={styles.bulletItem}>
-              <span className={styles.boldTerm}>Engineering &amp; Systems Rig:</span>
+              <span className={styles.boldTerm}>Gaming PC</span>
               <ul className={styles.nestedList}>
                 <li className={styles.nestedItem}>
-                  CPU: <span className={styles.link}>AMD Ryzen 9 High-Throughput Processor</span>
+                  CPU:{" "}
+                  <a
+                    href="https://www.amd.com/en/products/cpu/amd-ryzen-5-3600"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.link}
+                  >
+                    AMD Ryzen 5 3600
+                  </a>
                 </li>
                 <li className={styles.nestedItem}>
-                  Motherboard: PCIe Gen 4 High-Bandwidth Architecture
+                  Motherboard:{" "}
+                  <a
+                    href="https://www.asrock.com/mb/AMD/B550%20Phantom%20Gaming%204/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.link}
+                  >
+                    ASRock B550 Phantom Gaming 4
+                  </a>
                 </li>
                 <li className={styles.nestedItem}>
-                  Memory: Crucial Ballistix / 64GB High-Speed RAM
+                  Memory:{" "}
+                  <a
+                    href="https://www.crucial.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.link}
+                  >
+                    Crucial Ballistix 32GB
+                  </a>
                 </li>
                 <li className={styles.nestedItem}>
-                  Storage: NVMe M.2 2TB PCIe Gen 4 SSD (7,000 MB/s read)
+                  Storage:{" "}
+                  <a
+                    href="https://www.samsung.com/us/computing/memory-storage/solid-state-drives/ssd-970-evo-plus-nvme-m-2-1tb-mz-v7s1t0b-am/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.link}
+                  >
+                    SSD 970 EVO NVMe M.2 1TB
+                  </a>
                 </li>
                 <li className={styles.nestedItem}>
-                  GPU: NVIDIA RTX Workstation Compute Accelerator
+                  GPU:{" "}
+                  <a
+                    href="https://www.amd.com/en/products/graphics/amd-radeon-rx-6950-xt"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.link}
+                  >
+                    Radeon 6950XT
+                  </a>
                 </li>
                 <li className={styles.nestedItem}>
-                  Displays: Dual 4K Color-Accurate Ergonomic Displays
-                </li>
-                <li className={styles.nestedItem}>
-                  Peripherals: Custom 65% Mechanical Keyboard (Tactile), Precision Wireless Track/Mouse
+                  PSU:{" "}
+                  <a
+                    href="https://www.evga.com/products/product.aspx?pn=220-G3-0650-Y1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.link}
+                  >
+                    EVGA SuperNOVA 650 G+
+                  </a>
                 </li>
               </ul>
             </li>
@@ -273,7 +346,7 @@ export default function AboutEditorialBio({
       </motion.div>
 
       {/* -------------------------------------------------------------
-          Subtle divider connecting to the existing sections below
+          Subtle bottom divider linking cleanly to the lower sections
           ------------------------------------------------------------- */}
       <div className={styles.sectionDivider} aria-hidden="true" />
     </section>

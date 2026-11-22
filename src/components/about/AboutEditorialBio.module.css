@@ -6,11 +6,10 @@
 
 .sectionRoot {
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
   padding: 0 0 clamp(3.5rem, 5.5vw, 5rem);
   box-sizing: border-box;
-  color: #e5e7eb;
+  color: var(--color-text, #c9ced6);
 }
 
 /* -------------------------------------------------------------------------
@@ -23,31 +22,22 @@
   margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
 }
 
-.headerIcon {
-  width: 32px;
-  height: 32px;
-  background-color: #1a1c23;
+.headerSquare {
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  background-color: #0b0c0e;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
-}
-
-.headerIconInner {
-  width: 14px;
-  height: 14px;
-  background-color: #2e323f;
-  border-radius: 2px;
 }
 
 .mainTitle {
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: clamp(2rem, 3.6vw, 2.75rem);
+  font-size: clamp(2.1rem, 3.6vw, 2.75rem);
   font-weight: 700;
   letter-spacing: -0.025em;
-  color: #ffffff;
+  color: var(--color-text-heading, #ffffff);
   margin: 0;
   line-height: 1.15;
 }
@@ -57,7 +47,7 @@
    ------------------------------------------------------------------------- */
 .heroGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(260px, 340px);
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 350px);
   column-gap: clamp(2.5rem, 5vw, 4.5rem);
   row-gap: 2rem;
   align-items: start;
@@ -71,10 +61,15 @@
 
 .paragraph {
   font-family: var(--font-sans, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: clamp(0.98rem, 1.15vw, 1.06rem);
+  font-size: clamp(0.98rem, 1.15vw, 1.05rem);
   line-height: 1.78;
-  color: #c9ced6;
+  color: var(--color-text, #c9ced6);
   margin: 0;
+}
+
+.strongText {
+  font-weight: 600;
+  color: var(--color-text-heading, #ffffff);
 }
 
 .link {
@@ -90,47 +85,18 @@
   text-underline-offset: 3px;
 }
 
-/* Portrait Card */
-.portraitWrap {
-  width: 100%;
+/* Contact sub-section directly inside the left column beside the photo */
+.contactSubSection {
+  margin-top: 1rem;
   display: flex;
-  justify-content: flex-end;
-}
-
-.portraitFrame {
-  position: relative;
-  width: 100%;
-  max-width: 320px;
-  aspect-ratio: 1 / 1;
-  border-radius: 14px;
-  overflow: hidden;
-  background-color: #181a20;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5);
-}
-
-.portraitImg {
-  object-fit: cover;
-  object-position: center 20%;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.portraitFrame:hover .portraitImg {
-  transform: scale(1.025);
-}
-
-/* -------------------------------------------------------------------------
-   3. Contact Section
-   ------------------------------------------------------------------------- */
-.sectionBlock {
-  margin-top: clamp(2.75rem, 4.5vw, 3.75rem);
+  flex-direction: column;
 }
 
 .sectionHeading {
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
   font-size: clamp(1.45rem, 2.2vw, 1.85rem);
   font-weight: 700;
-  color: #ffffff;
+  color: var(--color-text-heading, #ffffff);
   margin: 0 0 0.85rem 0;
   letter-spacing: -0.015em;
 }
@@ -138,7 +104,7 @@
 .leadText {
   font-family: var(--font-sans, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
   font-size: 1rem;
-  color: #9ca3af;
+  color: var(--color-text-muted, #9ca3af);
   margin: 0 0 1rem 0;
   line-height: 1.6;
 }
@@ -155,39 +121,81 @@
 .bulletItem {
   font-size: clamp(0.95rem, 1.1vw, 1.02rem);
   line-height: 1.75;
-  color: #d1d5db;
+  color: var(--color-text, #d1d5db);
 }
 
 .bulletLabel {
-  color: #9ca3af;
+  color: var(--color-text-muted, #9ca3af);
   margin-right: 0.35rem;
 }
 
+/* Portrait Card */
+.portraitWrap {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.portraitFrame {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #16181e;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.45);
+}
+
+.portraitImg {
+  object-fit: cover;
+  object-position: center 15%;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portraitFrame:hover .portraitImg {
+  transform: scale(1.025);
+}
+
 /* -------------------------------------------------------------------------
-   4. What I'm Doing Now
+   3. What I'm Doing Now
    ------------------------------------------------------------------------- */
+.sectionBlock {
+  margin-top: clamp(2.75rem, 4.5vw, 3.75rem);
+}
+
 .nowDate {
   font-family: var(--font-sans, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
   font-style: italic;
-  font-size: 0.92rem;
-  color: #8b949e;
+  font-size: 0.95rem;
+  color: var(--color-text-muted, #8b949e);
   margin: 0 0 1.15rem 0;
 }
 
 /* -------------------------------------------------------------------------
-   5. Tools (Software & Hardware)
+   4. Tools (Software & Hardware)
    ------------------------------------------------------------------------- */
-.toolsHeadingWrap {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding-bottom: 0.85rem;
-  margin-bottom: 2rem;
+.toolsSection {
+  margin-top: clamp(3rem, 5vw, 4.25rem);
+}
+
+.toolsDivider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.12);
+  margin: 0.85rem 0 2rem 0;
+}
+
+.subCategoryBlock {
+  margin-bottom: 2.25rem;
 }
 
 .subHeading {
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: 1.28rem;
+  font-size: 1.35rem;
   font-weight: 700;
-  color: #f3f4f6;
+  color: var(--color-text-heading, #f3f4f6);
   margin: 0 0 0.75rem 0;
   letter-spacing: -0.01em;
 }
@@ -202,14 +210,14 @@
 }
 
 .nestedItem {
-  font-size: 0.94rem;
-  color: #9ca3af;
+  font-size: 0.95rem;
+  color: var(--color-text-muted, #9ca3af);
   line-height: 1.65;
 }
 
 .boldTerm {
   font-weight: 600;
-  color: #e5e7eb;
+  color: var(--color-text-heading, #e5e7eb);
 }
 
 /* -------------------------------------------------------------------------
@@ -244,75 +252,126 @@
   }
 
   .portraitFrame {
-    max-width: 260px;
-    aspect-ratio: 1 / 1;
+    max-width: 280px;
+    aspect-ratio: 3 / 4;
   }
 }
 
 @media (max-width: 480px) {
   .portraitFrame {
-    max-width: 220px;
-    aspect-ratio: 1 / 1;
+    max-width: 240px;
+    aspect-ratio: 3 / 4;
   }
 }
 
 /* -------------------------------------------------------------------------
-   LIGHT THEME OVERRIDES
+   LIGHT THEME OVERRIDES (Compatible with paper, sage, sandstone, light)
    ------------------------------------------------------------------------- */
-:global([data-theme="light"]) .sectionRoot {
+:global([data-theme="light"]) .sectionRoot,
+:global([data-theme="paper"]) .sectionRoot,
+:global([data-theme="sage"]) .sectionRoot,
+:global([data-theme="sandstone"]) .sectionRoot {
   color: #27272a;
 }
 
 :global([data-theme="light"]) .mainTitle,
+:global([data-theme="paper"]) .mainTitle,
+:global([data-theme="sage"]) .mainTitle,
+:global([data-theme="sandstone"]) .mainTitle,
 :global([data-theme="light"]) .sectionHeading,
-:global([data-theme="light"]) .subHeading {
+:global([data-theme="paper"]) .sectionHeading,
+:global([data-theme="sage"]) .sectionHeading,
+:global([data-theme="sandstone"]) .sectionHeading,
+:global([data-theme="light"]) .subHeading,
+:global([data-theme="paper"]) .subHeading,
+:global([data-theme="sage"]) .subHeading,
+:global([data-theme="sandstone"]) .subHeading,
+:global([data-theme="light"]) .strongText,
+:global([data-theme="paper"]) .strongText,
+:global([data-theme="sage"]) .strongText,
+:global([data-theme="sandstone"]) .strongText {
   color: #18181b;
 }
 
 :global([data-theme="light"]) .paragraph,
-:global([data-theme="light"]) .bulletItem {
+:global([data-theme="paper"]) .paragraph,
+:global([data-theme="sage"]) .paragraph,
+:global([data-theme="sandstone"]) .paragraph,
+:global([data-theme="light"]) .bulletItem,
+:global([data-theme="paper"]) .bulletItem,
+:global([data-theme="sage"]) .bulletItem,
+:global([data-theme="sandstone"]) .bulletItem {
   color: #3f3f46;
 }
 
-:global([data-theme="light"]) .headerIcon {
-  background-color: #f4f4f5;
-  border-color: rgba(0, 0, 0, 0.1);
+:global([data-theme="light"]) .headerSquare,
+:global([data-theme="paper"]) .headerSquare,
+:global([data-theme="sage"]) .headerSquare,
+:global([data-theme="sandstone"]) .headerSquare {
+  background-color: #27272a;
+  border-color: rgba(0, 0, 0, 0.15);
 }
 
-:global([data-theme="light"]) .headerIconInner {
-  background-color: #d4d4d8;
-}
-
-:global([data-theme="light"]) .portraitFrame {
+:global([data-theme="light"]) .portraitFrame,
+:global([data-theme="paper"]) .portraitFrame,
+:global([data-theme="sage"]) .portraitFrame,
+:global([data-theme="sandstone"]) .portraitFrame {
   background-color: #f4f4f5;
   border-color: rgba(0, 0, 0, 0.1);
   box-shadow: 0 16px 35px -10px rgba(0, 0, 0, 0.12);
 }
 
-:global([data-theme="light"]) .link {
+:global([data-theme="light"]) .link,
+:global([data-theme="paper"]) .link,
+:global([data-theme="sage"]) .link,
+:global([data-theme="sandstone"]) .link {
   color: #0284c7;
 }
 
-:global([data-theme="light"]) .link:hover {
+:global([data-theme="light"]) .link:hover,
+:global([data-theme="paper"]) .link:hover,
+:global([data-theme="sage"]) .link:hover,
+:global([data-theme="sandstone"]) .link:hover {
   color: #0369a1;
 }
 
-:global([data-theme="light"]) .toolsHeadingWrap {
-  border-bottom-color: rgba(0, 0, 0, 0.08);
+:global([data-theme="light"]) .toolsDivider,
+:global([data-theme="paper"]) .toolsDivider,
+:global([data-theme="sage"]) .toolsDivider,
+:global([data-theme="sandstone"]) .toolsDivider {
+  background-color: rgba(0, 0, 0, 0.12);
 }
 
-:global([data-theme="light"]) .boldTerm {
+:global([data-theme="light"]) .boldTerm,
+:global([data-theme="paper"]) .boldTerm,
+:global([data-theme="sage"]) .boldTerm,
+:global([data-theme="sandstone"]) .boldTerm {
   color: #18181b;
 }
 
 :global([data-theme="light"]) .nowDate,
+:global([data-theme="paper"]) .nowDate,
+:global([data-theme="sage"]) .nowDate,
+:global([data-theme="sandstone"]) .nowDate,
 :global([data-theme="light"]) .leadText,
+:global([data-theme="paper"]) .leadText,
+:global([data-theme="sage"]) .leadText,
+:global([data-theme="sandstone"]) .leadText,
 :global([data-theme="light"]) .bulletLabel,
-:global([data-theme="light"]) .nestedItem {
+:global([data-theme="paper"]) .bulletLabel,
+:global([data-theme="sage"]) .bulletLabel,
+:global([data-theme="sandstone"]) .bulletLabel,
+:global([data-theme="light"]) .nestedItem,
+:global([data-theme="paper"]) .nestedItem,
+:global([data-theme="sage"]) .nestedItem,
+:global([data-theme="sandstone"]) .nestedItem {
   color: #71717a;
 }
 
-:global([data-theme="light"]) .sectionDivider {
+:global([data-theme="light"]) .sectionDivider,
+:global([data-theme="paper"]) .sectionDivider,
+:global([data-theme="sage"]) .sectionDivider,
+:global([data-theme="sandstone"]) .sectionDivider {
   background: linear-gradient(
     90deg,
     rgba(0, 0, 0, 0) 0%,
