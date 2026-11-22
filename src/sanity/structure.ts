@@ -78,6 +78,14 @@ export const structure = (S: any) =>
                     .title("Drafts")
                     .filter('_type == "project" && status == "Draft"')
                 ),
+              S.listItem()
+                .title("Card Layout & Line Limits")
+                .child(
+                  S.document()
+                    .schemaType("siteSettings")
+                    .documentId("siteSettings")
+                    .title("Project Card Layout & Line Limits")
+                ),
             ])
         ),
 
@@ -131,6 +139,14 @@ export const structure = (S: any) =>
               S.listItem()
                 .title("SEO Settings")
                 .child(S.document().schemaType("siteSettings").documentId("siteSettings")),
+              S.listItem()
+                .title("Card Layout & Line Limits")
+                .child(
+                  S.document()
+                    .schemaType("siteSettings")
+                    .documentId("siteSettings")
+                    .title("Card Layout & Line Limits")
+                ),
             ])
         ),
     ]);

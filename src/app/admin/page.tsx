@@ -261,14 +261,22 @@ export default function AdminDashboardPage() {
               )}
 
               {/* Projects Views */}
-              {(currentView === "projects-all" || currentView === "projects-categories") && (
+              {(currentView === "projects-all" ||
+                currentView === "projects-categories" ||
+                currentView === "projects-cards") && (
                 <ProjectsView
                   projects={projects}
                   onAddNew={handleOpenAddProject}
                   onEdit={handleEditProject}
                   onDelete={handleDeleteProject}
                   onToggleFeatured={handleToggleFeatured}
-                  initialTab={currentView === "projects-categories" ? "categories" : "all"}
+                  initialTab={
+                    currentView === "projects-cards"
+                      ? "card-layout"
+                      : currentView === "projects-categories"
+                      ? "categories"
+                      : "all"
+                  }
                 />
               )}
 

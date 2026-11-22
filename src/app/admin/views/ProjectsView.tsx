@@ -42,6 +42,12 @@ export const ProjectsView: React.FC<ProjectsViewProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [activeTab, setActiveTab] = useState<"all" | "categories" | "card-layout">(initialTab);
 
+  useEffect(() => {
+    if (initialTab) {
+      setActiveTab(initialTab);
+    }
+  }, [initialTab]);
+
   // Card Layout Configuration
   const [cardConfig, setCardConfig] = useState<ProjectCardLayoutConfig>(
     DEFAULT_GLOBAL_SETTINGS.projectCardConfig!

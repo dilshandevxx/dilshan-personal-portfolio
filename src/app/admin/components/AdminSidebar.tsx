@@ -28,6 +28,7 @@ export type AdminViewType =
   | "projects-all"
   | "projects-add"
   | "projects-categories"
+  | "projects-cards"
   | "pages-about"
   | "pages-projects"
   | "pages-contact"
@@ -248,6 +249,15 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
                   title="Categories"
                 >
                   <span>Categories</span>
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.navItemBtn} ${currentView === "projects-cards" ? styles.navItemBtnActive : ""}`}
+                  onClick={() => handleItemClick("projects-cards")}
+                  title="Card Layout & Line Limits"
+                >
+                  <Sliders size={14} />
+                  <span>Card Line Limits</span>
                 </button>
               </div>
             ) : null}

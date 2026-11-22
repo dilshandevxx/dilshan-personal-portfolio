@@ -51,6 +51,8 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
         return { parent: "Projects", current: "Add New Project" };
       case "projects-categories":
         return { parent: "Projects", current: "Categories" };
+      case "projects-cards":
+        return { parent: "Projects", current: "Card Layout & Line Limits" };
       case "pages-about":
         return { parent: "Website Pages", current: "About Page" };
       case "pages-projects":
