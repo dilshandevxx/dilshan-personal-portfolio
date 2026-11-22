@@ -1,127 +1,182 @@
-/* =========================================================================
-   JourneySection.module.css
-   Clean, unified editorial milestone timeline matching Tania Rascia top style.
-   ========================================================================= */
-
-.sectionRoot {
+/* Journey & Career Milestones Section (Faithfully reproducing Reference Image 1) */
+.journeySection {
   width: 100%;
+  background-color: #111111;
+  color: #ffffff;
+  padding: clamp(4rem, 6vw, 5.5rem) clamp(2rem, 5vw, 3.5rem);
   box-sizing: border-box;
-  color: var(--color-text, #c9ced6);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.headerBlock {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+@media (max-width: 768px) {
+  .journeySection {
+    padding: clamp(3rem, 5vw, 4rem) clamp(1.5rem, 5vw, 2.5rem);
+  }
 }
 
-.headerSquare {
-  display: inline-block;
-  width: 26px;
-  height: 26px;
-  background-color: #0b0c0e;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 4px;
-  flex-shrink: 0;
+.journeyContainer {
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
 }
 
-.mainTitle {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  color: var(--color-text-heading, #ffffff);
-  margin: 0;
+.journeyHeader {
+  margin-bottom: clamp(2.25rem, 4vw, 3.25rem);
+}
+
+.journeyHeadline {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 600;
   line-height: 1.15;
-}
-
-.toolsDivider {
-  width: 100%;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.12);
-  margin: 0.85rem 0 2rem 0;
-}
-
-.contentWrap {
-  width: 100%;
-}
-
-.leadText {
-  font-family: var(--font-sans, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: 1rem;
-  color: var(--color-text-muted, #9ca3af);
-  margin: 0 0 1.5rem 0;
-  line-height: 1.6;
-}
-
-.bulletList {
-  list-style: disc;
-  padding-left: 1.35rem;
+  letter-spacing: -0.025em;
+  color: #ffffff;
   margin: 0;
+}
+
+/* 3-Part Architecture Layout: Photo (left) + 2-Column Milestones with Dividers (right) */
+.journeyGrid {
+  display: grid;
+  grid-template-columns: minmax(260px, 320px) 1fr;
+  gap: clamp(2rem, 3.5vw, 3.5rem);
+  align-items: stretch;
+  width: 100%;
+}
+
+.journeyPhotoCard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #181818;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.45);
+}
+
+.journeyImage {
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journeyPhotoCard:hover .journeyImage {
+  transform: scale(1.035);
+}
+
+/* 2-Column Milestones Grid with Continuous Vertical Dividers */
+.milestonesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: clamp(2rem, 3vw, 2.75rem);
+  column-gap: 0;
+  align-items: start;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  padding-left: 0;
+}
+
+.milestoneItem {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  padding: 0 clamp(1.5rem, 2.8vw, 3rem);
+  box-sizing: border-box;
 }
 
-.bulletItem {
-  font-size: clamp(0.95rem, 1.1vw, 1.02rem);
-  line-height: 1.75;
-  color: var(--color-text, #d1d5db);
+/* Vertical divider between column 1 and column 2 */
+.milestoneItem:nth-child(2n) {
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.boldTerm {
+.milestoneYear {
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
+  font-size: clamp(1.1rem, 1.35vw, 1.25rem);
   font-weight: 600;
-  color: var(--color-text-heading, #ffffff);
-  margin-right: 0.35rem;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin: 0 0 0.55rem 0;
 }
 
-/* -------------------------------------------------------------------------
-   Light Theme Overrides
-   ------------------------------------------------------------------------- */
-:global([data-theme="light"]) .sectionRoot,
-:global([data-theme="paper"]) .sectionRoot,
-:global([data-theme="sage"]) .sectionRoot,
-:global([data-theme="sandstone"]) .sectionRoot {
-  color: #27272a;
+.milestoneDesc {
+  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
+  font-size: clamp(0.9rem, 1.05vw, 0.95rem);
+  line-height: 1.62;
+  color: #9da4ae;
+  margin: 0;
+  max-width: 440px;
 }
 
-:global([data-theme="light"]) .mainTitle,
-:global([data-theme="paper"]) .mainTitle,
-:global([data-theme="sage"]) .mainTitle,
-:global([data-theme="sandstone"]) .mainTitle,
-:global([data-theme="light"]) .boldTerm,
-:global([data-theme="paper"]) .boldTerm,
-:global([data-theme="sage"]) .boldTerm,
-:global([data-theme="sandstone"]) .boldTerm {
-  color: #18181b;
+/* Responsive adjustments */
+@media (max-width: 960px) {
+  .journeyGrid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .journeyPhotoCard {
+    width: 100%;
+    max-width: 500px;
+    height: 280px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .milestonesGrid {
+    border-left: none;
+  }
+
+  .milestoneItem:nth-child(2n+1) {
+    padding-left: 0;
+  }
 }
 
-:global([data-theme="light"]) .headerSquare,
-:global([data-theme="paper"]) .headerSquare,
-:global([data-theme="sage"]) .headerSquare,
-:global([data-theme="sandstone"]) .headerSquare {
-  background-color: #27272a;
-  border-color: rgba(0, 0, 0, 0.15);
+@media (max-width: 640px) {
+  .milestonesGrid {
+    grid-template-columns: 1fr;
+    row-gap: 2rem;
+  }
+
+  .milestoneItem {
+    padding: 0;
+    border-left: none !important;
+  }
+
+  .journeyPhotoCard {
+    height: 240px;
+  }
 }
 
-:global([data-theme="light"]) .toolsDivider,
-:global([data-theme="paper"]) .toolsDivider,
-:global([data-theme="sage"]) .toolsDivider,
-:global([data-theme="sandstone"]) .toolsDivider {
-  background-color: rgba(0, 0, 0, 0.12);
+/* =========================================================================
+   LIGHT THEME OVERRIDES FOR JOURNEY (Matching Reference in Light Mode)
+   ========================================================================= */
+:global([data-theme="light"]) .journeySection {
+  background-color: #f9f7f2;
+  color: #111111;
+  border-top-color: rgba(0, 0, 0, 0.07);
 }
 
-:global([data-theme="light"]) .leadText,
-:global([data-theme="paper"]) .leadText,
-:global([data-theme="sage"]) .leadText,
-:global([data-theme="sandstone"]) .leadText {
-  color: #71717a;
+:global([data-theme="light"]) .journeyHeadline {
+  color: #111111;
 }
 
-:global([data-theme="light"]) .bulletItem,
-:global([data-theme="paper"]) .bulletItem,
-:global([data-theme="sage"]) .bulletItem,
-:global([data-theme="sandstone"]) .bulletItem {
-  color: #3f3f46;
+:global([data-theme="light"]) .journeyPhotoCard {
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .milestonesGrid {
+  border-left-color: rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .milestoneItem:nth-child(2n) {
+  border-left-color: rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .milestoneYear {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .milestoneDesc {
+  color: #555555;
 }
