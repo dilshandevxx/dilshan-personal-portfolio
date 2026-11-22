@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import styles from "./FaqSection.module.css";
 
 interface FaqItem {
@@ -63,7 +63,7 @@ const FAQ_ITEMS: FaqItem[] = [
     id: "next-steps",
     question: "I'm ready to start. What's next?",
     answer:
-      "Simply get in touch via the contact section below or email me directly at dilshan.devxx@gmail.com. We'll set up an introductory deep-dive call to align on your vision, technical requirements, and timeline.",
+      "Simply get in touch via the contact section above or email me directly at dilshan.devxx@gmail.com. We'll set up an introductory deep-dive call to align on your vision, technical requirements, and timeline.",
   },
 ];
 
@@ -75,80 +75,76 @@ export default function FaqSection() {
   };
 
   return (
-    <section className={styles.faqSection} id="faq" aria-label="Frequently Asked Questions">
-      <div className={styles.container}>
-        {/* Minimalist Editorial Section Header — Direct & Clean */}
-        <div className={styles.header}>
-          <h2 className={styles.headline}>Frequently Asked Questions</h2>
-        </div>
+    <section className={styles.sectionRoot} id="faq" aria-label="Frequently Asked Questions">
+      {/* Header Block: Dark square icon + Title */}
+      <motion.div
+        className={styles.headerBlock}
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <span className={styles.headerSquare} aria-hidden="true" />
+        <h2 className={styles.mainTitle}>Frequently Asked Questions</h2>
+      </motion.div>
 
-        {/* Minimalist Line-Divided Accordion List (Faithfully matching reference design) */}
-        <div className={styles.accordionList}>
-          {FAQ_ITEMS.map((item) => {
-            const isOpen = openId === item.id;
-            return (
-              <div key={item.id} className={styles.accordionItem}>
-                <button
-                  type="button"
-                  onClick={() => toggleFaq(item.id)}
-                  className={styles.triggerButton}
-                  aria-expanded={isOpen}
+      <div className={styles.toolsDivider} aria-hidden="true" />
+
+      {/* Minimalist Line-Divided Accordion */}
+      <div className={styles.accordionList}>
+        {FAQ_ITEMS.map((item) => {
+          const isOpen = openId === item.id;
+          return (
+            <div key={item.id} className={styles.accordionItem}>
+              <button
+                type="button"
+                onClick={() => toggleFaq(item.id)}
+                className={styles.triggerButton}
+                aria-expanded={isOpen}
+              >
+                <span className={styles.questionText}>{item.question}</span>
+                <span
+                  className={`${styles.plusIcon} ${isOpen ? styles.plusIconOpen : ""}`}
+                  aria-hidden="true"
                 >
-                  <span className={styles.questionText}>{item.question}</span>
-                  <span
-                    className={`${styles.plusIcon} ${isOpen ? styles.plusIconOpen : ""}`}
-                    aria-hidden="true"
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={styles.svgPlus}
                   >
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className={styles.svgPlus}
-                    >
-                      <line
-                        x1="8"
-                        y1="1.5"
-                        x2="8"
-                        y2="14.5"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinecap="round"
-                      />
-                      <line
-                        x1="1.5"
-                        y1="8"
-                        x2="14.5"
-                        y2="8"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </span>
-                </button>
+                    <line
+                      x1="8"
+                      y1="2"
+                      x2="8"
+                      y2="14"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                    />
+                    <line
+                      x1="2"
+                      y1="8"
+                      x2="14"
+                      y2="8"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </span>
+              </button>
 
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      key="answer"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                      className={styles.answerWrapper}
-                    >
-                      <div className={styles.answerInner}>
-                        <p className={styles.answerText}>{item.answer}</p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            );
-          })}
-        </div>
+              {isOpen && (
+                <div className={styles.answerWrap}>
+                  <p className={styles.answerText}>{item.answer}</p>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </section>
   );

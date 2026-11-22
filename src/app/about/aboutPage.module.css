@@ -1,6 +1,6 @@
 /* =========================================================================
    About Me Page — Cohesive Editorial Layout
-   Aligned to 960px readable book container with generous left/right margins.
+   Aligned to 1140px readable container matching Tania Rascia editorial reference.
    Clean typography, generous whitespace, matte charcoal surfaces.
    ========================================================================= */
 
@@ -18,136 +18,23 @@
 }
 
 .mainContainer {
-  max-width: 960px;
+  max-width: 1140px;
   margin: 0 auto;
-  padding: clamp(2.5rem, 4.5vw, 4rem) clamp(2rem, 5vw, 3.5rem) clamp(3.5rem, 5.5vw, 5rem);
+  padding: clamp(2.5rem, 4vw, 3.75rem) clamp(1.5rem, 3.5vw, 2.5rem) clamp(4rem, 6vw, 6rem);
   width: 100%;
   box-sizing: border-box;
-}
-
-/* -------------------------------------------------------------------------
-   Engineering Ethos Section (Harmonized with top editorial style)
-   ------------------------------------------------------------------------- */
-.storySection {
-  width: 100%;
-  margin-top: clamp(2.5rem, 4vw, 3.75rem);
-  padding-top: clamp(2.5rem, 4vw, 3.75rem);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.headerBlock {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
-}
-
-.headerSquare {
-  display: inline-block;
-  width: 26px;
-  height: 26px;
-  background-color: #0b0c0e;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 4px;
-  flex-shrink: 0;
-}
-
-.mainTitle {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: clamp(1.85rem, 3.2vw, 2.4rem);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  color: var(--color-text-heading, #ffffff);
-  margin: 0;
-  line-height: 1.15;
-}
-
-.ethosContent {
   display: flex;
   flex-direction: column;
-  width: 100%;
-}
-
-.headline {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(1.75rem, 2.8vw, 2.35rem);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
-  color: var(--color-text-heading, #ffffff);
-  margin: 0 0 1.35rem 0;
-}
-
-.narrativeBody {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.paragraph {
-  font-family: var(--font-sans, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: clamp(0.98rem, 1.15vw, 1.05rem);
-  line-height: 1.78;
-  color: var(--color-text, #c9ced6);
-  margin: 0;
-}
-
-.punchline {
-  font-family: var(--font-sans, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  font-size: 1.05rem;
-  line-height: 1.65;
-  font-weight: 600;
-  color: var(--color-text-heading, #f3f4f6);
-  margin: 0.25rem 0 0 0;
+  gap: clamp(3rem, 5vw, 4.5rem);
 }
 
 /* -------------------------------------------------------------------------
-   Photo Gallery: Bit smaller, proper size with clean spacing
+   Responsive Breakpoints
    ------------------------------------------------------------------------- */
-.photoGallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1rem, 2.5vw, 1.5rem);
-  margin-top: 2.5rem;
-  width: 100%;
-}
-
-.photoCard {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 11;
-  border-radius: 12px;
-  overflow: hidden;
-  background-color: #16181e;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.45);
-}
-
-.cardImage {
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.photoCard:hover .cardImage {
-  transform: scale(1.025);
-}
-
-/* -------------------------------------------------------------------------
-   Responsive Layout
-   ------------------------------------------------------------------------- */
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .mainContainer {
-    padding: 2rem clamp(1.5rem, 5vw, 2.5rem) 3.5rem;
-  }
-
-  .photoGallery {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
-
-  .photoCard {
-    max-width: 320px;
-    aspect-ratio: 16 / 11;
+    padding: 2rem 1.25rem 3.5rem;
+    gap: 2.5rem;
   }
 }
 
@@ -160,43 +47,4 @@
 :global([data-theme="sandstone"]) .pageRoot {
   background-color: #fbf8f3;
   color: #27272a;
-}
-
-:global([data-theme="light"]) .mainTitle,
-:global([data-theme="paper"]) .mainTitle,
-:global([data-theme="sage"]) .mainTitle,
-:global([data-theme="sandstone"]) .mainTitle,
-:global([data-theme="light"]) .headline,
-:global([data-theme="paper"]) .headline,
-:global([data-theme="sage"]) .headline,
-:global([data-theme="sandstone"]) .headline,
-:global([data-theme="light"]) .punchline,
-:global([data-theme="paper"]) .punchline,
-:global([data-theme="sage"]) .punchline,
-:global([data-theme="sandstone"]) .punchline {
-  color: #18181b;
-}
-
-:global([data-theme="light"]) .paragraph,
-:global([data-theme="paper"]) .paragraph,
-:global([data-theme="sage"]) .paragraph,
-:global([data-theme="sandstone"]) .paragraph {
-  color: #3f3f46;
-}
-
-:global([data-theme="light"]) .headerSquare,
-:global([data-theme="paper"]) .headerSquare,
-:global([data-theme="sage"]) .headerSquare,
-:global([data-theme="sandstone"]) .headerSquare {
-  background-color: #27272a;
-  border-color: rgba(0, 0, 0, 0.15);
-}
-
-:global([data-theme="light"]) .photoCard,
-:global([data-theme="paper"]) .photoCard,
-:global([data-theme="sage"]) .photoCard,
-:global([data-theme="sandstone"]) .photoCard {
-  background-color: #f4f4f5;
-  border-color: rgba(0, 0, 0, 0.1);
-  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.1);
 }

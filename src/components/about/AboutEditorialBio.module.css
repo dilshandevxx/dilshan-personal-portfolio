@@ -7,7 +7,7 @@
 .sectionRoot {
   width: 100%;
   margin: 0 auto;
-  padding: 0 0 clamp(3.5rem, 5.5vw, 5rem);
+  padding: 0;
   box-sizing: border-box;
   color: var(--color-text, #c9ced6);
 }
@@ -47,8 +47,8 @@
    ------------------------------------------------------------------------- */
 .heroGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 350px);
-  column-gap: clamp(2.5rem, 5vw, 4.5rem);
+  grid-template-columns: minmax(0, 1.45fr) minmax(300px, 350px);
+  column-gap: clamp(2.5rem, 4.5vw, 4rem);
   row-gap: 2rem;
   align-items: start;
 }
