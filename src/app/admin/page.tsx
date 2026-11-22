@@ -290,11 +290,12 @@ export default function AdminDashboardPage() {
               )}
 
               {/* Media Library */}
-              {currentView === "media-library" && (
+              {(currentView === "media-library" || currentView === "media-add") && (
                 <MediaLibraryView
                   assets={mediaAssets}
                   onAddAsset={handleAddMedia}
                   onDeleteAsset={handleDeleteMedia}
+                  initialTab={currentView === "media-add" ? "add" : "library"}
                 />
               )}
 

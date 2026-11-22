@@ -15,7 +15,7 @@
 }
 
 .container {
-  max-width: 1360px;
+  max-width: 1400px;
   margin: 0 auto;
   width: 100%;
 }
@@ -23,10 +23,10 @@
 .bannerFrame {
   position: relative;
   width: 100%;
-  aspect-ratio: 1930 / 904;
+  aspect-ratio: 1920 / 888;
   min-height: 280px;
-  max-height: 640px;
-  border-radius: clamp(14px, 1.5vw, 18px);
+  max-height: 720px;
+  border-radius: clamp(10px, 1.2vw, 16px);
   overflow: hidden;
   background-color: #0c0d10;
   border: 1px solid rgba(255, 255, 255, 0.12);

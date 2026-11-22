@@ -33,6 +33,7 @@ export type AdminViewType =
   | "pages-projects"
   | "pages-contact"
   | "media-library"
+  | "media-add"
   | "settings-nav"
   | "settings-branding"
   | "settings-social"
@@ -66,6 +67,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
     homepage: currentView.startsWith("homepage"),
     projects: currentView.startsWith("projects"),
     pages: currentView.startsWith("pages"),
+    media: currentView.startsWith("media"),
     settings: currentView.startsWith("settings"),
   });
 
@@ -313,18 +315,48 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
             ) : null}
           </div>
 
-          {/* 5. Media Library */}
+          {/* 5. Media Assets Group */}
           <div className={styles.navGroup}>
-            <button
-              type="button"
-              className={`${styles.navItemBtn} ${currentView === "media-library" ? styles.navItemBtnActive : ""}`}
-              onClick={() => handleItemClick("media-library")}
-              title="Media Library"
-            >
-              <ImageIcon size={16} />
-              {!collapsed && <span>Media Library</span>}
-              {!collapsed && <span className={styles.navItemBadge}>{mediaCount}</span>}
-            </button>
+            {!collapsed ? (
+              <button
+                type="button"
+                className={styles.groupHeaderBtn}
+                onClick={() => toggleGroup("media")}
+              >
+                <span className={styles.groupTitleWithIcon}>
+                  <ImageIcon size={14} />
+                  <span>Media Assets</span>
+                </span>
+                <ChevronDown
+                  size={14}
+                  className={`${styles.groupChevron} ${!openGroups.media ? styles.groupChevronClosed : ""}`}
+                />
+              </button>
+            ) : null}
+
+            {(!collapsed && openGroups.media) || collapsed ? (
+              <div className={!collapsed ? styles.groupSubItems : ""}>
+                <button
+                  type="button"
+                  className={`${styles.navItemBtn} ${currentView === "media-library" ? styles.navItemBtnActive : ""}`}
+                  onClick={() => handleItemClick("media-library")}
+                  title="Media Library"
+                >
+                  {collapsed ? <ImageIcon size={16} /> : null}
+                  <span>Media Library</span>
+                  {!collapsed && <span className={styles.navItemBadge}>{mediaCount}</span>}
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.navItemBtn} ${currentView === "media-add" ? styles.navItemBtnActive : ""}`}
+                  onClick={() => handleItemClick("media-add")}
+                  title="Add Media (Upload / URL)"
+                >
+                  <Plus size={14} />
+                  <span>Add Media</span>
+                </button>
+              </div>
+            ) : null}
           </div>
 
           {/* 6. Global Settings Group */}

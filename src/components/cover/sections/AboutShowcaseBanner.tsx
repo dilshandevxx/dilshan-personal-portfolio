@@ -49,7 +49,7 @@ export default function AboutShowcaseBanner({
             src={bannerUrl}
             alt={alt}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1440px) 94vw, 1360px"
+            sizes="(max-width: 768px) 100vw, (max-width: 1440px) 94vw, 1400px"
             className={styles.bannerImage}
             priority={false}
           />

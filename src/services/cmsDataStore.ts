@@ -96,10 +96,10 @@ const STORAGE_KEYS = {
   ACTIVITY: "dilshan_cms_activity_v2",
 };
 
-// Default seed for media library
+// Default seed for media library: only pure site media assets (no mock project card titles)
 const DEFAULT_MEDIA_ASSETS: CMSMediaAsset[] = [
   {
-    id: "media-1",
+    id: "media-video-1",
     name: "Skyline Banner Video",
     url: "/images/skyline_banner.mp4",
     type: "video",
@@ -107,11 +107,21 @@ const DEFAULT_MEDIA_ASSETS: CMSMediaAsset[] = [
     width: 1920,
     height: 1080,
     size: "8.4 MB",
-    usedIn: ["Homepage Hero"],
     createdAt: "2026-11-20T10:00:00Z",
   },
   {
-    id: "media-2",
+    id: "media-img-1",
+    name: "Satellite Solar Array Banner",
+    url: "/images/about-visual-banner.webp",
+    type: "image",
+    format: "WEBP",
+    width: 1930,
+    height: 904,
+    size: "98 KB",
+    createdAt: "2026-11-21T18:00:00Z",
+  },
+  {
+    id: "media-img-2",
     name: "Skyline Twilight Poster",
     url: "/images/skyline_twilight.jpg",
     type: "image",
@@ -119,59 +129,10 @@ const DEFAULT_MEDIA_ASSETS: CMSMediaAsset[] = [
     width: 1920,
     height: 1080,
     size: "420 KB",
-    usedIn: ["Homepage Hero", "Observability Platform"],
     createdAt: "2026-11-20T10:05:00Z",
   },
   {
-    id: "media-3",
-    name: "Production RAG Architecture",
-    url: "/images/project_collective.jpg",
-    type: "image",
-    format: "JPG",
-    width: 1600,
-    height: 900,
-    size: "680 KB",
-    usedIn: ["Production RAG Platform"],
-    createdAt: "2026-11-19T14:30:00Z",
-  },
-  {
-    id: "media-4",
-    name: "Foodlence Microservices",
-    url: "/images/project_brutalist.jpg",
-    type: "image",
-    format: "JPG",
-    width: 1600,
-    height: 900,
-    size: "540 KB",
-    usedIn: ["Foodlence Backend"],
-    createdAt: "2026-11-19T15:10:00Z",
-  },
-  {
-    id: "media-5",
-    name: "Analytics & Telemetry Dashboard",
-    url: "/images/project_analytics.jpg",
-    type: "image",
-    format: "JPG",
-    width: 1600,
-    height: 900,
-    size: "710 KB",
-    usedIn: ["CloudWatch Telemetry"],
-    createdAt: "2026-11-18T09:20:00Z",
-  },
-  {
-    id: "media-6",
-    name: "WarpSpeed Protocol Desk",
-    url: "/images/project_warpspeed_desk.jpg",
-    type: "image",
-    format: "JPG",
-    width: 1600,
-    height: 900,
-    size: "820 KB",
-    usedIn: ["WarpSpeed Protocol"],
-    createdAt: "2026-11-18T11:45:00Z",
-  },
-  {
-    id: "media-7",
+    id: "media-img-3",
     name: "Architectural Sunlit Journey",
     url: "/images/about/journey_architecture.jpg",
     type: "image",
@@ -179,11 +140,10 @@ const DEFAULT_MEDIA_ASSETS: CMSMediaAsset[] = [
     width: 924,
     height: 735,
     size: "340 KB",
-    usedIn: ["Engineering Journey Section"],
     createdAt: "2026-11-21T08:00:00Z",
   },
   {
-    id: "media-8",
+    id: "media-img-4",
     name: "Keynote Stage Presentation",
     url: "/images/about/about_stage_1.jpg",
     type: "image",
@@ -191,7 +151,6 @@ const DEFAULT_MEDIA_ASSETS: CMSMediaAsset[] = [
     width: 1200,
     height: 800,
     size: "480 KB",
-    usedIn: ["About Me Page"],
     createdAt: "2026-11-20T11:15:00Z",
   },
 ];
@@ -640,7 +599,18 @@ class CMSDataStore {
       try {
         const parsed = JSON.parse(local);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          return parsed;
+          // Filter out legacy mock project card items if present
+          const cleaned = parsed.filter(
+            (item: any) =>
+              item.id !== "media-3" &&
+              item.id !== "media-4" &&
+              item.id !== "media-5" &&
+              item.id !== "media-6" &&
+              !item.name?.includes("Production RAG Architecture") &&
+              !item.name?.includes("Foodlence Microservices") &&
+              !item.name?.includes("WarpSpeed Protocol Desk")
+          );
+          return cleaned.length > 0 ? cleaned : DEFAULT_MEDIA_ASSETS;
         }
       } catch (e) {}
     }

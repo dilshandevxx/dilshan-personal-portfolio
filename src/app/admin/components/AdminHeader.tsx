@@ -60,7 +60,9 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
       case "pages-contact":
         return { parent: "Website Pages", current: "Contact Page" };
       case "media-library":
-        return { current: "Media Library" };
+        return { parent: "Media Assets", current: "Media Library" };
+      case "media-add":
+        return { parent: "Media Assets", current: "Add Media (Upload / URL)" };
       case "settings-nav":
         return { parent: "Global Settings", current: "Navigation" };
       case "settings-branding":
