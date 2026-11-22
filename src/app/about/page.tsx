@@ -3,10 +3,8 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ChevronLeft } from "lucide-react";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
 import AboutEditorialBio from "@/components/about/AboutEditorialBio";
-import AboutShowcaseBanner from "@/components/cover/sections/AboutShowcaseBanner";
 import JourneySection from "@/components/cover/sections/JourneySection";
 import FaqSection from "@/components/cover/sections/FaqSection";
 import PreFooterBanner from "@/components/cover/sections/PreFooterBanner";
@@ -26,70 +24,29 @@ export default function AboutPage() {
         <AboutEditorialBio />
 
         {/* =========================================================================
-            ABOUT HERO STAGE: 3-COLUMN EDITORIAL STORY & ENGINEERING ETHOS
+            ENGINEERING ETHOS: HARMONIZED EDITORIAL STORY & PHOTO GALLERY
             ========================================================================= */}
         <section className={styles.storySection} aria-label="Engineering Ethos">
           <motion.div
             className={styles.headerBlock}
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className={styles.headerIcon} aria-hidden="true">
-              <div className={styles.headerIconInner} />
-            </div>
+            <span className={styles.headerSquare} aria-hidden="true" />
             <h2 className={styles.mainTitle}>Engineering Ethos</h2>
           </motion.div>
 
-          <div className={styles.storyGrid}>
-            {/* -------------------------------------------------------------
-                LEFT COLUMN: 2 Vertically Stacked Rounded Photo Cards
-                ------------------------------------------------------------- */}
+          <div className={styles.ethosContent}>
             <motion.div
-              className={styles.leftCol}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {/* Top Photo Card */}
-              <div className={styles.photoCardSmall}>
-                <Image
-                  src="/images/about/about_stage_1.jpg"
-                  alt="Speaker presenting on stage"
-                  fill
-                  sizes="(max-width: 960px) 100vw, 220px"
-                  className={styles.cardImage}
-                  priority
-                />
-              </div>
-
-              {/* Bottom Photo Card */}
-              <div className={styles.photoCardSmall}>
-                <Image
-                  src="/images/about/about_stage_2.jpg"
-                  alt="Collaborative discussion"
-                  fill
-                  sizes="(max-width: 960px) 100vw, 220px"
-                  className={styles.cardImage}
-                />
-              </div>
-            </motion.div>
-
-            {/* -------------------------------------------------------------
-                MIDDLE COLUMN: Display Headline & Thoughtful Narrative
-                ------------------------------------------------------------- */}
-            <motion.div
-              className={styles.middleCol}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             >
               <h3 className={styles.headline}>
-                Architecting resilient systems<br />
-                for deterministic scale
+                Architecting resilient systems for deterministic scale
               </h3>
 
               <div className={styles.narrativeBody}>
@@ -107,44 +64,40 @@ export default function AboutPage() {
               </div>
             </motion.div>
 
-            {/* -------------------------------------------------------------
-                RIGHT COLUMN: Real Engineering Distinctions & Photo Card
-                ------------------------------------------------------------- */}
+            {/* Clean 3-image gallery: bit smaller, proper size with spaces, top part styling */}
             <motion.div
-              className={styles.rightCol}
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className={styles.photoGallery}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.65, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             >
-              {/* Stats Block */}
-              <div className={styles.statsBlock}>
-                <div className={styles.statPrimary}>
-                  <div className={styles.statPrimaryNumber}>10+</div>
-                  <div className={styles.statPrimaryLabel}>years of curiosity &amp; software craft</div>
-                </div>
-
-                <div className={styles.statsDivider} />
-
-                <div className={styles.statsSecondaryRow}>
-                  <div className={styles.statSecondary}>
-                    <div className={styles.statSecondaryNumber}>&lt;14ms</div>
-                    <div className={styles.statSecondaryLabel}>p99 inference latency</div>
-                  </div>
-                  <div className={styles.statSecondary}>
-                    <div className={styles.statSecondaryNumber}>100%</div>
-                    <div className={styles.statSecondaryLabel}>ad-free, zero tracking</div>
-                  </div>
-                </div>
+              <div className={styles.photoCard}>
+                <Image
+                  src="/images/about/about_stage_1.jpg"
+                  alt="Speaker presenting on stage"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 320px"
+                  className={styles.cardImage}
+                />
               </div>
 
-              {/* Portrait Photo Card directly below stats */}
-              <div className={styles.photoCardPortrait}>
+              <div className={styles.photoCard}>
+                <Image
+                  src="/images/about/about_stage_2.jpg"
+                  alt="Collaborative technical discussion"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 320px"
+                  className={styles.cardImage}
+                />
+              </div>
+
+              <div className={styles.photoCard}>
                 <Image
                   src="/images/about/about_stage_3.jpg"
                   alt="Keynote presentation"
                   fill
-                  sizes="(max-width: 960px) 100vw, 280px"
+                  sizes="(max-width: 768px) 100vw, 320px"
                   className={styles.cardImage}
                 />
               </div>
@@ -154,17 +107,12 @@ export default function AboutPage() {
       </main>
 
       {/* =========================================================================
-          SHOWCASE BANNER: HIGH-TECH VISUAL EXPANSIVE BANNER (Image 2)
-          ========================================================================= */}
-      <AboutShowcaseBanner />
-
-      {/* =========================================================================
-          JOURNEY & MILESTONES: 3-COLUMN ARCHITECTURAL & CHRONOLOGY SECTION (Image 4)
+          JOURNEY & MILESTONES: 3-COLUMN ARCHITECTURAL & CHRONOLOGY SECTION
           ========================================================================= */}
       <JourneySection />
 
       {/* =========================================================================
-          FAQ: MINIMALIST ACCORDION SECTION (Image 3)
+          FAQ: MINIMALIST ACCORDION SECTION
           ========================================================================= */}
       <FaqSection />
 

@@ -1,6 +1,6 @@
 /* =========================================================================
    About Me Page — Cohesive Editorial Layout
-   Aligned to 1200px container matching the top editorial section.
+   Aligned to 960px readable book container with generous left/right margins.
    Clean typography, generous whitespace, matte charcoal surfaces.
    ========================================================================= */
 
@@ -18,13 +18,16 @@
 }
 
 .mainContainer {
-  max-width: 1200px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: clamp(2.5rem, 4.5vw, 4rem) clamp(1.25rem, 4vw, 3rem) clamp(3.5rem, 5.5vw, 5rem);
+  padding: clamp(2.5rem, 4.5vw, 4rem) clamp(2rem, 5vw, 3.5rem) clamp(3.5rem, 5.5vw, 5rem);
   width: 100%;
   box-sizing: border-box;
 }
 
+/* -------------------------------------------------------------------------
+   Engineering Ethos Section (Harmonized with top editorial style)
+   ------------------------------------------------------------------------- */
 .storySection {
   width: 100%;
   margin-top: clamp(2.5rem, 4vw, 3.75rem);
@@ -32,7 +35,6 @@
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Header matching the top editorial section style */
 .headerBlock {
   display: flex;
   align-items: center;
@@ -40,23 +42,14 @@
   margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
 }
 
-.headerIcon {
-  width: 32px;
-  height: 32px;
-  background-color: #1a1c23;
+.headerSquare {
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  background-color: #0b0c0e;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
-}
-
-.headerIconInner {
-  width: 14px;
-  height: 14px;
-  background-color: #2e323f;
-  border-radius: 2px;
 }
 
 .mainTitle {
@@ -64,63 +57,25 @@
   font-size: clamp(1.85rem, 3.2vw, 2.4rem);
   font-weight: 700;
   letter-spacing: -0.025em;
-  color: #ffffff;
+  color: var(--color-text-heading, #ffffff);
   margin: 0;
   line-height: 1.15;
 }
 
-/* 3-Column Grid Layout */
-.storyGrid {
-  display: grid;
-  grid-template-columns: minmax(180px, 220px) minmax(360px, 1.4fr) minmax(240px, 280px);
-  column-gap: clamp(2rem, 3.5vw, 3.5rem);
-  align-items: start;
-  width: 100%;
-}
-
-.leftCol {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  width: 100%;
-}
-
-.photoCardSmall {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 14px;
-  overflow: hidden;
-  background-color: #181818;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.45);
-}
-
-.cardImage {
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.photoCardSmall:hover .cardImage,
-.photoCardPortrait:hover .cardImage {
-  transform: scale(1.03);
-}
-
-.middleCol {
+.ethosContent {
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-width: 0;
 }
 
 .headline {
   font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, sans-serif);
-  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-size: clamp(1.75rem, 2.8vw, 2.35rem);
   font-weight: 700;
-  line-height: 1.18;
+  line-height: 1.2;
   letter-spacing: -0.025em;
-  color: #ffffff;
-  margin: 0 0 1.5rem 0;
+  color: var(--color-text-heading, #ffffff);
+  margin: 0 0 1.35rem 0;
 }
 
 .narrativeBody {
@@ -130,190 +85,118 @@
 }
 
 .paragraph {
-  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
-  font-size: clamp(0.98rem, 1.12vw, 1.05rem);
+  font-family: var(--font-sans, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: clamp(0.98rem, 1.15vw, 1.05rem);
   line-height: 1.78;
-  color: #c9ced6;
+  color: var(--color-text, #c9ced6);
   margin: 0;
 }
 
 .punchline {
-  font-family: var(--font-body, "Inter", -apple-system, sans-serif);
+  font-family: var(--font-sans, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
   font-size: 1.05rem;
   line-height: 1.65;
   font-weight: 600;
-  color: #f3f4f6;
-  margin: 0.5rem 0 0 0;
+  color: var(--color-text-heading, #f3f4f6);
+  margin: 0.25rem 0 0 0;
 }
 
-.rightCol {
-  display: flex;
-  flex-direction: column;
+/* -------------------------------------------------------------------------
+   Photo Gallery: Bit smaller, proper size with clean spacing
+   ------------------------------------------------------------------------- */
+.photoGallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  margin-top: 2.5rem;
   width: 100%;
 }
 
-.statsBlock {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background: #151816;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: 1.5rem;
-  box-sizing: border-box;
-}
-
-.statPrimary {
-  display: flex;
-  flex-direction: column;
-}
-
-.statPrimaryNumber {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(3.2rem, 4.5vw, 4.2rem);
-  font-weight: 800;
-  line-height: 0.95;
-  letter-spacing: -0.04em;
-  color: #ffffff;
-}
-
-.statPrimaryLabel {
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.85rem;
-  color: #9ca3af;
-  margin-top: 0.5rem;
-  font-weight: 500;
-}
-
-.statsDivider {
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.1);
-  margin: 1.25rem 0;
-  width: 100%;
-}
-
-.statsSecondaryRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
-  width: 100%;
-}
-
-.statSecondary {
-  display: flex;
-  flex-direction: column;
-}
-
-.statSecondaryNumber {
-  font-family: var(--font-display, "Plus Jakarta Sans", sans-serif);
-  font-size: clamp(1.6rem, 2.2vw, 2rem);
-  font-weight: 700;
-  line-height: 1.1;
-  color: #ffffff;
-  letter-spacing: -0.02em;
-}
-
-.statSecondaryLabel {
-  font-family: var(--font-body, -apple-system, sans-serif);
-  font-size: 0.78rem;
-  color: #9ca3af;
-  margin-top: 0.35rem;
-}
-
-.photoCardPortrait {
+.photoCard {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 14px;
+  aspect-ratio: 16 / 11;
+  border-radius: 12px;
   overflow: hidden;
-  background-color: #181818;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.45);
-  margin-top: 1.25rem;
+  background-color: #16181e;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.45);
 }
 
-/* =========================================================================
-   Responsive Breakpoints
-   ========================================================================= */
-@media (max-width: 960px) {
-  .storyGrid {
-    grid-template-columns: 1fr;
-    row-gap: 2.25rem;
-  }
-
-  .leftCol {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  .statsSecondaryRow {
-    gap: 1.5rem;
-  }
+.cardImage {
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (max-width: 640px) {
+.photoCard:hover .cardImage {
+  transform: scale(1.025);
+}
+
+/* -------------------------------------------------------------------------
+   Responsive Layout
+   ------------------------------------------------------------------------- */
+@media (max-width: 768px) {
   .mainContainer {
-    padding: 2rem 1.25rem 3.5rem;
+    padding: 2rem clamp(1.5rem, 5vw, 2.5rem) 3.5rem;
   }
 
-  .headline {
-    font-size: clamp(1.85rem, 6vw, 2.2rem);
-    margin-bottom: 1.25rem;
-  }
-
-  .leftCol {
+  .photoGallery {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .photoCard {
+    max-width: 320px;
+    aspect-ratio: 16 / 11;
   }
 }
 
-/* =========================================================================
-   LIGHT THEME OVERRIDES
-   ========================================================================= */
-:global([data-theme="light"]) .pageRoot {
+/* -------------------------------------------------------------------------
+   Light Theme Overrides
+   ------------------------------------------------------------------------- */
+:global([data-theme="light"]) .pageRoot,
+:global([data-theme="paper"]) .pageRoot,
+:global([data-theme="sage"]) .pageRoot,
+:global([data-theme="sandstone"]) .pageRoot {
   background-color: #fbf8f3;
-  color: #24211e;
+  color: #27272a;
 }
 
 :global([data-theme="light"]) .mainTitle,
+:global([data-theme="paper"]) .mainTitle,
+:global([data-theme="sage"]) .mainTitle,
+:global([data-theme="sandstone"]) .mainTitle,
 :global([data-theme="light"]) .headline,
+:global([data-theme="paper"]) .headline,
+:global([data-theme="sage"]) .headline,
+:global([data-theme="sandstone"]) .headline,
 :global([data-theme="light"]) .punchline,
-:global([data-theme="light"]) .statPrimaryNumber,
-:global([data-theme="light"]) .statSecondaryNumber {
+:global([data-theme="paper"]) .punchline,
+:global([data-theme="sage"]) .punchline,
+:global([data-theme="sandstone"]) .punchline {
   color: #18181b;
 }
 
-:global([data-theme="light"]) .paragraph {
+:global([data-theme="light"]) .paragraph,
+:global([data-theme="paper"]) .paragraph,
+:global([data-theme="sage"]) .paragraph,
+:global([data-theme="sandstone"]) .paragraph {
   color: #3f3f46;
 }
 
-:global([data-theme="light"]) .statPrimaryLabel,
-:global([data-theme="light"]) .statSecondaryLabel {
-  color: #71717a;
+:global([data-theme="light"]) .headerSquare,
+:global([data-theme="paper"]) .headerSquare,
+:global([data-theme="sage"]) .headerSquare,
+:global([data-theme="sandstone"]) .headerSquare {
+  background-color: #27272a;
+  border-color: rgba(0, 0, 0, 0.15);
 }
 
-:global([data-theme="light"]) .statsBlock,
-:global([data-theme="light"]) .photoCardSmall,
-:global([data-theme="light"]) .photoCardPortrait {
-  background-color: #ffffff;
-  border-color: rgba(0, 0, 0, 0.08);
-  box-shadow: 0 16px 35px -10px rgba(0, 0, 0, 0.1);
-}
-
-:global([data-theme="light"]) .storySection {
-  border-top-color: rgba(0, 0, 0, 0.08);
-}
-
-:global([data-theme="light"]) .statsDivider {
-  background-color: rgba(0, 0, 0, 0.08);
-}
-
-:global([data-theme="light"]) .headerIcon {
+:global([data-theme="light"]) .photoCard,
+:global([data-theme="paper"]) .photoCard,
+:global([data-theme="sage"]) .photoCard,
+:global([data-theme="sandstone"]) .photoCard {
   background-color: #f4f4f5;
   border-color: rgba(0, 0, 0, 0.1);
-}
-
-:global([data-theme="light"]) .headerIconInner {
-  background-color: #d4d4d8;
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.1);
 }

@@ -1,7 +1,7 @@
 /* Frequently Asked Questions — Minimalist Editorial Line Accordion (Matching Reference Image 3) */
 .faqSection {
   background-color: #111111;
-  padding: clamp(4rem, 6vw, 5.5rem) clamp(1.25rem, 4vw, 3rem);
+  padding: clamp(4rem, 6vw, 5.5rem) clamp(2rem, 5vw, 3.5rem);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
   width: 100%;
@@ -11,12 +11,12 @@
 
 @media (max-width: 768px) {
   .faqSection {
-    padding: clamp(3rem, 5vw, 4rem) 1.25rem;
+    padding: clamp(3rem, 5vw, 4rem) clamp(1.5rem, 5vw, 2.5rem);
   }
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 960px;
   margin: 0 auto;
   width: 100%;
 }
