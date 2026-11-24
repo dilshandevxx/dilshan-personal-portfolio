@@ -37,7 +37,7 @@ export default function JourneySection() {
               src="/images/about/journey_architecture.jpg"
               alt="Architectural space in natural sunlight"
               fill
-              sizes="(max-width: 960px) 100vw, 340px"
+              sizes="(max-width: 1024px) 100vw, 380px"
               className={styles.journeyImage}
             />
           </motion.div>
