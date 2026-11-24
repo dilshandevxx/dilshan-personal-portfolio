@@ -210,22 +210,21 @@
 .projectsGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: clamp(1.25rem, 2vw, 2rem);
-  row-gap: clamp(2.5rem, 4.5vw, 3.75rem);
+  gap: clamp(1.15rem, 2vw, 1.75rem);
   width: 100%;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1024px) {
   .projectsGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: 2.75rem;
+    gap: 1.5rem;
   }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 640px) {
   .projectsGrid {
     grid-template-columns: 1fr;
-    row-gap: 2.5rem;
+    gap: 1.5rem;
   }
 }
 

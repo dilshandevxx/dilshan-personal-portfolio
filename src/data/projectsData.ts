@@ -1,4 +1,4 @@
-import { Project, ProjectCategory } from "./projects";
+import { Project, ProjectCategory, projectsList } from "./projects";
 
 export interface ProjectArticle {
   id: string;
@@ -10,6 +10,9 @@ export interface ProjectArticle {
   description: string;
   date: string;
   image: string;
+  githubUrl?: string;
+  demoUrl?: string;
+  articleUrl?: string;
 }
 
 export const PROJECTS_DATA: ProjectArticle[] = [
@@ -155,6 +158,11 @@ export function convertArticleToProject(article: ProjectArticle): Project {
   const stack = article.techStack || article.tags || ["TypeScript", "React", "Python"];
   const category = (article.category as ProjectCategory) || "Product";
 
+  const match = projectsList.find((p) => p.slug === article.slug);
+  const githubUrl = article.githubUrl || match?.githubUrl || `https://github.com/dilshandevxx/${article.slug}`;
+  const demoUrl = article.demoUrl || match?.demoUrl || `https://${article.slug}.vercel.app`;
+  const writeupUrl = article.articleUrl || match?.writeupUrl || `/projects/${article.slug}`;
+
   return {
     slug: article.slug,
     title: article.title,
@@ -176,8 +184,9 @@ export function convertArticleToProject(article: ProjectArticle): Project {
     status: "Existing",
     featured: true,
     highlight: true,
-    githubUrl: "https://github.com/dilshandevxx",
-    demoUrl: "https://heydilshan.me",
+    githubUrl,
+    demoUrl,
+    writeupUrl,
     metrics: "Sub-50ms TTFB",
     metricsDetail: [
       { label: "P99 Latency", value: "< 48ms" },

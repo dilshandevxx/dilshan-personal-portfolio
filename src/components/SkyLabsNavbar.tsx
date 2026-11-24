@@ -5,17 +5,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { IoPaw } from "react-icons/io5";
+import { useTheme } from "@/components/ThemeContext";
 import styles from "./SkyLabsNavbar.module.css";
 
 interface SkyLabsNavbarProps {
-  activeTab?: "home" | "services" | "expertise" | "projects" | "about" | "contact";
+  activeTab?: "home" | "services" | "expertise" | "projects" | "works" | "about";
 }
 
 export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
   const pathname = usePathname();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -58,67 +60,69 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
 
   return (
     <header
-      className={`${styles.navHeader} ${!navVisible && !menuOpen ? styles.navHidden : ""
-        } ${menuOpen ? styles.navOpen : ""}`}
+      className={`${styles.navHeader} ${
+        !navVisible && !menuOpen ? styles.navHidden : ""
+      } ${menuOpen ? styles.navOpen : ""}`}
       role="banner"
     >
       <div className={styles.navContainer}>
-        {/* Left Column: Brand Wordmark */}
-        <Link href="/" className={styles.brandLink} title="DILSHAN.">
-          <span className={styles.brandWordmark}>
-            DILSHAN<span className={styles.brandDot}>.</span>
-          </span>
-        </Link>
+        {/* Left Column: Brand Wordmark with Paw Print Theme Toggle */}
+        <div className={styles.brandGroup}>
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className={styles.pawThemeToggleBtn}
+            aria-label={theme === "light" ? "Switch to Night mode" : "Switch to Light mode"}
+            title={theme === "light" ? "Switch to Night mode" : "Switch to Light mode"}
+          >
+            <IoPaw className={styles.brandPawIcon} aria-hidden="true" />
+          </button>
+          <Link href="/" className={styles.brandTextLink} title="Dilshan Works">
+            <span className={styles.brandWordmark}>Dilshan Works</span>
+          </Link>
+        </div>
 
-        {/* Right Column: Desktop Nav Links + Sharp Pink Rectangular Button ("Join 70K+ Readers") */}
+        {/* Right Column: Desktop Nav Links ("WORKS", "EXPERTISE", "ABOUT") + CTA */}
         <div className={styles.navRight}>
           <nav className={styles.desktopNav} aria-label="Main Navigation">
             <Link
               href="/#skills"
-              className={`${styles.navLink} ${activeTab === "services" || activeTab === "expertise"
+              className={`${styles.navLink} ${
+                activeTab === "services" || activeTab === "expertise"
                   ? styles.navLinkActive
                   : ""
-                }`}
+              }`}
             >
               EXPERTISE
             </Link>
             <Link
               href="/projects"
-              className={`${styles.navLink} ${activeTab === "projects" || pathname.startsWith("/projects")
+              className={`${styles.navLink} ${
+                activeTab === "projects" || activeTab === "works" || pathname.startsWith("/projects")
                   ? styles.navLinkActive
                   : ""
-                }`}
+              }`}
             >
-              PROJECTS
+              WORKS
             </Link>
             <Link
               href="/about"
-              className={`${styles.navLink} ${activeTab === "about" || pathname === "/about"
+              className={`${styles.navLink} ${
+                activeTab === "about" || pathname === "/about"
                   ? styles.navLinkActive
                   : ""
-                }`}
+              }`}
             >
               ABOUT
             </Link>
-            <Link
-              href="/#contact"
-              className={`${styles.navLink} ${activeTab === "contact" ? styles.navLinkActive : ""
-                }`}
-            >
-              CONTACT
-            </Link>
-
-            {/* Theme Toggle styled like a Nav Link: changes text between NIGHT and LIGHT, no icon */}
-            <ThemeToggle variant="nav-link" className={styles.themeNavLink} />
           </nav>
 
           <Link href="/#contact" className={styles.ctaButton}>
             Join 70K+ Readers
           </Link>
 
-          {/* Mobile Right Actions: Theme Toggle + Minimalist Hamburger Button */}
+          {/* Mobile Right Actions: Minimalist Hamburger Button */}
           <div className={styles.mobileActions}>
-            <ThemeToggle variant="nav-link" className={styles.mobileThemeToggle} />
             <button
               type="button"
               className={`${styles.hamburgerBtn} ${menuOpen ? styles.hamburgerActive : ""}`}
@@ -147,16 +151,15 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
               <nav className={styles.menuNav} aria-label="Main Navigation">
                 {[
                   { label: "EXPERTISE", href: "/#skills", key: "expertise" },
-                  { label: "PROJECTS", href: "/projects", key: "projects" },
+                  { label: "WORKS", href: "/projects", key: "works" },
                   { label: "ABOUT", href: "/about", key: "about" },
-                  { label: "CONTACT", href: "/#contact", key: "contact" },
                 ].map((item, idx) => {
                   const isActive =
                     ((item.key === "expertise" || item.key === "services") &&
                       (activeTab === "expertise" || activeTab === "services")) ||
-                    (item.key === "projects" && (activeTab === "projects" || pathname.startsWith("/projects"))) ||
-                    (item.key === "about" && (activeTab === "about" || pathname === "/about")) ||
-                    (item.key === "contact" && activeTab === "contact");
+                    ((item.key === "works" || item.key === "projects") &&
+                      (activeTab === "works" || activeTab === "projects" || pathname.startsWith("/projects"))) ||
+                    (item.key === "about" && (activeTab === "about" || pathname === "/about"));
 
                   return (
                     <motion.div
@@ -185,7 +188,7 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.35, delay: 0.3 }}
+                  transition={{ duration: 0.35, delay: 0.25 }}
                   className={styles.menuCtaWrap}
                 >
                   <Link
@@ -197,17 +200,6 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
                   </Link>
                 </motion.div>
               </nav>
-
-              {/* Mobile Overlay Theme Toggle Switcher */}
-              <motion.div
-                className={styles.menuFooter}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, delay: 0.34 }}
-              >
-                <span className={styles.menuFooterText}>APPEARANCE</span>
-                <ThemeToggle variant="nav-link" className={styles.menuThemeToggle} />
-              </motion.div>
             </div>
           </motion.div>
         )}

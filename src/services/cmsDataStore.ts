@@ -96,6 +96,11 @@ export interface ProjectCardLayoutConfig {
   techStackLines: number;
   showCategory: boolean;
   showDate: boolean;
+  showArticleLink?: boolean;
+  showDemoLink?: boolean;
+  showSourceLink?: boolean;
+  showStackButton?: boolean;
+  actionLinksColor?: string;
 }
 
 export interface CMSGlobalSettings {
@@ -273,6 +278,11 @@ export const DEFAULT_GLOBAL_SETTINGS: CMSGlobalSettings = {
     techStackLines: 2,
     showCategory: true,
     showDate: true,
+    showArticleLink: true,
+    showDemoLink: true,
+    showSourceLink: true,
+    showStackButton: true,
+    actionLinksColor: "#38bdf8",
   },
 };
 
@@ -779,6 +789,17 @@ class CMSDataStore {
                 sanitySettings.projectCardShowDate !== undefined
                   ? Boolean(sanitySettings.projectCardShowDate)
                   : sanitySettings.projectCardConfig?.showDate !== false,
+              showArticleLink:
+                sanitySettings.projectCardConfig?.showArticleLink !== false,
+              showDemoLink:
+                sanitySettings.projectCardConfig?.showDemoLink !== false,
+              showSourceLink:
+                sanitySettings.projectCardConfig?.showSourceLink !== false,
+              showStackButton:
+                sanitySettings.projectCardConfig?.showStackButton !== false,
+              actionLinksColor:
+                sanitySettings.projectCardConfig?.actionLinksColor ||
+                DEFAULT_GLOBAL_SETTINGS.projectCardConfig!.actionLinksColor,
             },
           };
         }

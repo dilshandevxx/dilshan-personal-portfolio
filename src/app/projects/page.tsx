@@ -6,11 +6,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
 import MainFooter from "@/components/MainFooter";
+import { ProjectCard } from "@/components/ProjectCard";
 import { Rss } from "lucide-react";
 import styles from "./projectsPage.module.css";
-import { cmsDataStore } from "@/services/cmsDataStore";
+import { cmsDataStore, ProjectCardLayoutConfig } from "@/services/cmsDataStore";
 import { getProjectThumbnail } from "@/data/projects";
-import { ProjectArticle, PROJECTS_DATA } from "@/data/projectsData";
+import { ProjectArticle, PROJECTS_DATA, convertArticleToProject } from "@/data/projectsData";
 
 const CATEGORIES = [
   "All",
@@ -29,12 +30,17 @@ type Category = (typeof CATEGORIES)[number] | string;
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState<Category>("All");
   const [projectArticles, setProjectArticles] = useState<ProjectArticle[]>(PROJECTS_DATA);
-  const [cardConfig, setCardConfig] = useState({
+  const [cardConfig, setCardConfig] = useState<Partial<ProjectCardLayoutConfig>>({
     titleLines: 2,
     descriptionLines: 2,
     techStackLines: 2,
     showCategory: true,
     showDate: true,
+    showArticleLink: true,
+    showDemoLink: true,
+    showSourceLink: true,
+    showStackButton: true,
+    actionLinksColor: "#38bdf8",
   });
 
   // Sync with live CMS / Sanity data if available
@@ -149,105 +155,14 @@ export default function ProjectsPage() {
             </div>
           ) : (
             <div className={styles.projectsGrid}>
-              {filteredProjects.map((project, idx) => {
-                const stack = project.techStack || project.tags || [];
-
-                return (
-                  <motion.article
-                    key={project.id}
-                    className={styles.card}
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.4,
-                      delay: Math.min(idx * 0.04, 0.3),
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                  >
-                    <Link
-                      href={`/projects/${project.slug}`}
-                      className={styles.cardLink}
-                      aria-label={`View ${project.title}`}
-                    >
-                      {/* 4:3 Rounded Banner Image Frame */}
-                      <div className={styles.imageFrame}>
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-                          priority={idx < 6}
-                          className={styles.cardImage}
-                        />
-                      </div>
-
-                      {/* Card Content directly below image */}
-                      <div className={styles.cardContent}>
-                        {/* 1. Category badge (if enabled) */}
-                        {cardConfig.showCategory && (
-                          <div className={styles.categoryLine}>
-                            <span className={styles.categoryBadge}>{project.category}</span>
-                          </div>
-                        )}
-
-                        {/* 2. Main Title (Dynamically clamped to titleLines) */}
-                        <h2
-                          className={styles.cardTitle}
-                          style={{
-                            WebkitLineClamp: cardConfig.titleLines,
-                            height: `calc(1.35em * ${cardConfig.titleLines})`,
-                            minHeight: `calc(1.35em * ${cardConfig.titleLines})`,
-                            maxHeight: `calc(1.35em * ${cardConfig.titleLines})`,
-                          }}
-                        >
-                          {project.title}
-                        </h2>
-
-                        {/* 3. Small Description (Dynamically clamped to descriptionLines) */}
-                        <p
-                          className={styles.cardDescription}
-                          style={{
-                            WebkitLineClamp: cardConfig.descriptionLines,
-                            height: `calc(1.45em * ${cardConfig.descriptionLines})`,
-                            minHeight: `calc(1.45em * ${cardConfig.descriptionLines})`,
-                            maxHeight: `calc(1.45em * ${cardConfig.descriptionLines})`,
-                          }}
-                        >
-                          {project.description}
-                        </p>
-
-                        {/* 4. Tech Stack (Dynamically budgeted to techStackLines rows) */}
-                        <div
-                          className={styles.techStackSlot}
-                          style={{
-                            height: `${cardConfig.techStackLines * 24}px`,
-                            minHeight: `${cardConfig.techStackLines * 24}px`,
-                            maxHeight: `${cardConfig.techStackLines * 24}px`,
-                          }}
-                        >
-                          {stack.slice(0, 6).map((tech) => (
-                            <span key={tech} className={styles.techBadge}>
-                              {tech}
-                            </span>
-                          ))}
-                          {stack.length > 6 && (
-                            <span className={styles.techBadgeMore}>
-                              +{stack.length - 6}
-                            </span>
-                          )}
-                        </div>
-
-                        {/* 5. Date Row (if enabled) */}
-                        {cardConfig.showDate && (
-                          <div className={styles.dateRow}>
-                            <span className={styles.cardDate}>{project.date}</span>
-                          </div>
-                        )}
-                      </div>
-                    </Link>
-                  </motion.article>
-                );
-              })}
+              {filteredProjects.map((project, idx) => (
+                <ProjectCard
+                  key={project.id || project.slug}
+                  project={convertArticleToProject(project)}
+                  index={idx}
+                  config={cardConfig}
+                />
+              ))}
             </div>
           )}
         </section>

@@ -49,6 +49,7 @@ export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
   const [formData, setFormData] = useState<CMSGlobalSettings>(() => safeSettings(settings));
   const [saving, setSaving] = useState(false);
   const [savedSuccess, setSavedSuccess] = useState(false);
+  const [previewStackExpanded, setPreviewStackExpanded] = useState(false);
 
   useEffect(() => {
     setFormData(safeSettings(settings));
@@ -650,8 +651,185 @@ export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
                 </span>
               </div>
 
+              {/* Action Links Visibility (Article, Demo, Source, Stack) */}
+              <div className={styles.formGroup} style={{ borderTop: "1px solid #292b31", paddingTop: "1.25rem" }}>
+                <label className={styles.formLabel} style={{ fontSize: "0.88rem" }}>
+                  Action Links Visibility
+                </label>
+                <span style={{ fontSize: "0.74rem", color: "#8c909c", marginBottom: "0.5rem" }}>
+                  Choose which quick actions appear on each project card. Unchecking an item removes it from all cards on the site.
+                </span>
+
+                <div className={styles.fieldGrid}>
+                  <div style={{ padding: "0.85rem", backgroundColor: "#141518", border: "1px solid #292b31", borderRadius: "6px" }}>
+                    <label style={{ display: "flex", alignItems: "center", gap: "0.6rem", cursor: "pointer", color: "#f2f2f0", fontSize: "0.84rem", fontWeight: 500 }}>
+                      <input
+                        type="checkbox"
+                        checked={formData.projectCardConfig?.showArticleLink !== false}
+                        onChange={(e) =>
+                          handleChange("projectCardConfig", {
+                            ...(formData.projectCardConfig || DEFAULT_GLOBAL_SETTINGS.projectCardConfig!),
+                            showArticleLink: e.target.checked,
+                          })
+                        }
+                        style={{ accentColor: "#a3e635", width: "16px", height: "16px" }}
+                      />
+                      <span>Show &quot;Article&quot; Link</span>
+                    </label>
+                    <div style={{ fontSize: "0.72rem", color: "#71717a", marginTop: "0.25rem", paddingLeft: "1.6rem" }}>
+                      Direct link to the project article / writeup page.
+                    </div>
+                  </div>
+
+                  <div style={{ padding: "0.85rem", backgroundColor: "#141518", border: "1px solid #292b31", borderRadius: "6px" }}>
+                    <label style={{ display: "flex", alignItems: "center", gap: "0.6rem", cursor: "pointer", color: "#f2f2f0", fontSize: "0.84rem", fontWeight: 500 }}>
+                      <input
+                        type="checkbox"
+                        checked={formData.projectCardConfig?.showDemoLink !== false}
+                        onChange={(e) =>
+                          handleChange("projectCardConfig", {
+                            ...(formData.projectCardConfig || DEFAULT_GLOBAL_SETTINGS.projectCardConfig!),
+                            showDemoLink: e.target.checked,
+                          })
+                        }
+                        style={{ accentColor: "#a3e635", width: "16px", height: "16px" }}
+                      />
+                      <span>Show &quot;Demo&quot; Link</span>
+                    </label>
+                    <div style={{ fontSize: "0.72rem", color: "#71717a", marginTop: "0.25rem", paddingLeft: "1.6rem" }}>
+                      External link to the live running application or demo.
+                    </div>
+                  </div>
+
+                  <div style={{ padding: "0.85rem", backgroundColor: "#141518", border: "1px solid #292b31", borderRadius: "6px" }}>
+                    <label style={{ display: "flex", alignItems: "center", gap: "0.6rem", cursor: "pointer", color: "#f2f2f0", fontSize: "0.84rem", fontWeight: 500 }}>
+                      <input
+                        type="checkbox"
+                        checked={formData.projectCardConfig?.showSourceLink !== false}
+                        onChange={(e) =>
+                          handleChange("projectCardConfig", {
+                            ...(formData.projectCardConfig || DEFAULT_GLOBAL_SETTINGS.projectCardConfig!),
+                            showSourceLink: e.target.checked,
+                          })
+                        }
+                        style={{ accentColor: "#a3e635", width: "16px", height: "16px" }}
+                      />
+                      <span>Show &quot;Source&quot; Link</span>
+                    </label>
+                    <div style={{ fontSize: "0.72rem", color: "#71717a", marginTop: "0.25rem", paddingLeft: "1.6rem" }}>
+                      External link to the GitHub / Git repository.
+                    </div>
+                  </div>
+
+                  <div style={{ padding: "0.85rem", backgroundColor: "#141518", border: "1px solid #292b31", borderRadius: "6px" }}>
+                    <label style={{ display: "flex", alignItems: "center", gap: "0.6rem", cursor: "pointer", color: "#f2f2f0", fontSize: "0.84rem", fontWeight: 500 }}>
+                      <input
+                        type="checkbox"
+                        checked={formData.projectCardConfig?.showStackButton !== false}
+                        onChange={(e) =>
+                          handleChange("projectCardConfig", {
+                            ...(formData.projectCardConfig || DEFAULT_GLOBAL_SETTINGS.projectCardConfig!),
+                            showStackButton: e.target.checked,
+                          })
+                        }
+                        style={{ accentColor: "#a3e635", width: "16px", height: "16px" }}
+                      />
+                      <span>Show &quot;Stack▾&quot; Button</span>
+                    </label>
+                    <div style={{ fontSize: "0.72rem", color: "#71717a", marginTop: "0.25rem", paddingLeft: "1.6rem" }}>
+                      Accordion button to toggle the full tech stack breakdown.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Links Color Customizer */}
+              <div className={styles.formGroup} style={{ borderTop: "1px solid #292b31", paddingTop: "1.25rem" }}>
+                <label className={styles.formLabel} style={{ fontSize: "0.88rem" }}>
+                  Action Links Color
+                </label>
+                <span style={{ fontSize: "0.74rem", color: "#8c909c", marginBottom: "0.5rem" }}>
+                  Customize the highlight color for &quot;Article&quot;, &quot;Demo&quot;, &quot;Source&quot;, and &quot;Stack▾&quot;.
+                </span>
+
+                <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.85rem", padding: "0.85rem", backgroundColor: "#141518", border: "1px solid #292b31", borderRadius: "8px" }}>
+                  <input
+                    type="color"
+                    value={formData.projectCardConfig?.actionLinksColor || "#38bdf8"}
+                    onChange={(e) =>
+                      handleChange("projectCardConfig", {
+                        ...(formData.projectCardConfig || DEFAULT_GLOBAL_SETTINGS.projectCardConfig!),
+                        actionLinksColor: e.target.value,
+                      })
+                    }
+                    style={{
+                      width: "38px",
+                      height: "38px",
+                      border: "none",
+                      borderRadius: "6px",
+                      cursor: "pointer",
+                      backgroundColor: "transparent",
+                    }}
+                    title="Choose custom color"
+                  />
+
+                  <input
+                    type="text"
+                    value={formData.projectCardConfig?.actionLinksColor || "#38bdf8"}
+                    onChange={(e) =>
+                      handleChange("projectCardConfig", {
+                        ...(formData.projectCardConfig || DEFAULT_GLOBAL_SETTINGS.projectCardConfig!),
+                        actionLinksColor: e.target.value,
+                      })
+                    }
+                    placeholder="#38bdf8"
+                    className={styles.input}
+                    style={{ width: "110px", fontFamily: "var(--font-mono, monospace)", fontSize: "0.85rem", textAlign: "center" }}
+                  />
+
+                  {/* Preset Swatches */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.45rem", marginLeft: "auto", flexWrap: "wrap" }}>
+                    <span style={{ fontSize: "0.72rem", color: "#71717a", marginRight: "0.2rem" }}>Presets:</span>
+                    {[
+                      { name: "Sky", color: "#38bdf8" },
+                      { name: "Emerald", color: "#34d399" },
+                      { name: "Indigo", color: "#818cf8" },
+                      { name: "Amber", color: "#fbbf24" },
+                      { name: "Rose", color: "#fb7185" },
+                      { name: "Purple", color: "#c084fc" },
+                      { name: "White", color: "#f4f4f5" },
+                    ].map((preset) => {
+                      const isActive = (formData.projectCardConfig?.actionLinksColor || "#38bdf8").toLowerCase() === preset.color.toLowerCase();
+                      return (
+                        <button
+                          key={preset.color}
+                          type="button"
+                          onClick={() =>
+                            handleChange("projectCardConfig", {
+                              ...(formData.projectCardConfig || DEFAULT_GLOBAL_SETTINGS.projectCardConfig!),
+                              actionLinksColor: preset.color,
+                            })
+                          }
+                          style={{
+                            width: "24px",
+                            height: "24px",
+                            borderRadius: "50%",
+                            backgroundColor: preset.color,
+                            border: isActive ? "2px solid #ffffff" : "2px solid transparent",
+                            boxShadow: isActive ? "0 0 0 1px #000, 0 0 8px rgba(255,255,255,0.4)" : "none",
+                            cursor: "pointer",
+                            transition: "transform 0.15s ease",
+                          }}
+                          title={`${preset.name} (${preset.color})`}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
               {/* Toggles */}
-              <div className={styles.fieldGrid}>
+              <div className={styles.fieldGrid} style={{ borderTop: "1px solid #292b31", paddingTop: "1.25rem" }}>
                 <div style={{ padding: "0.85rem", backgroundColor: "#141518", border: "1px solid #292b31", borderRadius: "6px" }}>
                   <label style={{ display: "flex", alignItems: "center", gap: "0.6rem", cursor: "pointer", color: "#f2f2f0", fontSize: "0.84rem", fontWeight: 500 }}>
                     <input
@@ -711,7 +889,7 @@ export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
                 <div
                   style={{
                     width: "100%",
-                    aspectRatio: "4 / 3",
+                    aspectRatio: "16 / 10",
                     backgroundColor: "#0d0f12",
                     borderRadius: "8px",
                     border: "1px solid #24262d",
@@ -733,16 +911,7 @@ export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
 
                 {/* Card Content Details */}
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  {/* Line 1: Category */}
-                  {formData.projectCardConfig?.showCategory !== false && (
-                    <div style={{ height: "20px", display: "flex", alignItems: "center", marginBottom: "0.35rem" }}>
-                      <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: "0.68rem", color: "#8c909c", fontWeight: 700, textTransform: "uppercase" }}>
-                        PRODUCT
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Line 2: Title */}
+                  {/* Title */}
                   <h4
                     style={{
                       margin: "0 0 0.4rem 0",
@@ -754,17 +923,27 @@ export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
                       WebkitBoxOrient: "vertical",
                       display: "-webkit-box",
                       overflow: "hidden",
-                      height: `calc(1.35em * ${formData.projectCardConfig?.titleLines || 2})`,
                       maxHeight: `calc(1.35em * ${formData.projectCardConfig?.titleLines || 2})`,
                     }}
                   >
                     Enterprise Hybrid RAG Platform with Semantic Cache & Model Inference
                   </h4>
 
-                  {/* Line 3: Small Description */}
+                  {/* Metadata: Category & Date */}
+                  {(formData.projectCardConfig?.showCategory !== false || formData.projectCardConfig?.showDate !== false) && (
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.45rem", fontSize: "0.76rem", color: "#8c909c", marginBottom: "0.45rem", fontFamily: "var(--font-mono, monospace)" }}>
+                      {formData.projectCardConfig?.showCategory !== false && <span>Product</span>}
+                      {formData.projectCardConfig?.showCategory !== false && formData.projectCardConfig?.showDate !== false && (
+                        <span>&bull;</span>
+                      )}
+                      {formData.projectCardConfig?.showDate !== false && <span>October 2026</span>}
+                    </div>
+                  )}
+
+                  {/* Description */}
                   <p
                     style={{
-                      margin: "0 0 0.55rem 0",
+                      margin: "0 0 0.75rem 0",
                       fontSize: "0.8rem",
                       color: "#888e99",
                       lineHeight: 1.45,
@@ -772,50 +951,117 @@ export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
                       WebkitBoxOrient: "vertical",
                       display: "-webkit-box",
                       overflow: "hidden",
-                      height: `calc(1.45em * ${formData.projectCardConfig?.descriptionLines || 2})`,
                       maxHeight: `calc(1.45em * ${formData.projectCardConfig?.descriptionLines || 2})`,
                     }}
                   >
                     Engineered an enterprise retrieval-augmented generation engine with sub-50ms hybrid lexical and dense vector search, reciprocal rank fusion, and Redis semantic caching.
                   </p>
 
-                  {/* Line 4: Tech Stack */}
-                  <div
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      gap: "0.3rem",
-                      overflow: "hidden",
-                      height: `${(formData.projectCardConfig?.techStackLines || 2) * 24}px`,
-                      maxHeight: `${(formData.projectCardConfig?.techStackLines || 2) * 24}px`,
-                      marginBottom: "0.5rem",
-                    }}
-                  >
-                    {["Python", "FastAPI", "vLLM", "Qdrant", "Redis", "TypeScript", "React"].map((t) => (
-                      <span
-                        key={t}
-                        style={{
-                          fontSize: "0.64rem",
-                          fontFamily: "var(--font-mono, monospace)",
-                          padding: "0.15rem 0.4rem",
-                          backgroundColor: "rgba(255, 255, 255, 0.05)",
-                          border: "1px solid rgba(255, 255, 255, 0.1)",
-                          borderRadius: "4px",
-                          color: "#a1a5b0",
-                          textTransform: "uppercase",
-                        }}
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+                  {/* Action Links Bar */}
+                  {(formData.projectCardConfig?.showArticleLink !== false ||
+                    formData.projectCardConfig?.showDemoLink !== false ||
+                    formData.projectCardConfig?.showSourceLink !== false ||
+                    formData.projectCardConfig?.showStackButton !== false) && (
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "1.1rem",
+                        paddingTop: "0.55rem",
+                        borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+                        fontSize: "0.84rem",
+                        fontWeight: 600,
+                      }}
+                    >
+                      {formData.projectCardConfig?.showArticleLink !== false && (
+                        <span
+                          style={{
+                            color: formData.projectCardConfig?.actionLinksColor || "#38bdf8",
+                            textDecoration: "underline",
+                            textUnderlineOffset: "3px",
+                            cursor: "pointer",
+                          }}
+                        >
+                          Article
+                        </span>
+                      )}
+                      {formData.projectCardConfig?.showDemoLink !== false && (
+                        <span
+                          style={{
+                            color: formData.projectCardConfig?.actionLinksColor || "#38bdf8",
+                            textDecoration: "underline",
+                            textUnderlineOffset: "3px",
+                            cursor: "pointer",
+                          }}
+                        >
+                          Demo
+                        </span>
+                      )}
+                      {formData.projectCardConfig?.showSourceLink !== false && (
+                        <span
+                          style={{
+                            color: formData.projectCardConfig?.actionLinksColor || "#38bdf8",
+                            textDecoration: "underline",
+                            textUnderlineOffset: "3px",
+                            cursor: "pointer",
+                          }}
+                        >
+                          Source
+                        </span>
+                      )}
+                      {formData.projectCardConfig?.showStackButton !== false && (
+                        <button
+                          type="button"
+                          onClick={() => setPreviewStackExpanded((prev) => !prev)}
+                          style={{
+                            background: "transparent",
+                            border: "none",
+                            padding: 0,
+                            font: "inherit",
+                            color: formData.projectCardConfig?.actionLinksColor || "#38bdf8",
+                            cursor: "pointer",
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: "0.2rem",
+                          }}
+                          title="Click to toggle stack preview"
+                        >
+                          Stack{previewStackExpanded ? "▴" : "▾"}
+                        </button>
+                      )}
+                    </div>
+                  )}
 
-                  {/* Line 5: Date */}
-                  {formData.projectCardConfig?.showDate !== false && (
-                    <div style={{ height: "18px", display: "flex", alignItems: "center" }}>
-                      <span style={{ fontSize: "0.72rem", color: "#606470", fontFamily: "var(--font-mono, monospace)" }}>
-                        OCTOBER 2026
-                      </span>
+                  {/* Expanded Stack Pills Preview */}
+                  {formData.projectCardConfig?.showStackButton !== false && previewStackExpanded && (
+                    <div
+                      style={{
+                        marginTop: "0.75rem",
+                        padding: "0.6rem",
+                        backgroundColor: "rgba(0, 0, 0, 0.35)",
+                        border: "1px solid rgba(255, 255, 255, 0.08)",
+                        borderRadius: "6px",
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: "0.35rem",
+                      }}
+                    >
+                      {["Python", "FastAPI", "vLLM", "Qdrant", "Redis", "TypeScript", "React"].map((t) => (
+                        <span
+                          key={t}
+                          style={{
+                            fontSize: "0.66rem",
+                            fontFamily: "var(--font-mono, monospace)",
+                            padding: "0.15rem 0.45rem",
+                            backgroundColor: "rgba(255, 255, 255, 0.06)",
+                            border: "1px solid rgba(255, 255, 255, 0.12)",
+                            borderRadius: "4px",
+                            color: "#d1d5db",
+                          }}
+                        >
+                          {t}
+                        </span>
+                      ))}
                     </div>
                   )}
                 </div>

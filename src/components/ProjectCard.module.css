@@ -1,150 +1,303 @@
-/* Project Card — Clean, Proportionate & Beautifully Rounded */
+/* =========================================================================
+   ProjectCard.module.css
+   Pixel-perfect match to the Main Page Article Section Card Design (InsightsSection).
+   Rounded top image canvas, serif title, metadata, excerpt, plus clean action buttons:
+   "Article", "Demo", "Source", and expandable "Stack".
+   ========================================================================= */
 
-.projectCard {
-  background: #181818;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 14px;
-  overflow: hidden;
+.card {
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+
+.cardInner {
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+  width: 100%;
+  background-color: #181818;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: clamp(12px, 1.4vw, 16px) clamp(12px, 1.4vw, 16px) clamp(16px, 1.8vw, 20px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.25s ease,
-              box-shadow 0.3s ease;
-  width: 100%;
-  min-width: 0;
-  height: 100%;
-  cursor: pointer;
+              background-color 0.25s ease,
+              box-shadow 0.25s ease;
   box-sizing: border-box;
-  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.65);
 }
 
-.projectCard:hover {
-  border-color: rgba(255, 255, 255, 0.18);
+.cardInner:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.88);
+  background-color: #202020;
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.38);
 }
 
-.projectCard:focus-visible {
-  outline: 2px solid var(--color-primary, #8bb397);
-  outline-offset: 4px;
-  border-radius: 14px;
-}
-
-.imageLink {
-  display: block;
-  width: 100%;
-  text-decoration: none;
-}
-
+/* 1. Rounded Top Image Canvas (Exact match to InsightsSection) */
 .imageFrame {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  background: #141414;
+  aspect-ratio: 16 / 9.6;
+  border-radius: 12px;
   overflow: hidden;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background-color: #1a1b1f;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: block;
 }
 
 .cardImage {
   object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.projectCard:hover .cardImage {
-  transform: scale(1.035);
+.cardInner:hover .cardImage {
+  transform: scale(1.038);
 }
 
+/* 2. Content Area directly beneath the image */
 .cardBody {
-  padding: 1.35rem 1.45rem 1.45rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  padding: 1.15rem 0.2rem 0.1rem;
+  gap: 0.65rem;
   flex-grow: 1;
-  box-sizing: border-box;
 }
 
+/* Card Title (Serif/Editorial typography matching main page articles) */
 .cardTitle {
-  font-family: var(--font-display, "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif);
-  font-size: clamp(1.12rem, 1.35vw, 1.25rem);
-  font-weight: 600;
-  margin: 0;
-  line-height: 1.35;
+  font-family: var(--font-artistic, "Newsreader", "Playfair Display", Georgia, serif);
+  font-size: clamp(1.08rem, 1.35vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.28;
   letter-spacing: -0.015em;
-}
-
-.cardLink {
-  color: #ffffff;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
+  color: #f4f5f7;
+  margin: 0;
   transition: color 0.2s ease;
 }
 
-.cardArrow {
-  color: #71717a;
-  transition: transform 0.25s ease, color 0.2s ease;
-  flex-shrink: 0;
+.titleLink {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-.projectCard:hover .cardLink {
+.cardInner:hover .titleLink {
   color: #ffffff;
 }
 
-.projectCard:hover .cardArrow {
-  color: #a3e635;
-  transform: translate(2px, -2px);
+/* Metadata Row (Category • Date) */
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-body, "Inter", sans-serif);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #8b919e;
+  letter-spacing: 0.01em;
+  margin: 0;
 }
 
+.metaDivider {
+  color: #616672;
+  font-size: 0.75rem;
+}
+
+/* Clean Description Excerpt */
 .cardDesc {
-  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-family: var(--font-body, "Inter", sans-serif);
   font-size: 0.88rem;
-  line-height: 1.58;
-  color: #94a3b8;
+  line-height: 1.55;
+  color: #9ca3af;
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
-  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.tagsWrapper {
+/* 3. Action Links Bar (Article, Demo, Source, Stack) */
+.actionsRow {
   display: flex;
   align-items: center;
+  gap: 1.15rem;
   flex-wrap: wrap;
-  gap: 0.45rem;
   margin-top: auto;
-  padding-top: 0.65rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.tag {
-  font-family: var(--font-mono, monospace);
+.actionLink,
+.stackToggleBtn {
+  font-family: var(--font-sans, "Inter", -apple-system, sans-serif);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--action-color, #38bdf8);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: color 0.18s ease, filter 0.18s ease, text-underline-offset 0.18s ease;
+}
+
+.actionLink:hover,
+.stackToggleBtn:hover {
+  filter: brightness(1.25);
+  text-underline-offset: 4px;
+}
+
+.stackToggleActive {
+  color: #818cf8;
+}
+
+.toggleArrow {
   font-size: 0.72rem;
-  font-weight: 500;
-  color: #8c93a0;
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  padding: 0.22rem 0.55rem;
-  border-radius: 6px;
-  line-height: 1.25;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-  transition: all 0.2s ease;
+  line-height: 1;
 }
 
-.projectCard:hover .tag {
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.065);
+/* 4. Expandable Tech Stack Strip */
+.stackContainer {
+  overflow: hidden;
+  margin-top: 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
 }
 
-.tagMore {
+.stackBadgeList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding-top: 0.15rem;
+}
+
+.techPill {
+  background-color: #1f2128;
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
   font-family: var(--font-mono, monospace);
-  font-size: 0.7rem;
-  color: #64748b;
-  font-weight: 500;
-  padding-left: 0.15rem;
+  font-size: 0.76rem;
+  user-select: none;
+  transition: background-color 0.18s ease;
+}
+
+.techPill:hover {
+  background-color: #272a33;
+  color: #ffffff;
+}
+
+/* =========================================================================
+   LIGHT THEME OVERRIDES (paper, sage, sandstone, light)
+   ========================================================================= */
+:global([data-theme="light"]) .cardInner,
+:global([data-theme="paper"]) .cardInner,
+:global([data-theme="sage"]) .cardInner,
+:global([data-theme="sandstone"]) .cardInner {
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+:global([data-theme="light"]) .cardInner:hover,
+:global([data-theme="paper"]) .cardInner:hover,
+:global([data-theme="sage"]) .cardInner:hover,
+:global([data-theme="sandstone"]) .cardInner:hover {
+  background-color: #fcfbfa;
+  border-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+:global([data-theme="light"]) .imageFrame,
+:global([data-theme="paper"]) .imageFrame,
+:global([data-theme="sage"]) .imageFrame,
+:global([data-theme="sandstone"]) .imageFrame {
+  background-color: #f4f0e6;
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+:global([data-theme="light"]) .cardTitle,
+:global([data-theme="paper"]) .cardTitle,
+:global([data-theme="sage"]) .cardTitle,
+:global([data-theme="sandstone"]) .cardTitle {
+  color: #111111;
+}
+
+:global([data-theme="light"]) .cardInner:hover .titleLink,
+:global([data-theme="paper"]) .cardInner:hover .titleLink,
+:global([data-theme="sage"]) .cardInner:hover .titleLink,
+:global([data-theme="sandstone"]) .cardInner:hover .titleLink {
+  color: #15803d;
+}
+
+:global([data-theme="light"]) .cardMeta,
+:global([data-theme="paper"]) .cardMeta,
+:global([data-theme="sage"]) .cardMeta,
+:global([data-theme="sandstone"]) .cardMeta {
+  color: #5e5953;
+}
+
+:global([data-theme="light"]) .metaDivider,
+:global([data-theme="paper"]) .metaDivider,
+:global([data-theme="sage"]) .metaDivider,
+:global([data-theme="sandstone"]) .metaDivider {
+  color: #a1a1aa;
+}
+
+:global([data-theme="light"]) .cardDesc,
+:global([data-theme="paper"]) .cardDesc,
+:global([data-theme="sage"]) .cardDesc,
+:global([data-theme="sandstone"]) .cardDesc {
+  color: #4b5563;
+}
+
+:global([data-theme="light"]) .actionsRow,
+:global([data-theme="paper"]) .actionsRow,
+:global([data-theme="sage"]) .actionsRow,
+:global([data-theme="sandstone"]) .actionsRow {
+  border-top-color: rgba(0, 0, 0, 0.07);
+}
+
+:global([data-theme="light"]) .actionLink,
+:global([data-theme="paper"]) .actionLink,
+:global([data-theme="sage"]) .actionLink,
+:global([data-theme="sandstone"]) .actionLink,
+:global([data-theme="light"]) .stackToggleBtn,
+:global([data-theme="paper"]) .stackToggleBtn,
+:global([data-theme="sage"]) .stackToggleBtn,
+:global([data-theme="sandstone"]) .stackToggleBtn {
+  color: var(--action-color, #0284c7);
+}
+
+:global([data-theme="light"]) .actionLink:hover,
+:global([data-theme="paper"]) .actionLink:hover,
+:global([data-theme="sage"]) .actionLink:hover,
+:global([data-theme="sandstone"]) .actionLink:hover,
+:global([data-theme="light"]) .stackToggleBtn:hover,
+:global([data-theme="paper"]) .stackToggleBtn:hover,
+:global([data-theme="sage"]) .stackToggleBtn:hover,
+:global([data-theme="sandstone"]) .stackToggleBtn:hover {
+  filter: brightness(1.2);
+}
+
+:global([data-theme="light"]) .stackContainer,
+:global([data-theme="paper"]) .stackContainer,
+:global([data-theme="sage"]) .stackContainer,
+:global([data-theme="sandstone"]) .stackContainer {
+  border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+:global([data-theme="light"]) .techPill,
+:global([data-theme="paper"]) .techPill,
+:global([data-theme="sage"]) .techPill,
+:global([data-theme="sandstone"]) .techPill {
+  background-color: #f1f5f9;
+  color: #334155;
+  border-color: #e2e8f0;
 }

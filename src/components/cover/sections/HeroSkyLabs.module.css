@@ -52,36 +52,98 @@
   width: 100%;
 }
 
-/* Brand Wordmark: DILSHAN. */
-.brandLink {
+/* Brand Wordmark & Dog Hand Paw Theme Toggle */
+.brandGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  user-select: none;
+}
+
+.pawThemeToggleBtn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  line-height: 1;
+  border-radius: 6px;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.pawThemeToggleBtn:hover {
+  transform: scale(1.12);
+}
+
+.pawThemeToggleBtn:active {
+  transform: scale(0.92) rotate(-15deg);
+}
+
+.pawThemeToggleBtn:focus-visible {
+  outline: 2px solid var(--color-primary, #4ade80);
+  outline-offset: 2px;
+}
+
+.brandPawIcon {
+  font-size: 1.35rem;
+  color: var(--color-text-heading, #ffffff);
+  flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s ease;
+}
+
+.pawThemeToggleBtn:hover .brandPawIcon {
+  transform: rotate(20deg);
+  color: #ff8bd2;
+}
+
+.brandTextLink {
   text-decoration: none;
   outline: none;
   display: inline-flex;
   align-items: center;
+  padding: 0.35rem 0;
 }
 
 .brandWordmark {
-  color: #ffffff;
-  font-family: var(--font-brand, "Bebas Neue", "Anton", "Barlow Condensed", "Oswald", sans-serif);
-  font-size: clamp(1.8rem, 2.6vw, 2.3rem);
+  color: var(--color-text-heading, #ffffff);
+  font-family: var(--font-display, "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: clamp(1.15rem, 1.4vw, 1.3rem);
   font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  line-height: 0.95;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
   display: inline-flex;
-  align-items: baseline;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  align-items: center;
+  transition: opacity 0.2s ease;
 }
 
-.brandDot {
-  color: #ffffff;
-  display: inline-block;
-  margin-left: 1px;
+.brandTextLink:hover .brandWordmark {
+  opacity: 0.88;
 }
 
-.brandLink:hover .brandWordmark {
-  opacity: 0.9;
-  transform: translateY(-0.5px);
+/* Light Theme Overrides for Brand */
+:global([data-theme="light"]) .brandPawIcon,
+:global([data-theme="paper"]) .brandPawIcon,
+:global([data-theme="sage"]) .brandPawIcon,
+:global([data-theme="sandstone"]) .brandPawIcon {
+  color: #18181b;
+}
+
+:global([data-theme="light"]) .pawThemeToggleBtn:hover .brandPawIcon,
+:global([data-theme="paper"]) .pawThemeToggleBtn:hover .brandPawIcon,
+:global([data-theme="sage"]) .pawThemeToggleBtn:hover .brandPawIcon,
+:global([data-theme="sandstone"]) .pawThemeToggleBtn:hover .brandPawIcon {
+  color: #ec4899;
+}
+
+:global([data-theme="light"]) .brandWordmark,
+:global([data-theme="paper"]) .brandWordmark,
+:global([data-theme="sage"]) .brandWordmark,
+:global([data-theme="sandstone"]) .brandWordmark {
+  color: #18181b;
 }
 
 /* Right Desktop Navigation: Links positioned on the right next to CTA button */

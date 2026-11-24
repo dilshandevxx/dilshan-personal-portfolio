@@ -4,13 +4,15 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { IoPaw } from "react-icons/io5";
+import { useTheme } from "@/components/ThemeContext";
 import styles from "./HeroSkyLabs.module.css";
 
 export default function HeroSkyLabs() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
   const [activeSection, setActiveSection] = useState<string>("");
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -116,14 +118,23 @@ export default function HeroSkyLabs() {
           } ${menuOpen ? styles.navOpen : ""}`}
       >
         <div className={styles.navContainer}>
-          {/* Brand Wordmark matching reference typography */}
-          <Link href="/" className={styles.brandLink} title="DILSHAN.">
-            <span className={styles.brandWordmark}>
-              DILSHAN<span className={styles.brandDot}>.</span>
-            </span>
-          </Link>
+          {/* Brand Wordmark with Paw Print Theme Toggle */}
+          <div className={styles.brandGroup}>
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className={styles.pawThemeToggleBtn}
+              aria-label={theme === "light" ? "Switch to Night mode" : "Switch to Light mode"}
+              title={theme === "light" ? "Switch to Night mode" : "Switch to Light mode"}
+            >
+              <IoPaw className={styles.brandPawIcon} aria-hidden="true" />
+            </button>
+            <Link href="/" className={styles.brandTextLink} title="Dilshan Works">
+              <span className={styles.brandWordmark}>Dilshan Works</span>
+            </Link>
+          </div>
 
-          {/* Right Navigation: Desktop Nav Links + Pink Rectangular Button ("Join 70K+ Readers") */}
+          {/* Right Navigation: Desktop Nav Links ("WORKS", "EXPERTISE", "ABOUT") + CTA */}
           <div className={styles.navRight}>
             <nav className={styles.desktopNav} aria-label="Main Navigation">
               <a
@@ -139,7 +150,7 @@ export default function HeroSkyLabs() {
                 className={`${styles.navLink} ${activeSection === "projects" ? styles.navLinkActive : ""
                   }`}
               >
-                PROJECTS
+                WORKS
               </Link>
               <Link
                 href="/about"
@@ -148,17 +159,6 @@ export default function HeroSkyLabs() {
               >
                 ABOUT
               </Link>
-              <a
-                href="#contact"
-                onClick={(e) => handleSlowScroll(e, "contact")}
-                className={`${styles.navLink} ${activeSection === "contact" ? styles.navLinkActive : ""
-                  }`}
-              >
-                CONTACT
-              </a>
-
-              {/* Desktop Theme Toggle: Nav Link style, toggles between NIGHT and LIGHT, no icon */}
-              <ThemeToggle variant="nav-link" className={styles.themeNavLink} />
             </nav>
 
             <a
@@ -169,9 +169,8 @@ export default function HeroSkyLabs() {
               Join 70K+ Readers
             </a>
 
-            {/* Mobile Right Actions: Theme Toggle + Minimalist Hamburger Button */}
+            {/* Mobile Right Actions: Minimalist Hamburger Button */}
             <div className={styles.mobileActions}>
-              <ThemeToggle variant="nav-link" className={styles.mobileThemeToggle} />
               <button
                 type="button"
                 className={`${styles.hamburgerBtn} ${menuOpen ? styles.hamburgerActive : ""}`}
@@ -200,9 +199,8 @@ export default function HeroSkyLabs() {
                 <nav className={styles.menuNav} aria-label="Overlay Navigation">
                   {[
                     { label: "EXPERTISE", href: "#skills", isAnchor: true },
-                    { label: "PROJECTS", href: "/projects", isAnchor: false },
+                    { label: "WORKS", href: "/projects", isAnchor: false },
                     { label: "ABOUT", href: "/about", isAnchor: false },
-                    { label: "CONTACT", href: "#contact", isAnchor: true },
                   ].map((item, idx) => (
                     <motion.div
                       key={item.label}
@@ -240,7 +238,7 @@ export default function HeroSkyLabs() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.35, delay: 0.3 }}
+                    transition={{ duration: 0.35, delay: 0.25 }}
                     className={styles.menuCtaWrap}
                   >
                     <a
@@ -252,17 +250,6 @@ export default function HeroSkyLabs() {
                     </a>
                   </motion.div>
                 </nav>
-
-                {/* Mobile Overlay Theme Toggle Switcher */}
-                <motion.div
-                  className={styles.menuFooter}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.35, delay: 0.34 }}
-                >
-                  <span className={styles.menuFooterText}>APPEARANCE</span>
-                  <ThemeToggle variant="nav-link" className={styles.menuThemeToggle} />
-                </motion.div>
               </div>
             </motion.div>
           )}

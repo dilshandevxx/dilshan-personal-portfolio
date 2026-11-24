@@ -1,6 +1,6 @@
 /* =========================================================================
    About Me Page — Cohesive Editorial Layout
-   Aligned to 1140px readable container matching Tania Rascia editorial reference.
+   Aligned to 860px intimate readable container matching Tania Rascia reference.
    Clean typography, generous whitespace, matte charcoal surfaces.
    ========================================================================= */
 
@@ -18,14 +18,13 @@
 }
 
 .mainContainer {
-  max-width: 1140px;
+  max-width: 860px;
   margin: 0 auto;
   padding: clamp(2.5rem, 4vw, 3.75rem) clamp(1.5rem, 3.5vw, 2.5rem) clamp(4rem, 6vw, 6rem);
   width: 100%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: clamp(3rem, 5vw, 4.5rem);
 }
 
 /* -------------------------------------------------------------------------
@@ -34,7 +33,6 @@
 @media (max-width: 640px) {
   .mainContainer {
     padding: 2rem 1.25rem 3.5rem;
-    gap: 2.5rem;
   }
 }
 
