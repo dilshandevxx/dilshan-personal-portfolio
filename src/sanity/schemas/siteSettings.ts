@@ -59,14 +59,14 @@ export const siteSettingsSchema = {
       title: "Top-Right CTA Button Text",
       type: "string",
       fieldset: "nav",
-      initialValue: "Join 70K+ Readers",
+      initialValue: "Say Hello",
     },
     {
       name: "ctaButtonUrl",
       title: "CTA Button Destination",
       type: "string",
       fieldset: "nav",
-      initialValue: "/#contact",
+      initialValue: "mailto:dilshan.devxx@gmail.com",
     },
 
     // Socials

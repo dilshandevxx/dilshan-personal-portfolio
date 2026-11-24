@@ -284,7 +284,7 @@ export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
                   className={styles.inputField}
                   value={formData.ctaButtonText || ""}
                   onChange={(e) => handleChange("ctaButtonText", e.target.value)}
-                  placeholder="e.g. Join 70K+ Readers"
+                  placeholder="e.g. Say Hello"
                 />
               </div>
 
@@ -295,7 +295,7 @@ export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
                   className={styles.inputField}
                   value={formData.ctaButtonUrl || ""}
                   onChange={(e) => handleChange("ctaButtonUrl", e.target.value)}
-                  placeholder="e.g. /#contact"
+                  placeholder="e.g. mailto:dilshan.devxx@gmail.com"
                 />
               </div>
             </div>

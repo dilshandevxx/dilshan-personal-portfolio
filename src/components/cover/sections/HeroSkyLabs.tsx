@@ -6,13 +6,37 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { IoPaw } from "react-icons/io5";
 import { useTheme } from "@/components/ThemeContext";
+import { cmsDataStore } from "@/services/cmsDataStore";
 import styles from "./HeroSkyLabs.module.css";
 
 export default function HeroSkyLabs() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
   const [activeSection, setActiveSection] = useState<string>("");
+  const [ctaText, setCtaText] = useState("Say Hello");
+  const [ctaUrl, setCtaUrl] = useState("mailto:dilshan.devxx@gmail.com");
   const { theme, toggleTheme } = useTheme();
+
+  useEffect(() => {
+    async function loadSettings() {
+      try {
+        const settings = await cmsDataStore.getGlobalSettings();
+        if (settings?.ctaButtonText) setCtaText(settings.ctaButtonText);
+        if (settings?.ctaButtonUrl) setCtaUrl(settings.ctaButtonUrl);
+      } catch {}
+    }
+    loadSettings();
+
+    const handleUpdate = () => {
+      loadSettings();
+    };
+    window.addEventListener("cms_settings_updated", handleUpdate);
+    window.addEventListener("storage", handleUpdate);
+    return () => {
+      window.removeEventListener("cms_settings_updated", handleUpdate);
+      window.removeEventListener("storage", handleUpdate);
+    };
+  }, []);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -162,11 +186,15 @@ export default function HeroSkyLabs() {
             </nav>
 
             <a
-              href="#contact"
-              onClick={(e) => handleSlowScroll(e, "contact")}
+              href={ctaUrl}
+              onClick={(e) => {
+                if (ctaUrl.startsWith("#")) {
+                  handleSlowScroll(e, ctaUrl.replace("#", ""));
+                }
+              }}
               className={styles.ctaButton}
             >
-              Join 70K+ Readers
+              {ctaText}
             </a>
 
             {/* Mobile Right Actions: Minimalist Hamburger Button */}
@@ -242,11 +270,16 @@ export default function HeroSkyLabs() {
                     className={styles.menuCtaWrap}
                   >
                     <a
-                      href="#contact"
-                      onClick={(e) => handleSlowScroll(e, "contact")}
+                      href={ctaUrl}
+                      onClick={(e) => {
+                        setMenuOpen(false);
+                        if (ctaUrl.startsWith("#")) {
+                          handleSlowScroll(e, ctaUrl.replace("#", ""));
+                        }
+                      }}
                       className={styles.menuCtaButton}
                     >
-                      Join 70K+ Readers
+                      {ctaText}
                     </a>
                   </motion.div>
                 </nav>

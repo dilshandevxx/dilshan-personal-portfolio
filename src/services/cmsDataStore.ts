@@ -257,8 +257,8 @@ export const DEFAULT_GLOBAL_SETTINGS: CMSGlobalSettings = {
     { id: "3", label: "ABOUT", url: "/about", order: 3 },
     { id: "4", label: "CONTACT", url: "/#contact", order: 4 },
   ],
-  ctaButtonText: "Join 70K+ Readers",
-  ctaButtonUrl: "/#contact",
+  ctaButtonText: "Say Hello",
+  ctaButtonUrl: "mailto:dilshan.devxx@gmail.com",
   accentColor: "#6366F1",
   socials: [
     { id: "1", platform: "GitHub", url: "https://github.com", handle: "@dilshandevxx" },
@@ -304,7 +304,7 @@ const DEFAULT_ACTIVITY_LOGS: CMSActivityLog[] = [
   {
     id: "act-3",
     action: "Updated Global Navigation",
-    target: "Centered desktop nav links with Join 70K+ Readers CTA",
+    target: "Centered desktop nav links with Say Hello CTA",
     timestamp: "3 hours ago",
     type: "settings",
   },

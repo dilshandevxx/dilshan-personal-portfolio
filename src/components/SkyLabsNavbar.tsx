@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { IoPaw } from "react-icons/io5";
 import { useTheme } from "@/components/ThemeContext";
+import { cmsDataStore } from "@/services/cmsDataStore";
 import styles from "./SkyLabsNavbar.module.css";
 
 interface SkyLabsNavbarProps {
@@ -16,8 +17,31 @@ interface SkyLabsNavbarProps {
 export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
+  const [ctaText, setCtaText] = useState("Say Hello");
+  const [ctaUrl, setCtaUrl] = useState("mailto:dilshan.devxx@gmail.com");
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
+
+  useEffect(() => {
+    async function loadSettings() {
+      try {
+        const settings = await cmsDataStore.getGlobalSettings();
+        if (settings?.ctaButtonText) setCtaText(settings.ctaButtonText);
+        if (settings?.ctaButtonUrl) setCtaUrl(settings.ctaButtonUrl);
+      } catch {}
+    }
+    loadSettings();
+
+    const handleUpdate = () => {
+      loadSettings();
+    };
+    window.addEventListener("cms_settings_updated", handleUpdate);
+    window.addEventListener("storage", handleUpdate);
+    return () => {
+      window.removeEventListener("cms_settings_updated", handleUpdate);
+      window.removeEventListener("storage", handleUpdate);
+    };
+  }, []);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -117,9 +141,9 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
             </Link>
           </nav>
 
-          <Link href="/#contact" className={styles.ctaButton}>
-            Join 70K+ Readers
-          </Link>
+          <a href={ctaUrl} className={styles.ctaButton}>
+            {ctaText}
+          </a>
 
           {/* Mobile Right Actions: Minimalist Hamburger Button */}
           <div className={styles.mobileActions}>
@@ -191,13 +215,13 @@ export function SkyLabsNavbar({ activeTab }: SkyLabsNavbarProps) {
                   transition={{ duration: 0.35, delay: 0.25 }}
                   className={styles.menuCtaWrap}
                 >
-                  <Link
-                    href="/#contact"
+                  <a
+                    href={ctaUrl}
                     onClick={() => setMenuOpen(false)}
                     className={styles.menuCtaButton}
                   >
-                    Join 70K+ Readers
-                  </Link>
+                    {ctaText}
+                  </a>
                 </motion.div>
               </nav>
             </div>
