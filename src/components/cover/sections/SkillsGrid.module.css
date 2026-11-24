@@ -87,11 +87,10 @@
   outline-offset: 4px;
 }
 
-/* Title Group: Index + Bold Uppercase Text */
+/* Title Group: Bold Uppercase Text */
 .titleGroup {
   display: flex;
-  align-items: baseline;
-  gap: clamp(1rem, 2vw, 1.75rem);
+  align-items: center;
   flex: 1;
   min-width: 0;
 }

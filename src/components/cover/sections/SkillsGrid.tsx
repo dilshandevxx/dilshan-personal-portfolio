@@ -158,9 +158,6 @@ export default function SkillsGrid() {
                   aria-expanded={isOpen}
                 >
                   <div className={styles.titleGroup}>
-                    <span className={styles.categoryIndex}>
-                      {item.index}
-                    </span>
                     <span className={styles.cardTitle}>{item.name}</span>
                   </div>
 
