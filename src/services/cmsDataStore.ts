@@ -812,9 +812,31 @@ class CMSDataStore {
     if (local) {
       try {
         const parsed = JSON.parse(local);
+
+        // Permanently migrate any legacy "Join 70K+ Readers" text in local cache
+        const isLegacyCta =
+          !parsed.ctaButtonText ||
+          parsed.ctaButtonText.includes("70K") ||
+          parsed.ctaButtonText.toLowerCase().includes("reader");
+
+        if (isLegacyCta) {
+          parsed.ctaButtonText = "Say Hello";
+          if (!parsed.ctaButtonUrl || parsed.ctaButtonUrl === "/#contact") {
+            parsed.ctaButtonUrl = "mailto:dilshan.devxx@gmail.com";
+          }
+          try {
+            localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(parsed));
+          } catch {}
+        }
+
         return {
           ...DEFAULT_GLOBAL_SETTINGS,
           ...parsed,
+          ctaButtonText: isLegacyCta ? "Say Hello" : parsed.ctaButtonText,
+          ctaButtonUrl:
+            isLegacyCta && (!parsed.ctaButtonUrl || parsed.ctaButtonUrl === "/#contact")
+              ? "mailto:dilshan.devxx@gmail.com"
+              : parsed.ctaButtonUrl || "mailto:dilshan.devxx@gmail.com",
           navLinks:
             Array.isArray(parsed.navLinks) && parsed.navLinks.length > 0
               ? parsed.navLinks

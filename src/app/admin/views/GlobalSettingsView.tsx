@@ -23,22 +23,34 @@ interface GlobalSettingsViewProps {
   onSave: (settings: Partial<CMSGlobalSettings>) => Promise<void>;
 }
 
-const safeSettings = (input?: Partial<CMSGlobalSettings>): CMSGlobalSettings => ({
-  ...DEFAULT_GLOBAL_SETTINGS,
-  ...(input || {}),
-  navLinks:
-    Array.isArray(input?.navLinks) && input.navLinks.length > 0
-      ? input.navLinks
-      : DEFAULT_GLOBAL_SETTINGS.navLinks,
-  socials:
-    Array.isArray(input?.socials) && input.socials.length > 0
-      ? input.socials
-      : DEFAULT_GLOBAL_SETTINGS.socials,
-  projectCardConfig: {
-    ...DEFAULT_GLOBAL_SETTINGS.projectCardConfig!,
-    ...(input?.projectCardConfig || {}),
-  },
-});
+const safeSettings = (input?: Partial<CMSGlobalSettings>): CMSGlobalSettings => {
+  const isLegacyCta =
+    !input?.ctaButtonText ||
+    input.ctaButtonText.includes("70K") ||
+    input.ctaButtonText.toLowerCase().includes("reader");
+
+  return {
+    ...DEFAULT_GLOBAL_SETTINGS,
+    ...(input || {}),
+    ctaButtonText: isLegacyCta ? DEFAULT_GLOBAL_SETTINGS.ctaButtonText : (input?.ctaButtonText || DEFAULT_GLOBAL_SETTINGS.ctaButtonText),
+    ctaButtonUrl:
+      isLegacyCta && (!input?.ctaButtonUrl || input.ctaButtonUrl === "/#contact")
+        ? DEFAULT_GLOBAL_SETTINGS.ctaButtonUrl
+        : input?.ctaButtonUrl || DEFAULT_GLOBAL_SETTINGS.ctaButtonUrl,
+    navLinks:
+      Array.isArray(input?.navLinks) && input.navLinks.length > 0
+        ? input.navLinks
+        : DEFAULT_GLOBAL_SETTINGS.navLinks,
+    socials:
+      Array.isArray(input?.socials) && input.socials.length > 0
+        ? input.socials
+        : DEFAULT_GLOBAL_SETTINGS.socials,
+    projectCardConfig: {
+      ...DEFAULT_GLOBAL_SETTINGS.projectCardConfig!,
+      ...(input?.projectCardConfig || {}),
+    },
+  };
+};
 
 export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
   initialSubTab = "nav",
@@ -962,75 +974,75 @@ export const GlobalSettingsView: React.FC<GlobalSettingsViewProps> = ({
                     formData.projectCardConfig?.showDemoLink !== false ||
                     formData.projectCardConfig?.showSourceLink !== false ||
                     formData.projectCardConfig?.showStackButton !== false) && (
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "1.1rem",
-                        paddingTop: "0.55rem",
-                        borderTop: "1px solid rgba(255, 255, 255, 0.08)",
-                        fontSize: "0.84rem",
-                        fontWeight: 600,
-                      }}
-                    >
-                      {formData.projectCardConfig?.showArticleLink !== false && (
-                        <span
-                          style={{
-                            color: formData.projectCardConfig?.actionLinksColor || "#38bdf8",
-                            textDecoration: "underline",
-                            textUnderlineOffset: "3px",
-                            cursor: "pointer",
-                          }}
-                        >
-                          Article
-                        </span>
-                      )}
-                      {formData.projectCardConfig?.showDemoLink !== false && (
-                        <span
-                          style={{
-                            color: formData.projectCardConfig?.actionLinksColor || "#38bdf8",
-                            textDecoration: "underline",
-                            textUnderlineOffset: "3px",
-                            cursor: "pointer",
-                          }}
-                        >
-                          Demo
-                        </span>
-                      )}
-                      {formData.projectCardConfig?.showSourceLink !== false && (
-                        <span
-                          style={{
-                            color: formData.projectCardConfig?.actionLinksColor || "#38bdf8",
-                            textDecoration: "underline",
-                            textUnderlineOffset: "3px",
-                            cursor: "pointer",
-                          }}
-                        >
-                          Source
-                        </span>
-                      )}
-                      {formData.projectCardConfig?.showStackButton !== false && (
-                        <button
-                          type="button"
-                          onClick={() => setPreviewStackExpanded((prev) => !prev)}
-                          style={{
-                            background: "transparent",
-                            border: "none",
-                            padding: 0,
-                            font: "inherit",
-                            color: formData.projectCardConfig?.actionLinksColor || "#38bdf8",
-                            cursor: "pointer",
-                            display: "inline-flex",
-                            alignItems: "center",
-                            gap: "0.2rem",
-                          }}
-                          title="Click to toggle stack preview"
-                        >
-                          Stack{previewStackExpanded ? "▴" : "▾"}
-                        </button>
-                      )}
-                    </div>
-                  )}
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "1.1rem",
+                          paddingTop: "0.55rem",
+                          borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+                          fontSize: "0.84rem",
+                          fontWeight: 600,
+                        }}
+                      >
+                        {formData.projectCardConfig?.showArticleLink !== false && (
+                          <span
+                            style={{
+                              color: formData.projectCardConfig?.actionLinksColor || "#38bdf8",
+                              textDecoration: "underline",
+                              textUnderlineOffset: "3px",
+                              cursor: "pointer",
+                            }}
+                          >
+                            Article
+                          </span>
+                        )}
+                        {formData.projectCardConfig?.showDemoLink !== false && (
+                          <span
+                            style={{
+                              color: formData.projectCardConfig?.actionLinksColor || "#38bdf8",
+                              textDecoration: "underline",
+                              textUnderlineOffset: "3px",
+                              cursor: "pointer",
+                            }}
+                          >
+                            Demo
+                          </span>
+                        )}
+                        {formData.projectCardConfig?.showSourceLink !== false && (
+                          <span
+                            style={{
+                              color: formData.projectCardConfig?.actionLinksColor || "#38bdf8",
+                              textDecoration: "underline",
+                              textUnderlineOffset: "3px",
+                              cursor: "pointer",
+                            }}
+                          >
+                            Source
+                          </span>
+                        )}
+                        {formData.projectCardConfig?.showStackButton !== false && (
+                          <button
+                            type="button"
+                            onClick={() => setPreviewStackExpanded((prev) => !prev)}
+                            style={{
+                              background: "transparent",
+                              border: "none",
+                              padding: 0,
+                              font: "inherit",
+                              color: formData.projectCardConfig?.actionLinksColor || "#38bdf8",
+                              cursor: "pointer",
+                              display: "inline-flex",
+                              alignItems: "center",
+                              gap: "0.2rem",
+                            }}
+                            title="Click to toggle stack preview"
+                          >
+                            Stack{previewStackExpanded ? "▴" : "▾"}
+                          </button>
+                        )}
+                      </div>
+                    )}
 
                   {/* Expanded Stack Pills Preview */}
                   {formData.projectCardConfig?.showStackButton !== false && previewStackExpanded && (

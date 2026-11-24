@@ -21,8 +21,20 @@ export default function HeroSkyLabs() {
     async function loadSettings() {
       try {
         const settings = await cmsDataStore.getGlobalSettings();
-        if (settings?.ctaButtonText) setCtaText(settings.ctaButtonText);
-        if (settings?.ctaButtonUrl) setCtaUrl(settings.ctaButtonUrl);
+        const text = settings?.ctaButtonText;
+        const url = settings?.ctaButtonUrl;
+
+        if (text && !text.includes("70K") && !text.toLowerCase().includes("reader")) {
+          setCtaText(text);
+        } else {
+          setCtaText("Say Hello");
+        }
+
+        if (url && url !== "/#contact") {
+          setCtaUrl(url);
+        } else {
+          setCtaUrl("mailto:dilshan.devxx@gmail.com");
+        }
       } catch {}
     }
     loadSettings();
