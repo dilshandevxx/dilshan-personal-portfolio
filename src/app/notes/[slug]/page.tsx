@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { postsData } from "@/data/notes";
 import { ArrowLeft, Clock, Calendar, Tag, ArrowRight } from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
+import { SkyLabsNavbar } from "@/components/SkyLabsNavbar";
+import MainFooter from "@/components/MainFooter";
 
 export async function generateStaticParams() {
   return postsData.map((note) => ({ slug: note.slug }));
@@ -40,7 +42,10 @@ export default async function NoteDetailPage({
   const nextPost = currentIndex < postsData.length - 1 ? postsData[currentIndex + 1] : null;
 
   return (
-    <article className="blog-container" style={{ maxWidth: "760px" }}>
+    <div style={{ backgroundColor: "#111111", minHeight: "100vh", width: "100%" }}>
+      <SkyLabsNavbar />
+      <div style={{ padding: "7rem 1.5rem 5rem" }}>
+        <article className="blog-container" style={{ maxWidth: "760px", margin: "0 auto" }}>
       {/* Header */}
       <div className="note-page-header">
         <Link href="/blog" className="note-back-link">
@@ -131,5 +136,8 @@ export default async function NoteDetailPage({
         )}
       </div>
     </article>
+      </div>
+      <MainFooter />
+    </div>
   );
 }
