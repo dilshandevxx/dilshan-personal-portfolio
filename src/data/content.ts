@@ -77,7 +77,7 @@ export const siteConfig: SiteConfig = {
       role: "Creator",
       githubUrl: "https://github.com/example/lifestyle-portfolio",
       demoUrl: "https://dilshan.dev",
-      articleUrl: "/portfolio/blog/zero-dependency-web-design",
+      articleUrl: "/blog/zero-dependency-web-design",
       architectureHighlights: [
         "Synchronous anti-flash theme script in document head",
         "Zero runtime CSS-in-JS overhead using vanilla CSS variables",
@@ -108,7 +108,7 @@ export const siteConfig: SiteConfig = {
       role: "Lead Architect",
       githubUrl: "https://github.com/example/khepri-kv",
       demoUrl: "https://example.com/khepri-kv",
-      articleUrl: "/portfolio/blog/resilience-in-distributed-systems",
+      articleUrl: "/blog/resilience-in-distributed-systems",
       architectureHighlights: [
         "Concurrent SkipList in-memory memtable with atomic pointer swaps during flush",
         "Sparse index SSTable layout with Murmur3 Bloom Filters to prevent unnecessary disk seeks",
@@ -139,7 +139,7 @@ export const siteConfig: SiteConfig = {
       role: "Full-Stack Engineer",
       githubUrl: "https://github.com/example/chronicle-graph",
       demoUrl: "https://example.com/chronicle",
-      articleUrl: "/portfolio/blog/lost-art-of-readable-code",
+      articleUrl: "/blog/lost-art-of-readable-code",
       architectureHighlights: [
         "Zero-latency optimistic UI updates backed by local SQLite WebAssembly and File System Access API",
         "State synchronization via Yjs binary delta messages over encrypted WebRTC data channels",
@@ -170,7 +170,7 @@ export const siteConfig: SiteConfig = {
       role: "Systems Developer",
       githubUrl: "https://github.com/example/sentinel-probe",
       demoUrl: undefined,
-      articleUrl: "/portfolio/blog/resilience-in-distributed-systems",
+      articleUrl: "/blog/resilience-in-distributed-systems",
       architectureHighlights: [
         "Asynchronous non-blocking I/O loop built atop Tokio and Hyper with zero-copy buffer transfers",
         "Lock-free atomic token bucket rate limiting using cache-line aligned atomic counters",
@@ -201,7 +201,7 @@ export const siteConfig: SiteConfig = {
       role: "Creator",
       githubUrl: "https://github.com/example/verbum-engine",
       demoUrl: "https://example.com/verbum",
-      articleUrl: "/portfolio/blog/zero-dependency-web-design",
+      articleUrl: "/blog/zero-dependency-web-design",
       architectureHighlights: [
         "Custom unified/remark AST pipeline transforming Edward Tufte-style sidenotes and margin figures",
         "Syntax highlighting at compile time generating zero-runtime-cost semantic HTML",

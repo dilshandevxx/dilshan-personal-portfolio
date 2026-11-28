@@ -22,7 +22,7 @@ const ARTICLES: ArticleItem[] = [
     category: "Thoughts",
     readTime: "4 min",
     image: "/images/articles/article_design_thinking.jpg",
-    href: "/portfolio/blog/lost-art-of-readable-code",
+    href: "/blog/lost-art-of-readable-code",
   },
   {
     id: "mastering-design-tools",
@@ -30,7 +30,7 @@ const ARTICLES: ArticleItem[] = [
     category: "Tools",
     readTime: "3 min",
     image: "/images/articles/article_design_tools.jpg",
-    href: "/portfolio/blog/zero-dependency-web-design",
+    href: "/blog/zero-dependency-web-design",
   },
   {
     id: "side-projects-passion",
@@ -38,7 +38,7 @@ const ARTICLES: ArticleItem[] = [
     category: "Side projects",
     readTime: "6 min",
     image: "/images/articles/article_side_projects.jpg",
-    href: "/portfolio/blog/resilience-in-distributed-systems",
+    href: "/blog/resilience-in-distributed-systems",
   },
   {
     id: "streamlining-design-workflows",
@@ -46,7 +46,7 @@ const ARTICLES: ArticleItem[] = [
     category: "Design systems",
     readTime: "4 min",
     image: "/images/articles/article_design_workflows.jpg",
-    href: "/portfolio/blog/enabling-apache-echarts-in-react",
+    href: "/blog/enabling-apache-echarts-in-react",
   },
   {
     id: "building-effective-design-system",
@@ -54,7 +54,7 @@ const ARTICLES: ArticleItem[] = [
     category: "Design systems",
     readTime: "4 min",
     image: "/images/articles/article_design_systems.jpg",
-    href: "/portfolio/blog/zero-dependency-web-design",
+    href: "/blog/zero-dependency-web-design",
   },
   {
     id: "side-projects-personal-growth",
@@ -62,7 +62,7 @@ const ARTICLES: ArticleItem[] = [
     category: "Side projects",
     readTime: "3 min",
     image: "/images/articles/article_personal_growth.jpg",
-    href: "/portfolio/blog/lost-art-of-readable-code",
+    href: "/blog/lost-art-of-readable-code",
   },
 ];
 
@@ -73,7 +73,7 @@ export default function InsightsSection() {
         {/* Section Header */}
         <div className={styles.header}>
           <h2 className={styles.title}>Articles.</h2>
-          <Link href="/portfolio/blog" className={styles.seeAllLink}>
+          <Link href="/blog" className={styles.seeAllLink}>
             <span>SEE ALL ARTICLES</span>
             <span className={styles.arrowIcon} aria-hidden="true">&rarr;</span>
           </Link>

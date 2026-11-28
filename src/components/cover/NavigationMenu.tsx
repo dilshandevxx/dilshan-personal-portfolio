@@ -12,7 +12,7 @@ interface NavigationMenuProps {
 const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/#projects", label: "Work" },
-  { href: "/portfolio", label: "Portfolio" },
+  { href: "/projects", label: "Works" },
   { href: "/#insights", label: "Insights" },
 ];
 

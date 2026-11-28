@@ -31,7 +31,7 @@ export default function Blog({ posts }: { posts: DevToArticle[] }) {
     <section className={styles.blogSection}>
       <div className={styles.header}>
         <h2 className={styles.title}>Latest News</h2>
-        <Link href="/portfolio/blog" className={styles.linkButton}>
+        <Link href="/blog" className={styles.linkButton}>
           ALL POST
         </Link>
       </div>
@@ -42,7 +42,7 @@ export default function Blog({ posts }: { posts: DevToArticle[] }) {
             const fallbackImage = "/images/science_tech.png";
             const imageUrl = post.cover_image || fallbackImage;
             const category = post.tag_list && post.tag_list.length > 0 ? post.tag_list[0].toUpperCase() : "TECH";
-            const postHref = post.path && post.path.startsWith("/portfolio") ? post.path : "/portfolio/blog";
+            const postHref = post.path && post.path.startsWith("/blog") ? post.path : "/blog";
             
             return (
               <motion.div

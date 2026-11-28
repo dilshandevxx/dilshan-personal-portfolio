@@ -47,17 +47,16 @@ export function Sidebar() {
         pathname.startsWith("/blog/"),
     },
     {
-      label: "Shelves",
+      label: "Guides",
       icon: Bookmark,
-      path: "/shelves",
-      isActive:
-        pathname.startsWith("/shelves") || pathname.startsWith("/guides"),
+      path: "/guides",
+      isActive: pathname.startsWith("/guides"),
     },
     {
       label: "CV",
       icon: FileText,
-      path: "/portfolio/resume",
-      isActive: pathname.startsWith("/portfolio/resume"),
+      path: "/resume",
+      isActive: pathname.startsWith("/resume"),
     },
   ];
 

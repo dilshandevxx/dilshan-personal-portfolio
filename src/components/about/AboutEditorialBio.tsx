@@ -57,7 +57,7 @@ export default function AboutEditorialBio({
           <div className={styles.heroLeftCol}>
             <p className={styles.proseParagraph}>
               Hey, I&apos;m Dilshan! Welcome to my spot on the web for{" "}
-              <Link href="/portfolio/blog" className={styles.greenInlineLink}>
+              <Link href="/blog" className={styles.greenInlineLink}>
                 writing
               </Link>
               ,{" "}
@@ -228,7 +228,7 @@ export default function AboutEditorialBio({
               <span className={styles.greenHighlight}>AI/ML &amp; Systems Engineer:</span> Building
               LLM inference runtimes, vLLM / PagedAttention pipelines, autonomous agent
               architectures, and still documenting:{" "}
-              <Link href="/portfolio/blog" className={styles.greenHighlightLink}>
+              <Link href="/blog" className={styles.greenHighlightLink}>
                 50+ posts
               </Link>
               ,{" "}
@@ -490,7 +490,7 @@ export default function AboutEditorialBio({
           <div className={styles.seriesCard}>
             <RetroJsBadge size={32} />
             <div className={styles.seriesInfo}>
-              <Link href="/portfolio/blog" className={styles.seriesTitleLink}>
+              <Link href="/blog" className={styles.seriesTitleLink}>
                 How to Code in JavaScript &amp; TypeScript
               </Link>
               <p className={styles.seriesDescription}>
@@ -505,7 +505,7 @@ export default function AboutEditorialBio({
           <div className={styles.seriesCard}>
             <RetroDomBadge size={32} />
             <div className={styles.seriesInfo}>
-              <Link href="/portfolio/blog" className={styles.seriesTitleLink}>
+              <Link href="/blog" className={styles.seriesTitleLink}>
                 Understanding the DOM &amp; Browser Runtimes
               </Link>
               <p className={styles.seriesDescription}>
@@ -519,7 +519,7 @@ export default function AboutEditorialBio({
           <div className={styles.seriesCard}>
             <RetroSystemsBadge size={32} />
             <div className={styles.seriesInfo}>
-              <Link href="/portfolio/blog" className={styles.seriesTitleLink}>
+              <Link href="/blog" className={styles.seriesTitleLink}>
                 Distributed Systems &amp; Storage Engines from Scratch
               </Link>
               <p className={styles.seriesDescription}>
@@ -533,7 +533,7 @@ export default function AboutEditorialBio({
           <div className={styles.seriesCard}>
             <RetroQuillBadge size={32} />
             <div className={styles.seriesInfo}>
-              <Link href="/portfolio/blog" className={styles.seriesTitleLink}>
+              <Link href="/blog" className={styles.seriesTitleLink}>
                 Year in Review
               </Link>
               <p className={styles.seriesDescription}>
@@ -547,7 +547,7 @@ export default function AboutEditorialBio({
           <div className={styles.seriesCard}>
             <RetroFloppyIcon size={30} />
             <div className={styles.seriesInfo}>
-              <Link href="/portfolio/blog" className={styles.seriesTitleLink}>
+              <Link href="/blog" className={styles.seriesTitleLink}>
                 Redesigns of this website
               </Link>
               <p className={styles.seriesDescription}>
@@ -575,7 +575,7 @@ export default function AboutEditorialBio({
       >
         <div className={styles.latestHeaderRow}>
           <h2 className={styles.sectionTitle}>Latest</h2>
-          <Link href="/portfolio/blog" className={styles.allPostsPillBtn}>
+          <Link href="/blog" className={styles.allPostsPillBtn}>
             All Posts
           </Link>
         </div>
@@ -587,7 +587,7 @@ export default function AboutEditorialBio({
               <RetroFeatherIcon size={18} className={styles.postIcon} />
               <div className={styles.postTitleCol}>
                 <Link
-                  href="/portfolio/blog/enabling-apache-echarts-in-react"
+                  href="/blog/enabling-apache-echarts-in-react"
                   className={styles.postTitle}
                 >
                   Enabling Apache ECharts in React for Data Visualization
@@ -608,7 +608,7 @@ export default function AboutEditorialBio({
               <RetroFloppyIcon size={18} className={styles.postIcon} />
               <div className={styles.postTitleCol}>
                 <Link
-                  href="/portfolio/blog/resilience-in-distributed-systems"
+                  href="/blog/resilience-in-distributed-systems"
                   className={styles.postTitle}
                 >
                   Year in Review: 2024
@@ -628,7 +628,7 @@ export default function AboutEditorialBio({
               <RetroFloppyIcon size={18} className={styles.postIcon} />
               <div className={styles.postTitleCol}>
                 <Link
-                  href="/portfolio/blog/zero-dependency-web-design"
+                  href="/blog/zero-dependency-web-design"
                   className={styles.postTitle}
                 >
                   Redesign: Version 7.0
@@ -648,7 +648,7 @@ export default function AboutEditorialBio({
               <RetroOrangeNodeIcon size={18} className={styles.postIcon} />
               <div className={styles.postTitleCol}>
                 <Link
-                  href="/portfolio/blog/lost-art-of-readable-code"
+                  href="/blog/lost-art-of-readable-code"
                   className={styles.postTitle}
                 >
                   Creating a Keyboard Shortcut Hook in React (Deep Dive)
@@ -669,7 +669,7 @@ export default function AboutEditorialBio({
               <RetroLightningIcon size={18} className={styles.postIcon} />
               <div className={styles.postTitleCol}>
                 <Link
-                  href="/portfolio/blog/resilience-in-distributed-systems"
+                  href="/blog/resilience-in-distributed-systems"
                   className={styles.postTitle}
                 >
                   Designing for Resilience: The Architecture of Failure
@@ -704,13 +704,13 @@ export default function AboutEditorialBio({
 
         <ul className={styles.bulletList}>
           <li className={styles.bulletItem}>
-            <Link href="/portfolio/resume" className={styles.greenInlineLink}>
+            <Link href="/resume" className={styles.greenInlineLink}>
               Resume
             </Link>
           </li>
           <li className={styles.bulletItem}>
-            <Link href="/portfolio/shelves" className={styles.greenInlineLink}>
-              Illustrations &amp; Digital Garden
+            <Link href="/guides" className={styles.greenInlineLink}>
+              Engineering Guides &amp; References
             </Link>
           </li>
         </ul>

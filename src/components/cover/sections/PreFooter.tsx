@@ -10,7 +10,7 @@ export default function PreFooter() {
       <h2 className={styles.mainHeading}>
         Build smooth<br className={styles.mobileBreak} /> creative sites with<br className={styles.mobileBreak} /> us.
       </h2>
-      <Link href="/portfolio/contact" className={styles.talkButton}>
+      <Link href="/#contact" className={styles.talkButton}>
         Talk Today
       </Link>
     </section>

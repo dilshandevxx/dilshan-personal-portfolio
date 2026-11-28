@@ -42,7 +42,7 @@ export default function MainFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/portfolio/blog" className={styles.footerLink}>
+                <Link href="/blog" className={styles.footerLink}>
                   Articles &amp; Notes
                 </Link>
               </li>

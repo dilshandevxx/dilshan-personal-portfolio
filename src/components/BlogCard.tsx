@@ -42,7 +42,7 @@ export function BlogCard({ post }: BlogCardProps) {
       {/* Title & Subtitle */}
       <div className="space-y-1.5 mb-3">
         <h3 className="text-lg sm:text-xl font-serif font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-color)] transition-colors">
-          <Link href={`/portfolio/blog/${post.slug}`} className="hover:underline">
+          <Link href={`/blog/${post.slug}`} className="hover:underline">
             {post.title}
           </Link>
         </h3>
@@ -70,7 +70,7 @@ export function BlogCard({ post }: BlogCardProps) {
         </div>
 
         <Link
-          href={`/portfolio/blog/${post.slug}`}
+          href={`/blog/${post.slug}`}
           className="inline-flex items-center gap-1.5 text-xs font-mono text-[var(--accent-color)] font-medium hover:translate-x-0.5 transition-transform"
         >
           <span>Read Essay</span>

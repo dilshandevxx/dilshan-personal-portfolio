@@ -12,6 +12,8 @@ import {
   MapPin,
 } from 'lucide-react';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa6';
+import { SkyLabsNavbar } from '@/components/SkyLabsNavbar';
+import MainFooter from '@/components/MainFooter';
 import styles from './resume.module.css';
 
 export default function ResumeRoutePage() {
@@ -20,29 +22,31 @@ export default function ResumeRoutePage() {
   };
 
   return (
-    <div className={styles.cvWrapper}>
-      {/* ------------------------------------------------------------- */}
-      {/* 1. TOP TOOLBAR (Hidden when printing)                         */}
-      {/* ------------------------------------------------------------- */}
-      <div className={styles.toolbar} role="region" aria-label="Resume toolbar">
-        <div className={styles.breadcrumb}>
-          <Link href="/portfolio" className={styles.breadcrumbLink}>
-            <ArrowLeft size={14} />
-            <span>Portfolio</span>
-          </Link>
-          <span aria-hidden="true">/</span>
-          <span className={styles.breadcrumbCurrent}>Curriculum Vitae</span>
-        </div>
+    <div style={{ backgroundColor: '#111111', minHeight: '100vh', width: '100%' }}>
+      <SkyLabsNavbar />
+      <div className={styles.cvWrapper}>
+        {/* ------------------------------------------------------------- */}
+        {/* 1. TOP TOOLBAR (Hidden when printing)                         */}
+        {/* ------------------------------------------------------------- */}
+        <div className={styles.toolbar} role="region" aria-label="Resume toolbar">
+          <div className={styles.breadcrumb}>
+            <Link href="/" className={styles.breadcrumbLink}>
+              <ArrowLeft size={14} />
+              <span>Home</span>
+            </Link>
+            <span aria-hidden="true">/</span>
+            <span className={styles.breadcrumbCurrent}>Curriculum Vitae</span>
+          </div>
 
-        <div className={styles.toolbarActions}>
-          <a
-            href="mailto:hello@dilshan.dev"
-            className={styles.emailBtn}
-            title="Send Email"
-          >
-            <Mail size={13} />
-            <span>hello@dilshan.dev</span>
-          </a>
+          <div className={styles.toolbarActions}>
+            <a
+              href="mailto:dilshan.devxx@gmail.com"
+              className={styles.emailBtn}
+              title="Send Email"
+            >
+              <Mail size={13} />
+              <span>dilshan.devxx@gmail.com</span>
+            </a>
 
           <button
             type="button"
@@ -320,6 +324,8 @@ export default function ResumeRoutePage() {
           </div>
         </section>
       </article>
+      </div>
+      <MainFooter />
     </div>
   );
 }

@@ -14,7 +14,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     pathname?.startsWith("/about") ||
     pathname === "/projects" ||
     pathname?.startsWith("/projects/") ||
-    pathname?.startsWith("/portfolio") ||
+    pathname?.startsWith("/blog/") ||
+    pathname === "/resume" ||
     pathname?.startsWith("/admin");
 
   if (isFullWidthPage) {
